@@ -16,6 +16,8 @@
 
 ## 多种继承及其优缺点
 
+## `valueOf` 和 `toString`
+
 ## async、await 及 generator、promise 的关系
 
 ## JS 协程及 async、await
@@ -502,6 +504,69 @@ function radixSort(arr) {
 }
 ```
 
-### 桶排序
+### ✔ 桶排序、箱排序(bucket-sort)
+
+![桶排序](/static/imgs/bucketSort.png)
+
+桶排序工作原理是将数组分到有限数量的桶里，每个桶再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。
+
+桶排序以下列步骤进行：
+
+1. 设置桶个数 `size`，计算每个桶的存储范围；
+1. 遍历数组，把数字放到对应的桶中；
+1. 对步骤 2 放新数字的桶数组排序；
+1. 数组遍历完之后，把桶中的数字依次取出放到最终的数组中；
+
+```javascript
+function swap(arr, i, j) {
+  ;[arr[i], arr[j]] = [arr[j], arr[i]]
+}
+
+/**
+ * @param {array} arr 待排序的数组
+ * @param {number} size 桶的个数
+ */
+function bucketSort(arr, size = 5) {
+  const len = arr.length
+  // 取到最小值
+  const min = Math.min(...arr)
+  // 取得最大值
+  const max = Math.max(...arr)
+  // 每个桶的范围
+  const bucketSize = Math.floor((max - min) / size) + 1
+  const res = []
+  // 总共的桶容器
+  const bucket = []
+
+  for (let i = 0; i < len; i++) {
+    // arr[i] 分布在桶 j
+    const j = Math.floor((arr[i] - min) / bucketSize)
+
+    // 桶不存在则创建
+    if (bucket[j] === undefined) {
+      bucket[j] = []
+    }
+    // 将 arr[i] 推入桶中
+    bucket[j].push(arr[i])
+    let l = bucket[j].length - 1
+    while (l > 0) {
+      // 对个别桶使用冒泡
+      // 若 arr[i] 在桶内不是最小，则向前移动
+      bucket[j][l] < bucket[j][l - 1] && swap(bucket[j], l, l - 1)
+      l--
+    }
+  }
+
+  // 把 bucket 二维数组中的数据全部拿出来
+  for (let i = 0; i < bucket.length; i++) {
+    if (bucket[i] !== undefined) {
+      for (let j = 0; j < bucket[i].length; j++) {
+        res.push(bucket[i][j])
+      }
+    }
+  }
+  return res
+}
+```
 
 ## LRU 缓存算法
