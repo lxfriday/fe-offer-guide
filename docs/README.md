@@ -84,6 +84,8 @@ ref
 
 ## commonJS 和 ESM 差异
 
+## EventEmmiter 实现
+
 # CSS
 
 ## CSS 盒模型
@@ -263,6 +265,8 @@ ref
 
 ## 队列
 
+### 优先队列
+
 ## 二叉树
 
 # 算法
@@ -277,25 +281,25 @@ ref
 
 ```typescript
 function swap(arr: number[], a: number, b: number) {
-  const tmp: number = arr[a];
-  arr[a] = arr[b];
-  arr[b] = tmp;
+  const tmp: number = arr[a]
+  arr[a] = arr[b]
+  arr[b] = tmp
 }
 
 export function bubbleSort(arr: number[]) {
-  const length = arr.length;
-  if (length <= 1) return arr;
+  const length = arr.length
+  if (length <= 1) return arr
   for (let i = 0; i < length; i++) {
-    let changed: boolean = false; // 没有数据交换则表示已经有序了
+    let changed: boolean = false // 没有数据交换则表示已经有序了
     for (let j = 0; j < length - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
-        swap(arr, j, j + 1);
-        changed = true;
+        swap(arr, j, j + 1)
+        changed = true
       }
     }
-    if (!changed) break;
+    if (!changed) break
   }
-  return arr;
+  return arr
 }
 ```
 
@@ -309,12 +313,105 @@ export function bubbleSort(arr: number[]) {
 
 ### 快速排序
 
-### 堆排序(heap sort)
+### ✔ 堆排序(heap sort)
 
-通常堆是通过一维数组来实现的。
+![堆排序](/static/imgs/heapSort2.png)
+![堆排序](/static/imgs/heapSort.gif)
+
+堆(Heap)是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵完全二叉树的数组对象。其中每个节点最多存在两个子节点，对以 0 开始的堆数组，有如下规则：
+
+1. 父节点 `i` 的**左**子节点在位置 `2 * i + 1`
+1. 父节点 `i` 的**右**子节点在位置 `2 * i + 2`
+1. 子节点 `i` 的父节点在位置 `Math.floor((i -1) / 2)`
+
+大顶堆：所有节点 `i` 的值比其左右子节点都大的堆
+小顶堆：所有节点 `i` 的值比其左右子节点都小的堆
+
+堆排序的重要过程（以大顶堆实现从小到大为例）：
+
+1. 构建大顶堆
+1. 把 0 和最后一位交换（无序数组的最后一位）
+1. 从 0 位重新构建大顶堆
+1. 重复步骤 2、3
+
+```javascript
+function swap(arr, i, j) {
+  ;[arr[i], arr[j]] = [arr[j], arr[i]]
+}
+// 构建大顶堆的核心递归算法
+function heapifyMax(arr, i, len) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let max = i
+  if (left < len && arr[left] > arr[max]) {
+    max = left
+  }
+  if (right < len && arr[right] > arr[max]) {
+    max = right
+  }
+  if (i != max) {
+    swap(arr, max, i)
+    heapifyMax(arr, max, len)
+  }
+}
+// 构建小顶堆的核心递归算法
+function heapifyMin(arr, i, len) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let min = i
+  if (left < len && arr[left] < arr[min]) {
+    min = left
+  }
+  if (right < len && arr[right] < arr[min]) {
+    min = right
+  }
+  if (i != min) {
+    swap(arr, min, i)
+    heapifyMin(arr, min, len)
+  }
+}
+
+function buildMaxHeap(arr) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMax(arr, i, len)
+  }
+}
+
+function buildMinHeap(arr) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMin(arr, i, len)
+  }
+}
+
+// asc 为 true 表示从小到大，false 为从大到小
+function heapSort(arr, asc = false) {
+  if (asc) {
+    // 使用大顶堆实现从小到大排序
+    buildMaxHeap(arr)
+    const len = arr.length
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMax(arr, 0, i)
+    }
+  } else {
+    // 使用小顶堆实现从大到小排序
+    buildMinHeap(arr)
+    const len = arr.length
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMin(arr, 0, i)
+    }
+  }
+  return arr
+}
+```
 
 ### 计数排序
 
 ### 桶排序
 
 ### 基数排序
+
+## LRU 缓存算法
