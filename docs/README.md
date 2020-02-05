@@ -444,8 +444,64 @@ function countingSort(arr) {
 }
 ```
 
-### 桶排序
+### ✔ 基数排序(radix-sort)
 
-### 基数排序
+![基数排序](/static/imgs/radixSort.png)
+
+**限定为非负数**
+
+基数排序原理是将整数按位数切割成不同的数字，然后按每个位数分别比较。
+
+它是这样实现的：将所有待比较数值（正整数）统一为同样的数字长度，数字较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后，数列就变成一个有序序列。
+
+基数排序的方式可以采用 **LSD（Least significant digital）** 或 **MSD（Most significant digital）**，LSD 的排序方式由键值的最右边开始，而 MSD 则相反，由键值的最左边开始。
+
+基数排序的时间复杂度是 `O(k*n)`，其中 `n` 是排序元素个数，`k` 是数字位数。这不是说这个时间复杂度一定优于 `O(nlogn)`，`k` 的大小取决于数字位的选择（比如比特位数），和待排序数据所属数据类型的全集的大小；`k` 决定了进行多少轮处理，而 `n` 是每轮处理的操作数目。
+
+LSD 实现
+
+```javascript
+function radixSort(arr) {
+  const len = arr.length
+  // 得到最大值
+  const max = Math.max(...arr)
+  let bucket = []
+  // 获取最大值的位数
+  let digit = `${max}`.length
+  let start = 1
+  // 待操作的新数组
+  let res = arr.slice()
+
+  while (digit > 0) {
+    // 每轮向左移动一位
+    start *= 10
+    for (let i = 0; i < len; i++) {
+      const j = res[i] % start
+      // 和计数排序类似
+      if (!bucket[j]) {
+        bucket[j] = []
+      }
+      // bucket 是一个二维数组
+      bucket[j].push(res[i])
+    }
+
+    // 拼接前 res 设为空数组
+    res = []
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i] !== undefined) {
+        // res 拼接 bucket[i] 数组
+        res = res.concat(bucket[i])
+      }
+    }
+    // 结束之后 bucket 重置
+    bucket = []
+    digit--
+  }
+
+  return res
+}
+```
+
+### 桶排序
 
 ## LRU 缓存算法
