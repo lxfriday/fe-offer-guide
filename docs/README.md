@@ -313,7 +313,7 @@ export function bubbleSort(arr: number[]) {
 
 ### 快速排序
 
-### ✔ 堆排序(heap sort)
+### ✔ 堆排序(heap-sort)
 
 ![堆排序](/static/imgs/heapSort2.png)
 ![堆排序](/static/imgs/heapSort.gif)
@@ -408,7 +408,41 @@ function heapSort(arr, asc = false) {
 }
 ```
 
-### 计数排序
+### ✔ 计数排序(counting-sort)
+
+![计数排序](/static/imgs/countingSort.png)
+
+**限定为非负数**
+
+计数排序是一种稳定的线性时间排序算法。计数排序使用一个额外的数组 `C` ，其中第 `i` 个元素是待排序数组 `A` 中值等于 `i` 的元素的个数。然后根据数组 `C` 来将 `A` 中的元素排到正确的位置。
+
+当输入的元素是 `n` 个 `0` 到 `k` 之间的整数时，它的运行时间是 `t(n+k)`。**计数排序不是比较排序，排序的速度快于任何比较排序算法。**
+
+由于用来计数的数组 `C` 的长度取决于待排序数组中数据的范围（等于待排序数组的最大值与最小值的差加上 1），这使得计数排序对于数据范围很大的数组，需要大量时间和内存。
+
+```javascript
+function countingSort(arr) {
+  const len = arr.length
+  if (len < 2) return arr
+  const bucket = []
+  let sortIndex = 0
+
+  for (let i = 0; i < len; i++) {
+    if (bucket[arr[i]]) {
+      bucket[arr[i]] += 1
+    } else {
+      bucket[arr[i]] = 1
+    }
+  }
+
+  for (let i = 0; i < bucket.length; i++) {
+    for (let j = bucket[i]; j > 0; j--) {
+      arr[sortIndex++] = i
+    }
+  }
+  return arr
+}
+```
 
 ### 桶排序
 
