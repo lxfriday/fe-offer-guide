@@ -12,6 +12,8 @@ const HOSTNAME_WHITELIST = [
   "fonts.gstatic.com",
   "fonts.googleapis.com",
   "unpkg.com",
+  "cdn.staticfile.org",
+  "qiniu1.lxfriday.xyz",
   "cdn.staticfile.org"
 ];
 
