@@ -72,6 +72,8 @@ ref
 
 ## 事件冒泡、捕捉、代理
 
+## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
+
 # V8 专区
 
 ## JS 内存泄露
@@ -229,6 +231,8 @@ ref
 
 # 手撕代码
 
+## 使用 XMLHttpRequest 发送请求，并封装成 Promise
+
 ## call
 
 ## apply
@@ -250,6 +254,16 @@ ref
 ## 深拷贝
 
 # 设计模式
+
+# 数据结构
+
+## 堆
+
+## 栈
+
+## 队列
+
+## 二叉树
 
 # 算法
 
@@ -295,7 +309,9 @@ export function bubbleSort(arr: number[]) {
 
 ### 快速排序
 
-### 堆排序
+### 堆排序(heap sort)
+
+通常堆是通过一维数组来实现的。
 
 ### 计数排序
 
