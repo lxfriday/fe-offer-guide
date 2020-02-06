@@ -70,6 +70,94 @@ ref
 
 - [https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 
+# BOM
+
+## XMLHttpRequest
+
+### readyState
+
+`readyState` 共有 5 种状态
+
+| 值  | 状态               | 描述                                             |
+| :-- | :----------------- | :----------------------------------------------- |
+| 0   | `UNSENT`           | `xhr` 被创建，但没有调用`open()` 方法            |
+| 1   | `OPENED`           | `open()`方法已经被调用                           |
+| 2   | `HEADERS_RECEIVED` | `send()`方法已经被调用，并且头部和状态已经可获得 |
+| 3   | `LOADING`          | 下载中， `responseText` 属性已经包含部分数据     |
+| 4   | `DONE`             | 下载操作已完成                                   |
+
+```javascript
+const codeMap = {
+  0: 'UNSENT',
+  1: 'OPENED',
+  2: 'HEADERS_RECEIVED',
+  3: 'LOADING',
+  4: 'DONE',
+}
+const xhr = new XMLHttpRequest()
+console.log('1', codeMap[xhr.readyState])
+xhr.open('GET', '/', true)
+console.log('2', codeMap[xhr.readyState])
+xhr.setRequestHeader('accept', 'text/html')
+xhr.responseType = 'text'
+xhr.onprogress = function() {
+  console.log('onprogress', codeMap[xhr.readyState])
+  // console.log('responseText', xhr.responseText) // 已经有部分 response
+}
+xhr.onload = function() {
+  console.log('onload', codeMap[xhr.readyState])
+}
+xhr.onreadystatechange = function() {
+  console.log('onreadystatechange', codeMap[xhr.readyState])
+}
+xhr.send()
+console.log('3', codeMap[xhr.readyState])
+```
+
+会打印下面的内容
+
+```
+1 UNSENT
+2 OPENED
+3 OPENED
+onreadystatechange HEADERS_RECEIVED
+onreadystatechange LOADING
+onprogress LOADING
+onreadystatechange LOADING
+onprogress LOADING
+onreadystatechange DONE
+onload DONE
+```
+
+### responseType
+
+`xhr.responseType` 用来指定 `xhr.response` 的类型。
+
+| 值               | `xhr.response`数据类型 | 说明                                                            |
+| :--------------- | :--------------------- | :-------------------------------------------------------------- |
+| 空字符串或者不设 | 字符串                 | 将 `responseType` 设为空字符串与设置为`"text"`相同， 是默认类型 |
+| `text`           | 字符串                 |                                                                 |
+| `document`       | `Document` 对象        | 希望返回 XML 格式数据时使用                                     |
+| `json`           | JSON                   |                                                                 |
+| `blob`           | `Blob` 对象            |                                                                 |
+| `arraybuffer`    | `ArrayBuffer` 对象     |                                                                 |
+|                  |                        |                                                                 |
+
+### 事件
+
+ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/1190000004322487)
+
+| 事件                 | 触发条件                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onreadystatechange` | 每当 `xhr.readyState` 改变时触发                                                                                                                                                                                                                                                                                                                                                                                              |
+| `onloadstart`        | 调用 `xhr.send()`方法后立即触发，若 `xhr.send()`未被调用则不会触发此事件。此时 `readyState` 为 1(`OPENED`)                                                                                                                                                                                                                                                                                                                    |
+| `onprogress`         | `xhr.upload.onprogress` 在上传阶段(即 `xhr.send()`之后，`xhr.readystate=2` 之前)触发，每 50ms 触发一次；`xhr.onprogress` 在下载阶段（即 `xhr.readystate=3` 时）触发，每 50ms 触发一次。                                                                                                                                                                                                                                       |
+| `onload`             | 当请求成功完成时触发，此时 `xhr.readystate=4`                                                                                                                                                                                                                                                                                                                                                                                 |
+| `onloadend`          | 当请求结束（包括请求成功和请求失败）时触发                                                                                                                                                                                                                                                                                                                                                                                    |
+| `onabort`            | 当调用 `xhr.abort()` 后触发                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
+| `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
+
 # DOM
 
 ## 事件冒泡、捕捉、代理
@@ -181,7 +269,47 @@ ref
 
 ### keep-alive
 
-### **http 状态码**（1-5 分类的含义和每个状态码具体的含义）
+### http 状态码
+
+#### 100 Continue
+
+#### 101 Switching Protocols
+
+#### 200 OK
+
+#### 201 Created
+
+#### 202 Accepted
+
+#### 204 No Content
+
+#### 206 Partial Content
+
+#### 301 Moved Permanently
+
+#### 302 Move Temporarily(Found)
+
+#### 303 See Other
+
+#### 304 Not Modified
+
+#### 307 Temporary Redirect
+
+#### 400 Bad Request
+
+#### 401 Unauthorized
+
+#### 403 Forbidden
+
+#### 405 Method Not Allowed
+
+#### 500 Internal Server Error
+
+#### 502 Bad Gateway
+
+#### 503 Service Unavailable
+
+#### 504 Gateway Timeout
 
 ### ✔ http 请求方法
 
@@ -255,7 +383,7 @@ ref
 
 【GET 请求】
 ![http-get](static/imgs/http-get.png)
-【POST 请求(multipart/formdata)】
+【POST 请求(multipart/form-data)】
 ![http-post](static/imgs/http-post.png)
 【POST 请求(application/json)】
 ![http-post](static/imgs/http-post2.png)
@@ -311,8 +439,6 @@ ref
 - [docsify demo](https://docsify.js.org/#/pwa)
 
 # 手撕代码
-
-## 使用 XMLHttpRequest 发送请求，并封装成 Promise
 
 ## call
 
