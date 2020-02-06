@@ -28,7 +28,7 @@
 }
 
 .sk-chase-dot:before {
-  content: "";
+  content: '';
   display: block;
   width: 25%;
   height: 25%;
@@ -95,4 +95,8 @@
   0% {
     transform: scale(1);
   }
+}
+
+img {
+  border: 1px solid #aaaaaa;
 }

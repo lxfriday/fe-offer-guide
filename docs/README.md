@@ -183,7 +183,32 @@ ref
 
 ### **http 请求方法**
 
-### [get、post 区别](https://www.cnblogs.com/logsharing/p/8448446.html)
+### GET、POST 区别
+
+ref
+
+- [https://www.cnblogs.com/logsharing/p/8448446.html](https://www.cnblogs.com/logsharing/p/8448446.html)
+
+1. GET 通过 url 传递参数，POST 可以通过 url 和 request body 传递参数；
+1. GET 请求可以缓存，POST 请求不能缓存（cache-control 经测试无法缓存）；
+1. GET 只能进行 url 编码，POST 传输的编码方式很多；
+1. GET 请求参数会保存在浏览器历史中，POST 不会；
+1. GET 传递的参数上限是 2k，POST 没有限制；
+1. GET 只接受 ASCII 字符，POST 没有限制；
+1. **GET 产生一个 TCP 数据包，POST 产生两个 TCP 数据包；**
+
+> 对于 GET 方式的请求，浏览器会把 http header 和 data 一并发送出去，服务器响应 200（返回数据）；而对于 POST，浏览器先发送 header，服务器响应 100 continue，浏览器再发送 data，服务器响应 200 ok（返回数据）。另外并不是所有浏览器都会在 POST 中发送两次包，Firefox 就只发送一次。
+
+本质上 GET、POST 都是基于 HTTP 的，他们的报文传输格式并没有本质区别，下面是 GET 和 POST 原始传输的内容，**GET 其实也可以在 request body 中放数据，只是大部分处理程序会直接忽略**。
+
+> 业界不成文的规定是，（大多数）浏览器通常都会限制 url 长度在 2K 个字节，而（大多数）服务器最多处理 64K 大小的 url。数据量太大会对处理程序造成负担。
+
+【GET 请求】
+![http-get](static/imgs/http-get.png)
+【POST 请求(multipart/formdata)】
+![http-post](static/imgs/http-post.png)
+【POST 请求(application/json)】
+![http-post](static/imgs/http-post2.png)
 
 ## HTTPS
 
