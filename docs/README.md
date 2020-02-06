@@ -72,9 +72,9 @@ ref
 
 # BOM
 
-## XMLHttpRequest
+## ✔ XMLHttpRequest
 
-### readyState
+### ✔ readyState
 
 `readyState` 共有 5 种状态
 
@@ -129,7 +129,7 @@ onreadystatechange DONE
 onload DONE
 ```
 
-### responseType
+### ✔ responseType
 
 `xhr.responseType` 用来指定 `xhr.response` 的类型。
 
@@ -143,7 +143,7 @@ onload DONE
 | `arraybuffer`    | `ArrayBuffer` 对象     |                                                                 |
 |                  |                        |                                                                 |
 
-### 事件
+### ✔ 事件
 
 ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/1190000004322487)
 
