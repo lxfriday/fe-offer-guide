@@ -183,7 +183,7 @@ ref
 
 ### **http 请求方法**
 
-### GET、POST 区别
+### ✔ GET、POST 区别
 
 ref
 
