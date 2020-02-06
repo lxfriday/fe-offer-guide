@@ -167,6 +167,8 @@ ref
 
 ## HTTP
 
+### HTTP 协议格式
+
 ### HTTP 缓存
 
 ref
@@ -182,6 +184,22 @@ ref
 ### **http 状态码**（1-5 分类的含义和每个状态码具体的含义）
 
 ### **http 请求方法**
+
+#### GET
+
+#### HEAD
+
+#### POST
+
+#### PUT
+
+#### DELETE
+
+#### OPTIONS
+
+#### CONNECT
+
+#### TRACE
 
 ### ✔ GET、POST 区别
 
@@ -209,6 +227,8 @@ ref
 ![http-post](static/imgs/http-post.png)
 【POST 请求(application/json)】
 ![http-post](static/imgs/http-post2.png)
+【POST 请求(application/x-www-form-urlencoded)】
+![http-post](static/imgs/http-post3.png)
 
 ## HTTPS
 
