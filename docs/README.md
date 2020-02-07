@@ -74,6 +74,8 @@ ref
 
 # BOM
 
+## WebSocket
+
 ## ✔ XMLHttpRequest
 
 ### ✔ readyState
@@ -561,9 +563,122 @@ CORS 请求中客户端发送的跨域请求头：
 
 注意：OPTIONS 预检请求和跨域 GET(POST) 请求是分开的两次请求，OPTIONS 只是为了验证服务器是否允许跨域，而预检请求之后的 GET(POST) 请求是逻辑请求，服务端的返回头中必须一致带着允许跨域的标识。
 
-### WebSocket
+### ✔ WebSocket 跨域
 
-### postMessage
+WebSocket 和 HTTP 都是应用层协议，都基于 TCP 协议。但是 WebSocket 是一种双向通信协议，在建立连接之后，WebSocket 的 server 与 client 都能主动向对方发送或接收数据。同时，WebSocket 在建立连接时需要借助 HTTP 协议，连接建立好了之后 client 与 server 之间的双向通信就与 HTTP 无关了。
+
+服务端
+
+```javascript
+// app.js
+const WebSocket = require('ws')
+const wss = new WebSocket.Server({
+  port: 3344,
+})
+
+wss.on('connection', function(ws) {
+  console.log('connection')
+  ws.on('message', function(data) {
+    console.log('message')
+    console.log(data)
+    ws.send('hello client')
+    ws.send(JSON.stringify({ name: 'lxfriday' }))
+  })
+})
+console.log('ws listenning 3344')
+
+// ws listenning 3344
+// connection
+// message
+// hello server
+```
+
+页面
+
+```html
+<script>
+  const ws = new WebSocket('ws://localhost:3344')
+  ws.onopen = () => {
+    ws.send('hello server')
+  }
+  ws.onmessage = e => {
+    console.log('message ', e.data)
+  }
+
+  // message  hello client
+  // message  {"name":"lxfriday"}
+</script>
+```
+
+### ✔ postMessage 跨域
+
+ref
+
+- [MDN postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)
+
+`window.postMessage()` 方法可以安全地实现跨源通信，它提供了一种受控机制来规避同源限制。
+
+```javascript
+otherWindow.postMessage(message, targetOrigin, [transfer])
+```
+
+- `otherWindow` 其他窗口的一个引用，比如 `iframe` 的 `contentWindow` 属性、执行 `window.open` 返回的窗口对象；
+- `message` 将要发送到其他 window 的数据。它将会被[结构化克隆算法](https://developer.mozilla.org/en-US/docs/DOM/The_structured_clone_algorithm)序列化；
+- `targetOrigin` 通过窗口的 `origin` 属性来指定哪些窗口能接收到消息事件，其值可以是字符串 `*`（表示无限制）或者一个 URI。如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配 `targetOrigin` 提供的值，那么消息就不会被发送；只有三者完全匹配，消息才会被发送；
+
+- `transfer` 是一串和 `message` 同时传递的 `Transferable` 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。
+
+在 a.html 页面中用 iframe 加载 b.html，并对 b.html 发送数据，然后 b.html 回传数据给 a.html。打印的结果如下
+
+```
+b :: e.origin http://localhost:5000
+b :: e.data {name: "a.html", msg: "hello b"}
+a :: e.origin http://localhost:5000
+a :: e.data hello, I am b
+```
+
+a.html
+
+```html
+<body>
+  a
+  <iframe id="iframe" src="http://localhost:5000/b.html" onload="load()"></iframe>
+  <script>
+    function load() {
+      const bUrl = 'http://localhost:5000/b.html'
+      const b = document.querySelector('#iframe')
+      function receiveMessage(e) {
+        console.log('a :: e.origin', e.origin)
+        console.log('a :: e.data', e.data)
+      }
+      window.addEventListener('message', receiveMessage)
+      b.contentWindow.postMessage(
+        {
+          name: 'a.html',
+          msg: 'hello b',
+        },
+        bUrl
+      )
+    }
+  </script>
+</body>
+```
+
+b.html
+
+```html
+<body>
+  b
+  <script>
+    function receiveMessage(e) {
+      console.log('b :: e.origin', e.origin)
+      console.log('b :: e.data', e.data) // e.data 接收到一个对象
+      e.source.postMessage('hello, I am b', e.origin)
+    }
+    window.addEventListener('message', receiveMessage)
+  </script>
+</body>
+```
 
 ## XSS
 
