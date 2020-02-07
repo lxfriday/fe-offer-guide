@@ -70,6 +70,8 @@ ref
 
 - [https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 
+## 函数式编程
+
 # BOM
 
 ## ✔ XMLHttpRequest
@@ -163,6 +165,16 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 ## 事件冒泡、捕捉、代理
 
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
+
+## Cookie
+
+### 增删改查
+
+ref
+
+- [https://www.w3school.com.cn/js/js_cookies.asp](https://www.w3school.com.cn/js/js_cookies.asp)
+
+### 不同二级域名共享 cookie
 
 # V8 专区
 
@@ -415,6 +427,101 @@ ref
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
 # 浏览器及安全
+
+## 跨域
+
+跨域是因为浏览器同源策略的存在而产生的，它可以提升网站的安全性。
+
+同源：**协议 + 域名 + 端口完全相同则为同源**，即使两个不同的域名指向同一个 IP 这也算跨域。
+
+同源策略限制的内容：
+
+1. Cookie、LocalStorage、IndexedDB
+1. Ajax 请求
+
+额外允许跨域的标签，都是资源型标签：
+
+1. `img`
+1. `link`
+1. `script`
+
+对于 Ajax 请求，跨域请求是可以发送出去的，只是浏览器检测到不符合安全性要求，不允许 xhr 回调接受数据，并且会触发 `xhr.onerror` 事件。
+
+### ✔ JSONP
+
+原理：利用 `script` 标签没有跨域限制，网页可以得到从其他来源动态产生的 JSON 数据。
+
+优点：兼容性好。
+
+缺点：只能使用 GET 方式发请求，可能会遭受 XSS 攻击。
+
+实现流程：
+
+1. 前端声明一个待调用的函数 `show`
+1. 创建 `script` 标签，设置其 `src` 为 `https://xxx.yy?cb=show`，并把标签添加到 DOM 中；
+1. 服务端接受请求之后，获取到 `cb=show`；
+1. 服务端把要传递的数据作为 show 的参数整体返回，`show(data)`；
+1. 前端 `script` 接收导 `show` 函数的调用，执行 `show()` 函数；
+
+```javascript
+// index.html
+function jsonp({ url, params, cb }) {
+  return new Promise((resolve, reject) => {
+    let script = document.createElement('script')
+    // 把要执行的函数名传递到服务端，服务端回传一个对该函数的调用（同时附带需要处理的参数）
+    window[cb] = function(data) {
+      resolve(data)
+      document.body.removeChild(script)
+    }
+    params = { ...params, cb }
+    let arrs = []
+    // 拼接成 name=lxfriday&cb=show
+    for (let key in params) {
+      arrs.push(`${key}=${params[key]}`)
+    }
+    script.src = `${url}?${arrs.join('&')}`
+    document.body.appendChild(script)
+  })
+}
+jsonp({
+  url: 'http://localhost:3333/api',
+  params: { name: 'lxfriday' },
+  cb: 'show',
+}).then(data => {
+  // 打印 lxfriday
+  console.log(data)
+})
+```
+
+```javascript
+// server.js
+const url = require('url')
+const http = require('http')
+
+const app = http.createServer((req, res) => {
+  const urlObj = url.parse(req.url)
+  console.log('urlObj', urlObj)
+  const query = {}
+  urlObj.query.split('&').forEach(v => {
+    const [key, value] = v.split('=')
+    query[key] = value
+  })
+  // query { name: 'lxfriday', cb: 'show' }
+  console.log('query', query)
+  // 服务端返回 show('a cat ')，这样浏览器就会执行在浏览器中注册的函数
+  res.end(`${query.cb}('${query.name}')`)
+})
+app.listen(3333)
+console.log('listening')
+```
+
+### CORS
+
+### WebSocket
+
+### postMessage
+
+###
 
 ## XSS
 
