@@ -6,20 +6,48 @@
     <!-- IE8/9及以后的版本都会以最高版本IE来渲染页面，用来指定IE浏览器去模拟某个特定版本的IE浏览器的渲染方式(如IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF渲染，否则使用最高版本的IE内核进行渲染 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="面试总结" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/docsify/4.10.2/themes/vue.css"
-    />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/docsify/4.10.2/themes/vue.css" />
     <link rel="stylesheet" href="./static/css/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/prism/9000.0.1/themes/prism-coy.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/prism/9000.0.1/themes/prism-coy.min.css" />
     <script src="https://qiniu1.lxfriday.xyz/static/docsify-edit-on-github.js"></script>
+
+    <script>
+      window.$docsify = {
+        name: '大厂前端 offer 收割指南',
+        repo: 'https://github.com/lxfriday/fe-offer-guide',
+        coverpage: true,
+        search: [
+          '/', // => /README.md
+        ],
+        plugins: [
+          EditOnGithubPlugin.create('https://github.com/lxfriday/fe-offer-guide/tree/master/docs/', null, function(file) {
+            if (file.indexOf('en') === -1) {
+              return '编辑'
+            } else {
+              return 'edit on git'
+            }
+          }),
+        ],
+      }
+    </script>
+    <!-- my code -->
+    <script>
+      const isLocal = location.origin.includes('localhost')
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('sw.js')
+      }
+    </script>
+    <!-- docsify config -->
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/docsify.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/search.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/zoom-image.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/emoji.min.js" defer></script>
+    <script src="https://qiniu1.lxfriday.xyz/static/docsify-copy-code.min.js" defer></script>
+    <!-- prism config-->
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-typescript.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-jsx.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-http.min.js" defer></script>
   </head>
   <body>
     <div id="app">
@@ -36,44 +64,5 @@
         </div>
       </div>
     </div>
-    <script>
-      window.$docsify = {
-        name: "大厂前端 offer 收割指南",
-        repo: "https://github.com/lxfriday/fe-offer-guide",
-        coverpage: true,
-        search: [
-          "/" // => /README.md
-        ],
-        plugins: [
-          EditOnGithubPlugin.create(
-            "https://github.com/lxfriday/fe-offer-guide/tree/master/docs/",
-            null,
-            function(file) {
-              if (file.indexOf("en") === -1) {
-                return "编辑";
-              } else {
-                return "edit on git";
-              }
-            }
-          )
-        ]
-      };
-    </script>
-    <!-- docsify config -->
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/docsify.min.js"></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/search.min.js"></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/zoom-image.min.js"></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/emoji.min.js"></script>
-    <script src="https://qiniu1.lxfriday.xyz/static/docsify-copy-code.min.js"></script>
-    <!-- prism config-->
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-typescript.min.js"></script>
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-jsx.min.js"></script>
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-http.min.js"></script>
-    <!-- my code -->
-    <script>
-      if (typeof navigator.serviceWorker !== "undefined") {
-        navigator.serviceWorker.register("sw.js");
-      }
-    </script>
   </body>
 </html>
