@@ -22,6 +22,8 @@
 
 ## JS 协程及 async、await
 
+## Proxy
+
 ## JS GC 原理
 
 ref
@@ -164,11 +166,23 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 
 # DOM
 
+## DOM 操作(增删改查)
+
+## DOM 属性
+
 ## 事件冒泡、捕捉、代理
+
+ref
+
+- [https://www.quirksmode.org/js/events_order.html](https://www.quirksmode.org/js/events_order.html)
 
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
 
 ## Cookie
+
+## localStorage
+
+## sessionStorage
 
 ### 增删改查
 
@@ -190,9 +204,17 @@ ref
 
 ## EventEmmiter 实现
 
+## Koa
+
+### 洋葱模型
+
+## restful API 介绍及其优缺点
+
 # CSS
 
 ## CSS 盒模型
+
+## CSS 写画一个三角形
 
 ## 基本布局
 
@@ -214,7 +236,22 @@ ref
 
 # React
 
+## React Context
+
+## React 事件机制
+
+ref
+
+- [https://juejin.im/post/5c7df2e7f265da2d8a55d49d](https://juejin.im/post/5c7df2e7f265da2d8a55d49d)
+
+## React 事件绑定 this
+
 ## React Fiber
+
+ref
+
+- [https://zhuanlan.zhihu.com/p/37095662](https://zhuanlan.zhihu.com/p/37095662)
+- [https://juejin.im/post/5dadc6045188255a270a0f85](https://juejin.im/post/5dadc6045188255a270a0f85)
 
 ## setState 原理
 
@@ -241,33 +278,173 @@ ref
 
 ## Plugin 编写
 
-# 【HTML】
+# Axios
+
+## Axios 封装
+
+# HTML
+
+## HTML Element 和 HTML Node
+
+ref
+
+- [https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement)
+- [https://developer.mozilla.org/zh-CN/docs/Web/API/Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)
 
 ## `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`
 
 IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 IE 浏览器去模拟某个特定版本的 IE 浏览器的渲染方式(如 IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF 渲染，否则使用最高版本的 IE 内核进行渲染。
 
-# 协议（HTTP+TCP）
+# 协议（HTTP+TCP+UDP）
+
+## OSI 七层网络分层模型
+
+ref
+
+- [https://baike.baidu.com/item/%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/1441391](https://baike.baidu.com/item/%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/1441391)
+
+开放式系统互联通信参考模型（Open System Interconnection Reference Model）。
+
+| 名称       | 特征                                                                                                                    |
+| :--------- | :---------------------------------------------------------------------------------------------------------------------- |
+| 应用层     | 网络服务与最终用户的一个接口。包含：**HTTP HTTPS DNS TELNET FTP DHCP TFTP SMTP SNMP POP3** 。                           |
+| 表示层     | 数据的表示、安全、压缩。                                                                                                |
+| 会话层     | 建立、管理、终止会话。对应主机进程，指本地主机与远程主机正在进行的会话。                                                |
+| 传输层     | 定义传输数据的协议端口号，以及流控和差错校验。包括 **TCP，UDP，SPX**。                                                  |
+| 网络层     | 进行逻辑地址寻址，实现不同网络之间的路径选择。包括 **ICMP IGMP IP（IPV4 IPV6）**。                                      |
+| 数据链路层 | 建立逻辑连接、进行硬件地址寻址、差错校验等功能。将比特组合成字节进而组合成帧，用 MAC 地址访问介质，错误发现但不能纠正。 |
+| 物理层     | 建立、维护、断开物理连接。                                                                                              |
+
+## TCP/IP 四层网络分层模型
+
+![](/static/imgs/tcp-network-model.png)
+
+| 名称                      | 特征                                                                                                                          |
+| :------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
+| 应用层(application layer) | 有各种面向具体应用的协议。包含 Telnet、SSH、FTP、SMTP 、HTTP 等等                                                             |
+| 传输层(transport layer)   | 保证数据在 IP 地址标记的两点之间“可靠”地传输，是 TCP 协议工作的层次，另外还包括 UDP                                           |
+| 网际层(internet layer)    | 包含 IP 协议，可以在链接层的基础上，用 IP 地址取代 MAC 地址，把许许多多的局域网、广域网连接成一个虚拟的巨大网络               |
+| 链接层(link layer)        | 负责在以太网、WiFi 这样的底层网络上发送原始数据包，工作在网卡这个层次，使用 MAC 地址来标记网络上的设备，所以有时候也叫 MAC 层 |
+
+链接层的传输单位是帧（frame），IP 层的传输单位是包（packet），TCP 层的传输单位是段（segment），HTTP 的传输单位是消息或者报文（message）。
+
+OSI 网络模型和 TCP 网络模型的对应关系
+
+![](/static/imgs/tcp-network-model-osi-model.png)
 
 ## TCP
 
-### 三次握手、四次挥手
+ref
+
+- [TCP 的那些事儿（上）](https://coolshell.cn/articles/11564.html)
+- [TCP 的那些事儿（下）](https://coolshell.cn/articles/11609.html)
+
+### ✔ TCP 头信息
+
+![TCP 头](/static/imgs/tcp-header-01.png)
+
+六个标志位的含义：
+
+| 字段  | 含义                                                                         |
+| :---- | :--------------------------------------------------------------------------- |
+| `SYN` | 请求建立连接，并在其序列号的字段进行序列号的初始值设定。建立连接，设置为 1。 |
+| `ACK` | 确认号是否有效，一般置为 1。                                                 |
+| `FIN` | 希望断开连接。                                                               |
+| `PSH` | 提示接收端应用程序立即从 TCP 缓冲区把数据读走。                              |
+| `RST` | 对方要求重新建立连接，复位。                                                 |
+| `URG` | 紧急指针是否有效。为 1，表示某一位需要被优先处理                             |
+
+- 序列号 seq：占 4 个字节，用来标记数据段的顺序，解决网络包乱序的问题。序列号表示报文段携带数据的第一个字节的编号；
+- 确认号 ack：占 4 个字节，表示期待收到对方下一个报文段的第一个数据字节的序号，当前报文段最后一个字节的编号+1 即为确认号。
+- 确认 ACK 标志位：占 1 位，仅当 ACK=1 时，确认号 ack 字段才有效。ACK=0 时，确认号 ack 无效；
+- 同步 SYN 标志位：连接建立时用于同步序号。当 SYN=1，ACK=0 时表示：这是一个连接请求报文段。若同意连接，则在响应报文段中使得 SYN=1，ACK=1。SYN 这个标志位只有在 TCP 建产连接时才会被置 1，握手完成后 SYN 标志位被置 0；
+- 终止 FIN 标志位：用来释放一个连接。FIN=1 表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接；
+
+**大写的 SYN ACK 都是标志位，其值为 1 或 0，小写的 ack、seq 单词表示序号，和具体的传输内容有关。**
+
+### ✔ 三次握手
 
 ref
 
 - [三次握手、四次挥手](https://mp.weixin.qq.com/s?__biz=MzI5MzYzMDAwNw==&mid=2247486033&idx=1&sn=679e99b0ca60ad9eb81456bba8ffbdec&chksm=ec6e7309db19fa1f74da440a9980ec08a1458598bb3e57a9110b6ceee83d52dbf8cf27d982c5&mpshare=1&scene=1&srcid=0201hefKnCRp0hm9SW35tKNb&sharer_sharetime=1580534579241&sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&key=732653fb0fa49e86b2cb705aaaaf51f9f8a46f0369ca0a885b4b4916bc819da38977e0551641a69f6dfa36e1074df74cccb282239774e685deec1821000aacb4deaaadac4c325535942de78f26806e40&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=6208006f&lang=zh_CN&exportkey=A1nRWsKlQIXAWHd8C0NMQYo%3D&pass_ticket=xlc2xiojgyuqCT6cyqwQWdbOwUCf%2BOt%2BC4jow75C87vgCsxU%2FXCzkna537BHolOS)
 
-### TCP 为什么是三次握手（为什么不是两次）、四次挥手（为什么不是三次）
+![三次握手](/static/imgs/tcp-three-times-handshake.png)
+
+### ✔ 四次挥手
+
+![四次挥手](/static/imgs/tcp-four-times-wave.png)
+
+### TCP 为什么要三次握手（为什么不是两次）
+
+当网络中存在延迟时，可能客户端发送了多个 SYN 建立链接，最后这些包都到达了服务端，从而导致建立多个连接浪费资源。
+
+### TCP 为什么要四次挥手（为什么不是三次）
+
+当服务端收到 FIN 报文时，可能还有数据需要处理，所以需要先发送一个 ACK 表示服务端知道要断开连接了（如果不发这个 ACK 客户端可能会重复发送 FIN）。等服务端的数据都发送完之后，服务端需要再发送一个 FIN 报文，表示服务端也不发送数据了，两边都可以断开了。
 
 ### TIME_WAIT 为什么是 2 个 MSL
 
-### SYN 洪水
+客户端发送的最后一个 ACK 在网络中可能会丢失，TIME_WAIT 用来等待服务端发送的 FIN ，服务端如果没有收到 ACK，将不断重复发送 FIN 片段。所以客户端不能立即关闭，它必须确认服务端接收到了该 ACK。
+
+客户端会有一个计时器，如果在 TIME_WAIT 阶段接收到 FIN ，那么客户端会重发 ACK 重置计时器再次进入 TIME_WAIT 状态。
+
+2MSL（Maximum Segment Lifetime，片段在网络中的最大存活时间），刚好是一个发送和一个回复所需的最大时间（大于客户端发送的 ACK 丢失之后服务端重发 FIN 并被客户端接收到的时间），如果直到 2MSL，客户端都没有再次收到 FIN，客户端则推断 ACK 已经被成功接收，会关闭连接。
+
+### 建立连接时 SYN 超时
+
+服务端收到了客户端发送的 SYN 时返回了 SYN-ACK，这之后客户端掉线了，服务端没有收到客户端发送回来的 ACK，那么这个连接就处于中间状态了，此时连接既没有成功也没有失败。
+
+服务端如果在一定时间内没有收到 ACK 则会重发 SYN-ACK 。在 Linux 下，默认重试次数为 **5** 次，重试的时间间隔时间从 1 秒开始翻翻，5 次重试的时间间隔分别为： 1s，2s，4s，8s，16s，总共 31s，第五次发出后还要等待 32s 才知道第 5 次也超时了，所以总共需要 63s，服务端才会断开这个连接。
+
+### SYN 洪水攻击
+
+攻击者发送 SYN 之后就下线了，而服务器必须等待 63s 才会断开连接，因此攻击者利用这个等待时间发送大量的 SYN 并让客户端不接受返回的 SYN-ACK，以此来耗尽服务端的 SYN 队列资源，让正常的请求无法处理。
+
+解决办法：Linux 下给了一个 tcp_syncookies 的参数来应对，当 SYN 队列满了之后，TCP 会通过**源地址端口**、**目标地址端口**和**时间戳**打造出一个特别的 seq（也叫 cookie）发回去。如果是攻击者则不会有响应，如果是正常连接，则会把这个 seq Cookie 发回来，然后服务端可以通过 cookie 建连接（即使你不在 SYN 队列中）。
+
+### Inital Sequence Number(ISN) 如何确定
+
+在三次握手中主要是初始化双方的 Sequence Number 的初始值。通信双方要互相通知对方自己的初始化 Sequence Number（缩写为 ISN：Initial Sequence Number）。SYN（Synchronize Sequence Number）为 1 的数据包中会带上 seq。
+
+从三次握手的过程可以看出，通信双方都会发送 SYN 标志位，这是为了告知对方自己发送数据的初始序号。
+
+ISN 会和一个假的时钟绑在一起，这个时钟会在每 4 微秒对 ISN 做加一操作，直到超过 2^32，又从 0 开始。这样一个 ISN 的周期大约 4.55 小时。只要 MSL 小于 4.55 小时，就不会重用 ISN。
+
+如果 ISN 是一个固定的值，假如为 1，建立好连接之后，客户端发送了 30 个 segment，客户端掉线重连之后，又用 1 建立连接，如果服务端收到了这 30 个 segment，则此时服务端返回的 ack 和客户端会对不上，导致问题。
 
 ### TCP 保活机制（客户端故障之后什么时候断开连接）
 
-### TCP 滑动窗口、拥塞控制
+服务器没收到一次客户端的请求后都会重置一个计时器，这个计时器通常设置为 **2 小时**，若 2 小时内都没有收到任何客户端的数据，服务端就会发送一个探测报文段，以后**每隔 75 秒**发送一次，一共发送 **10** 个探测报文，如果客户端仍然没有反应，服务器就认定客户端出现故障，服务端关闭连接。
 
-### TCP 标志位及其作用
+### TCP 滑动窗口（流量控制）
+
+TCP 必需要解决的可靠传输以及包乱序（reordering）的问题，所以，TCP 必需要知道网络实际的数据处理带宽或是数据处理速度，这样才不会引起网络拥塞，导致丢包。
+
+### TCP 拥塞控制
+
+### TCP 拥塞避免
+
+### TCP 慢启动
+
+### TCP 快重传
+
+![tcp 快重传 by coolshell](/static/imgs/tcp-fast-retransmit.png)
+
+如果发送方连续收到 3 次相同的 ack，则表示这个报文的下一个报文丢失了，进入快重传阶段，要求接收方在收到一个失序的报文段后就立即发出重复确认，为的是使发送方及早知道报文段有没有到达对方，可以提高网络吞吐率约 20%。
+
+比如：如果发送方发出了 1，2，3，4，5 份数据，第一份先送到了，于是就 ack 回 2，结果 2 因为某些原因没收到，3 到达了，于是还是 ack 回 2，后面的 4 和 5 都到了，但是还是 ack 回 2，因为 2 还是没有收到，于是发送端收到了三个 ack=2 的确认，知道了 2 还没有到，于是就马上重转 2。然后，接收端收到了 2，此时因为 3，4，5 都收到了，于是 ack 回 6。
+
+### TCP 快恢复
+
+### TCP 和 UDP 的对比
+
+ref
+
+- [https://zhuanlan.zhihu.com/p/76023663](https://zhuanlan.zhihu.com/p/76023663)
+
+![TCP UDP 对比](/static/imgs/tcp-udp-compare.jpg)
+
+TCP 和 UDP 是 OSI 模型中传输层的协议。TCP 的数据是连续的 **字节流**，有**先后顺序**，而 UDP 则是分散的小数据包，是**顺序发，乱序收**。
 
 ## HTTP
 
@@ -291,6 +468,8 @@ ref
 
 #### 101 Switching Protocols
 
+websocket 建立连接时有用到
+
 #### 200 OK
 
 #### 201 Created
@@ -299,7 +478,11 @@ ref
 
 #### 204 No Content
 
+HEAD 请求有用到？
+
 #### 206 Partial Content
+
+分段传输时有用到
 
 #### 301 Moved Permanently
 
@@ -308,6 +491,8 @@ ref
 #### 303 See Other
 
 #### 304 Not Modified
+
+http 缓存
 
 #### 307 Temporary Redirect
 
@@ -406,6 +591,8 @@ ref
 【POST 请求(application/x-www-form-urlencoded)】
 ![http-post](static/imgs/http-post3.png)
 
+## UDP
+
 ## HTTPS
 
 ### HTTPS 原理
@@ -413,6 +600,8 @@ ref
 ## DNS
 
 ### DNS 查询过程
+
+# CDN
 
 # 性能优化
 
@@ -429,6 +618,8 @@ ref
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
 # 浏览器及安全
+
+## async、defer 的区别及应用
 
 ## ✔ 跨域
 
@@ -714,25 +905,37 @@ ref
 
 # 手撕代码
 
-## call
+## 手撕 JS 实现
 
-## apply
+### call
 
-## bind
+### apply
 
-## new
+##### bind
 
-## Object.create
+### new
 
-## Promise
+#### Object.create
+
+### Promise
 
 ref
 
 - [https://juejin.im/post/5b2f02cd5188252b937548ab](https://juejin.im/post/5b2f02cd5188252b937548ab)
 
-## JSON.stringify
+### JSON.stringify
 
-## 深拷贝
+### 深拷贝
+
+## 手撕 DOM 操作
+
+### 实现一个输入框节流防抖并带有 autocomplete 能力
+
+### 手写实现拖放功能
+
+### 从一个字符串中提取时间
+
+`2020-02-08 12:13:14` 提取成 => `[2020, 02, 08, 12, 13, 14]`
 
 # 设计模式
 
