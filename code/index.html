@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    defer vs normal
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('document.DOMContentLoaded')
+      })
+      window.addEventListener('load', function() {
+        console.log('window.onload')
+      })
+      function load1() {
+        console.log('load1')
+      }
+      function load2() {
+        console.log('load2')
+      }
+      function load3() {
+        console.log('load3')
+      }
+      function load4() {
+        console.log('load4')
+      }
+      function load5() {
+        console.log('load5')
+      }
+    </script>
+    <script src="./index1.js" defer onload="load1()"></script>
+    <script src="./index2.js" defer onload="load2()"></script>
+    <script src="./index3.js" defer onload="load3()"></script>
+    <script src="./index4.js" onload="load4()"></script>
+    <script src="./index5.js" onload="load5()"></script>
+  </body>
+</html>
