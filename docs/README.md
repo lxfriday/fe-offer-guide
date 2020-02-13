@@ -448,9 +448,9 @@ ref
 
 - [https://www.quirksmode.org/js/events_order.html](https://www.quirksmode.org/js/events_order.html)
 
-- `e.target` 或者 `e.srcElement` 获取到触发事件的元素，它不会变；
-- `e.currentTarget` 获取到处理当前事件的目标对象，它是变化的；
-- `this` 获取绑定该事件的元素；
+1. `e.target` 或者 `e.srcElement` 获取到触发事件的元素，它不会变；
+1. `e.currentTarget` 获取到处理当前事件的目标对象，它是变化的；
+1. `this` 获取绑定该事件的元素；
 
 如果几个不同的元素绑定相同的时间处理函数，当使用 `e.target` 或者 `e.srcElement` 获取目标对象时永远获取的都是那个触发事件的元素。
 
@@ -688,7 +688,7 @@ IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 
 
 # 协议（HTTP+TCP+UDP）
 
-## OSI 七层网络分层模型
+## ✔ OSI 七层网络分层模型
 
 ref
 
@@ -706,7 +706,7 @@ ref
 | 数据链路层 | 建立逻辑连接、进行硬件地址寻址、差错校验等功能。将比特组合成字节进而组合成帧，用 MAC 地址访问介质，错误发现但不能纠正。 |
 | 物理层     | 建立、维护、断开物理连接。                                                                                              |
 
-## TCP/IP 四层网络分层模型
+## ✔ TCP/IP 四层网络分层模型
 
 ![](/static/imgs/tcp-network-model.png)
 
@@ -723,7 +723,7 @@ OSI 网络模型和 TCP 网络模型的对应关系
 
 ![](/static/imgs/tcp-network-model-osi-model.png)
 
-## TCP
+## ✔ TCP
 
 ref
 
