@@ -170,15 +170,343 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 
 ## DOM 属性
 
-## 事件冒泡、捕捉、代理
+## ✔ 事件冒泡、捕捉、代理
+
+### ✔ 事件模型
 
 ref
 
 - [https://www.quirksmode.org/js/events_order.html](https://www.quirksmode.org/js/events_order.html)
 
+事件捕捉（源自 Netscape）
+
+```
+               | |
+---------------| |-----------------
+| element1     | |                |
+|   -----------| |-----------     |
+|   |element2  \ /          |     |
+|   -------------------------     |
+|        Event CAPTURING          |
+-----------------------------------
+```
+
+事件冒泡（源自 Microsoft ）
+
+```
+               / \
+---------------| |-----------------
+| element1     | |                |
+|   -----------| |-----------     |
+|   |element2  | |          |     |
+|   -------------------------     |
+|        Event BUBBLING           |
+-----------------------------------
+```
+
+W3C 事件模型（先捕捉再冒泡）
+
+```
+                 | |  / \
+-----------------| |--| |-----------------
+| element1       | |  | |                |
+|   -------------| |--| |-----------     |
+|   |element2    \ /  | |          |     |
+|   --------------------------------     |
+|        W3C event model                 |
+------------------------------------------
+```
+
+### ✔ addEventListener
+
+用法
+
+```js
+target.addEventListener(type, listener, options)
+target.addEventListener(type, listener, useCapture)
+```
+
+- `type` 表示监听事件类型的字符串；
+- `listener` 当所监听的事件类型触发时，会接收到一个事件通知（实现了 [Event](https://developer.mozilla.org/zh-CN/docs/Web/API/Event) 接口的对象）对象；
+- `options` 一个指定有关 `listener` 属性的可选参数对象；
+  - `capture` (`Boolean`)：是否在捕获阶段触发；
+  - `once`(`Boolean`)：是否只调用一次，为 `true` 则在事件调用一次之后会被移除；
+  - `passive` (`Boolean`)：设置为 `true` 时，表示 `listener` 永远不会调用 `preventDefault()`。如果 `listener` 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告；
+- `useCapture`(`Boolean`)：默认为 `false` 表示在冒泡阶段调用，为 `true` 表示在捕获阶段调用；
+
+`addEventListener` 相比 `onXX` ，前者可以对同一事件注册多个监听函数，也可以指定冒泡或者捕获。`addEventListener` 对同一个函数引用无论注册多少次，都只会相当于注册一次，对不同函数引用则会全部注册。
+
+```javascript
+box3.addEventListener('click', function(e) {
+  console.log('box3')
+})
+box3.addEventListener('click', function(e) {
+  console.log('box3')
+})
+box3.addEventListener('click', function(e) {
+  console.log('box3')
+})
+// 点击一次 box3，打印三次 box3
+```
+
+```javascript
+function b3(e) {
+  console.log('box3')
+}
+box3.addEventListener('click', b3)
+box3.addEventListener('click', b3)
+box3.addEventListener('click', b3)
+// 点击一次 box3，打印一次 box3
+```
+
+![](./static/imgs/event-model.png)
+
+```html
+<style>
+  .box1 {
+    width: 300px;
+    height: 300px;
+    background-color: black;
+  }
+  .box2 {
+    width: 200px;
+    height: 200px;
+    background-color: cyan;
+  }
+  .box3 {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+  }
+</style>
+
+<body>
+  <div class="box1">
+    1
+    <div class="box2">
+      2
+      <div class="box3">3</div>
+    </div>
+  </div>
+  <script>
+    const box1 = document.querySelector('.box1')
+    const box2 = document.querySelector('.box2')
+    const box3 = document.querySelector('.box3')
+  </script>
+</body>
+```
+
+**冒泡**
+
+```javascript
+box1.addEventListener('click', function(e) {
+  console.log('box1')
+})
+box2.addEventListener('click', function(e) {
+  console.log('box2')
+})
+box3.addEventListener('click', function(e) {
+  console.log('box3')
+})
+// 点击 `.box3` 所在的区域时
+// box3
+// box2
+// box1
+```
+
+**捕捉**
+
+```javascript
+box1.addEventListener(
+  'click',
+  function(e) {
+    console.log('box1')
+  },
+  true
+)
+box2.addEventListener(
+  'click',
+  function(e) {
+    console.log('box2')
+  },
+  true
+)
+box3.addEventListener(
+  'click',
+  function(e) {
+    console.log('box3')
+  },
+  true
+)
+// 点击 `.box3` 所在的区域时
+// box1
+// box2
+// box3
+```
+
+**捕捉和冒泡混合**
+
+```javascript
+box1.addEventListener(
+  'click',
+  function(e) {
+    console.log('box1')
+  },
+  true
+)
+box2.addEventListener('click', function(e) {
+  console.log('box2')
+})
+box3.addEventListener('click', function(e) {
+  console.log('box3')
+})
+// 点击 `.box3` 所在的区域时
+// box1
+// box3
+// box2
+```
+
+**在同一个目标元素（捕捉和冒泡切换的末端）上注册了冒泡和捕捉两种事件时，先注册的事件先执行**
+
+```javascript
+box1.addEventListener('click', function(e) {
+  console.log('box1')
+})
+box2.addEventListener('click', function(e) {
+  console.log('box2')
+})
+box3.addEventListener(
+  'click',
+  function(e) {
+    console.log('box3 capture')
+  },
+  true
+)
+box3.addEventListener('click', function(e) {
+  console.log('box3 bubble')
+})
+// 点击 `.box3` 所在的区域时
+// box3 capture
+// box3 bubble
+// box2
+// box1
+```
+
+```javascript
+box1.addEventListener('click', function(e) {
+  console.log('box1')
+})
+box2.addEventListener('click', function(e) {
+  console.log('box2')
+})
+box3.addEventListener('click', function(e) {
+  console.log('box3 bubble')
+})
+box3.addEventListener(
+  'click',
+  function(e) {
+    console.log('box3 capture')
+  },
+  true
+)
+// 点击 `.box3` 所在的区域时
+// box3 bubble
+// box3 capture
+// box2
+// box1
+```
+
+### ✔ attachEvent
+
+对于 Internet Explorer 来说，在 IE 9 之前，你必须使用 `attachEvent` 而不是使用标准方法 `addEventListener`。
+
+可以使用 `window.event.srcElement` 或者 `e.srcElement` 获取触发事件的元素（是点击时的元素，不一定是绑定事件的元素）。
+
+`attachEvent` 时间处理函数中的 `this` 对应的是 `window`，不是绑定该事件的元素。
+
+```javascript
+box1.attachEvent('onclick', function(e) {
+  console.log('box1')
+  console.log(window.event.srcElement)
+  console.log(e.srcElement)
+})
+```
+
+### ✔ 禁止冒泡、捕捉
+
+在事件监听函数中执行 `e.stopPropagation()`
+
+```javascript
+box3.addEventListener('click', function(e) {
+  e.stopPropagation()
+})
+```
+
+### ✔ 获取触发事件的元素
+
+ref
+
+- [https://www.quirksmode.org/js/events_order.html](https://www.quirksmode.org/js/events_order.html)
+
+- `e.target` 或者 `e.srcElement` 获取到触发事件的元素，它不会变；
+- `e.currentTarget` 获取到处理当前事件的目标对象，它是变化的；
+- `this` 获取绑定该事件的元素；
+
+如果几个不同的元素绑定相同的时间处理函数，当使用 `e.target` 或者 `e.srcElement` 获取目标对象时永远获取的都是那个触发事件的元素。
+
+```javascript
+// 点击 box3
+box1.addEventListener('click', function(e) {
+  console.log('box1 e.target', e.target)
+})
+box2.addEventListener('click', function(e) {
+  console.log('box2 e.target', e.target)
+})
+```
+
+![](./static/imgs/event-model-eventtarget.png)
+
+```javascript
+// 点击 box3
+box1.addEventListener('click', function(e) {
+  console.log('box1 this', this)
+})
+box2.addEventListener('click', function(e) {
+  console.log('box2 this', this)
+})
+```
+
+![](./static/imgs/event-model-this.png)
+
+### ✔ 事件代理
+
+事件代理是利用事件的冒泡、捕捉机制，让绑定事件更加统一的一种方式。
+
+当我们有一个 `ul`，想在其中动态的增删 `li` 时，事件代理就非常适合在这里使用。
+
+```html
+<ul>
+  <li key="1" name="lx">11</li>
+  <li key="2">22</li>
+  <li key="3">33</li>
+  <li key="4">44</li>
+</ul>
+
+<script>
+  ul.addEventListener('click', function(e) {
+    console.log('target', e.target) // li
+    console.log('key', e.target.attributes.key.value)
+  })
+</script>
+```
+
+我们删除了 `li` 时无需删除事件绑定，也无需为新增的 `li` 绑定事件。点击事件会冒泡到 `ul` 并被这个事件处理程序处理，我们只需要拿到当前点击的元素 `e.taregt` 做对应的处理即可。
+
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
 
 ## Cookie
+
+## Session
 
 ## localStorage
 

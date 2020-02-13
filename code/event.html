@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event</title>
+    <style>
+      .box1 {
+        width: 300px;
+        height: 300px;
+        background-color: black;
+      }
+      .box2 {
+        width: 200px;
+        height: 200px;
+        background-color: cyan;
+      }
+      .box3 {
+        width: 100px;
+        height: 100px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="wrapper">
+      <li key="1" name="lx">11</li>
+      <li key="2">22</li>
+      <li key="3">33</li>
+      <li key="4">44</li>
+    </ul>
+    <script>
+      var box1 = document.querySelector('.box1')
+      var box2 = document.querySelector('.box2')
+      var box3 = document.querySelector('.box3')
+      var ul = document.querySelector('.wrapper')
+
+      ul.addEventListener('click', function(e) {
+        console.log('target', e.target) // li
+        console.log('key', e.target.attributes.key.value)
+      })
+
+      // box1.addEventListener(
+      //   'click',
+      //   function(e) {
+      //     e.stopPropagation()
+      //     console.log('box1')
+      //   },
+      //   true
+      // )
+      // box2.addEventListener(
+      //   'click',
+      //   function(e) {
+      //     console.log('box2')
+      //   },
+      //   true
+      // )
+      // box3.addEventListener(
+      //   'click',
+      //   function(e) {
+      //     console.log('box3')
+      //   },
+      //   true
+      // )
+    </script>
+  </body>
+</html>
