@@ -976,55 +976,211 @@ ref
 
 ### keep-alive
 
-### http 状态码
+### HTTP2 头部压缩
 
-#### 100 Continue
+### HTTP2 服务端推送
 
-#### 101 Switching Protocols
+### HTTP 队头阻塞
 
-websocket 建立连接时有用到
+### ✔ http 状态码
 
-#### 200 OK
+#### ✔ 100 Continue
 
-#### 201 Created
+表示目前为止一切正常, 客户端应该继续请求, 如果已完成请求则忽略。
 
-#### 202 Accepted
+POST 请求实际会发送两个包，第一个包发出去之后服务端会返回 100。可以查看【 GET、POST 区别】部分了解更多。
 
-#### 204 No Content
+#### ✔ 101 Switching Protocols
 
-HEAD 请求有用到？
+ref
 
-#### 206 Partial Content
+- [https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Protocol_upgrade_mechanism](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Protocol_upgrade_mechanism)
 
-分段传输时有用到
+![](/static/imgs/http-response-code-101.png)
 
-#### 301 Moved Permanently
+（协议切换）状态码表示服务器应客户端升级协议的请求（Upgrade 请求头）正在进行协议切换。
 
-#### 302 Move Temporarily(Found)
+```http
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+```
 
-#### 303 See Other
+协议升级请求总是由客户端发起的；当客户端试图升级到一个新的协议时，可以先发送一个普通的请求（GET，POST 等），不过这个请求需要进行特殊配置以包含升级请求。
 
-#### 304 Not Modified
+- `Connection: Upgrade`，设置 `Connection` 头的值为 `Upgrade` 来指示这是一个升级请求；
+- `Upgrade: protocols`，`Upgrade` 头指定一项或多项协议名，按优先级排序，以逗号分隔；
 
-http 缓存
+#### ✔ 200 OK
 
-#### 307 Temporary Redirect
+表明请求已经成功。
 
-#### 400 Bad Request
+PUT 和 DELETE 的请求成功通常并不是响应 200 OK 的状态码而是 204 No Content 表示无内容(或者 201 Created 表示一个资源首次被创建成功)。
 
-#### 401 Unauthorized
+#### ✔ 201 Created
 
-#### 403 Forbidden
+表示请求已经被成功处理，并且创建了新的资源。新的资源在应答返回之前已经被创建。同时新增的资源会在应答消息体中返回，其地址或者是原始请求的路径，或者是 Location 首部的值。
 
-#### 405 Method Not Allowed
+**这个状态码的常规使用场景是作为 POST 请求的返回值。**
 
-#### 500 Internal Server Error
+#### ✔ 202 Accepted
 
-#### 502 Bad Gateway
+表示服务器端已经收到请求消息，但是尚未进行处理。
 
-#### 503 Service Unavailable
+这个状态码被设计用来将请求交由另外一个进程或者服务器来进行处理，或者是对请求进行批处理的情形。
 
-#### 504 Gateway Timeout
+#### ✔ 204 No Content
+
+表示该请求已经成功了，但是客户端不需要离开当前页面。
+
+使用惯例是，**在 PUT 请求中进行资源更新，但是不需要改变当前展示给用户的页面，那么返回 204 No Content**。如果创建了资源，则返回 201 Created 。如果应将页面更改为新更新的页面，则应改用 200 。
+
+#### ✔ 206 Partial Content
+
+表示请求已成功，**并且主体包含所请求的数据区间，该数据区间是在请求的 `Range` 首部指定的**。
+
+如果只包含一个数据区间，那么整个响应的 `Content-Type` 首部的值为所请求的文件的类型，同时包含 `Content-Range` 首部。
+
+如果包含多个数据区间，那么整个响应的 `Content-Type` 首部的值为 `multipart/byteranges` ，其中一个片段对应一个数据区间，并提供 `Content-Range` 和 `Content-Type` 描述信息。
+
+只包含一个数据区间的响应：
+
+```http
+HTTP/1.1 206 Partial Content
+Date: Wed, 15 Nov 2015 06:25:24 GMT
+Last-Modified: Wed, 15 Nov 2015 04:58:08 GMT
+Content-Range: bytes 21010-47021/47022
+Content-Length: 26012
+Content-Type: image/gif
+
+... 26012 bytes of partial image data ...
+```
+
+包含多个数据区间的响应：
+
+```http
+HTTP/1.1 206 Partial Content
+Date: Wed, 15 Nov 2015 06:25:24 GMT
+Last-Modified: Wed, 15 Nov 2015 04:58:08 GMT
+Content-Length: 1741
+Content-Type: multipart/byteranges; boundary=String_separator
+
+--String_separator
+Content-Type: application/pdf
+Content-Range: bytes 234-639/8000
+
+...the first range...
+--String_separator
+Content-Type: application/pdf
+Content-Range: bytes 4590-7999/8000
+
+...the second range
+--String_separator--
+```
+
+网易云音乐举例：
+
+请求头中会有 Range
+
+```http
+Range: bytes=0-
+// Range: bytes=10682368-23317920
+```
+
+返回头中：
+
+```http
+Content-Range: bytes 0-2925871/2925872
+Content-Length: 2925872
+```
+
+#### ✔ 301 Moved Permanently
+
+HTTP 301 永久重定向，说明请求的资源已经被移动到了由 `Location` 头部指定的 `URL` 上，是固定的不会再改变。搜索引擎会根据该响应修正。
+
+尽管标准要求浏览器在收到该响应并进行重定向时不应该修改 http method 和 body，但是有一些浏览器可能会有问题。所以最好是在应对 GET 或 HEAD 方法时使用 301，其他情况使用 308 来替代 301。
+
+#### ✔ 302 Move Temporarily(Found)
+
+HTTP 302 Found 重定向状态码表明请求的资源被暂时的移动到了由 `Location` 头部指定的 `URL` 上。浏览器会重定向到这个 `URL`， 但是搜索引擎不会对该资源的链接进行更新。
+
+#### ✔ 303 See Other
+
+HTTP 303 See Other 重定向状态码，通常作为 PUT 或 POST 操作的返回结果，它表示重定向链接指向的不是新上传的资源，而是另外一个页面，比如消息确认页面或上传进度页面。
+
+**明确指定浏览器应该使用 GET 方法请求重定向的页面**。
+
+#### ✔ 304 Not Modified
+
+表示可以使用本地缓存的内容，详见【HTTP 缓存】部分。
+
+#### ✔ 307 Temporary Redirect
+
+307 Temporary Redirect（临时重定向）是表示重定向的响应状态码，说明请求的资源暂时地被移动到 `Location` 首部所指向的 `URL` 上。
+
+307 状态码可以确保请求方法和消息主体不会发生变化（303 是让浏览器用 GET）。
+
+#### ✔ 308 Permanent Redirect
+
+表示重定向的响应状态码，说明请求的资源已经被永久的移动到了由 `Location` 首部指定的 `URL` 上。浏览器会进行重定向，同时搜索引擎也会更新其链接。
+
+**在重定向过程中，请求方法和消息主体不会发生改变，然而在返回 301 状态码的情况下，请求方法有时候会被客户端错误地修改为 GET 方法**。
+
+#### ✔ 400 Bad Request
+
+表示由于语法无效，服务器无法理解该请求。 客户端不应该在未经修改的情况下重复此请求。
+
+#### ✔ 401 Unauthorized
+
+代表客户端错误，指的是由于缺乏目标资源要求的**身份验证凭证**，发送的请求未得到满足。这个状态码会与 `WWW-Authenticate` 首部一起发送，其中包含有如何进行验证的信息。
+
+```http
+HTTP/1.1 401 Unauthorized
+Date: Wed, 21 Oct 2015 07:28:00 GMT
+WWW-Authenticate: Basic realm="Access to staging site"
+```
+
+不知道你是谁，所以不让你请求。
+
+#### ✔ 403 Forbidden
+
+代表客户端错误，指的是服务器端有能力处理该请求，但是拒绝授权访问。
+
+知道你是谁但是不让你请求。
+
+#### ✔ 404 Not Found
+
+代表客户端错误，指的是服务器端无法找到所请求的资源。
+
+#### ✔ 405 Method Not Allowed
+
+表明服务器禁止了使用当前 HTTP 方法的请求。需要注意的是，GET 与 HEAD 两个方法不得被禁止，当然也不得返回状态码 405。
+
+#### ✔ 500 Internal Server Error
+
+表示服务器端错误的响应状态码，意味着所请求的服务器遇到意外的情况并阻止其执行请求。
+
+#### ✔ 501 Not Implemented
+
+**客户端发起的请求超出服务器的能力范围(比如，使用了服务器不支持的请求方法)时，使用此状态码**。
+
+表示请求的方法不被服务器支持，因此无法被处理。服务器必须支持的方法（即不会返回这个状态码的方法）只有 GET 和 HEAD。
+
+请注意，你无法修复 501 错误，需要被访问的 web 服务器去修复该问题。
+
+405 是明确禁止使用某种方法访问，501 是服务器还不支持（后续可能会支持）。
+
+#### ✔ 502 Bad Gateway
+
+表示作为网关或代理角色的服务器，从上游服务器（如 tomcat、php-fpm）中接收到的响应是无效的。代理使用的服务器遇到了上游的无效响应。
+
+#### ✔ 503 Service Unavailable
+
+表示服务器尚未处于可以接受请求的状态。造成这种情况的原因是由**于服务器停机维护或者已超载**。
+
+#### ✔ 504 Gateway Timeout
+
+表示扮演网关或者代理的服务器无法在规定的时间内获得想要的响应。响应来自网关或代理，此网关或代理在等待另一台服务器的响应时出现了超时。
 
 ### ✔ http 请求方法
 
