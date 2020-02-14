@@ -576,6 +576,164 @@ default < `:link` < `:visited` < `:hover` < `:active`
 
 ## 基本布局
 
+## ✔ 垂直居中
+
+ref
+
+- [https://juejin.im/post/5b9a4477f265da0ad82bf921](https://juejin.im/post/5b9a4477f265da0ad82bf921)
+
+仅居中定宽高元素适用：
+
+- absolute + 负 margin
+- absolute + margin auto
+- absolute + calc
+
+居中不定宽高元素：
+
+- absolute + transform
+- lineheight
+- writing-mode
+- css-table
+- flex
+- grid
+
+公共代码
+
+```html
+<style>
+  /* 公共代码 */
+  .wp {
+    border: 1px solid red;
+    width: 300px;
+    height: 300px;
+  }
+
+  .box {
+    background: green;
+  }
+
+  .box.size {
+    width: 100px;
+    height: 100px;
+  }
+  /* 公共代码 */
+</style>
+
+<div class="wp">
+  <div class="box size">123123</div>
+</div>
+```
+
+### ✔ absolute + 负 margin
+
+必须知道 `.box` 宽高。
+
+```css
+.box {
+  background: green;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+```
+
+### ✔ absolute + margin auto
+
+必须知道 `.box` 宽高
+
+```css
+.box {
+  background: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+```
+
+### ✔ absolute + calc
+
+需要知道 `.box` 宽高，需要考虑 `calc` 的兼容性，`calc(50% - 50px);` 中 `-` 前后的空格不能省略。
+
+```css
+.box {
+  background: green;
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+```
+
+### ✔ absolute + transform
+
+`transform` 的 `translate` 使用百分比时是相对当前的元素，所以不需要知道当前元素的大小。
+
+```css
+.box {
+  background: green;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+### ✔ css-table
+
+```css
+.wp {
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.box {
+  background-color: green;
+  display: inline-block;
+}
+```
+
+### ✔ flex
+
+比较主流
+
+```css
+.wp {
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+### ✔ grid
+
+兼容性比较差
+
+```css
+.wp {
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+  display: grid;
+}
+
+.box {
+  background-color: green;
+  align-self: center;
+  justify-self: center;
+}
+```
+
 ## reflow、repaint
 
 ## 外边距折叠（BFC）
@@ -693,10 +851,6 @@ ref
 ## `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`
 
 IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 IE 浏览器去模拟某个特定版本的 IE 浏览器的渲染方式(如 IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF 渲染，否则使用最高版本的 IE 内核进行渲染。
-
-## 水平居中
-
-## 垂直居中
 
 # 协议（HTTP+TCP+UDP）
 
@@ -1301,7 +1455,7 @@ ref
 
 # 浏览器及安全
 
-## url、uri、urn
+## ✔ url、uri、urn
 
 - URI（Uniform Resource Identifier ）：统一资源标识符，就是在某一规则下能把一个资源独一无二地标识出来。
 - URL（Uniform Resource Locator）：统一资源定位符。
