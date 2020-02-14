@@ -1303,6 +1303,14 @@ ref
 
 ## url、uri、urn
 
+- URI（Uniform Resource Identifier ）：统一资源标识符，就是在某一规则下能把一个资源独一无二地标识出来。
+- URL（Uniform Resource Locator）：统一资源定位符。
+- URN（Uniform Resource Name）：统一资源名称。
+
+URI 可以分为 URL,URN 或同时具备 locators 和 names 特性的一个东西。URN 作用就好像一个人的名字，URL 就像一个人的地址。换句话说：URN 确定了东西的身份，URL 提供了找到它的方式。
+
+大白话，就是 URI 是抽象的定义，不管用什么方法表示，只要能定位一个资源，就叫 URI，本来设想的的使用两种方法定位：1，URL，用地址定位；2，URN 用名称定位。
+
 ## async、defer 的区别及应用
 
 ## ✔ 跨域
@@ -1588,6 +1596,7 @@ ref
 - [docsify demo](https://docsify.js.org/#/pwa)
 
 ## 浏览器原理
+
 ### CSS 渲染、合成
 
 # 手撕代码
