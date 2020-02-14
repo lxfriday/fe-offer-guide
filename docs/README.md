@@ -44,6 +44,8 @@ ref
 
 - https://juejin.im/post/5d81bc016fb9a06b084d2acc
 
++async await
+
 ## 节流防抖
 
 ref
@@ -163,6 +165,8 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `onabort`            | 当调用 `xhr.abort()` 后触发                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
+
+## encodeURIComponent 和 encodeURI
 
 # DOM
 
@@ -663,6 +667,10 @@ ref
 
 ## Redux Saga 原理
 
+## immer
+
+## immutable
+
 # Webpack
 
 ## Loader 编写
@@ -685,6 +693,10 @@ ref
 ## `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`
 
 IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 IE 浏览器去模拟某个特定版本的 IE 浏览器的渲染方式(如 IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF 渲染，否则使用最高版本的 IE 内核进行渲染。
+
+## 水平居中
+
+## 垂直居中
 
 # 协议（HTTP+TCP+UDP）
 
@@ -1269,7 +1281,7 @@ ref
 
 ## DNS
 
-### DNS 查询过程
+### DNS 解析过程
 
 # CDN
 
@@ -1288,6 +1300,8 @@ ref
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
 # 浏览器及安全
+
+## url、uri、urn
 
 ## async、defer 的区别及应用
 
@@ -1572,6 +1586,9 @@ b.html
 ref
 
 - [docsify demo](https://docsify.js.org/#/pwa)
+
+## 浏览器原理
+### CSS 渲染、合成
 
 # 手撕代码
 
@@ -1920,3 +1937,5 @@ function bucketSort(arr, size = 5) {
 ```
 
 ## LRU 缓存算法
+
+## 斐波拉契数列累加
