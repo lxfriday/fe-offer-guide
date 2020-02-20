@@ -1553,13 +1553,13 @@ ref
 > 业界不成文的规定是，（大多数）浏览器通常都会限制 url 长度在 2K 个字节，而（大多数）服务器最多处理 64K 大小的 url。数据量太大会对处理程序造成负担。
 
 【GET 请求】
-![http-get](static/imgs/http-get.png)
+![http-get](https://qiniu1.lxfriday.xyz/feoffer/http-get.png)
 【POST 请求(multipart/form-data)】
-![http-post](static/imgs/http-post.png)
+![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post.png)
 【POST 请求(application/json)】
-![http-post](static/imgs/http-post2.png)
+![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post2.png)
 【POST 请求(application/x-www-form-urlencoded)】
-![http-post](static/imgs/http-post3.png)
+![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post3.png)
 
 ## UDP
 
