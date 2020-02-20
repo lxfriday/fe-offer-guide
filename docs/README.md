@@ -69,7 +69,7 @@ typeof f // function
 
 ## ES7、8、9、10 新特性
 
-![ES-7-8-9-10.png](/static/imgs/ES-7-8-9-10.png)
+![ES-7-8-9-10.png](https://qiniu1.lxfriday.xyz/feoffer%2FES-7-8-9-10.png)
 
 ## 箭头函数
 
