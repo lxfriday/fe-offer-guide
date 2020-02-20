@@ -1,8 +1,87 @@
 # JavaScript
 
+## ✔ 基本数据类型
+
+- `Boolean`
+- `Number`
+- `String`
+- `Null`
+- `Undefined`
+- `Object`
+- `Symbol`
+- `BigInt`
+
+## ✔ 原始值和引用值
+
+**原始值**即一些代表原始数据类型的值，也叫基本数据类型。这些基本数据类型的访问是按值进行访问的。他们被存储在栈中。包括：
+
+- `Number`
+- `String`
+- `Boolean`
+- `Null`
+- `Undefined`
+- `Symbol`
+
+**引用值**是把引用变量的**名称存储在栈**中，但是把其**实际对象存在堆**中，且存在一个指针由变量名指向存储在堆中的实际对象，当把引用对象传递给另一个变量时，复制的其实是指向实际对象的指针。包括：
+
+- `Object`
+- `Function`
+- `Array`
+- `Date`
+- `RegExp`
+
+## ✔ typeof
+
+下表总结了 `typeof` 可能的返回值。
+
+| 类型            | 结果        |
+| :-------------- | :---------- |
+| `Boolean`       | `boolean`   |
+| `Number`        | `number`    |
+| `String`        | `string`    |
+| `Null`          | `object`    |
+| `Undefined`     | `undefined` |
+| `Symbol`        | `symbol`    |
+| `Function` 对象 | `function`  |
+| `BigInt`        | `bigint`    |
+| 其他任何对象    | `object`    |
+
+```javascript
+typeof NaN // number
+typeof 42n // bigint
+typeof Symbol('foo') // symbol
+typeof [1, 2, 4] // object
+typeof new Date() // object
+typeof /regex/ // object
+typeof new Boolean(true) // object
+typeof new String('abc') // object
+typeof function() {} // function
+typeof new Function() // function
+typeof class C {} // function
+
+const f = () => {}
+typeof f // function
+```
+
+`typeof null === 'object'` 的原因：在 JavaScript 最初的实现中，JavaScript 中的值是由**一个表示类型的标签和实际数据值表示的**。对象的类型标签是 **0**。由于 `null` 代表的是**空指针**（大多数平台下值为 `0x00`），因此，`null` 的类型标签是 `0`，`typeof null` 也因此返回 `object`。
+
+## ✔ `valueOf` 和 `toString`
+
+## ES7、8、9、10 新特性
+
+![ES-7-8-9-10.png](/static/imgs/ES-7-8-9-10.png)
+
+## 箭头函数
+
+## class
+
 ## 作用域和作用域链
 
 ## JS 执行上下文
+
+ref
+
+- [https://segmentfault.com/a/1190000005654451](https://segmentfault.com/a/1190000005654451)
 
 ## 原型链
 
@@ -16,13 +95,13 @@
 
 ## 多种继承及其优缺点
 
-## `valueOf` 和 `toString`
-
 ## async、await 及 generator、promise 的关系
 
 ## JS 协程及 async、await
 
 ## Proxy
+
+## forin、forof、for、while、reduce、forEach、map 性能对比
 
 ## JS GC 原理
 
@@ -58,15 +137,9 @@ ref
 
 ## reduce((prev, curr) => xx)
 
-## 箭头函数和普通函数的区别
+## setTimeout、setInterval
 
-## 作用域和作用域链
-
-## JS 执行上下文
-
-ref
-
-- [https://segmentfault.com/a/1190000005654451](https://segmentfault.com/a/1190000005654451)
+## requestIdleCallback
 
 ## JS 动画
 
@@ -591,8 +664,6 @@ ref
 居中不定宽高元素：
 
 - absolute + transform
-- lineheight
-- writing-mode
 - css-table
 - flex
 - grid
@@ -756,6 +827,7 @@ ref
    1. `~` 通用兄弟选择器
    1. `>` 子选择器
    1. `' '` 后代选择器
+1. 伪元素选择器(`::before`)
 
 对优先级有影响的：
 
@@ -765,19 +837,39 @@ ref
 1. 伪类选择器(`:hover`)
 1. 类选择器(`.container`)
 1. 属性选择器(`[name=lxfriday]`)
-1. 伪元素选择器(`::before`)
 1. 元素选择器(`h1`)
 
-- `!important` > 内联样式 style > id 选择器 > 伪类选择器 > 属性选择器 = class 选择器 > 伪元素 > 元素(类型)选择器；
+- `!important` > 内联样式 style > id 选择器 > 伪类选择器 > 属性选择器 = class 选择器 > 元素(类型)选择器；
 - 相同的选择器，后面声明的比前面声明的优先级高，相同属性后者覆盖前者；
 
 关系选择器 > 通配符选择器
+
+伪元素的属性部分继承自元素，由于伪元素无法用其他选择器选中，所以不参与优先级排序。
 
 `!important` 如何覆盖：
 
 - 方法 1：内联样式设置了 `!important` ，使用 js(`el.style.color = 'red'`) 可以消除；
 - 方法 2：再添加一条带 `!important` 的 CSS 规则，再给这个给选择器更高的优先级（添加一个标签，ID 或类）；
 - 方法 3：使用相同的选择器，但是置于已有的样式之后（后者覆盖前者）；
+
+经典题：两个 `div` 内的文字都是 `red`，因为 `.blue` `.red` 优先级相同，后声明的覆盖前者。
+
+```html
+<body>
+  <style>
+    .blue {
+      color: blue;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+  <div>
+    <div class="blue red">111</div>
+    <div class="red blue">111</div>
+  </div>
+</body>
+```
 
 ## flex: flex-grow flex-shrink flex-basis
 
@@ -859,18 +951,19 @@ IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 
 ref
 
 - [https://baike.baidu.com/item/%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/1441391](https://baike.baidu.com/item/%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/1441391)
+- [https://www.zhihu.com/question/24002080/answer/410983148](https://www.zhihu.com/question/24002080/answer/410983148)
 
 开放式系统互联通信参考模型（Open System Interconnection Reference Model）。
 
-| 名称       | 特征                                                                                                                    |
-| :--------- | :---------------------------------------------------------------------------------------------------------------------- |
-| 应用层     | 网络服务与最终用户的一个接口。包含：**HTTP HTTPS DNS TELNET FTP DHCP TFTP SMTP SNMP POP3** 。                           |
-| 表示层     | 数据的表示、安全、压缩。                                                                                                |
-| 会话层     | 建立、管理、终止会话。对应主机进程，指本地主机与远程主机正在进行的会话。                                                |
-| 传输层     | 定义传输数据的协议端口号，以及流控和差错校验。包括 **TCP，UDP，SPX**。                                                  |
-| 网络层     | 进行逻辑地址寻址，实现不同网络之间的路径选择。包括 **ICMP IGMP IP（IPV4 IPV6）**。                                      |
-| 数据链路层 | 建立逻辑连接、进行硬件地址寻址、差错校验等功能。将比特组合成字节进而组合成帧，用 MAC 地址访问介质，错误发现但不能纠正。 |
-| 物理层     | 建立、维护、断开物理连接。                                                                                              |
+| 名称       | 特征                                                                                                                                        |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| 应用层     | 网络服务与最终用户的一个接口。包含：**HTTP HTTPS DNS TELNET FTP DHCP TFTP SMTP SNMP POP3** 。                                               |
+| 表示层     | 提供数据压缩、解压、加密等服务，为应用层提供语法选择，语法转换。                                                                            |
+| 会话层     | 建立、管理、终止会话。对应主机进程，指本地主机与远程主机正在进行的会话。                                                                    |
+| 传输层     | 定义传输数据的协议端口号，以及流控和差错校验。包括 **TCP，UDP，SPX**。                                                                      |
+| 网络层     | 基于 IP 地址为数据的传输进行网络间的路由选择。包括 **ICMP IGMP IP（IPV4 IPV6）**，**路由器**工作在网络层。                                  |
+| 数据链路层 | 建立逻辑连接、**进行硬件地址寻址**、差错校验等功能。将比特组合成字节进而组合成帧，用 MAC 地址访问介质，错误发现但不能纠正。包括：**交换机** |
+| 物理层     | 为数据传输提供物理媒体，进行数据的实际传输。包含：**网线、光纤**                                                                            |
 
 ## ✔ TCP/IP 四层网络分层模型
 
@@ -1128,6 +1221,35 @@ TCP 和 UDP 是 OSI 模型中传输层的协议。TCP 的数据是连续的 **�
 
 ## HTTP
 
+## ✔ url、uri、urn
+
+ref
+
+- [https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web)
+
+---
+
+- URI（Uniform Resource Identifier ）：统一资源标识符，就是在某一规则下能把一个资源独一无二地标识出来。
+- URL（Uniform Resource Locator）：统一资源定位符。
+- URN（Uniform Resource Name）：统一资源名称。
+
+URI 可以分为 URL,URN 或同时具备 locators 和 names 特性的一个东西。URN 作用就好像一个人的名字，URL 就像一个人的地址。换句话说：URN 确定了东西的身份，URL 提供了找到它的方式。
+
+大白话，就是 URI 是抽象的定义，不管用什么方法表示，只要能定位一个资源，就叫 URI，本来设想的的使用两种方法定位：1，URL，用地址定位；2，URN 用名称定位。
+
+**URN**
+
+URN 是另一种形式的 URI，它通过特定命名空间中的唯一名称来标识资源。
+
+```
+urn:isbn:9780141036144
+urn:ietf:rfc:7230
+```
+
+乔治·奥威尔所著的《1984》
+
+IETF 规范 7230，超文本传输 ​​ 协议 (HTTP/1.1)：Message Syntax and Routing.
+
 ### HTTP 协议格式
 
 ### HTTP 缓存
@@ -1138,6 +1260,16 @@ ref
 
 - [etag 如何生成](https://juejin.im/post/5df027036fb9a0164143ef25)
 
+### HTTP 协议版本变迁
+
+#### HTTP 0.9
+
+#### HTTP 1.0
+
+#### HTTP 1.1
+
+#### HTTP 2
+
 ### HTTP 长连接
 
 ### keep-alive
@@ -1147,6 +1279,8 @@ ref
 ### HTTP2 服务端推送
 
 ### HTTP 队头阻塞
+
+### HTTP 多路复用
 
 ### ✔ http 状态码
 
@@ -1455,16 +1589,6 @@ ref
 
 # 浏览器及安全
 
-## ✔ url、uri、urn
-
-- URI（Uniform Resource Identifier ）：统一资源标识符，就是在某一规则下能把一个资源独一无二地标识出来。
-- URL（Uniform Resource Locator）：统一资源定位符。
-- URN（Uniform Resource Name）：统一资源名称。
-
-URI 可以分为 URL,URN 或同时具备 locators 和 names 特性的一个东西。URN 作用就好像一个人的名字，URL 就像一个人的地址。换句话说：URN 确定了东西的身份，URL 提供了找到它的方式。
-
-大白话，就是 URI 是抽象的定义，不管用什么方法表示，只要能定位一个资源，就叫 URI，本来设想的的使用两种方法定位：1，URL，用地址定位；2，URN 用名称定位。
-
 ## async、defer 的区别及应用
 
 ## ✔ 跨域
@@ -1729,6 +1853,10 @@ b.html
 
 ## CSRF
 
+ref
+
+- [https://juejin.im/post/5b6b08956fb9a04fc67c2263](https://juejin.im/post/5b6b08956fb9a04fc67c2263)
+
 ## Chrome 架构
 
 ## 页面渲染流程
@@ -1757,23 +1885,151 @@ ref
 
 ## 手撕 JS 实现
 
-### call
+### ✔ 手撕 instanceof
 
-### apply
+ref
 
-##### bind
+- [https://juejin.im/post/5e05d56be51d4557e87fe365#heading-0](https://juejin.im/post/5e05d56be51d4557e87fe365#heading-0)
 
-### new
+`instanceof` 运算符用于检测构造函数的 `prototype` 属性是否出现在某个实例对象的原型链上。
 
-#### Object.create
+```javascript
+function simulateInstanceOf(left, right) {
+  if (right === null || right === undefined) {
+    throw new TypeError(`Right-hand side of ' instanceof ' is not an object`)
+  }
+  const rightPrototype = right.prototype
+  left = Object.getPrototypeOf(left)
 
-### Promise
+  while (left !== null) {
+    if (left === rightPrototype) return true
+    left = Object.getPrototypeOf(left)
+  }
+
+  return false
+}
+```
+
+### ✔ 手撕 call
+
+```javascript
+Function.prototype.call = function(ctx, ...args) {
+  ctx = ctx || window
+  const that = this
+  const funcName = Symbol('func')
+  ctx[funcName] = that
+  const res = ctx[funcName](...args)
+  delete ctx[funcName]
+  return res
+}
+```
+
+### ✔ 手撕 apply
+
+```javascript
+Function.prototype.apply = function(ctx, args) {
+  ctx = ctx || window
+  const that = this
+  const funcName = Symbol('func')
+  ctx[funcName] = that
+  const res = ctx[funcName](...args)
+  delete ctx[funcName]
+  return res
+}
+```
+
+### ✔ 手撕 bind
+
+```javascript
+Function.prototype.bind = function(ctx, ...args) {
+  ctx = ctx || window
+  const that = this
+  const funcName = Symbol('func')
+  ctx[funcName] = that
+  return function(...args1) {
+    return ctx[funcName](...args, ...args1)
+  }
+}
+```
+
+### ✔ 手撕 new
+
+`new` 操作符创建对象的时候会做下面几件事情：
+
+1. 创建一个新对象；
+1. 将这个对象的 `__proto__` 属性指向构造函数的 `prototype` 属性；
+1. 将构造函数的上下文指向这个新对象；
+1. 执行构造函数中的代码；
+1. 如果有 `return` 且返回一个对象（非 `null`），则返回 `return` 的对象，否则返回步骤一中创建的新对象；
+
+```javascript
+function myNew(Constructor, ...args) {
+  if (!Constructor.prototype) {
+    throw new TypeError('Constructor 不是一个构造函数')
+  }
+  const newObj = {}
+  Object.setPrototypeOf(newObj, Constructor.prototype)
+  const res = Constructor.apply(newObj, args)
+  if (typeof res === 'object' && res !== null) return res
+  else return newObj
+}
+```
+
+### ✔ 手撕 Object.create
+
+`Object.create` 以一个对象为原型创建一个新对象，并给其添加属性。
+
+```javascript
+function ObjectCreate(proto, propertiesObject) {
+  const o = {}
+  // proto 只能为 null 或者 type 为 object 的数据类型
+  if (!(proto === null || typeof proto === 'object')) {
+    throw new TypeError('Object prototype may only be an Object or null')
+  }
+
+  Object.setPrototypeOf(o, proto)
+
+  if (propertiesObject === null) {
+    throw new TypeError('Cannot convert undefined or null to object')
+  }
+  if (propertiesObject) Object.defineProperties(o, propertiesObject)
+  return o
+}
+```
+
+### ✔ 手撕 Object.assign
+
+```javascript
+function ObjectAssign(target, ...args) {
+  if (target === null || target === undefined) {
+    throw new Error('target 不能为 null 或者 undefined')
+  }
+
+  for (let index = 0; index < args.length; index++) {
+    const source = args[index]
+
+    if ((typeof source === 'object' || typeof source === 'string') && source !== null) {
+      for (const key in source) {
+        if (source.hasOwnProperty(key)) {
+          target[key] = source[key]
+        }
+      }
+    }
+  }
+
+  return target
+}
+```
+
+### 手撕 Promise
 
 ref
 
 - [https://juejin.im/post/5b2f02cd5188252b937548ab](https://juejin.im/post/5b2f02cd5188252b937548ab)
 
-### JSON.stringify
+### 手撕 JSON.stringify
+
+### 手撕 EventEmitter
 
 ### 深拷贝
 
