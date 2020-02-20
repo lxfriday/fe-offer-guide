@@ -27,25 +27,44 @@
               return 'edit on git'
             }
           }),
+          function(hook, vm) {
+            hook.ready(function() {
+              function debounce(func, wait) {
+                let timer = null
+
+                return function(...args) {
+                  if (timer) clearTimeout(timer)
+                  timer = setTimeout(() => {
+                    func(...args)
+                  }, wait)
+                }
+              }
+
+              console.log('ready')
+
+              const imgs = document.querySelectorAll('img[data-origin]')
+              imgs.forEach(el => {
+                el.src = 'https://qiniu1.lxfriday.xyz/feoffer/loading.gif'
+              })
+
+              function lazyLoad() {
+                const windowHeight = document.documentElement.clientHeight
+                imgs.forEach(($img, i) => {
+                  // 重点是下面这个判断
+                  if ($img.dataset.origin && $img.getBoundingClientRect().bottom >= 0 && windowHeight > $img.getBoundingClientRect().top) {
+                    $img.src = $img.dataset.origin
+                    delete $img.dataset.origin
+                  }
+                })
+              }
+
+              lazyLoad()
+              document.addEventListener('scroll', debounce(lazyLoad, 200))
+            })
+          },
         ],
       }
     </script>
-    <!-- my code -->
-    <script>
-      if (typeof navigator.serviceWorker !== 'undefined') {
-        navigator.serviceWorker.register('sw.js')
-      }
-    </script>
-    <!-- docsify config -->
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/docsify.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/search.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/zoom-image.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/emoji.min.js" defer></script>
-    <script src="https://qiniu1.lxfriday.xyz/static/docsify-copy-code.min.js" defer></script>
-    <!-- prism config-->
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-typescript.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-jsx.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-http.min.js" defer></script>
   </head>
   <body>
     <div id="app">
@@ -62,5 +81,21 @@
         </div>
       </div>
     </div>
+    <!-- my code -->
+    <script>
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('sw.js')
+      }
+    </script>
+    <!-- docsify config -->
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/docsify.min.js"></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/search.min.js"></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/zoom-image.min.js"></script>
+    <script src="https://cdn.staticfile.org/docsify/4.10.2/plugins/emoji.min.js"></script>
+    <script src="https://qiniu1.lxfriday.xyz/static/docsify-copy-code.min.js"></script>
+    <!-- prism config-->
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-jsx.min.js"></script>
+    <script src="https://cdn.staticfile.org/prism/9000.0.1/components/prism-http.min.js"></script>
   </body>
 </html>
