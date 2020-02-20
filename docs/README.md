@@ -336,7 +336,7 @@ box3.addEventListener('click', b3)
 // 点击一次 box3，打印一次 box3
 ```
 
-![](./static/imgs/event-model.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/event-model.png)
 
 ```html
 <style>
@@ -541,7 +541,7 @@ box2.addEventListener('click', function(e) {
 })
 ```
 
-![](./static/imgs/event-model-eventtarget.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/event-model-eventtarget.png)
 
 ```javascript
 // 点击 box3
@@ -553,7 +553,7 @@ box2.addEventListener('click', function(e) {
 })
 ```
 
-![](./static/imgs/event-model-this.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/event-model-this.png)
 
 ### ✔ 事件代理
 
@@ -967,7 +967,7 @@ ref
 
 ## ✔ TCP/IP 四层网络分层模型
 
-![](/static/imgs/tcp-network-model.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/tcp-network-model.png)
 
 | 名称                      | 特征                                                                                                                          |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
@@ -980,7 +980,7 @@ ref
 
 OSI 网络模型和 TCP 网络模型的对应关系
 
-![](/static/imgs/tcp-network-model-osi-model.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/tcp-network-model-osi-model.png)
 
 ## ✔ TCP
 
@@ -991,7 +991,7 @@ ref
 
 ### ✔ TCP 头信息
 
-![TCP 头](/static/imgs/tcp-header-01.png)
+![TCP 头](https://qiniu1.lxfriday.xyz/feoffer/tcp-header-01.png)
 
 六个标志位的含义：
 
@@ -1018,11 +1018,11 @@ ref
 
 - [三次握手、四次挥手](https://mp.weixin.qq.com/s?__biz=MzI5MzYzMDAwNw==&mid=2247486033&idx=1&sn=679e99b0ca60ad9eb81456bba8ffbdec&chksm=ec6e7309db19fa1f74da440a9980ec08a1458598bb3e57a9110b6ceee83d52dbf8cf27d982c5&mpshare=1&scene=1&srcid=0201hefKnCRp0hm9SW35tKNb&sharer_sharetime=1580534579241&sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&key=732653fb0fa49e86b2cb705aaaaf51f9f8a46f0369ca0a885b4b4916bc819da38977e0551641a69f6dfa36e1074df74cccb282239774e685deec1821000aacb4deaaadac4c325535942de78f26806e40&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=6208006f&lang=zh_CN&exportkey=A1nRWsKlQIXAWHd8C0NMQYo%3D&pass_ticket=xlc2xiojgyuqCT6cyqwQWdbOwUCf%2BOt%2BC4jow75C87vgCsxU%2FXCzkna537BHolOS)
 
-![三次握手](/static/imgs/tcp-three-times-handshake.png)
+![三次握手](https://qiniu1.lxfriday.xyz/feoffer/tcp-three-times-handshake.png)
 
 ### ✔ 四次挥手
 
-![四次挥手](/static/imgs/tcp-four-times-wave.png)
+![四次挥手](https://qiniu1.lxfriday.xyz/feoffer/tcp-four-times-wave.png)
 
 ### ✔ TCP 为什么要三次握手（为什么不是两次）
 
@@ -1085,7 +1085,7 @@ TCP 滑动窗口分为接受窗口，发送窗口。
 
 对于**发送方**，任何时候在其发送缓存内的数据都可以分为 4 类，**已经发送并得到对端 ACK 的**，**已经发送但还未收到对端 ACK 的**，**未发送但对端允许发送的**，**未发送且对端不允许发送**。**已经发送但还未收到对端 ACK 的**和**未发送但对端允许发送的**这两部分数据称之为发送窗口。
 
-![tcp 滑动窗口-发送窗口](/static/imgs/tcp-sliding-window.jpg)
+![tcp 滑动窗口-发送窗口](https://qiniu1.lxfriday.xyz/feoffer/tcp-sliding-window.jpg)
 
 对于**接收方**，在某一时刻在它的接受缓存内存在 3 类，**已接收**，**未接收准备接收**，**未接收并未准备接收**（由于 ACK 直接由 TCP 协议栈回复，默认无应用延迟，不存在已接收未回复 ACK），其中**未接收准备接收**称之为接收窗口。
 
@@ -1095,7 +1095,7 @@ TCP 是双工的协议，会话的双方都可以同时接收、发送数据。T
 
 **发送窗口**
 
-![tcp 滑动窗口-发送窗口-示例](/static/imgs/tcp-sliding-window-demo.png)
+![tcp 滑动窗口-发送窗口-示例](https://qiniu1.lxfriday.xyz/feoffer/tcp-sliding-window-demo.png)
 
 1. 我们一共需要发送 900 字节数据。可发送数据为 1-500 字节，尚未发送数据。假设首先发送 400 字节的数据；
 1. 发送了 400 字节后，对端返回一个 ack 表示收到 200 序号之内的数据且窗口通告为 500。于是如图示，窗口向前滑动了 200 字节。当前已发送未确认字节序号为 200-400,可发送字节序号为 401-700,假设在此尚未发送数据；
@@ -1103,7 +1103,7 @@ TCP 是双工的协议，会话的双方都可以同时接收、发送数据。T
 
 **接收窗口**
 
-![tcp 滑动窗口-接收窗口-示例](/static/imgs/tcp-sliding-window-demo2.png)
+![tcp 滑动窗口-接收窗口-示例](https://qiniu1.lxfriday.xyz/feoffer/tcp-sliding-window-demo2.png)
 
 1. 发送端：写入 2KB 的数据[seq=0]；
 1. 接收端：收到数据,初始化接收端缓冲区 4K,写入后还剩 2K,于是通告 ack[seq=2048,win=2048]；
@@ -1123,8 +1123,8 @@ ref
 - [https://coolshell.cn/articles/11609.html](https://coolshell.cn/articles/11609.html)
 - [https://zhuanlan.zhihu.com/p/37379780](https://zhuanlan.zhihu.com/p/37379780)
 
-![TCP 拥塞控制](/static/imgs/tcp-congestion-control.jpg)
-![TCP 拥塞控制](/static/imgs/tcp-congestion-control2.jpg)
+![TCP 拥塞控制](https://qiniu1.lxfriday.xyz/feoffer/tcp-congestion-control.jpg)
+![TCP 拥塞控制](https://qiniu1.lxfriday.xyz/feoffer/tcp-congestion-control2.jpg)
 
 拥塞控制包括：慢启动、拥塞避免、快重传、快恢复。它是为了避免网络拥塞而设计的一系列算法。
 
@@ -1136,7 +1136,7 @@ ref
 
 - [https://coolshell.cn/articles/11609.html](https://coolshell.cn/articles/11609.html)
 
-![](/static/imgs/tcp-slow-start.jpg)
+![](https://qiniu1.lxfriday.xyz/feoffer/tcp-slow-start.jpg)
 
 > 对于以太网来说，MTU 是 1500 字节，除去 TCP+IP 头的 40 个字节，真正的数据传输可以有 1460，这就是所谓的 MSS。
 
@@ -1176,7 +1176,7 @@ ref
 
 - Fast Retransmit 快重传
 
-![tcp 快重传 by coolshell](/static/imgs/tcp-fast-retransmit.png)
+![tcp 快重传 by coolshell](https://qiniu1.lxfriday.xyz/feoffer/tcp-fast-retransmit.png)
 
 如果发送方连续收到 3 次相同的 ack，则表示这个报文的下一个报文丢失了，进入快重传阶段，要求接收方在收到一个失序的报文段后就立即发出重复确认，为的是使发送方及早知道报文段有没有到达对方，可以提高网络吞吐率约 20%。
 
@@ -1215,7 +1215,7 @@ ref
 
 - [https://zhuanlan.zhihu.com/p/76023663](https://zhuanlan.zhihu.com/p/76023663)
 
-![TCP UDP 对比](/static/imgs/tcp-udp-compare.jpg)
+![TCP UDP 对比](https://qiniu1.lxfriday.xyz/feoffer/tcp-udp-compare.jpg)
 
 TCP 和 UDP 是 OSI 模型中传输层的协议。TCP 的数据是连续的 **字节流**，有**先后顺序**，而 UDP 则是分散的小数据包，是**顺序发，乱序收**。
 
@@ -1296,7 +1296,7 @@ ref
 
 - [https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Protocol_upgrade_mechanism](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Protocol_upgrade_mechanism)
 
-![](/static/imgs/http-response-code-101.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/http-response-code-101.png)
 
 （协议切换）状态码表示服务器应客户端升级协议的请求（Upgrade 请求头）正在进行协议切换。
 
@@ -1518,7 +1518,7 @@ HEAD 方法的响应不应包含响应正文，即使包含了正文也必须忽
 
 > 在 CORS 跨域方案中，浏览器会先发送一个 OPTIONS 请求（预检请求），服务端会返回支持的 HTTP 方法、允许的 origin、是否允许提交 cookie 等信息。
 
-![OPTIONS 请求过程](/static/imgs/options.png)
+![OPTIONS 请求过程](https://qiniu1.lxfriday.xyz/feoffer/options.png)
 
 #### ✔ CONNECT
 
@@ -1843,7 +1843,7 @@ b.html
 
 ### ✔ 中间层代理跨域
 
-![代理跨域](/static/imgs/cross-origin-proxy.png)
+![代理跨域](https://qiniu1.lxfriday.xyz/feoffer/cross-origin-proxy.png)
 
 使用 Nginx 或者自建代理服务，让前端页面请求自己的代理服务器，由代理服务器把原请求转发到目标地址。
 
@@ -2061,11 +2061,11 @@ ref
 
 ## 排序算法
 
-![排序算法一览](./static/imgs/sort.png)
+![排序算法一览](https://qiniu1.lxfriday.xyz/feoffer/sort.png)
 
 ### 冒泡排序
 
-![](./static/imgs/bubbleSort.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/bubbleSort.png)
 
 ```typescript
 function swap(arr: number[], a: number, b: number) {
@@ -2103,8 +2103,8 @@ export function bubbleSort(arr: number[]) {
 
 ### ✔ 堆排序(heap-sort)
 
-![堆排序](/static/imgs/heapSort2.png)
-![堆排序](/static/imgs/heapSort.gif)
+![堆排序](https://qiniu1.lxfriday.xyz/feoffer/heapSort2.png)
+![堆排序](https://qiniu1.lxfriday.xyz/feoffer/heapSort.gif)
 
 堆(Heap)是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵完全二叉树的数组对象。其中每个节点最多存在两个子节点，对以 0 开始的堆数组，有如下规则：
 
@@ -2198,7 +2198,7 @@ function heapSort(arr, asc = false) {
 
 ### ✔ 计数排序(counting-sort)
 
-![计数排序](/static/imgs/countingSort.png)
+![计数排序](https://qiniu1.lxfriday.xyz/feoffer/countingSort.png)
 
 **限定为非负数**
 
@@ -2234,7 +2234,7 @@ function countingSort(arr) {
 
 ### ✔ 基数排序(radix-sort)
 
-![基数排序](/static/imgs/radixSort.png)
+![基数排序](https://qiniu1.lxfriday.xyz/feoffer/radixSort.png)
 
 **限定为非负数**
 
@@ -2292,7 +2292,7 @@ function radixSort(arr) {
 
 ### ✔ 桶排序、箱排序(bucket-sort)
 
-![桶排序](/static/imgs/bucketSort.png)
+![桶排序](https://qiniu1.lxfriday.xyz/feoffer/bucketSort.png)
 
 桶排序工作原理是将数组分到有限数量的桶里，每个桶再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。
 
