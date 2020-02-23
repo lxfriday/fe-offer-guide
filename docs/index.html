@@ -29,35 +29,52 @@
           }),
           function(hook, vm) {
             hook.ready(function() {
-              function debounce(func, wait) {
-                let timer = null
+              // function debounce(func, wait) {
+              //   let timer = null
 
-                return function(...args) {
-                  if (timer) clearTimeout(timer)
-                  timer = setTimeout(() => {
-                    func(...args)
-                  }, wait)
-                }
-              }
+              //   return function(...args) {
+              //     if (timer) clearTimeout(timer)
+              //     timer = setTimeout(() => {
+              //       func(...args)
+              //     }, wait)
+              //   }
+              // }
+              // function lazyLoad() {
+              //   const windowHeight = document.documentElement.clientHeight
+              //   imgs.forEach(($img, i) => {
+              //     // 重点是下面这个判断
+              //     if ($img.dataset.origin && $img.getBoundingClientRect().bottom >= 0 && windowHeight > $img.getBoundingClientRect().top) {
+              //       $img.src = $img.dataset.origin
+              //       delete $img.dataset.origin
+              //     }
+              //   })
+              // }
+              // lazyLoad()
+              // document.addEventListener('scroll', debounce(lazyLoad, 200))
 
-              const imgs = document.querySelectorAll('img[data-origin]')
-              imgs.forEach(el => {
-                el.src = 'https://qiniu1.lxfriday.xyz/feoffer/loading1.png'
-              })
-
-              function lazyLoad() {
-                const windowHeight = document.documentElement.clientHeight
-                imgs.forEach(($img, i) => {
-                  // 重点是下面这个判断
-                  if ($img.dataset.origin && $img.getBoundingClientRect().bottom >= 0 && windowHeight > $img.getBoundingClientRect().top) {
-                    $img.src = $img.dataset.origin
-                    delete $img.dataset.origin
+              if (typeof IntersectionObserver !== undefined) {
+                const imgObserver = new IntersectionObserver(
+                  function(entries) {
+                    entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                        entry.target.src = entry.target.dataset.origin
+                        imgObserver.unobserve(entry.target)
+                        console.log('entry', entry)
+                      }
+                    })
+                  },
+                  {
+                    root: null,
+                    threshold: 0,
                   }
+                )
+
+                const imgs = document.querySelectorAll('img[data-origin]')
+                imgs.forEach(el => {
+                  el.src = 'https://qiniu1.lxfriday.xyz/feoffer/loading1.png'
+                  imgObserver.observe(el)
                 })
               }
-
-              lazyLoad()
-              document.addEventListener('scroll', debounce(lazyLoad, 200))
             })
           },
         ],
