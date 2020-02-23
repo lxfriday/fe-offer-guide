@@ -151,6 +151,131 @@ ref
 
 # BOM
 
+## Observer
+
+### ✔ IntersectionObserver
+
+ref
+
+- [https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API)
+
+Intersection Observer API 提供了一种**异步**观察目标元素与祖先元素或顶级文档 viewport 的交集中的变化的方法。
+
+这个 API 覆盖最广的最常用的使用方式是"如果两个元素发生的交集部分在**N%**左右，我需要做处理一些事情(执行回调)"。
+
+目标(target)元素与根(root)元素之间的交叉度是交叉比(intersection ratio)。这是目标(target)元素相对于根(root)的交集百分比的表示，它的取值在 0.0 和 1.0 之间。
+
+基本用法：
+
+```javascript
+const options = {
+  root: document.querySelector('#scrollArea'),
+  rootMargin: '0px',
+  threshold: [0],
+}
+
+const observer = new IntersectionObserver(entries => {
+  for (let entry of entries) {
+    // Each entry describes an intersection change for one observed
+    // target element:
+    //   entry.boundingClientRect
+    //   entry.intersectionRatio
+    //   entry.intersectionRect
+    //   entry.isIntersecting
+    //   entry.rootBounds
+    //   entry.target
+    //   entry.time
+  }
+}, options)
+
+const imgs = document.querySelectorAll('img[data-origin]')
+imgs.forEach(el => {
+  imgObserver.observe(el)
+})
+```
+
+**options**
+
+- `root`：指定根(root)元素，用于检查目标的可见性。必须是目标元素的父级元素。如果未指定或者为 `null`，则**默认为浏览器视窗**；
+- `rootMargin`：root 元素的外边距，该属性值是用作 root 元素和 target 发生交集时候的计算交集的区域范围，类似于 css 中的 `margin` 属性；
+- `threshold`：number 或者 number 数组，target 元素和 root 元素相交程度达到该值的时候 IntersectionObserver 注册的回调函数将会被执行；
+
+当可见性达到 `threshold` 指定的值时，会触发 `IntersectionObserver` 中注册的回调函数，`entries` 是符合可见性条件的元素。
+
+- `entry.boundingClientRect` 目标元素的边界信息，与 [Element.getBoundingClientRect](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect) 相同；
+- `entry.intersectionRatio` target 与 root 的交叉比；
+- `entry.intersectionRect` 交叉区域的位置、大小信息；
+- `entry.isIntersecting` 是否处于交叉状态；
+- `entry.rootBounds` 根的位置、大小信息；
+- `entry.target` 目标元素；
+- `entry.time` 一个记录从 `IntersectionObserver` 的时间原点(time origin)到交叉被触发的时间的时间戳；
+
+#### ✔ IntersectionObserver 实现懒加载
+
+一个简单的图片懒加载例子：
+
+```javascript
+if (typeof IntersectionObserver !== undefined) {
+  const imgObserver = new IntersectionObserver(
+    function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.src = entry.target.dataset.origin
+          // 图片 src 更换之后，就不需要继续观察这个元素了
+          imgObserver.unobserve(entry.target)
+          console.log('entry', entry)
+        }
+      })
+    },
+    {
+      root: null,
+      threshold: 0,
+    }
+  )
+
+  const imgs = document.querySelectorAll('img[data-origin]')
+  imgs.forEach(el => {
+    imgObserver.observe(el)
+  })
+}
+```
+
+#### ✔ 普通懒加载
+
+通过监听滚动事件实现，使用防抖函数防止卡顿：
+
+```javascript
+function debounce(func, wait) {
+  let timer = null
+
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...args)
+    }, wait)
+  }
+}
+const imgs = document.querySelectorAll('img[data-origin]')
+function lazyLoad() {
+  const windowHeight = document.documentElement.clientHeight
+  imgs.forEach(($img, i) => {
+    // 重点是下面这个判断
+    if ($img.dataset.origin && $img.getBoundingClientRect().bottom >= 0 && windowHeight >= $img.getBoundingClientRect().top) {
+      $img.src = $img.dataset.origin
+      delete $img.dataset.origin
+    }
+  })
+}
+lazyLoad()
+document.addEventListener('scroll', debounce(lazyLoad, 200))
+```
+
+### MutationObserver
+
+### PerformanceObserver
+
+### ResizeObserver
+
 ## WebSocket
 
 ## ✔ XMLHttpRequest
@@ -222,7 +347,6 @@ onload DONE
 | `json`           | JSON                   |                                                                 |
 | `blob`           | `Blob` 对象            |                                                                 |
 | `arraybuffer`    | `ArrayBuffer` 对象     |                                                                 |
-|                  |                        |                                                                 |
 
 ### ✔ 事件
 
