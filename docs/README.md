@@ -1744,7 +1744,17 @@ Set-Cookie: key=value; SameSite=Strict
 
 - `None` 浏览器会在同站请求、跨站请求下继续发送 Cookies，不区分大小写；
 - `Strict` 浏览器将只发送相同站点请求的 Cookie(即当前网页 URL 与请求目标 URL 完全一致)。如果请求来自与当前 location 的 URL 不同的 URL，则不包括标记为 Strict 属性的 Cookie；
-- `Lax` 在新版本浏览器中，为**默认**选项，Same-site Cookies 将会为一些跨站子请求保留，如图片加载或者 frames 的调用，但只有当用户从外部站点导航到 URL 时才会发送。如 link 链接；
+- `Lax` 在新版本浏览器中，为**默认**选项，Same-site Cookies 将会为一些跨站子请求保留，如**图片加载**或者 **iframe** 不会发送，而点击 `<a>` 标签会发送；
+
+| 请求类型  | 示例                                 | 正常情况    | Lax         |
+| :-------- | :----------------------------------- | :---------- | :---------- |
+| 链接      | `<a href="..."></a>`                 | 发送 Cookie | 发送 Cookie |
+| 预加载    | `<link rel="prerender" href="..."/>` | 发送 Cookie | 发送 Cookie |
+| GET 表单  | `<form method="GET" action="...">`   | 发送 Cookie | 发送 Cookie |
+| POST 表单 | `<form method="POST" action="...">`  | 发送 Cookie | 不发送      |
+| iframe    | `<iframe src="..."></iframe>`        | 发送 Cookie | 不发送      |
+| AJAX      | `$.get("...")`                       | 发送 Cookie | 不发送      |
+| Image     | `<img src="...">`                    | 发送 Cookie | 不发送      |
 
 #### ✔ 增删改查
 
@@ -1769,7 +1779,7 @@ function setCookie(cname, cvalue, exdays) {
 function deleteCookie(cname) {
   const d = new Date()
   const expires = 'expires=' + d.toUTCString()
-  return (document.cookie = cname + '=' + ';' + expires + ';path=/')
+  return (document.cookie = cname + '=;' + expires + ';path=/')
 }
 ```
 
@@ -1787,9 +1797,33 @@ function getCookie(cname) {
 }
 ```
 
-#### 不同二级域名共享 Cookie
+#### ✔ 不同二级域名共享 Cookie
 
-#### Cookie 常见问题
+Cookie 可以设置成给子域名共享，类似于在 `x.com.cn` 设置的 Cookie 可以提供给 `a.x.com.cn`、`b.x.com.cn`、`suba.a.x.com.cn` 等域名访问。
+
+比如下面的方式：
+
+```javascript
+res.writeHead(200, {
+  'Set-Cookie': ['name=sub-x-com-cn; path=/;domain=x.com.cn', 'name=only-x-com-cn; path=/'],
+})
+```
+
+`domain=x.com.cn` 表示 `domain=x.com.cn` 及其子域名都可以使用， 不写 `doamin` 默认只有当前域名可用，设置的 Cookie 是这样的：
+
+![x.com.cn](https://qiniu1.lxfriday.xyz/feoffer/c2441eaf-79f0-9fa0-9b9a-b5203225c6f6.png)
+
+![subx.x.com.cn](http://qiniu1.lxfriday.xyz/feoffer/c536421c-b7b0-a728-47e0-dc75289d3b93.png)
+
+---
+
+**总结**
+
+1. 设置 Cookie 时，在 `x.com.cn` 设置为 `...;domain=x.com.cn` 的 Cookie 可以给 `x.com.cn` 及其子域名使用；
+1. 设置 Cookie 时，在 `x.com.cn` 设置没有 `domain` 的 Cookie 只能给 `x.com.cn` 使用；
+1. **父域名无法在子域名设置 Cookie**，例如在 `x.com.cn` 设置了 `name=lxfriday;domain=subx.x.com.cn`，这种设置是无效的；
+
+#### ✔ Cookie 常见问题
 
 1. Cookie 不区分端口；
 1. 一个 Cookie 存储上限是 4K 大小；
@@ -1844,7 +1878,7 @@ ref
 1. **安全性不同**，Cookie 存储在客户端容易被盗取或者利用，Session 在服务端比较安全；
 1. **存储大小不同**，单个 Cookie 能存储 4K 的数据，Session 存储量比 Cookie 高得多；
 1. **存取方式不同**，Cookie 中只能保存 **ASCII 字符串**，假如需求存取 Unicode 字符或者二进制数据，需求先进行编码。Session 中能够存取**任何类型**的数据；
-1. **服务器压力不同**，Session 是存储在服务端的，巨大并发的时候会时服务器资源急速飙升。Cookie 则不存在此问题；
+1. **服务器压力不同**，Session 是存储在服务端的，巨大并发的时候会使服务器资源急速飙升。Cookie 则不存在此问题；
 
 ## UDP
 
