@@ -371,6 +371,8 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 
 ## DOM 属性
 
+## textContent、innerText、innerHTML
+
 ## ✔ 事件冒泡、捕捉、代理
 
 ### ✔ 事件模型
@@ -705,9 +707,136 @@ box2.addEventListener('click', function(e) {
 
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
 
-## localStorage
+## ✔ localStorage
 
-## sessionStorage
+localStorage 只在相同的域下共享同一空间。**协议和端口**都有影响，注意：
+
+- `http://a.com` 和 `https://a.com` 并**不共享**；
+- `http://a.com:80` 和 `http://a.com:8080` **不共享**；
+- `http://a.com` 和 `http://a.com:80` **共享**；
+
+### ✔ 常用 API
+
+| 设置                                                                             | 查看                                                                             |
+| :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| ![](http://qiniu1.lxfriday.xyz/feoffer/83dd0a6b-7af1-e1a3-6b4b-ccd89db00def.png) | ![](http://qiniu1.lxfriday.xyz/feoffer/23829b23-1f14-640c-c74a-01c58d6b68a5.png) |
+
+- `localstorage.setItem(key, value)` 存数据，`key` `value` 都会被转换成字符串，为了防止意料之外的情况，最好想将其转化为字符串了再存储；
+- `localstorage.getItem(key)` 获取数据，`key` 都会被转换成字符串；
+- `localstorage.clear()` 清除当前域下 `localStorage` 存储的数据；
+- `localstorage.length` 获取当前域下存储的项目条数；
+- `localstorage.key(n:number)` 获取显示面板中第 n 条的 `key`，感觉比较鸡肋；
+
+### ✔ 浏览器对 localStorage 容量限制
+
+经测试，Chrome、FireFox、Edge 都是 **5M**（IE 忽略）。
+
+<button id="localStorageQuota" onclick="window.LXFRIDAY_GLOBAL_localStorageQuota()">点我测试存储容量(当前操作会先清空 localStorage)</button>
+
+<div id="localStorageQuota_display"></div>
+
+下面是容量探测代码，可以精确到 1K。
+
+```javascript
+const add10KStr = new Array(1024).fill('0000000000').join('') // 10240 Byte => 10K
+const add1KStr = new Array(1024).fill('1').join('') // 1024 Byte => 1K
+const storageKey = 'QuotaTest'
+
+function localStorageQuota() {
+  localStorage.clear()
+  function setText(str) {
+    console.log(str)
+  }
+  let total = ''
+  let interval = null
+  interval = setInterval(() => {
+    try {
+      setText(`数据插入中 => ${total.length / 1024}K`)
+
+      localStorage.removeItem(storageKey)
+      localStorage.setItem(storageKey, total + add1KStr)
+      total += add10KStr
+    } catch (e) {
+      clearInterval(interval)
+      if (e && e.code === 22) {
+        setText('超过容量(10K增加)')
+        setText(`当前存储了${total.length / 1024}K`)
+        interval = setInterval(() => {
+          try {
+            setText(`数据插入中 => ${total.length / 1024}K`)
+
+            localStorage.removeItem(storageKey)
+            localStorage.setItem(storageKey, total + add1KStr)
+            total += add1KStr
+          } catch (ee) {
+            clearInterval(interval)
+            if (ee && ee.code === 22) {
+              setText('超过容量(1K增加)')
+              setText(`当前存储了${total.length / 1024}K`)
+            }
+          }
+        }, 0)
+      }
+    }
+  }, 0)
+}
+```
+
+以 Chrome 为 例，插入不了的时候会抛出异常，`e.code` 是 22。
+
+![localStorage error](https://qiniu1.lxfriday.xyz/feoffer/5a91d578-24a8-b39c-0f11-2775a68fc1ec.png)
+
+### ✔ Storage Event
+
+Storage 事件可以用来在同域下的页面之间实现广播机制，该事件是在 window 上触发的。该事件**不在导致数据变化的当前页面(tab)触发**（如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变 `localStorage` 的数据时，其他所有页面的 `storage` 事件会被触发，而原始页面并不触发 `storage` 事件）；
+
+event 包含的关键信息：
+
+- `event.key` 发生变更的 `key`；
+- `event.oldValue` 变更之前的值；
+- `event.newValue` 变更之后的值；
+
+触发的条件有两个：
+
+1. 不在当前的 tab 触发，相同的 url 在两个不同的 tab 也是会触发的；
+1. `localstorage.setItem(key, value)` 只有当后一次设置的 value 不同的时候才会触发该事件，相同的话也没有必要触发了；
+
+例如在 `https://a.com/a.html` 有如下代码：
+
+```javascript
+localStorage.setItem('name', 'lx')
+window.addEventListener('storage', e => {
+  console.log('e', e)
+})
+```
+
+这个时候，在 `https://a.com/b.html` 进行了下面的操作：
+
+```javascript
+localStorage.setItem('name', 'lxfriday')
+```
+
+则 a 页面会打印出下面的内容：
+
+![storage event](http://qiniu1.lxfriday.xyz/feoffer/f615efa9-106e-b78b-5db1-547eca5cf7a3.png)
+
+### ✔ localStorage 的其他用途
+
+ref
+
+- [https://iammapping.com/the-other-ways-to-use-localstorage/](https://iammapping.com/the-other-ways-to-use-localstorage/)
+
+1. 缓存静态文件；
+1. 作为前端 DB 的存储介质；
+
+- 灵活存取 json 格式的数据：[https://github.com/typicode/lowdb](https://github.com/typicode/lowdb)
+- 通过 sql 对数据 CURD 操作：[https://github.com/agershun/alasql#localstorage-and-dom-storage](https://github.com/agershun/alasql#localstorage-and-dom-storage)
+
+## ✔ sessionStorage
+
+它与 `localStorage` 相似，不同之处在于 `localStorage` 里面存储的数据没有过期时间设置，而存储在 `sessionStorage` 里面的数据在**页面会话结束时会被清除（关闭当前页面的时候会清除）**。
+
+页面会话在浏览器打开期间一直保持，并且**重新加载（刷新）**或恢复页面仍会保持原来的页面会话。在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这句不好理解，意思是点击当前页面的 `<a target="_black"></a>` 标签时，在新页面中的 `sessionStorage` 的值是复制的当前页面的，注意并不是共用的。
 
 # V8 专区
 
@@ -1813,7 +1942,7 @@ res.writeHead(200, {
 
 ![x.com.cn](https://qiniu1.lxfriday.xyz/feoffer/c2441eaf-79f0-9fa0-9b9a-b5203225c6f6.png)
 
-![subx.x.com.cn](http://qiniu1.lxfriday.xyz/feoffer/c536421c-b7b0-a728-47e0-dc75289d3b93.png)
+![subx.x.com.cn](https://qiniu1.lxfriday.xyz/feoffer/c536421c-b7b0-a728-47e0-dc75289d3b93.png)
 
 ---
 
