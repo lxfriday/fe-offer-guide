@@ -634,11 +634,11 @@ localStorage 只在相同的域下共享同一空间。**协议和端口**都有
 | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
 | ![](http://qiniu1.lxfriday.xyz/feoffer/83dd0a6b-7af1-e1a3-6b4b-ccd89db00def.png) | ![](http://qiniu1.lxfriday.xyz/feoffer/23829b23-1f14-640c-c74a-01c58d6b68a5.png) |
 
-- `localstorage.setItem(key, value)` 存数据，`key` `value` 都会被转换成字符串，为了防止意料之外的情况，最好想将其转化为字符串了再存储；
+- `localstorage.setItem(key, value)` 存数据，`key` `value` 都会被转换成字符串，为了防止意料之外的情况，最好先将其转化为字符串了再存储；
 - `localstorage.getItem(key)` 获取数据，`key` 都会被转换成字符串；
 - `localstorage.clear()` 清除当前域下 `localStorage` 存储的数据；
 - `localstorage.length` 获取当前域下存储的项目条数；
-- `localstorage.key(n:number)` 获取显示面板中第 n 条的 `key`，感觉比较鸡肋；
+- `localstorage.key(n:number)` 获取显示面板中第 `n` 条的 `key`，感觉比较鸡肋；
 
 ### ✔ 浏览器对 localStorage 容量限制
 
@@ -711,8 +711,8 @@ event 包含的关键信息：
 
 触发的条件有两个：
 
-1. 不在当前的 tab 触发，相同的 url 在两个不同的 tab 也是会触发的；
-1. `localstorage.setItem(key, value)` 只有当后一次设置的 value 不同的时候才会触发该事件，相同的话也没有必要触发了；
+1. 不在当前的 tab 触发，相同的 `url` 在两个不同的 tab 也是会触发的；
+1. `localstorage.setItem(key, value)` 只有当后一次设置的 `value` 不同的时候才会触发该事件，相同的话也没有必要触发了；
 
 例如在 `https://a.com/a.html` 有如下代码：
 
@@ -750,6 +750,47 @@ ref
 它与 `localStorage` 相似，不同之处在于 `localStorage` 里面存储的数据没有过期时间设置，而存储在 `sessionStorage` 里面的数据在**页面会话结束时会被清除（关闭当前页面的时候会清除）**。
 
 页面会话在浏览器打开期间一直保持，并且**重新加载（刷新）**或恢复页面仍会保持原来的页面会话。在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这句不好理解，意思是点击当前页面的 `<a target="_black"></a>` 标签时，在新页面中的 `sessionStorage` 的值是复制的当前页面的，注意并不是共用的。
+
+### ✔ sessionStorage 应用
+
+1. 存储用户输入的内容，当页面刷新的时候可以立刻显示出刷新前的内容；
+1. 对使用 browser historay 部署的单页应用，可以在前端使用 sessionStorage 实现路由匹配（不会报 404），不需要使用 nginx 做一次转发；
+
+实现自动匹配路由的过程是这样的：当访问 `a.com/page1` 页面的时候，由于服务器并没有这个页面，服务器会返回 `404.html`（浏览器当前的路由仍然是 `a.com/page1`），浏览器执行 `404.html` 时会先设置 `sessionStorage.redirect` 为当前的 url，然后 `<meta>` 会立刻让页面跳转到 `/`，服务器此时会返回 `index.html`，浏览器执行 `<script>` 中的代码获取到 `sessionStorage.redirect`，然后执行 `histpry.replaceState` 替换当前的 url，这样就达到了想要的跳转效果（[`history.replaceState`](https://developer.mozilla.org/zh-CN/docs/Web/API/History/replaceState) 只会更改浏览器地址栏，不会让浏览器主动去服务器获取对应的页面）。
+
+设置一个 `404.html`，`head` 中包含下面内容
+
+```html
+<head>
+    ...
+    <script>
+      sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'"></meta>
+</head>
+```
+
+在单页应用的模板 `index.html` 中，填下面的代码：
+
+```html
+<body>
+  <div id="root"></div>
+  <script>
+    // 这段代码要放在其他js的前面
+    ;(function() {
+      var redirect = sessionStorage.redirect
+      delete sessionStorage.redirect
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect)
+      }
+    })()
+  </script>
+</body>
+```
+
+演示
+
+![sessionStorage 实现页面跳转](https://qiniu1.lxfriday.xyz/feoffer/sessionStorage.gif)
 
 # V8 专区
 
