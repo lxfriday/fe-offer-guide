@@ -153,6 +153,184 @@ ref
 
 # 浏览器特有 API
 
+## ✔ localStorage
+
+localStorage 只在相同的域下共享同一空间。**协议和端口**都有影响，注意：
+
+- `http://a.com` 和 `https://a.com` 并**不共享**；
+- `http://a.com:80` 和 `http://a.com:8080` **不共享**；
+- `http://a.com` 和 `http://a.com:80` **共享**；
+
+### ✔ 常用 API
+
+| 设置                                                                             | 查看                                                                             |
+| :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| ![](http://qiniu1.lxfriday.xyz/feoffer/83dd0a6b-7af1-e1a3-6b4b-ccd89db00def.png) | ![](http://qiniu1.lxfriday.xyz/feoffer/23829b23-1f14-640c-c74a-01c58d6b68a5.png) |
+
+- `localstorage.setItem(key, value)` 存数据，`key` `value` 都会被转换成字符串，为了防止意料之外的情况，最好先将其转化为字符串了再存储；
+- `localstorage.getItem(key)` 获取数据，`key` 都会被转换成字符串；
+- `localstorage.clear()` 清除当前域下 `localStorage` 存储的数据；
+- `localstorage.length` 获取当前域下存储的项目条数；
+- `localstorage.key(n:number)` 获取显示面板中第 `n` 条的 `key`，感觉比较鸡肋；
+
+### ✔ 浏览器对 localStorage 容量限制
+
+经测试，Chrome、FireFox、Edge 都是 **5M**（IE 忽略）。
+
+<button id="localStorageQuota" onclick="window.LXFRIDAY_GLOBAL_localStorageQuota()">点我测试存储容量(当前操作会先清空 localStorage)</button>
+
+<div id="localStorageQuota_display"></div>
+
+下面是容量探测代码，可以精确到 1K。
+
+```javascript
+const add10KStr = new Array(1024).fill('0000000000').join('') // 10240 Byte => 10K
+const add1KStr = new Array(1024).fill('1').join('') // 1024 Byte => 1K
+const storageKey = 'QuotaTest'
+
+function localStorageQuota() {
+  localStorage.clear()
+  function setText(str) {
+    console.log(str)
+  }
+  let total = ''
+  let interval = null
+  interval = setInterval(() => {
+    try {
+      setText(`数据插入中 => ${total.length / 1024}K`)
+
+      localStorage.removeItem(storageKey)
+      localStorage.setItem(storageKey, total + add1KStr)
+      total += add10KStr
+    } catch (e) {
+      clearInterval(interval)
+      if (e && e.code === 22) {
+        setText('超过容量(10K增加)')
+        setText(`当前存储了${total.length / 1024}K`)
+        interval = setInterval(() => {
+          try {
+            setText(`数据插入中 => ${total.length / 1024}K`)
+
+            localStorage.removeItem(storageKey)
+            localStorage.setItem(storageKey, total + add1KStr)
+            total += add1KStr
+          } catch (ee) {
+            clearInterval(interval)
+            if (ee && ee.code === 22) {
+              setText('超过容量(1K增加)')
+              setText(`当前存储了${total.length / 1024}K`)
+            }
+          }
+        }, 0)
+      }
+    }
+  }, 0)
+}
+```
+
+以 Chrome 为 例，插入不了的时候会抛出异常，`e.code` 是 22。
+
+![localStorage error](https://qiniu1.lxfriday.xyz/feoffer/5a91d578-24a8-b39c-0f11-2775a68fc1ec.png)
+
+### ✔ Storage Event
+
+Storage 事件可以用来在同域下的页面之间实现广播机制，该事件是在 window 上触发的。该事件**不在导致数据变化的当前页面(tab)触发**（如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变 `localStorage` 的数据时，其他所有页面的 `storage` 事件会被触发，而原始页面并不触发 `storage` 事件）；
+
+event 包含的关键信息：
+
+- `event.key` 发生变更的 `key`；
+- `event.oldValue` 变更之前的值；
+- `event.newValue` 变更之后的值；
+
+触发的条件有两个：
+
+1. 不在当前的 tab 触发，相同的 `url` 在两个不同的 tab 也是会触发的；
+1. `localstorage.setItem(key, value)` 只有当后一次设置的 `value` 不同的时候才会触发该事件，相同的话也没有必要触发了；
+
+例如在 `https://a.com/a.html` 有如下代码：
+
+```javascript
+localStorage.setItem('name', 'lx')
+window.addEventListener('storage', e => {
+  console.log('e', e)
+})
+```
+
+这个时候，在 `https://a.com/b.html` 进行了下面的操作：
+
+```javascript
+localStorage.setItem('name', 'lxfriday')
+```
+
+则 a 页面会打印出下面的内容：
+
+![storage event](http://qiniu1.lxfriday.xyz/feoffer/f615efa9-106e-b78b-5db1-547eca5cf7a3.png)
+
+### ✔ localStorage 的其他用途
+
+ref
+
+- [https://iammapping.com/the-other-ways-to-use-localstorage/](https://iammapping.com/the-other-ways-to-use-localstorage/)
+
+1. 缓存静态文件；
+1. 作为前端 DB 的存储介质；
+
+- 灵活存取 json 格式的数据：[https://github.com/typicode/lowdb](https://github.com/typicode/lowdb)
+- 通过 sql 对数据 CURD 操作：[https://github.com/agershun/alasql#localstorage-and-dom-storage](https://github.com/agershun/alasql#localstorage-and-dom-storage)
+
+## ✔ sessionStorage
+
+它与 `localStorage` 相似，存储容量也是 **5M**，不同之处在于 `localStorage` 里面存储的数据没有过期时间设置，而存储在 `sessionStorage` 里面的数据在**页面会话结束时会被清除（关闭当前页面的时候会清除）**。
+
+页面会话在浏览器打开期间一直保持，并且**重新加载（刷新）**或恢复页面仍会保持原来的页面会话。在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这句不好理解，意思是点击当前页面的 `<a target="_black"></a>` 标签时，在新页面中的 `sessionStorage` 的值是复制的当前页面的，注意并不是共用的。
+
+### ✔ sessionStorage 应用
+
+1. 存储用户输入的内容，当页面刷新的时候可以立刻显示出刷新前的内容；
+1. 对使用 browser historay 部署的单页应用，可以在前端使用 sessionStorage 实现路由匹配（不会报 404），不需要使用 nginx 做一次转发；
+
+实现自动匹配路由的过程是这样的：当访问 `a.com/page1` 页面的时候，由于服务器并没有这个页面，服务器会返回 `404.html`（浏览器当前的路由仍然是 `a.com/page1`），浏览器执行 `404.html` 时会先设置 `sessionStorage.redirect` 为当前的 url，然后 `<meta>` 会立刻让页面跳转到 `/`，服务器此时会返回 `index.html`，浏览器执行 `<script>` 中的代码获取到 `sessionStorage.redirect`，然后执行 `histpry.replaceState` 替换当前的 url，这样就达到了想要的跳转效果（[`history.replaceState`](https://developer.mozilla.org/zh-CN/docs/Web/API/History/replaceState) 只会更改浏览器地址栏，不会让浏览器主动去服务器获取对应的页面）。
+
+设置一个 `404.html`，`head` 中包含下面内容
+
+```html
+<head>
+    ...
+    <script>
+      sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'"></meta>
+</head>
+```
+
+在单页应用的模板 `index.html` 中，填下面的代码：
+
+```html
+<body>
+  <div id="root"></div>
+  <script>
+    // 这段代码要放在其他js的前面
+    ;(function() {
+      var redirect = sessionStorage.redirect
+      delete sessionStorage.redirect
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect)
+      }
+    })()
+  </script>
+</body>
+```
+
+演示
+
+![sessionStorage 实现页面跳转](https://qiniu1.lxfriday.xyz/feoffer/sessionStorage.gif)
+
+## history
+
+## performance
+
+## navigator
+
 ## Observer
 
 ### ✔ IntersectionObserver
@@ -619,178 +797,6 @@ box2.addEventListener('click', function(e) {
 我们删除了 `li` 时无需删除事件绑定，也无需为新增的 `li` 绑定事件。点击事件会冒泡到 `ul` 并被这个事件处理程序处理，我们只需要拿到当前点击的元素 `e.taregt` 做对应的处理即可。
 
 ## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
-
-## ✔ localStorage
-
-localStorage 只在相同的域下共享同一空间。**协议和端口**都有影响，注意：
-
-- `http://a.com` 和 `https://a.com` 并**不共享**；
-- `http://a.com:80` 和 `http://a.com:8080` **不共享**；
-- `http://a.com` 和 `http://a.com:80` **共享**；
-
-### ✔ 常用 API
-
-| 设置                                                                             | 查看                                                                             |
-| :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
-| ![](http://qiniu1.lxfriday.xyz/feoffer/83dd0a6b-7af1-e1a3-6b4b-ccd89db00def.png) | ![](http://qiniu1.lxfriday.xyz/feoffer/23829b23-1f14-640c-c74a-01c58d6b68a5.png) |
-
-- `localstorage.setItem(key, value)` 存数据，`key` `value` 都会被转换成字符串，为了防止意料之外的情况，最好先将其转化为字符串了再存储；
-- `localstorage.getItem(key)` 获取数据，`key` 都会被转换成字符串；
-- `localstorage.clear()` 清除当前域下 `localStorage` 存储的数据；
-- `localstorage.length` 获取当前域下存储的项目条数；
-- `localstorage.key(n:number)` 获取显示面板中第 `n` 条的 `key`，感觉比较鸡肋；
-
-### ✔ 浏览器对 localStorage 容量限制
-
-经测试，Chrome、FireFox、Edge 都是 **5M**（IE 忽略）。
-
-<button id="localStorageQuota" onclick="window.LXFRIDAY_GLOBAL_localStorageQuota()">点我测试存储容量(当前操作会先清空 localStorage)</button>
-
-<div id="localStorageQuota_display"></div>
-
-下面是容量探测代码，可以精确到 1K。
-
-```javascript
-const add10KStr = new Array(1024).fill('0000000000').join('') // 10240 Byte => 10K
-const add1KStr = new Array(1024).fill('1').join('') // 1024 Byte => 1K
-const storageKey = 'QuotaTest'
-
-function localStorageQuota() {
-  localStorage.clear()
-  function setText(str) {
-    console.log(str)
-  }
-  let total = ''
-  let interval = null
-  interval = setInterval(() => {
-    try {
-      setText(`数据插入中 => ${total.length / 1024}K`)
-
-      localStorage.removeItem(storageKey)
-      localStorage.setItem(storageKey, total + add1KStr)
-      total += add10KStr
-    } catch (e) {
-      clearInterval(interval)
-      if (e && e.code === 22) {
-        setText('超过容量(10K增加)')
-        setText(`当前存储了${total.length / 1024}K`)
-        interval = setInterval(() => {
-          try {
-            setText(`数据插入中 => ${total.length / 1024}K`)
-
-            localStorage.removeItem(storageKey)
-            localStorage.setItem(storageKey, total + add1KStr)
-            total += add1KStr
-          } catch (ee) {
-            clearInterval(interval)
-            if (ee && ee.code === 22) {
-              setText('超过容量(1K增加)')
-              setText(`当前存储了${total.length / 1024}K`)
-            }
-          }
-        }, 0)
-      }
-    }
-  }, 0)
-}
-```
-
-以 Chrome 为 例，插入不了的时候会抛出异常，`e.code` 是 22。
-
-![localStorage error](https://qiniu1.lxfriday.xyz/feoffer/5a91d578-24a8-b39c-0f11-2775a68fc1ec.png)
-
-### ✔ Storage Event
-
-Storage 事件可以用来在同域下的页面之间实现广播机制，该事件是在 window 上触发的。该事件**不在导致数据变化的当前页面(tab)触发**（如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变 `localStorage` 的数据时，其他所有页面的 `storage` 事件会被触发，而原始页面并不触发 `storage` 事件）；
-
-event 包含的关键信息：
-
-- `event.key` 发生变更的 `key`；
-- `event.oldValue` 变更之前的值；
-- `event.newValue` 变更之后的值；
-
-触发的条件有两个：
-
-1. 不在当前的 tab 触发，相同的 `url` 在两个不同的 tab 也是会触发的；
-1. `localstorage.setItem(key, value)` 只有当后一次设置的 `value` 不同的时候才会触发该事件，相同的话也没有必要触发了；
-
-例如在 `https://a.com/a.html` 有如下代码：
-
-```javascript
-localStorage.setItem('name', 'lx')
-window.addEventListener('storage', e => {
-  console.log('e', e)
-})
-```
-
-这个时候，在 `https://a.com/b.html` 进行了下面的操作：
-
-```javascript
-localStorage.setItem('name', 'lxfriday')
-```
-
-则 a 页面会打印出下面的内容：
-
-![storage event](http://qiniu1.lxfriday.xyz/feoffer/f615efa9-106e-b78b-5db1-547eca5cf7a3.png)
-
-### ✔ localStorage 的其他用途
-
-ref
-
-- [https://iammapping.com/the-other-ways-to-use-localstorage/](https://iammapping.com/the-other-ways-to-use-localstorage/)
-
-1. 缓存静态文件；
-1. 作为前端 DB 的存储介质；
-
-- 灵活存取 json 格式的数据：[https://github.com/typicode/lowdb](https://github.com/typicode/lowdb)
-- 通过 sql 对数据 CURD 操作：[https://github.com/agershun/alasql#localstorage-and-dom-storage](https://github.com/agershun/alasql#localstorage-and-dom-storage)
-
-## ✔ sessionStorage
-
-它与 `localStorage` 相似，存储容量也是 **5M**，不同之处在于 `localStorage` 里面存储的数据没有过期时间设置，而存储在 `sessionStorage` 里面的数据在**页面会话结束时会被清除（关闭当前页面的时候会清除）**。
-
-页面会话在浏览器打开期间一直保持，并且**重新加载（刷新）**或恢复页面仍会保持原来的页面会话。在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这句不好理解，意思是点击当前页面的 `<a target="_black"></a>` 标签时，在新页面中的 `sessionStorage` 的值是复制的当前页面的，注意并不是共用的。
-
-### ✔ sessionStorage 应用
-
-1. 存储用户输入的内容，当页面刷新的时候可以立刻显示出刷新前的内容；
-1. 对使用 browser historay 部署的单页应用，可以在前端使用 sessionStorage 实现路由匹配（不会报 404），不需要使用 nginx 做一次转发；
-
-实现自动匹配路由的过程是这样的：当访问 `a.com/page1` 页面的时候，由于服务器并没有这个页面，服务器会返回 `404.html`（浏览器当前的路由仍然是 `a.com/page1`），浏览器执行 `404.html` 时会先设置 `sessionStorage.redirect` 为当前的 url，然后 `<meta>` 会立刻让页面跳转到 `/`，服务器此时会返回 `index.html`，浏览器执行 `<script>` 中的代码获取到 `sessionStorage.redirect`，然后执行 `histpry.replaceState` 替换当前的 url，这样就达到了想要的跳转效果（[`history.replaceState`](https://developer.mozilla.org/zh-CN/docs/Web/API/History/replaceState) 只会更改浏览器地址栏，不会让浏览器主动去服务器获取对应的页面）。
-
-设置一个 `404.html`，`head` 中包含下面内容
-
-```html
-<head>
-    ...
-    <script>
-      sessionStorage.redirect = location.href;
-    </script>
-    <meta http-equiv="refresh" content="0;URL='/'"></meta>
-</head>
-```
-
-在单页应用的模板 `index.html` 中，填下面的代码：
-
-```html
-<body>
-  <div id="root"></div>
-  <script>
-    // 这段代码要放在其他js的前面
-    ;(function() {
-      var redirect = sessionStorage.redirect
-      delete sessionStorage.redirect
-      if (redirect && redirect != location.href) {
-        history.replaceState(null, null, redirect)
-      }
-    })()
-  </script>
-</body>
-```
-
-演示
-
-![sessionStorage 实现页面跳转](https://qiniu1.lxfriday.xyz/feoffer/sessionStorage.gif)
 
 # V8 专区
 
