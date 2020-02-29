@@ -2,12 +2,13 @@
   "name": "docs",
   "version": "1.0.0",
   "description": "ref",
-  "main": "sw.js",
+  "main": "",
   "scripts": {
     "s": "docsify serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {},
+  "repository": "https://github.com/lxfriday/fe-offer-guide"
 }
