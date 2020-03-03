@@ -100,3 +100,7 @@
 img {
   border: 1px solid #aaaaaa;
 }
+
+.markdown-section pre {
+  border-left: 5px solid #42b983;
+}
