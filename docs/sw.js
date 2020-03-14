@@ -56,6 +56,8 @@ self.addEventListener('activate', event => {
  *  void respondWith(Promise<Response> r)
  */
 self.addEventListener('fetch', event => {
+  console.log('event', event)
+
   // Skip some of cross-origin requests, like those for Google Analytics.
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
     // Stale-while-revalidate

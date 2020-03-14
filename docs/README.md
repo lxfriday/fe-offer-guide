@@ -1499,6 +1499,180 @@ ref
 
 - [etag 如何生成](https://juejin.im/post/5df027036fb9a0164143ef25)
 
+#### http 缓存-Pragma
+
+```http
+Pragma: no-cache
+```
+
+与 `Cache-Control: no-cache` 效果一致。强制要求缓存服务器在返回缓存的版本之前将请求提交到源头服务器进行验证。
+
+`Pragma` 是一个在 HTTP/1.0 中规定的通用首部，它用来向后兼容只支持 HTTP/1.0 协议的缓存服务器，那时候 HTTP/1.1 协议中的 `Cache-Control` 还没有出来。
+
+#### http 缓存-Expires
+
+```http
+Expires: Wed, 21 Oct 2015 07:28:00 GMT
+```
+
+Expires 响应头包含日期/时间， 即在此时候之后，响应过期。
+
+#### http 缓存-Cache-Control
+
+```http
+Cache-Control: max-age=<seconds>
+Cache-Control: max-stale[=<seconds>]
+Cache-Control: min-fresh=<seconds>
+Cache-control: no-cache
+Cache-control: no-store
+Cache-control: no-transform
+Cache-control: only-if-cached
+```
+
+**可缓存性**
+
+- `public` 响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存；
+- `private` 响应只能被单个用户缓存，不能作为共享缓存（即代理服务器不能缓存它）；
+- `no-cache` 会缓存在本地，另外在使用本地缓存之前，强制要求往服务器发送请求验证，如果本地缓存没有过期会返回 304；
+- `no-store` 不应该缓存；
+
+**到期**
+
+- `max-age=<seconds>` 设置缓存在多少秒之后过期；
+- `s-maxage=<seconds>` 覆盖 `max-age` 或者 `Expires` 头，但是仅适用于共享缓存(比如各个代理)，私有缓存会忽略它；
+- `max-stale[=<seconds>]` 表明客户端愿意接收一个已经过期的资源。可以设置一个可选的秒数，表示响应不能已经过时超过该给定的时间；
+- `stale-while-revalidate=<seconds>` 表明客户端愿意接受陈旧的响应，同时在后台异步检查新的响应。秒值指示客户愿意接受陈旧响应的时间长度；
+
+**重新验证和重新加载**
+
+- `must-revalidate` 一旦资源过期（比如已经超过 `max-age`），在成功向原始服务器验证之前，缓存不能用该资源响应后续请求；
+- `proxy-revalidate` 与 `must-revalidate` 作用相同，但它仅适用于共享缓存（例如代理），并被私有缓存忽略；
+- `immutable` 表示响应正文不会随时间而改变。资源（如果未过期）在服务器上不发生改变，因此客户端不应发送重新验证请求头（例如 `If-None-Match` 或 `If-Modified-Since`）来检查更新，即使用户显式地刷新页面。
+
+**其他**
+
+- `no-transform` 不得对资源进行转换或转变。`Content-Encoding`、`Content-Range`、`Content-Type` 等 HTTP 头不能由代理修改；
+
+---
+
+示例
+
+**禁止缓存**
+
+```http
+Cache-Control: no-store
+```
+
+**缓存静态资源**
+
+```http
+Cache-Control:public, max-age=31536000
+```
+
+**需要重新验证**
+
+指定 `no-cache` 或 `max-age=0` 表示客户端可以缓存资源，每次使用缓存资源前都必须重新验证其有效性。这意味着每次都会发起 HTTP 请求，但当缓存内容仍有效时可以跳过 HTTP 响应体的下载。
+
+```http
+Cache-Control: no-cache
+Cache-Control: max-age=0
+```
+
+#### http 缓存-Last Modified、If Modified Since
+
+`If-Modified-Since` 是一个条件式请求首部，服务器只在所请求的资源在**给定的日期时间之后对内容进行过修改**的情况下才会将资源返回，状态码为 200 。
+
+如果请求的资源从那时起未经修改，那么返回一个不带有消息主体的 304 响应，而在 `Last-Modified` 首部中会带有上次修改时间。
+
+`Last-Modified` 是一个响应首部，其中包含源头服务器认定的资源做出修改的日期及时间。 它通常被用作一个验证器来判断接收到的或者存储的资源是否彼此一致。由于精确度比 ETag 要低，所以这是一个备用机制。
+
+```http
+If-Modified-Since: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
+```
+
+#### http 缓存-ETag
+
+`ETag` HTTP 响应头是资源的特定版本的标识符。这可以让缓存更高效，并节省带宽，因为如果内容没有改变，Web 服务器不需要发送完整的响应。而如果内容发生了变化，使用 ETag 有助于防止资源的同时更新相互覆盖（“空中碰撞”）。
+
+- `W/` 可选，`W/` (大小写敏感) 表示使用弱验证器。 弱验证器很容易生成，但不利于比较。 强验证器是比较的理想选择，但很难有效地生成。 相同资源的两个弱 `Etag` 值可能语义等同，但不是每个字节都相同；
+- `<etag_value>` 实体标签唯一地表示所请求的资源。 它们是位于双引号之间的 ASCII 字符串（如 `675af34563dc-tr34`）。 没有明确指定生成 `ETag` 值的方法。 通常，使用内容的散列，最后修改时间戳的哈希值，或简单地使用版本号。 例如，MDN 使用 wiki 内容的十六进制数字的哈希值；
+
+```http
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+ETag: W/"0815"
+```
+
+**应用 1：缓存未更改资源”**
+
+如果用户再次访问给定的 URL（设有 `ETag` 字段），显示资源过期了且不可用，客户端就发送值为 `ETag` 的 `If-None-Match` header 字段：
+
+```http
+If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+```
+
+服务器将客户端的 `ETag`（作为 `If-None-Match` 字段的值一起发送）与其当前版本的资源的 `ETag` 进行比较，如果两个值匹配（即资源未更改），服务器将返回不带任何内容的 304 未修改状态，告诉客户端缓存版本可用（新鲜）。
+
+**应用 2：避免“空中碰撞”**
+
+在 `ETag` 和 `If-Match` 头部的帮助下，您可以检测到"空中碰撞"的编辑冲突。
+
+例如，当编辑 MDN 时，当前的 wiki 内容被散列，并在响应中放入 `Etag`：
+
+```http
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+```
+
+将更改保存到 Wiki 页面（发布数据）时，POST 请求将包含有 `ETag` 值的 `If-Match` 头来检查是否为最新版本。
+
+```http
+If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+```
+
+如果哈希值不匹配，则意味着文档已经被编辑，抛出 [412](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/412) 前提条件失败错误。
+
+#### http 缓存 If-None-Match
+
+参考 Etag。
+
+当与 `If-Modified-Since` 一同使用的时候，`If-None-Match` 优先级更高（假如服务器支持的话）。
+
+#### http 缓存-Vary
+
+`Vary` 是一个 HTTP 响应头部信息，它决定了对于未来的一个请求头，应该用一个缓存的回复(response)还是向源服务器请求一个新的回复。它被服务器用来表明在 content negotiation algorithm（内容协商算法）中选择一个资源代表的时候应该使用哪些头部信息（headers）.
+
+在响应状态码为 304 Not Modified 的响应中，也要设置 `Vary` 首部，而且要与相应的 200 OK 响应设置得一模一样。
+
+**动态服务**
+
+对于 `User-Agent` 头部信息，例如你提供给移动端的内容是不同的，可用防止你客户端误使用了用于桌面端的缓存。
+
+```http
+Vary: User-Agent
+```
+
+#### http 缓存-Date
+
+`Date` 是一个通用首部，其中包含了报文创建的日期和时间。
+
+```http
+Date: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+
+Date: Wed, 21 Oct 2015 07:28:00 GMT
+```
+
+#### http 缓存-Age
+
+`Age` 消息头里包含消息对象在缓存代理中存贮的时长，以秒为单位。
+
+`Age` 消息头的值通常接近于 0。表示此消息对象刚刚从原始服务器获取不久；其他的值则是表示代理服务器当前的系统时间与此应答消息中的通用消息头 `Date` 的值之差。
+
+`<delta-seconds>`：一个非负整数，表示消息对象在缓存代理服务器中存贮的时长，以秒为单位。
+
+```http
+Age: <delta-seconds>
+```
+
 ### HTTP 协议版本变迁
 
 #### HTTP 0.9
@@ -1644,6 +1818,10 @@ HTTP 301 永久重定向，说明请求的资源已经被移动到了由 `Locati
 HTTP 302 Found 重定向状态码表明请求的资源被暂时的移动到了由 `Location` 头部指定的 `URL` 上。浏览器会重定向到这个 `URL`， 但是搜索引擎不会对该资源的链接进行更新。
 
 #### ✔ 303 See Other
+
+ref
+
+- [https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Redirections](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Redirections)
 
 HTTP 303 See Other 重定向状态码，通常作为 PUT 或 POST 操作的返回结果，它表示重定向链接指向的不是新上传的资源，而是另外一个页面，比如消息确认页面或上传进度页面。
 
