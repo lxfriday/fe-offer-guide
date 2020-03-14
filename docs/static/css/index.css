@@ -104,3 +104,6 @@ img {
 .markdown-section pre {
   border-left: 5px solid #42b983;
 }
+.markdown-section {
+  max-width: 1100px;
+}

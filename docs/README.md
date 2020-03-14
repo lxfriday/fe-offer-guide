@@ -1732,15 +1732,153 @@ Date: Wed, 21 Oct 2015 07:28:00 GMT
 Age: <delta-seconds>
 ```
 
-### HTTP 协议版本变迁
+### ✔ HTTP 协议版本变迁
 
-#### HTTP 0.9
+#### ✔ HTTP 0.9 - 单行协议
 
-#### HTTP 1.0
+HTTP/0.9 极其简单：请求由**单行指令**构成，以唯一可用方法**GET**开头，其后跟**目标资源的路径**（一旦连接到服务器，协议、服务器、端口号这些都不是必须的）。
 
-#### HTTP 1.1
+```http
+GET /mypage.html
+```
 
-#### HTTP 2
+响应也极其简单的：只包含响应文档本身。
+
+```http
+<HTML>
+这是一个非常简单的HTML页面
+</HTML>
+```
+
+**跟后来的版本不同，HTTP/0.9 的响应内容并不包含 HTTP 头，这意味着只有 HTML 文件可以传送，无法传输其他类型的文件；也没有状态码或错误代码：一旦出现问题，一个特殊的包含问题描述信息的 HTML 文件将被发回，供人们查看。**
+
+#### ✔ HTTP 1.0 – 构建可扩展性
+
+- 协议版本信息现在会随着每个请求发送（HTTP/1.0 被追加到了 GET 行）；
+- 状态码会在响应开始时发送，使浏览器能了解请求执行成功或失败，并相应调整行为（如更新或使用本地缓存）；
+- 引入了 HTTP 头的概念，无论是对于请求还是响应，允许传输元数据，使协议变得非常灵活，更具扩展性；
+- 在新 HTTP 头的帮助下，具备了传输除纯文本 HTML 文件以外其他类型文档的能力（感谢`Content-Type`头）；
+
+一个典型的请求：
+
+```http
+GET /mypage.html HTTP/1.0
+User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
+
+200 OK
+Date: Tue, 15 Nov 1994 08:12:31 GMT
+Server: CERN/3.0 libwww/2.17
+Content-Type: text/html
+<HTML>
+一个包含图片的页面
+  <IMG SRC="/myimage.gif">
+</HTML>
+```
+
+接下来是第二个连接，请求获取图片：
+
+```http
+GET /myimage.gif HTTP/1.0
+User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
+
+200 OK
+Date: Tue, 15 Nov 1994 08:12:32 GMT
+Server: CERN/3.0 libwww/2.17
+Content-Type: text/gif
+(这里是图片内容)
+```
+
+#### ✔ HTTP 1.1 – 标准化的协议
+
+HTTP/1.0 多种不同的实现方式在实际运用中显得有些混乱，自 1995 年开始，即 HTTP/1.0 文档发布的下一年，就开始修订 HTTP 的第一个标准化版本。在 1997 年初，HTTP/1.1 标准发布，就在 HTTP/1.0 发布的几个月后。
+
+HTTP/1.1 消除了大量歧义内容并引入了多项改进：
+
+- 连接可以复用，节省了多次打开 TCP 连接加载网页文档资源的时间；
+- 增加管线化技术，允许在第一个应答被完全发送之前就发送第二个请求，以降低通信延迟；
+- 支持响应分块；
+- 引入额外的缓存控制机制；
+- 引入内容协商机制，包括语言，编码，类型等，并允许客户端和服务器之间约定以最合适的内容进行交换；
+- 感谢`Host`头，**能够使不同域名配置在同一个 IP 地址的服务器上**；
+
+一个典型的请求流程， 所有请求都通过一个连接实现，看起来就像这样：
+
+```http
+GET /en-US/docs/Glossary/Simple_header HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
+
+HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Wed, 20 Jul 2016 10:55:30 GMT
+Etag: "547fa7e369ef56031dd3bff2ace9fc0832eb251a"
+Keep-Alive: timeout=5, max=1000
+Last-Modified: Tue, 19 Jul 2016 00:59:33 GMT
+Server: Apache
+Transfer-Encoding: chunked
+Vary: Cookie, Accept-Encoding
+
+(content)
+```
+
+```http
+GET /static/img/header-background.png HTTP/1.1
+Host: developer.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
+
+HTTP/1.1 200 OK
+Age: 9578461
+Cache-Control: public, max-age=315360000
+Connection: keep-alive
+Content-Length: 3077
+Content-Type: image/png
+Date: Thu, 31 Mar 2016 13:34:46 GMT
+Last-Modified: Wed, 21 Oct 2015 18:27:50 GMT
+Server: Apache
+
+(image content of 3077 bytes)
+```
+
+#### ✔ HTTP 2 - 为了更优异的表现
+
+ref
+
+- [一文读懂 HTTP/2 及 HTTP/3 特性](https://blog.fundebug.com/2019/03/07/understand-http2-and-http3/)
+
+在 2010 年到 2015 年，谷歌通过实践了一个实验性的 SPDY 协议，证明了一个在客户端和服务器端交换数据的另类方式。其收集了浏览器和服务器端的开发者的焦点问题。明确了**响应数量**的增加和**解决复杂的数据传输**，SPDY 成为了 HTTP/2 协议的基础。
+
+HTTP/2 在 HTTP/1.1 有几处基本的不同:
+
+- **二进制传输**：HTTP/2 是**二进制协议**而不是文本协议。**不再可读**，也不可无障碍的手动创建，改善的优化技术现在可被实施；
+- **连接复用**：这是一个**复用**协议。**并行的请求能在同一个链接中处理，移除了 HTTP/1.x 中顺序和阻塞的约束**；
+- **头部压缩**：压缩了 headers。因为 headers 在一系列请求中常常是相似的，其移除了重复和传输重复数据的成本；
+- **服务端推送**：其允许服务器在客户端缓存中填充数据，通过一个叫服务器推送的机制来提前请求；
+
+#### ✔ HTTP 3
+
+ref
+
+- [一文读懂 HTTP/2 及 HTTP/3 特性](https://blog.fundebug.com/2019/03/07/understand-http2-and-http3/)
+
+HTTP/2 使用了多路复用，一般来说同一域名下只需要使用一个 TCP 连接。但当这个连接中出现了丢包的情况，那就会导致 HTTP/2 的表现情况反倒不如 HTTP/1 了。
+
+因为在出现丢包的情况下，整个 TCP 都要开始等待重传，也就导致了后面的所有数据都被阻塞了。但是对于 HTTP/1.1 来说，可以开启多个 TCP 连接，出现这种情况反到只会影响其中一个连接，剩余的 TCP 连接还可以正常传输数据。
+
+那么可能就会有人考虑到去修改 TCP 协议，其实这已经是一件不可能完成的任务了。因为 TCP 存在的时间实在太长，已经充斥在各种设备中，并且这个协议是由操作系统实现的，更新起来不大现实。
+
+基于这个原因，Google 就更起炉灶搞了一个**基于 UDP 协议的 QUIC 协议**，并且使用在了 HTTP/3 上，HTTP/3 之前名为 HTTP-over-QUIC，从这个名字中我们也可以发现，HTTP/3 最大的改造就是使用了 QUIC。
+
+![QUIC](https://qiniu1.lxfriday.xyz/feoffer/66795018-1c93-70df-7be8-0a39ed68e9df.png)
 
 ### HTTP 长连接
 
