@@ -1491,7 +1491,7 @@ IETF 规范 7230，超文本传输 ​​ 协议 (HTTP/1.1)：Message Syntax and
 
 ### HTTP 协议格式
 
-### HTTP 缓存
+### ✔ HTTP 缓存
 
 ref
 
@@ -1499,7 +1499,7 @@ ref
 
 - [etag 如何生成](https://juejin.im/post/5df027036fb9a0164143ef25)
 
-#### http 缓存-Pragma
+#### ✔ http 缓存-Pragma
 
 ```http
 Pragma: no-cache
@@ -1509,7 +1509,7 @@ Pragma: no-cache
 
 `Pragma` 是一个在 HTTP/1.0 中规定的通用首部，它用来向后兼容只支持 HTTP/1.0 协议的缓存服务器，那时候 HTTP/1.1 协议中的 `Cache-Control` 还没有出来。
 
-#### http 缓存-Expires
+#### ✔ http 缓存-Expires
 
 ```http
 Expires: Wed, 21 Oct 2015 07:28:00 GMT
@@ -1517,7 +1517,7 @@ Expires: Wed, 21 Oct 2015 07:28:00 GMT
 
 Expires 响应头包含日期/时间， 即在此时候之后，响应过期。
 
-#### http 缓存-Cache-Control
+#### ✔ http 缓存-Cache-Control
 
 ```http
 Cache-Control: max-age=<seconds>
@@ -1578,7 +1578,7 @@ Cache-Control: no-cache
 Cache-Control: max-age=0
 ```
 
-#### http 缓存-Last Modified、If Modified Since
+#### ✔ http 缓存-Last Modified、If Modified Since
 
 `If-Modified-Since` 是一个条件式请求首部，服务器只在所请求的资源在**给定的日期时间之后对内容进行过修改**的情况下才会将资源返回，状态码为 200 。
 
@@ -1591,7 +1591,7 @@ If-Modified-Since: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
 If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
-#### http 缓存-ETag
+#### ✔ http 缓存-ETag
 
 `ETag` HTTP 响应头是资源的特定版本的标识符。这可以让缓存更高效，并节省带宽，因为如果内容没有改变，Web 服务器不需要发送完整的响应。而如果内容发生了变化，使用 ETag 有助于防止资源的同时更新相互覆盖（“空中碰撞”）。
 
@@ -1631,13 +1631,13 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 
 如果哈希值不匹配，则意味着文档已经被编辑，抛出 [412](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/412) 前提条件失败错误。
 
-#### http 缓存 If-None-Match
+#### ✔ http 缓存 If-None-Match
 
 参考 Etag。
 
 当与 `If-Modified-Since` 一同使用的时候，`If-None-Match` 优先级更高（假如服务器支持的话）。
 
-#### http 缓存-Vary
+#### ✔ http 缓存-Vary
 
 `Vary` 是一个 HTTP 响应头部信息，它决定了对于未来的一个请求头，应该用一个缓存的回复(response)还是向源服务器请求一个新的回复。它被服务器用来表明在 content negotiation algorithm（内容协商算法）中选择一个资源代表的时候应该使用哪些头部信息（headers）.
 
@@ -1651,7 +1651,7 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 Vary: User-Agent
 ```
 
-#### http 缓存-Date
+#### ✔ http 缓存-Date
 
 `Date` 是一个通用首部，其中包含了报文创建的日期和时间。
 
@@ -1661,7 +1661,7 @@ Date: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
 Date: Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
-#### http 缓存-Age
+#### ✔ http 缓存-Age
 
 `Age` 消息头里包含消息对象在缓存代理中存贮的时长，以秒为单位。
 
