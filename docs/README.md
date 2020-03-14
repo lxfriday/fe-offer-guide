@@ -1489,7 +1489,66 @@ urn:ietf:rfc:7230
 
 IETF 规范 7230，超文本传输 ​​ 协议 (HTTP/1.1)：Message Syntax and Routing.
 
-### HTTP 协议格式
+### ✔ HTTP 协议格式
+
+一个完整的 HTTP 交互过程由 **HTTP 请求** 和 **HTTP 响应** 两部分组成。
+
+**HTTP 请求**
+
+- `起始行`：请求的第一行，包含请求方法、请求目标、HTTP 版本；
+- `请求头`；
+- `请求体`；
+
+**HTTP 响应**
+
+- `状态行`：请求的第一行，包含协议版本、状态码、状态文本；
+- `响应头`；
+- `响应体`；
+
+请求头和请求体中间有一个换行，响应头和响应体中间有一个换行。
+
+发起请求：
+
+```http
+POST /v3/web/wbbr/bgeda HTTP/1.1
+Host: web-api.juejin.im
+Connection: keep-alive
+Content-Length: 147
+X-Legacy-Device-Id:
+Sec-Fetch-Dest: empty
+X-Agent: Juejin/Web
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: https://juejin.im
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Referer: https://juejin.im/
+Accept-Encoding: gzip
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7
+
+{"operationName":"","query":"","variables":{"platformCode":1,"positionCodes":[1]},"extensions":{"query":{"id":"85c0f781f40a7390dd7aedf0b1b35889"}}}
+```
+
+接收响应：
+
+```http
+HTTP/1.1 200 OK
+Server: nginx/1.10.2
+Date: Sat, 14 Mar 2020 03:51:18 GMT
+Content-Type: application/json
+Content-Length: 508
+Connection: close
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: GET, PUT, POST, DELETE, PATCH
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Content-Type,X-Agent,X-Token,X-Legacy-Token,X-Legacy-Uid,X-Legacy-Device-Id,X-Legacy-New-Token,X-Request-Id
+Access-Control-Max-Age: 86400
+X-Request-Id: 0fc2f44065a711eab6b66f8b0073adbf
+Set-Cookie: QINGCLOUDELB=743155a837e7deb03acb8e760501fb609b6845ac24ccb3b2c31a11c11a0765c2|XmxUu|XmxUu; path=/; HttpOnly
+
+{"data":{"advertisementCard":{"items":[{"type":"ImageAdvertisement","id":"5e6b33e3e51d4526f363c0fc","url":"https://juejin.im/book/5c7bcd6b6fb9a049a7128934?source=fenxiweb&utm_campaign=xiaoce&utm_content=juejin01&utm_fenxiweb","platformCode":1,"positionCode":1,"startedAt":"2020-03-12T16:00:00.000Z","endedAt":"2020-03-15T16:00:00.000Z","imageUrl":"https://user-gold-cdn.xitu.io/1584083935907df34609a20504f1498d7c8c42705effd.jpg","advertiser":{"id":"","title":"","nativeTarget":null},"nativeTarget":null}]}}}
+```
 
 ### ✔ HTTP 缓存
 
