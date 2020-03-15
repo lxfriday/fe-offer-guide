@@ -107,3 +107,6 @@ img {
 .markdown-section {
   max-width: 1100px;
 }
+.markdown-section > * {
+  font-size: 14px;
+}

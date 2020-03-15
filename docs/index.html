@@ -97,7 +97,8 @@
     </div>
     <!-- my code -->
     <script>
-      if (typeof navigator.serviceWorker !== 'undefined') {
+      if (location.origin.indexOf('localhost') === -1 && typeof navigator.serviceWorker !== 'undefined') {
+        console.log('register sw')
         navigator.serviceWorker.register('sw.js')
       }
     </script>
