@@ -3,9 +3,9 @@
 
 
 clipboard@^2.0.0:
-  version "2.0.4"
-  resolved "https://registry.npm.taobao.org/clipboard/download/clipboard-2.0.4.tgz#836dafd66cf0fea5d71ce5d5b0bf6e958009112d"
-  integrity sha1-g22v1mzw/qXXHOXVsL9ulYAJES0=
+  version "2.0.6"
+  resolved "https://registry.npm.taobao.org/clipboard/download/clipboard-2.0.6.tgz?cache=0&sync_timestamp=1583389806287&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fclipboard%2Fdownload%2Fclipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
+  integrity sha1-UpISlu7A/fd+rRdJQhshyWhkc3Y=
   dependencies:
     good-listener "^1.2.2"
     select "^1.1.2"
@@ -16,15 +16,16 @@ delegate@^3.1.2:
   resolved "https://registry.npm.taobao.org/delegate/download/delegate-3.2.0.tgz#b66b71c3158522e8ab5744f720d8ca0c2af59166"
   integrity sha1-tmtxwxWFIuirV0T3INjKDCr1kWY=
 
-docsify@^4.10.2:
-  version "4.10.2"
-  resolved "https://registry.npm.taobao.org/docsify/download/docsify-4.10.2.tgz#0e4e7efad511b75680c69a4d648253e63c8cf647"
-  integrity sha1-Dk5++tURt1aAxppNZIJT5jyM9kc=
+docsify@^4.11.3:
+  version "4.11.3"
+  resolved "https://registry.npm.taobao.org/docsify/download/docsify-4.11.3.tgz?cache=0&sync_timestamp=1585060594419&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdocsify%2Fdownload%2Fdocsify-4.11.3.tgz#d79af6f92d48d2c1857b7f76df333db4fd6d19ec"
+  integrity sha1-15r2+S1I0sGFe3923zM9tP1tGew=
   dependencies:
     marked "^0.7.0"
-    medium-zoom "^1.0.4"
+    medium-zoom "^1.0.5"
     opencollective-postinstall "^2.0.2"
-    prismjs "^1.15.0"
+    prismjs "^1.19.0"
+    strip-indent "^3.0.0"
     tinydate "^1.0.0"
     tweezer.js "^1.4.0"
 
@@ -37,22 +38,27 @@ good-listener@^1.2.2:
 
 marked@^0.7.0:
   version "0.7.0"
-  resolved "https://registry.npm.taobao.org/marked/download/marked-0.7.0.tgz?cache=0&sync_timestamp=1576185048882&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmarked%2Fdownload%2Fmarked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
+  resolved "https://registry.npm.taobao.org/marked/download/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha1-tkIB8FHScbHtwQoE0a6bdLuOXA4=
 
-medium-zoom@^1.0.4:
+medium-zoom@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npm.taobao.org/medium-zoom/download/medium-zoom-1.0.5.tgz#81413dda20ccdd857141ff420cfab788dd32e20e"
   integrity sha1-gUE92iDM3YVxQf9CDPq3iN0y4g4=
+
+min-indent@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/min-indent/download/min-indent-1.0.0.tgz#cfc45c37e9ec0d8f0a0ec3dd4ef7f7c3abe39256"
+  integrity sha1-z8RcN+nsDY8KDsPdTvf3w6vjklY=
 
 opencollective-postinstall@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/opencollective-postinstall/download/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha1-Vlfxvt5ptuM6RZObBh61PTxsOok=
 
-prismjs@^1.15.0:
+prismjs@^1.19.0:
   version "1.19.0"
-  resolved "https://registry.npm.taobao.org/prismjs/download/prismjs-1.19.0.tgz?cache=0&sync_timestamp=1578922929839&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprismjs%2Fdownload%2Fprismjs-1.19.0.tgz#713afbd45c3baca4b321569f2df39e17e729d4dc"
+  resolved "https://registry.npm.taobao.org/prismjs/download/prismjs-1.19.0.tgz#713afbd45c3baca4b321569f2df39e17e729d4dc"
   integrity sha1-cTr71Fw7rKSzIVafLfOeF+cp1Nw=
   optionalDependencies:
     clipboard "^2.0.0"
@@ -61,6 +67,13 @@ select@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/select/download/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
   integrity sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=
+
+strip-indent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/strip-indent/download/strip-indent-3.0.0.tgz#c32e1cee940b6b3432c771bc2c54bcce73cd3001"
+  integrity sha1-wy4c7pQLazQyx3G8LFS8znPNMAE=
+  dependencies:
+    min-indent "^1.0.0"
 
 tiny-emitter@^2.0.0:
   version "2.1.0"

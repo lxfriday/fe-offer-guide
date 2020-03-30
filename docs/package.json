@@ -9,6 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "docsify": "^4.11.3"
+  },
   "repository": "https://github.com/lxfriday/fe-offer-guide"
 }

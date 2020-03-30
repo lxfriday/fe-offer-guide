@@ -1734,6 +1734,11 @@ Age: <delta-seconds>
 
 ### ✔ HTTP 协议版本变迁
 
+ref
+
+- [阮一峰：HTTP 协议入门](http://www.ruanyifeng.com/blog/2016/08/http.html)
+- [阮一峰：HTTP/2 服务器推送（Server Push）教程](http://www.ruanyifeng.com/blog/2018/03/http2_server_push.html)
+
 #### ✔ HTTP 0.9 - 单行协议
 
 HTTP/0.9 极其简单：请求由**单行指令**构成，以唯一可用方法**GET**开头，其后跟**目标资源的路径**（一旦连接到服务器，协议、服务器、端口号这些都不是必须的）。
@@ -2049,6 +2054,8 @@ HTTP/2 定义了一个“流”（Stream）的概念，它是**二进制帧的�
 
 当流 ID 用完了的时候可以再发一个控制帧 **GOAWAY**，真正关闭 TCP 连接；
 
+> RST_STREAM 可以取消数据流，而 GOAWAY 断开此次连接。
+
 ### ✔ HTTP2 头部压缩
 
 ref
@@ -2089,7 +2096,87 @@ HTTP/2 就为一些最常用的头字段定义了一个只读的**静态表**（
 
 ### ✔ HTTP2 服务端推送
 
-HTTP/2 还在一定程度上改变了传统的“请求 - 应答”工作模式，服务器不再是完全被动地响应请求，也可以新建“流”主动向客户端发送消息。比如，在浏览器刚请求 HTML 的时候就提前把可能会用到的 JS、CSS 文件发给客户端，减少等待的延迟，这被称为“服务器推送”（Server Push，也叫 Cache Push）。
+ref
+
+- [阮一峰：HTTP/2 服务器推送（Server Push）教程](http://www.ruanyifeng.com/blog/2018/03/http2_server_push.html)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/e4c9e805-3202-9b57-e7ed-8399afd77cd3.png)
+
+HTTP/2 在一定程度上改变了传统的“请求 - 应答”工作模式，服务器不再是完全被动地响应请求，也可以新建“流”主动向客户端发送消息。比如，在浏览器刚请求 HTML 的时候就提前把可能会用到的 JS、CSS 文件发给客户端，减少等待的延迟，这被称为“服务器推送”（Server Push，也叫 Cache Push）。
+
+### ✔ HTTP2 本地搭建
+
+先用 openssl 生成公钥、私钥和证书：
+
+```bash
+openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
+openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
+```
+
+生成三个文件：`key.pem` 私钥，`csr.pem` 公钥，`server.crt` 服务端证书；
+
+下面用 nodejs 搭建一个 server：
+
+```javascript
+const http2 = require('http2')
+const fs = require('fs')
+
+const server = http2.createSecureServer({
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./server.crt'),
+})
+server.on('error', err => console.error(err))
+
+server.on('stream', (stream, headers) => {
+  // 流是一个双工流。
+  stream.respond({
+    'content-type': 'text/html',
+    ':status': 200,
+  })
+  console.log('stream', stream)
+  console.log('headers', headers)
+
+  stream.end(
+    fs
+      .readFileSync('./index.html')
+      .toString()
+      .replace(
+        '$headers$',
+        Object.keys(headers)
+          .map(header => `<li>${header}:${headers[header]}</li>`)
+          .join('')
+      )
+  )
+})
+
+server.listen(8443)
+console.log('http2 listening at 8443')
+```
+
+index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>https&&http2</title>
+  </head>
+  <body>
+    hello http2
+    <br />
+    <p>headers</p>
+    <ul>
+      $headers$
+    </ul>
+  </body>
+</html>
+```
+
+最后的效果
+
+![](https://qiniu1.lxfriday.xyz/feoffer/26f1c080-08b5-c9f6-0965-7ab63a382fdf.png)
 
 ### ✔ HTTP1、HTTPS、HTTP2 协议构成
 
@@ -2369,13 +2456,20 @@ ref
 
 > 业界不成文的规定是，（大多数）浏览器通常都会限制 url 长度在 2K 个字节，而（大多数）服务器最多处理 64K 大小的 url。数据量太大会对处理程序造成负担。
 
-【GET 请求】
+- 【GET 请求】
+
 ![http-get](https://qiniu1.lxfriday.xyz/feoffer/http-get.png)
-【POST 请求(multipart/form-data)】
+
+- 【POST 请求(multipart/form-data)】
+
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post.png)
-【POST 请求(application/json)】
+
+- 【POST 请求(application/json)】
+
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post2.png)
-【POST 请求(application/x-www-form-urlencoded)】
+
+- 【POST 请求(application/x-www-form-urlencoded)】
+
 ![http-post](https://qiniu1.lxfriday.xyz/feoffer/http-post3.png)
 
 ### ✔ Cookie
@@ -2585,11 +2679,105 @@ ref
 1. **存取方式不同**，Cookie 中只能保存 **ASCII 字符串**，假如需求存取 Unicode 字符或者二进制数据，需求先进行编码。Session 中能够存取**任何类型**的数据；
 1. **服务器压力不同**，Session 是存储在服务端的，巨大并发的时候会使服务器资源急速飙升。Cookie 则不存在此问题；
 
-## UDP
-
 ## HTTPS
 
+### 对称加密
+
+![](https://qiniu1.lxfriday.xyz/feoffer/3cd066a3-d0f0-03cb-253a-7ee41b1a5b40.png)
+
+**对称加密**是指加密和解密时使用的密钥都是同一个，是**对称**的，只要保证了密钥的安全，那整个通信过程就可以说具有了机密性。
+
+TLS 里有非常多的对称加密算法可供选择，比如 RC4、DES、3DES、AES、ChaCha20 等，但前三种算法都被认为是不安全的，通常都禁止使用，目前常用的只有 **AES** 和 **ChaCha20**。
+
+**AES** 的意思是**高级加密标准**（Advanced Encryption Standard），密钥长度可以是 128、192 或 256。它是 DES 算法的替代者，安全强度很高，性能也很好，而且有的硬件还会做特殊优化，所以非常流行，是应用最广泛的对称加密算法。
+
+**ChaCha20** 是 Google 设计的另一种加密算法，密钥长度固定为 256 位，纯软件运行性能要超过 AES，曾经在移动客户端上比较流行，但 ARMv8 之后也加入了 AES 硬件优化，所以现在不再具有明显的优势，但仍然算得上是一个不错算法。
+
+#### 加密分组模式
+
+对称算法还有一个**分组模式**的概念，它可以让算法用**固定长度的密钥**加密任意长度的明文，把**小秘密（即密钥）**转化为**大秘密（即密文）**。
+
+最新的分组模式被称为 **AEAD**（Authenticated Encryption withAssociated Data），在**加密**的同时增加了**认证**的功能，常用的是 **GCM（伽罗瓦/计数器模式）**、**CCM** 和**Poly1305**。
+
+- AES128-GCM，意思是密钥长度为 128 位的 AES 算法，使用的分组模式是 GCM；
+- ChaCha20-Poly1305 的意思是 ChaCha20 算法，使用的分组模式是 Poly1305；
+
+另外也有下面一些分组模式：
+
+- 电子密码本（ECB）
+- 密码块链接（CBC）
+- 填充密码块链接（PCBC）
+- 密文反馈（CFB）
+- 输出反馈（OFB）
+- 计数器模式（CTR）
+
+### 非对称加密
+
+它有两个密钥，一个叫**公钥**（public key），一个叫**私钥**（private key）。两个密钥是不同的，**不对称**，公钥可以公开给任何人使用，而私钥必须严格保密。
+
+公钥和私钥有个特别的**单向**性，虽然都可以用来加密解密，但公钥加密后只能用私钥解密，反过来，私钥加密后也只能用公钥解密。
+
+非对称加密可以解决**密钥交换**的问题。网站秘密保管私钥，在网上任意分发公钥，你想要登录网站只要用公钥加密就行了，密文只能由私钥持有者才能解密。而黑客因为没有私钥，所以就无法破解密文。
+
+非对称加密算法的设计要比对称算法难得多，在 TLS 里只有很少的几种，比如 `DH`、`DSA`、`RSA`、`ECC` 等。
+
+**`RSA`**
+
+RSA 是 1977 年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。**RSA 就是他们三人姓氏开头字母拼在一起组成的**；
+
+对极大整数做因数分解的难度决定了 RSA 算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA 算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用 RSA 加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的 RSA 钥匙才可能被强力方式解破。世界上还没有任何可靠的攻击 RSA 算法的方式。只要其钥匙的长度足够长，用 RSA 加密的信息实际上是不能被解破的。**目前 RSA 密钥的推荐长度是 2048**；
+
+**ECC**
+
+ECC（Elliptic Curve Cryptography）是非对称加密里的后起之秀，它基于椭圆曲线离散对数的数学难题，使用特定的曲线方程和基点生成公钥和私钥，子算法 ECDHE 用于密钥交换，ECDSA 用于数字签名。
+
+### 混合加密
+
+ref
+
+- [透视 HTTP 协议：24 讲](https://time.geekbang.org/column/intro/100029001)
+
+非对称加密有很高的安全性，但是它的成本也非常高，如果只用非对称加密可能会导致很严重的性能问题。
+
+```
+aes_128_cbc enc/dec 1000 times : 0.97ms, 13.11MB/s
+rsa_1024 enc/dec 1000 times : 138.59ms, 93.80KB/s
+rsa_1024/aes ratio = 143.17
+rsa_2048 enc/dec 1000 times : 840.35ms, 15.47KB/s
+rsa_2048/aes ratio = 868.13
+```
+
+TLS 在设计的时候考虑到了对称加密和非对称加密各自的优点，采用混合加密来实现。
+
+1. 在通信刚开始的时候使用非对称算法，比如 `RSA`、`ECDHE`，首先解决密钥交换的问题；
+1. 然后用随机数产生对称算法使用的**会话密钥**（session key），再用公钥加密。因为会话密钥很短，通常只有 16 字节或 32 字节，所以慢一点也无所谓。
+
+### 数字证书和 CA
+
+CA（Certificate Authority，证书认证机构），具有极高的可信度，由它来给各个公钥签名，用自身的信誉来保证公钥无法伪造，是可信的。
+
+知名的 CA 全世界就那么几家，比如 DigiCert、VeriSign、Entrust、Let’s Encrypt 等，它们签发的证书分 DV、OV、EV 三种，区别在于可信程度。
+
+- `DV` 中文全称是**域名验证型证书**，证书审核方式为通过**验证域名所有权**即可签发证书。此类型证书适合个人和小微企业申请，价格较低，申请快捷，但是证书中无法显示企业信息，安全性较差。在浏览器中显示锁型标志；
+- `OV` **企业验证型证书**，证书审核方式为**通过验证域名所有权和申请企业的真实身份信息才能签发证书**。目前 OV 类型证书是全球运用最广，兼容性最好的证书类型。此证书类型适合中型企业和互联网业务申请。在浏览器中显示锁型标志，并能通过点击查看到企业相关信息。支持 ECC 高安全强度加密算法，加密数据更加安全，加密性能更高；
+- `EV` **增强验证型证书**，证书审核级别为所有类型最严格验证方式，在 OV 类型的验证基础上额外验证其他企业的相关信息，比如银行开户许可证书。EV 类型证书多使用于银行,金融,证券,支付等高安全标准行业。其在地址栏可以显示独特的 EV 绿色标识地址栏，最大程度的标识出网站的可信级别。支持 ECC 高安全强度加密算法，加密数据更加安全，加密性能更高；
+
+证书体系（PKI，Public Key Infrastructure）虽然是目前整个网络世界的安全基础设施，但它也不是完全没有弱点的。如果 CA 失误或者被欺骗，签发了错误的证书，虽然证书是真的，可它代表的网站却是假的。针对这种情况，开发出了 **CRL**（证书吊销列表，Certificate revocation list）和 **OCSP**（在线
+证书状态协议，Online Certificate Status Protocol），及时废止有问题的证书。
+
+还有一种更危险的情况，CA 被黑客攻陷，或者 CA 有恶意，因为它（即根证书）是信任的源头，整个信任链里的所有证书也就都不可信了。因为涉及的证书太多，就**只能操作系统或者浏览器从根上下手了，撤销对 CA 的信任，列入黑名单**，这样它颁发的所有证书就都会被认为是不安全的。
+
+### HTTPS 概述
+
+![](https://qiniu1.lxfriday.xyz/feoffer/e2153928-d0b6-e997-5ae4-21c2dcb08b38.png)
+
+HTTPS => HTTP over SSL/TLS，让 HTTP 运行在了安全的 SSL/TLS 协议上。
+
+SSL 发展到 v3 时已经证明了它自身是一个非常好的安全通信协议，TLS1.0 实际上就是 SSLv3.1。 TLS 已经发展出了三个版本，分别是 2006 年的 1.1、2008 年的 1.2 和 2018 年的 1.3。目前应用的最广泛的 TLS 是 1.2。TLS 由**记录协议**、**握手协议**、**警告协议**、**变更密码规范协议**、**扩展协议**等几个子协议组成，综合使用了**对称加密**、**非对称加密**、**身份认证**等许多密码学前沿技术。
+
 ### HTTPS 原理
+
+## UDP
 
 ## WebSocket
 
