@@ -2838,7 +2838,14 @@ ref
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/dba6f32a-f007-637a-4c7e-347fc9a45014.png)
 
-SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端先向服务器端索要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密。
+缩略来说，握手过程是下面几步：
+
+- 客户端向服务器发送 Client Hello，告诉服务器，我支持的协议版本，加密套件等信息；
+- 服务器收到响应，选择双方都支持的协议，套件，向客户端发送 Server Hello。同时服务器也将自己的证书发送到客户端（Certificate）；
+- 客户端自己生产预主密钥（pre-master-key），通过公钥加密预主秘钥，将加密后的预主秘钥发送给服务器 (Client Exchange)。
+- 服务器用自己的私钥解密加密的预主密钥。
+
+之后，客户端与服务器用相同的算法根据客户端随机数，服务器随机数，预主秘钥生产主密钥，之后的通信内容将都用主密钥加密解密。
 
 **1、客户端发出请求（ClientHello）**
 
@@ -2860,7 +2867,7 @@ SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/dd737f55-c4b8-0aa9-d895-9d0737d85ba3.png)
 
-![](https://qiniu1.lxfriday.xyz/feoffer/a8525b22-90ce-55e9-ff12-522cea5113c3.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/dfe8aa7e-9db6-9af3-c037-d6b74a549967.png)
 
 **3、客户端回应**
 
@@ -2884,6 +2891,10 @@ SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端
 - 服务器握手结束通知（Encrypted Handshake Message），表示服务器的握手阶段已经结束；
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/24abb128-4245-8f37-4c8e-d9e02c390914.png)
+
+建立好连接之后双方开始发送数据，抓包看到的数据都是加密的。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/d307bd74-c096-8d2f-3b79-28f43acf19cc.png)
 
 ### ✔ HTTPS 建立连接时抓包字段详解
 
