@@ -2729,7 +2729,7 @@ RSA 是 1977 年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔�
 
 **ECC**
 
-ECC（Elliptic Curve Cryptography）是非对称加密里的后起之秀，它基于椭圆曲线离散对数的数学难题，使用特定的曲线方程和基点生成公钥和私钥，子算法 ECDHE 用于密钥交换，ECDSA 用于数字签名。
+ECC（Elliptic Curve Cryptography）是非对称加密里的后起之秀，它基于椭圆曲线离散对数的数学难题，使用特定的曲线方程和基点生成公钥和私钥，**子算法 ECDHE 用于密钥交换，ECDSA 用于数字签名**。
 
 ### ✔ 混合加密
 
@@ -2836,6 +2836,8 @@ ref
 - [阮一峰：SSL/TLS 协议运行机制的概述](https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
 - [HTTPS 篇之 SSL 握手过程详解](https://razeencheng.com/post/ssl-handshake-detail)
 
+![](https://qiniu1.lxfriday.xyz/feoffer/dba6f32a-f007-637a-4c7e-347fc9a45014.png)
+
 SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端先向服务器端索要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密。
 
 **1、客户端发出请求（ClientHello）**
@@ -2843,7 +2845,8 @@ SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端
 - 支持的协议版本，比如 TLS 1.2 版；
 - 一个客户端生成的随机数，稍后用于生成**对话密钥**；
 - 支持的加密方法，比如 RSA 公钥加密；
-- 支持的压缩方法；
+- 支持的压缩方法（Compression Methods）；
+- 扩展列表（Extensions）；
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/6580f624-daa0-ae61-237c-b7b65bb9d38c.png)
 
