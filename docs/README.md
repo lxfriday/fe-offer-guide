@@ -2829,29 +2829,21 @@ TLS 包含几个子协议，比较常用的有**记录协议**、**警报协议*
 
 它非常简单，就是一个“通知”，告诉对方，后续的数据都将使用加密保护。那么反过来，在它之前，数据都是明文的。
 
-### ✔ HTTPS 建立连接的过程
+### ✔ HTTPS 建立连接的过程（ECDHE 握手）
 
 ref
 
-- [阮一峰：SSL/TLS 协议运行机制的概述](https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
 - [HTTPS 篇之 SSL 握手过程详解](https://razeencheng.com/post/ssl-handshake-detail)
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/dba6f32a-f007-637a-4c7e-347fc9a45014.png)
 
-缩略来说，握手过程是下面几步：
-
-- 客户端向服务器发送 Client Hello，告诉服务器，我支持的协议版本，加密套件等信息；
-- 服务器收到响应，选择双方都支持的协议，套件，向客户端发送 Server Hello。同时服务器也将自己的证书发送到客户端（Certificate）；
-- 客户端自己生产预主密钥（pre-master-key），通过公钥加密预主秘钥，将加密后的预主秘钥发送给服务器 (Client Exchange)。
-- 服务器用自己的私钥解密加密的预主密钥。
-
-之后，客户端与服务器用相同的算法根据客户端随机数，服务器随机数，预主秘钥生产主密钥，之后的通信内容将都用主密钥加密解密。
+客户端与服务器用相同的算法根据客户端随机数，服务器随机数，预主秘钥生产主密钥，之后的通信内容将都用主密钥加密解密。
 
 **1、客户端发出请求（ClientHello）**
 
 - 支持的协议版本，比如 TLS 1.2 版；
 - 一个客户端生成的随机数，稍后用于生成**对话密钥**；
-- 支持的加密方法，比如 RSA 公钥加密；
+- 支持的加密套件列表（Cipher Suites：TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384、TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256）；
 - 支持的压缩方法（Compression Methods）；
 - 扩展列表（Extensions）；
 
@@ -2861,9 +2853,11 @@ ref
 
 - 确认使用的加密通信协议版本，比如 TLS 1.2 版本，如果浏览器与服务器支持的版本不一致，服务器关闭加密通信；
 - 一个服务器生成的随机数，稍后用于生成**对话密钥**；
-- 确认使用的加密方法，比如 RSA 公钥加密；
-- 服务器证书；
+- 确认使用的加密套件（如 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256）；
 - 压缩方法；
+- 扩展列表；
+- 服务器证书（Certificate）；
+- Server Key Exchange（ECDHE 特色）：其中包含椭圆曲线的公钥（Server Params），用来实现密钥交换算法；
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/dd737f55-c4b8-0aa9-d895-9d0737d85ba3.png)
 
@@ -2873,15 +2867,11 @@ ref
 
 客户端收到服务器回应以后，**首先验证服务器证书**。如果证书**不是可信机构颁布**、或者**证书中的域名与实际域名不一致**、或者**证书已经过期**，就会向访问者显示一个警告，由其选择是否还要继续通信。
 
-如果证书没有问题，客户端就会从证书中取出服务器的公钥。然后，向服务器发送下面三项信息。
-
-- 一个随机数（pre-master-key，这是客户端和服务端握手中出现的第三个随机数）；
+- 客户端按照密码套件的要求，也生成一个椭圆曲线的公钥（Client Params），用 Client Key Exchange 消息发送给服务器（EC Diffie-Hellman Client Params->Pubkey）；
 - 编码改变通知（Change Cipher Spec），表示随后的信息都将用双方商定的加密方法和密钥发送；
 - 客户端握手结束通知（Encrypted Handshake Message），表示客户端的握手阶段已经结束；
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/365fa28b-89f1-0a35-4e63-e43c8ae4064d.png)
-
-> 为什么需要用三个随机数？"不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于 SSL 协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。对于 RSA 密钥交换算法来说，pre-master-key 本身就是一个随机数，再加上 hello 消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。pre master 的存在在于 SSL 协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么 pre master secret 就有可能被猜出来，那么仅适用 pre master secret 作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上 pre master secret 三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。"
 
 **4、服务器的最后回应**
 
@@ -2890,11 +2880,41 @@ ref
 - 编码改变通知（Change Cipher Spec），表示随后的信息都将用双方商定的加密方法和密钥发送；
 - 服务器握手结束通知（Encrypted Handshake Message），表示服务器的握手阶段已经结束；
 
+这一步之后客户端和服务器手里都拿到了密钥交换算法的两个参数（Client Params、Server Params），就用 ECDHE 算法一阵算，算出了一个新的东西，叫**Pre-Master**，其实也是一个**随机数**。
+
+现在客户端和服务器手里有了三个随机数：Client Random、Server Random 和 Pre-Master。用这三个作为原始材料，就可以生成**用于加密会话的主密钥**，叫**MasterSecret**。而黑客因为拿不到**Pre-Master**，所以也就得不到主密钥。
+
+**为什么非要三个随机数呢？**，他们不信任客户端或服务器伪随机数的可靠性，为了保证真正的完全随机不可预测，把三个不可靠的随机数混合起来，那么随机的程度就非常高了，足够让黑客难以猜测。
+
+Master Secret 生成的公式：
+
+```
+master_secret = PRF(pre_master_secret, "master secret", ClientHello.random + ServerHello.random)
+```
+
+PRF 就是伪随机数函数，它基于密码套件里的最后一个参数，比如这次的 SHA256，通过摘要算法来再一次强化 Master Secret 的随机性。
+
+**主密钥有 48 字节，但它也不是最终用于通信的会话密钥，还会再用 PRF 扩展出更多的密钥，比如客户端发送用的会话密钥（client_write_key）、服务器发送用的会话密钥（server_write_key）等等，避免只用一个密钥带来的安全隐患。**
+
 ![](https://qiniu1.lxfriday.xyz/feoffer/24abb128-4245-8f37-4c8e-d9e02c390914.png)
 
 建立好连接之后双方开始发送数据，抓包看到的数据都是加密的。
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/d307bd74-c096-8d2f-3b79-28f43acf19cc.png)
+
+---
+
+因为使用了 ECDHE，客户端可以不用等到服务器发回**Finished**确认握手完毕，立即就发出 HTTP 报文，省去了一个消息往返的时间浪费。这个叫**TLS FalseStart**，意思就是**抢跑**，和**TCP Fast Open**有点像，都是不等连接完全建立就提前发应用数据，提高传输的效率。
+
+### ✔ HTTPS 建立连接的过程（RSA 握手）
+
+ref
+
+- [阮一峰：SSL/TLS 协议运行机制的概述](https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
+
+RSA HTTPS 握手主要是在第二阶段和第三阶段有不同。第二阶段服务端不用发送椭圆曲线公钥和签名，在第三阶段客户端生成 Pre master key 之后用证书加密（Client Key Exchange），发送给服务端，服务端使用这个 pre master key 以及前面两次的随机数来生成主密钥。
+
+大体的流程没有变，只是**Pre-Master**不再需要用算法生成，而是客户端直接生成随机数，然后用服务器的公钥加密，通过**Client Key Exchange**消息发给服务器。服务器再用私钥解密，这样双方也实现了共享三个随机数，就可以生成主密钥。
 
 ### ✔ HTTPS 建立连接时抓包字段详解
 
