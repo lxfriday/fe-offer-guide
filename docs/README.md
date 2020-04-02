@@ -1460,7 +1460,7 @@ TCP 和 UDP 是 OSI 模型中传输层的协议。TCP 的数据是连续的 **�
 
 ## HTTP
 
-## ✔ url、uri、urn
+### ✔ url、uri、urn
 
 ref
 
@@ -1731,6 +1731,77 @@ Date: Wed, 21 Oct 2015 07:28:00 GMT
 ```http
 Age: <delta-seconds>
 ```
+
+### HSTS
+
+HTTP Strict Transport Security（通常简称为 HSTS）是一个安全功能，它告诉浏览器只能通过 HTTPS 访问当前资源，而不是 HTTP。
+
+语法
+
+```http
+Strict-Transport-Security: max-age=<expire-seconds>
+Strict-Transport-Security: max-age=<expire-seconds>; includeSubDomains
+```
+
+- `max-age=<expire-seconds>` 设置在浏览器收到这个请求后的 `<expire-seconds>` 秒的时间内凡是访问这个域名下的请求都使用 HTTPS 请求；
+- `includeSubDomains` 如果这个可选的参数被指定，那么说明此规则也适用于该网站的所有子域名；
+
+`Strict-Transport-Security` 在通过 HTTP 访问时会被浏览器忽略; 因为攻击者可以通过中间人攻击的方式在连接中修改、注入或删除它. 只有在你的网站通过 HTTPS 访问并且没有证书错误时, 浏览器才认为你的网站支持 HTTPS 然后使用 `Strict-Transport-Security` 的值。
+
+你的网站第一次通过 HTTPS 请求，服务器响应 `Strict-Transport-Security` 头，浏览器记录下这些信息，然后后面尝试访问这个网站的请求都会自动把 HTTP 替换为 HTTPS。
+
+当 HSTS 头设置的过期时间到了，后面通过 HTTP 的访问恢复到正常模式，不会再自动跳转到 HTTPS。
+
+每次浏览器接收到 `Strict-Transport-Security` 头，它都会更新这个网站的过期时间，所以网站可以刷新这些信息，防止过期发生。
+
+Chrome、Firefox 等浏览器里，当您尝试访问该域名下的内容时，会产生一个 307 Internal Redirect（内部跳转），自动跳转到 HTTPS 请求。
+
+### CSP
+
+ref
+
+- [内容安全策略( CSP )](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+- [CSP: default-src](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy/default-src)
+
+内容安全策略 (CSP) 是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (XSS) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段（`X-Content-Security-Policy` 是旧版用法 ）。
+
+CSP 的主要目标是减少和报告 XSS 攻击 ，XSS 攻击利用了浏览器对于从服务器所获取的内容的信任。恶意脚本在受害者的浏览器中得以运行，因为浏览器信任其内容来源，即使有的时候这些脚本并非来自于它本该来的地方。
+
+CSP 通过指定有效域——即浏览器认可的可执行脚本的有效来源——使服务器管理者有能力减少或消除 XSS 攻击所依赖的载体。一个 CSP 兼容的浏览器将会仅执行从白名单域获取到的脚本文件，忽略所有的其他脚本 (包括内联脚本和 HTML 的事件处理属性)。
+
+用法
+
+```http
+Content-Security-Policy: policy
+```
+
+你的策略应当包含一个 `default-src` 策略指令，在其他资源类型没有符合自己的策略时应用该策略。一个策略可以包含 `default-src` 或者 `script-src` 指令来防止内联脚本运行, 并杜绝 `eval()` 的使用。 一个策略也可包含一个 `default-src` 或 `style-src` 指令去限制来自一个 `<style>` 元素或者 style 属性的內联样式。
+
+https://home.firefoxchina.cn/ 设置的 CSP 策略
+
+```http
+Content-Security-Policy: default-src 'self' api2.firefoxchina.cn;
+   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://tiny.lishitu.com/open/changeXinzuo  http://a.alimama.cn g.click.taobao.com platform.sina.com.cn suggestion.baidu.com www.baidu.com hm.baidu.com nssug.baidu.com tui.cnzz.net www.google-analytics.com *.googlesyndication.com static.huohu123.com https://www.duba.com/main3_json.html http://www.duba.com/main3_json.html;
+   img-src * data:;
+   child-src 'self' *.firefoxchina.cn  *.17huohu.com;
+   frame-src 'self' *.firefoxchina.cn  *.17huohu.com www.taobao.com entry.baidu.com;
+   frame-ancestors 'self' *.firefoxchina.cn tongji.baidu.com about:;
+   style-src 'self' 'unsafe-inline';
+   font-src 'self' data: ;
+   report-uri /_/csp-reports
+```
+
+**常用指令：**
+
+- `default-src` 可以为其他 CSP 拉取指令提供备选项；
+- `font-src` 定义了 `@font-face` 加载字体的有效源规则；
+- `script-src` 指定加载 JS 代码的途径；
+- `img-src` 指定加载图片的途径；
+- `style-src` 指定加载样式的途径；
+- `frame-src` 直接加载页面内 frame 的途径（iframe）；
+- `report-uri` 指定出现违规状况时上报的地址；
+
+### HTTP header
 
 ### ✔ HTTP 协议版本变迁
 
