@@ -1795,7 +1795,7 @@ Content-Security-Policy: default-src 'self' api2.firefoxchina.cn;
 
 - `default-src` 可以为其他 CSP 拉取指令提供备选项；
 - `font-src` 定义了 `@font-face` 加载字体的有效源规则；
-- `script-src` 指定加载 JS 代码的途径；
+- `script-src` 指定加载 JS 代码的途径，`'unsafe-eval'` 表示可以使用 `eval()`，`'unsafe-inline'` 表示可以使用 `<script>` 内联标签；
 - `img-src` 指定加载图片的途径；
 - `style-src` 指定加载样式的途径；
 - `frame-src` 直接加载页面内 frame 的途径（iframe）；
