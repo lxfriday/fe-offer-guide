@@ -55,7 +55,7 @@ typeof new Date() // object
 typeof /regex/ // object
 typeof new Boolean(true) // object
 typeof new String('abc') // object
-typeof function() {} // function
+typeof function () {} // function
 typeof new Function() // function
 typeof class C {} // function
 
@@ -310,7 +310,7 @@ ref
   <div id="root"></div>
   <script>
     // 这段代码要放在其他js的前面
-    ;(function() {
+    ;(function () {
       var redirect = sessionStorage.redirect
       delete sessionStorage.redirect
       if (redirect && redirect != location.href) {
@@ -397,7 +397,7 @@ imgs.forEach(el => {
 ```javascript
 if (typeof IntersectionObserver !== undefined) {
   const imgObserver = new IntersectionObserver(
-    function(entries) {
+    function (entries) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.src = entry.target.dataset.origin
@@ -428,7 +428,7 @@ if (typeof IntersectionObserver !== undefined) {
 function debounce(func, wait) {
   let timer = null
 
-  return function(...args) {
+  return function (...args) {
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       func(...args)
@@ -531,13 +531,13 @@ target.addEventListener(type, listener, useCapture)
 `addEventListener` 相比 `onXX` ，前者可以对同一事件注册多个监听函数，也可以指定冒泡或者捕获。`addEventListener` 对同一个函数引用无论注册多少次，都只会相当于注册一次，对不同函数引用则会全部注册。
 
 ```javascript
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3')
 })
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3')
 })
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3')
 })
 // 点击一次 box3，打印三次 box3
@@ -593,13 +593,13 @@ box3.addEventListener('click', b3)
 **冒泡**
 
 ```javascript
-box1.addEventListener('click', function(e) {
+box1.addEventListener('click', function (e) {
   console.log('box1')
 })
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2')
 })
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3')
 })
 // 点击 `.box3` 所在的区域时
@@ -613,21 +613,21 @@ box3.addEventListener('click', function(e) {
 ```javascript
 box1.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box1')
   },
   true
 )
 box2.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box2')
   },
   true
 )
 box3.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box3')
   },
   true
@@ -643,15 +643,15 @@ box3.addEventListener(
 ```javascript
 box1.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box1')
   },
   true
 )
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2')
 })
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3')
 })
 // 点击 `.box3` 所在的区域时
@@ -663,20 +663,20 @@ box3.addEventListener('click', function(e) {
 **在同一个目标元素（捕捉和冒泡切换的末端）上注册了冒泡和捕捉两种事件时，先注册的事件先执行**
 
 ```javascript
-box1.addEventListener('click', function(e) {
+box1.addEventListener('click', function (e) {
   console.log('box1')
 })
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2')
 })
 box3.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box3 capture')
   },
   true
 )
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3 bubble')
 })
 // 点击 `.box3` 所在的区域时
@@ -687,18 +687,18 @@ box3.addEventListener('click', function(e) {
 ```
 
 ```javascript
-box1.addEventListener('click', function(e) {
+box1.addEventListener('click', function (e) {
   console.log('box1')
 })
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2')
 })
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   console.log('box3 bubble')
 })
 box3.addEventListener(
   'click',
-  function(e) {
+  function (e) {
     console.log('box3 capture')
   },
   true
@@ -719,7 +719,7 @@ box3.addEventListener(
 `attachEvent` 时间处理函数中的 `this` 对应的是 `window`，不是绑定该事件的元素。
 
 ```javascript
-box1.attachEvent('onclick', function(e) {
+box1.attachEvent('onclick', function (e) {
   console.log('box1')
   console.log(window.event.srcElement)
   console.log(e.srcElement)
@@ -731,7 +731,7 @@ box1.attachEvent('onclick', function(e) {
 在事件监听函数中执行 `e.stopPropagation()`
 
 ```javascript
-box3.addEventListener('click', function(e) {
+box3.addEventListener('click', function (e) {
   e.stopPropagation()
 })
 ```
@@ -750,10 +750,10 @@ ref
 
 ```javascript
 // 点击 box3
-box1.addEventListener('click', function(e) {
+box1.addEventListener('click', function (e) {
   console.log('box1 e.target', e.target)
 })
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2 e.target', e.target)
 })
 ```
@@ -762,10 +762,10 @@ box2.addEventListener('click', function(e) {
 
 ```javascript
 // 点击 box3
-box1.addEventListener('click', function(e) {
+box1.addEventListener('click', function (e) {
   console.log('box1 this', this)
 })
-box2.addEventListener('click', function(e) {
+box2.addEventListener('click', function (e) {
   console.log('box2 this', this)
 })
 ```
@@ -787,7 +787,7 @@ box2.addEventListener('click', function(e) {
 </ul>
 
 <script>
-  ul.addEventListener('click', function(e) {
+  ul.addEventListener('click', function (e) {
     console.log('target', e.target) // li
     console.log('key', e.target.attributes.key.value)
   })
@@ -3039,6 +3039,40 @@ ref
 
 ## UDP
 
+**用户数据报协议**（英语：**User Datagram Protocol**，缩写：**UDP**；又称用户数据包协议）是一个简单的面向数据报的通信协议，位于 OSI 模型的传输层。该协议由 David P. Reed 在 1980 年设计且在 RFC 768 中被规范。典型网络上的众多使用 UDP 协议的关键应用在一定程度上是相似的。
+
+UDP 只提供数据的不可靠传递，它一旦把应用程序发给网络层的数据发送出去，就不保留数据备份（所以 UDP 有时候也被认为是不可靠的数据报协议）。UDP 在 IP 数据报的头部仅仅加入了复用和数据校验字段。
+
+**UDP 适用于不需要在程序中执行错误检查和纠正的应用**，它避免了协议栈中此类处理的开销。对时间有较高要求的应用程序通常使用 UDP，因为丢弃数据包比等待或重传导致延迟更可取。
+
+**UDP 的构成**
+
+![](https://qiniu1.lxfriday.xyz/feoffer/0f546736-a1e3-d1ad-3450-42be69c69598.png)
+
+UDP 头部包含了以下几个数据：
+
+- 两个十六位的端口号，分别为源端口（可选字段）和目标端口；
+- 整个数据报文的长度；
+- 整个数据报文的检验和（IPv4 可选 字段），该字段用于发现头部信息和数据中的错误；
+
+**可靠性**
+
+由于 UDP **缺乏可靠性**且**属于无连接协议**，所以应用程序通常必须容许一些丢失、错误或重复的数据包。某些应用程序（如 TFTP）可能会根据需要在应用程序层中添加基本的可靠性机制。
+
+一些应用程序不太需要可靠性机制，甚至可能因为引入可靠性机制而降低性能，所以它们使用 UDP 这种缺乏可靠性的协议。流媒体，实时多人游戏和 IP 语音（VoIP）是经常使用 UDP 的应用程序。 在这些特定应用中，丢包通常不是重大问题。如果应用程序需要高度可靠性，则可以使用诸如 TCP 之类的协议。
+
+由于 UDP 缺乏拥塞控制，所以需要基于网络的机制来减少因失控和高速 UDP 流量负荷而导致的拥塞崩溃效应。因为 UDP 发送端无法检测拥塞，所以像使用包队列和丢弃技术的路由器之类的网络基础设备会被用于降低 UDP 过大流量。[数据拥塞控制协议](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE)（DCCP）设计成通过在诸如流媒体类型的高速率 UDP 流中增加主机拥塞控制，来减小这个潜在的问题。
+
+### UDP 应用
+
+- [DNS](https://zh.wikipedia.org/wiki/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F) 域名系统，其中查询阶段必须快速，并且只包含单个请求，后跟单个回复数据包；
+- [DHCP](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE) 动态主机配置协议，用于动态分配 IP 地址；
+- [SNMP](https://zh.wikipedia.org/wiki/%E7%AE%80%E5%8D%95%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE) 简单网络管理协议；
+- [RIP](https://zh.wikipedia.org/wiki/%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%8D%8F%E8%AE%AE) 路由信息协议；
+- [NTP](https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E6%99%82%E9%96%93%E5%8D%94%E5%AE%9A) 网络时间协议；
+
+音频、视频、在线游戏流量通常使用 UDP 传输。 实时视频流和音频流应用程序旨在处理偶尔丢失、错误的数据包，因此只会发生质量轻微下降，而避免了重传数据包带来的高延迟。
+
 ## WebSocket
 
 ## ✔ XMLHttpRequest
@@ -3069,14 +3103,14 @@ xhr.open('GET', '/', true)
 console.log('2', codeMap[xhr.readyState])
 xhr.setRequestHeader('accept', 'text/html')
 xhr.responseType = 'text'
-xhr.onprogress = function() {
+xhr.onprogress = function () {
   console.log('onprogress', codeMap[xhr.readyState])
   // console.log('responseText', xhr.responseText) // 已经有部分 response
 }
-xhr.onload = function() {
+xhr.onload = function () {
   console.log('onload', codeMap[xhr.readyState])
 }
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
   console.log('onreadystatechange', codeMap[xhr.readyState])
 }
 xhr.send()
@@ -3191,7 +3225,7 @@ function jsonp({ url, params, cb }) {
   return new Promise((resolve, reject) => {
     let script = document.createElement('script')
     // 把要执行的函数名传递到服务端，服务端回传一个对该函数的调用（同时附带需要处理的参数）
-    window[cb] = function(data) {
+    window[cb] = function (data) {
       resolve(data)
       document.body.removeChild(script)
     }
@@ -3296,9 +3330,9 @@ const wss = new WebSocket.Server({
   port: 3344,
 })
 
-wss.on('connection', function(ws) {
+wss.on('connection', function (ws) {
   console.log('connection')
-  ws.on('message', function(data) {
+  ws.on('message', function (data) {
     console.log('message')
     console.log(data)
     ws.send('hello client')
@@ -3472,7 +3506,7 @@ function simulateInstanceOf(left, right) {
 ### ✔ 手撕 call
 
 ```javascript
-Function.prototype.call = function(ctx, ...args) {
+Function.prototype.call = function (ctx, ...args) {
   ctx = ctx || window
   const that = this
   const funcName = Symbol('func')
@@ -3486,7 +3520,7 @@ Function.prototype.call = function(ctx, ...args) {
 ### ✔ 手撕 apply
 
 ```javascript
-Function.prototype.apply = function(ctx, args) {
+Function.prototype.apply = function (ctx, args) {
   ctx = ctx || window
   const that = this
   const funcName = Symbol('func')
@@ -3500,12 +3534,12 @@ Function.prototype.apply = function(ctx, args) {
 ### ✔ 手撕 bind
 
 ```javascript
-Function.prototype.bind = function(ctx, ...args) {
+Function.prototype.bind = function (ctx, ...args) {
   ctx = ctx || window
   const that = this
   const funcName = Symbol('func')
   ctx[funcName] = that
-  return function(...args1) {
+  return function (...args1) {
     return ctx[funcName](...args, ...args1)
   }
 }
