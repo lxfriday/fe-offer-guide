@@ -3037,7 +3037,7 @@ ref
 
 ​ 扩展块由任意数量的扩展组成。这些扩展会携带额外的数据。扩展可以在不修改协议本身的条件下为 TLS 协议增加功能。
 
-## UDP
+## ✔ UDP
 
 **用户数据报协议**（英语：**User Datagram Protocol**，缩写：**UDP**；又称用户数据包协议）是一个简单的面向数据报的通信协议，位于 OSI 模型的传输层。该协议由 David P. Reed 在 1980 年设计且在 RFC 768 中被规范。典型网络上的众多使用 UDP 协议的关键应用在一定程度上是相似的。
 
@@ -3063,7 +3063,7 @@ UDP 头部包含了以下几个数据：
 
 由于 UDP 缺乏拥塞控制，所以需要基于网络的机制来减少因失控和高速 UDP 流量负荷而导致的拥塞崩溃效应。因为 UDP 发送端无法检测拥塞，所以像使用包队列和丢弃技术的路由器之类的网络基础设备会被用于降低 UDP 过大流量。[数据拥塞控制协议](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE)（DCCP）设计成通过在诸如流媒体类型的高速率 UDP 流中增加主机拥塞控制，来减小这个潜在的问题。
 
-### UDP 应用
+### ✔ UDP 应用
 
 - [DNS](https://zh.wikipedia.org/wiki/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F) 域名系统，其中查询阶段必须快速，并且只包含单个请求，后跟单个回复数据包；
 - [DHCP](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE) 动态主机配置协议，用于动态分配 IP 地址；
@@ -3073,7 +3073,122 @@ UDP 头部包含了以下几个数据：
 
 音频、视频、在线游戏流量通常使用 UDP 传输。 实时视频流和音频流应用程序旨在处理偶尔丢失、错误的数据包，因此只会发生质量轻微下降，而避免了重传数据包带来的高延迟。
 
-## WebSocket
+## ✔ WebSocket
+
+ref
+
+- [维基百科 WebSocket](https://zh.wikipedia.org/wiki/WebSocket)
+- [MDN websocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket/WebSocket)
+- [npm ws](https://www.npmjs.com/package/ws)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/acdfd5e9-d7c2-6b9c-2415-caf38329ff85.png)
+
+WebSockets 是一种网络传输协议，可在单个 TCP 连接上进行全双工通信，位于 OSI 模型的应用层。它可以在用户的浏览器和服务器之间打开交互式通信会话。使用此 API，您可以**向服务器发送消息并接收事件驱动的响应**，而**无需通过轮询服务器**的方式以获得响应。
+
+WebSocket 是一种与 HTTP 不同的协议。两者都位于 OSI 模型的应用层，并且都依赖于传输层的 TCP 协议。RFC 6455 中规定：it is designed to work over HTTP ports 80 and 443 as well as to support HTTP proxies and intermediaries（WebSocket 通过 HTTP 端口 80 和 443 进行工作，并支持 HTTP 代理和中介），从而使其与 **HTTP 协议兼容**。 为了实现兼容性，**WebSocket 握手使用 HTTP Upgrade 头从 HTTP 协议更改为 WebSocket 协议**。
+
+Websocket 使用 ws 或 wss 的统一资源标志符（URI）。其中 wss 表示使用了 TLS 的 Websocket。如：
+
+```
+ws://example.com/wsapi
+wss://secure.example.com/wsapi
+```
+
+Websocket 与 HTTP 和 HTTPS 使用相同的 TCP 端口，可以绕过大多数防火墙的限制。默认情况下，Websocket 协议使用 80 端口；运行在 TLS 之上时，默认使用 443 端口。
+
+### ✔ WebSocket 优点
+
+- 是轮询技术的替代，不会向服务器发送大量请求导致服务器压力，，也不会像 HTTP 请求一样带有较长的头信息；
+- 节省服务器带宽和资源，能够更实时地进行通讯；
+- 全双工，服务器可以随时主动给客户端下发数据；
+- 保持连接状态，与 HTTP 不同的是，Websocket 需要先创建连接，这就使得其成为一种**有状态的协议**，之后通信时可以省略部分状态信息；
+- 更好的二进制支持；
+- 更好的压缩效果。Websocket 在适当的扩展支持下，可以沿用之前内容的上下文，在传递类似的数据时，可以显著地提高压缩率；
+
+### ✔ Websocket 建立连接的过程
+
+ref
+
+- [WebSocket 探秘](https://juejin.im/post/5a1bdf676fb9a045055dd99d)
+
+WebSocket 是独立的、创建在 TCP 上的协议。Websocket 通过 HTTP/1.1 协议的 101 状态码进行握手。为了创建 Websocket 连接，需要通过浏览器发出请求，之后服务器进行回应，这个过程通常称为“握手”（Handshaking）。
+
+一个典型的 Websocket 握手请求如下：
+
+客户端请求：
+
+```http
+GET ws://localhost:3344/ HTTP/1.1
+Host: localhost:3344
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:5000
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7
+Sec-WebSocket-Key: 8UDwnI/irW3PcoG8n8SGbQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: ws
+```
+
+服务器回应：
+
+```http
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: amISaWB8bz9W/ynjGG1IQk1f0c8=
+Sec-WebSocket-Protocol: ws
+```
+
+**字段说明**
+
+- `Connection` 必须设置 `Upgrade`，表示客户端希望连接升级；
+- `Upgrade` 字段必须设置 `Websocket`，表示希望升级到 Websocket 协议；
+- `Sec-WebSocket-Key` 是随机的字符串，服务器端会用这些数据来构造出一个 SHA-1 的信息摘要。把`Sec-WebSocket-Key`加上一个特殊字符串“258EAFA5-E914-47DA-95CA-C5AB0DC85B11”，然后计算 SHA-1 摘要，之后进行 Base64 编码，将结果做为`Sec-WebSocket-Accept`头的值，返回给客户端。如此操作，可以尽量避免普通 HTTP 请求被误认为 Websocket 协议;
+- `Sec-WebSocket-Extensions` 让服务端使用的扩展；
+- `Sec-WebSocket-Protocol` 指定一个或者多个想要使用的 Websocket 协议；
+- `Sec-WebSocket-Accept` 用以告知服务器愿发起一个 websocket 连接；
+- `Sec-WebSocket-Version` 表示支持的 Websocket 版本。RFC6455 要求使用的版本是 `13`，之前草案的版本均应当弃用；
+
+### ✔ 简单地实现 WebSocket 通信
+
+前端页面
+
+```html
+<script>
+  const ws = new WebSocket('ws://localhost:3344', 'ws')
+  ws.onopen = () => {
+    ws.send('hello server')
+  }
+  ws.onmessage = e => {
+    console.log('message ', e.data)
+  }
+</script>
+```
+
+`app.js`
+
+```js
+const WebSocket = require('ws')
+const wss = new WebSocket.Server({
+  port: 3344,
+})
+
+wss.on('connection', function (ws) {
+  console.log('connection')
+  ws.on('message', function (data) {
+    console.log('message')
+    console.log(data)
+    ws.send('hello client')
+    ws.send(JSON.stringify({ name: 'lxfriday' }))
+  })
+})
+console.log('ws listenning 3344')
+```
 
 ## ✔ XMLHttpRequest
 
