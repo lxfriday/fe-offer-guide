@@ -3277,7 +3277,7 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 
 # 性能优化
 
-## 输入一个 URL 到页面显示发生哪些事情
+## 输入 URL 到页面显示发生哪些事情
 
 ref
 
@@ -3293,14 +3293,14 @@ ref
 - 接受响应
 - 渲染页面
 
-**1、URL 解析**
+**一、URL 解析**
 
 - 地址解析：首先判断你输入的是一个合法的 URL 还是一个待搜索的关键词，并且根据你输入的内容进行自动完成、字符编码等操作；
 - HSTS：会使用 HSTS 强制客户端使用 HTTPS 访问页面；
 - 其他操作：安全检查、访问限制（之前国产浏览器限制 996.icu）；
 - 检查 HTTP 缓存；
 
-**2、DNS 查询**
+**二、DNS 查询**
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/v2-4e68ba51d411b26b607307dbd83a97ed_720w.png)
 
@@ -3312,19 +3312,204 @@ ref
 
 ![](https://qiniu1.lxfriday.xyz/Fjw5pRIFReOzeYiHqTG3a8xyCb8D)
 
-## 前端性能优化有哪些方式
+**三、TCP 连接**
+
+TCP/IP 分为四层，在发送数据时，每层都要对数据进行封装。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/bcfe6d8e-261b-758d-91b7-7454aa359f0e.png)
+
+应用层：浏览器会构造一个 HTTP 报文，报文包括请求头和请求体。
+
+传输层：会发起一条到达服务器的 TCP 连接。会经历三次握手阶段。
+
+网络层：IP 协议查询 Mac 地址，将数据段打包，并加入源及目标的 IP 地址，并且负责寻找传输路线。判断目标地址是否与当前地址处于同一网络中，是的话直接根据 Mac 地址发送，否则使用路由表查找下一跳地址，以及使用 ARP 协议查询它的 Mac 地址；
+
+链路层：以太网协议，根据以太网协议将数据分为以“帧”为单位的数据包，每一帧分为两个部分，标头：数据包的发送者、接受者、数据类型；数据：数据包具体内容。
+
+MAC 地址，以太网规定了连入网络的所有设备都必须具备网卡接口，数据包都是从一块网卡传递到另一块网卡，网卡的地址就是 Mac 地址。每一个 Mac 地址都是独一无二的，具备了一对一的能力。
+
+广播，发送数据的方法很原始，直接把数据通过 ARP 协议，向本网络的所有机器发送，接收方根据标头信息与自身 Mac 地址比较，一致就接受，否则丢弃。
+
+**四、服务器处理请求**
+
+![](https://qiniu1.lxfriday.xyz/feoffer/f1b059d0-ad32-e1ae-4f7f-068fdf2d5c4e.png)
+
+**五、浏览器接受响应**
+
+浏览器接收到来自服务器的响应资源后，会对资源进行分析。
+
+首先查看 HTTP Response header，根据不同状态码做不同的事（比如上面提到的重定向）。
+
+如果响应资源进行了压缩（比如 gzip），还需要进行解压。
+
+然后，对响应资源做缓存。
+
+接下来，根据响应资源里的 MIME 类型去解析响应内容（比如 HTML、Image 各有不同的解析方式）。
+
+**六、渲染页面**
+
+常见的浏览器内核：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/dd40da90-a7b8-6988-fc4d-79fbd63fafb8.png)
+
+不同的浏览器内核，渲染过程也不完全相同，但大致流程都差不多。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/bbdb7d84-42f5-b441-9bc6-2f85f4a887d6.png)
+
+1.HTML 解析（DOM）
+
+首先要知道浏览器解析是从上往下一行一行地解析的。
+
+解析的过程可以分为四个步骤：
+
+- 解码：传输回来的其实都是一些二进制字节数据，浏览器需要根据文件指定编码（例如 UTF-8）转换成字符串，也就是 HTML 代码；
+- 预解析：预解析做的事情是提前加载资源，减少处理时间，它会识别一些会请求资源的属性，比如 `img` 标签的 `src` 属性，并将这个请求加到请求队列中；
+- 符号化（Tokenization）：符号化是词法分析的过程，将输入解析成符号，HTML 符号包括，开始标签、结束标签、属性名和属性值；
+- 构建树：符号化和构建树是并行操作的，也就是说只要解析到一个开始标签，就会创建一个 DOM 节点。上一步符号化中，解析器获得这些标记，然后以合适的方法创建 DOM 对象并把这些符号插入到 DOM 对象中；
+
+当整个解析的过程完成以后，浏览器会通过 `DOMContentLoaded` 事件来通知 DOM 解析完成。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/25c0d02b-d937-2b26-edec-3ec7ceaa680f.png)
+
+2. CSS 解析（CSSOM）
+
+一旦浏览器下载了 CSS，CSS 解析器就会处理它遇到的任何 CSS，根据语法规范解析出所有的 CSS 并进行标记化，然后我们得到一个规则表。
+
+CSS 匹配规则：在匹配一个节点对应的 CSS 规则时，是按照**从右到左**的顺序的，例如：`div p { font-size :14px }` 会先寻找所有的 `p` 标签然后判断它的父元素是否为 `div`。
+
+3. 渲染树（RenderTree）
+
+这就是一个 DOM 树和 CSS 规则树合并的过程。渲染树会忽略那些不需要渲染的节点，比如设置了 `display:none` 的节点。
+
+级联：浏览器需要一种方法来确定哪些样式才真正需要应用到对应元素，它会依据 [CSS 优先级](#✔-CSS-选择器优先级)来决定最终应用的样式规则。
+
+渲染阻塞：当遇到一个 script 标签时，DOM 构建会被暂停，直至脚本完成执行，然后继续构建 DOM 树。但如果 JS 依赖 CSS 样式，而它还没有被下载和构建时，浏览器就会延迟脚本执行，直至 CSS Rules 被构建。所以：CSS 会阻塞 JS 执行，JS 会阻塞后面 DOM 解析；为了避免这种情况，应该应用以下办法：CSS 放在 JS 前面，JS 放在 HTML 底部也就是 Body 尾标签之前。
+
+4. 布局与绘制
+
+确定渲染树中所有节点的几何属性，比如：位置、大小等等。
+
+5. 合并渲染层
+
+浏览器会将各层的信息发送给 GPU（GPU 进程：最多一个，用于 3D 绘制等），GPU 会将各层合成（composite），显示在屏幕上。
+
+6. 回流重绘 -> 见[回流重绘](#回流重绘)
+
+7. JavaScript 编译执行
+
+大致分为三个阶段：
+
+1. 词法分析：JS 脚本下载完毕后，先进行词法分析，会先分析代码块的语法是否正确，不正确则抛出错误，停止执行；
+
+   - 分词，例如将 `var a = 2`，分成 `var`、`a`、`=`、`2` 这样的词法单元；
+   - 解析，将词法单元转换成抽象语法树（AST）；
+   - 代码生成，将抽象语法树转换成机器指令；
+
+2. 预编译：JS 有三种运行环境，全局环境、函数环境、eval。每进入一个不同的运行环境都会创建一个对应的执行上下文，根据不同的上下文环境，形成一个函数调用栈，栈底永远是全局执行上下文，栈顶则永远是当前执行上下文。创建执行上下文的过程中，主要做了以下三件事：
+
+   - 创建变量对象；
+   - 建立作用域链；
+   - 确定 This；
+
+3. 执行：虽然 JS 是单线程的，但实际上参与工作的线程一共有四个（其中三个只是协助，只有 JS 引擎线程是真正执行的）。
+   - JS 引擎线程：也叫 JS 内核，负责解析执行 JS 脚本程序的主线程，例如 V8 引擎；
+   - 事件触发线程：属于浏览器内核线程，主要用于控制事件，例如鼠标、键盘等，当事件被触发时，就会把事件的处理函数推进事件队列，等待 JS 引擎线程执行；
+   - 定时器触发线程：主要控制 `setInterval` 和 `setTimeout`，用来计时，计时完毕后，则把定时器的处理函数推进事件队列中，等待 JS 引擎线程；
+   - HTTP 异步请求线程：通过 `XMLHttpRequest` 连接后，通过浏览器新开的一个线程，监控 `readyState` 状态变更时，如果设置了该状态的回调函数，则将该状态的处理函数推进事件队列中，等待 JS 引擎线程执行；
+
+## 前端性能优化技巧
 
 ref
 
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
-# 浏览器及安全
+### 升级协议版本到 HTTP2
 
-## async、defer 的区别及应用
+多路复用，头部压缩。
+
+### DNS-prefetch
+
+### 回流重绘
+
+ref
+
+- [初探浏览器渲染原理](https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&mid=2247483899&idx=1&sn=7c30a7f988b849dcf78c53d31047b53c&chksm=fd3c3d53ca4bb445fb0f2daef575e692ad02de4b15d605577d05261ba626283cb6ca2b6acdcd&mpshare=1&scene=1&srcid=0410RVR6be4t1Afbj3O5W4yT&sharer_sharetime=1586450941057&sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&key=638ad2969ef69dcf11476168c5c3cd0cce26c4f3e4e5132b1573dab7740b10a7e745075955d4771a957e8bba66d6f361c15c3fc94cc01ba68429691caf7684a2dbe58e45929eaaf9feb416d1285cdf75&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=62090045&lang=zh_CN&exportkey=A69%2Fy66UqAKVG8vtwnJza5s%3D&pass_ticket=tQsZ5yMHlUVs7h0lTw%2Ffpm89BwyLVP1sKZHZS6%2BNk7ZECu67WBdy01bMx%2FEgBfv9)
+
+**回流**：DOM 元素的几何尺寸发生变化，如宽高、margin、padding、border、left、top 等发生变化时，浏览器会重新计算元素几何属性，即会触发回流。
+
+除了上面说那些几何属性，`offsetTop`、`offsetLeft`、 `offsetWidth`、`offsetHeight`、`scrollTop`、`scrollLeft`、`scrollWidth`、`scrollHeight`、`clientTop`、`clientLeft`、`clientWidth`、`clientHeight`， 这些属性是经过即时计算得到，也就是说每次调用它们取值时都会触发内部的计算，会导致回流。
+
+当我们调用了 `getComputedStyle` 方法，也会触发回流。原理是一样的，都为求一个“即时性”和“准确性”。
+
+`getComputedStyle(ele)` 会返回元素的所有 CSS 属性：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/f2e2bd87-a1b1-37c0-daf2-8a131e0504bb.png)
+
+**重绘**：不修改 DOM 元素的几何属性，只修改元素的显示效果（背景色、文字颜色、visibility），浏览器不需要重新计算元素的位置和大小，直接重新绘制。
+
+规则：回流一定会触发重绘，重绘不一定触发回流。
+
+回流重绘是不可避免的，因为浏览器需要依据元素属性变化计算出页面最新的视图。由于回流重绘会触发浏览器的大量计算，会消耗资源，频繁地回流重绘就会导致页面出现卡顿。所以优化的策略是要尽可能地减少回流重绘的次数。
+
+---
+
+**优化策略**
+
+**1. 缓存变量**
+
+操作 DOM 时一定要注意不要在循环中频繁地获取 DOM 属性，例如下面，每次循环都要获取一次然后再赋值一次，这其实很没有必要。
+
+```javascript
+for (let i = 0; i < 100000; i++) {
+  // 会不断的获取 innerHTML，设置 innerHTML
+  document.querySelector('#count').innerHTML += '<span>添加内容</span>'
+}
+```
+
+改进之后
+
+```javascript
+let counter = document.querySelector('#count')
+let countText = counter.innerHTML // 获取一次
+for (let i = 0; i < 100000; i++) {
+  count += '<span>添加内容</span>'
+}
+
+// 设置一次
+counter.innerHTML = countText
+```
+
+**2、DocumentFragment**
+
+[DocumentFragment](https://developer.mozilla.org/zh-CN/docs/Web/API/DocumentFragment) 不是真实 DOM 树的一部分，它的变化不会触发 DOM 树的重新渲染，且不会导致性能等问题。
+
+```javascript
+let counter = document.querySelector('#count')
+let counterFragment = document.createDocumentFragment()
+let countText = counter.innerHTML
+for (let i = 0; i < 1000; i++) {
+  const span = document.createElement('span')
+  span.innerHTML = '<span>添加内容</span>'
+  counterFragment.appendChild(span)
+}
+counter.appendChild(counterFragment)
+```
+
+**3、提前命名选择器**
+
+提前命名一个选择器 `.xxx`，用 JS 控制添加选择器或者删除这个选择器。避免一条一条的设定 CSS 属性从而触发频繁的回流重绘。
+
+**4、`display: none`**
+
+使用 `display: none` 将元素先隐藏，然后对元素进行 CSS 设置，最后恢复显示。`display: none` 后容器将不会触发回流重绘。
+
+### async、defer 优化脚本加载和执行
 
 ref
 
 - [https://github.com/xiaoyu2er/blog/issues/8](https://github.com/xiaoyu2er/blog/issues/8)
+
+# 浏览器及安全
 
 ## ✔ 跨域
 
