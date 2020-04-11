@@ -65,15 +65,9 @@ typeof f // function
 
 `typeof null === 'object'` 的原因：在 JavaScript 最初的实现中，JavaScript 中的值是由**一个表示类型的标签和实际数据值表示的**。对象的类型标签是 **0**。由于 `null` 代表的是**空指针**（大多数平台下值为 `0x00`），因此，`null` 的类型标签是 `0`，`typeof null` 也因此返回 `object`。
 
-## ✔ `valueOf` 和 `toString`
-
 ## ES7、8、9、10 新特性
 
 ![ES-7-8-9-10.png](https://qiniu1.lxfriday.xyz/feoffer%2FES-7-8-9-10.png)
-
-## 箭头函数
-
-## class
 
 ## 作用域和作用域链
 
@@ -131,7 +125,7 @@ ref
 
 - [https://juejin.im/post/5d88d68ae51d4561c541a796](https://juejin.im/post/5d88d68ae51d4561c541a796)
 
-## 正则表达式（regexp.exec）
+## 正则表达式
 
 ## flatten 递归把数组扁平化
 
