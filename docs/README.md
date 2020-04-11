@@ -3423,13 +3423,37 @@ ref
 
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
-### 升级协议版本到 HTTP2
+### ✔ 升级协议版本到 HTTP2
 
-多路复用，头部压缩。
+- [多路复用（减少 TCP 握手）](#✔-http-多路复用)
+- [头部压缩](#✔-http2-头部压缩)
 
-### DNS-prefetch
+### ✔ DNS-prefetch
 
-### 回流重绘
+![](https://qiniu1.lxfriday.xyz/feoffer/0d1c8367-38c2-9840-5903-80e0817a2fc2.png)
+
+ref
+
+- [MDN dns-prefetch](https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch)
+- [预加载系列一：DNS Prefetching 的正确使用姿势](https://juejin.im/post/599e35b6f265da24975feaa5)
+
+当浏览器从第三方服务**跨域请求资源**的时候，在浏览器发起请求之前，这个**第三方的跨域域名需要被解析为一个 IP 地址，这个过程就是 DNS 解析，DNS 缓存可以用来减少这个过程的耗时**，DNS 解析可能会增加请求的延迟，对于那些需要请求许多第三方的资源的网站而言，DNS 解析的耗时延迟可能会大大降低网页加载性能。
+
+dns-prefetch 可帮助开发人员处理 DNS 解析延迟问题。 HTML `<link>` 元素通过 dns-prefetch 的 rel 属性值提供此功能。然后在 href 属性中指定跨域域名：
+
+```html
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
+```
+
+每当站点引用跨域域上的资源时，都应在 `<head>` 元素中放置 dns-prefetch 提示，但是要记住一些注意事项。首先，`dns-prefetch` 仅对跨域域上的 DNS 查找有效，对当前页面就没有必要添加了（页面的域名会在加载 html 之前就进行过 DNS 解析）。
+
+**什么场景下需要 DNS prefetch？**
+
+Chrome 会自动把当前页面的所有带 href 的 link 的 dns 都 prefetch 一遍。
+
+需要手动添加 link 标签的场景是：你预计用户在后面的访问中需要用到当前页面的所有链接都不包含的域名。
+
+### ✔ 回流重绘
 
 ref
 
@@ -3445,7 +3469,7 @@ ref
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/f2e2bd87-a1b1-37c0-daf2-8a131e0504bb.png)
 
-**重绘**：不修改 DOM 元素的几何属性，只修改元素的显示效果（背景色、文字颜色、visibility），浏览器不需要重新计算元素的位置和大小，直接重新绘制。
+**重绘**：不修改 DOM 元素的几何属性，只修改元素的显示效果（背景色、文字颜色、[visibility](https://developer.mozilla.org/zh-CN/docs/Web/CSS/visibility)），浏览器不需要重新计算元素的位置和大小，直接重新绘制。
 
 规则：回流一定会触发重绘，重绘不一定触发回流。
 
@@ -3503,11 +3527,86 @@ counter.appendChild(counterFragment)
 
 使用 `display: none` 将元素先隐藏，然后对元素进行 CSS 设置，最后恢复显示。`display: none` 后容器将不会触发回流重绘。
 
-### async、defer 优化脚本加载和执行
+### ✔ async、defer 优化脚本加载和执行
+
+![](https://qiniu1.lxfriday.xyz/feoffer/5e98011d-6bb2-5274-225b-5a4230ca3c5a.png)
 
 ref
 
-- [https://github.com/xiaoyu2er/blog/issues/8](https://github.com/xiaoyu2er/blog/issues/8)
+`defer` 会按照顺序在 `DOMContentLoaded` 前（html parse 之后）按照页面出现顺序依次执行。`async` 则是下载完立即执行（执行时会阻塞 html parse）。
+
+**普通 script**
+
+```html
+<script src="a.js"></script>
+```
+
+浏览器会做如下处理
+
+- 停止解析 `document`；
+- 请求 `a.js`；
+- 执行 `a.js` 中的脚本；
+- 继续解析 `document`；
+
+**async**
+
+```html
+<script src="b.js" async></script>
+<script src="c.js" async></script>
+```
+
+- 下载阶段不阻止解析 `document`, 并行下载 `b.js`， `c.js`；
+- 当脚本下载完后立即执行（执行阶段阻塞 `document` 解析）。（**两者执行顺序不确定**，**执行阶段不确定**，可能在 **DOMContentLoaded** 事件前或者后 ）；
+
+`async` 是加载完就执行，所以 `b.js` 可能在 `c.js` 之前执行，也可能在其之后执行。
+
+**defer**
+
+```html
+<script src="d.js" defer></script>
+<script src="e.js" defer></script>
+```
+
+- 不阻止解析 `document`， 并行下载 `d.js`, `e.js`；
+- 即使下载完 `d.js`，`e.js` 仍继续解析 `document`；
+- **按照页面中出现的顺序**，在其他同步脚本执行后，`DOMContentLoaded` 事件前依次执行 `d.js`，`e.js`；
+
+**其他注意事项**
+
+- 如果 `script` 无 `src` 属性，则 `defer`，`async` 会被忽略；
+- 动态添加的 `script` 标签隐含 `async` 属性，对动态嵌入的脚本使用 `async=false` 来达到 `defer` 的效果；
+
+## DOMContentLoaded 和 load 事件的区别
+
+ref
+
+- [MDN DOMContentLoaded](https://developer.mozilla.org/zh-CN/docs/Web/Events/DOMContentLoaded)
+- [再谈 load 与 DOMContentLoaded](https://juejin.im/post/5b2a508ae51d4558de5bd5d1)
+
+当**初始的 HTML 文档被完全加载和解析完成**之后，`DOMContentLoaded` 事件被触发，而无需等待样式表、图像和子框架的完成加载。注意：**`DOMContentLoaded` 事件必须等待其所属 `script` 之前的样式表加载解析完成才会触发**。
+
+`DOMContentLoaded` 事件在 html 文档加载完毕，并且 html 所引用的**内联 js、以及外链 js 的同步代码都执行完毕后触发**。
+
+`load` 应该仅用于检测一个完全加载的页面，页面完全加载包括：页面中的资源，如样式、图片的完全加载，脚本的加载和执行 。
+
+当页面 DOM 结构中的 js、css、图片，以及 js 异步加载的 js、css 、图片都加载完成之后，才会触发 load 事件。
+
+- 页面中引用的 js 代码如果有异步加载的 js、css、图片，是会影响 load 事件触发的；
+- video、audio、flash 不会影响 load 事件触发；
+
+注意：这两者的监听对象不同
+
+```javascript
+// document
+document.addEventListener('DOMContentLoaded', function (event) {
+  console.log('DOM fully loaded and parsed')
+})
+
+// window
+window.addEventListener('load', function (event) {
+  console.log('All resources finished loading!')
+})
+```
 
 # 浏览器及安全
 
@@ -3788,8 +3887,6 @@ ref
 ## 预加载和懒加载
 
 ## prefetch 和 preload
-
-## onload 和 DOMContentLoaded 的区别和顺序
 
 ## pwa
 

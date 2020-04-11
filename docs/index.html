@@ -6,6 +6,7 @@
     <link type="short-cut/icon" />
     <!-- IE8/9及以后的版本都会以最高版本IE来渲染页面，用来指定IE浏览器去模拟某个特定版本的IE浏览器的渲染方式(如IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF渲染，否则使用最高版本的IE内核进行渲染 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="dns-prefetch" href="https://qiniu1.lxfriday.xyz" />
     <link rel="shortcut icon" href="http://qiniu1.lxfriday.xyz/feoffer/0e3e3db0-15f2-010f-da3c-34708dfe78da.png" type="image/x-icon" />
     <meta name="description" content="面试总结" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
@@ -22,15 +23,15 @@
           '/', // => /README.md
         ],
         plugins: [
-          EditOnGithubPlugin.create('https://github.com/lxfriday/fe-offer-guide/tree/master/docs/', null, function(file) {
+          EditOnGithubPlugin.create('https://github.com/lxfriday/fe-offer-guide/tree/master/docs/', null, function (file) {
             if (file.indexOf('en') === -1) {
               return '编辑'
             } else {
               return 'edit on git'
             }
           }),
-          function(hook, vm) {
-            hook.ready(function() {
+          function (hook, vm) {
+            hook.ready(function () {
               // function debounce(func, wait) {
               //   let timer = null
 
@@ -56,7 +57,7 @@
 
               if (typeof IntersectionObserver !== undefined) {
                 const imgObserver = new IntersectionObserver(
-                  function(entries) {
+                  function (entries) {
                     entries.forEach(entry => {
                       if (entry.isIntersecting) {
                         entry.target.src = entry.target.dataset.origin
