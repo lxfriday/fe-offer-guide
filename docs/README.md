@@ -3283,13 +3283,42 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 
 # 性能优化
 
-## 打开一个 URL 到页面显示发生哪些事情
+## 输入一个 URL 到页面显示发生哪些事情
 
 ref
 
+- [https://zhuanlan.zhihu.com/p/80551769](https://zhuanlan.zhihu.com/p/80551769)
 - [https://zhuanlan.zhihu.com/p/34453198](https://zhuanlan.zhihu.com/p/34453198)
 
-## 前端性能优化最佳实践
+主要的过程分为以下几步：
+
+- URL 解析
+- DNS 查询
+- TCP 连接
+- 处理请求
+- 接受响应
+- 渲染页面
+
+**1、URL 解析**
+
+- 地址解析：首先判断你输入的是一个合法的 URL 还是一个待搜索的关键词，并且根据你输入的内容进行自动完成、字符编码等操作；
+- HSTS：会使用 HSTS 强制客户端使用 HTTPS 访问页面；
+- 其他操作：安全检查、访问限制（之前国产浏览器限制 996.icu）；
+- 检查 HTTP 缓存；
+
+**2、DNS 查询**
+
+![](https://qiniu1.lxfriday.xyz/feoffer/v2-4e68ba51d411b26b607307dbd83a97ed_720w.png)
+
+- 浏览器缓存；
+- 操作系统缓存；
+- 路由器缓存；
+- ISP DNS 缓存；
+- 根域名服务器查询：在前面所有步骤没有缓存的情况下，本地 DNS 服务器会将请求转发到互联网上的根域，下面这个图很好的诠释了整个流程；
+
+![](https://qiniu1.lxfriday.xyz/Fjw5pRIFReOzeYiHqTG3a8xyCb8D)
+
+## 前端性能优化有哪些方式
 
 ref
 
@@ -3298,6 +3327,10 @@ ref
 # 浏览器及安全
 
 ## async、defer 的区别及应用
+
+ref
+
+- [https://github.com/xiaoyu2er/blog/issues/8](https://github.com/xiaoyu2er/blog/issues/8)
 
 ## ✔ 跨域
 
