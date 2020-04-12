@@ -89,6 +89,13 @@ ref
 
 ## 多种继承及其优缺点
 
+## ✔ 箭头函数和普通函数
+
+1. 箭头函数没有自己的 `this`，箭头函数的上下文是在定义时绑定的，`call`、`apply`、`bind` 无法更改其上下文指向；
+1. 箭头函数没有 `prototype` 属性，自然也就不能作为构造函数使用了；
+1. 箭头函数不能作为构造函数（由 2 知道）；
+1. 箭头函数内部没有 `arguments` 变量，想要获取需要通过 `...args`；
+
 ## async、await 及 generator、promise 的关系
 
 ## JS 协程及 async、await
@@ -111,19 +118,112 @@ ref
 
 - [https://juejin.im/post/5dab6dd7e51d457805049b18](https://juejin.im/post/5dab6dd7e51d457805049b18)
 
-## 事件循环
+## ✔ 事件循环
 
 ref
 
-- https://juejin.im/post/5d81bc016fb9a06b084d2acc
+- [JS 事件循环 event loop，前端烧脑一刻](https://juejin.im/post/5d81bc016fb9a06b084d2acc)
+- [详解 JavaScript 中的 Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
 
-+async await
+事件循环涉及到两种类型的任务，**宏任务（macroTask）**和**微任务（microTask）**。
 
-## 节流防抖
+宏任务包括：
 
-ref
+- `process.nextTick`
+- `promise.then`（`new Promise(cb)` 中的 cb 是同步执行的，非微任务，`async`、`await` 是 promise 的语法糖）
 
-- [https://juejin.im/post/5d88d68ae51d4561c541a796](https://juejin.im/post/5d88d68ae51d4561c541a796)
+优先级是 `process.nextTick` > `promise.then`。
+
+微任务包括：
+
+- `setImmediate`
+- `setTimeout`
+- `setInterval`
+
+优先级：`setImmediate` > `setTimeout` = `setInterval`（这里有一个非确定情况，`setImmediate` 和 `setTimeout` 的执行顺序在 nodejs 中不是固定的，在浏览器中`setImmediate`支持度较差）。
+
+**在不同类型宏任务切换的间隙，一旦微任务队列有任务则会把微任务队列先执行完，然后继续执行下一个类型的宏任务队列。（注意是切换的时候，如果已经进入执行阶段是让该类型的宏任务执行完然后检查微任务队列，如果宏任务执行时又加入了同类型的宏任务，则会在下一个循环里面执行）。**
+
+nodejs 事件循环模型：
+
+```
+   ┌───────────────────────────┐
+┌─>│           timers          │ setTimeout setInterval
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │ I/O 除了另外几种之外的几乎所有回调
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │ 内部使用（忽略）
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │<─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │ setImmediate
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │ 类似 socket.on('close', ...) 的 close 回调
+   └───────────────────────────┘
+```
+
+**node 中事件循环与浏览器环境有何不同？**
+
+在 node 中，事件循环表现出的状态与浏览器中大致相同。不同的是 node 中有一套自己的模型。node 中事件循环的实现是依靠的 libuv 引擎。我们知道 node 选择 chrome v8 引擎作为 js 解释器，v8 引擎将 js 代码分析后去调用对应的 node api，而这些 api 最后则由 libuv 引擎驱动，执行对应的任务，并把不同的事件放在不同的队列中等待主线程执行。 因此实际上 node 中的事件循环存在于 libuv 引擎中。
+
+node 中的事件循环的顺序：外部输入数据 --> 轮询阶段(poll) --> 检查阶段(check) --> 关闭事件回调阶段(close callback) --> 定时器检测阶段(timers) --> I/O 事件回调阶段(I/O callbacks) --> 闲置阶段(idle, prepare) --> 轮询阶段...
+
+- timers：这个阶段执行定时器队列中的回调如 `setTimeout()` 和 `setInterval()`；
+- I/O callbacks: 这个阶段执行几乎所有的回调。但是不包括 close 事件，定时器和 `setImmediate()` 的回调；
+- idle, prepare: 这个阶段仅在内部使用；
+- poll: 等待新的 I/O 事件，node 在一些特殊情况下会阻塞在这里；
+- check: `setImmediate()` 的回调会在这个阶段执行；
+- close callbacks: 例如 `socket.on('close', ...)` 这种 close 事件的回调；
+
+做个题目：
+
+```javascript
+console.log('script start')
+
+async function async1() {
+  await async2()
+  console.log('async1 end')
+}
+async function async2() {
+  console.log('async2 end')
+}
+async1()
+
+setTimeout(function () {
+  console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+  console.log('Promise')
+  resolve()
+})
+  .then(function () {
+    console.log('promise1')
+  })
+  .then(function () {
+    console.log('promise2')
+  })
+
+console.log('script end')
+```
+
+打印结果：
+
+```
+script start
+async2 end
+Promise
+script end
+async1 end
+promise1
+promise2
+setTimeout
+```
 
 ## 正则表达式
 
@@ -3527,19 +3627,26 @@ ref
 
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
-1. 升级到 HTTP2
-1. http 缓存
-1. dns-prefetch（dns 预热）
+1. [升级到 HTTP2](#✔-升级协议版本到-HTTP2)
+1. [http 缓存](#✔-HTTP-缓存)
+1. [dns-prefetch（dns 预热）](#✔-DNS-prefetch)
 1. preload（预加载单个资源）
 1. 使用 CDN
-1. 减少回流重绘
-1. async、defer 并行加载脚本
+1. [减少回流重绘](#✔-回流重绘)
+1. [async、defer 并行加载脚本](#✔-async、defer-优化脚本加载和执行)
 1. js 代码拆分（code-spliting）
 1. tree shaking
 1. 图片等静态资源压缩
 1. 开启 gzip、deflat、brotli 压缩
 1. 使用 service worker
-1. 图片懒加载
+1. [图片懒加载](#✔-IntersectionObserver-实现懒加载)
+1. [节流防抖](#节流防抖)
+
+### 节流防抖
+
+ref
+
+- [https://juejin.im/post/5d88d68ae51d4561c541a796](https://juejin.im/post/5d88d68ae51d4561c541a796)
 
 ### ✔ 升级协议版本到 HTTP2
 
@@ -3548,7 +3655,7 @@ ref
 
 ### ✔ 应用 HTTP 缓存
 
-见 [HTTP 缓存](#✔-HTTP-缓存)
+见 [HTTP 缓存]()
 
 ### ✔ DNS-prefetch
 
