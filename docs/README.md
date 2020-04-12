@@ -822,6 +822,12 @@ box2.addEventListener('click', function (e) {
 
 ### flex
 
+ref
+
+- [MDN flex](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+
+CSS 属性 `flex` 规定了弹性元素如何伸长或缩短以适应 flex 容器中的可用空间。这是一个简写属性，用来设置 `flex-grow`， `flex-shrink` 与 `flex-basis`。
+
 ## less sass postcss 的区别及优缺点
 
 ## em rem px rpx dp 单位的区别
@@ -1030,11 +1036,109 @@ ref
 }
 ```
 
-## reflow、repaint
+## ✔ 块级格式化上下文（BFC）
 
-## 外边距折叠（BFC）
+ref
 
-## 清除浮动
+- [这一次终于弄懂了 CSS BFC、清除浮动、外边距折叠](https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&mid=2247483885&idx=1&sn=329d623cd0f6dcbb9788c024a4ed1cd3&chksm=fd3c3d45ca4bb453c8a24ed29f0558763e4050f157d9e3dcd971e8f673a3e23db938477503fd&mpshare=1&scene=1&srcid=04110VTQxAyGp8CEoGSBE7j9&sharer_sharetime=1586589371751&sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&key=8a1773839eeb014af2ada37216476ccde9d409bfa46b9970d49c3634a5f461b23c0cb95dd9134a741d11c9fd37ee381b76edc7f18e03a09546ec265d4c705bb2374e694e066c2cda2b0402c2eea2e02e&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=62090045&lang=zh_CN&exportkey=A7ltid3L7iH5fr0DuZngz%2FM%3D&pass_ticket=fniwo%2BeVmtEQ6J0mXTcjM%2FmVCnaeDHY3TGanPEUOTH0ProYx5lafIbNygWRvEYGd)
+
+块格式化上下文（Block Formatting Context，BFC） 是 Web 页面的可视化 CSS 渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域。
+
+创建 BFC 的 CSS 列为以下几类：
+
+- `html` 根元素；
+- `float`（不为 `none` 即可）: `left`、`right`；
+- `position`: `absolute`、`fixed`；
+- `display`: `inline-block`、`flex`、`inline-flex`、`grid`、`inline-grid`、`table`、`table-cell`、`table-caption`、`flow-root`；
+- `overflow` 值不为 `visible` 的块元素；
+
+创建了 BFC 的元素具有下面的特性：
+
+- 清除浮动只能清除同一 BFC 中在它前面的元素的浮动；
+- 外边距折叠（Margin collapsing）也只会发生在属于同一 BFC 的块级元素之间；
+- BFC 就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然；
+- 计算 BFC 的高度时，考虑 BFC 所包含的所有元素，连浮动元素也参与计算；
+- 浮动盒区域不叠加到 BFC 上；
+
+### ✔ 高度坍塌和清除浮动
+
+高度坍塌是指父元素本来应该包括子元素的高度，但是实际上父元素比子元素的高度要小。
+
+```html
+<style>
+  .container {
+    margin-left: 50px;
+    background: red;
+  }
+  .box1 {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+  }
+  .box2 {
+    width: 400px;
+    height: 100px;
+    background: cyan;
+  }
+</style>
+<div class="container">
+  <div class="box1"></div>
+  <div class="box2"></div>
+</div>
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/0d4fad1c-1008-bf54-42dc-31a3deeb5497.png)
+
+1、box1 浮动之后，父元素的高度就坍塌了，解决办法是让父元素触发 BFC ，这样 BFC 内的元素就无法影响到外面了，给 container 加上 `overflow: auto;` 即可。加上之后变成这样了。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/edd6be82-0fc6-b05e-2490-fa362e591d48.png)
+
+2、也可以通过给 container 添加 `::after` 伪元素，清除左右浮动来防止坍塌。
+
+```css
+.container::after {
+  content: '';
+  display: block; /* 不能少 */
+  clear: left;
+}
+```
+
+3、还可以通过在父元素的最后添加一个块级元素并清除浮动。
+
+```html
+<div class="container">
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div style="clear: both;"></div>
+</div>
+```
+
+4、图中有另外一个问题是 box2 被 box1 盖住了一部分，**这是因为 box1 浮动起来了**，显然只需要清除浮动即可。使用 BFC 清除，对应的规则是**浮动盒区域不叠加到 BFC 上，给 box2 添加 `overflow: auto;` 之后显示正常**。
+
+### ✔ 外边距折叠
+
+块级元素的上外边距和下外边距有时会合并（或折叠）为一个外边距，其大小取其中的最大者，这种行为称为外边距折叠（margin collapsing），有时也翻译为外边距合并。注意浮动元素和绝对定位元素的外边距不会折叠。
+
+外边距折叠的基本情况：
+
+**相邻元素之间**：毗邻的两个元素之间的外边距会发生折叠。
+
+**父元素与其第一个或最后一个子元素之间**：如果在父元素与其第一个子元素之间不存在边框、内边距、行内内容，也没有创建块格式化上下文、或者清除浮动将两者的 margin-top 分开；或者在父元素与其最后一个子元素之间不存在边框、内边距、行内内容、height、min-height、max-height 将两者的 margin-bottom 分开，那么这两对外边距之间会产生折叠。此时子元素的外边距会“溢出”到父元素的外面。
+
+消除外边距折叠的方法：
+
+- 父元素添加边框（`border`）；
+- 父元素添加内边距（`padding`）；
+- 父子元素之间存在行内元素 `<span>`、匿名元素；
+- 父子元素之间存在触发 BFC 的元素（插入一个 `display: flex` 的块级元素）；
+- 父元素触发 BFC（`overflow: auto;` 等）；
+
+外边距折叠的一些规则：
+
+- 即使某一外边距为 0，这些规则仍然适用。因此就算父元素的外边距是 0，第一个或最后一个子元素的外边距仍然会“溢出”到父元素的外面；
+- 如果参与折叠的外边距中包含负值，折叠后的外边距的值为最大的正边距与最小的负边距（即绝对值最大的负边距）的和；
+- 如果所有参与折叠的外边距都为负，折叠后的外边距的值为最小的负边距的值；
 
 ## ✔ CSS 选择器优先级
 
@@ -3423,10 +3527,28 @@ ref
 
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
+1. 升级到 HTTP2
+1. http 缓存
+1. dns-prefetch（dns 预热）
+1. preload（预加载单个资源）
+1. 使用 CDN
+1. 减少回流重绘
+1. async、defer 并行加载脚本
+1. js 代码拆分（code-spliting）
+1. tree shaking
+1. 图片等静态资源压缩
+1. 开启 gzip、deflat、brotli 压缩
+1. 使用 service worker
+1. 图片懒加载
+
 ### ✔ 升级协议版本到 HTTP2
 
 - [多路复用（减少 TCP 握手）](#✔-http-多路复用)
 - [头部压缩](#✔-http2-头部压缩)
+
+### ✔ 应用 HTTP 缓存
+
+见 [HTTP 缓存](#✔-HTTP-缓存)
 
 ### ✔ DNS-prefetch
 
