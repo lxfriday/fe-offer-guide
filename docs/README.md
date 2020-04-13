@@ -65,7 +65,7 @@ typeof f // function
 
 `typeof null === 'object'` 的原因：在 JavaScript 最初的实现中，JavaScript 中的值是由**一个表示类型的标签和实际数据值表示的**。对象的类型标签是 **0**。由于 `null` 代表的是**空指针**（大多数平台下值为 `0x00`），因此，`null` 的类型标签是 `0`，`typeof null` 也因此返回 `object`。
 
-## ES7、8、9、10 新特性
+## ✔ ES7、8、9、10 新特性
 
 ![ES-7-8-9-10.png](https://qiniu1.lxfriday.xyz/feoffer%2FES-7-8-9-10.png)
 
@@ -87,13 +87,13 @@ ref
 
 ## 闭包原理及其危害
 
-## 多种继承及其优缺点
+## ✔ 多种继承及其优缺点
 
 ref
 
 - [JavaScript 深入之继承的多种方式和优缺点](https://juejin.im/post/591523588d6d8100585ba595)
 
-### 原型链继承
+### ✔ 原型链继承
 
 ```javascript
 function Parent() {
@@ -120,7 +120,7 @@ const child2 = new Child()
 - 引用类型的属性被所有实例共享；
 - 在创建 `Child` 的实例时，不能向 `Parent` 传参；
 
-### 借用构造函数继承（经典继承）
+### ✔ 借用构造函数继承（经典继承）
 
 ```javascript
 function Parent() {
@@ -148,7 +148,7 @@ console.log(child2.names) /// names => ['lxfriday', 'bob']
 
 - 方法都在构造函数中定义，每次创建实例都会创建一遍方法；
 
-### 组合继承
+### ✔ 组合继承
 
 ```javascript
 function Parent(name) {
@@ -184,7 +184,7 @@ const child2 = new Child('daisy', 20)
 
 优点：融合原型链继承和构造函数的优点，是 JavaScript 中最常用的继承模式。
 
-### 原型式继承
+### ✔ 原型式继承
 
 ```javascript
 function createObj(o) {
@@ -212,7 +212,7 @@ p1.friends.push('bob')
 
 - 引用类型的属性被所有实例共享；
 
-### 寄生式继承
+### ✔ 寄生式继承
 
 ```javascript
 function createObj(o) {
@@ -229,7 +229,7 @@ function createObj(o) {
 - 每次创建对象都会重复创建方法；
 - 共享引用型变量；
 
-### 寄生组合继承
+### ✔ 寄生组合继承
 
 ```javascript
 // 以 o 为原型创建一个对象
