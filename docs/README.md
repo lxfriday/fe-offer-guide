@@ -83,9 +83,72 @@ ref
 
 ## 作用域提升
 
-## this 原理
+## this（如何确定 this 的指向）
 
-## 闭包原理及其危害
+ref
+
+- [https://www.zhihu.com/question/19636194/answer/12504495](https://www.zhihu.com/question/19636194/answer/12504495)
+
+`this` 对象只会在一个函数中需要确定，如果是在全局域下，`this` 永远为 Global 对象，在浏览器中通常就是 `window` 对象。而在 javascript 中，函数的调用一共有 4 种方式：
+
+**Function Invocation Pattern**
+
+诸如 `foo()` 的调用形式被称为 Function Invocation Pattern，是函数最直接的使用形式，注意这里的 `foo` 是作为单独的变量出现，而不是属性。**在这种模式下，`foo` 函数体中的 `this` 永远为 Global 对象，在浏览器中就是 window 对象**。
+
+**Method Invocation Pattern**
+
+诸如 `foo.bar()` 的调用形式被称为 Method Invocation Pattern，注意其特点是**被调用的函数作为一个对象的属性**出现，必然会有 `.` 或者 `[]` 这样的关键符号。在这种模式下，`bar` 函数体中的 `this` 永远为 `.` 或 `[` 前的那个对象，如上例中就一定是 `foo` 对象。
+
+**Constructor Pattern**
+
+`new foo()` 这种形式的调用被称为 Constructor Pattern，其关键字 `new` 就很能说明问题，非常容易识别。在这种模式下，`foo` 函数内部的 `this` 永远是 `new foo()` 返回的对象。
+
+**Apply Pattern**
+
+`foo.call(thisObject)` 和 `foo.apply(thisObject)` 的形式被称为 Apply Pattern，使用了内置的 `call` 和 `apply` 函数。在这种模式下，`call` 和 `apply` 的第一个参数就是 `foo` 函数体内的 `this`，如果 `thisObject` 是 `null` 或`undefined`，那么会变成 Global 对象。
+
+**另外，this 是永远不会延作用域链或原型链出现一个查找的过程的，只会在函数调用时就完全确认。**
+
+以下情况需要注意：
+
+**箭头函数在设计中使用的是 Lexical this，即这个函数被创建时的 this 就是函数内部的 this**。
+
+需要注意的是，这个函数创建时并不是一个读代码的人肉眼能看到这个函数的时候，很多人有这样的误解，比如这样的代码：
+
+```javascript
+function printThis() {
+  let print = () => console.log(this)
+
+  print()
+}
+
+printThis.call([1])
+printThis.call([2])
+```
+
+打印的结果是：
+
+```
+// [1]
+// [2]
+```
+
+> 有些人会理解都一样，输出的是 Window，因为看到 print 函数的时候是顶级作用域。**但其实 print 函数是在 printThis 被调用的时候才会被创建的**，而 printThis 的 this 由外部的 call 决定着，所以输出自然是[1]和[2]。
+
+## ✔ 闭包原理及其优缺点
+
+![](https://qiniu1.lxfriday.xyz/feoffer/d3319e98-d131-d026-620d-88d71d066477.png)
+
+**闭包就是指有权访问另一个函数作用域中的变量的函数。这意味着即使外层函数执行完成了闭包也可以记住并访问外层函数的变量和参数。**
+
+闭包的作用：
+
+- 设计私有的方法和变量：任何在函数中定义的变量，都可以认为是私有变量，因为不能在函数外部访问这些变量。私有变量包括函数的参数、局部变量和函数内定义的其他函数；
+- 在外层函数执行结束返回结果之后，仍然可以通过闭包获取到内部的变量；
+
+闭包缺点：
+
+- 常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露；
 
 ## ✔ 多种继承及其优缺点
 
@@ -276,6 +339,11 @@ const child1 = new Child('lxfriday', 100)
 
 - `Parent` 只会调用一次；
 - 继承的最终解决方案；
+
+### ES6 extends
+
+```javascript
+```
 
 ## ✔ 箭头函数和普通函数
 
