@@ -89,6 +89,194 @@ ref
 
 ## 多种继承及其优缺点
 
+ref
+
+- [JavaScript 深入之继承的多种方式和优缺点](https://juejin.im/post/591523588d6d8100585ba595)
+
+### 原型链继承
+
+```javascript
+function Parent() {
+  this.names = ['lxfriday', 'bob']
+}
+
+Parent.prototype.getNames = function () {
+  console.log(this.names)
+}
+
+function Child() {}
+
+// 原型链继承
+Child.prototype = new Parent()
+
+// 原型上的 names 指向上面 new Parent() 中的 names
+// 这个 names 对所有 child 都只有一份引用
+const child1 = new Child()
+const child2 = new Child()
+```
+
+缺点：
+
+- 引用类型的属性被所有实例共享；
+- 在创建 `Child` 的实例时，不能向 `Parent` 传参；
+
+### 借用构造函数继承（经典继承）
+
+```javascript
+function Parent() {
+  this.names = ['lxfriday', 'bob']
+}
+
+function Child() {
+  Parent.call(this)
+}
+
+const child1 = new Child()
+const child2 = new Child()
+
+child1.names.push('john') // names => ['lxfriday', 'bob', 'john']
+
+console.log(child2.names) /// names => ['lxfriday', 'bob']
+```
+
+优点：
+
+- 避免引用类型的属性被所有实例共享；
+- 可以在 `Child` 中向 `Parent` 传参；
+
+缺点：
+
+- 方法都在构造函数中定义，每次创建实例都会创建一遍方法；
+
+### 组合继承
+
+```javascript
+function Parent(name) {
+  this.name = name
+  this.colors = ['red', 'blue', 'green']
+}
+
+Parent.prototype.getName = function () {
+  console.log(this.name)
+}
+
+function Child(name, age) {
+  // 继承内部属性
+  Parent.call(this, name)
+  this.age = age
+}
+
+// 继承原型链属性
+Child.prorotype = new Parent()
+
+const child1 = new Child('kevin', 18)
+
+child1.colors.push('black')
+// child1.age => 18
+// child1.colors => ["red", "blue", "green", "black"]
+// child1.name => "kevin"
+
+const child2 = new Child('daisy', 20)
+// child2.age => 20
+// child2.colors => ["red", "blue", "green"]
+// child2.name => "daisy"
+```
+
+优点：融合原型链继承和构造函数的优点，是 JavaScript 中最常用的继承模式。
+
+### 原型式继承
+
+```javascript
+function createObj(o) {
+  function F() {}
+  F.prototype = 0
+  return new F()
+}
+
+const person = {
+  name: 'kevin',
+  friends: ['daisy', 'kelly'],
+}
+
+const p1 = createObj(person)
+const p2 = createObj(person)
+
+p1.name = 'person1'
+// p2.name => 'kevin'
+
+p1.friends.push('bob')
+// p1.friends => ['daisy', 'kelly', 'bob']
+```
+
+缺点：
+
+- 引用类型的属性被所有实例共享；
+
+### 寄生式继承
+
+```javascript
+function createObj(o) {
+  const clone = Object.create(o)
+  clone.sayName = function () {
+    console.log('hello')
+  }
+  return clone
+}
+```
+
+缺点：
+
+- 每次创建对象都会重复创建方法；
+- 共享引用型变量；
+
+### 寄生组合继承
+
+```javascript
+// 以 o 为原型创建一个对象
+function object(o) {
+  function F() {}
+  F.prototype = o
+  return new F()
+}
+
+// 把 child.prototype 指向 parent 的实例
+function prototype(child, parent) {
+  const proto = object(parent.prototype)
+  proto.constructor = child
+  child.prototype = proto
+}
+
+function Parent(name) {
+  console.log('name', name)
+  this.name = name
+  this.colors = ['red', 'blue', 'green']
+}
+
+Parent.prototype.getName = function () {
+  console.log(this.name)
+}
+
+function Child(name, age) {
+  // 从 Parent 中构造 this
+  // 从 Child 中给 this 增加属性
+  Parent.call(this, name)
+  this.age = age
+}
+
+prototype(Child, Parent)
+const child1 = new Child('lxfriday', 100)
+// child1.age => 100
+// child1.colors => ["red", "blue", "green"]
+// child1.name => "lxfriday"
+```
+
+封装 `object` + `prototype` 的目的是为了得到一个 `Parent` 的实例，并让 `Child.prototype` 指向这个实例，同时在整个继承过程中让 `Parent` 只调用一次。
+
+优点：
+
+- `Parent` 只会调用一次；
+- 继承的最终解决方案；
+
 ## ✔ 箭头函数和普通函数
 
 1. 箭头函数没有自己的 `this`，箭头函数的上下文是在定义时绑定的，`call`、`apply`、`bind` 无法更改其上下文指向；
@@ -105,7 +293,7 @@ ref
 
 协程是一种比线程更加轻量级的存在，可以看成是跑在线程上的任务。就像一个进程可以有多个线程一样，一个线程也可以有多个协程。
 
-但是，线程上同时只能执行一个协程。比如：当前执行的是 A 协程，要启动 B，就需要将主线程的控制权交给 B 协程；A 暂停执行，B 恢复执行。通常，如果从 A 协程启动 B 协程，我们就把 A 协程称为 B 协程的父协程。
+但是，线程上同时只能执行一个协程。比如：当前执行的是 A 协程，要启动 B，就需要将主线程的控制权交给 B 协程；A 暂停执行，B 恢复执行。通常，**如果从 A 协程启动 B 协程，我们就把 A 协程称为 B 协程的父协程**。
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/88470e2a-a8f7-34ae-b7ac-e43837a494b4.png)
 
@@ -182,7 +370,7 @@ console.log('script end')
 输出如下
 
 ```
-scritp start
+script start
 bar start
 foo
 promise executor
