@@ -96,9 +96,101 @@ ref
 1. 箭头函数不能作为构造函数（由 2 知道）；
 1. 箭头函数内部没有 `arguments` 变量，想要获取需要通过 `...args`；
 
-## async、await 及 generator、promise 的关系
+## ✔ JS 协程及 async、await
 
-## JS 协程及 async、await
+ref
+
+- [async 和 await 是怎么工作的？——你不知道的生成器与协程](https://juejin.im/post/5d8724f4e51d453b7779d60a)
+- [Node.js 真的有协程吗？](https://www.zhihu.com/question/305443189/answer/551716136)
+
+协程是一种比线程更加轻量级的存在，可以看成是跑在线程上的任务。就像一个进程可以有多个线程一样，一个线程也可以有多个协程。
+
+但是，线程上同时只能执行一个协程。比如：当前执行的是 A 协程，要启动 B，就需要将主线程的控制权交给 B 协程；A 暂停执行，B 恢复执行。通常，如果从 A 协程启动 B 协程，我们就把 A 协程称为 B 协程的父协程。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/88470e2a-a8f7-34ae-b7ac-e43837a494b4.png)
+
+- 通过调用 `gen.next` 可以使协程执行；
+- 通过 `yield` 关键字来暂停 `gen` 协程的执行，并返回主要信息给父协程；
+- 若在执行期间遇到 `return`，JS 引擎会结束当前协程并将 `return` 后的内容返回给父协程；
+
+父协程与 `gen` 协程都有自己的调用栈，当控制权通过 `yield` 与 `gen.next` 互相切换时，V8 是如何切换调用栈的？
+
+`gen` 中调用 `yield` 时，JS 引擎会保存 `gen` 协程当前的调用栈信息并恢复父协程的调用栈信息。同理，父协程中执行 `gen.next` 时，JS 引擎会保存父协程调用栈信息并恢复 `gen` 协程的调用栈信息。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/e11ef84a-134c-3fbf-af83-b925bf014029.png)
+
+**async、await**
+
+`async` 是一个通过异步执行并隐式返回 `Promise` 作为结果的函数。
+
+```javascript
+async function foo() {
+  console.log(1)
+  let a = await 100
+  console.log(a)
+  console.log(2)
+}
+console.log(0)
+foo()
+console.log(3)
+// 输出 0 1 3 100 2
+```
+
+执行流程如下
+
+![](https://qiniu1.lxfriday.xyz/feoffer/9c8c8d6e-d6dc-11d3-1bfc-54427f0607cb.png)
+
+执行到 `await 100` 时，会创建一个 Promise 对象，
+
+```javascript
+let promise_ = new Promise((resolve, reject) => {
+  resolve(100)
+})
+```
+
+JS 引擎会将该任务提交到微任务队列，然后暂停当前协程的执行，将主线程的控制权转交给父协程执行，同时将 `promise_` 对象返回给父协程(如下)。
+
+主线程控制权交给父协程后，父协程调用 `promise_.then` 来获取状态的改变。
+
+接下来执行父协程的流程，打印出 `3`。随后父协程将执行结束，在结束前，进入微任务的检查点去执行微任务队列，微任务队列中有 `resolve(100)` 等待执行，执行到这里时，会触发 `promise_.then` 中的回调函数。
+
+`foo` 协程激活后，将 `value` 的值给了变量 `a`，然后继续执行后面语句，执行完成，将控制权归还给父协程。
+
+```javascript
+async function foo() {
+  console.log('foo')
+}
+async function bar() {
+  console.log('bar start')
+  await foo()
+  console.log('bar end')
+}
+console.log('script start')
+setTimeout(() => {
+  console.log('setTimeout')
+}, 0)
+bar()
+new Promise(resolve => {
+  console.log('promise executor')
+  resolve()
+}).then(() => {
+  console.log('promise then')
+})
+console.log('script end')
+```
+
+输出如下
+
+```
+scritp start
+bar start
+foo
+promise executor
+script end
+bar end
+promise then
+setTimeout
+```
 
 ## Proxy
 
