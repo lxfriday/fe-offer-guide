@@ -2163,6 +2163,8 @@ ref
 
 - [https://webpack.js.org/loaders](https://webpack.js.org/loaders)
 
+---
+
 - `babel-loader` 加载 ES2015+ 代码，并使用 Babel 转换成 ES5 代码；
 - `style-loader` 把 CSS 注入到 DOM 中；
 - `css-loader` 解析 CSS 代码，找出 CSS 中依赖的资源、压缩 CSS、输出 sourcemap 等；
@@ -2185,6 +2187,25 @@ ref
 
 自己本地写的 Loader 测试的时候可以通过 npm link 从 node_modules 加载，最方便的是配置 `resolveLoader` 属性来扩展 loader 加载的目录。
 
+Loader 需要返回数据，返回数据有两种形式：
+
+1、通过 `return` 返回。
+
+2、通过 `this.callback` 返回，`this.callback` 使用方法如下。
+
+```javascript
+this.callback(
+    // 当无法转换原内容时，给 Webpack 返回一个 Error
+    err: Error | null,
+    // 原内容转换后的内容
+    content: string | Buffer,
+    // 用于把转换后的内容得出原内容的 Source Map，方便调试
+    sourceMap?: SourceMap,
+    // 如果本次转换为原内容生成了 AST 语法树，可以把这个 AST 返回，
+    // 以方便之后需要 AST 的 Loader 复用该 AST，以避免重复生成 AST，提升性能
+    abstractSyntaxTree?: AST
+);
+```
 ![](https://qiniu1.lxfriday.xyz/feoffer/cc177795-bae0-6cd1-432a-287c5beae476.png)
 ![](https://qiniu1.lxfriday.xyz/feoffer/f7f45982-58b7-8697-1f54-37f157d35219.png)
 
@@ -2207,6 +2228,9 @@ module.exports = function (source) {
   console.log(marked(source))
   console.log('------------------')
   return marked(source)
+
+  // 或者使用 this.callback
+  // this.callback(null, marked(source))
 }
 ```
 
