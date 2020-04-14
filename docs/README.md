@@ -142,17 +142,149 @@ LexicalEnvironment = {
 
 **JavaScript 引擎使用词法作用域，这意味着变量的作用域在编译时确定。JavaScript 引擎使用词法环境在程序执行期间存储变量。**
 
-## 作用域提升
-
-## JS 执行上下文
+## ✔ 变量提升
 
 ref
 
-- [https://segmentfault.com/a/1190000005654451](https://segmentfault.com/a/1190000005654451)
+- [一文读懂现代 JavaScript 中的变量提升 - let、const 和 var](https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&mid=2247483928&idx=1&sn=8a9900ad8fbf5a8861166e721840806c&chksm=fd3c3eb0ca4bb7a6b1e92ae4e4e4bd71f8e7c837ece1b29b0e89ed09bdd278f46a25d6aa4341&token=1491323947&lang=zh_CN#rd)
+
+变量提升是指在**编译阶段**，即在代码执行前的几微秒内，将对其进行扫描以查找**函数**和**变量声明**。所有这些函数和变量声明都添加到内存中称为**词法环境**的 JavaScript 数据结构内部。这样，**即使在源代码中实际声明它们之前也可以使用它们**。
+
+词法环境是用来保存标识符和变量映射关系的地方。标识符是变量或者函数的名字，变量是对实际对象（包括函数对象和数组对象）或者原始值的引用。词法环境的结构如下：
+
+```
+LexicalEnvironment = {
+  EnvironmentRecord: {
+    Type: "Declarative",
+    // Identifier bindings go here
+  }
+  outer: <Global or outer function environment reference>,
+  this: <depends on how function is called>
+}
+```
+
+- `EnvironmentRecord` 表示在当前作用域内定义的变量；
+- `outer` 指向定义时外层函数的词法环境；
+- `this` 取决于函数怎么调用；
+
+### ✔ 函数声明提升
+
+`function` 声明的函数会被整体提升。
+
+```javascript
+helloWorld() // prints 'Hello World!' to the console
+function helloWorld() {
+  console.log('Hello World!')
+}
+```
+
+函数声明是在编译阶段添加到内存的，因此我们可以在实际函数声明之前在代码中对其进行访问。
+
+**函数表达式不提升**，JavaScript 引擎只会提升函数声明，并不会提升函数表达式。由于 JavaScript 仅提升声明，而不赋值，`helloWorld` 会被视为变量而不是函数。因为 `helloWorld` 是一个 `var` 声明的变量，所以在提升阶段引擎将会给它赋值 `undefined`，所以上述代码会报错。
+
+```javascript
+helloWorld() // TypeError: helloWorld is not a function
+var helloWorld = function () {
+  console.log('Hello World!')
+}
+```
+
+### ✔ var 变量提升
+
+JavaScript 仅是提升声明，**并不会提升赋值操作**。在编译期间，JavaScript 仅将**函数**和**变量声明**存储在内存中，并没把赋值操作也一起提升，而 **function 声明的函数会被整体提升**。
+
+当 JavaScript 引擎在编译阶段找到一个 `var` 变量声明时，它会把该变量添加到词法环境中，并给它赋值 `undefined` 作为初始值，然后当代码执行到赋值语句时，会把实际的值赋到词法环境中对应的变量。
+
+```javascript
+console.log(a) // outputs 'undefined'
+var a = 3
+```
+
+### ✔ let 和 const 的提升
+
+所有声明（`function`，`var`，`let`，`const` 和 `class`）都会提升，而 `var` 声明会被初始化为 `undefined`，但是 **`let` 和 `const` 声明保持未初始化 `uninitialized`**。
+
+**只有当 JavaScript 事实上执行过了声明语句之后，它们才会被初始化，JS 引擎做了限制，你不能在初始化它们之前就使用它们。这也就是我们说的暂时性死区。**
+
+如果 JavaScript 引擎在声明它们的行上仍找不到 `let` 或 `const` 的值，它将为它们分配 `undefined` 或返回错误（如果为 const）。
+
+```javascript
+console.log(a) // 报错 Uncaught ReferenceError: Cannot access 'a' before initialization。
+let a = 3
+```
+
+由于 `const` 声明的变量是不可改变的，所以声明的时候没有赋值将会直接报错。
+
+```javascript
+const ast
+// VM275:1 Uncaught SyntaxError: Missing initializer in const declaration
+```
+
+### ✔ class 声明提升
+
+`class` 是 ES6 中出现的一个关键字，它也会提升，方式和 `let` `const` 一致，也会产生暂时性死区，它在初始情况下也是未初始化的，直到执行赋值。
+
+```javascript
+// Uncaught ReferenceError: Cannot access 'Person' before initialization
+let peter = new Person('Peter', 25)
+console.log(peter)
+class Person {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+}
+```
+
+## ✔ 执行上下文
+
+ref
+
+- [理解 JavaScript 中的执行上下文](https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&mid=2247483911&idx=1&sn=2922e6dc26a8aed4ec733c5ec0a24696&chksm=fd3c3eafca4bb7b9cf15b43f3abedc270f6e18a0942364448a42862766c1bde7c42eb0cc61b9&token=1816422279&lang=zh_CN#rd)
+
+执行上下文是一个 JavaScript 代码运行的环境。任何 JavaScript 代码执行的时候都是处于一个执行上下文中。
+
+JavaScript 中一共有三种执行上下：
+
+- 全局执行上下文(Global)：它是默认的基本执行上下文。代码要么在全局执行上下文要么在函数执行上下文。它有两个特征：它会创建一个全局对象（在浏览器中就是 `window`）并且会把 `this` 设置为全局对象 `window`。在一个程序中只会有一个全局执行上下文；
+- 函数执行上下文：当函数执行的时候，一个新的函数执行上下文就会创建。每个函数都有自己的执行上下文，当函数执行的时候上下文会被创建。函数执行上下文可以创建任意多个，每个执行上下文被创建的时候会经历若干步骤，接下来将会讨论；
+- `eval` 函数执行上下文：在 `eval` 函数中执行的代码也会有自己的自行上下文，但由于 `eval` 已经不常用了，所以不做讨论；
+
+### ✔ 执行栈
+
+执行栈（执行上下文栈），在其他编程语言中也叫调用栈，是一个后进先出的结构。它用来存储代码执行过程中创建的所有执行上下文。
+
+当 JavaScript 引擎执行你的代码时，它会创建一个全局执行上下文并且将它推入当前的执行栈。当执行碰到函数调用的时候，它会为这个函数创建执行上下文并把这个执行上下文推入执行栈顶部。
+
+引擎执行处于栈顶的上下文对应的函数。当函数执行完毕，它的上下文就会从栈顶弹出，引擎接着继续执行新处于顶部的上下文对应的函数。
+
+```javascript
+let a = 'Hello World!'
+function first() {
+  console.log('Inside first function')
+  second()
+  console.log('Again inside first function')
+}
+function second() {
+  console.log('Inside second function')
+}
+first()
+console.log('Inside Global Execution Context')
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1caae4ac-8962-8cf7-cd69-bf7e40e607ea.png)
+
+上面代码在浏览器中执行时，JavaScript 引擎会先创建一个全局执行上下文并把它推出执行栈中。碰到 `first()` 执行时，引擎给这个函数创建一个新的执行上下文，然后把它推入执行栈顶部。
+
+当 `second()` 在 `first()` 函数内部执行时，引擎会给 `second` 创建上下文并把它推入执行栈顶，当 `second` 函数执行完毕，它的执行上下文就会从执行栈顶弹出，指针会指向它下面的上下文，也就是 `first` 函数的上下文。
+
+当 `first` 函数执行完毕，它的执行栈也会从栈顶弹出，指针就指向了全局执行上下文。当所有的代码执行完毕，引擎会把全局执行上下文也从执行栈中移出。
+
+### ✔ 执行上下文是如何创建的
+
+执行上下文会经历两个阶段：1、创建阶段；2、执行阶段。
 
 ## 原型链
-
-## 变量查找原理
 
 ## ✔ this（如何确定 this 的指向）
 
@@ -411,9 +543,34 @@ const child1 = new Child('lxfriday', 100)
 - `Parent` 只会调用一次；
 - 继承的最终解决方案；
 
-### ES6 extends
+### ✔ ES6 extends
+
+相同点：ES6 `extends` 继承是 ES5 继承的语法糖
+
+不同点：
+
+- `extends` 在构建 `this` 的时候先从父类开始构建，先调用 `super()` 之后才能调用 `this`；
+- `extends` 继承是双链继承，继承父类构造函数的静态属性，继承父类的原型属性；
 
 ```javascript
+class A {
+}
+
+class B {
+}
+
+Object.setPrototypeOf = function (obj, proto) {
+  obj.__proto__ = proto;
+  return obj;
+}
+
+// B 的实例继承 A 的实例
+// B.prototype.__proto__ = A.prototype
+Object.setPrototypeOf(B.prototype, A.prototype);
+
+// B 继承 A 的静态属性
+// B.__proto__ = A
+Object.setPrototypeOf(B, A);
 ```
 
 ## ✔ 箭头函数和普通函数
