@@ -13,5 +13,6 @@ module.exports = function (source) {
   console.log('marked(source)')
   console.log(marked(source))
   console.log('------------------')
-  return marked(source)
+  this.callback(null, marked(source))
+  return 1
 }
