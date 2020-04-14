@@ -5224,7 +5224,6 @@ const singleton = function (name) {
 singleton.getInstance = function (name) {
   if (!this.instance) {
     // 关键语句
-    console.log(this)
     this.instance = new singleton(name)
   }
   return this.instance
@@ -5235,9 +5234,51 @@ const b = singleton.getInstance('b')
 console.log(a === b)
 ```
 
-## 代理模式
+## 发布-订阅模式
+
+见 [手撕 EventEmitter](#✔-手撕-EventEmitter)
 
 ## 观察者模式
+
+当观察的数据对象发生变化时, 自动调用相应函数。
+
+**Object.defineProperty**
+
+```javascript
+const obj = {
+  data: { list: [] },
+}
+
+Object.defineProperty(obj, 'list', {
+  get() {
+    return this.data['list']
+  },
+  set(val) {
+    this.data['list'] = val
+  }
+})
+```
+
+**Proxy**
+
+`Proxy/Reflect` 是 ES6 引入的新特性, 也可以使用其完成观察者模式
+
+```javascript
+const obj = {
+  value: 0
+}
+
+const proxy = new Proxy(obj, {
+  set: function(target, key, value, receiver) { // {value: 0}  "value"  1  Proxy {value: 0}
+    console.log('调用相应函数')
+    Reflect.set(target, key, value, receiver)
+  }
+})
+
+proxy.value = 1 // 调用相应函数
+```
+
+## 代理模式
 
 ## 装饰者模式
 
