@@ -443,7 +443,13 @@ FunctionExectionContext = {
 
 `let` 和 `const` 声明的变量在创建阶段（creation phase） 和它的值没有任何关联，但是 `var` 声明的变量被赋予了 `undefined`。这是因为在创建阶段 JavaScript 引擎会扫描到变量和函数声明。用 `var` 声明的变量被初始化为 `undefined`，用 `let` `const` 声明的变量将不会被初始化。后者将会形成暂时性死区，提前使用它们将会报错。
 
-## 原型链
+## ✔ 原型和原型链
+
+![](https://qiniu1.lxfriday.xyz/feoffer/e7bb680c-85fe-9eef-c388-62a33a1157c0.png)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/be26e0d9-ae39-dba1-ae48-49991bf2580e.png)
+
+JavaScript 使用原始链实现继承，基本原理是实例可以通过 `__proto__` 属性获取到构造函数的原型属性（`prototype`）。实例查找属性的时候先从自身开始查找，如果没有找到就到 `__proto__` 指向的地址查找，如果还没有找到就继续从上层的 `__proto__` 指向的地址查找，直到 `__proto__ === null`，表示没有找到，返回 `null`。
 
 ## ✔ this（如何确定 this 的指向）
 
