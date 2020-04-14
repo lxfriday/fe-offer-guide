@@ -2089,9 +2089,162 @@ ref
 
 # Webpack
 
-## Loader 编写
+## ✔ Loader
 
-## Plugin 编写
+ref
+
+- [Loader](https://www.webpackjs.com/concepts/loaders/#%E7%A4%BA%E4%BE%8B)
+- [https://juejin.im/post/5a4f3791f265da3e3f4c7ee6](https://juejin.im/post/5a4f3791f265da3e3f4c7ee6)
+
+**Loader 用于对模块的源代码进行转换，通过处理文件的输入，返回一个新的结果，最终交给 webpack 进行下一步的处理。**Loader 可以使你在 import 或"加载"模块时**预处理文件**。因此，Loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。Loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。Loader 甚至允许你直接在 JavaScript 模块中 import CSS 文件！
+
+**使用 Loader**
+
+- 配置：`weback.config.js` 配置文件指定 Loader；
+- 内联：在每个 `import` 语句中显式指定 Loader；
+- CLI：在 shell 命令中指定它们；
+
+1、配置
+
+`module.rules` 允许你在 webpack 配置中指定多个 Loader。
+
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+          },
+        },
+      ],
+    },
+  ]
+}
+```
+
+2、内联
+
+可以在 `import` 语句或任何等效于 `import` 的方式中指定 Loader。使用 `!` 将资源中的 Loader 分开。分开的每个部分都相对于当前目录解析。
+
+```javascript
+import Styles from 'style-loader!css-loader?modules!./styles.css'
+```
+
+选项可以传递查询参数，例如 `?key=value&foo=bar`，或者一个 JSON 对象，例如 `?{"key":"value","foo":"bar"}`。
+
+3、CLI
+
+```bash
+webpack --module-bind jade-loader --module-bind 'css=style-loader!css-laoder'
+```
+
+这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 `style-loader` 和 `css-loader`。
+
+### ✔ Loader 特性
+
+- Loader 支持链式传递。能够对资源使用流水线(pipeline)。**一组链式的 Loader 将按照相反的顺序执行（从后往前执行）**。Loader 链中的第一个 Loader 返回值给下一个 Loader。在最后一个 Loader，返回 webpack 所预期的 JavaScript。
+- Loader 可以是同步的，也可以是异步的；
+- Loader 运行在 Node.js 中，并且能够执行任何可能的操作；
+- Loader 接收查询参数。用于对 Loader 传递配置；
+- Loader 也能够使用 `options` 对象进行配置；
+- 插件（Plugin）可以为 Loader 带来更多特性；
+- Loader 能够产生额外的任意文件；
+
+Loader 通过（Loader）预处理函数，为 JavaScript 生态系统提供了更多能力。用户现在可以更加灵活地引入细粒度逻辑，例如压缩、打包、语言翻译和其他更多。
+
+### ✔ 常用的 Loader
+
+ref
+
+- [https://webpack.js.org/loaders](https://webpack.js.org/loaders)
+
+- `babel-loader` 加载 ES2015+ 代码，并使用 Babel 转换成 ES5 代码；
+- `style-loader` 把 CSS 注入到 DOM 中；
+- `css-loader` 解析 CSS 代码，找出 CSS 中依赖的资源、压缩 CSS、输出 sourcemap 等；
+- `less-loader` 加载并编译 less 代码；
+- `sass-loader` 加载并编译 sass 代码；
+- `postcss-loader` 使用 PostCSS 加载并转换 CSS 文件；
+- `eslint-loader` 在运行阶段检测 JS 代码；
+- `file-loader` 把文件输出到指定目录，并返回相对地址；
+- `url-loader` 功能基本和 `file-loader` 一致，但是会把小于 limit 的文件转换成 data url；
+- `raw-loader` 加载文件的原始内容；
+
+### ✔ Loader 编写
+
+ref
+
+- [深入 Webpack-编写 Loader](https://juejin.im/post/5a4f3791f265da3e3f4c7ee6)
+- [markdown-loader](https://github.com/peerigon/markdown-loader)
+
+编写插件会用到 [loader-utils](https://github.com/webpack/loader-utils) 来处理传入的参数等。
+
+自己本地写的 Loader 测试的时候可以通过 npm link 从 node_modules 加载，最方便的是配置 `resolveLoader` 属性来扩展 loader 加载的目录。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/cc177795-bae0-6cd1-432a-287c5beae476.png)
+![](https://qiniu1.lxfriday.xyz/feoffer/f7f45982-58b7-8697-1f54-37f157d35219.png)
+
+编写一个简单的 loader 来转换 markdown，插件命名为 `md-loader`。
+
+```javascript
+const loaderUitls = require('loader-utils')
+const marked = require('marked')
+
+module.exports = function (source) {
+  const options = loaderUitls.getOptions(this)
+  marked.setOptions(options)
+
+  console.log('------------------')
+  console.log('options')
+  console.log(options)
+  console.log('source')
+  console.log(source)
+  console.log('marked(source)')
+  console.log(marked(source))
+  console.log('------------------')
+  return marked(source)
+}
+```
+
+webpack.config.js
+
+```javascript
+{
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.md$/i,
+        use: [
+          'html-loader',
+          {
+            loader: 'md-loader',
+            options: {
+              name: 'md-loader',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  resolveLoader: {
+    modules: ['node_modules', './loader'],
+  },
+}
+```
+
+运行之后，打印如下
+
+![](https://qiniu1.lxfriday.xyz/feoffer/2902fc92-6fff-476c-93fe-bdfddd24686a.png)
+
+## Plugin
+
+### Plugin 编写
 
 # Axios
 
@@ -5255,7 +5408,7 @@ Object.defineProperty(obj, 'list', {
   },
   set(val) {
     this.data['list'] = val
-  }
+  },
 })
 ```
 
@@ -5265,14 +5418,15 @@ Object.defineProperty(obj, 'list', {
 
 ```javascript
 const obj = {
-  value: 0
+  value: 0,
 }
 
 const proxy = new Proxy(obj, {
-  set: function(target, key, value, receiver) { // {value: 0}  "value"  1  Proxy {value: 0}
+  set: function (target, key, value, receiver) {
+    // {value: 0}  "value"  1  Proxy {value: 0}
     console.log('调用相应函数')
     Reflect.set(target, key, value, receiver)
-  }
+  },
 })
 
 proxy.value = 1 // 调用相应函数
