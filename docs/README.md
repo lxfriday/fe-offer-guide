@@ -841,8 +841,6 @@ setTimeout
 
 ## Proxy
 
-## forin、forof、for、while、reduce、forEach、map 性能对比
-
 ## JS GC 原理
 
 ref
@@ -5108,7 +5106,84 @@ ref
 
 ### 手撕 JSON.stringify
 
-### 手撕 EventEmitter
+### ✔ 手撕 EventEmitter
+
+要实现的 API 有：
+
+- `on(event, listener)`：为指定事件注册一个监听器，接受一个字符串 event 和一个回调函数；
+- `emit(event, [arg1], [arg2])`： 按监听器的顺序执行执行每个监听器；
+- `addListener(event, listener)`：on 的同名函数（alias）；
+- `once(event, listener)`: 和 on 类似，但只触发一次，随后便解除事件监听；
+- `removeListener(event, listener)`： 移除指定事件的某个监听回调；
+- `removeAllListeners([event])`：移除指定事件的所有监听回调；
+- `setMaxListeners(n)`：用于提高监听器的默认限制的数量；
+- `listeners(event)`： 返回指定事件的监听器数组；
+
+```javascript
+class EventEmitter {
+  constructor() {
+    // 用于存放事件监听器函数
+    this.listeners = {}
+    // 设置的某个事件能够添加的监听器的最大数量
+    this.maxListener = 10
+  }
+
+  on(event, cb) {
+    const listeners = this.listeners
+    // 超过最大数量时抛出异常
+    if (listeners[event] && listeners[event].length >= this.maxListener) {
+      throw new Error('监听器的最大数量是%d,您已超出限制', this.maxListener)
+    }
+    if (listeners[event] instanceof Array) {
+      // 不添加重复的监听函数
+      if (listeners[event].indexOf(cb) === -1) {
+        listeners[event].push(cb)
+      }
+    } else {
+      // 没有对某个事件的监听数组时
+      listeners[event] = [].concat(cb)
+    }
+  }
+
+  emit(event, ...args) {
+    this.listeners[event].forEach(cb => {
+      cb(...args)
+    })
+  }
+
+  removeListener(event, listener) {
+    const listeners = this.listeners
+    const arr = listeners[event] || []
+    const i = arr.indexOf(listener)
+    if (i >= 0) {
+      listeners[event].splice(i, 1)
+    }
+  }
+
+  once(event, listener) {
+    const that = this
+
+    function fn(...args) {
+      listener(...args)
+      that.removeListener(event, fn)
+    }
+
+    this.on(event, fn)
+  }
+
+  removeAllListeners(event) {
+    this.listeners[event] = []
+  }
+
+  setMaxListeners(max) {
+    this.maxListener = max
+  }
+
+  listeners(event) {
+    return this.listeners[event]
+  }
+}
+```
 
 ### 深拷贝
 
@@ -5123,6 +5198,48 @@ ref
 `2020-02-08 12:13:14` 提取成 => `[2020, 02, 08, 12, 13, 14]`
 
 # 设计模式
+
+ref
+
+- [JavaScript 设计模式](https://juejin.im/post/59df4f74f265da430f311909)
+- [JavaScript 中常见设计模式整理](https://juejin.im/post/5afe6430518825428630bc4d)
+
+## 单例模式
+
+两个条件：
+
+- 确保只有一个实例
+- 可以全局访问
+
+适用：
+
+- 适用于弹框的实现, 全局缓存（不会创建多个弹框实例）。
+
+```javascript
+const singleton = function (name) {
+  this.name = name
+  this.instance = null
+}
+
+singleton.getInstance = function (name) {
+  if (!this.instance) {
+    // 关键语句
+    console.log(this)
+    this.instance = new singleton(name)
+  }
+  return this.instance
+}
+
+const a = singleton.getInstance('a') // 通过 getInstance 来获取实例
+const b = singleton.getInstance('b')
+console.log(a === b)
+```
+
+## 代理模式
+
+## 观察者模式
+
+## 装饰者模式
 
 # 数据结构
 
