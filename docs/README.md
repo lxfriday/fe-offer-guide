@@ -284,6 +284,165 @@ console.log('Inside Global Execution Context')
 
 执行上下文会经历两个阶段：1、创建阶段；2、执行阶段。
 
+**1、创建阶段**
+
+在创建阶段会创建词法环境（LexicalEnvironment）和变量环境（VariableEnvironment）。
+
+执行上下文可以用下面的方式表示：
+
+```
+ExecutionContext = {
+  LexicalEnvironment = <ref. to LexicalEnvironment in memory>,
+  VariableEnvironment = <ref. to VariableEnvironment in  memory>,
+}
+```
+
+**词法环境**是用来保存标识符和变量映射关系的地方。标识符是变量或者函数的名字，变量是对实际对象（包括函数对象和数组对象）或者原始值的引用。词法环境的结构如下：
+
+```
+LexicalEnvironment = {
+  EnvironmentRecord: {
+    Type: "Declarative",
+    // Identifier bindings go here
+  }
+  outer: <Global or outer function environment reference>,
+  this: <depends on how function is called>
+}
+```
+
+- `EnvironmentRecord` 表示在当前作用域内定义的变量；
+- `outer` 指向定义时外层函数的词法环境；
+- `this` 取决于函数怎么调用；
+
+**EnvironmentRecord** 是在词法环境中存储变量和函数的地方。
+
+**outer** 表示一个作用域指向的外层词法环境。在查找变量时，如果在当前的词法环境里面没有找到变量，那就通过 outer 找到外层的词法环境，然后再在外层的词法环境里面查找变量，如果还没有找到，则会继续往外层找，一直找到全局作用域。
+
+**2、执行阶段**
+
+在执行阶段会完成变量的赋值，代码会被执行。
+
+```javascript
+let a = 20
+const b = 30
+var c
+function multiply(e, f) {
+  var g = 20
+  return e * f * g
+}
+c = multiply(20, 30)
+```
+
+当上面的代码执行的时候，JavaScript 引擎会创建一个全局执行上下文来执行全局的代码。所以在创建阶段（creation phase）全局执行上下文是像这样的：
+
+```
+GlobalExectionContext = {
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      // Identifier bindings go here
+      a: <uninitialized>,
+      b: <uninitialized>,
+      multiply: <func>
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  },
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      // Identifier bindings go here
+      c: undefined,
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  }
+}
+```
+
+在执行阶段（execution phase），会进行变量赋值。全局执行上下文将会变成下面这样：
+
+```
+GlobalExectionContext = {
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      // Identifier bindings go here
+      a: 20,
+      b: 30,
+      multiply: <func>
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  },
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      // Identifier bindings go here
+      c: undefined,
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  }
+}
+```
+
+当碰到要执行 `multiply(20, 30)` 时，一个新的函数执行上下文会创建。在创建阶段（creation phase）函数执行上下文会像下面这样：
+
+```
+FunctionExectionContext = {
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // Identifier bindings go here
+      e: 20,
+      f: 30,
+      Arguments: {0: 20, 1: 30, length: 2}, // 函数的参数也在词法环境中
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>,
+  },
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // Identifier bindings go here
+      g: undefined
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>
+  }
+}
+```
+
+在执行阶段（execution phase）会进行变量赋值。赋值之后的函数执行上下文如下：
+
+```
+FunctionExectionContext = {
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // Identifier bindings go here
+      Arguments: {0: 20, 1: 30, length: 2},
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>,
+  },
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // Identifier bindings go here
+      g: 20
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>
+  }
+}
+```
+
+函数执行完成时，返回的值将会赋值给 `c`，全局词法环境将会更新，然后所有代码执行完毕，程序结束。
+
+`let` 和 `const` 声明的变量在创建阶段（creation phase） 和它的值没有任何关联，但是 `var` 声明的变量被赋予了 `undefined`。这是因为在创建阶段 JavaScript 引擎会扫描到变量和函数声明。用 `var` 声明的变量被初始化为 `undefined`，用 `let` `const` 声明的变量将不会被初始化。后者将会形成暂时性死区，提前使用它们将会报错。
+
 ## 原型链
 
 ## ✔ this（如何确定 this 的指向）
@@ -553,24 +712,22 @@ const child1 = new Child('lxfriday', 100)
 - `extends` 继承是双链继承，继承父类构造函数的静态属性，继承父类的原型属性；
 
 ```javascript
-class A {
-}
+class A {}
 
-class B {
-}
+class B {}
 
 Object.setPrototypeOf = function (obj, proto) {
-  obj.__proto__ = proto;
-  return obj;
+  obj.__proto__ = proto
+  return obj
 }
 
 // B 的实例继承 A 的实例
 // B.prototype.__proto__ = A.prototype
-Object.setPrototypeOf(B.prototype, A.prototype);
+Object.setPrototypeOf(B.prototype, A.prototype)
 
 // B 继承 A 的静态属性
 // B.__proto__ = A
-Object.setPrototypeOf(B, A);
+Object.setPrototypeOf(B, A)
 ```
 
 ## ✔ 箭头函数和普通函数
@@ -3612,6 +3769,12 @@ CA（Certificate Authority，证书认证机构），具有极高的可信度，
 
 还有一种更危险的情况，CA 被黑客攻陷，或者 CA 有恶意，因为它（即根证书）是信任的源头，整个信任链里的所有证书也就都不可信了。因为涉及的证书太多，就**只能操作系统或者浏览器从根上下手了，撤销对 CA 的信任，列入黑名单**，这样它颁发的所有证书就都会被认为是不安全的。
 
+### ✔ TLS 证书校验
+
+ref
+
+- [HTTPS 精读之 TLS 证书校验](https://zhuanlan.zhihu.com/p/30655259)
+
 ### ✔ HTTPS 概述
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/e2153928-d0b6-e997-5ae4-21c2dcb08b38.png)
@@ -3719,8 +3882,6 @@ ref
 ![](https://qiniu1.lxfriday.xyz/feoffer/365fa28b-89f1-0a35-4e63-e43c8ae4064d.png)
 
 **4、服务器的最后回应**
-
-服务器收到客户端的第三个随机数 pre-master key 之后，计算生成本次会话所用的"会话密钥"。然后，向客户端最后发送下面信息。
 
 - 编码改变通知（Change Cipher Spec），表示随后的信息都将用双方商定的加密方法和密钥发送；
 - 服务器握手结束通知（Encrypted Handshake Message），表示服务器的握手阶段已经结束；
@@ -3872,7 +4033,7 @@ Websocket 与 HTTP 和 HTTPS 使用相同的 TCP 端口，可以绕过大多数�
 
 ### ✔ WebSocket 优点
 
-- 是轮询技术的替代，不会向服务器发送大量请求导致服务器压力，，也不会像 HTTP 请求一样带有较长的头信息；
+- 是轮询技术的替代，不会向服务器发送大量请求导致服务器压力，也不会像 HTTP 请求一样带有较长的头信息；
 - 节省服务器带宽和资源，能够更实时地进行通讯；
 - 全双工，服务器可以随时主动给客户端下发数据；
 - 保持连接状态，与 HTTP 不同的是，Websocket 需要先创建连接，这就使得其成为一种**有状态的协议**，之后通信时可以省略部分状态信息；
