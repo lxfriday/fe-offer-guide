@@ -13,7 +13,8 @@ module.exports = function () {
     devtool: 'cheap-module-source-map',
     entry: getPath('src/index.js'),
     output: {
-      publicPath: getPath('build'),
+      publicPath: 'https://lxfriday.xyz/cdn/',
+      filename: '[contenthash].js',
     },
     module: {
       rules: [
@@ -21,7 +22,7 @@ module.exports = function () {
           test: /\.(png|jpe?g|gif)$/i,
           loader: 'file-loader',
           options: {
-            name: 'static/imgs/[name].[ext]',
+            name: 'static/imgs/[name].[contenthash].[ext]',
           },
         },
         {
@@ -39,6 +40,7 @@ module.exports = function () {
         {
           test: /\.css$/i,
           use: [
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -55,8 +57,8 @@ module.exports = function () {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: '[name].css',
-        chunkFilename: '[id].css',
+        filename: '[id].[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
       }),
       new EndNotiWebpackPlugin(
         () => {
