@@ -1,0 +1,11 @@
+@import './common.css';
+
+.container {
+  color: red;
+  height: 100px;
+}
+
+.nav {
+  height: 1000px;
+  background-image: url(./assets/google.png);
+}

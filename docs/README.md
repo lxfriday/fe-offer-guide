@@ -2089,6 +2089,8 @@ ref
 
 # Webpack
 
+## 手写实现 Webpack
+
 ## ✔ Loader
 
 ref
@@ -2175,6 +2177,7 @@ ref
 - `file-loader` 把文件输出到指定目录，并返回相对地址；
 - `url-loader` 功能基本和 `file-loader` 一致，但是会把小于 limit 的文件转换成 data url；
 - `raw-loader` 加载文件的原始内容；
+- `thread-loader` 加速编译；
 
 ### ✔ Loader 编写
 
@@ -2206,6 +2209,7 @@ this.callback(
     abstractSyntaxTree?: AST
 );
 ```
+
 ![](https://qiniu1.lxfriday.xyz/feoffer/cc177795-bae0-6cd1-432a-287c5beae476.png)
 ![](https://qiniu1.lxfriday.xyz/feoffer/f7f45982-58b7-8697-1f54-37f157d35219.png)
 
@@ -2266,9 +2270,216 @@ webpack.config.js
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/2902fc92-6fff-476c-93fe-bdfddd24686a.png)
 
+### ✔ css-loader 原理分析
+
+- [https://github.com/webpack-contrib/css-loader/blob/a748f3754cdeb57fc2b081ba7dd67d776f636569/src/index.js#L83](https://github.com/webpack-contrib/css-loader/blob/a748f3754cdeb57fc2b081ba7dd67d776f636569/src/index.js#L83)
+
+分析 css-loader 之前简单介绍下 [PostCSS](https://postcss.org/)。PostCSS 是一个允许使用 JS 插件转换样式的工具。 这些插件可以检查（lint）你的 CSS，支持 CSS Variables 和 Mixins， 编译尚未被浏览器广泛支持的先进的 CSS 语法，内联图片，以及其它很多优秀的功能。
+
+PostCSS 接收一个 CSS 文件并提供了一个 API 来分析、修改它的规则（**通过把 CSS 规则转换成一个抽象语法树的方式**）。在这之后，这个 API 便可被许多插件利用来做有用的事情，比如寻错或自动添加 CSS vendor 前缀。PostCSS 的[插件](https://github.com/postcss/postcss/blob/master/README-cn.md)十分丰富。
+
+---
+
+css-loader 内部使用 Postcss 处理 CSS ，内部有对 postcss-loader 生成的 ast 的重用，对分析有用的代码是从 [importCode](https://github.com/webpack-contrib/css-loader/blob/a748f3754cdeb57fc2b081ba7dd67d776f636569/src/index.js#L132) 开始的。
+
+流程是：
+
+1. `postcss(plugins).process(ast).then(result => ...)` 处理过后，`result` 中包含 `import`、`export`、CSS 代码；
+1. 使用 `getImportCode` 生成导入相关的代码；
+1. 使用 `getModuleCode` 生成与页面 CSS 相关的代码；
+1. 使用 `getExportCode` 生成导出相关的代码；
+1. 最后拼接步骤 2、3、4 生成的代码，形成 JS 代码；
+
+![](https://qiniu1.lxfriday.xyz/feoffer/01b27a2a-1b8b-9209-fa4e-b62c41a4d0d6.png)
+
+- `importCode` 表示文件导入的代码；
+- `moduleCode` 表示和 CSS 样式相关的代码；
+- `exportCode` 表示文件导出的代码；
+
+---
+
+**importCode**
+
+这一部分把 CSS 文件导入转换成 JS 模块导入的方式。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/83ac4ee0-06fc-0847-ba6f-58028c5b25fa.png)
+
+实际代码效果（google.png 是一张图片，使用 `background-image: url(./assets/google.png)` 导入）
+
+![](https://qiniu1.lxfriday.xyz/feoffer/450288c3-33df-7c7f-10cd-e5815abd87eb.png)
+
+---
+
+**moduleCode**
+
+![](https://qiniu1.lxfriday.xyz/feoffer/c3532c5f-0bf5-fdd0-cfc3-c93f17ae7afa.png)
+
+实际代码效果（实际对页面有影响的样式表）
+
+![](https://qiniu1.lxfriday.xyz/feoffer/deb24e89-bd77-1747-333b-432592872298.png)
+
+---
+
+**exportCode**
+
+![](https://qiniu1.lxfriday.xyz/feoffer/aa3d6a26-cd66-8f14-9a4f-ea3e48cc3d3b.png)
+
+实际代码效果（开启了 CSS Modules）
+
+![](https://qiniu1.lxfriday.xyz/feoffer/a79cd7e2-2da4-28c1-5e23-d0b18abee827.png)
+
+---
+
+`index.css` 转换前
+
+![](https://qiniu1.lxfriday.xyz/feoffer/062228fc-98d7-8a45-49bd-bdb5b25f19eb.png)
+
+转换后
+
+![](https://qiniu1.lxfriday.xyz/feoffer/ad9d247f-122f-5e1c-cf0a-d29d9c310fbe.png)
+
+---
+
+css-loader 最后通过 `callback(null, content)` 把解析出来的 JS 代码传递出去，所以经过 css-loader 处理之后传递出去的是 JS 代码。
+
+```javascript
+return callback(null, `${importCode}${moduleCode}${exportCode}`)
+```
+
 ## Plugin
 
-### Plugin 编写
+ref
+
+- [plugins](https://www.webpackjs.com/concepts/plugins/)
+- [5-4 编写 Plugin](https://webpack.wuhaolin.cn/5%E5%8E%9F%E7%90%86/5-4%E7%BC%96%E5%86%99Plugin.html)
+
+插件是 Webpack 的支柱功能。插件目的在于解决 Loader 无法实现的其他事。插件可以用来修改输出文件、增加输出文件、甚至可以提升 Webpack 性能、等等，总之插件通过调用 Webpack 提供的 API 能完成很多事情。
+
+Webpack 通过 Plugin 机制让其更加灵活，以适应各种应用场景。 **在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果**。
+
+Webpack 插件是一个具有 `apply` 属性的 JavaScript 对象。`apply` 属性会被 webpack `compiler` 调用，并且 `compiler` 对象可在整个编译生命周期访问。
+
+一个最基础的 Plugin 代码是这样的：
+
+```javascript
+class BasicPlugin {
+  // 在构造函数中获取用户给该插件传入的配置
+  constructor(options) {}
+
+  // Webpack 会调用 BasicPlugin 实例的 apply 方法给插件实例传入 compiler 对象
+  apply(compiler) {
+    compiler.hooks.run.tap(name, compilation => {
+      console.log('构建过程开始')
+    })
+  }
+}
+
+// 导出 Plugin
+module.exports = BasicPlugin
+```
+
+**事件流**
+
+Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。**插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。**
+
+Webpack 通过 [Tapable](https://github.com/webpack/tapable) 来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
+
+### ✔ Compiler 和 Compilation
+
+**Compiler**
+
+- 包含了 Webpack 环境所有的的配置信息；
+- 包含 `options`，`loaders`，`plugins` 这些信息；
+- **这个对象在 Webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 Webpack 实例；**
+
+**Compilation**
+
+- 对象包含了当前的模块资源、编译生成资源、变化的文件等；
+- **当 Webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建；**
+- **Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象；**
+
+Compiler 和 Compilation 的区别在于：Compiler 代表了整个 Webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。
+
+### ✔ 查找是否使用了某个 Plugin
+
+```javascript
+// 检查是否使用了 mini-css-extract-plugin
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+class SearchOneWebpackPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap('SearchOne', compilation => {
+      const plugins = compiler.options.plugins
+      console.log('hasMiniCssExtractPlugin', plugins.find(plugin => plugin.__proto__.constructor === MiniCssExtractPlugin) !== undefined)
+    })
+  }
+}
+```
+
+### ✔ Compiler Hooks
+
+ref
+
+- [https://webpack.js.org/api/compiler-hooks/](https://webpack.js.org/api/compiler-hooks/)
+
+Compiler 扩展自 Tapable 类，以便注册和调用插件。大多数面向用户的插件首会先在 Compiler 上注册。
+
+- `entryOption` Called after the entry configuration from webpack options has been processed
+- `beforeRun` Adds a hook right before running the compiler
+- `run` Hook into the compiler before it begins reading records
+- `beforeCompile` Executes a plugin after compilation parameters are created
+- `compile` Called right after beforeCompile, before a new compilation is created
+- `thisCompilation` Executed while initializing the compilation, right before emitting the compilation event
+- `compilation` Runs a plugin after a compilation has been created
+- `shouldEmit`：Called before emitting assets. Should return a boolean telling whether to emit
+- `emit` Executed right before emitting assets to output dir
+- `afterEmit` Called after emitting assets to output directory
+- `assetEmitted` Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content
+- `done` Executed when the compilation has completed
+- `failed` Called if the compilation fails
+
+### ✔ Plugin 编写
+
+编写一个 Webpack 插件，实现在编译完成或者编译失败之后执行传入的回调。
+
+```javascript
+class EndNotiWebpackPlugin {
+  constructor(doneCb, failCb) {
+    this.doneCb = doneCb
+    this.failCb = failCb
+  }
+
+  apply(compiler) {
+    compiler.hooks.done.tap('EndNotiWebpackPlugin', compilation => {
+      this.doneCb && this.doneCb()
+    })
+    compiler.hooks.failed.tap('EndNotiWebpackPlugin', err => {
+      this.failCb && this.failCb(err)
+    })
+  }
+}
+```
+
+webpack.config.js
+
+```javascript
+plugins: [
+  ...
+  new EndNotiWebpackPlugin(
+    () => {
+      console.log('编译成功了')
+    },
+    err => {
+      console.log('编译失败了')
+      console.log(err)
+    }
+  ),
+],
+```
+
+### clean-webpack-plugin 解析
+
+## Webpack、Rollup、Parcel、Grunt、Gulp 对比
 
 # Axios
 
@@ -2280,7 +2491,9 @@ webpack.config.js
 
 ## html5 相比以前有什么变化
 
-## html5 新增标签
+### html5 新增标签
+
+### html5 新增 api
 
 ## HTML Element 和 HTML Node
 
