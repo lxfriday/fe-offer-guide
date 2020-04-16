@@ -4610,7 +4610,7 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
 
-## fetch
+## ✔ fetch
 
 ref
 
@@ -4762,7 +4762,7 @@ fetch 返回的 Resposne 结构是下面这样的，通过 `res.json()` 可以�
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/XVQX_1MXE3LBOPP7MKA%5B6ZD.png)
 
-### fetch 如何实现 abort、onabort
+### ✔ fetch 如何实现 abort、onabort
 
 ref
 
@@ -4800,7 +4800,130 @@ setTimeout(() => {
 }, 3000)
 ```
 
-### fetch 和 XMLHttpRequest 比较
+### ✔ fetch 实现查看下载进度
+
+ref
+
+- [fetch使用的常见问题及解决办法](https://www.cnblogs.com/wonyun/p/fetch_polyfill_timeout_jsonp_cookie_progress.html)
+
+```javascript
+fetch('https://qiniu1.lxfriday.xyz/feoffer/vuejs-book.pdf', {
+  method: 'GET',
+})
+  .then(res => {
+    return res.body
+  })
+  .then(body => {
+    const reader = body.getReader()
+    let bytesReceived = 0
+    // read() returns a promise that resolves when a value has been received
+    reader.read().then(function processResult(result) {
+      // Result objects contain two properties:
+      // done  - true if the stream has already given you all its data.
+      // value - some data. Always undefined when done is true.
+      if (result.done) {
+        console.log('Fetch 完成')
+        return
+      }
+      // result.value for fetch streams is a Uint8Array
+      bytesReceived += result.value.length
+      console.log('接收到 ' + (bytesReceived / 1024 / 1024).toFixed(2) + 'M')
+
+      setTimeout(() => {
+        // Read some more, and call this function again
+        reader.read().then(processResult)
+      })
+    })
+  })
+```
+
+### ✔ fetch 和 XMLHttpRequest 比较
+
+ref
+
+- [传统 Ajax 已死，Fetch 永生](https://segmentfault.com/a/1190000003810652)
+
+XMLHttpRequest 是一个设计粗糙的 API，不符合关注分离（Separation of Concerns）的原则，配置和调用方式非常混乱，而且基于事件的异步模型写起来也没有现代的 Promise，generator/yield，async/await 友好。
+
+XMLHttpRequest 需要经过一次封装之后才方便业务层使用， fetch 方便直接在业务层使用。
+
+---
+
+**XMLHttpRequest**
+
+缺点：
+
+- 需要封装成 Promise 的形式才方便使用；
+- 配置和调用混乱；
+- 配置复杂；
+
+优点：
+
+- 兼容性好；
+- 支持的功能非常完善，自带超时、取消、进度相关的属性和回调函数；
+
+---
+
+**fetch**
+
+- 自身的功能比较简单，超时、取消、进度处理需要另外实现；
+- 基于 Promise 实现，能使用 async 等新特性；
+- 基本配置比较简单且集中，方便管理；
+- fetch 是事实上未来的趋势；
+
+---
+
+**axios**
+
+[axios](https://github.com/axios/axios#interceptors) 基于 XMLHttpRequest、Promise 实现，对 XMLHttpRequest 进行了大量封装，支持直接配置超时，支持取消请求。同时 axios 支持并发请求、请求和响应拦截。
+
+axios Interceptors
+
+```javascript
+// Add a request interceptor
+axios.interceptors.request.use(
+  function (config) {
+    // Do something before request is sent
+    return config
+  },
+  function (error) {
+    // Do something with request error
+    return Promise.reject(error)
+  }
+)
+
+// Add a response interceptor
+axios.interceptors.response.use(
+  function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response
+  },
+  function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error)
+  }
+)
+```
+
+并发请求
+
+```javascript
+function getUserAccount() {
+  return axios.get('/user/12345')
+}
+
+function getUserPermissions() {
+  return axios.get('/user/12345/permissions')
+}
+
+axios.all([getUserAccount(), getUserPermissions()]).then(
+  axios.spread(function (acct, perms) {
+    // Both requests are now complete
+  })
+)
+```
 
 # CDN
 

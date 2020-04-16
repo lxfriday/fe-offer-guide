@@ -1,25 +1,30 @@
-const abortController = new AbortController()
-const abortSignal = abortController.signal
-
-const stopButton = document.getElementById('stop')
-
-abortSignal.onabort = function onabort() {
-  console.log('onabort')
-}
-
-stopButton.addEventListener('click', () => abortController.abort())
-
 fetch('https://qiniu1.lxfriday.xyz/feoffer/vuejs-book.pdf', {
   method: 'GET',
-  credentials: 'omit',
-  signal: abortSignal,
 })
   .then(res => {
-    console.log('res', res)
-    return res.json()
+    return res.body
   })
-  .then(data => {
-    console.log('fetch data', data)
+  .then(body => {
+    const reader = body.getReader()
+    let bytesReceived = 0
+    // read() returns a promise that resolves when a value has been received
+    reader.read().then(function processResult(result) {
+      // Result objects contain two properties:
+      // done  - true if the stream has already given you all its data.
+      // value - some data. Always undefined when done is true.
+      if (result.done) {
+        console.log('Fetch complete')
+        return
+      }
+      // result.value for fetch streams is a Uint8Array
+      bytesReceived += result.value.length
+      console.log('接收到 ' + (bytesReceived / 1024 / 1024).toFixed(2) + 'M')
+
+      setTimeout(() => {
+        // Read some more, and call this function again
+        reader.read().then(processResult)
+      })
+    })
   })
 
 // const abortController = new AbortController()
