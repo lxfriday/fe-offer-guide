@@ -4519,6 +4519,12 @@ wss.on('connection', function (ws) {
 console.log('ws listenning 3344')
 ```
 
+## DNS
+
+### ✔ DNS 解析过程
+
+见 [输入 URL 到页面显示发生哪些事情](#✔-输入-URL-到页面显示发生哪些事情)
+
 ## ✔ XMLHttpRequest
 
 ### ✔ readyState
@@ -4604,15 +4610,203 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
 
-## DNS
+## fetch
 
-### DNS 解析过程
+ref
+
+- [MDN fetch](https://developer.mozilla.org/zh-CN/docs/Web/API/WindowOrWorkerGlobalScope/fetch)
+
+`fetch()` 方法用于发起获取资源的请求。它返回一个 promise，这个 promise 会在请求响应后被 resolve，并传回 [`Response`](https://developer.mozilla.org/zh-CN/docs/Web/API/Response) 对象。
+
+**使用 fetch**
+
+```
+Promise<Response> fetch(input[, requestInit]);
+```
+
+`fetch` 的参数可以直接是一个 [`Request`](https://developer.mozilla.org/zh-CN/docs/Web/API/Request) 实例，Request 构造函数的参数和 `fetch` 的参数相同。一般用法是第一个参数是目标 `url`，第二个参数是和请求相关的信息。
+
+- `input` 目标 url 或者 Request 对象；
+- `requestInit` 请求时的配置信息；
+
+```javascript
+interface RequestInit {
+  /**
+   * 请求的 body 信息：可能是一个 Blob、BufferSource、FormData、URLSearchParams 或者 USVString 对象
+   * type BodyInit = Blob | BufferSource | FormData | URLSearchParams | ReadableStream<Uint8Array> | string;
+   */
+  body?: BodyInit | null;
+  /**
+   * 请求的 cache 模式: default 、 no-store 、 reload 、 no-cache 、 force-cache 或者 only-if-cached 。
+   * A string indicating how the request will interact with the browser's cache to set request's cache.
+   * type RequestCache = "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload";
+   */
+  cache?: RequestCache;
+  /**
+   * 请求的 credentials，如 omit、same-origin 或者 include。为了在当前域名内自动发送 cookie ， 必须提供这个选项
+   * A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL. Sets request's credentials.
+   * type RequestCredentials = "include" | "omit" | "same-origin";
+   */
+  credentials?: RequestCredentials;
+  /**
+   * 请求的头信息
+   */
+  headers?: HeadersInit;
+  /**
+   * A cryptographic hash of the resource to be fetched by request. Sets request's integrity.
+   */
+  integrity?: string;
+  /**
+   * A boolean to set request's keepalive.
+   */
+  keepalive?: boolean;
+  /**
+   * 请求使用的方法，如 GET、POST。
+   */
+  method?: string;
+  /**
+   * 请求的模式，如 cors、 no-cors 或者 same-origin。
+   * A string to indicate whether the request will use CORS, or will be restricted to same-origin URLs. Sets request's mode.
+   * type RequestMode = "cors" | "navigate" | "no-cors" | "same-origin";
+   */
+  mode?: RequestMode;
+  /**
+   * 可用的 redirect 模式: follow (自动重定向), error (如果产生重定向将自动终止并且抛出一个错误), 或者 manual (手动处理重定向). 在Chrome中，Chrome 47之前的默认值是 follow，从 Chrome 47开始是 manual。
+   * A string indicating whether request follows redirects, results in an error upon encountering a redirect, or return s the redirect (in an opaque fashion). Sets request's redirect.
+   * type RequestRedirect = "error" | "follow" | "manual";
+   */
+  redirect?: RequestRedirect;
+  /**
+   * A string whose value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
+   */
+  referrer?: string;
+  /**
+   * 指定了 HTTP 头部 referer 字段的值。可能为以下值之一： no-referrer、 no-referrer-when-downgrade、 origin、 origin-when-cross-origin、 unsafe-url 。
+   * A referrer policy to set request's referrerPolicy.
+   * type ReferrerPolicy = "" | "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url";
+   */
+  referrerPolicy?: ReferrerPolicy;
+  /**
+   * An AbortSignal to set request's signal.
+   */
+  signal?: AbortSignal | null;
+  /**
+   * Can only be null. Used to disassociate request from any Window.
+   */
+  window?: any;
+}
+```
+
+---
+
+使用 fetch 发起一个跨域 GET 请求：
+
+打开控制台，点击下面的按钮进行测试。
+
+<button onclick="LXFRIDAY_TEST_FETCH_GET()">点我测试</button>
+
+<div>获取到数据：<span id="lxfriday-test-fetch-get-data-area"></div></div>
+
+```javascript
+fetch('https://qiniu1.lxfriday.xyz/feoffer/fetch-data.json', {
+  method: 'GET',
+  headers: {
+    // 'content-type': 'application/json',
+  },
+  credentials: 'omit',
+  mode: 'cors',
+  // body: JSON.stringify({
+  //   id: 100
+  // }),
+})
+  .then(res => {
+    console.log('res', res)
+    return res.json()
+  })
+  .then(data => {
+    console.log('fetch data', data)
+  })
+```
+
+---
+
+使用 fetch 发起一个跨域 POST 请求：
+
+```javascript
+fetch('http://y.com/api/query', {
+  method: 'post',
+  headers: {
+    'content-type': 'application/json',
+  },
+  credentials: 'include',
+  mode: 'cors',
+  body: JSON.stringify({
+    operationName: '',
+    query: '',
+    variables: { limit: 10, excluded: [] },
+    extensions: { query: { id: 'b031bf7f8b17b1a173a38807136cc20e' } },
+  }),
+})
+  .then(res => {
+    console.log('res', res)
+    return res.json()
+  })
+  .then(data => {
+    console.log('fetch data', data)
+  })
+```
+
+---
+
+fetch 返回的 Resposne 结构是下面这样的，通过 `res.json()` 可以把 MIME 指定成 json，返回 json 数据给后面。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/XVQX_1MXE3LBOPP7MKA%5B6ZD.png)
+
+### fetch 如何实现 abort、onabort
+
+ref
+
+- [MDN AbortController](https://developer.mozilla.org/zh-CN/docs/Web/API/FetchController)
+
+fetch 自身没有 abort 属性，需要配合 `AbortController` 实现 abort 取消请求。
+
+`AbortController` 接口代表一个控制器对象，允许你在需要时中止一个或多个 DOM 请求。
+
+<button onclick="LXFRIDAY_TEST_FETCH_ABORT()">点我测试 abort（点击之后 3 秒会自动 abort）</button>
+
+```javascript
+const abortController = new AbortController()
+const abortSignal = abortController.signal
+
+// abort 之后触发
+abortSignal.onabort = function onabort() {
+  console.log('onabort')
+}
+
+fetch('https://qiniu1.lxfriday.xyz/feoffer/vuejs-book.pdf', {
+  method: 'GET',
+  credentials: 'omit',
+  signal: abortSignal,
+})
+  .then(res => {
+    console.log('res', res)
+    return res.json()
+  })
+  .then(data => {
+    console.log('fetch data', data)
+  })
+setTimeout(() => {
+  abortController.abort()
+}, 3000)
+```
+
+### fetch 和 XMLHttpRequest 比较
 
 # CDN
 
 # 性能优化
 
-## 输入 URL 到页面显示发生哪些事情
+## ✔ 输入 URL 到页面显示发生哪些事情
 
 ref
 
