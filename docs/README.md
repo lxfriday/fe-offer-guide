@@ -841,11 +841,216 @@ setTimeout
 
 ## Proxy
 
-## JS GC 原理
+## ✔ JS GC 原理
 
 ref
 
-- [https://github.com/lxfriday/give-me-job/issues/61](https://github.com/lxfriday/give-me-job/issues/61)
+- [JavaScript 中的垃圾回收和内存泄漏](https://juejin.im/post/5cb33660e51d456e811d2687)
+- [阮一峰 JavaScript 内存泄漏教程](http://www.ruanyifeng.com/blog/2017/04/memory-leak.html)
+
+**原始数据类型**是存储在**栈**空间中的，**引用类型**的数据是存储在**堆**空间中的。
+
+GC 常见的算法是引用计数和标记清除算法。
+
+### ✔ V8 GC 原理
+
+**代际假说**
+
+在 V8 中会把**堆**分为**新生代**和**老生代**两个区域，**新生代中存放的是生存时间短的对象，老生代中存放的生存时间久的对象。**
+
+新生区通常只支持 **1 ～ 8M** 的容量，而老生区支持的容量就大很多了。对于这两块区域，V8 分别使用两个不同的垃圾回收器，以便更高效地实施垃圾回收。
+
+**副**垃圾回收器，主要负责**新生代**的垃圾回收。**主**垃圾回收器，主要负责**老生代**的垃圾回收。
+
+其实不论什么类型的垃圾回收器，它们都有一套共同的执行流程，垃圾回收器的工作流程：
+
+- **标记**：第一步是标记空间中活动对象和非活动对象。所谓活动对象就是还在使用的对象，非活动对象就是可以进行垃圾回收的对象；
+- **清除**：第二步是回收非活动对象所占据的内存。其实就是在所有的标记完成之后，统一清理内存中所有被标记为可回收的对象；
+- **整理**：第三步是做内存整理。一般来说，频繁回收对象后，内存中就会存在大量不连续空间，我们把这些不连续的内存空间称为内存碎片。当内存中出现了大量的内存碎片之后，如果需要分配较大连续内存的时候，就有可能出现内存不足的情况。所以最后一步需要整理这些内存碎片，但这步其实是可选的，因为有的垃圾回收器不会产生内存碎片，比如接下来我们要介绍的副垃圾回收器；
+
+---
+
+**副垃圾回收器**
+
+副垃圾回收器主要负责新生区的垃圾回收。而通常情况下，大多数小的对象都会被分配到新生区，所以说这个区域不大。
+
+新生代中用 **Scavenge 算法**来处理。所谓 Scavenge 算法，**是把新生代空间对半划分为两个区域，一半是对象区域，一半是空闲区域**，如下图所示：
+
+![](https://qiniu1.lxfriday.xyz/Ftrg64rUBKXgObjjsqW5L5wFMsRq)
+
+新加入的对象都会存放到对象区域，当对象区域快被写满时，就需要执行一次垃圾清理操作。
+
+首先要对对象区域中的垃圾做标记；标记完成之后，就进入垃圾清理阶段，副垃圾回收器会把这些存活的对象复制到空闲区域中，**同时它还会把这些对象有序地排列起来**，所以这个复制过程，也就相当于完成了内存整理操作，复制后空闲区域就没有内存碎片了。
+
+**完成复制后，对象区域与空闲区域进行角色翻转，也就是原来的对象区域变成空闲区域，原来的空闲区域变成了对象区域。这样就完成了垃圾对象的回收操作，同时这种角色翻转的操作还能让新生代中的这两块区域无限重复使用下去。**
+
+也正是因为新生区的空间不大，所以很容易被存活的对象装满整个区域。为了解决这个问题，**JavaScript 引擎采用了对象晋升策略，也就是经过两次垃圾回收依然还存活的对象，会被移动到老生区中。**
+
+---
+
+**主垃圾回收器**
+
+主垃圾回收器主要负责老生区中的垃圾回收。除了新生区中晋升的对象，一些大的对象会直接被分配到老生区。因此老生区中的对象有两个特点，**一个是对象占用空间大，另一个是对象存活时间长**。
+
+主垃圾回收器是采用 **标记 - 清除 Mark-Sweep** 的算法进行垃圾回收的。
+
+首先是标记过程阶段。标记阶段就是从一组**根元素**开始，**递归遍历这组根元素，在这个遍历过程中，能到达的元素称为活动对象，没有到达的元素就可以判断为垃圾数据。**
+
+![](https://qiniu1.lxfriday.xyz/FuV18I2KyyOX0AqphCGW2YDKcQF5)
+
+接下来就是垃圾的清除过程。它和副垃圾回收器的垃圾清除过程完全不同。可以理解这个过程是清除掉红色标记数据的过程。
+
+![](https://qiniu1.lxfriday.xyz/FlapCWKwkg9wmMXB6KrScT5GOBX_)
+
+上面的标记过程和清除过程就是标记 - 清除算法。不过对一块内存多次执行标记 - 清除算法后，**会产生大量不连续的内存碎片**。而碎片过多会导致大对象无法分配到足够的连续内存，于是又产生了另外一种算法——标记 - 整理（Mark-Compact）。**标记-整理是将存活的对象都向一端移动，然后直接清理掉端边界以外的内存。**
+
+![](https://qiniu1.lxfriday.xyz/FjKa-FXsrZhsRsnahbdcqY0zeMe5)
+
+---
+
+**全停顿**
+
+由于 JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，都需要将正在执行的 JavaScript 脚本暂停下来，待垃圾回收完毕后再恢复脚本执行。我们把这种行为叫做全停顿（Stop-The-World）。
+
+在 V8 新生代的垃圾回收中，因其空间较小，且存活对象较少，所以全停顿的影响不大，但老生代就不一样了。老生代包含大量的数据，如果一直占用主线程，会导致页面极其不友好。
+
+为了降低老生代的垃圾回收而造成的卡顿，**V8 将标记过程分为一个个的子标记过程，同时让垃圾回收标记和 JavaScript 应用逻辑交替进行**，直到标记阶段完成，我们把这个算法称为**增量标记（Incremental Marking）算法**。
+
+![](https://qiniu1.lxfriday.xyz/FnamhXjX0NCXlxRma-1tgqh7B6jb)
+
+好处：使用增量标记算法，可以把**一个完整的垃圾回收任务拆分为很多小的任务**，这些小的任务执行时间比较短，可以穿插在其他的 JavaScript 任务中间执行，这样当执行上述动画效果时，就不会让用户因为垃圾回收任务而感受到页面的卡顿了。
+
+### ✔ 引用计数算法
+
+垃圾回收算法主要依赖于引用的概念。在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。
+
+引用计数垃圾收集是最初级的垃圾收集算法。此算法把**对象是否不再需要**简化定义为**对象有没有其他对象引用到它**。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。
+
+引用计数算法的缺点是它无法处理循环引用。下面的例子中形成了循环引用，它们被调用之后会离开函数作用域，所以它们已经没有用了，可以被回收。然而，引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收。
+
+```javascript
+function f() {
+  var o = {}
+  var o2 = {}
+  o.a = o2 // o 引用 o2
+  o2.a = o // o2 引用 o
+
+  return 'azerty'
+}
+
+f()
+```
+
+### ✔ 标记清除算法
+
+这个算法把对象是否不再需要简化定义为**对象是否可以获得**。
+
+这个算法假定设置一个叫做根（root）的对象（在 Javascript 里，根是全局对象）。**垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象。**
+
+从 2012 年起，所有现代浏览器都使用了标记-清除垃圾回收算法。
+
+### ✔ 哪些操作会导致内存泄漏
+
+**意外添加的全局变量**：变量被添加到 window 上之后不会被销毁
+
+```javascript
+function foo(arg) {
+  bar = 'this is a hidden global variable'
+}
+
+// 或者
+function foo() {
+  this.variable = 'potential accidental global'
+}
+// foo 调用自己，this 指向了全局对象（window）
+foo()
+```
+
+**闭包**：在 `foo` 函数执行结束之后，内部定义的变量 `obj` 不会被销毁，导致内存一直被占用。
+
+```javascript
+function foo() {
+  const obj = { a: 1, b: 2 }
+  return () => {
+    console.log(obj)
+  }
+}
+```
+
+**没有清理的 DOM 元素引用**：同样的 DOM 元素存在两个引用时，一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。
+
+```javascript
+var elements = {
+  button: document.getElementById('button'),
+  image: document.getElementById('image'),
+  text: document.getElementById('text'),
+}
+function doStuff() {
+  image.src = 'http://some.url/image'
+  button.click()
+  console.log(text.innerHTML)
+}
+function removeButton() {
+  document.body.removeChild(document.getElementById('button'))
+  // elements 中 button 元素仍旧在内存中，不能被 GC 回收。
+}
+```
+
+虽然我们用 `removeChild` 移除了 `button`，但是还在 `elements` 对象里保存着 `#button` 的引用，换言之，DOM 元素还在内存里面。
+
+### ✔ GC 优化
+
+**优化不用的数组**
+
+一个数组使用过后确定不再使用时，可以使用 `arr.length = 0` 来达到清空数组的目的。
+
+相比于 `arr = []` 清空原数组，后者又会创建一个空数组，占用部分空间。
+
+```javascript
+const arr = ['a', 'b', 'c', 'd']
+arr.length = 0
+console.log(arr)
+```
+
+**对象尽量复用**
+
+对象尽量复用，尤其是在循环等地方出现创建新对象，能复用就复用。不用的对象，尽可能设置为 `null`，尽快被垃圾回收掉。
+
+```javascript
+var t = {} // 每次循环都沿用这个旧对象。
+for (var i = 0; i < 10; i++) {
+  // var t = {};// 每次循环都会创建一个新对象。
+  t.age = 19
+  t.name = '123'
+  t.index = i
+  console.log(t)
+}
+t = null //对象如果已经不用了，那就立即设置为null；等待垃圾回收。
+```
+
+**将重复声明的函数放到循环外面**
+
+```javascript
+// bad
+// 在循环中最好也别使用函数表达式。
+for (var k = 0; k < 10; k++) {
+  var t = function (a) {
+    // 创建了10次  函数对象。
+    console.log(a)
+  }
+  t(k)
+}
+
+// good
+// 推荐用法
+function t(a) {
+  console.log(a)
+}
+for (var k = 0; k < 10; k++) {
+  t(k)
+}
+t = null
+```
 
 ## `use strict` 使用前后的差别
 
@@ -4804,7 +5009,7 @@ setTimeout(() => {
 
 ref
 
-- [fetch使用的常见问题及解决办法](https://www.cnblogs.com/wonyun/p/fetch_polyfill_timeout_jsonp_cookie_progress.html)
+- [fetch 使用的常见问题及解决办法](https://www.cnblogs.com/wonyun/p/fetch_polyfill_timeout_jsonp_cookie_progress.html)
 
 ```javascript
 fetch('https://qiniu1.lxfriday.xyz/feoffer/vuejs-book.pdf', {
@@ -5253,7 +5458,7 @@ ref
 - 如果 `script` 无 `src` 属性，则 `defer`，`async` 会被忽略；
 - 动态添加的 `script` 标签隐含 `async` 属性，对动态嵌入的脚本使用 `async=false` 来达到 `defer` 的效果；
 
-## DOMContentLoaded 和 load 事件的区别
+## ✔ DOMContentLoaded 和 load 事件的区别
 
 ref
 
@@ -5699,6 +5904,7 @@ function simulateInstanceOf(left, right) {
 ```javascript
 Function.prototype.call = function (ctx, ...args) {
   ctx = ctx || window
+  if (typeof ctx === 'number' || typeof ctx === 'string') ctx = new ctx.__proto__.constructor(ctx)
   const that = this
   const funcName = Symbol('func')
   ctx[funcName] = that
@@ -5713,6 +5919,7 @@ Function.prototype.call = function (ctx, ...args) {
 ```javascript
 Function.prototype.apply = function (ctx, args) {
   ctx = ctx || window
+  if (typeof ctx === 'number' || typeof ctx === 'string') ctx = new ctx.__proto__.constructor(ctx)
   const that = this
   const funcName = Symbol('func')
   ctx[funcName] = that
@@ -5727,6 +5934,7 @@ Function.prototype.apply = function (ctx, args) {
 ```javascript
 Function.prototype.bind = function (ctx, ...args) {
   ctx = ctx || window
+  if (typeof ctx === 'number' || typeof ctx === 'string') ctx = new ctx.__proto__.constructor(ctx)
   const that = this
   const funcName = Symbol('func')
   ctx[funcName] = that
@@ -5805,13 +6013,250 @@ function ObjectAssign(target, ...args) {
 }
 ```
 
-### 手撕 Promise
+### ✔ 手撕 Promise
 
 ref
 
 - [https://juejin.im/post/5b2f02cd5188252b937548ab](https://juejin.im/post/5b2f02cd5188252b937548ab)
+- [Promises/A+ 规范](https://promisesaplus.com/)
 
-### 手撕 JSON.stringify
+```javascript
+class MPromise {
+  constructor(executor) {
+    this.stateCons = {
+      PENDING: 'PENDING',
+      FULFILLELD: 'FULFILLELD',
+      REJECTED: 'REJECTED',
+    }
+    this.state = this.stateCons.PENDING
+    this.value = undefined
+    this.reason = undefined
+    this.onResolvedCallbacks = []
+    this.onRejectedCallbacks = []
+
+    let resolve = value => {
+      if (this.state === this.stateCons.PENDING) {
+        this.state = this.stateCons.FULFILLELD
+        this.value = value
+
+        this.onResolvedCallbacks.forEach(f => f())
+      }
+    }
+    let reject = reason => {
+      if (this.state === this.stateCons.PENDING) {
+        this.state = this.stateCons.REJECTED
+        this.reason = reason
+
+        this.onRejectedCallbacks.forEach(f => f())
+      }
+    }
+
+    try {
+      // Promise 构造函数传入的参数
+      executor(resolve, reject)
+    } catch (err) {
+      reject(err)
+    }
+  }
+
+  then(onFulfilled, onRejected) {
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
+    onRejected =
+      typeof onRejected === 'function'
+        ? onRejected
+        : err => {
+            throw err
+          }
+
+    let p = new MPromise((resolve, reject) => {
+      if (this.state === this.stateCons.FULFILLELD) {
+        setTimeout(() => {
+          try {
+            let x = onFulfilled(this.value)
+            resolvePromise(p, x, resolve, reject)
+          } catch (e) {
+            reject(e)
+          }
+        })
+      } else if (this.state === this.stateCons.REJECTED) {
+        setTimeout(() => {
+          try {
+            let x = onRejected(this.reason)
+            resolvePromise(p, x, resolve, reject)
+          } catch (e) {
+            reject(e)
+          }
+        })
+      } else if (this.state === this.stateCons.PENDING) {
+        this.onResolvedCallbacks.push(() => {
+          setTimeout(() => {
+            try {
+              let x = onFulfilled(this.value)
+              resolvePromise(p, x, resolve, reject)
+            } catch (e) {
+              reject(e)
+            }
+          })
+        })
+        this.onRejectedCallbacks.push(() => {
+          setTimeout(() => {
+            try {
+              let x = onRejected(this.reason)
+              resolvePromise(p, x, resolve, reject)
+            } catch (e) {
+              reject(e)
+            }
+          })
+        })
+      }
+    })
+
+    return p
+  }
+
+  static resolve(arg) {
+    return new MPromise(res => res(arg))
+  }
+
+  static reject(arg) {
+    return new MPromise((res, rej) => rej(arg))
+  }
+
+  static race(promises) {
+    return new MPromise((resolve, reject) => {
+      promises.forEach(p => {
+        p.then(resolve, reject)
+      })
+    })
+  }
+
+  static all(promises) {
+    const ret = []
+    let length = 0
+    function processData(v, i, resolve) {
+      ret[i] = v
+      length++
+      if (promises.length === length) {
+        resolve(ret)
+      }
+    }
+    return new MPromise((resolve, reject) => {
+      promises.forEach((p, i) => {
+        p.then(v => {
+          processData(v, i, resolve)
+        }, reject)
+      })
+    })
+  }
+}
+
+function resolvePromise(p, x, resolve, reject) {
+  // 禁止无限循环
+  if (x === p) {
+    return reject(new TypeError('检测到无限循环'))
+  }
+  // 防止多次调用
+  let called
+
+  if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
+    try {
+      let then = x.then
+
+      if (typeof then === 'function') {
+        then.call(
+          x,
+          y => {
+            if (called) return
+            called = true
+            resolvePromise(p, y, resolve, reject)
+          },
+          err => {
+            if (called) return
+            called = true
+            reject(err)
+          }
+        )
+      } else {
+        resolve(x)
+      }
+    } catch (e) {
+      if (called) return
+      called = true
+      reject(e)
+    }
+  } else {
+    resolve(x)
+  }
+}
+```
+
+测试代码
+
+```javascript
+new MPromise(res => {
+  res(1)
+}).then(d => console.log('1 => ', d))
+
+MPromise.resolve(2).then(d => {
+  console.log('2 => ', d)
+})
+
+MPromise.reject(3)
+  .then(null)
+  .then(null, err => console.log('3 => ', err))
+
+const p1 = new MPromise(res =>
+  setTimeout(() => {
+    res(100)
+  }, 100)
+)
+
+const p2 = new MPromise(res =>
+  setTimeout(() => {
+    res(200)
+  }, 200)
+)
+
+const p3 = new MPromise(res =>
+  setTimeout(() => {
+    res(300)
+  }, 300)
+)
+
+MPromise.race([p1, p2, p3]).then(d => console.log('100 => ', d))
+
+MPromise.all([p1, p2, p3]).then(
+  d => console.log('[100, 200, 300] => ', d),
+  err => console.log('err', err)
+)
+```
+
+打印结果
+
+```
+1 =>  1
+2 =>  2
+3 =>  3
+100 =>  100
+[100, 200, 300] =>  [ 100, 200, 300 ]
+```
+
+### ✔ 手撕 map 函数
+
+```javascript
+function map(arr, iteratee) {
+  let index = -1
+
+  while (++index < arr.length) {
+    iteratee(arr[index], index, arr)
+  }
+}
+
+// 测试代码
+map(['a', 'b', 'c', 'd'], (v, i) => {
+  console.log(v + ' => ' + i)
+})
+```
 
 ### ✔ 手撕 EventEmitter
 
@@ -5892,7 +6337,229 @@ class EventEmitter {
 }
 ```
 
-### 深拷贝
+### ✔ 手撕深拷贝
+
+ref
+
+- [如何写出一个惊艳面试官的深拷贝?](https://juejin.im/post/5d6aa4f96fb9a06b112ad5b1)
+
+**浅拷贝**：在创建一个新对象时，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址上的数据，就会影响到另一个对象。
+
+![浅拷贝](https://qiniu1.lxfriday.xyz/Fl40w18JgzHtHMN15a5SuHNhoV8p)
+
+**深拷贝**：将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象。
+
+![深拷贝](https://qiniu1.lxfriday.xyz/FizVjhg3DvETQ26NUvYX56PvpX9U)
+
+最简单的实现深拷贝的方式是用 `JSON.parse(JSON.stringify(obj))`，简单而且能适应大多数场景。但是它不支持拷贝函数、循环引用、以及其他的引用类型等情况。
+
+---
+
+下面开始写一个比较全面的深拷贝函数，它可以复制：
+
+- 基本数据类型
+- Object、Array、Map、Set
+- Date、Error
+- 函数
+- 正则
+- Symbol
+
+需要拷贝的类型主要是下面几类：
+
+- 基本数据类型，直接返回
+- 引用类型
+  - 复制 Boolean、Number、String、Date、Error 等的实例对象（非原始值）
+  - 复制正则
+  - 复制函数
+  - 复制 Symbol
+  - 遍历递归复制：Object、Array、Map、Set
+
+```javascript
+const mapTag = '[object Map]'
+const setTag = '[object Set]'
+const arrayTag = '[object Array]'
+const objectTag = '[object Object]'
+
+const boolTag = '[object Boolean]'
+const numberTag = '[object Number]'
+const stringTag = '[object String]'
+const symbolTag = '[object Symbol]'
+const dateTag = '[object Date]'
+const errorTag = '[object Error]'
+const regexpTag = '[object RegExp]'
+const funcTag = '[object Function]'
+
+// 需要遍历复制的
+const deepTag = [mapTag, setTag, arrayTag, objectTag]
+
+function deepCloneWithWhile(target, wm = new WeakMap()) {
+  if (!isObject(target)) return target
+
+  const type = getType(target)
+  let cloneTarget
+  if (deepTag.includes(type)) {
+    cloneTarget = getInit(target)
+  } else {
+    // 直接使用构造函数创建实例或者正则、Symbol、Function 复制
+    return cloneOtherType(target, type)
+  }
+
+  // 避免循环引用
+  if (wm.get(target)) return wm.get(target)
+  wm.set(target, cloneTarget)
+
+  // 需要遍历赋值的类型：Object Array Map Set
+  if (type === mapTag) {
+    target.forEach((value, key) => cloneTarget.set(key, value))
+    return cloneTarget
+  }
+  if (type === setTag) {
+    target.forEach(value => cloneTarget.add(value))
+    return cloneTarget
+  }
+  forEach(type === arrayTag ? target : Object.keys(target), function (value, index) {
+    if (type === arrayTag) {
+      cloneTarget[index] = deepCloneWithWhile(value, wm)
+    } else {
+      cloneTarget[value] = deepCloneWithWhile(target[value], wm)
+    }
+  })
+  return cloneTarget
+}
+
+function cloneFunction(func) {
+  const paramReg = /(?<=\()(.)*(?=\)\s*{)/
+  const bodyReg = /(?<={)(.|\n)+(?=})/m
+  const funcString = func.toString()
+  if (func.prototype) {
+    const params = paramReg.exec(funcString)
+    const body = bodyReg.exec(funcString)
+
+    if (body) {
+      if (params) {
+        const paramsArr = params[0].split(',')
+        return new Function(...paramsArr, body[0])
+      } else {
+        return new Function(body[0])
+      }
+    } else {
+      return null
+    }
+  } else {
+    return eval(funcString)
+  }
+}
+
+function cloneOtherType(target, type) {
+  const Ctor = target.constructor
+  switch (type) {
+    case boolTag:
+    case numberTag:
+    case stringTag:
+    case errorTag:
+    case dateTag:
+      return new Ctor(target)
+    case regexpTag:
+      return cloneReg(target)
+    case symbolTag:
+      return cloneSymbol(target)
+    case funcTag:
+      return cloneFunction(target)
+    default:
+      return null
+  }
+}
+
+function cloneReg(target) {
+  const flagsReg = /\w*$/
+  const flags = flagsReg.exec(target)
+  const result = new target.constructor(target.source, flags && flags[0])
+  result.lastIndex = target.lastIndex
+  return result
+}
+
+function cloneSymbol(target) {
+  return Symbol.prototype.valueOf.call(target)
+}
+
+// 使用构造函数初始化一个实例
+function getInit(target) {
+  return new target.constructor()
+}
+
+// 优化版循环（for in 升级版）
+function forEach(arr, iteratee) {
+  let index = -1
+  const len = arr.length
+  while (++index < len) {
+    iteratee(arr[index], index)
+  }
+  return arr
+}
+
+// 获取 target 的类型 tag
+function getType(target) {
+  return Object.prototype.toString.call(target)
+}
+
+// target 是否是引用类型，不是引用类型的值可以直接返回
+function isObject(target) {
+  const type = typeof target
+  return target !== null && (type === 'object' || type === 'function')
+}
+```
+
+测试代码
+
+```javascript
+const target = {
+  a: 1,
+  b: '2',
+  c: undefined,
+  d: null,
+  e: {
+    e1: 1,
+    e2: 'e1',
+  },
+  f: [1, 2, 3],
+  g: {
+    g: {
+      g: {
+        g: {
+          g: {
+            g: {
+              g: {
+                g: {
+                  g: {
+                    g: {},
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  i: new Set([1, 2, 3]),
+  j: new Map([
+    ['a', 1],
+    ['b', 2],
+    ['c', 3],
+  ]),
+  k: function name(params) {
+    console.log(params)
+  },
+  l: x => console.log(x),
+  m: /abc/,
+  n: /abc/gim,
+}
+
+// 循环引用
+target.h = target
+
+console.log(deepCloneWithWhile(target))
+```
 
 ## 手撕 DOM 操作
 
@@ -5903,6 +6570,8 @@ class EventEmitter {
 ### 从一个字符串中提取时间
 
 `2020-02-08 12:13:14` 提取成 => `[2020, 02, 08, 12, 13, 14]`
+
+### 实现点击表头自动正序、反序
 
 # 设计模式
 
