@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('here')
-
   const add10KStr = new Array(1024).fill('0000000000').join('') // 10240 Byte => 10K
   const add1KStr = new Array(1024).fill('1').join('') // 1024 Byte => 1K
   const storageKey = 'QuotaTest'
@@ -44,5 +42,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 0)
   }
 
+  // 测试 fetch get 请求
+  function LXFRIDAY_TEST_FETCH_GET() {
+    const fetchDataArea = document.querySelector('#lxfriday-test-fetch-get-data-area')
+    fetch('https://qiniu1.lxfriday.xyz/feoffer/fetch-data.json', {
+      method: 'GET',
+      headers: {
+        // 'content-type': 'application/json',
+      },
+      credentials: 'omit',
+      mode: 'cors',
+      // body: JSON.stringify({
+      //   id: 100
+      // }),
+    })
+      .then(res => {
+        console.log('res', res)
+        return res.json()
+      })
+      .then(data => {
+        fetchDataArea.textContent = JSON.stringify(data)
+        console.log('fetch data', data)
+      })
+  }
+
+  function LXFRIDAY_TEST_FETCH_ABORT() {
+    const abortController = new AbortController()
+    const abortSignal = abortController.signal
+
+    // abort 之后触发
+    abortSignal.onabort = function onabort() {
+      console.log('onabort')
+    }
+
+    fetch('https://qiniu1.lxfriday.xyz/feoffer/vuejs-book.pdf', {
+      method: 'GET',
+      credentials: 'omit',
+      signal: abortSignal,
+    })
+      .then(res => {
+        console.log('res', res)
+        return res.json()
+      })
+      .then(data => {
+        console.log('fetch data', data)
+      })
+    setTimeout(() => {
+      abortController.abort()
+    }, 3000)
+  }
+
   window.LXFRIDAY_GLOBAL_localStorageQuota = LXFRIDAY_GLOBAL_localStorageQuota
+  window.LXFRIDAY_TEST_FETCH_GET = LXFRIDAY_TEST_FETCH_GET
+  window.LXFRIDAY_TEST_FETCH_ABORT = LXFRIDAY_TEST_FETCH_ABORT
 })
