@@ -2346,6 +2346,30 @@ css-loader 最后通过 `callback(null, content)` 把解析出来的 JS 代码�
 return callback(null, `${importCode}${moduleCode}${exportCode}`)
 ```
 
+### ✔ thread-loader、HappyPack 加速构建的原理
+
+[thread-loader](https://github.com/webpack-contrib/thread-loader) 是一个加速构建的 loader。
+
+把 thread-loader 放在其他耗时的 loader 前面，则位于 thread-loader 后面的 loader 将会运行在一个 worker 池中。每个 worker 都是一个单独的有 600ms 限制的 node.js 进程，同时跨进程的数据交换也会被限制。
+
+---
+
+**HappyPack 原理**
+
+ref
+
+- [HappyPack 原理](https://webpack.wuhaolin.cn/4%E4%BC%98%E5%8C%96/4-3%E4%BD%BF%E7%94%A8HappyPack.html)
+
+在整个 Webpack 构建流程中，最耗时的流程可能就是 Loader 对文件的转换操作了，因为要转换的文件数据巨多，而且这些转换操作都只能一个个挨着处理。 HappyPack 的核心原理就是把这部分任务分解到多个进程去并行处理，从而减少了总的构建时间。
+
+从使用中可以看出所有需要通过 Loader 处理的文件都先交给了 happypack/loader 去处理，收集到了这些文件的处理权后 HappyPack 就好统一分配了。
+
+每通过 `new HappyPack()` 实例化一个 HappyPack 其实就是告诉 HappyPack 核心调度器如何通过一系列 Loader 去转换一类文件，并且可以指定如何给这类转换操作分配子进程。
+
+核心调度器的逻辑代码在主进程中，也就是运行着 Webpack 的进程中，核心调度器会把一个个任务分配给当前空闲的子进程，子进程处理完毕后把结果发送给核心调度器，它们之间的数据交换是通过进程间通信 API 实现的。
+
+核心调度器收到来自子进程处理完毕的结果后会通知 Webpack 该文件处理完毕。
+
 ## Plugin
 
 ref
@@ -2477,9 +2501,17 @@ plugins: [
 ],
 ```
 
-### clean-webpack-plugin 解析
+## ✔ hash、chunkhash、contenthash 区别
+
+- hash：是工程级别的，每次 build 都会生成一个新的 hash；
+- chunkhash：根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值，缺点是 JS 中引入了 CSS 时，CSS 和 JS 的 chunkhash 一致；
+- contenthash：针对文件内容级别的，只有你自己模块的内容变了，那么 contenthash 值才改变，即使 JS 中引入了 CSS，这两个文件的 contenthash 都是不一样的，
 
 ## Webpack、Rollup、Parcel、Grunt、Gulp 对比
+
+ref
+
+- [Parcel Vs Webpack](https://segmentfault.com/a/1190000012612891)
 
 # Axios
 
