@@ -4,13 +4,11 @@
   "description": "ref",
   "main": "",
   "scripts": {
-    "s": "docsify serve"
+    "s": "cd docs && docsify serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "docsify": "^4.11.3"
-  },
+  "dependencies": {},
   "repository": "https://github.com/lxfriday/fe-offer-guide"
 }

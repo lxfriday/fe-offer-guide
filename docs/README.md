@@ -841,6 +841,10 @@ setTimeout
 
 ## Proxy
 
+ref
+
+- [你不知道的 Proxy：ES6 Proxy 可以做哪些有意思的事情？](https://mp.weixin.qq.com/s?__biz=MzIwNTc4OTU2NA==&mid=2247484998&idx=1&sn=fd584294b73a69d99697f2bebc992317&chksm=972ac655a05d4f4378369eb8324ae493183747908a8e3f10eb9ae25a848516b6282db60ad028&mpshare=1&scene=1&srcid=&sharer_sharetime=1587787687461&sharer_shareid=ad6ea48401668192245ea0291391a68c&key=fcccb4241fdfb8d1f74076eb486fafe3368a8d1655a4729da67ebe4ae1320df1742195efef7500503632dfd4b87356c29abf0270270f77617309d2c8a2e929c8e7f586932c6d1f3bc4c91f1ba346225f&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=62090045&lang=zh_CN&exportkey=A%2BZoF3%2FvYqfBB7iWOuYMOWg%3D&pass_ticket=TvVBe0XVrGqHORR5pST%2BraOQbs1fR%2Fe4DqEiaLNpjVVt2xYdXKFVxOS3PuwA%2Bsbl)
+
 ## ✔ JS GC 原理
 
 ref
@@ -1052,7 +1056,251 @@ for (var k = 0; k < 10; k++) {
 t = null
 ```
 
-## `use strict` 使用前后的差别
+## ✔ use strict 严格模式
+
+ref
+
+- [阮一峰 Javascript 严格模式详解](https://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html)
+
+严格模式做了哪些事情：
+
+- 严格模式通过**抛出错误**来消除了一些原有静默错误；
+- 严格模式修复了一些导致 JavaScript 引擎难以执行优化的缺陷：有时候，相同的代码，**严格模式可以比非严格模式下运行得更快**；
+- 严格模式禁用了在 ECMAScript 的未来版本中可能会定义的一些语法；
+
+### ✔ 开启严格模式
+
+**为脚本开启严格模式**
+
+为整个脚本文件开启严格模式，需要在所有语句之前放一个特定语句 `'use strict';`。突然为整个脚本开启严格模式容易被坑，要慎用。
+
+将 `'use strict';` 放在脚本文件的第一行，则整个脚本都将以"严格模式"运行。如果这行语句不在第一行，则无效，整个脚本以"正常模式"运行。如果不同模式的代码文件合并成一个文件，这一点需要特别注意。
+
+```html
+<script>
+  'use strict'
+  console.log('这是严格模式。')
+  a = 1000 // 会报错
+</script>
+<script>
+  console.log('这是正常模式。')
+  b = 1000 // 不会报错
+</script>
+```
+
+**为函数开启严格模式**
+
+要给某个函数开启严格模式，得把 `'use strict';` 声明放在函数体所有语句之前。
+
+```javascript
+function strict() {
+  'use strict'
+  return '这是严格模式。'
+}
+function notStrict() {
+  return '这是正常模式。'
+}
+```
+
+### ✔ 语法和行为改变
+
+**1、需要显示声明全局变量**
+
+严格模式下必须显示声明全局变量，然后才能对其进行赋值。
+
+```html
+<script>
+  'use strict'
+  v = 1 // 报错，v 未声明
+  for (i = 0; i < 2; i++) {
+    // 报错，i 未声明
+  }
+</script>
+```
+
+**2、创建 eval 作用域**
+
+正常模式下，JavaScript 语言有两种变量作用域（scope）：全局作用域和函数作用域。严格模式创设了第三种作用域：**eval 作用域**。
+
+正常模式下，eval 语句的作用域，取决于它所处于全局作用域，还是处于函数作用域。严格模式下，eval 语句本身就是一个作用域，不再能够生成全局变量了，它所生成的变量只能用于 eval 内部。
+
+```html
+<script>
+  'use strict'
+  var x = 2
+  console.info(eval('var x = 5; x')) // 5
+  console.info(x) // 2
+</script>
+
+<script>
+  var x = 2
+  console.info(eval('var x = 5; x')) // 5
+  console.info(x) // 5
+</script>
+```
+
+**3、禁止 this 关键字指向全局对象**
+
+严格模式下，函数内 `this` 的值为 `undefined`。
+
+```javascript
+function f() {
+  'use strict'
+  return this
+}
+```
+
+函数当做构造函数使用时，如果忘了加 `new` ，`this` 不再指向全局对象，而是报错。
+
+```javascript
+function f() {
+  'use strict'
+  this.a = 1
+}
+f() // 报错，this 未定义
+```
+
+**4、禁止在函数内部遍历调用栈**
+
+```javascript
+function f1() {
+  'use strict'
+  f1.caller // 报错
+  f1.arguments // 报错
+}
+f1()
+```
+
+**5、禁止删除变量**
+
+严格模式下无法删除变量。只有 `configurable` 设置为 `true` 的对象属性，才能被删除。
+
+```javascript
+;(function () {
+  'use strict'
+  var x
+  delete x // 报错
+
+  var o = Object.create(null, {
+    x: {
+      value: 1,
+      configurable: true,
+    },
+  })
+
+  delete o.x // 删除成功
+})()
+```
+
+**6、原本静默失败的变为显示报错**
+
+正常模式下，对一个对象的只读属性进行赋值，不会报错，只会默默地失败。严格模式下，将报错。
+
+```javascript
+;(function () {
+  'use strict'
+  var o = {}
+  Object.defineProperty(o, 'v', { value: 1, writable: false })
+  o.v = 2 // 报错
+})()
+```
+
+严格模式下，对一个使用 `getter` 方法读取的属性进行赋值，会报错。
+
+```javascript
+;(function () {
+  'use strict'
+  var o = {
+    get v() {
+      return 1
+    },
+  }
+
+  o.v = 2 // 报错
+})()
+```
+
+严格模式下，对禁止扩展的对象添加新属性，会报错。
+
+```javascript
+;(function () {
+  'use strict'
+  var o = {}
+  Object.preventExtensions(o)
+  o.v = 1 // 报错
+})()
+```
+
+**7、重名错误**
+
+函数不能有同名的参数。
+
+```javascript
+;(function () {
+  'use strict'
+
+  function f(a, a, b) {
+    // 语法错误
+    // SyntaxError: Duplicate parameter name not allowed in this context
+    return
+  }
+})()
+```
+
+**8、禁止八进制表示法**
+
+正常模式下，整数的第一位如果是 0，表示这是八进制数，比如 `0100` 等于十进制的 64。严格模式禁止这种表示法，整数第一位为 0，将报错。
+
+```javascript
+;(function () {
+  'use strict'
+
+  var num = 0112
+  console.log(num)
+  // 报错
+  // SyntaxError: Octal literals are not allowed in strict mode
+})()
+```
+
+**9、arguments 对象的限制**
+
+不允许对 `arguments` 赋值。
+
+```javascript
+;(function () {
+  'use strict'
+  arguments++ // 语法错误
+  var obj = { set p(arguments) {} } // 语法错误
+  try {
+  } catch (arguments) {} // 语法错误
+  function arguments() {} // 语法错误
+  var f = new Function('arguments', "'use strict'; return 17;") // 语法错误
+})()
+// SyntaxError: Unexpected eval or arguments in strict mode
+```
+
+`arguments` 不再追踪参数的变化。
+
+```javascript
+function f(a) {
+  a = 2
+  return [a, arguments[0]]
+}
+console.log(f(1)) // 正常模式为[2, 2]
+
+function g(a) {
+  'use strict'
+  a = 2
+  return [a, arguments[0]]
+}
+console.log(g(1)) // 严格模式为[2, 1]
+```
+
+禁止使用 `arguments.callee`
+
+**10、保留字**
+
+为了向将来 JavaScript 的新版本过渡，严格模式新增了一些保留字：`implements`, `interface`, `let`, `package`, `private`, `protected`, `public`, `static`, `yield`。
 
 ## 浮点数运算不准确
 
