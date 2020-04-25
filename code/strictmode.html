@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    严格模式
+    <script>
+      function g() {
+        function f(a) {
+          console.log(f.caller)
+          console.log(f.arguments)
+        }
+        f(1) // 报错，this未定义
+      }
+      g()
+      function f1() {
+        'use strict'
+
+        f1.caller // 报错
+
+        f1.arguments // 报错
+      }
+
+      f1()
+    </script>
+  </body>
+</html>
