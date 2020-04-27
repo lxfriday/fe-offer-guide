@@ -839,7 +839,7 @@ promise then
 setTimeout
 ```
 
-## Proxy
+## ✔ Proxy
 
 ref
 
@@ -941,7 +941,7 @@ ref
 - [MDN apply](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply)
 
 `handler.apply(target, thisArg, argumentsList)` 方法用于拦截函数的调用。该方法会拦截目标对象的以下操作：
-  
+
 - `proxy(...args)`
 - `Function.prototype.apply()` 和 `Function.prototype.call()`
 - `Reflect.apply()`
@@ -1189,7 +1189,6 @@ ref
 
 如果成功修改了 `[[Prototype]]`， `setPrototypeOf` 方法返回 `true`，否则返回 `false`。
 
-
 ```javascript
 function Pig(name) {}
 
@@ -1244,7 +1243,7 @@ const p = new Proxy(dog, {
     if (key === 'age') return false
     return key in target
   },
-}) 
+})
 
 console.log(p) // Dog { name: 'wangcai', age: 100 }
 console.log('age' in p) // false
