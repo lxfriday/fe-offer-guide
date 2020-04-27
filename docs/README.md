@@ -843,7 +843,459 @@ setTimeout
 
 ref
 
+- [MDN Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 - [你不知道的 Proxy：ES6 Proxy 可以做哪些有意思的事情？](https://mp.weixin.qq.com/s?__biz=MzIwNTc4OTU2NA==&mid=2247484998&idx=1&sn=fd584294b73a69d99697f2bebc992317&chksm=972ac655a05d4f4378369eb8324ae493183747908a8e3f10eb9ae25a848516b6282db60ad028&mpshare=1&scene=1&srcid=&sharer_sharetime=1587787687461&sharer_shareid=ad6ea48401668192245ea0291391a68c&key=fcccb4241fdfb8d1f74076eb486fafe3368a8d1655a4729da67ebe4ae1320df1742195efef7500503632dfd4b87356c29abf0270270f77617309d2c8a2e929c8e7f586932c6d1f3bc4c91f1ba346225f&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=62090045&lang=zh_CN&exportkey=A%2BZoF3%2FvYqfBB7iWOuYMOWg%3D&pass_ticket=TvVBe0XVrGqHORR5pST%2BraOQbs1fR%2Fe4DqEiaLNpjVVt2xYdXKFVxOS3PuwA%2Bsbl)
+
+Proxy 可以代理对目标的各种操作。语法：
+
+```javascript
+const p = new Proxy(target, handler)
+```
+
+- `target`：要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）；
+- `handler`：一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为；
+
+### ✔ handler.get
+
+ref
+
+- [MDN handler.get()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/get)
+
+`handler.get(target, key, receiver)` 方法用于拦截对象的读取属性操作。该方法会拦截：
+
+- 访问属性: `proxy[foo]` 和 `proxy.bar`
+- 访问原型链上的属性: `Object.create(proxy)[foo]`
+- `Reflect.get()`
+
+**参数**
+
+以下是传递给 `get` 方法的参数，`this` 上下文绑定在 `handler` 对象上。
+
+- `target` 目标对象
+- `key` 被获取的属性名
+- `receiver` Proxy 或者继承 Proxy 的对象
+
+```javascript
+const t = { name: 'lxfriday' }
+const p = new Proxy(t, {
+  get(target, key, receiver) {
+    console.log('this', this) // {get: ƒ}
+    console.log('target === t', target === t) // true
+    console.log('key', key) // name
+    console.log('receiver', receiver) // Proxy {name: "lxfriday"}
+    console.log('receiver === p', receiver === p) // true
+    return Reflect.get(target, key, receiver)
+  },
+})
+console.log(p.name) // lxfriday
+```
+
+### ✔ handler.set
+
+ref
+
+- [MDN handler.set](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/set)
+
+`handler.set(target, key, value, receiver)` 方法是设置属性值操作的捕获器。该方法会拦截目标对象的以下操作:
+
+- 指定属性值：`proxy[foo] = bar` 和 `proxy.foo = bar`
+- 指定继承者的属性值：`Object.create(proxy)[foo] = bar`
+- `Reflect.set()`
+
+**参数**
+
+以下是传递给 `set()` 方法的参数。`this` 绑定在 `handler` 对象上。
+
+- `target`：目标对象
+- `key`：将被设置的属性名或 Symbol
+- `value`：新属性值
+- `receiver`：最初被调用的对象。通常是 `proxy` 本身，但 `handler` 的 set 方法也有可能在原型链上，或以其他方式被间接地调用
+
+**返回值**
+
+`set()` 方法应当返回一个布尔值。
+
+- 返回 `true` 代表属性设置成功
+- 在严格模式下，如果 `set()` 方法返回 `false`，那么会抛出一个 `TypeError` 异常
+
+```javascript
+const t = { name: 'lxfriday' }
+const p = new Proxy(t, {
+  set(target, key, value, receiver) {
+    console.log('this', this) // {set: ƒ}
+    console.log('target === t', target === t) // true
+    console.log('key', key) // age
+    console.log('receiver', receiver) // Proxy {name: "lxfriday"}
+    console.log('receiver === p', receiver === p) // true
+    return Reflect.set(target, key, value, receiver)
+  },
+})
+console.log(Reflect.set(p, 'age', 100)) // lxfriday
+console.log(p) // { name: 'lxfriday', age: 100 }
+```
+
+### ✔ handler.apply
+
+ref
+
+- [MDN apply](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply)
+
+`handler.apply(target, thisArg, argumentsList)` 方法用于拦截函数的调用。该方法会拦截目标对象的以下操作：
+  
+- `proxy(...args)`
+- `Function.prototype.apply()` 和 `Function.prototype.call()`
+- `Reflect.apply()`
+
+**参数**
+
+以下是传递给 `apply` 方法的参数，`this` 上下文绑定在 `handler` 对象上。
+
+- `target`：目标对象（函数）
+- `thisArg`：被调用时的上下文对象
+- `argumentsList`：被调用时的参数数组
+
+**返回值**
+
+`apply` 方法可以返回任何值。
+
+```javascript
+const t = function (a, b) {
+  return a + b
+}
+const p = new Proxy(t, {
+  apply(target, thisArg, args) {
+    console.log('this', this) // { apply: [Function: apply] }
+    console.log('thisArg', thisArg) // { ctx: 'hello' }
+    console.log('args', args) // [ 1, 2 ]
+    return target.apply(thisArg, args)
+  },
+})
+console.log(p.call({ ctx: 'hello' }, 1, 2) * 10) // 30
+```
+
+### ✔ handler.construct
+
+ref
+
+- [MDN handler.construct](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/construct)
+
+`handler.construct(target, argumentsList, newTarget)` 方法用于拦截 `new` 操作符，为了使 `new` 操作符在生成的 `Proxy` 对象上生效，用于初始化代理的目标对象自身必须具有 `[[Construct]]` 内部方法（即 `new target` 必须是有效的）。该拦截器可以拦截以下操作：
+
+- `new proxy(...args)`
+- `Reflect.construct()`
+
+**参数**
+
+下面的参数将会传递给 `construct` 方法，`this` 绑定在 `handler` 上。
+
+- `target`：目标对象
+- `argumentsList`：`constructor` 的参数列表
+- `newTarget`：最初被调用的构造函数，就上面的例子而言是 `p`
+
+**返回值**
+
+`construct` 方法必须返回一个对象。
+
+```javascript
+function Person(name, age) {
+  this.name = name
+  this.age = age
+}
+const p = new Proxy(Person, {
+  construct(target, args, newTarget) {
+    console.log('this', this) // {construct: ƒ}
+    console.log('args', args) // [ 'lxfriday', 100 ]
+    console.log('newTarget', newTarget) // Proxy {length: 2, name: "Person", arguments: null, caller: null, prototype: {…}}
+    console.log('newTarget === p', newTarget === p) // true
+    const res = new target(...args)
+    res.sex = 'male'
+    return res
+  },
+})
+
+console.log(new p('lxfriday', 100)) // { name: 'lxfriday', age: 100, sex: 'male' }
+```
+
+### ✔ handler.deleteProperty
+
+ref
+
+- [MDN handler.deleteProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/deleteProperty)
+
+`handler.deleteProperty(target, key)` 方法用于拦截对对象属性的 `delete` 操作。该方法会拦截以下操作：
+
+- 删除属性: `delete proxy[foo]` 和 `delete proxy.foo`
+- `Reflect.deleteProperty()`
+
+**参数**
+
+`deleteProperty` 方法将会接受以下参数。 `this` 被绑定在 `handler` 上。
+
+- `target`：目标对象
+- `key`：待删除的属性名
+
+**返回值**
+
+`deleteProperty` 必须返回一个 `Boolean` 类型的值，表示了该属性是否被成功删除。
+
+```javascript
+const t = { name: 'lxfriday', school: 'HZAU' }
+const p = new Proxy(t, {
+  deleteProperty(target, key) {
+    console.log('key', key) // school
+    delete target[key]
+    return true
+  },
+})
+Reflect.deleteProperty(p, 'school', {})
+console.log(p) // { name: 'lxfriday' }
+```
+
+### ✔ handler.defineProperty
+
+ref
+
+- [MDN handler.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/defineProperty)
+
+`handler.defineProperty(target, key, descriptor)` 用于拦截对对象的 `Object.defineProperty()` 操作。该方法会拦截目标对象的以下操作：
+
+- `Object.defineProperty()`
+- `Reflect.defineProperty()`
+- `proxy.property='value'`
+
+**参数**
+
+下列参数将会被传递给 `defineProperty` 方法。 `this` 绑定在 `handler` 对象上。
+
+- `target`：目标对象
+- `key`：待检索其描述的属性名
+- `descriptor`：待定义或修改的属性的描述符
+
+**返回值**
+
+`defineProperty` 方法必须以一个 `Boolean` 返回，表示定义该属性的操作成功与否。
+
+```javascript
+const t = { name: 'lxfriday' }
+const p = new Proxy(t, {
+  defineProperty(target, key, descriptors) {
+    console.log('key', key) // school
+    console.log('descriptors', descriptors) // {value: "HZAU", writable: false, enumerable: true, configurable: true}
+    return true
+  },
+})
+Object.defineProperty(p, 'school', {
+  value: 'HZAU',
+  configurable: true,
+  writable: false,
+  enumerable: true,
+})
+```
+
+### ✔ handler.getOwnPropertyDescriptor
+
+ref
+
+- [MDN handler.getOwnPropertyDescriptor](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/getOwnPropertyDescriptor)
+
+`handler.getOwnPropertyDescriptor(target, key)` 方法是 `Object.getOwnPropertyDescriptor()` 的钩子。这个陷阱可以拦截这些操作：
+
+- `Object.getOwnPropertyDescriptor()`
+- `Reflect.getOwnPropertyDescriptor()`
+
+**参数**
+
+- `target`：目标对象
+- `key`：返回属性名称的描述
+
+**返回值**
+
+`getOwnPropertyDescriptor` 方法必须返回一个 `object` 或 `undefined`。
+
+```javascript
+const t = {}
+const p = new Proxy(t, {
+  getOwnPropertyDescriptor(target, key) {
+    console.log('key', key) // school
+    return { value: 'HZAU', configurable: true, enumerable: false, writable: true }
+  },
+})
+console.log(Object.getOwnPropertyDescriptor(p, 'school')) // {value: "HZAU", writable: true, enumerable: false, configurable: true}
+```
+
+### ✔ handler.getPrototypeOf
+
+ref
+
+- [MDN handler.getPrototypeOf](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/getPrototypeOf)
+
+`handler.getPrototypeOf(target)` 是一个代理（Proxy）方法，当读取代理对象的原型时，该方法就会被调用。以下操作会触发拦截方法：
+
+- `Object.getPrototypeOf()`
+- `Reflect.getPrototypeOf()`
+- `__proto__`
+- `Object.prototype.isPrototypeOf()`
+- `instanceof`
+
+**参数**
+
+当 `getPrototypeOf` 方法被调用时，`this` 指向的是它所属的处理器对象。
+
+- `target`：被代理的目标对象
+
+**返回值**
+
+`getPrototypeOf` 方法的返回值必须是一个对象或者 `null`。
+
+```javascript
+function Person(name) {
+  this.name = name
+}
+
+const person = new Person('lxfriday')
+
+const p = new Proxy(person, {
+  getPrototypeOf(target) {
+    console.log('go here')
+    return Person.prototype
+  },
+})
+
+console.log(p instanceof Person) // true
+console.log(Object.getPrototypeOf(p)) // Person {} Person 构造函数
+console.log(Person.prototype.isPrototypeOf(p)) // true
+console.log(p.__proto__) // Person {} Person 构造函数
+```
+
+### ✔ handler.setPrototypeOf
+
+ref
+
+- [MDN handler.setPrototypeOf](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/setPrototypeOf)
+
+`handler.setPrototypeOf(target, prototype)` 方法主要用来拦截设置对象的原型。这个方法可以拦截以下操作：
+
+- `Object.setPrototypeOf()`
+- `Reflect.setPrototypeOf()`
+
+**参数**
+
+以下参数传递给 `setPrototypeOf` 方法。
+
+- `target`：被拦截目标对象
+- `prototype`：对象新原型或为 `null`
+
+**返回值**
+
+如果成功修改了 `[[Prototype]]`， `setPrototypeOf` 方法返回 `true`，否则返回 `false`。
+
+
+```javascript
+function Pig(name) {}
+
+function Dog(name) {
+  this.name = name
+}
+
+const dog = new Dog('wangcai')
+
+const p = new Proxy(dog, {
+  setPrototypeOf(target, prototype) {
+    Reflect.setPrototypeOf(target, prototype)
+    return true
+  },
+})
+
+Reflect.setPrototypeOf(dog, new Pig())
+console.log(dog) // Pig { name: 'wangcai' }
+```
+
+### ✔ handler.has
+
+ref
+
+- [MDN handler.has](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/has)
+
+`handler.has(target, key)` 方法是针对 `in` 操作符的代理方法。这个钩子可以拦截下面这些操作：
+
+- 属性查询：`foo in proxy`
+- 继承属性查询：`foo in Object.create(proxy)`
+- `Reflect.has()`
+
+**参数**
+
+- `target`：目标对象
+- `prop`：需要检查是否存在的属性
+
+**返回值**
+
+`has` 方法返回一个 `Boolean` 属性的值。
+
+```javascript
+function Dog(name, age) {
+  this.name = name
+  this.age = age
+}
+
+const dog = new Dog('wangcai', 100)
+
+const p = new Proxy(dog, {
+  has(target, key) {
+    if (key === 'age') return false
+    return key in target
+  },
+}) 
+
+console.log(p) // Dog { name: 'wangcai', age: 100 }
+console.log('age' in p) // false
+console.log('name' in p) // true
+```
+
+### ✔ handler.isExtensible
+
+ref
+
+- [MDN handler.isExtensible](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/isExtensible)
+
+没啥好说的。
+
+### ✔ handler.ownKeys
+
+ref
+
+- [MDN handler.ownKeys](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/ownKeys)
+
+`handler.ownKeys()` 方法用于拦截 `Reflect.ownKeys()` 等。该拦截器可以拦截以下操作：
+
+- `Object.getOwnPropertyNames()`
+- `Object.getOwnPropertySymbols()`
+- `Object.keys()`
+- `Reflect.ownKeys()`
+
+```javascript
+function Dog(name, age) {
+  this.name = name
+  this.age = age
+}
+
+const dog = new Dog('wangcai', 100)
+
+const p = new Proxy(dog, {
+  ownKeys(target) {
+    return ['a', 'b', 'c']
+  },
+})
+
+console.log(Reflect.ownKeys(p)) // [ 'a', 'b', 'c' ]
+```
+
+### ✔ handler.preventExtensions
+
+ref
+
+- [MDN handler.preventExtensions](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/preventExtensions)
+
+`handler.preventExtensions(target)` 方法用于设置对 `Object.preventExtensions()` 的拦截。
 
 ## ✔ JS GC 原理
 
