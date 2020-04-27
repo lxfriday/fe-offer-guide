@@ -31,11 +31,51 @@
 // proxy.push('a')
 // proxy.push('b')
 
-const t = {}
-const p = new Proxy(t, {
-  getOwnPropertyDescriptor(target, key) {
-    console.log('key', key) // school
-    return { value: 'HZAU', configurable: true, enumerable: false, writable: true }
+// const t = []
+// const p = new Proxy(t, {
+//   set(target, key, value, receiver) {
+//     console.log('key', key)
+//     console.log('value', value)
+//     return Reflect.set(target, key, value, receiver)
+//   },
+// })
+
+// p.push(2)
+// p.push(3)
+// console.log(p)
+// console.log('-----------------------')
+
+// const t2 = [2, 3, 4]
+
+// let c = 0
+
+// new Array(5).fill(1).forEach((v, i) =>
+//   Object.defineProperty(t2, `${i}`, {
+//     set(value) {
+//       console.log('set', value)
+//       console.log('i', i)
+//       Reflect.set(t2, i, value)
+//       c++
+//     },
+//   })
+// )
+
+// t2[0] = 1
+// console.log('c', c)
+
+const arr = ['a']
+
+Object.defineProperties(arr, {
+  '0': {
+    get(value) {
+      console.log('0')
+      return arr[0]
+    },
+  },
+  '1': {
+    get(value) {
+      console.log('1')
+      return arr[0]
+    },
   },
 })
-console.log(Object.getOwnPropertyDescriptors(p)) // {value: "HZAU", writable: true, enumerable: false, configurable: true}
