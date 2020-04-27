@@ -1296,6 +1296,19 @@ ref
 
 `handler.preventExtensions(target)` 方法用于设置对 `Object.preventExtensions()` 的拦截。
 
+### ✔ Proxy vs Object.defineProperty
+
+**Proxy**
+
+- 全方位拦截
+- 兼容性略差
+
+**Object.defineProperty**
+
+- 无法一次性监听所有属性
+- 无法监听新增加的属性
+- 无法响应数组操作
+
 ## ✔ JS GC 原理
 
 ref
