@@ -20,8 +20,50 @@
 //   return res
 // }
 
-function test() {
-  return this
+// function test() {
+//   return this
+// }
+
+// console.log(test.bind(1)())
+
+// function Person(name) {
+//   this.name = name
+// }
+
+// const single = {
+//   ins: null,
+//   get(name) {
+//     if (this.ins) {
+//       this.ins.name = name
+//     } else {
+//       this.ins = new Person(name)
+//     }
+//     return this.ins
+//   },
+// }
+
+const multi = function (...args) {
+  let i = -1
+  let prev = 1
+  while (++i < args.length) {
+    prev *= args[i]
+  }
+  return prev
 }
 
-console.log(test.bind(1)())
+const proxyMulti = (function () {
+  const cache = {}
+  return function (...args) {
+    const argsStr = args.join(',')
+    if (cache[argsStr]) {
+      console.log('here', argsStr)
+      return cache[argsStr]
+    }
+    cache[argsStr] = multi(...args)
+    return cache[argsStr]
+  }
+})()
+
+console.log(proxyMulti(2, 3, 4))
+console.log(proxyMulti(2, 3, 4))
+console.log(proxyMulti(2, 3, 5))
