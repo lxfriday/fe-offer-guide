@@ -2558,8 +2558,6 @@ box2.addEventListener('click', function (e) {
 
 ## commonJS 和 ESM 差异
 
-## EventEmmiter 实现
-
 ## Koa
 
 ### 洋葱模型
@@ -7324,7 +7322,7 @@ ref
 - [JavaScript 设计模式](https://juejin.im/post/59df4f74f265da430f311909)
 - [JavaScript 中常见设计模式整理](https://juejin.im/post/5afe6430518825428630bc4d)
 
-## 单例模式
+## ✔ 单例模式
 
 两个条件：
 
@@ -7336,29 +7334,28 @@ ref
 - 适用于弹框的实现, 全局缓存（不会创建多个弹框实例）。
 
 ```javascript
-const singleton = function (name) {
+function Person(name) {
   this.name = name
-  this.instance = null
 }
 
-singleton.getInstance = function (name) {
-  if (!this.instance) {
-    // 关键语句
-    this.instance = new singleton(name)
-  }
-  return this.instance
+const single = {
+  ins: null,
+  get(name) {
+    if (this.ins) {
+      this.ins.name = name
+    } else {
+      this.ins = new Person(name)
+    }
+    return this.ins
+  },
 }
-
-const a = singleton.getInstance('a') // 通过 getInstance 来获取实例
-const b = singleton.getInstance('b')
-console.log(a === b)
 ```
 
-## 发布-订阅模式
+## ✔ 发布-订阅模式
 
 见 [手撕 EventEmitter](#✔-手撕-EventEmitter)
 
-## 观察者模式
+## ✔ 观察者模式
 
 当观察的数据对象发生变化时, 自动调用相应函数。
 
@@ -7399,9 +7396,164 @@ const proxy = new Proxy(obj, {
 proxy.value = 1 // 调用相应函数
 ```
 
-## 代理模式
+## ✔ 策略模式
 
-## 装饰者模式
+根据不同参数可以命中不同的策略
+
+```javascript
+const strategy = {
+  S: function (salary) {
+    return salary * 4
+  },
+  A: function (salary) {
+    return salary * 3
+  },
+  B: function (salary) {
+    return salary * 2
+  },
+}
+
+const calculateBonus = function (level, salary) {
+  return strategy[level](salary)
+}
+
+calculateBonus('A', 10000) // 30000
+```
+
+## ✔ 代理模式
+
+代理模式的种类有很多, 在 JS 中最常用的为虚拟代理和缓存代理。
+
+**虚拟代理实现图片预加载**
+
+```javascript
+const myImage = (function () {
+  const imgNode = document.createElement('img')
+  document.body.appendChild(imgNode)
+  return {
+    setSrc: function (src) {
+      imgNode.src = src
+    },
+  }
+})()
+
+const proxyImage = (function () {
+  const img = new Image()
+  img.onload = function () {
+    // http 图片加载完毕后才会执行
+    myImage.setSrc(this.src)
+  }
+  return {
+    setSrc: function (src) {
+      myImage.setSrc('loading.jpg') // 本地 loading 图片
+      img.src = src
+    },
+  }
+})()
+
+proxyImage.setSrc('http://loaded.jpg')
+```
+
+**缓存代理实现乘积计算**
+
+```javascript
+const multi = function (...args) {
+  let i = -1
+  let prev = 1
+  while (++i < args.length) {
+    prev *= args[i]
+  }
+  return prev
+}
+
+const proxyMulti = (function () {
+  const cache = {}
+  return function (...args) {
+    const argsStr = args.join(',')
+    if (cache[argsStr]) {
+      console.log('here', argsStr)
+      return cache[argsStr]
+    }
+    cache[argsStr] = multi(...args)
+    return cache[argsStr]
+  }
+})()
+
+console.log(proxyMulti(2, 3, 4))
+console.log(proxyMulti(2, 3, 4))
+console.log(proxyMulti(2, 3, 5))
+```
+
+## ✔ 装饰者模式
+
+动态地给函数赋能。在改造前是这样的：
+
+```javascript
+let wear = function () {
+  console.log('穿上第一件衣服')
+}
+
+const _wear1 = wear
+
+wear = function () {
+  _wear1()
+  console.log('穿上第二件衣服')
+}
+
+const _wear2 = wear
+
+wear = function () {
+  _wear2()
+  console.log('穿上第三件衣服')
+}
+
+wear()
+
+// 穿上第一件衣服
+// 穿上第二件衣服
+// 穿上第三件衣服
+```
+
+经过改造之后：
+
+```javascript
+// 前置代码
+Function.prototype.before = function (fn) {
+  const self = this
+  return function () {
+    fn.apply(self, arguments)
+    return self.apply(self, arguments)
+  }
+}
+
+// 后置代码
+Function.prototype.after = function (fn) {
+  const self = this
+  return function () {
+    self.apply(self, arguments)
+    return fn.apply(self, arguments)
+  }
+}
+
+const wear1 = function () {
+  console.log('穿上第一件衣服')
+}
+
+const wear2 = function () {
+  console.log('穿上第二件衣服')
+}
+
+const wear3 = function () {
+  console.log('穿上第三件衣服')
+}
+
+const wear = wear1.after(wear2).after(wear3)
+wear()
+
+// 穿上第一件衣服
+// 穿上第二件衣服
+// 穿上第三件衣服
+```
 
 # 数据结构
 
