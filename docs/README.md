@@ -3434,13 +3434,76 @@ ref
 
 # HTML
 
-## doctype
+## ✔ doctype
 
-## html5 相比以前有什么变化
+ref
 
-### html5 新增标签
+- [MDN 文档类型声明](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
 
-### html5 新增 api
+在HTML中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
+
+## ✔ html5 相比以前有什么变化
+
+### ✔ html5 新增标签
+
+ref
+
+- [MDN HTML5 标签列表](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5/HTML5_element_list)
+
+html5 中新增了一些语义化的标签，方便做 seo，这些新增标签自带固定样式。
+
+- `<template>` 通过 JavaScript 在运行时实例化内容的容器
+- `<section>` 定义文档中的一个章节
+- `<nav>` 定义只包含导航链接的章节
+- `<article>` 定义可以独立于内容其余部分的完整独立内容块
+- `<aside>` 定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理
+- `<header>` 定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录
+- `<footer>` 定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址
+- `<main>` 定义文档中主要或重要的内容
+- `<figure>` 代表一个和文档有关的图例
+- `<figcaption>` 代表一个图例的说明
+- `<data>` 关联一个内容的机器可读的等价形式
+- `<time>` 代表日期和时间值；机器可读的等价形式通过 datetime 属性指定
+- `<mark>` 代表一段需要被高亮的引用 文字
+- `<ruby>` 代表被 ruby 注释标记的文本，如中文汉字和它的拼音
+- `<rt>` 代表 ruby 注释 ，如中文拼音
+- `<rp>` 代表 ruby 注释两边的额外插入文本 ，用于在不支持 ruby 注释显示的浏览器中提供友好的注释显示
+- `<bdi>` 代表需要脱离父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本
+- `<wbr>` 代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符
+- `<embed>` 代表一个嵌入 的外部资源，如应用程序或交互内容
+- `<video>` 代表一段视频及其视频文件和字幕，并提供了播放视频的用户界面
+- `<audio>` 代表一段声音 ，或音频流
+- `<source>` 为 `<video>` 或 `<audio>` 这类媒体元素指定媒体源
+- `<track>` 为 `<video>` 或 `<audio>` 这类媒体元素指定文本轨道（字幕）
+- `<canvas>` 代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等
+- `<svg>` 定义一个嵌入式矢量图
+- `<math>` 定义一段数学公式
+- `<datalist>` 代表提供给其他控件的一组预定义选项
+- `<keygen>` 代表一个密钥对生成器 控件
+- `<output>` 代表计算值
+- `<progress>` 代表进度条
+- `<meter>` 代表滑动条
+- `<details>` 代表一个用户可以(点击)获取额外信息或控件的小部件
+- `<summary>` 代表 `<details>` 元素的综述或标题
+- `<menuitem>` 代表一个用户可以点击的菜单项
+- `<menu>` 代表菜单
+
+### ✔ html5 新增 api
+
+- Websocket
+- WebRTC
+- web Workers
+- serviceWorker
+- xlocalStorage
+- IndexedDB
+- Camera
+- Canvas
+- WebGL
+- Svg
+- fetch
+- History
+- contentEditable 属性
+- requestAnimationFrame
 
 ## HTML Element 和 HTML Node
 
