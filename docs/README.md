@@ -6036,6 +6036,7 @@ ref
 1. 使用 service worker
 1. [图片懒加载](#✔-IntersectionObserver-实现懒加载)
 1. [节流防抖](#节流防抖)
+1. 虚拟列表
 
 ### 节流防抖
 
@@ -6199,6 +6200,12 @@ ref
 
 - 如果 `script` 无 `src` 属性，则 `defer`，`async` 会被忽略；
 - 动态添加的 `script` 标签隐含 `async` 属性，对动态嵌入的脚本使用 `async=false` 来达到 `defer` 的效果；
+
+### 虚拟列表
+
+ref
+
+- [「前端进阶」高性能渲染十万条数据(虚拟列表)](https://juejin.im/post/5db684ddf265da4d495c40e5)
 
 ## ✔ DOMContentLoaded 和 load 事件的区别
 
@@ -7573,22 +7580,17 @@ wear()
 
 ![排序算法一览](https://qiniu1.lxfriday.xyz/feoffer/sort.png)
 
-### 冒泡排序
+### ✔ 冒泡排序
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/bubbleSort.png)
 
-```typescript
-function swap(arr: number[], a: number, b: number) {
-  const tmp: number = arr[a]
-  arr[a] = arr[b]
-  arr[b] = tmp
-}
-
-export function bubbleSort(arr: number[]) {
+```javascript
+const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
+function bubbleSort(arr) {
   const length = arr.length
   if (length <= 1) return arr
   for (let i = 0; i < length; i++) {
-    let changed: boolean = false // 没有数据交换则表示已经有序了
+    let changed = false // 没有数据交换则表示已经有序了
     for (let j = 0; j < length - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
         swap(arr, j, j + 1)
@@ -7601,15 +7603,97 @@ export function bubbleSort(arr: number[]) {
 }
 ```
 
-### 鸡尾酒排序
+### ✔ 选择排序
 
-### 选择排序
+![](https://qiniu1.lxfriday.xyz/feoffer/ec43f415-5224-bd9b-ad33-0ee480cd19e7.png)
 
-### 插入排序
+![](https://qiniu1.lxfriday.xyz/feoffer/selectionSort.gif)
 
-### 归并排序
+核心思想：进行 n 轮，每轮找出最小的放在这一轮的初始位置
 
-### 快速排序
+```javascript
+const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
+function selectionSort(arr) {
+  const len = arr.length
+  if (len <= 1) return arr
+  for (let i = 0; i < len; i++) {
+    let min = i
+    for (let j = i + 1; j < len; j++) {
+      if (arr[j] < arr[min]) min = j
+    }
+    swap(arr, i, min)
+  }
+
+  return arr
+}
+```
+
+### ✔ 插入排序
+
+![](https://qiniu1.lxfriday.xyz/feoffer/6e79c1d5-2896-68bc-ebc0-280ee2881035.png)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/insertionSort.gif)
+
+```javascript
+function insertionSort(arr) {
+  const len = arr.length
+  if (len <= 1) return arr
+
+  for (let i = 1; i < len; i++) {
+    const cur = arr[i]
+    let j = i - 1
+    for (; j >= 0; j--) {
+      if (arr[j] > cur) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = cur
+  }
+
+  return arr
+}
+```
+
+### ✔ 快速排序
+
+![](https://qiniu1.lxfriday.xyz/feoffer/008ba6a2-d847-8894-a3b4-70b09a1b44b8.png)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/quicksort.gif)
+
+单路快排
+
+```javascript
+function partition(arr, left, right) {
+  let pivot = left
+  let index = pivot + 1
+  for (let i = index; i <= right; i++) {
+    if (arr[i] < arr[pivot]) {
+      swap(arr, i, index)
+      index++
+    }
+  }
+  swap(arr, pivot, index - 1)
+  return index - 1
+}
+
+function quickSort(arr, l, r) {
+  const len = arr.length
+  const left = typeof l === 'number' ? l : 0
+  const right = typeof r === 'number' ? r : len - 1
+  let partitionIndex = 0
+  if (left < right) {
+    partitionIndex = partition(arr, left, right)
+    quickSort(arr, left, partitionIndex - 1)
+    quickSort(arr, partitionIndex + 1, right)
+  }
+
+  return arr
+}
+```
+
+### ✔ 归并排序
 
 ### ✔ 堆排序(heap-sort)
 
@@ -7868,3 +7952,5 @@ function bucketSort(arr, size = 5) {
 ## LRU 缓存算法
 
 ## 斐波拉契数列累加
+
+## 因式分解
