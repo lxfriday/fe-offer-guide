@@ -2962,6 +2962,21 @@ ref
 
 # React
 
+## ✔ React 生命周期
+
+![](https://qiniu1.lxfriday.xyz/feoffer/28cc0a6d-9b6b-e9af-0e7f-3b2df7636ed1.png)
+
+- `componentWillMount`
+- `render`
+- `componentDidMount`
+- `shouldComponentUpdate`
+- `componentWillReceiveProps`
+- `componentWillUpdate`
+- `componentDidUpdate`
+- `componentWillUnmount`
+- `static getDerivedStateFromProps` 在组件创建时和更新时的render方法之前调用，它应该返回一个对象来更新状态，或者返回null来不更新任何内容
+- `getSnapshotBeforeUpdate` 被调用于 `render` 之后，可以读取但无法使用 DOM 的时候。它使您的组件可以在可能更改之前从 DOM 捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给 `componentDidUpdate()`
+
 ## React Context
 
 ## React 事件机制
@@ -7757,6 +7772,17 @@ function quickSort(arr, l, r) {
 ```
 
 ### ✔ 归并排序
+
+![](https://qiniu1.lxfriday.xyz/feoffer/3ccf988e-b992-84f0-a622-dd03c51123c9.png)
+
+
+
+
+### ✔ 希尔排序
+
+![](https://qiniu1.lxfriday.xyz/feoffer/907976b2-e3b0-91fc-0b6d-3ead3ee08c1c.png)
+
+
 
 ### ✔ 堆排序(heap-sort)
 
