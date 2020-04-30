@@ -7659,6 +7659,7 @@ wear()
 ref
 
 - [丰富图例讲解十大经典排序算法](https://juejin.im/post/5d9033fa5188257f6f1ba46b)
+- [排序算法](https://github.com/lxfriday/give-me-job/tree/7c193c8279/algorithm/%E6%8E%92%E5%BA%8F)
 
 ![排序算法一览](https://qiniu1.lxfriday.xyz/feoffer/sort.png)
 
@@ -7867,9 +7868,10 @@ function shellSort(arr) {
 
 1. 父节点 `i` 的**左**子节点在位置 `2 * i + 1`
 1. 父节点 `i` 的**右**子节点在位置 `2 * i + 2`
-1. 子节点 `i` 的父节点在位置 `Math.floor((i -1) / 2)`
+1. 子节点 `i` 的父节点在位置 `Math.floor((i - 1) / 2)`
 
 大顶堆：所有节点 `i` 的值比其左右子节点都大的堆
+
 小顶堆：所有节点 `i` 的值比其左右子节点都小的堆
 
 堆排序的重要过程（以大顶堆实现从小到大为例）：
@@ -7880,9 +7882,7 @@ function shellSort(arr) {
 1. 重复步骤 2、3
 
 ```javascript
-function swap(arr, i, j) {
-  ;[arr[i], arr[j]] = [arr[j], arr[i]]
-}
+const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
 // 构建大顶堆的核心递归算法
 function heapifyMax(arr, i, len) {
   const left = 2 * i + 1

@@ -107,24 +107,86 @@ const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
 //   return arr
 // }
 
-const ar = [2, 6, 8, 4, 5, 3, 2, 1]
+// function shellSort(arr) {
+//   const len = arr.length
+//   if (len <= 1) return arr
 
-console.log(shellSort(ar))
+//   for (let gap = len >> 1; gap > 0; gap >>= 1) {
+//     for (let i = gap; i < len; i++) {
+//       const tmp = arr[i]
+//       let j = i - gap
+//       for (; j >= 0 && arr[j] > tmp; j -= gap) {
+//         arr[j + gap] = arr[j]
+//       }
+//       arr[j + gap] = tmp
+//     }
+//   }
 
-function shellSort(arr) {
+//   return arr
+// }
+
+// 对 i 进行大顶堆化
+function heapifyMax(arr, i, len) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let max = i
+  if (left < len && arr[left] > arr[max]) max = left
+  if (right < len && arr[right] > arr[max]) max = right
+  if (max !== i) {
+    swap(arr, i, max)
+    heapifyMax(arr, max, len)
+  }
+}
+
+function heapifyMin(arr, i, len) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let min = i
+  if (left < len && arr[left] < arr[min]) min = left
+  if (right < len && arr[right] < arr[min]) min = right
+  if (min !== i) {
+    swap(arr, i, min)
+    heapifyMin(arr, min, len)
+  }
+}
+
+function buildMaxHeap(arr) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMax(arr, i, len)
+  }
+}
+
+function buildMinHeap(arr) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMin(arr, i, len)
+  }
+}
+
+function heapSort(arr, asc = true) {
   const len = arr.length
   if (len <= 1) return arr
 
-  for (let gap = len >> 1; gap > 0; gap >>= 1) {
-    for (let i = gap; i < len; i++) {
-      const tmp = arr[i]
-      let j = i - gap
-      for (; j >= 0 && arr[j] > tmp; j -= gap) {
-        arr[j + gap] = arr[j]
-      }
-      arr[j + gap] = tmp
+  if (asc) {
+    buildMaxHeap(arr)
+
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMax(arr, 0, i)
+    }
+  } else {
+    buildMinHeap(arr)
+
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMin(arr, 0, i)
     }
   }
 
   return arr
 }
+
+const ar = [2, 6, 8, 4, 5, 3, 2, 1]
+
+console.log(heapSort(ar, false))
