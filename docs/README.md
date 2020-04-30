@@ -2974,7 +2974,7 @@ ref
 - `componentWillUpdate`
 - `componentDidUpdate`
 - `componentWillUnmount`
-- `static getDerivedStateFromProps` 在组件创建时和更新时的render方法之前调用，它应该返回一个对象来更新状态，或者返回null来不更新任何内容
+- `static getDerivedStateFromProps` 在组件创建时和更新时的 render 方法之前调用，它应该返回一个对象来更新状态，或者返回 null 来不更新任何内容
 - `getSnapshotBeforeUpdate` 被调用于 `render` 之后，可以读取但无法使用 DOM 的时候。它使您的组件可以在可能更改之前从 DOM 捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给 `componentDidUpdate()`
 
 ## React Context
@@ -3455,7 +3455,7 @@ ref
 
 - [MDN 文档类型声明](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
 
-在HTML中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
+在 HTML 中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
 
 ## ✔ html5 相比以前有什么变化
 
@@ -7656,6 +7656,10 @@ wear()
 
 ## 排序算法
 
+ref
+
+- [丰富图例讲解十大经典排序算法](https://juejin.im/post/5d9033fa5188257f6f1ba46b)
+
 ![排序算法一览](https://qiniu1.lxfriday.xyz/feoffer/sort.png)
 
 ### ✔ 冒泡排序
@@ -7743,6 +7747,7 @@ function insertionSort(arr) {
 单路快排
 
 ```javascript
+const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
 function partition(arr, left, right) {
   let pivot = left
   let index = pivot + 1
@@ -7775,14 +7780,83 @@ function quickSort(arr, l, r) {
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/3ccf988e-b992-84f0-a622-dd03c51123c9.png)
 
+![](https://qiniu1.lxfriday.xyz/feoffer/d3de0b1f-7827-e3b9-eeb7-1993e03e0372.png)
 
+![](https://qiniu1.lxfriday.xyz/feoffer/16d7b507ece11c9d.gif)
 
+归并排序（英语：Merge sort，或 mergesort），是创建在归并操作上的一种有效的排序算法，效率为 O(nlogn)。1945 年由约翰·冯·诺伊曼首次提出。该算法是采用 分治法（Divide and Conquer） 的一个非常典型的应用，且各层分治递归可以同时进行。
+
+采用分治法:
+
+1. 分割：递归地把当前序列平均分割成两半。
+1. 集成：在保持元素顺序的同时将上一步得到的子序列集成到一起（归并）。
+
+```javascript
+function merge(arr1, arr2) {
+  const res = []
+  while (arr1.length && arr2.length) {
+    if (arr1[0] < arr2[0]) {
+      res.push(arr1.shift())
+    } else {
+      res.push(arr2.shift())
+    }
+  }
+  while (arr1.length) {
+    res.push(arr1.shift())
+  }
+  while (arr2.length) {
+    res.push(arr2.shift())
+  }
+
+  return res
+}
+
+function mergeSort(arr) {
+  const len = arr.length
+  if (len <= 1) return arr
+  const m = Math.floor(len / 2)
+  const arr1 = arr.slice(0, m)
+  const arr2 = arr.slice(m)
+  return merge(mergeSort(arr1), mergeSort(arr2))
+}
+```
 
 ### ✔ 希尔排序
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/907976b2-e3b0-91fc-0b6d-3ead3ee08c1c.png)
 
+![](https://qiniu1.lxfriday.xyz/feoffer/16d7b4ce200763d6.gif)
 
+希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。
+
+希尔排序是基于插入排序的以下两点性质而提出改进方法的：
+
+- 插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率
+- 但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位
+
+希尔排序通过将比较的全部元素分为几个区域来提升插入排序的性能。这样可以让一个元素可以一次性地朝最终位置前进一大步。然后算法再取越来越小的步长进行排序，算法的最后一步就是普通的插入排序，但是到了这步，需排序的数据几乎是已排好的了（此时插入排序较快）。
+
+```javascript
+function shellSort(arr) {
+  const len = arr.length
+  if (len <= 1) return arr
+  // gap 不断缩小，最后变成 1
+  for (let gap = len >> 1; gap > 0; gap >>= 1) {
+    // gap 确定之后，从 gap 位置开始向后循环
+    for (let i = gap; i < len; i++) {
+      const temp = arr[i]
+      let j = i - gap
+      // i 每轮循环中需要从左往右做插排
+      for (; j >= 0 && arr[j] > temp; j -= gap) {
+        arr[j + gap] = arr[j]
+      }
+      arr[j + gap] = temp
+    }
+  }
+
+  return arr
+}
+```
 
 ### ✔ 堆排序(heap-sort)
 
