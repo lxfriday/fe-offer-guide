@@ -126,67 +126,147 @@ const swap = (arr, a, b) => ([arr[a], arr[b]] = [arr[b], arr[a]])
 // }
 
 // 对 i 进行大顶堆化
-function heapifyMax(arr, i, len) {
-  const left = 2 * i + 1
-  const right = 2 * i + 2
-  let max = i
-  if (left < len && arr[left] > arr[max]) max = left
-  if (right < len && arr[right] > arr[max]) max = right
-  if (max !== i) {
-    swap(arr, i, max)
-    heapifyMax(arr, max, len)
-  }
-}
+// function heapifyMax(arr, i, len) {
+//   const left = 2 * i + 1
+//   const right = 2 * i + 2
+//   let max = i
+//   if (left < len && arr[left] > arr[max]) max = left
+//   if (right < len && arr[right] > arr[max]) max = right
+//   if (max !== i) {
+//     swap(arr, i, max)
+//     heapifyMax(arr, max, len)
+//   }
+// }
 
-function heapifyMin(arr, i, len) {
-  const left = 2 * i + 1
-  const right = 2 * i + 2
-  let min = i
-  if (left < len && arr[left] < arr[min]) min = left
-  if (right < len && arr[right] < arr[min]) min = right
-  if (min !== i) {
-    swap(arr, i, min)
-    heapifyMin(arr, min, len)
-  }
-}
+// function heapifyMin(arr, i, len) {
+//   const left = 2 * i + 1
+//   const right = 2 * i + 2
+//   let min = i
+//   if (left < len && arr[left] < arr[min]) min = left
+//   if (right < len && arr[right] < arr[min]) min = right
+//   if (min !== i) {
+//     swap(arr, i, min)
+//     heapifyMin(arr, min, len)
+//   }
+// }
 
-function buildMaxHeap(arr) {
+// function buildMaxHeap(arr) {
+//   const len = arr.length
+//   for (let i = Math.floor(len / 2); i >= 0; i--) {
+//     heapifyMax(arr, i, len)
+//   }
+// }
+
+// function buildMinHeap(arr) {
+//   const len = arr.length
+//   for (let i = Math.floor(len / 2); i >= 0; i--) {
+//     heapifyMin(arr, i, len)
+//   }
+// }
+
+// function heapSort(arr, asc = true) {
+//   const len = arr.length
+//   if (len <= 1) return arr
+
+//   if (asc) {
+//     buildMaxHeap(arr)
+
+//     for (let i = len - 1; i > 0; i--) {
+//       swap(arr, 0, i)
+//       heapifyMax(arr, 0, i)
+//     }
+//   } else {
+//     buildMinHeap(arr)
+
+//     for (let i = len - 1; i > 0; i--) {
+//       swap(arr, 0, i)
+//       heapifyMin(arr, 0, i)
+//     }
+//   }
+
+//   return arr
+// }
+
+// function countingSort(arr) {
+//   const res = []
+//   const len = arr.length
+//   if (len <= 1) return arr
+//   const bucket = []
+
+//   for (let i = 0; i < len; i++) {
+//     if (bucket[arr[i]]) {
+//       bucket[arr[i]] += 1
+//     } else {
+//       bucket[arr[i]] = 1
+//     }
+//   }
+
+//   for (let i = 0; i < bucket.length; i++) {
+//     for (let j = bucket[i]; j > 0; j--) {
+//       res.push(i)
+//     }
+//   }
+
+//   return res
+// }
+
+// function radixSort(arr) {
+//   const len = arr.length
+//   const max = Math.max(...arr)
+//   let digit = `${max}`.length
+//   let res = arr.slice()
+//   let bucket = []
+//   let start = 1
+//   while (digit > 0) {
+//     start *= 10
+//     for (let i = 0; i < len; i++) {
+//       const j = res[i] % start
+//       if (!bucket[j]) {
+//         bucket[j] = []
+//       }
+//       bucket[j].push(res[i])
+//     }
+
+//     res = []
+//     for (let i = 0; i < bucket.length; i++) {
+//       if (bucket[i] !== undefined) res = res.concat(bucket[i])
+//     }
+//     bucket = []
+//     digit--
+//   }
+
+//   return res
+// }
+
+function bucketSort(arr, size = 5) {
   const len = arr.length
-  for (let i = Math.floor(len / 2); i >= 0; i--) {
-    heapifyMax(arr, i, len)
-  }
-}
-
-function buildMinHeap(arr) {
-  const len = arr.length
-  for (let i = Math.floor(len / 2); i >= 0; i--) {
-    heapifyMin(arr, i, len)
-  }
-}
-
-function heapSort(arr, asc = true) {
-  const len = arr.length
+  const max = Math.max(...arr)
+  const min = Math.min(...arr)
   if (len <= 1) return arr
+  const bucketSize = Math.floor((max - min) / size) + 1
+  const bucket = []
+  let res = []
 
-  if (asc) {
-    buildMaxHeap(arr)
-
-    for (let i = len - 1; i > 0; i--) {
-      swap(arr, 0, i)
-      heapifyMax(arr, 0, i)
-    }
-  } else {
-    buildMinHeap(arr)
-
-    for (let i = len - 1; i > 0; i--) {
-      swap(arr, 0, i)
-      heapifyMin(arr, 0, i)
+  for (let i = 0; i < len; i++) {
+    const j = Math.floor((arr[i] - min) / bucketSize)
+    if (!bucket[j]) bucket[j] = []
+    bucket[j].push(arr[i])
+    let l = bucket[j].length - 1
+    while (l > 0) {
+      bucket[j][l] < bucket[j][l - 1] && swap(bucket[j], l, l - 1)
+      l--
     }
   }
 
-  return arr
+  for (let i = 0; i < bucket.length; i++) {
+    if (bucket[i]) {
+      res = res.concat(bucket[i])
+    }
+  }
+
+  return res
 }
 
 const ar = [2, 6, 8, 4, 5, 3, 2, 1]
 
-console.log(heapSort(ar, false))
+console.log(bucketSort(ar, false))
