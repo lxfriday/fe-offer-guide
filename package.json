@@ -4,11 +4,14 @@
   "description": "ref",
   "main": "",
   "scripts": {
-    "s": "cd docs && docsify serve"
+    "s": "node dev.js && cd docs && docsify serve --port 3388"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "docsify-cli": "^4.4.0",
+    "react-dev-utils": "^10.2.1"
+  },
   "repository": "https://github.com/lxfriday/fe-offer-guide"
 }
