@@ -872,7 +872,6 @@ setTimeout
 
 ![Object_defineProperty2](https://qiniu1.lxfriday.xyz/feoffer/Object_defineProperty2.png)
 
-
 ## ✔ Proxy
 
 ref
@@ -1806,13 +1805,192 @@ ref
 
 - [https://juejin.im/post/5dab6dd7e51d457805049b18](https://juejin.im/post/5dab6dd7e51d457805049b18)
 
-## valueOf && toString 及其相关场景
+## ✔ valueOf && toString 及其涉及到的隐式转换
+### ✔ valueOf
 
-- `+`
-- `''+param`
-- `String()`、`Number()`
-- 上述强制转换
+- [MDN Object.prototype.valueOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)
+- [MDN Object.prototype.toString()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString)
 
+`Object.prototype.valueOf()` 意思是返回对象的原始值。
+
+默认情况下，`valueOf` 方法由 `Object` 后面的每个对象继承。 每个内置的核心对象都会覆盖此方法以返回适当的值。如果对象没有原始值，则 `valueOf` 将返回对象本身。JavaScript 的许多内置对象都重写了该函数，以实现更适合自身的功能需要。因此，不同类型对象的 `valueOf()` 方法的返回值和返回值类型均可能不同。
+
+![valueOf](https://qiniu1.lxfriday.xyz/feoffer/valueOf.png)
+
+![valueOf2](https://qiniu1.lxfriday.xyz/feoffer/valueOf2.png)
+
+### ✔ toString
+
+返回一个表示该对象的字符串。它的返回结果比 `valueOf` 返回的结果更复杂。
+
+每个对象都有一个 `toString()` 方法，当该对象被表示为一个文本值时，或者一个对象以预期的字符串方式引用时自动调用。默认情况下，`toString()` 方法被每个 `Object` 对象继承。如果此方法在自定义对象中未被覆盖，`toString()` 返回 `"[object type]"`，其中 type 是对象的类型。
+
+![toString](https://qiniu1.lxfriday.xyz/feoffer/toString.png)
+
+`toString` 检测对象类型。
+
+![toString 检测对象的类型](https://qiniu1.lxfriday.xyz/feoffer/toString%20%E6%A3%80%E6%B5%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B.png)
+
+### ✔ valueOf 及 toString 的隐式调用
+
+在对对象做一些操作的时候，会涉及到这两个函数隐式调用，有时候两个函数都会调用且顺序在不同时候不固定。
+
+- `+param` 优先调用 `valueOf` 获取值，先从 `valueOf` 或者 `toString` 取到值，再强制转数字
+- `''+param` 优先调用 `valueOf` 获取值（没错是 `valueOf` 不是 `toString`），，先从 `valueOf` 或者 `toString` 取到值，再强制转字符串
+- `String()` 优先调用 `toString` 获取值，强转为字符串
+- `Number()` 优先调用 `valueOf` 获取值，强转为数字
+
+![valueOf&toString6](https://qiniu1.lxfriday.xyz/feoffer/valueOf&toString6.png)
+
+总而言之，先从 `valueOf` 或者 `toString` 获取到值，再强制转换为数字或者字符串。对获取到的值进行强制转换的时候就有可能出现 `NaN`、`'undefined'`。
+
+```js
+Number(undefined) // NaN
+String(undefined) // 'undefined'
+```
+
+**连续调用出现的场景**
+
+二者并存的情况下，在数值运算中，优先调用了 `valueOf`，字符串运算中，优先调用了 `toString`。
+
+```js
+function Ming(name, age, sex) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+}
+function Juan(name, age, sex) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+}
+
+
+Ming.prototype.toString = function() {
+    console.log('Ming toString')
+    return '100'
+}
+Ming.prototype.valueOf = function() {
+    console.log('Ming valueOf')
+    return 1000
+}
+
+Juan.prototype.toString = function() {
+   console.log('Juan toString')
+   return '200'
+}
+Juan.prototype.valueOf = function() {
+    console.log('Juan valueOf')
+    return 500
+}
+
+const ming = new Ming('ming', 1, 'male')
+const juan = new Juan('juan', 2, 'female')
+
+
+ming < juan 
+// Ming valueOf
+// Juan valueOf
+// false
+
+ming > juan
+// Ming valueOf
+// Juan valueOf
+// true
+
+Ming.prototype.valueOf = null
+Juan.prototype.valueOf = null
+
+ming < juan 
+// Ming toString
+// Juan toString
+// true
+
+ming > juan
+// Ming toString
+// Juan toString
+// false
+```
+
+![valueOf&toString3](https://qiniu1.lxfriday.xyz/feoffer/valueOf&toString3.png)
+
+### ✔ Symbol.toPrimitive
+
+- ref [MDN Symbol.toPrimitive](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive)
+
+`Symbol.toPrimitive` 是一个内置的 `Symbol` 值，它是作为对象的函数值属性存在的，当一个对象转换为对应的原始值时，会调用此函数。
+
+```js
+class Foo {} 
+let foo = new Foo(); 
+console.log(3 + foo); // "3[object Object]" 
+console.log(3 - foo); // NaN 
+console.log(String(foo)); // "[object Object]" 
+class Bar {
+ constructor() { 
+  this[Symbol.toPrimitive] = function(hint) { 
+    switch (hint) { 
+      case 'number': 
+      return 3; 
+      case 'string': 
+      return 'string bar'; 
+      case 'default': 
+      default: 
+      return 'default bar'; 
+    }
+  }
+ }
+}
+
+let bar = new Bar(); 
+console.log(3 + bar); // "3default bar" 
+console.log(3 - bar); // 0 
+console.log(String(bar)); // "string bar"
+```
+
+![toPrimitive2](https://qiniu1.lxfriday.xyz/feoffer/toPrimitive2.png)
+
+来看另外一个例子。
+
+```js
+// 一个没有提供 Symbol.toPrimitive 属性的对象，参与运算时的输出结果
+var obj1 = {};
+console.log(+obj1);     // NaN
+console.log(`${obj1}`); // "[object Object]"
+console.log(obj1 + ""); // "[object Object]"
+
+// 接下面声明一个对象，手动赋予了 Symbol.toPrimitive 属性，再来查看输出结果
+var obj2 = {
+  [Symbol.toPrimitive](hint) {
+    if (hint == "number") {
+      return 10;
+    }
+    if (hint == "string") {
+      return "hello";
+    }
+    return true;
+  }
+};
+console.log(+obj2);     // 10      -- hint 参数值是 "number"
+console.log(3+obj2);     // 4      恶心！！！ -- hint 参数值是 "default"
+// Number(true) === 1
+
+console.log(`${obj2}`); // "hello" -- hint 参数值是 "string"
+console.log(obj2 + ""); // "true"  -- hint 参数值是 "default"
+```
+
+![toPrimitive4](https://qiniu1.lxfriday.xyz/feoffer/toPrimitive4.png)
+
+
+综上，对 `hint` 的值做一个归纳：
+
+- `+param`，`hint` => `number`
+- `number + param`，`hint` => `default`
+- `string + param`，`hint` => `default`
+- `param + ''`，`hint` => `default`
+- `${param}`，`hint` => `string`
+
+![toPrimitive5](https://qiniu1.lxfriday.xyz/feoffer/toPrimitive5.png)
 ## ✔ 事件循环
 
 ref
