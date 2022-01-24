@@ -841,9 +841,37 @@ setTimeout
 
 ## Object
 
-### Object.defineProperty
+### ✔ Object.defineProperty
 
 - ref [MDN Object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+
+`Object.defineProperty()` 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
+用法 `Object.defineProperty(obj, prop, descriptor)`。
+
+`descriptor` 用来精确控制对象的属性。
+
+共享键值：
+
+- `configurable` 控制属性是否可以被删除，默认 `false`
+- `enumerable` 控制属性是否可以被枚举，默认 `false`
+
+数据描述符：
+
+- `value` 属性对应的值
+- `writable` 是否可以被赋值，默认 `false`，为 `false` 强制写入将会无效。
+
+![Object_defineProperty](https://qiniu1.lxfriday.xyz/feoffer/Object_defineProperty.png)
+
+存取描述符：
+
+- `get` 获取属性值时候会调用这个函数
+- `set` 设置属性值时候会调用这个函数
+
+**注意**，使用 `Object.defineProperty` 设置的属性和直接设置的属性在描述符默认属性上会有差别。
+
+![Object_defineProperty2](https://qiniu1.lxfriday.xyz/feoffer/Object_defineProperty2.png)
+
 
 ## ✔ Proxy
 
