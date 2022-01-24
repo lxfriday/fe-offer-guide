@@ -1988,7 +1988,7 @@ console.log(obj2 + ""); // "true"  -- hint 参数值是 "default"
 - `number + param`，`hint` => `default`
 - `string + param`，`hint` => `default`
 - `param + ''`，`hint` => `default`
-- `${param}`，`hint` => `string`
+- \`${param}\`，`hint` => `string`
 
 ![toPrimitive5](https://qiniu1.lxfriday.xyz/feoffer/toPrimitive5.png)
 ## ✔ 事件循环
