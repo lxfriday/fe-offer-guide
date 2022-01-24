@@ -839,6 +839,12 @@ promise then
 setTimeout
 ```
 
+## Object
+
+### Object.defineProperty
+
+- ref [MDN Object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+
 ## ✔ Proxy
 
 ref
@@ -1771,6 +1777,13 @@ console.log(g(1)) // 严格模式为[2, 1]
 ref
 
 - [https://juejin.im/post/5dab6dd7e51d457805049b18](https://juejin.im/post/5dab6dd7e51d457805049b18)
+
+## valueOf && toString 及其相关场景
+
+- `+`
+- `''+param`
+- `String()`、`Number()`
+- 上述强制转换
 
 ## ✔ 事件循环
 
