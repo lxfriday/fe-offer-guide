@@ -2787,6 +2787,27 @@ box2.addEventListener('click', function (e) {
 
 ## 基础属性
 
+### ✔ getComputedStyle
+
+- ref [MDN getComputedStyle](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getComputedStyle)
+
+`Window.getComputedStyle()` 方法返回一个对象，该对象在**应用活动样式表并解析这些值可能包含的任何基本计算后**报告元素的所有CSS属性的值。
+
+用法 
+
+```js
+let style = window.getComputedStyle(element, [pseudoElt]);
+```
+
+- `element` html 元素
+- `pseudoElt` 指定一个要匹配的伪元素的字符串。
+
+返回的 `style` 是一个实时的 `CSSStyleDeclaration` 对象，**当元素的样式更改时，它会自动更新本身*。注意能够自动更新。
+
+返回的对象与从元素的 `style` 属性返回的对象具有相同的类型；然而，两个对象具有不同的目的。从 `getComputedStyle` 返回的对象是**只读**的，可以用于检查元素的样式（包括由一个 `<style>` 元素或一个外部样式表设置的那些样式）。`elt.style` 对象应用于在特定元素上**设置样式**。
+
+**使用 `getComputedStyle` 会触发浏览器回流，因为需要实时计算元素的属性值。**
+
 ### background
 
 ### position
