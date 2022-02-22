@@ -2100,9 +2100,21 @@ setTimeout
 
 ## 正则表达式
 
-## reduce((prev, curr) => xx)
+## ✔ setTimeout、setInterval
 
-## setTimeout、setInterval
+### ✔ setTimeout 和 setInterval 能设置的最小延迟时间
+
+ - ref [MDN setTimeout](https://developer.mozilla.org/zh-CN/docs/Web/API/setTimeout#%E5%AE%9E%E9%99%85%E5%BB%B6%E6%97%B6%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%80%BC%E6%9B%B4%E4%B9%85%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%9C%80%E5%B0%8F%E5%BB%B6%E8%BF%9F%E6%97%B6%E9%97%B4)
+
+`setTimeout(func, delay)` `delay` 表示的是延迟的毫秒数，函数的调用会在该**延迟之后**才会发生，省略的时候默认取 0 ，这表示**尽快**执行，实际的延迟时间可能会比期待的 `delay` 时间更长。
+
+有很多因素会导致 `setTimeout` 的回调函数执行比设定的预期值更久。
+
+**最小延时 `>=4ms`**。
+
+可参考 [事件循环](/?id=%e2%9c%94-%e4%ba%8b%e4%bb%b6%e5%be%aa%e7%8e%af)
+
+实际延迟时间可能远大于 `delay`。
 
 ## requestIdleCallback
 
