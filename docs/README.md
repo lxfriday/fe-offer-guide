@@ -2116,9 +2116,71 @@ setTimeout
 
 实际延迟时间可能远大于 `delay`。
 
-## requestIdleCallback
-
 ## encodeURIComponent 和 encodeURI
+
+## ✔ requestIdleCallback、cancelIdleCallback
+
+- ref [MDN requestIdleCallback](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestIdleCallback)
+- ref [Using requestIdleCallback](https://developers.google.com/web/updates/2015/08/using-requestidlecallback)
+
+`requestIdleCallback` 方法插入一个函数，这个函数将在浏览器空闲时期被调用，`requestIdleCallback` 回调执行的前提条件是当前浏览器处于空闲状态。
+
+```js
+var handle = window.requestIdleCallback(callback[, options])
+````
+- `handle` 一个 ID，使用 `cancelIdleCallback` 可以取消回调的执行
+- `callback` 一个在事件循环空闲时即将被调用的函数的引用。函数会收到一个名为 `IdleDeadline` 的参数，这个参数可以获取当前空闲时间以及回调是否在超时时间前已经执行的状态。
+- `options` 可选参数，可以为 `{timeout: 2000}`(2000可以为其他数字)，回调在 `timeout` 毫秒过后还没有被调用，则回调任务将放入事件循环中排队，即使这样做有可能对性能产生负面影响。
+
+`requestIdleCallback` 用法示例
+
+```js
+requestIdelCallback(myNonEssentialWork);
+
+
+function myNonEssentialWork (deadline) {
+
+  // deadline.timeRemaining()可以获取到当前帧剩余时间
+  while (deadline.timeRemaining() > 0 && tasks.length > 0) {
+    doWorkIfNeeded();
+  }
+  // 当前帧没有时间了，则把剩余的任务放进下一帧中
+  if (tasks.length > 0){
+    requestIdleCallback(myNonEssentialWork);
+  }
+}
+
+````
+
+`deadline` 有两个属性
+
+- `deadline.didTimeout` 是否超时了
+- `deadline.timeRemaining()` 一帧里面剩余的时间
+
+它与 `requestAnimationFrame` 的区别在于，`requestAnimationFrame`的回调会在每一帧确定执行，属于高优先级任务，而 `requestIdelCallback` 的回调则不一定，只有每一帧有空闲时间的时候才会执行。
+
+由于 `requestIdelCallback` 的回调是在每一帧的中有空闲时间的时候才会执行，所以，如果浏览器一直处于繁忙状态，则回调会一直无法执行。这种情况下，就可以在 `options` 中配置 `timeout` 来强制让回调排队。
+
+```js
+requestIdleCallback(myNonEssentialWork, { timeout: 2000 });
+
+function myNonEssentialWork (deadline) {
+  // 当回调函数是由于超时才得以执行的话，deadline.didTimeout为true
+  while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && tasks.length > 0) {
+    doWorkIfNeeded();
+  }
+  if (tasks.length > 0) {
+    requestIdleCallback(myNonEssentialWork);
+  }
+}
+````
+
+关于是否适合在 `requestIdleCallback` 中执行 DOM 操作，这是否定的。下面是 `requestIdleCallback` 在一阵里面的执行时机：
+
+![requestIdleCallback](https://qiniu1.lxfriday.xyz/blog/b7345d22-3a0e-7eeb-251c-4dbde9892510.png)
+
+可能存在的情况是，浏览器可能会过于繁忙，以至于在一帧里面无法执行 `requestIdleCallback` 的回调函数。另一个原因是 DOM 操作所花费的时间可能会比 `deadline.timeRemaining()` 更长，这也会导致问题。
+
 
 ## JS 动画
 
