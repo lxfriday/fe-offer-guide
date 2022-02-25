@@ -2181,12 +2181,84 @@ function myNonEssentialWork (deadline) {
 
 可能存在的情况是，浏览器可能会过于繁忙，以至于在一帧里面无法执行 `requestIdleCallback` 的回调函数。另一个原因是 DOM 操作所花费的时间可能会比 `deadline.timeRemaining()` 更长，这也会导致问题。
 
-
 ## JS 动画
+
+### ✔ 实现动画的方式有哪些
+
+- ref [css与 js动画 优缺点比较](https://blog.csdn.net/songshuzhong/article/details/80806425)
+
+- 计时器：setTimeout、setInterval
+- requestAnimationFrame
+- CSS 动画：animation、transition
+- Canvas
+
+**JS 动画**
+
+计时器动画就不用说了，最次的一种动画实现方式，很不稳定，回调执行时机不确定，导致动画绘制不稳定。
+
+`requestAnimationFrame` 浏览器提供的API，专门用来在浏览器每一帧里面执行脚本，实现动画。能适应显示器刷新率。
+
+JS动画能够实现的动画效果非常多，能对动画过程做到全流程控制（开始、暂停等），而且JS动画基本不存在兼容性问题。
+
+但是JS动画可能造成性能损耗，进程阻塞，丢帧。
+
+**CSS 动画**
+
+浏览器能够对动画做天然优化（硬件加速）。
+
+CSS 动画代码看起来会比较直观，JS 动画代码相对晦涩。
 
 ### requestAnimationFrame
 
-- [https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
+- ref [https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
+
+`window.requestAnimationFrame()`告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行。
+回调函数执行次数通常是**每秒60次**，但在大多数遵循W3C建议的浏览器中，**回调函数执行次数通常与浏览器屏幕刷新次数相匹配**。为了提高性能和电池寿命，因此在大多数浏览器里，当`requestAnimationFrame()` 运行在后台标签页或者隐藏的`<iframe>`里时，**`requestAnimationFrame()` 会被暂停调用以提升性能和电池寿命**。
+
+`requestAnimationFrame` 会把每一帧中的所有 DOM 操作集中起来，在一次回流重绘中就完成，并且回流重绘的时间间隔紧跟浏览器的刷新率。  
+
+回调函数会被传入 `DOMHighResTimeStamp` 参数，`DOMHighResTimeStamp` 指示当前被 `requestAnimationFrame()` 排序的回调函数被触发的时间。在同一个帧中的多个回调函数，它们每一个都会接受到一个相同的时间戳，即使在计算上一个回调函数的工作负载期间已经消耗了一些时间。该时间戳是一个十进制数，单位毫秒，最小精度为1ms(1000μs)。
+
+这个时间戳类似下面：
+
+![requestAnimationFrame DOMHighResTimeStamp](https://qiniu1.lxfriday.xyz/blog/0174fa62-84f0-2e12-b748-7a3a3683f36a.png)
+
+```js
+requestAnimationFrame(cb);
+```
+
+`cb` 中传入的这个参数与 `performance.now` 的返回值类似，但貌似并不相同（实测结果），[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame#parameters) 中说两者是相同的，但是经过实测，并不是如此。
+
+```js
+function aaaaa() {
+  const box = document.querySelector('#box')
+  let start;
+  function step(timestamp, ...args) {
+    // ----------------------------
+    console.log(timestamp);
+    console.log('performance.now', performance.now());
+    // ----------------------------
+    if (start === undefined) start = timestamp
+    const elapsed = timestamp - start
+    //这里使用`Math.min()`确保元素刚好停在200px的位置。
+    box.style.transform = 'translateX(' + Math.min(0.1 * elapsed, 200) + 'px)'
+
+    if (elapsed < 2000) {
+      // 在两秒后停止动画
+      window.requestAnimationFrame(step)
+    }
+  }
+  requestAnimationFrame(step)
+}
+````
+
+得出的结果是这样的：
+
+![performance.now() vs timestamp](https://qiniu1.lxfriday.xyz/blog/4d0c114e-7145-b2fa-a3b7-a85614f9a049.png)
+
+略微有点差别，知道就好。
+
+清除 `requestAnimationFrame` 对应 `cancelAnimationFrame`。
 
 ## 函数式编程
 
