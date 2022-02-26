@@ -2181,11 +2181,11 @@ function myNonEssentialWork (deadline) {
 
 可能存在的情况是，浏览器可能会过于繁忙，以至于在一帧里面无法执行 `requestIdleCallback` 的回调函数。另一个原因是 DOM 操作所花费的时间可能会比 `deadline.timeRemaining()` 更长，这也会导致问题。
 
-## JS 动画
+## 动画
 
 ### ✔ 实现动画的方式有哪些
 
-- ref [css与 js动画 优缺点比较](https://blog.csdn.net/songshuzhong/article/details/80806425)
+ref [css与 js动画 优缺点比较](https://blog.csdn.net/songshuzhong/article/details/80806425)
 
 - 计时器：setTimeout、setInterval
 - requestAnimationFrame
@@ -2208,7 +2208,7 @@ JS动画能够实现的动画效果非常多，能对动画过程做到全流程
 
 CSS 动画代码看起来会比较直观，JS 动画代码相对晦涩。
 
-### requestAnimationFrame
+### ✔ requestAnimationFrame
 
 - ref [https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 
@@ -2259,6 +2259,206 @@ function aaaaa() {
 略微有点差别，知道就好。
 
 清除 `requestAnimationFrame` 对应 `cancelAnimationFrame`。
+
+### ✔ transition 动画
+
+`transition` 属性是一个简写属性，用于设置四个过渡属性，默认 `all 0 ease 0`：
+
+- `transition-property` 设置 CSS 属性名，`all` 表示覆盖到所有的属性
+- `transition-duration` 完成过渡效果所需要的时间，`2s` `200ms` 等
+- `transition-timing-function` 设置速度曲线
+- `transition-delay` 设置延迟时间
+
+简单使用：
+
+```html
+<style>
+  .demo-transition-box {
+    width: 100px;
+    transition: width 2s ease 0.5s;
+    background-color: red;
+    height: 100px;
+  }
+  .demo-transition-box:hover {
+    width: 300px;
+  }
+</style>
+
+<div class="demo-transition-box"></div>
+```
+实际效果
+
+<div class="demo-transition-box"></div>
+<style>
+  .demo-transition-box {
+    width: 100px;
+    transition: width 2s ease 0.5s;
+    background-color: red;
+    height: 100px;
+  }
+  .demo-transition-box:hover {
+    width: 300px;
+  }
+</style>
+
+### ✔ animation 动画（keyframe）
+
+`animation` 属性是一个简写属性，用于设置六个动画属性：
+
+- `animation-name` 设置关键帧名字，必填
+- `animation-duration` 规定完成动画需要花费的时间，必填
+- `animation-timing-function` 设置动画速度曲线，默认 `ease`
+- `animation-delay` 设置动画开始前的延迟时间，默认 0秒
+- `animation-iteration-count` 设置动画重复次数，默认是 1次
+- `animation-direction` 设置动画是否轮流反向播放动画，默认是 `normal`，执行完一轮之后回到初始状态，另一个选项是 `alternate`，执行完一轮之后反向回来。
+
+
+`animation` 动画的能力在于可以按进度控制动画，粒度更加细致，它也可以控制动画的重复次数，另外动画也可重复使用 `animation-name`。
+
+`keyframe` 中可以用百分比控制动画进度如 0%、10%、50%、100% 等，或者用 `from` 、 `to`。
+
+
+```html
+<style>
+  .demo-aniamtion-box {
+    height: 100px;
+    background-color: red;
+    animation: demo-aniamtion-box-width 3s ease infinite;
+  }
+  @keyframes demo-aniamtion-box-width {
+    0% {
+      width: 100px;
+    }
+    50% {
+      width: 500px;
+    }
+    100% {
+      width: 100px;
+    }
+  }
+</style>
+
+<div class="demo-aniamtion-box"></div>
+
+````
+实际效果
+
+
+<style>
+  .demo-aniamtion-box {
+    height: 100px;
+    background-color: red;
+    animation: demo-aniamtion-box-width 3s ease infinite;
+  }
+  @keyframes demo-aniamtion-box-width {
+    0% {
+      width: 100px;
+    }
+    50% {
+      width: 500px;
+    }
+    100% {
+      width: 100px;
+    }
+  }
+</style>
+
+<div class="demo-aniamtion-box"></div>
+
+来一个 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation#cylon_eye) 的例子，我觉得这个例子比较好玩：
+
+```html
+<style>
+  .demo-aniamtion-wrapper {
+    background-color: black;
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+  }
+
+  .demo-animation-cylon-eye-alternate {
+    background-color: red;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.9) 75%);
+    height: 25px;
+    width: 20%;
+    animation: 4s linear 0s infinite alternate demo-aniamtion-move-eye;
+  }
+  .demo-animation-cylon-eye-normal {
+    background-color: red;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.9) 75%);
+    height: 25px;
+    width: 20%;
+    animation: 4s linear 0s infinite normal demo-aniamtion-move-eye;
+  }
+  @keyframes demo-aniamtion-move-eye {
+    from {
+      margin-left: -20%;
+    }
+    to {
+      margin-left: 100%;
+    }
+  }
+</style>
+
+<div class="demo-aniamtion-wrapper">
+  <div class="demo-animation-cylon-eye-normal">normal</div>
+</div>
+<div class="demo-aniamtion-wrapper">
+  <div class="demo-animation-cylon-eye-alternate">alternate</div>
+</div>
+```
+
+实际效果：
+
+<style>
+  .demo-aniamtion-wrapper {
+    background-color: black;
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+  }
+
+  .demo-animation-cylon-eye-alternate {
+    text-align: center;
+    background-color: red;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.9) 75%);
+    height: 25px;
+    width: 20%;
+    animation: 4s linear 0s infinite alternate demo-aniamtion-move-eye;
+  }
+  .demo-animation-cylon-eye-normal {
+    text-align: center;
+    background-color: red;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.9) 75%);
+    height: 25px;
+    width: 20%;
+    animation: 4s linear 0s infinite normal demo-aniamtion-move-eye;
+  }
+  @keyframes demo-aniamtion-move-eye {
+    from {
+      margin-left: -20%;
+    }
+    to {
+      margin-left: 100%;
+    }
+  }
+</style>
+
+<div class="demo-aniamtion-wrapper">
+  <div class="demo-animation-cylon-eye-normal">normal</div>
+</div>
+<div class="demo-aniamtion-wrapper">
+  <div class="demo-animation-cylon-eye-alternate">alternate</div>
+</div>
+
+
+
+### canvas 动画
+
+### 常用动画库
 
 ## 函数式编程
 
@@ -3397,7 +3597,10 @@ ref
 
 - [https://juejin.im/post/589965c9128fe1006569cc9d#heading-3](https://juejin.im/post/589965c9128fe1006569cc9d#heading-3)
 
-## keyframes
+
+## 字体
+
+`@font-face` 相关问题
 
 # React
 
