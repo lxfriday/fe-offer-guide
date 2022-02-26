@@ -2194,7 +2194,7 @@ ref [css与 js动画 优缺点比较](https://blog.csdn.net/songshuzhong/article
 
 **JS 动画**
 
-计时器动画就不用说了，最次的一种动画实现方式，很不稳定，回调执行时机不确定，导致动画绘制不稳定。
+计时器动画，很不稳定，回调执行时机不确定，导致动画绘制不稳定，当然它也有使用的场景。
 
 `requestAnimationFrame` 浏览器提供的API，专门用来在浏览器每一帧里面执行脚本，实现动画。能适应显示器刷新率。
 
@@ -2324,7 +2324,6 @@ function aaaaa() {
 `keyframe` 中可以用百分比控制动画进度如 0%、10%、50%、100% 等，或者用 `from` 、 `to`。
 
 要注意一点，由于 `animation-duration` 和 `animation-delay` 都是时间，所以只给一个时间的时候，时间是分配给 `animation-duration` 的。
-
 
 
 ```html
@@ -2463,9 +2462,34 @@ function aaaaa() {
   <div class="demo-animation-cylon-eye-alternate">alternate</div>
 </div>
 
+### ✔ Canvas 动画
 
+Canvas 动画不在这一节做深入探讨，参考 MDN。
 
-### canvas 动画
+- ref [Canvas 基本动画](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
+
+### ✔ SVG 动画
+SVG 动画不在这一节做深入探讨，参考 MDN。
+
+- ref [使用 SMIL 的 SVG 动画](https://developer.mozilla.org/zh-CN/docs/Web/SVG/SVG_animation_with_SMIL)
+
+```html
+<svg width="300px" height="100px">
+  <rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+  <rect x="0" y="0" width="20" height="20" fill="red" stroke="black" stroke-width="1">
+    <animateMotion path="M 250,80 H 50 Q 30,80 30,50 Q 30,20 50,20 H 250 Q 280,20,280,50 Q 280,80,250,80Z"
+      dur="3s" repeatCount="indefinite" rotate="auto">
+  </rect>
+</svg>
+```
+
+<svg width="300px" height="100px">
+  <rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+  <rect x="0" y="0" width="20" height="20" fill="red" stroke="black" stroke-width="1">
+    <animateMotion path="M 250,80 H 50 Q 30,80 30,50 Q 30,20 50,20 H 250 Q 280,20,280,50 Q 280,80,250,80Z"
+      dur="3s" repeatCount="indefinite" rotate="auto">
+  </rect>
+</svg>
 
 ### 常用动画库
 
