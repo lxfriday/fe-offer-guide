@@ -2306,16 +2306,25 @@ function aaaaa() {
 `animation` 属性是一个简写属性，用于设置六个动画属性：
 
 - `animation-name` 设置关键帧名字，必填
-- `animation-duration` 规定完成动画需要花费的时间，必填
-- `animation-timing-function` 设置动画速度曲线，默认 `ease`
-- `animation-delay` 设置动画开始前的延迟时间，默认 0秒
-- `animation-iteration-count` 设置动画重复次数，默认是 1次
-- `animation-direction` 设置动画是否轮流反向播放动画，默认是 `normal`，执行完一轮之后回到初始状态，另一个选项是 `alternate`，执行完一轮之后反向回来。
+- [`animation-duration`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-duration) 规定完成动画需要花费的时间，必填，可以是毫秒或者秒
+- [`animation-timing-function`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timing-function) 设置动画速度曲线，默认 `ease`
+- `animation-delay` 设置动画开始前的延迟时间，默认 0秒，如果是负值，如 `-1s`，则表示直接跳到一秒时候的状态执行动画
+- `animation-iteration-count` 设置动画重复次数，默认是 1次，它可以被设置成多个值，如 `2, 0, infinite`，这种情况表示每次播放动画时，将使用列表中的下一个值，在使用最后一个值后循环回第一个值
+- `animation-direction` 设置动画是否轮流反向播放动画，默认是 `normal`，它可以取下面几个值：
+    - `normal` 每个动画循环结束，动画重置到起点重新开始
+    - `alternate` 动画交替反向运行，反向运行时，动画按步后退，同时，带时间功能的函数也反向，比如，`ease-in` 在反向时成为 `ease-out`。这是一个镜面反向
+    - `reverse` 反向运行动画，每周期结束动画由尾到头运行，0% 变成 100% 倒过来执行
+    - `alternate-reverse` 反向交替，反向开始交替，动画第一次运行时是反向的，然后下一次是正向，后面依次循环。决定奇数次或偶数次的计数从1开始。
+    - 总结，带 `alternate` 就表示会镜面反向，而带 `reverse` 则表示从 100% -> 0%
+
 
 
 `animation` 动画的能力在于可以按进度控制动画，粒度更加细致，它也可以控制动画的重复次数，另外动画也可重复使用 `animation-name`。
 
 `keyframe` 中可以用百分比控制动画进度如 0%、10%、50%、100% 等，或者用 `from` 、 `to`。
+
+要注意一点，由于 `animation-duration` 和 `animation-delay` 都是时间，所以只给一个时间的时候，时间是分配给 `animation-duration` 的。
+
 
 
 ```html
