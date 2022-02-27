@@ -78,6 +78,14 @@
                   imgObserver.observe(el)
                 })
               }
+
+              // 侧边栏已经完成的类目，添加完成色背景
+              const sidebarLinks = document.querySelectorAll('.sidebar-nav li a')
+              sidebarLinks.forEach((v, i) => {
+                if(v.textContent.startsWith('✔')) {
+                  v.style.backgroundColor = 'rgba(109,255,51,.3)'
+                }
+              })
             })
           },
         ],
@@ -134,8 +142,12 @@
       .sidebar-nav {
         font-family: "喜鹊招牌体";
       }
-      sidebar li {
-        margin: 1px 0;
+      .sidebar li {
+        margin: 0;
+      }
+      .sidebar ul {
+        margin: 0;
+        padding: 0 0 0 15px;
       }
     </style>
   </head>
