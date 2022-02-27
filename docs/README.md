@@ -3217,7 +3217,247 @@ ref
 
 # CSS
 
-## 选择器
+## ✔ 选择器
+### ✔ 元素选择器
+
+元素选择器也叫类型选择器，通过node节点名称匹配元素。
+
+例如：
+
+```css
+span {
+  background-color: DodgerBlue;
+  color: #ffffff;
+}
+```
+
+### ✔ 通配选择器
+
+一个星号(`*`)就是一个通配选择器.它可以匹配任意类型的HTML元素。
+
+```css
+* {
+  color: red;
+}
+```
+
+### ✔ 类选择器
+
+比较常见的选择器。
+
+```css
+.类名 {样式声明 }
+
+.classy {
+  background-color: DodgerBlue;
+}
+```
+
+### ✔ ID选择器
+
+注意它与类选择器的区别在于，类选择器用于匹配多个，或者说是一类，而id应用于匹配单独的一个。不过这是一个约定的做法，实际上，id 选择器也可以匹配到多个。看下面的例子：
+
+```html
+<style>
+  div {
+    height: 30px;
+  }
+  #demo-id-test1 {
+    background-color: red;
+  }
+  #demo-id-test2 {
+    background-color: green;
+  }
+</style>
+
+<div id="demo-id-test1"></div>
+<div id="demo-id-test2"></div>
+<div id="demo-id-test1"></div>
+```
+
+实际效果
+
+<style>
+  div {
+    height: 30px;
+  }
+  #demo-id-test1 {
+    background-color: red;
+  }
+  #demo-id-test2 {
+    background-color: green;
+  }
+</style>
+
+<div id="demo-id-test1"></div>
+<div id="demo-id-test2"></div>
+<div id="demo-id-test1"></div>
+
+只不过，在使用 `document.getElementById('demo-id-test1')` 或者 `document.querySelector('#demo-id-test1')` 的时候只会获取到一个。
+
+当然，并不推荐 id 选择器重复使用。
+
+### ✔ 属性选择器
+
+属性选择器是一个比较强大的选择器，能够依据条件精准找到想要的元素。CSS 属性选择器通过已经存在的属性名或属性值匹配元素。
+
+语法：
+
+- `[attr]` 表示带有以 `attr` 命名的属性的元素
+- `[attr=value]` 精准匹配，表示带有 `attr` 且值等于 `value` 的元素
+- `[attr~=value]` 表示带有以 `attr` 命名的属性的元素，并且该属性是一个以**空格**作为分隔的值列表，其中至少有一个值为 `value`，`[class~=classname]`等同于 `.classname`
+- `[attr^=value]` 表示带有以 `attr` 命名的属性，且属性值是以 `value` **开头**的元素
+- `[attr$=value]` 表示带有以 `attr` 命名的属性，且属性值是以 `value` **结尾**的元素
+- `[attr*=value]` 表示带有以 `attr` 命名的属性，且属性值至少包含一个 `value` 值的元素
+- `[attr operator value i]` 属性选择器的右方括号前添加一个用空格隔开的字母 `i`（或 `I`），可以在匹配属性值时忽略大小写
+- `[attr operator value s]` 在属性选择器的右方括号前添加一个用空格隔开的字母 `s`（或 `S`），可以在匹配属性值时区分大小写
+- `[attr|=value]` 表示带有以 `attr` 命名的属性的元素，属性值为 `value` 或是以 `value-` 为前缀（"`-`"为连字符，Unicode 编码为 U+002D）开头。典型的应用场景是用来匹配语言简写代码（如 `zh-CN`，`zh-TW` 可以用 `zh` 作为 `value`）
+
+例子：
+
+```css
+a {
+  color: blue;
+}
+
+/* 以 "#" 开头的页面本地链接 */
+a[href^="#"] {
+  background-color: gold;
+}
+
+/* 包含 "example" 的链接 */
+a[href*="example"] {
+  background-color: silver;
+}
+
+/* 包含 "insensitive" 的链接,不区分大小写 */
+a[href*="insensitive" i] {
+  color: cyan;
+}
+
+/* 包含 "cAsE" 的链接，区分大小写 */
+a[href*="cAsE" s] {
+  color: pink;
+}
+
+/* 以 ".org" 结尾的链接 */
+a[href$=".org"] {
+  color: red;
+}
+
+
+
+/* 将所有包含 `lang` 属性的 <div> 元素的字重设为 bold */
+div[lang] {
+  font-weight: bold;
+}
+
+/* 将所有语言为美国英语的 <div> 元素的文本颜色设为蓝色 */
+div[lang~="en-us"] {
+  color: blue;
+}
+
+/* 将所有语言为葡萄牙语的 <div> 元素的文本颜色设为绿色 */
+div[lang="pt"] {
+  color: green;
+}
+
+/* 将所有语言为中文的 <div> 元素的文本颜色设为红色
+   无论是简体中文（zh-CN）还是繁体中文（zh-TW） */
+div[lang|="zh"] {
+  color: red;
+}
+
+/* 将所有 `data-lang` 属性的值为 "zh-TW" 的 <div> 元素的文本颜色设为紫色 */
+/* 备注: 和 JS 不同，CSS 可以在不使用双引号的情况下直接使用带连字符的属性名 */
+div[data-lang="zh-TW"] {
+  color: purple;
+}
+```
+
+### ✔ 伪类选择器
+
+- ref [MDN 伪类](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes)
+
+CSS 伪类是添加到选择器的关键字，指定要选择的元素的特殊状态。
+
+用法：
+
+
+```css
+selector:pseudo-class {
+  property: value;
+}
+```
+
+![标准伪类索引](https://qiniu1.lxfriday.xyz/blog/0dbbc6f8-0f2a-2d8a-98e4-d9cb4dc628bc.png)
+
+### ✔ 伪元素选择器
+伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。
+
+语法：
+
+```css
+selector::pseudo-element {
+  property: value;
+}
+```
+
+按照规范，应该使用双冒号（`::`）而不是单个冒号（`:`），以便区分伪类和伪元素。但是，由于旧版本的 W3C 规范并未对此进行特别区分，因此目前绝大多数的浏览器都同时支持使用这两种方式来表示伪元素。
+
+
+![伪元素索引](https://qiniu1.lxfriday.xyz/blog/50e77929-3358-5a0f-4ee2-efb4687229d8.png)
+
+### ✔ 后代选择器
+
+通常用单个空格（` `）字符表示，能够匹配到元素的所有后代。
+
+这个比较常见：
+
+```css
+selector1 selector2 {
+  /* property declarations */
+}
+```
+
+### ✔ 子代选择器
+
+使用 `>` 来匹配元素的直接后代元素，注意不会像后代选择器那样匹配所有的后代。
+
+```css
+元素1 > 元素2 {样式声明 }
+```
+
+### ✔ 相邻兄弟选择器
+
+相邻兄弟选择器 (`+`) 介于两个选择器之间，当第二个元素紧跟在第一个元素之后，并且两个元素都是属于同一个父元素的子元素，则第二个元素将被选中。
+
+语法：
+
+```css
+former_element + target_element { style properties }
+```
+
+注意选中的目标是后面的那个
+
+```css
+* 图片后面紧跟着的段落将被选中 */
+img + p {
+  font-style: bold;
+}
+```
+
+### ✔ 通用兄弟选择器
+
+兄弟选择符，位置无须紧邻，只须同层级，`A~B` 选择 `A` 元素之后**所有**同层级 `B` 元素。
+
+注意它选择的是所有的兄弟，而 `+` 只选择某个兄弟。
+
+语法：
+
+```css
+former_element ~ target_element { style properties }
+```
 
 ## 基础属性
 
