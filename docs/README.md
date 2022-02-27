@@ -3240,6 +3240,71 @@ let style = window.getComputedStyle(element, [pseudoElt]);
 
 **使用 `getComputedStyle` 会触发浏览器回流，因为需要实时计算元素的属性值。**
 
+### ✔ 字体
+
+- ref [MDN @font-face](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face)
+
+`@font-face` 它允许网页开发者为其网页指定在线字体。字体能从远程服务器或者用户本地安装的字体加载. 如果提供了 `local()` 函数，从用户本地查找指定的字体名称，并且找到了一个匹配项, 本地字体就会被使用. 否则, 字体就会使用 `url()` 函数下载的资源。
+
+这里使用的 Web fonts 仍然受到同域限制  (字体文件必须和调用它的网页同一域), 但可以使用 [HTTP access controls](https://developer.mozilla.org/en-US/docs/HTTP_access_control) 解除这一限制。
+
+**注意**，不能在 CSS 选择器中定义 `@font-face`。
+
+```css
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+       url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
+}
+```
+
+常用的几个属性：
+
+- `font-family` 定义字体名
+- `src` 字体源
+- `font-weight` 字体粗细
+
+在接下来的例子中，用到了用户本地字体 "Helvetica Neue Bold" 的备份；如果当前用户(浏览器)未安装该字体(两种可能的字体名都已经试过)，就会用下载的字体 "MgOpenModernaBold.ttf" 来代替：
+
+```css
+@font-face {
+  font-family: MyHelvetica;
+  src: local("Helvetica Neue Bold"),
+  local("HelveticaNeue-Bold"),
+  url(MgOpenModernaBold.ttf);
+  font-weight: bold;
+}
+```
+
+这个例子新定义了一个字体，**正常粗细的字采用字体 Times New Roman，粗体字采用 Consolas**。
+
+```css
+@font-face {
+  font-family: myFirstFont;
+  src: local("Times New Roman");
+  font-weight:normal;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: local(Consolas);
+  font-weight:bold;
+}
+```
+
+注意下面这个例子是无效的，不能在选择器里面定义字体：
+
+```css bad-code
+.className {
+  @font-face {
+    font-family: MyHelvetica;
+    src: local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"),
+        url(MgOpenModernaBold.ttf);
+    font-weight: bold;
+  }
+}
+```
+
 ### background
 
 ### position
@@ -3629,11 +3694,6 @@ ref
 ref
 
 - [https://juejin.im/post/589965c9128fe1006569cc9d#heading-3](https://juejin.im/post/589965c9128fe1006569cc9d#heading-3)
-
-
-## 字体
-
-`@font-face` 相关问题
 
 # React
 
