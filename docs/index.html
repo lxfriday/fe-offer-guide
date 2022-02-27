@@ -94,6 +94,23 @@
       code {
         font-family: Monaco, Consolas !important;
       }
+      pre[data-lang~="bad-code"] {
+        background-color: #ff7d7e;
+      }
+      pre[data-lang~="bad-code"] {
+        position: relative;
+      }
+      pre[data-lang~="bad-code"] .bad-code {
+        background-color: transparent;
+      }
+      pre[data-lang~="bad-code"]:before {
+        content: "😭错误示范";
+        font-size: 10px;
+        color: #666;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+      }
     </style>
   </head>
   <body>
