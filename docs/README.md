@@ -3392,6 +3392,408 @@ selector:pseudo-class {
 
 ![标准伪类索引](https://qiniu1.lxfriday.xyz/blog/0dbbc6f8-0f2a-2d8a-98e4-d9cb4dc628bc.png)
 
+
+#### ✔ 常用伪类
+
+- `:link` 选中尚未访问的链接
+- `:visited` 表示用户已访问过的链接
+- `:hover` 匹配鼠标放在上面时候
+- `:active` 匹配被用户激活的元素，也就是被用户点击时的状态（点击着，没放开鼠标的时候）
+
+
+
+伪类优先级(lvha)
+
+default < `:link` < `:visited` < `:hover` < `:active`
+
+```css
+.link {
+  color: red;
+}
+.link:link {
+  color: green;
+}
+.link:visited {
+  color: cyan;
+}
+.link:hover {
+  color: yellow;
+}
+.link:active {
+  color: white;
+}
+```
+
+- `:checked` 表示任何处于选中状态的`radio(<input type="radio">)`, `checkbox (<input type="checkbox">)` 或 `select` 元素中的 `option` HTML元素。
+- `:empty` 代表没有子元素的元素。子元素只可以是元素节点或文本（包括空格）。注释或处理指令都不会产生影响，注意换行或者空格不会被匹配到。
+
+
+```css
+/* 匹配任意被勾选/选中的radio(单选按钮),checkbox(复选框),或者option(select中的一项) */
+:checked {
+  margin-left: 25px;
+  border: 1px solid blue;
+}
+```
+
+```html
+<div class="demo-pseudo-classes-empty-box-wrapper">
+  <div class="demo-pseudo-classes-empty-box"><!-- 匹配到 :empty --></div>
+  <div class="demo-pseudo-classes-empty-box"> </div>
+  <div class="demo-pseudo-classes-empty-box">I will be pink</div>
+  <div class="demo-pseudo-classes-empty-box">
+      <!-- 由于有换行，不会匹配到:empty -->
+  </div>
+</div>
+
+<style>
+.demo-pseudo-classes-empty-box-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+}
+.demo-pseudo-classes-empty-box {
+  background: pink;
+  height: 80px;
+  width: 80px;
+}
+.demo-pseudo-classes-empty-box:empty {
+  background: lime;
+}
+</style>
+```
+
+<div class="demo-pseudo-classes-empty-box-wrapper">
+  <div class="demo-pseudo-classes-empty-box"><!-- 匹配到 :empty --></div>
+  <div class="demo-pseudo-classes-empty-box"> </div>
+  <div class="demo-pseudo-classes-empty-box">I will be pink</div>
+  <div class="demo-pseudo-classes-empty-box">
+      <!-- 由于有换行，不会匹配到:empty -->
+  </div>
+</div>
+
+<style>
+.demo-pseudo-classes-empty-box-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+}
+.demo-pseudo-classes-empty-box {
+  background: pink;
+  height: 80px;
+  width: 80px;
+}
+.demo-pseudo-classes-empty-box:empty {
+  background: lime;
+}
+</style>
+
+- `:disabled` 表示任何被禁用的元素。如果一个元素不能被激活（如选择、点击或接受文本输入）或获取焦点，则该元素处于被禁用状态
+- `:enabled` 表示任何被启用的（enabled）元素
+- `:focus` 表示获得焦点的元素（如表单输入）。当用户点击或触摸元素或通过键盘的 “tab” 键选择它时会被触发。
+
+
+```css
+/* Selects any disabled <input> */
+input:disabled {
+  background: #ccc;
+}
+
+/* 选择任何启用状态的 <input> */
+input:enabled {
+  color: blue;
+}
+
+/* Selects any <input> when focused */
+input:focus {
+  color: red;
+}
+```
+
+- `:root` 匹配文档树的根元素。对于 HTML 来说，`:root` 表示 `<html>` 元素，除了优先级更高之外，与 html 选择器相同。
+
+```css
+:root {
+  --main-color: hotpink;
+  --pane-padding: 5px 42px;
+}
+```
+
+- `:first-child` 表示在一组兄弟元素中的第一个元素。要有兄弟元素，也就是说必须是两个或以上挨着的相同元素
+
+```css
+/* Selects any <p> that is the first element
+   among its siblings */
+/* 选中兄弟元素中的第一个 <p> */
+p:first-child {
+  color: lime;
+}
+```
+
+```html
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3
+    <ul>
+      <li>Item 3.1</li>
+      <li>Item 3.2</li>
+      <li>Item 3.3</li>
+    </ul>
+  </li>
+</ul>
+
+<style>
+ul li {
+  color: blue;
+}
+
+ul li:first-child {
+  color: red;
+  font-weight: bold;
+}
+</style>
+```
+
+![:first-child](https://qiniu1.lxfriday.xyz/blog/ed35a41c-754e-7f56-0013-ae6eaf4c0e69.png)
+
+- `:first-of-type`  表示了在（它父元素的）子元素列表中，第一个给定类型的元素（兄弟元素不需要紧邻）
+
+```css
+/* 选择在父元素中第一个出现的<p>，而不管其在兄弟内的位置如何 */
+p:first-of-type {
+  color: red;
+}
+```
+
+```html
+<h2>Heading</h2>
+<p>Paragraph 1</p>
+<p>Paragraph 1</p>
+
+<style>
+p:first-of-type {
+  color: red;
+  font-style: italic;
+}
+</style>
+```
+
+![:first-of-type](https://qiniu1.lxfriday.xyz/blog/53de601f-4545-9e5d-26f0-7ffe42778a50.png)
+
+
+- `:last-child` 表示在一组兄弟元素中的最后一个元素。要有兄弟元素，也就是说必须是两个或以上挨着的相同元素
+
+```html
+<ul>
+  <li>此元素背景色不是lime</li>
+  <li>我的也不是lime。</li>
+  <li>我的才是lime！ :)</li>
+</ul>
+
+<style>
+li:last-child {
+  background-color: lime;
+}
+</style>
+```
+
+![:last-child](https://qiniu1.lxfriday.xyz/blog/c8fcd46a-2e13-9b64-427b-82ff729e24ab.png)
+
+- `:last-of-type` 表示了在（它父元素的）子元素列表中，最后一个给定类型的元素（兄弟元素不需要紧邻）
+
+```html
+<p>
+  <em>我没有颜色 :(</em><br>
+  <strong>我没有颜色 :(</strong><br>
+  <em>我有颜色 :D</em><br>
+  <strong>我也没有颜色 :(</strong><br>
+</p>
+
+<p>
+  <em>我没有颜色 :(</em><br>
+  <span><em>我有颜色!</em></span><br>
+  <strong>我没有颜色 :(</strong><br>
+  <em>我有颜色 :D</em><br>
+  <span>
+    <em>我在子元素里，但没有颜色!</em><br>
+    <span style="text-decoration:line-through;"> 我没有颜色 </span><br>
+    <em>我却有颜色！</em><br>
+  </span><br>
+  <strong>我也没有颜色 :(</strong>
+</p>
+
+<style>
+p em:last-of-type {
+  color: lime;
+}
+</style>
+
+```
+
+![:last-of-type](https://qiniu1.lxfriday.xyz/blog/27eb19de-241b-6904-1dc2-b1a6aa4438e0.png)
+
+- `:not()` 用来匹配不符合一组选择器的元素。由于它的作用是防止特定的元素被选中，它也被称为反选伪类（negation pseudo-class）
+
+  可以利用这个伪类提高规则的优先级。例如， `#foo:not(#bar) `和 `#foo` 会匹配相同的元素，但是**前者的优先级更高**。
+
+  `:not(.foo)` 将匹配任何非 `.foo` 的元素，包括 `<html>` 和 `<body>`。
+
+```css
+/* 选择所有不是段落（p）的元素 */
+:not(p) {
+  color: blue;
+}
+```
+
+- `:nth-child()` 这个 CSS 伪类首先找到所有当前元素的兄弟元素，然后按照位置先后顺序从1开始排序，选择的结果为CSS伪类 `:nth-child` 括号中表达式（`an+b`）匹配到的元素集合（n=0，1，2，3...）
+  - `0n+3` 或简单的 `3` 匹配第三个元素。
+  - `1n+0` 或简单的 `n` 匹配每个元素
+  - `2n+0` 或简单的 `2n` 匹配位置为 2、4、6、8...的元素（`n=0` 时，`2n+0=0`，第0个元素不存在，因为是从1开始排序)。你可以使用关键字 `even` 来替换此表达式
+  - `2n+1` 匹配位置为 1、3、5、7...的元素。你可以使用关键字 `odd` 来替换此表达式
+  - `3n+4` 匹配位置为 4、7、10、13...的元素
+
+  a 和 b 都必须为整数，并且元素的第一个子元素的下标为 1。换言之就是，该伪类匹配所有下标在集合 { an + b; n = 0, 1, 2, ...} 中的子元素。另外需要特别注意的是，**an 必须写在 b 的前面，不能写成 b+an 的形式**。
+
+  `tr:nth-child(2n+1)` 表示HTML表格中的奇数行，等同于 `tr:nth-child(odd)`。
+
+  `tr:nth-child(2n)` 表示HTML表格中的偶数行，等同于 `tr:nth-child(even)`。
+
+  `span:nth-child(0n+1)` 表示子元素中第一个且为 `span` 的元素，与 `:first-child` 选择器作用相同。
+
+  `span:nth-child(-n+3)` 匹配前三个子元素中的span元素。`
+
+- `:nth-of-type()` 针对具有一组兄弟节点的标签, 用 n 来筛选出在一组兄弟节点的位置。
+
+```css
+/* 在每组兄弟元素中选择第四个 <p> 元素 */
+p:nth-of-type(4n) {
+  color: lime;
+}
+```
+
+```html
+<div>
+  <div>这段不参与计数。</div>
+  <p>这是第一段。</p>
+  <p>这是第二段。</p>
+  <div>这段不参与计数。</div>
+  <p>这是第三段。</p>
+  <p>这是第四段。</p>
+</div>
+
+<style>
+/* 奇数段 */
+p:nth-of-type(2n+1) {
+  color: red;
+}
+
+/* 偶数段 */
+p:nth-of-type(2n) {
+  color: blue;
+}
+
+/* 第一段 */
+p:nth-of-type(1) {
+  font-weight: bold;
+}
+</style>
+```
+
+![:nth-of-type()](https://qiniu1.lxfriday.xyz/blog/585830ce-445a-f340-b41e-dfd760992605.png)
+
+- `:nth-last-child()` 从兄弟节点中从后往前匹配处于某些位置的元素
+  - `odd` 代表一些元素，它们在所在的兄弟节点中，从后往前计算的数字位置是奇数，比如: 1, 3, 5等。
+  - `even` 代表一些元素，它们在所在的兄弟节点中，从后往前计算的数字位置是偶数，比如: 2, 4, 6等。
+  - `an+b` 代表一些元素，它们在所在兄弟节点中的数字位置满足模式 `an+b`, `n` 是 `0` 或者任意的正整数.。从**结尾**开始计算的第一个元素的索引值是1。 `a` 和 `b` 必须都是 `<integer>`。
+  这个伪类和 `:nth-child` 基本一致, 但它是从结尾计数, 而不是从开始计数。
+
+```css
+/* 在所有兄弟节点中，从后往前
+   选择所有4的倍数的节点 */
+:nth-last-child(4n) {
+  color: lime;
+}
+```
+
+- `:nth-last-of-type(an+b)` 基本上和 `:nth-of-type` 一样，只是它从结尾处反序计数，而不是从开头处
+
+```html
+<div>
+  <span>This is a span.</span>
+  <span>This is another span.</span>
+  <em>This is emphasized.</em>
+  <span>Wow, this span gets limed!!!</span>
+  <strike>This is struck through.</strike>
+  <span>Here is one last span.</span>
+</div>
+
+
+<style>
+span:nth-last-of-type(2) {
+  background-color: lime;
+}
+</style>
+```
+
+![:nth-last-of-type](https://qiniu1.lxfriday.xyz/blog/766b02ad-178e-7f73-df73-2585c635793a.png)
+
+- `:only-child` 匹配**没有任何兄弟元素的元素**，等效的选择器还可以写成 `:first-child:last-child` 或者 `:nth-child(1):nth-last-child(1)`
+
+```css
+/* Selects each <p>, but only if it is the */
+/* only child of its parent */
+p:only-child {
+  background-color: lime;
+}
+```
+
+```html
+<main>
+  <div>
+    <i>I am a lonely only child.</i>
+  </div>
+
+  <div>
+    <i>I have siblings.</i><br>
+    <b>So do I!</b><br>
+    <span>I also have siblings, <span>but this is an only child.</span></span>
+  </div>
+</main>
+
+
+<style>
+main :only-child {
+  color: red;
+}
+</style>
+```
+
+![:only-child](https://qiniu1.lxfriday.xyz/blog/4d682ab0-3ad4-6907-e010-3b942f0db0bd.png)
+
+- `:only-of-type` 代表了任意一个元素，这个元素**没有其他相同类型的兄弟元素**
+
+```html
+<main>
+  <div>I am `div` #1.</div>
+  <p>I am the only `p` among my siblings.</p>
+  <div>I am `div` #2.</div>
+  <div>I am `div` #3.
+    <i>I am the only `i` child.</i>
+    <em>I am `em` #1.</em>
+    <em>I am `em` #2.</em>
+  </div>
+</main>
+
+<style>
+main :only-of-type {
+  color: red;
+}
+</style>
+```
+
+![:only-of-type](https://qiniu1.lxfriday.xyz/blog/3313c4dc-9d7b-c3e8-fe83-e1a14db3c921.png)
+
 ### ✔ 伪元素选择器
 伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。
 
@@ -3564,32 +3966,6 @@ CSS 属性 `flex` 规定了弹性元素如何伸长或缩短以适应 flex 容�
 ## em rem px rpx dp 单位的区别
 
 ## 行内元素、块级元素各自特点及区别
-
-## 伪类
-
-## ✔ 伪类优先级(lvha)
-
-default < `:link` < `:visited` < `:hover` < `:active`
-
-```css
-.link {
-  color: red;
-}
-.link:link {
-  color: green;
-}
-.link:visited {
-  color: cyan;
-}
-.link:hover {
-  color: yellow;
-}
-.link:active {
-  color: white;
-}
-```
-
-## 伪元素
 
 ## CSS 盒模型
 
