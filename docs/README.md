@@ -3810,6 +3810,46 @@ selector::pseudo-element {
 
 ![伪元素索引](https://qiniu1.lxfriday.xyz/blog/50e77929-3358-5a0f-4ee2-efb4687229d8.png)
 
+#### ✔ 常用伪元素
+
+- `::before` 元素前面添加伪元素
+- `::after` 元素后面添加伪元素
+- `::first-letter` 会选中某 block-level element（块级元素）第一行的第一个字母，并且文字所处的行之前没有其他内容（如图片和内联的表格） 
+
+`::before` 伪元素 和 `content` 属性结合起来有可能会在元素前面注入一些文本。如此，`::first-letter` 将会匹配到 `content` 文本的首字母。
+
+```html
+/* Selects the first letter of a <p> */
+<p class=".demo-pseudo-element-p">你好呀 我叫艾琳</p>
+
+<style>
+.demo-pseudo-element-p::first-letter {
+  font-size: 200%;
+}
+</style>
+```
+
+<p class="demo-pseudo-element-p">你好呀 我叫艾琳</p>
+
+<style>
+.demo-pseudo-element-p::first-letter {
+  font-size: 200%;
+}
+</style>
+
+
+- `::first-line` 在某 block-level element （块级元素）的第一行应用样式。第一行的长度取决于很多因素，包括元素宽度，文档宽度和文本的文字大小。
+
+  `::first-line` 伪元素只能在一个 `display` 值为 `block`, `inline-block`, `table-cell` 或者 `table-caption` 中有用。在其他的类型中，`::first-line` 是不起作用的。
+
+- `::selection` 应用于文档中被用户高亮的部分（比如使用鼠标或其他选择设备选中的部分）。
+  
+  只有一小部分CSS属性可以用于 `::selection` 选择器：
+  
+  ![::selection](https://qiniu1.lxfriday.xyz/blog/4fdb6ae9-3050-8b10-115b-5a016c57adc3.png)  
+
+
+
 ### ✔ 后代选择器
 
 通常用单个空格（` `）字符表示，能够匹配到元素的所有后代。
