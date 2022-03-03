@@ -3901,6 +3901,14 @@ img + p {
 former_element ~ target_element { style properties }
 ```
 
+## 层叠与继承
+## 盒模型
+## 背景与边框
+## 溢出的内容
+## 值和单位
+em rem px rpx dp 单位的区别
+## 计算属性(var)
+
 ## 基础属性
 
 ### ✔ getComputedStyle
@@ -3918,7 +3926,7 @@ let style = window.getComputedStyle(element, [pseudoElt]);
 - `element` html 元素
 - `pseudoElt` 指定一个要匹配的伪元素的字符串。
 
-返回的 `style` 是一个实时的 `CSSStyleDeclaration` 对象，**当元素的样式更改时，它会自动更新本身*。注意能够自动更新。
+返回的 `style` 是一个实时的 `CSSStyleDeclaration` 对象，**当元素的样式更改时，它会自动更新本身**。注意能够自动更新。
 
 返回的对象与从元素的 `style` 属性返回的对象具有相同的类型；然而，两个对象具有不同的目的。从 `getComputedStyle` 返回的对象是**只读**的，可以用于检查元素的样式（包括由一个 `<style>` 元素或一个外部样式表设置的那些样式）。`elt.style` 对象应用于在特定元素上**设置样式**。
 
@@ -3989,11 +3997,100 @@ let style = window.getComputedStyle(element, [pseudoElt]);
 }
 ```
 
-### background
+### ✔ background
+
+`background` 是一种 CSS 简写属性，用于一次性集中定义各种背景属性，包括 color, image, origin 与 size, repeat 方式等等。
+
+包含的属性：
+
+- `background-color`背景颜色
+- `background-image` 背景图片
+- `background-clip` 设置元素的背景（背景图片或颜色）是否延伸到边框、内边距盒子、内容盒子下面
+  - `border-box` 背景延伸至边框外沿（但是在边框下层）(border)
+  - `padding-box` 背景延伸至内边距（padding）外沿。不会绘制到边框处 (padding)
+  - `content-box` 背景被裁剪至内容区（content box）外沿
+  - `text` 背景被裁剪成文字的前景色
+
+`border-box`
+
+```html
+<div style="background-clip: border-box;">
+  This is the content of the element.
+</div>
+```
+
+![border-box](https://qiniu1.lxfriday.xyz/blog/ab3c8a21-6e18-a76e-a4a6-473b48d4752c.png)
+
+`padding-box`
+
+```html
+<div style="background-clip: padding-box;">
+  This is the content of the element.
+</div>
+```
+
+![padding-box](https://qiniu1.lxfriday.xyz/blog/b655541f-cddf-db93-6856-522b4828a73d.png)
+
+`content-box`
+
+```html
+<div style="background-clip: content-box;">
+  This is the content of the element.
+</div>
+```
+
+![content-box](https://qiniu1.lxfriday.xyz/blog/a388ddfc-49d3-49cc-a43a-cbf2e718cdfa.png)
+
+`text`
+
+```html
+<div style="background-clip: text; color: transparent;">
+  This is the content of the element.
+</div>
+```
+![text](https://qiniu1.lxfriday.xyz/blog/045ec8e9-9289-84c0-3d2b-bff8d92c9577.png)
+
+- `background-origin` 规定了指定背景图片background-image 属性的原点位置的背景相对区域
+- `background-position` 为每一个背景图片设置初始位置。 这个位置是相对于由 `background-origin` 定义的位置图层的。
+- `background-repeat` 定义背景图像的重复方式。背景图像可以沿着水平轴，垂直轴，两个轴重复，或者根本不重复
+- `background-size` 设置背景图片大小。图片可以保有其原有的尺寸，或者拉伸到新的尺寸，或者在保持其原有比例的同时缩放到元素的可用空间的尺寸
+  - `auto` 以背景图片的比例缩放背景图片
+  - `cover` 缩放背景图片以完全覆盖背景区，可能背景图片部分看不见。和 `contain` 值相反，`cover` 值尽可能大的缩放背景图像并保持图像的宽高比例（图像不会被压扁）。该背景图以它的全部宽或者高覆盖所在容器 
+  - `contain` 缩放背景图片以完全装入背景区，可能背景区部分空白，该背景图会填充所在的容器
+  - length 绝对数值
+  - percentage 百分比
+
+```css
+/* 关键字 */
+background-size: cover
+background-size: contain
+
+/* 一个值: 这个值指定图片的宽度，图片的高度隐式的为auto */
+background-size: 50%
+background-size: 3em
+background-size: 12px
+background-size: auto
+
+/* 两个值 */
+/* 第一个值指定图片的宽度，第二个值指定图片的高度 */
+background-size: 50% auto
+background-size: 3em 25%
+background-size: auto 6px
+background-size: auto auto
+```
+
+- `background-attachment` 决定背景图像的位置是在视口内固定，或者随着包含它的区块滚动
+  - `fixed` 背景相对于视口固定，即使一个元素拥有滚动机制，背景也不会随着元素的内容滚动。
+  - `local` 背景相对于元素的内容固定，如果一个元素拥有滚动机制，背景将会随着元素的内容滚动， 并且背景的绘制区域和定位区域是相对于可滚动的区域而不是包含他们的边框
+  - `scroll` 此关键属性值表示背景相对于元素本身固定， 而不是随着它的内容滚动（对元素边框是有效的）
+
+前往 [MDN background-attachment](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-attachment) 查看详细例子
 
 ### position
 
-### flex
+## float
+
+## flex 布局
 
 ref
 
@@ -4001,13 +4098,13 @@ ref
 
 CSS 属性 `flex` 规定了弹性元素如何伸长或缩短以适应 flex 容器中的可用空间。这是一个简写属性，用来设置 `flex-grow`， `flex-shrink` 与 `flex-basis`。
 
+## grid 布局
+
+## 媒体查询
+
 ## less sass postcss 的区别及优缺点
 
-## em rem px rpx dp 单位的区别
-
 ## 行内元素、块级元素各自特点及区别
-
-## CSS 盒模型
 
 ## CSS 写画一个三角形
 
