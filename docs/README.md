@@ -4025,7 +4025,81 @@ ref [MDN CSS 层叠](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade)
 
 层叠是 CSS 的一个基本特征，它是一个定义了**如何合并来自多个源的属性值的算法**。它在CSS处于核心地位，CSS的全称层叠样式表正是强调了这一点。
 
-## 盒模型
+## ✔ 盒模型
+
+当对一个文档进行布局（lay out）的时候，浏览器的渲染引擎会根据标准之一的 CSS 基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子（box）。CSS 决定这些盒子的大小、位置以及属性（例如颜色、背景、边框尺寸…）。
+
+每个盒子由四个部分（或称区域）组成，其效用由它们各自的边界（Edge）所定义。与盒子的四个组成区域相对应，每个盒子有四个边界：**内容边界** Content edge、**内边距边界** Padding Edge、**边框边界** Border Edge、**外边框边界** Margin Edge。
+
+**内容区域** 由内容边界限制，容纳着元素的真实内容，它的尺寸为内容宽度（或称 content-box 宽度）和内容高度（或称 content-box 高度）。
+
+**内边距区域** 由内边距边界限制，扩展自内容区域，负责延伸内容区域的背景，填充元素中内容与边框的间距。
+
+**边框区域** 由边框边界限制，扩展自内边距区域，是容纳边框的区域。
+
+**外边距区域**  由外边距边界限制，用空白区域扩展边框区域，以分开相邻的元素。
+
+相关的一个 CSS 属性 `box-sizing`：
+
+`box-sizing` 属性定义了浏览器应该如何计算一个元素的总宽度和总高度。
+
+- `content-box` 是默认值，contentWidth = width，设置了宽度之后内容区域等于宽度
+- `border-box` contentWidth = width - border - padding，设置了宽度之后，内容区域会 <= 宽度
+
+看一个例子：
+
+```html
+<div class="demo-boxsizing-contentbox">content-box</div>
+<div class="demo-boxsizing-borderbox">border-box</div>
+
+<style>
+  .demo-boxsizing-contentbox {
+    box-sizing: content-box;
+    width: 300px;
+    height: 300px;
+    border: 10px solid #ccc;
+    padding: 10px;
+    background-color: red;
+  }
+  .demo-boxsizing-borderbox {
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    border: 10px solid #ccc;
+    padding: 10px;
+    background-color: red;
+  }
+</style>
+```
+
+<div class="demo-boxsizing-contentbox">content-box</div>
+
+![](https://qiniu1.lxfriday.xyz/blog/ed647722-b2e3-569c-09e8-0b414b14abf3.png)
+
+<div class="demo-boxsizing-borderbox">border-box</div>
+
+![](https://qiniu1.lxfriday.xyz/blog/6a7d0b29-de93-653e-5b29-0045c4eaa7e3.png)
+
+<style>
+  .demo-boxsizing-contentbox {
+    box-sizing: content-box;
+    width: 300px;
+    height: 300px;
+    border: 10px solid #ccc;
+    padding: 10px;
+    background-color: red;
+  }
+  .demo-boxsizing-borderbox {
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    border: 10px solid #ccc;
+    padding: 10px;
+    background-color: red;
+  }
+</style>
+
+
 ## 背景与边框
 ## 溢出的内容
 ## 值和单位
