@@ -4125,8 +4125,222 @@ ref [MDN CSS 层叠](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade)
 
 `rpx`（responsive pixel）: 可以根据屏幕宽度进行自适应。rpx 其实是微信对于 rem 的一种应用的规定，或者说一种设计的方案，官方上规定屏幕宽度为 20rem，规定屏幕宽为 750rpx。如在 iPhone6 上，屏幕宽度为 375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。
 
-## 媒体查询
-## 计算属性(var)
+## ✔ 媒体查询
+
+通过媒体查询（Media queries），您可以根据各种设备特征和参数的值或者是否存在来调整您的网站或应用。
+
+在 CSS 中，使用 `@media` at-rule 根据媒体查询的结果有条件地应用样式表的一部分。 使用 `@import` 有条件地应用整个样式表。
+
+`@media` 可用于基于一个或多个媒体查询的结果来应用样式表的一部分。 使用它，您可以指定一个媒体查询和一个CSS块，当且仅当该媒体查询与正在使用其内容的设备匹配时，该CSS块才能应用于该文档。
+
+
+|媒体类型|媒体类型说明|
+|:-:|:-:|
+|all|用于所有设备|
+|screen|用于电脑屏幕，平板电脑，智能手机等|
+|print|用于打印机和打印预览|
+|speech|应用于屏幕阅读器等发声设备|
+
+|媒体特性|含义|
+|:-:|:-:|
+|width|视口宽度|
+|heigh|视口高度|
+|device-width|设备屏幕的宽度|
+|device-height|设备屏幕的高度|
+|orientation|检查设备处于横向还是纵向|
+|aspect-ratio|基于视口宽度和高度的宽高比|
+|device-aspect-ratio|基于设备宽度和高度的宽高比|
+
+
+使用的一些例子：
+
+```css
+@media screen and (min-width: 900px) {
+  article {
+    display: flex;
+  }
+}
+
+
+@media only screen and (orientation: landscape) {
+  body {
+    background-color: lightblue;
+  }
+}
+
+/* bootstrap */
+/* 576 768 992 1200 1400 */
+@media (min-width: 576px) {
+  .container,
+  .container-sm {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1320px;
+  }
+}
+```
+
+## ✔ CSS 自定义变量(var)
+
+`var(<custom-property-name>,<declaration-value>?)` 函数可以代替元素中**任何属性**中的值的任何部分。`var()` 函数不能作为属性名、选择器或者其他除了属性值之外的值。
+
+方法的第一个参数是要替换的自定义属性的名称。函数的可选第二个参数用作回退值。如果第一个参数引用的自定义属性无效，则该函数将使用第二个值。
+
+- `<custom-property-name>` 在实际应用中它被定义为以两个破折号开始的任何有效标识符。这个值必须是在**父元素**中定义过才能使用。为了方便，常在 `:root` 重定义。
+- `<declaration-value>` 回退值被用来在自定义属性值无效的情况下保证函数有值。可以直接是一个值，看下面的第二个例子。
+
+
+
+在 `:root` 上定义，然后使用它
+
+```css
+:root {
+  --main-bg-color: pink;
+}
+
+body {
+  background-color: var(--main-bg-color);
+}
+```
+
+当第一个值未定义，回退值生效
+
+```css
+/* 后备值 */
+
+/* 在父元素样式中定义一个值 */
+.component {
+  --text-color: #080; /* header-color 并没有被设定 */
+}
+
+/* 在 component 的样式中使用它： */
+.component .text {
+  color: var(--text-color, black); /* 此处 color 正常取值 --text-color */
+}
+.component .header {
+  color: var(--header-color, blue); /* 此处 color 被回退到 blue */
+}
+```
+
+参考 [bootstrap](https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css)，看 bootstrap 中定义了什么：
+
+```css
+/* 截取了部分 */
+:root {
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13, 110, 253;
+  --bs-font-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+}
+```
+
+## ✔ CSS 计算属性(calc)
+
+`calc()` 此 CSS 函数允许在声明 CSS 属性值时执行一些计算。它可以用在如下场合：`<length>`、`<frequency>`,`<angle>`、`<time>`、`<percentage>`、`<number>`、或 `<integer>`。
+
+```css
+/* property: calc(expression) */
+width: calc(100% - 80px);
+```
+
+此 `calc()` 函数用一个表达式作为它的参数，用这个表达式的结果作为值。这个表达式可以是任何如下操作符的组合，采用标准操作符处理法则的简单表达式。
+
+`+`、`-`、`*`、`/`
+
+备注
+
+- `+` 和 `-` **运算符的两边必须要有空白字符**。比如，`calc(50% -8px)` 会被解析成为一个无效的表达式，解析结果是：一个百分比 后跟一个负数长度值。而加有空白字符的、有效的表达式 `calc(8px + -50%)` 会被解析成为：一个长度 后跟一个加号 再跟一个负百分比。
+- `*` 和 `/` 这两个运算符前后不需要空白字符，但如果考虑到统一性，仍然推荐加上空白符。
+
+
+例子，使用指定的外边距定位一个对象（绝对定位时的居中）：
+
+```html
+<div class="demo-css-calc-banner-wapper">
+  <div class="demo-css-calc-banner">This is a banner!</div>
+</div>
+
+<style>
+.demo-css-calc-banner-wapper {
+  position: relative;
+  margin: 50px 0;
+  height: 30px;
+}
+.demo-css-calc-banner {
+  position: absolute;
+  left: 40px;
+  width: calc(100% - 80px);
+  border: solid black 1px;
+  box-shadow: 1px 2px;
+  background-color: yellow;
+  padding: 6px;
+  text-align: center;
+  box-sizing: border-box;
+}
+</style>
+```
+
+<div class="demo-css-calc-banner-wapper">
+  <div class="demo-css-calc-banner">This is a banner!</div>
+</div>
+
+<style>
+.demo-css-calc-banner-wapper {
+  position: relative;
+  margin: 50px 0;
+  height: 30px;
+}
+.demo-css-calc-banner {
+  position: absolute;
+  left: 40px;
+  width: calc(100% - 80px);
+  border: solid black 1px;
+  box-shadow: 1px 2px;
+  background-color: yellow;
+  padding: 6px;
+  text-align: center;
+  box-sizing: border-box;
+}
+</style>
+
 
 ## 基础属性
 
