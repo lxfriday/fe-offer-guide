@@ -3900,7 +3900,7 @@ img + p {
 ```css
 former_element ~ target_element { style properties }
 ```
-## CSS 三大特性：层叠、继承、优先级
+## ✔ CSS 三大特性：层叠、继承、优先级
 
 ### ✔ CSS 选择器优先级
 
@@ -4383,8 +4383,6 @@ let h3 = document.querySelector('h3'),
 result = getComputedStyle(h3, '::after').content;
 ```
 
-
-
 ### ✔ 字体
 
 - ref [MDN @font-face](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face)
@@ -4565,9 +4563,49 @@ ref [MDN position](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)
 
 元素根据正常文档流进行定位，然后相对它的最近滚动祖先（nearest scrolling ancestor）和 containing block (最近块级祖先 nearest block-level ancestor)，包括 table-related 元素，基于 `top`，`right`，`bottom`，`left` 的值进行偏移。偏移值不会影响任何其他元素的位置。
 
-## float
+### ✔ float
 
-## flex 布局
+`float` CSS属性指定一个元素应沿其容器的左侧或右侧放置，允许文本和内联元素环绕它。该元素从网页的正常流动(文档流)中移除，尽管仍然保持部分的流动性（与绝对定位相反）。
+
+`float` 意味着使用块布局。
+
+- `left` 元素必须浮动在其所在的块容器左侧的关键字。
+- `right` 元素必须浮动在其所在的块容器右侧的关键字。
+- `none` 元素不进行浮动的关键字。
+- `inline-start` 元素必须浮动在其所在块容器的开始一侧，在ltr脚本中是左侧，在rtl脚本中是右侧。
+- `inline-end` 表明元素必须浮动在其所在块容器的结束一侧，在ltr脚本中是右侧，在rtl脚本中是左侧。
+
+### ✔ clear
+
+ref [MDN clear](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear)
+
+`clear` CSS 属性指定一个元素是否必须移动(清除浮动后)到在它之前的浮动元素下面。`clear` 属性适用于浮动和非浮动元素。
+
+当应用于非浮动块时，它将非浮动块的边框边界移动到所有相关浮动元素外边界的下方。这个非浮动块的垂直外边距会折叠。
+
+另一方面，两个浮动元素的垂直外边距将不会折叠。当应用于浮动元素时，它将元素的外边界移动到所有相关的浮动元素外边框边界的下方。这会影响后面浮动元素的布局，后面的浮动元素的位置无法高于它之前的元素。
+
+注意：如果一个元素里只有浮动元素，那它的高度会是 0。如果你想要它自适应即包含所有浮动元素，那你需要清除它的子元素。一种方法叫做 **clearfix**，即 `clear` 一个不浮动的 `::after` 伪元素。
+
+```css
+#container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+```
+
+- `left` 元素被向下移动用于清除之前的左浮动。
+- `right` 元素被向下移动用于清除之前的右浮动。
+- `none` 元素不会向下移动清除之前的浮动。
+- `both` 元素被向下移动用于清除之前的左右浮动。
+- `inline-start` 该元素向下移动以清除其包含块的起始侧上的浮动。即在某个区域的左侧(ltr)浮动或右侧浮动(rtl)。
+- `inline-end` 该元素向下移动以清除其包含块的末端的浮点，即在某个区域的右侧浮动(ltr)或左侧浮动(rtl)。
+
+
+## ✔ flex 布局
+
+### ✔ flex
 
 ref
 
@@ -4575,8 +4613,141 @@ ref
 
 CSS 属性 `flex` 规定了弹性元素如何伸长或缩短以适应 flex 容器中的可用空间。这是一个简写属性，用来设置 `flex-grow`， `flex-shrink` 与 `flex-basis`。
 
-## grid 布局
+- `flex-grow` 增长系数
+- `flex-shrink` 收缩系数
+- `flex-basis` 指定了 flex 元素在主轴方向上的初始大小
 
+```css
+/* 关键字值 */
+flex: auto;
+flex: initial;
+flex: none;
+
+/* 一个值, 无单位数字: flex-grow */
+flex: 2;
+
+/* 一个值, width/height: flex-basis */
+flex: 10em;
+flex: 30px;
+flex: min-content;
+
+/* 两个值: flex-grow | flex-basis */
+flex: 1 30px;
+
+/* 两个值: flex-grow | flex-shrink */
+flex: 2 2;
+
+/* 三个值: flex-grow | flex-shrink | flex-basis */
+flex: 2 2 10%;
+
+/*全局属性值 */
+flex: inherit;
+flex: initial;
+flex: unset;
+```
+
+可以使用一个，两个或三个值来指定 `flex` 属性。
+
+单值语法: 值必须为以下其中之一:
+
+- 一个无单位数(`<number>`): 它会被当作 `flex:<number> 1 0`; `<flex-shrink>`的值被假定为 `1` ，然后 `<flex-basis>` 的值被假定为 0。
+- 一个有效的宽度(width)值: 它会被当作 `<flex-basis>` 的值。
+- 关键字 `none`，`auto` 或 `initial` .
+
+双值语法: 第一个值必须为一个无单位数，并且它会被当作 `<flex-grow>` 的值。第二个值必须为以下之一：
+
+- 一个无单位数：它会被当作 `<flex-shrink>` 的值。
+- 一个有效的宽度值: 它会被当作 `<flex-basis>` 的值。
+
+三值语法:
+
+- 第一个值必须为一个无单位数，并且它会被当作 `<flex-grow>` 的值。
+- 第二个值必须为一个无单位数，并且它会被当作  `<flex-shrink>` 的值。
+- 第三个值必须为一个有效的宽度值， 并且它会被当作 `<flex-basis>` 的值。
+
+`initial` 元素会根据自身宽高设置尺寸。它会缩短自身以适应 flex 容器，但不会伸长并吸收 flex 容器中的额外自由空间来适应 flex 容器 。相当于将属性设置为"flex: 0 1 auto"。
+
+`auto` 元素会根据自身的宽度与高度来确定尺寸，但是会伸长并吸收 flex 容器中额外的自由空间，也会缩短自身来适应 flex 容器。这相当于将属性设置为 "flex: 1 1 auto".
+
+`none` 元素会根据自身宽高来设置尺寸。它是完全非弹性的：既不会缩短，也不会伸长来适应 flex 容器。相当于将属性设置为"flex: 0 0 auto"。
+
+### ✔ flex-direction
+
+指定了内部元素是如何在 flex 容器中布局的，定义了主轴的方向(正方向或反方向)。
+
+- `row` 横向
+- `row-reverse` 表现和 `row` 相同，但是置换了主轴起点和主轴终点
+- `column` 竖向
+- `column-reverse`  表现和 `column` 相同，但是置换了主轴起点和主轴终点
+ 
+### ✔ flex-wrap
+
+指定 flex 元素单行显示还是多行显示。如果允许换行，这个属性允许你控制行的堆叠方向。
+
+- `nowrap` flex 的元素被摆放到到一行，这可能导致 flex 容器溢出。默认值。
+- `wrap` 被打断到多个行中。
+- `wrap-reverse` 和 wrap 的行为一样，但是 cross-start 和 cross-end 互换（flex-direction 为 row 时，在 column 方向调换方向）。
+
+![nowrap](https://qiniu1.lxfriday.xyz/blog/e7e5a7e7-1486-63b1-4190-4a58b638bbaf.png)
+![wrap](https://qiniu1.lxfriday.xyz/blog/48ebba2f-135c-c13f-a5c1-4edd42c08585.png)
+![wrap-reverse](https://qiniu1.lxfriday.xyz/blog/a0f1abd4-070f-eff9-58f0-8adb88e5fcd8.png)
+
+### ✔ flex-flow
+
+`flex-flow` 属性是 `flex-direction` 和 `flex-wrap` 的简写。
+
+```css
+/* 默认 */
+flex-flow: row nowrap; 
+
+/* 某个设置 */
+flex-flow: column-reverse wrap;
+```
+
+### ✔ justify-content
+
+`justify-content` 属性定义了浏览器之间，如何分配顺着弹性容器主轴(或者网格行轴) 的元素之间及其周围的空间。
+
+常用属性：
+
+- `flex-start` 从行首开始排列。每行第一个弹性元素与行首对齐，同时所有后续的弹性元素与前一个对齐。
+- `flex-end` 从行尾开始排列。每行最后一个弹性元素与行尾对齐，其他元素将与后一个对齐。
+- `center` 伸缩元素向每行中点排列。每行第一个元素到行首的距离将与每行最后一个元素到行尾的距离相同。
+- `space-between` 在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素与行首对齐，每行最后一个元素与行尾对齐。
+- `space-around` 在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素到行首的距离和每行最后一个元素到行尾的距离将会是相邻元素之间距离的一半。
+- `stretch` 主轴方向上拉伸
+
+### ✔ align-items
+
+`align-items` 属性将所有直接子节点上的 `align-self` 值设置为一个组。
+
+常用属性：
+
+- `flex-start` 元素向侧轴起点对齐。
+- `flex-end` 元素向侧轴终点对齐。
+- `center` 元素在侧轴居中。如果元素在侧轴上的高度高于其容器，那么在两个方向上溢出距离相同。
+- `stretch` 弹性元素被在侧轴方向被拉伸到与容器相同的高度或宽度。
+
+### ✔ align-self
+
+`align-self` 会对齐当前 grid 或 flex 行中的元素，并覆盖已有的 `align-items` 的值。
+
+常用属性同 `align-items`。
+
+### ✔ align-content
+
+设置了浏览器如何沿着弹性盒子布局的纵轴和网格布局的主轴在内容项之间和周围分配空间。**该属性对单行弹性盒子模型无效**。（即：带有 `flex-wrap: nowrap`）。
+
+常用属性：
+
+- `flex-start` 从起始点开始放置flex元素
+- `flex-end` 从终止点开始放置flex元素
+- `center`侧轴居中
+- `space-between` 所有行在容器中平均分布。相邻两行间距相等。容器的垂直轴起点边和终点边分别与第一行和最后一行的边对齐
+- `space-around` 所有行在容器中平均分布，相邻两行间距相等。容器的垂直轴起点边和终点边分别与第一行和最后一行的距离是相邻两行间距的一半
+- `stretch` 拉伸所有行来填满剩余空间。剩余空间平均地分配给每一行
+
+## grid 布局
 
 ## less sass postcss 的区别及优缺点
 
@@ -4758,9 +4929,7 @@ ref
 
 ## ✔ 块级格式化上下文（BFC）
 
-ref
-
-- [这一次终于弄懂了 CSS BFC、清除浮动、外边距折叠](https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&mid=2247483885&idx=1&sn=329d623cd0f6dcbb9788c024a4ed1cd3&chksm=fd3c3d45ca4bb453c8a24ed29f0558763e4050f157d9e3dcd971e8f673a3e23db938477503fd&mpshare=1&scene=1&srcid=04110VTQxAyGp8CEoGSBE7j9&sharer_sharetime=1586589371751&sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&key=8a1773839eeb014af2ada37216476ccde9d409bfa46b9970d49c3634a5f461b23c0cb95dd9134a741d11c9fd37ee381b76edc7f18e03a09546ec265d4c705bb2374e694e066c2cda2b0402c2eea2e02e&ascene=1&uin=MjQyMzQ2MTgzMw%3D%3D&devicetype=Windows+10&version=62090045&lang=zh_CN&exportkey=A7ltid3L7iH5fr0DuZngz%2FM%3D&pass_ticket=fniwo%2BeVmtEQ6J0mXTcjM%2FmVCnaeDHY3TGanPEUOTH0ProYx5lafIbNygWRvEYGd)
+ref [MDN BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
 
 块格式化上下文（Block Formatting Context，BFC） 是 Web 页面的可视化 CSS 渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域。
 
@@ -4859,13 +5028,6 @@ ref
 - 即使某一外边距为 0，这些规则仍然适用。因此就算父元素的外边距是 0，第一个或最后一个子元素的外边距仍然会“溢出”到父元素的外面；
 - 如果参与折叠的外边距中包含负值，折叠后的外边距的值为最大的正边距与最小的负边距（即绝对值最大的负边距）的和；
 - 如果所有参与折叠的外边距都为负，折叠后的外边距的值为最小的负边距的值；
-
-
-## flex: flex-grow flex-shrink flex-basis
-
-ref
-
-- [https://juejin.im/post/589965c9128fe1006569cc9d#heading-3](https://juejin.im/post/589965c9128fe1006569cc9d#heading-3)
 
 # React
 
