@@ -4279,6 +4279,10 @@ body {
 ```css
 /* property: calc(expression) */
 width: calc(100% - 80px);
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
 ```
 
 此 `calc()` 函数用一个表达式作为它的参数，用这个表达式的结果作为值。这个表达式可以是任何如下操作符的组合，采用标准操作符处理法则的简单表达式。
@@ -4364,6 +4368,22 @@ let style = window.getComputedStyle(element, [pseudoElt]);
 返回的对象与从元素的 `style` 属性返回的对象具有相同的类型；然而，两个对象具有不同的目的。从 `getComputedStyle` 返回的对象是**只读**的，可以用于检查元素的样式（包括由一个 `<style>` 元素或一个外部样式表设置的那些样式）。`elt.style` 对象应用于在特定元素上**设置样式**。
 
 **使用 `getComputedStyle` 会触发浏览器回流，因为需要实时计算元素的属性值。**
+
+```js
+// 1
+let elem1 = document.getElementById("elemId");
+let style = window.getComputedStyle(elem1, null);
+
+// 2 获取属性值
+let elem = document.getElementById("elem-container");
+let theCSSprop = window.getComputedStyle(elem,null).getPropertyValue("height"); 
+
+// 3 与伪元素一起使用
+let h3 = document.querySelector('h3'),
+result = getComputedStyle(h3, '::after').content;
+```
+
+
 
 ### ✔ 字体
 
