@@ -81,11 +81,16 @@
 
               // 侧边栏已经完成的类目，添加完成色背景
               const sidebarLinks = document.querySelectorAll('.sidebar-nav li a')
+              const total = sidebarLinks.length // 完成度统计
+              let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
                 if(v.textContent.startsWith('✔')) {
                   v.style.backgroundColor = 'rgba(109,255,51,.3)'
+                  finishedCount++
                 }
               })
+              const finishedPercent = Math.floor(finishedCount / total * 100)
+              document.querySelector('.finished-info').innerText = `${finishedCount} / ${total} -> ${finishedPercent}%`
             })
           },
         ],
@@ -148,6 +153,9 @@
       .sidebar ul {
         margin: 0;
         padding: 0 0 0 15px;
+      }
+      .finished-info {
+        font-weight: bold;
       }
     </style>
   </head>

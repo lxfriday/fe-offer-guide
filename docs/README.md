@@ -1,3 +1,10 @@
+<div class="finished-info-wrapper">
+  完成度 <span class="finished-info">500 / 500 -> 100%<span>
+</div>
+
+---
+
+
 # JavaScript
 
 ## ✔ 基本数据类型
@@ -4822,11 +4829,6 @@ CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一�
 
 ![grid5](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2008-23-19%5B00-00-01--00-00-08%5D.gif)
 
-
-## less sass postcss 的区别及优缺点
-
-## 行内元素、块级元素各自特点及区别
-
 ## CSS 写画一个三角形
 
 ## 写一个瀑布流布局
@@ -5019,8 +5021,10 @@ ref [小程序使用Grid和css变量实现瀑布流布局](https://juejin.cn/pos
 
 ![](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-54-03%5B00-00-02--00-00-08%5D.gif)
 
-
 ## 1px 方案
+
+
+
 
 ## 基本布局
 
