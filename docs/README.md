@@ -3661,7 +3661,9 @@ p em:last-of-type {
 
   `span:nth-child(0n+1)` 表示子元素中第一个且为 `span` 的元素，与 `:first-child` 选择器作用相同。
 
-  `span:nth-child(-n+3)` 匹配前三个子元素中的span元素。`
+  `span:nth-child(-n+3)` 匹配前三个子元素中的span元素`。
+
+  `:nth-child` 和 `:nth-of-type` 区别参考 [彻底理解nth-child和nth-of-type的区别](https://zhuanlan.zhihu.com/p/269170132)，不同点在于，前者直接按照子元素在父元素中是第几个出现来计算（不管是否同类），而后者是按照分类（同类的）在父元素中是第几个出现的来计算。
 
 - `:nth-of-type()` 针对具有一组兄弟节点的标签, 用 n 来筛选出在一组兄弟节点的位置。
 
@@ -4747,7 +4749,79 @@ flex-flow: column-reverse wrap;
 - `space-around` 所有行在容器中平均分布，相邻两行间距相等。容器的垂直轴起点边和终点边分别与第一行和最后一行的距离是相邻两行间距的一半
 - `stretch` 拉伸所有行来填满剩余空间。剩余空间平均地分配给每一行
 
-## grid 布局
+## ✔ grid 布局
+
+ref [最强大的 CSS 布局 —— Grid 布局](https://juejin.cn/post/6854573220306255880)
+
+CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一维布局服务的（沿横向或纵向的），而网格布局是为二维布局服务的（同时沿着横向和纵向）。
+
+通过在元素上声明 `display：grid` 或 `display：inline-grid` 来创建一个网格容器。这个元素的所有直系子元素将成为网格项目。
+
+网格轨道：`grid-template-columns` 控制列宽，`grid-template-rows` 属性设置行高。
+
+```css
+.wrapper {
+  display: grid;
+  /*  声明了三列，宽度分别为 200px 100px 200px */
+  grid-template-columns: 200px 100px 200px;
+  grid-gap: 5px;
+  /*  声明了两行，行高分别为 50px 50px  */
+  grid-template-rows: 50px 50px;
+}
+```
+
+就能得到一个这样的布局：
+
+![grid1](https://qiniu1.lxfriday.xyz/blog/eeee016e-c4be-206a-7a09-e9df03e05e73.png)
+
+`auto-fill` 表示自动填充，让一行（或者一列）中尽可能的容纳更多的单元格。`grid-template-columns: repeat(auto-fill, 200px)` 表示列宽是 200 px，但列的数量是不固定的，只要浏览器能够容纳得下，就可以放置元素：
+
+```css
+.demo-grid-wrapper1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-gap: 5px;
+  grid-template-rows: 50px 50px;
+}
+```
+![grid2](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2005-59-49%5B00-00-00--00-00-07%5D.gif)
+
+`fr` 单位代表网格容器中可用空间的一等份。`grid-template-columns: 200px 1fr 2fr` 表示第一个列宽设置为 200px，后面剩余的宽度分为两部分，宽度分别为剩余宽度的 1/3 和 2/3。
+
+![grid3](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2005-56-20%5B00-00-02--00-00-11%5D.gif)
+
+通过 `auto` 关键字，能轻易实现下面的布局：
+
+```css
+.demo-grid-wrapper1 {
+  display: grid;
+  grid-template-columns: 100px auto 100px;
+  grid-gap: 5px;
+  grid-template-rows: 50px 50px;
+}
+```
+
+![grid4](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2006-04-20%5B00-00-02--00-00-08%5D.gif)
+
+`grid-row-gap` 设置行间距，`grid-column-gap` 设置列间距，`grid-gap` 是两者的简写。
+
+`justify-self` 属性设置单元格内容的水平位置（左中右），跟 `justify-items` 属性的用法完全一致，但只作用于单个项目。
+
+`align-self` 属性设置单元格内容的垂直位置（上中下），跟 `align-items` 属性的用法完全一致，也是只作用于单个项目。
+
+`repeat` + `auto-fit` + `minmax` 去掉右侧空白。
+
+```css
+.demo-grid-wrapper1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 5px;
+  grid-template-rows: 50px 50px;
+}
+```
+
+![grid5](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2008-23-19%5B00-00-01--00-00-08%5D.gif)
+
 
 ## less sass postcss 的区别及优缺点
 
@@ -4756,6 +4830,195 @@ flex-flow: column-reverse wrap;
 ## CSS 写画一个三角形
 
 ## 写一个瀑布流布局
+
+### ✔ grid 方案
+
+ref [小程序使用Grid和css变量实现瀑布流布局](https://juejin.cn/post/6859316040061435912)
+
+列宽相同，行高不同的时候（瀑布流布局）：
+
+```html
+<div class="demo-grid-wrapper">
+  <div class="box box1">1</div>
+  <div class="box box2">2</div>
+  <div class="box box3">3</div>
+  <div class="box box4">4</div>
+  <div class="box box5">5</div>
+  <div class="box box6">6</div>
+  <div class="box box7">7</div>
+  <div class="box box8">8</div>
+  <div class="box box9">9</div>
+  <div class="box box10">10</div>
+  <div class="box box11">11</div>
+  <div class="box box12">12</div>
+  <div class="box box13">13</div>
+  <div class="box box14">14</div>
+  <div class="box box15">15</div>
+</div>
+
+<style>
+  body {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 50vw;
+  }
+  .demo-grid-wrapper {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, 200px); */
+    grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+    grid-gap: 5px;
+    grid-auto-rows: 60px;
+  }
+  .box {
+    background-color: #222;
+    width: 100%;
+    color: #ddd;
+  }
+  .box1,.box4,.box5,.box7,.box12 {
+    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+    grid-row: auto / span 5;
+  }
+  .box2,.box3,.box8,.box10,.box15 {
+    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+    grid-row: auto / span 6;
+  }
+  .box6,.box9,.box11,.box13,.box14 {
+    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+    grid-row: auto / span 8;
+  }
+</style>
+```
+
+![waterfall1](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-11-10%5B00-00-02--00-00-09%5D.gif)
+
+
+列宽不同，行高相同的时候（砖墙布局）：
+
+```html
+<div class="demo-grid-wrapper">
+  <div class="box box1">1</div>
+  <div class="box box2">2</div>
+  <div class="box box3">3</div>
+  <div class="box box4">4</div>
+  <div class="box box5">5</div>
+  <div class="box box6">6</div>
+  <div class="box box7">7</div>
+  <div class="box box8">8</div>
+  <div class="box box9">9</div>
+  <div class="box box10">10</div>
+  <div class="box box11">11</div>
+  <div class="box box12">12</div>
+  <div class="box box13">13</div>
+  <div class="box box14">14</div>
+  <div class="box box15">15</div>
+</div>
+
+
+<style>
+  body {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 50vw;
+  }
+  .demo-grid-wrapper {
+    display: grid;
+    grid-gap: 5px;
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(133px, 20vmin);
+    grid-template-columns: 1fr;
+  }
+  .box {
+    background-color: #222;
+    width: 100%;
+    color: #ddd;
+  }
+  @media (min-width: 512px) {
+    .demo-grid-wrapper {
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 9) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 8) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 7) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 6) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 5) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 4) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 3) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 2) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(9n + 1) {
+      grid-column: auto / span 2;
+    }
+  }
+  @media  (min-width: 1024px) {
+    .demo-grid-wrapper {
+      grid-template-columns: repeat(14, 1fr);
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 15) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 14) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 13) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 12) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 11) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 10) {
+      grid-column: auto / span 2;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 9) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 8) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 7) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 6) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 5) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 4) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 3) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 2) {
+      grid-column: auto / span 3;
+    }
+    .demo-grid-wrapper .box:nth-of-type(15n + 1) {
+      grid-column: auto / span 2;
+    }
+  }
+</style>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-54-03%5B00-00-02--00-00-08%5D.gif)
+
 
 ## 1px 方案
 

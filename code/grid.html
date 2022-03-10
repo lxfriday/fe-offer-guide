@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 50vw;
+      }
+      .demo-grid-wrapper {
+        display: grid;
+        grid-gap: 5px;
+        grid-auto-flow: row dense;
+        grid-auto-rows: minmax(133px, 20vmin);
+        grid-template-columns: 1fr;
+      }
+      .box {
+        background-color: #222;
+        width: 100%;
+        color: #ddd;
+      }
+      @media (min-width: 512px) {
+        .demo-grid-wrapper {
+          grid-template-columns: repeat(7, 1fr);
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 9) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 8) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 7) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 6) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 5) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 4) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 3) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 2) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(9n + 1) {
+          grid-column: auto / span 2;
+        }
+      }
+      @media  (min-width: 1024px) {
+        .demo-grid-wrapper {
+          grid-template-columns: repeat(14, 1fr);
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 15) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 14) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 13) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 12) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 11) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 10) {
+          grid-column: auto / span 2;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 9) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 8) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 7) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 6) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 5) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 4) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 3) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 2) {
+          grid-column: auto / span 3;
+        }
+        .demo-grid-wrapper .box:nth-of-type(15n + 1) {
+          grid-column: auto / span 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-grid-wrapper">
+      <div class="box box1">1</div>
+      <div class="box box2">2</div>
+      <div class="box box3">3</div>
+      <div class="box box4">4</div>
+      <div class="box box5">5</div>
+      <div class="box box6">6</div>
+      <div class="box box7">7</div>
+      <div class="box box8">8</div>
+      <div class="box box9">9</div>
+      <div class="box box10">10</div>
+      <div class="box box11">11</div>
+      <div class="box box12">12</div>
+      <div class="box box13">13</div>
+      <div class="box box14">14</div>
+      <div class="box box15">15</div>
+    </div>
+  </body>
+</html>
