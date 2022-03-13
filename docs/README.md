@@ -5021,9 +5021,258 @@ ref [小程序使用Grid和css变量实现瀑布流布局](https://juejin.cn/pos
 
 ![](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-54-03%5B00-00-02--00-00-08%5D.gif)
 
-## 1px 方案
+## ✔ 移动端 1px 解决方案
+
+先分清几个概念
+
+- CSS 像素（虚拟像素）：指的是 CSS 样式代码中使用的逻辑像素
+- 设备像素 (物理像素)：指设备能控制显示的最小物理单位，意指显示器上一个个的点
+- 设备独立像素 (逻辑像素)：可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如: CSS 像素)，这个点是没有固定大小的，越小越清晰，然后由相关系统转换为物理像素。
+
+设备像素比：dpr（devicePixelRatio），也就是设备的物理像素与逻辑像素的比值。
+
+在 retina 屏的手机上, dpr 为 2 或 3，CSS 里写的 1px 宽度映射到物理像素上就有 2px 或 3px 宽度。
+
+### ✔ 0.5px 方案
+
+在IOS8+，苹果系列都已经支持 0.5px 了，可以借助媒体查询来处理（经实测，小米10 ultra 也支持此方法）。
+
+```css
+.border {
+  border: 1px solid #000;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .border {
+    border: 0.5px solid #000;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+  .border {
+    border: 0.333333px solid #000;
+  }
+}
+```
+
+对于部分不支持 0.5px 的系统，0.5px 可能会被显示为 0px。所以需要通过 JS 检测是否支持这种方法：
 
 
+```js
+if (window.devicePixelRatio && window.devicePixelRatio >= 2) {
+  var testElem = document.createElement('div');
+  testElem.style.border = '.5px solid transparent';
+  document.body.appendChild(testElem);
+}
+
+if (testElem.offsetHeight == 1) {
+  // 支持的话，在顶层加一个 hairlines，结合下面的 css 组合使用
+  document.querySelector('html').classList.add('hairlines');
+  document.body.removeChild(testElem);
+}
+````
+
+```css
+.box {
+  border: 1px solid #000;
+}
+.hairlines box {
+  border-width: 0.5px;
+}
+```
+
+### ✔ 伪类 + transform
+
+ref 
+- [移动端 1px 解决方案(完整版)](https://blog.csdn.net/qq_45846359/article/details/108761345)
+- [吃透移动端 1px｜从基本原理到开源解决方案](https://zhuanlan.zhihu.com/p/100752129)
+
+不直接给元素加边框，使用伪元素做 border，扩大两倍，设置 1px 边框，然后 transform scale(0.5) 缩放。
+
+```css
+.border-1px-top {
+  position: relative;
+}
+.border-1px:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  border: 1px solid #000;
+  border-radius: 4px;
+  transform-origin: top left;
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .border-1px:after {
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2.5) {
+  .border-1px:after {
+    width: 250%;
+    height: 250%;
+    transform: scale(.4);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2.75) {
+  .border-1px:after {
+    width: 275%;
+    height: 275%;
+    transform: scale(1 / 2.75);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .border-1px:after {
+    width: 300%;
+    height: 300%;
+    transform: scale(1 / 3);
+  }
+}
+
+/* 单边框 */
+.border-1px-top:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid red;
+  transform: scaleY(.5);
+  transform-origin: left top;
+}
+```
+
+### ✔ viewport + rem
+
+
+在 `devicePixelRatio=2` 时，设置 meta：
+
+```html
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
+```
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 10rem;
+        height: 10rem;
+        border: 1px solid #000;
+      }
+      .box-bottom {
+        width: 10rem;
+        height: 10rem;
+        border-bottom: 1px solid #000;
+      }
+      .box-top {
+        width: 10rem;
+        height: 10rem;
+        border-top: 1px solid #000;
+      }
+      .box-radius {
+        width: 10rem;
+        height: 10rem;
+        border: 1px solid #000;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <br />
+    <div class="box-top"></div>
+    <br />
+    <div class="box-bottom"></div>
+    <br />
+    <div class="box-radius"></div>
+    <script>
+      const viewport = document.querySelector('meta[name=viewport]')
+      const dpr = window.devicePixelRatio || 1
+      const scale = 1 / dpr
+      viewport.setAttribute('content', `width=device-width, minimum-scale=${scale}, maximum-scale=${scale}, user-scalable=no`)
+
+      // 这个时候要全部使用 rem 布局，如果是 px，则 100px 会被缩小 dpr 倍
+      // 原本 10rem -> 100px，设置了下面的根字体大小之后， 10rem -> 10 * 10 * dpr
+      document.documentElement.style.fontSize = `${10 * dpr}px`
+    </script>
+  </body>
+</html>
+```
+优点是非常方便，缺点在于老项目迁移难度大。部分机型可能没有 `devicePixelRatio` 属性，不支持这个方式。
+
+### ✔ border-image
+
+
+先看看 `border-image` 的属性，由下面5个属性组合构成：
+
+- `border-image-source` 用于指定要用于绘制边框的图像的路径
+- `border-image-slice` 图像边界向内偏移
+- `border-image-width` 图像边界的宽度
+- `border-image-outset` 用于指定在边框外部绘制 border-image-area 的量
+- `border-image-repeat` 用于设置图像边界是否应重复（repeat）、拉伸（stretch）或铺满（round）
+
+ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com/lunarorbitx/p/5287309.html)
+
+![](https://qiniu1.lxfriday.xyz/blog/866189-20160317143339131-2118326634.png)
+
+这样的1张6X6的图片, 9宫格等分填充 `border-image`, 这样元素的4个边框宽度都只有1px。
+
+```css
+@media screen and (-webkit-min-device-pixel-ratio: 2){ 
+  .border{ 
+    border: 1px solid transparent;
+    border-image: url(border.gif) 2 repeat;
+  }
+}
+```
+
+看例子：
+
+```html
+<style>
+  .box {
+    width: 100px;
+    height: 100px;
+  }
+  .border {
+    border: 1px solid transparent;
+    border-image: url(./imgs/866189-20160317143339131-2118326634.png) 2 repeat;
+  }
+</style>
+
+<div class="box border"></div>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/16822506-632a-6839-6916-1b99cb3eebfb.png)
+
+缺点比较多，更改颜色麻烦，圆角处理比较麻烦，存在边缘模糊的问题。
+
+### ✔ 渐变
+
+```css
+.border {
+  background: linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100% no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100% no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) top / 100% 1px no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px no-repeat;
+}
+```
+
+效果（小米10 ultra `divicePixelRatiro = 2.75`）：
+
+![](https://qiniu1.lxfriday.xyz/blog/3b589b51-a1d4-59f0-0e16-c2b08edf1f23.png)
+
+实际效果并不算很理想，不能处理圆角，不推荐。
 
 
 ## 基本布局
