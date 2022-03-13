@@ -5277,13 +5277,13 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 ## 基本布局
 
-## CSS 实现省略号
+## ✔ CSS 实现省略号
 
 ```css
-.ellipsis()  {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 ```
 
@@ -5544,6 +5544,96 @@ ref [MDN BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_forma
 - 即使某一外边距为 0，这些规则仍然适用。因此就算父元素的外边距是 0，第一个或最后一个子元素的外边距仍然会“溢出”到父元素的外面；
 - 如果参与折叠的外边距中包含负值，折叠后的外边距的值为最大的正边距与最小的负边距（即绝对值最大的负边距）的和；
 - 如果所有参与折叠的外边距都为负，折叠后的外边距的值为最小的负边距的值；
+
+#### ✔ 兄弟元素间的外边距折叠
+
+```html
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+
+
+<style>
+p {
+  margin: 10px 0;
+  height: 20px;
+  background-color: red;
+}
+</style>
+```
+
+出现折叠
+
+![](https://qiniu1.lxfriday.xyz/blog/9191c4ef-b7f8-e861-a702-f487b258a21d.png)
+
+如何避免折叠？
+
+兄弟元素间的折叠比较特殊，对兄弟元素应用 BFC 对兄弟元素折叠无效。万金油处理方法是加一个拥有 `display: flow-root` 或者 `overflow: auto` 的元素到兄弟元素中间。
+
+![](https://qiniu1.lxfriday.xyz/blog/67e9295b-7975-10db-e295-e0caa2e4695e.png)
+
+![](https://qiniu1.lxfriday.xyz/blog/dd8ece58-59b9-a4fe-1a7a-b055b82a8be1.png)
+
+这里加其他属性会有些问题。
+
+![](https://qiniu1.lxfriday.xyz/blog/4fc51d35-79e4-2297-3c7b-ef6de533540b.png)
+
+而加非块级元素有会有问题。
+
+![](https://qiniu1.lxfriday.xyz/blog/460ec9cd-1f0f-0360-1596-945566f48561.png)
+
+![](https://qiniu1.lxfriday.xyz/blog/b880368b-d0dd-9935-ecc0-77e70cdf2517.png)
+
+#### ✔ 父子元素间的外边距折叠
+
+```html
+<div class="wrapper">
+  <div class="box"></div>
+</div>
+
+<style>
+  .wrapper {
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+    background-color: red;
+  }
+  .box {
+    margin-top: 200px;
+    width: 300px;
+    height: 100px;
+    background-color: cyan;
+  }
+</style>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/9f91b93c-bd1c-e35c-bc14-6d5551803fc0.png)
+
+
+解决方案：
+
+```css
+.wrapper {
+  ...
+  /* display: flow-root; yes */
+  /* overflow: auto; yes  */
+  /* padding-top: 1px; yes */
+  /* border-top: 1px solid transparent; yes */
+  /* float: left; yes */
+}
+```
+添加内联元素或者BFC元素：
+
+```html
+<div class="wrapper">
+  <!-- <div style="display: flow-root"></div> -->
+  <!-- <div style="overflow: auto"></div> -->
+  <div class="box"></div>
+</div>
+```
+
 
 # React
 
