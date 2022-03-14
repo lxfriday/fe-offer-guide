@@ -4855,7 +4855,138 @@ CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一�
 
 ![grid5](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2008-23-19%5B00-00-01--00-00-08%5D.gif)
 
-## CSS 写画一个三角形
+## ✔ CSS 画一个三角形
+
+实现原理，border 存在四角分割，简单点说就是，border 与 border 的相交处是斜线相交。
+
+看下面的例子：
+
+```html
+<div class="demo-css-trangle"></div>
+
+<style>
+  .demo-css-trangle {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-top: 100px solid green;
+    border-bottom: 100px solid red;
+  }
+</style>
+```
+
+<div class="demo-css-trangle"></div>
+
+<style>
+  .demo-css-trangle {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-top: 100px solid green;
+    border-bottom: 100px solid red;
+  }
+  }
+</style>
+
+
+```html
+<div class="demo-css-trangle2"></div>
+
+<style>
+  .demo-css-trangle2 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-top: 100px solid green;
+    border-bottom: 100px solid red;
+  }
+</style>
+```
+
+<div class="demo-css-trangle2"></div>
+
+<style>
+  .demo-css-trangle2 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-top: 100px solid green;
+    border-bottom: 100px solid red;
+  }
+</style>
+
+```html
+<div class="demo-css-trangle3"></div>
+
+<style>
+  .demo-css-trangle3 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-bottom: 100px solid red;
+  }
+</style>
+```
+
+<div class="demo-css-trangle3"></div>
+
+<style>
+  .demo-css-trangle3 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid cyan;
+    border-right: 100px solid cyan;
+    border-bottom: 100px solid red;
+  }
+</style>
+
+```html
+<div class="demo-css-trangle4"></div>
+
+<style>
+  .demo-css-trangle4 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid red;
+  }
+</style>
+```
+
+<div class="demo-css-trangle4"></div>
+
+<style>
+  .demo-css-trangle4 {
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid red;
+  }
+</style>
+
+想要改变三角形的大小形状只需要修改边框宽度就可以实现：
+
+<iframe height="800" style="width: 100%;" scrolling="no" title="border 实现三角形动态体验" src="https://codepen.io/lxfriday/embed/popvdod?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/popvdod">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
 
 ## ✔ 写一个瀑布流布局
 
