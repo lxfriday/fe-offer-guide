@@ -4611,6 +4611,32 @@ ref [MDN clear](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear)
 - `inline-start` 该元素向下移动以清除其包含块的起始侧上的浮动。即在某个区域的左侧(ltr)浮动或右侧浮动(rtl)。
 - `inline-end` 该元素向下移动以清除其包含块的末端的浮点，即在某个区域的右侧浮动(ltr)或左侧浮动(rtl)。
 
+### ✔ offsetHeight、clientHeight、scrollHeight、height、getBoundingClientRect 区别
+
+- offsetXXX: `offsetHeight` `offsetWidth` `offsetLeft` `offsetTop` 四舍五入取整
+- clientXXX: `clientHeight` `clientWidth` `clientLeft` `clientTop` 四舍五入取整
+- scrollXXX: `scrollHeight` `scrollWidth` `scrollLeft` `scrollTop` 四舍五入取整
+
+`HTMLElement.offsetHeight` 是一个只读属性，它返回该元素的像素高度，高度包括元素的**边框**、**内边距**和元素的**水平滚动条**（如果存在且渲染的话），不包含 `:before` 或 `:after` 等伪类元素的高度。
+
+![offsetXXX](https://qiniu1.lxfriday.xyz/blog/42672cdb-fcc1-922b-7569-29b04bd03fe0.png)
+
+`Element.clientHeight` 是只读属性，对于没有定义 CSS 或者内联布局盒子的元素为0，否则，它是元素内部的高度(单位像素)，包含**内边距**，但**不包括水平滚动条、边框和外边距**。`clientHeight` 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算.
+
+![clientXXX](https://qiniu1.lxfriday.xyz/blog/efff2092-d4f0-5f8b-af4d-3f24290e73e8.png)
+
+`Element.scrollHeight` 这个只读属性是一个元素内容高度的度量，包括由于溢出导致的视图中不可见内容。没有垂直滚动条的情况下，`scrollHeight` 值与元素视图填充所有内容所需要的最小值 `clientHeight` 相同。包括元素的 `padding` ，但不包括元素的 `border` 和 `margin` 。`scrollHeight` 也包括 `::before` 和 `::after` 这样的伪元素。
+
+![](https://qiniu1.lxfriday.xyz/blog/74928d98-e37a-50df-fe94-5fff711cd8ba.png)
+
+`Element.getBoundingClientRect()` 方法返回元素的大小及其相对于视口的位置。如果是标准盒子模型，元素的尺寸等于 width/height + padding + border-width 的总和。如果 box-sizing: border-box，元素的的尺寸等于 width/height。
+
+返回值是一个 DOMRect 对象，返回的结果是包含完整元素的最小矩形，并且拥有 `left`, `top`, `right`, `bottom`, `x`, `y`, `width`, 和 `height` 这几个以像素为单位的只读属性用于描述整个边框。除了 `width` 和 `height` 以外的属性是相对于视图窗口的左上角来计算的。
+
+![](https://qiniu1.lxfriday.xyz/blog/b6c94e30-9b5d-2340-0731-fd98b1e3335c.png)
+
+当计算边界矩形时，会考虑视口区域（或其他可滚动元素）内的滚动操作，当滚动位置发生了改变，`top` 和 `left` 属性值就会随之立即发生变化（因此，它们的值是相对于视口的，而不是绝对的）。给 `top`、`left`属性值加上当前的滚动位置（通过 `window.scrollX` 和 `window.scrollY`），这样就可以获取与当前的滚动位置无关的值。
+
 
 ## ✔ flex 布局
 
