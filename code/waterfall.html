@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        width: 535px;
+        margin: 100px auto;
+        column-count: 4;
+        column-gap: 5px;
+      }
+      .box {
+        break-inside: avoid;
+        background-color: red;
+        width: 130px;
+        margin-bottom: 5px;
+      }
+      .box:nth-child(9n + 1) {
+        height: 100px;
+      }
+      .box:nth-child(9n + 2) {
+        height: 150px;
+      }
+      .box:nth-child(9n + 3) {
+        height: 200px;
+      }
+      .box:nth-child(9n + 4) {
+        height: 250px;
+      }
+      .box:nth-child(9n + 5) {
+        height: 300px;
+      }
+      .box:nth-child(9n + 6) {
+        height: 350px;
+      }
+      .box:nth-child(9n + 7) {
+        height: 400px;
+      }
+      .box:nth-child(9n + 8) {
+        height: 450px;
+      }
+      .box:nth-child(9n + 9) {
+        height: 500px;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+    </div>
+    <div>
+      <button id="add">Add</button>
+    </div>
+    <script>
+      let count = 0
+      document.querySelector('#add').addEventListener('click', () => {
+        console.log('add');
+        const wrapper = document.querySelector('.wrapper')
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          const box = document.createElement('div')
+          box.classList.add('box')
+          box.innerText = count++
+          list.push(box)
+        }
+        console.log(list);
+        wrapper.append(...list)
+      })
+    </script>
+  </body>
+</html>

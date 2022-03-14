@@ -4831,7 +4831,93 @@ CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一�
 
 ## CSS 写画一个三角形
 
-## 写一个瀑布流布局
+## ✔ 写一个瀑布流布局
+
+### ✔ column-count + break-inside 方案
+
+```html
+<div class="wrapper">
+</div>
+<div>
+  <button id="add">Add</button>
+</div>
+<script>
+  // 模拟动态加载的情况
+  let count = 0
+  document.querySelector('#add').addEventListener('click', () => {
+    console.log('add');
+    const wrapper = document.querySelector('.wrapper')
+    const list = []
+    for (let i = 0; i < 20; i++) {
+      const box = document.createElement('div')
+      box.classList.add('box')
+      box.innerText = count++
+      list.push(box)
+    }
+    console.log(list);
+    wrapper.append(...list)
+  })
+</script>
+
+
+<style>
+  .wrapper {
+    width: 535px;
+    margin: 100px auto;
+    column-count: 4;
+    column-gap: 5px;
+  }
+  .box {
+    break-inside: avoid;
+    background-color: red;
+    width: 130px;
+    margin-bottom: 5px;
+  }
+  .box:nth-child(9n + 1) {
+    height: 100px;
+  }
+  .box:nth-child(9n + 2) {
+    height: 150px;
+  }
+  .box:nth-child(9n + 3) {
+    height: 200px;
+  }
+  .box:nth-child(9n + 4) {
+    height: 250px;
+  }
+  .box:nth-child(9n + 5) {
+    height: 300px;
+  }
+  .box:nth-child(9n + 6) {
+    height: 350px;
+  }
+  .box:nth-child(9n + 7) {
+    height: 400px;
+  }
+  .box:nth-child(9n + 8) {
+    height: 450px;
+  }
+  .box:nth-child(9n + 9) {
+    height: 500px;
+  }
+  button {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+  }
+</style>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/20220314waterfall.gif)
+
+
+问题：竖向排序，没太大实际意义，碰到动态加载的时候，体验极差。
+
+### ✔ flex 方案
+
+ref [纯 CSS 实现横向排序的瀑布流式布局](https://jessieji.com/2019/pure-css-masonry)
+
+不推荐，需要固定容器高度。
 
 ### ✔ grid 方案
 
@@ -4840,58 +4926,76 @@ ref [小程序使用Grid和css变量实现瀑布流布局](https://juejin.cn/pos
 列宽相同，行高不同的时候（瀑布流布局）：
 
 ```html
-<div class="demo-grid-wrapper">
-  <div class="box box1">1</div>
-  <div class="box box2">2</div>
-  <div class="box box3">3</div>
-  <div class="box box4">4</div>
-  <div class="box box5">5</div>
-  <div class="box box6">6</div>
-  <div class="box box7">7</div>
-  <div class="box box8">8</div>
-  <div class="box box9">9</div>
-  <div class="box box10">10</div>
-  <div class="box box11">11</div>
-  <div class="box box12">12</div>
-  <div class="box box13">13</div>
-  <div class="box box14">14</div>
-  <div class="box box15">15</div>
-</div>
+<div class="wrapper"></div>
+<button id="add">Add</button>
+<script>
+  let count = 0
+  function addList() {
+    const wrapper = document.querySelector('.wrapper')
+    const list = []
+    for (let i = 0; i < 20; i++) {
+      const box = document.createElement('div')
+      box.classList.add('box')
+      box.innerText = count++
+      list.push(box)
+    }
+    wrapper.append(...list)
+  }
+  addList()
+  document.querySelector('#add').addEventListener('click', addList)
+</script>
+
 
 <style>
-  body {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 50vw;
-  }
-  .demo-grid-wrapper {
+  .wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
     display: grid;
     /* grid-template-columns: repeat(auto-fill, 200px); */
-    grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     grid-gap: 5px;
     grid-auto-rows: 60px;
   }
   .box {
-    background-color: #222;
-    width: 100%;
-    color: #ddd;
+    color: #fff;
+    background-color: #143250;
   }
-  .box1,.box4,.box5,.box7,.box12 {
-    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+  .box:nth-child(9n + 1) {
+    grid-row: auto / span 1;
+  }
+  .box:nth-child(9n + 2) {
+    grid-row: auto / span 2;
+  }
+  .box:nth-child(9n + 3) {
+    grid-row: auto / span 3;
+  }
+  .box:nth-child(9n + 4) {
+    grid-row: auto / span 4;
+  }
+  .box:nth-child(9n + 5) {
     grid-row: auto / span 5;
   }
-  .box2,.box3,.box8,.box10,.box15 {
-    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+  .box:nth-child(9n + 6) {
     grid-row: auto / span 6;
   }
-  .box6,.box9,.box11,.box13,.box14 {
-    /* 实际根据列宽和图片尺寸，修改最后的这个数字 */
+  .box:nth-child(9n + 7) {
+    grid-row: auto / span 7;
+  }
+  .box:nth-child(9n + 8) {
     grid-row: auto / span 8;
+  }
+  .box:nth-child(9n + 9) {
+    grid-row: auto / span 9;
+  }
+  button {
+    position: fixed;
+    right: 20px;
+    top: 20px;
   }
 </style>
 ```
 
-![waterfall1](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-11-10%5B00-00-02--00-00-09%5D.gif)
+![](https://qiniu1.lxfriday.xyz/blog/20220314waterfall2.gif)
 
 
 列宽不同，行高相同的时候（砖墙布局）：
@@ -5020,6 +5124,212 @@ ref [小程序使用Grid和css变量实现瀑布流布局](https://juejin.cn/pos
 ```
 
 ![](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2019-54-03%5B00-00-02--00-00-08%5D.gif)
+
+### ✔ JS 动态添加方案
+
+自己实现的，讲究可以，性能上，由于是添加一个之后再进行一次高度判断，实际性能可能会垃，但也影响不了多少。[https://unsplash.com/](https://unsplash.com/) 和这个方案比较类似。
+
+![](https://qiniu1.lxfriday.xyz/blog/75098f39-f07f-969b-c3ed-13a505235bf0.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        margin: 0 auto;
+        min-width: 900px;
+        max-width: 1200px;
+      }
+      .box {
+        margin-bottom: 10px;
+        color: #fff;
+        background-color: #143250;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper waterfall-wrapper"></div>
+    <button id="add">Add</button>
+    <script>
+      let count = 0
+      // ---------------------------------------------------------------------
+      // 实际根据瀑布的盒子设置好高度（已知宽度，依据图片宽高比，计算出高度）
+      // 生成一个 box
+      function genItem() {
+        const box = document.createElement('div')
+        box.classList.add('box')
+        box.innerText = count++
+        box.style.height = `${100 + Math.floor(Math.random() * 500)}px`
+        return box
+      }
+      // 一组 box
+      function genList() {
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          list.push(genItem())
+        }
+        return list
+      }
+      // ---------------------------------------------------------------------
+      // ----------------------------Waterfall--------------------------------
+      // ---------------------------------------------------------------------
+      class Waterfall {
+        constructor({ colCount, containerEle, colClassName, colGap }) {
+          this.colCount = colCount
+          this.container = containerEle
+          this.colClassName = colClassName || 'col'
+          this.colGap = colGap || '1%'
+          this.init()
+        }
+
+        // 初始化列
+        init() {
+          const colCount = this.colCount
+          for (let index = 1; index <= colCount; index++) {
+            const col = document.createElement('div')
+            col.classList.add(this.colClassName)
+            col.style.float = 'left'
+            col.style.width = `${(100 - (colCount - 1)) / colCount}%`
+            col.style.marginRight = `${colCount === index ? 0 : this.colGap}`
+            col.style.backgroundColor = '#eee'
+            this.container.appendChild(col)
+          }
+        }
+
+        // 计算下一次轮到哪一列添加
+        calcNext() {
+          const cols = document.querySelectorAll('.' + this.colClassName)
+          let target = cols[0]
+          let minHeight = cols[0].clientHeight
+          cols.forEach(v => {
+            if (v.clientHeight < minHeight) {
+              minHeight = v.clientHeight
+              target = v
+            }
+          })
+          return target
+        }
+
+        render(list) {
+          list.forEach(v => {
+            // console.log('v.style.height', v.style.height);
+            // 这里可以考虑缓存每列的高度，就不用每次都计算了
+            this.calcNext().appendChild(v)
+          })
+        }
+      }
+
+      const waterfall = new Waterfall({
+        colCount: 5,
+        containerEle: document.querySelector('.waterfall-wrapper'),
+        colClassName: 'col',
+        // 列距离，适当调整，太大的话会导致混乱
+        // 调整范围 <= 1%
+        colGap: '1%',
+      })
+
+
+      waterfall.render(genList())
+      document.querySelector('#add').addEventListener('click', () => waterfall.render(genList()))
+      // ---------------------------------------------------------------------
+      // ----------------------------Waterfall--------------------------------
+      // ---------------------------------------------------------------------
+    </script>
+  </body>
+</html>
+```
+
+实际效果：
+
+
+![](https://qiniu1.lxfriday.xyz/blog/20220314waterfall4.gif)
+
+
+效果还不错，没有太大的优缺点，内部实现比较好理解。
+
+### ✔ macy 开源方案
+
+使用 [macy.js](https://github.com/bigbite/macy.js) 开源库。
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        color: #fff;
+        background-color: #143250;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <button id="add">Add</button>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script>
+      var macy = Macy({
+        container: '.wrapper',
+        trueOrder: false,
+        waitForImages: false,
+        margin: { x: 10, y: 10 },
+        columns: 6,
+        breakAt: {
+          1200: 5,
+          940: 3,
+          520: 2,
+          400: 1,
+        },
+      })
+
+      let count = 0
+      function addList() {
+        const wrapper = document.querySelector('.wrapper')
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          const box = document.createElement('div')
+          box.classList.add('box')
+          box.innerText = count++
+          box.style.height = `${100 + Math.floor(Math.random() * 500)}px`
+          list.push(box)
+        }
+        wrapper.append(...list)
+        macy.recalculate()
+      }
+      addList()
+      document.querySelector('#add').addEventListener('click', addList)
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/20220314waterfall5.gif)
+
+实现方式：
+
+![](https://qiniu1.lxfriday.xyz/blog/QQ%E6%88%AA%E5%9B%BE20220314190251.png)
+
+设置 wrapper 的高度，对 box 进行绝对定位，直接计算出 box 的绝对位置。
+
 
 ## ✔ 移动端 1px 解决方案
 

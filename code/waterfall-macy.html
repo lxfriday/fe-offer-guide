@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        color: #fff;
+        background-color: #143250;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <button id="add">Add</button>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script>
+      var macy = Macy({
+        container: '.wrapper',
+        trueOrder: false,
+        waitForImages: false,
+        margin: { x: 10, y: 10 },
+        columns: 6,
+        breakAt: {
+          1200: 5,
+          940: 3,
+          520: 2,
+          400: 1,
+        },
+      })
+
+      let count = 0
+      function addList() {
+        const wrapper = document.querySelector('.wrapper')
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          const box = document.createElement('div')
+          box.classList.add('box')
+          box.innerText = count++
+          box.style.height = `${100 + Math.floor(Math.random() * 500)}px`
+          list.push(box)
+        }
+        wrapper.append(...list)
+        macy.recalculate()
+      }
+      addList()
+      document.querySelector('#add').addEventListener('click', addList)
+    </script>
+  </body>
+</html>

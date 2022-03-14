@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        margin: 0 auto;
+        min-width: 900px;
+        max-width: 1200px;
+      }
+      .wrapper::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .box {
+        margin-bottom: 10px;
+        color: #fff;
+        background-color: #143250;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+      .col {
+        min-height: 1px;
+        float: left;
+        width: 24.25%;
+        background-color: #eee;
+      }
+      .col + .col {
+        margin-left: 1%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="col" id="col1"></div>
+      <div class="col" id="col2"></div>
+      <div class="col" id="col3"></div>
+      <div class="col" id="col4"></div>
+    </div>
+    <button id="add">Add</button>
+    <script>
+      // 假如固定为 4 列
+      let count = 0
+
+      // ------------------------------------
+      // 实际根据瀑布的盒子设置好高度（已知宽度，依据图片宽高比，计算出高度）
+      // 生成一个 box
+      function genItem() {
+        const box = document.createElement('div')
+        box.classList.add('box')
+        box.innerText = count++
+        box.style.height = `${100 + Math.floor(Math.random() * 500)}px`
+        return box
+      }
+      // 一组 box
+      function genList() {
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          list.push(genItem())
+        }
+        return list
+      }
+      // ------------------
+      const col1 = document.querySelector('#col1')
+      const col2 = document.querySelector('#col2')
+      const col3 = document.querySelector('#col3')
+      const col4 = document.querySelector('#col4')
+
+      // 找出高度值小的，添加进去
+      // 调用函数动态获取 col 的高度
+      function cols() {
+        return [
+          {
+            sel: col1,
+            height: col1.offsetHeight,
+          },
+          {
+            sel: col2,
+            height: col2.offsetHeight,
+          },
+          {
+            sel: col3,
+            height: col3.offsetHeight,
+          },
+          {
+            sel: col4,
+            height: col4.offsetHeight,
+          },
+        ]
+      }
+
+      function applyList() {
+        genList().forEach(v => {
+          // 每次添加一个时候都要计算每列的高度并且比较获取到高度最小的，作为这次添加 box 的容器
+          const newCols = cols().sort((a, b) => a.height - b.height)
+          newCols[0].sel.appendChild(v)
+        })
+      }
+
+      applyList()
+      document.querySelector('#add').addEventListener('click', applyList)
+    </script>
+  </body>
+</html>

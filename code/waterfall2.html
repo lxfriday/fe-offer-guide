@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        display: flex;
+        flex-flow: column wrap;
+        align-content: space-between;
+        /* 容器必须有固定高度
+   /* 且高度大于最高的列高 */
+        height: 3000px;
+
+        /* 非必须 */
+        background-color: #f7f7f7;
+        border-radius: 3px;
+        padding: 20px;
+        width: 60%;
+        margin: 40px auto;
+        counter-reset: items;
+      }
+      .box:nth-child(3n + 1) {
+        order: 1;
+      }
+      .box:nth-child(3n + 2) {
+        order: 2;
+      }
+      .box:nth-child(3n) {
+        order: 3;
+      }
+      .wrapper::before,
+      .wrapper::after {
+        content: '';
+        flex-basis: 100%;
+        width: 0;
+        order: 2;
+      }
+
+      .box {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 32%;
+        color: #fff;
+        background-color: #143250;
+      }
+      .box:nth-child(9n + 1) {
+        height: 100px;
+      }
+      .box:nth-child(9n + 2) {
+        height: 150px;
+      }
+      .box:nth-child(9n + 3) {
+        height: 200px;
+      }
+      .box:nth-child(9n + 4) {
+        height: 250px;
+      }
+      .box:nth-child(9n + 5) {
+        height: 300px;
+      }
+      .box:nth-child(9n + 6) {
+        height: 350px;
+      }
+      .box:nth-child(9n + 7) {
+        height: 400px;
+      }
+      .box:nth-child(9n + 8) {
+        height: 450px;
+      }
+      .box:nth-child(9n + 9) {
+        height: 500px;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <button id="add">Add</button>
+    <script>
+      let count = 0
+      function addList() {
+        const wrapper = document.querySelector('.wrapper')
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          const box = document.createElement('div')
+          box.classList.add('box')
+          box.innerText = count++
+          list.push(box)
+        }
+        wrapper.append(...list)
+      }
+      addList()
+      document.querySelector('#add').addEventListener('click', addList)
+    </script>
+  </body>
+</html>
