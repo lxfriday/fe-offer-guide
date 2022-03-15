@@ -3434,6 +3434,14 @@ Content-Security-Policy: script-src 'self'; object-src 'none'; style-src cdn.exa
 <meta name="robots" content="none" />
 ```
 
+#### ✔ name="author"
+
+标示网页作者
+
+```html
+<meta name="author" content="云影同学">
+```
+
 #### ✔ name="keywords"
 
 为搜索引擎提供的关键字列表
