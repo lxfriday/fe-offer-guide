@@ -2809,11 +2809,190 @@ document.addEventListener('scroll', debounce(lazyLoad, 200))
 
 # DOM
 
+## ✔ Element 和 Node 的关系
+
+ref [HTML中的Node和Element的区别](https://blog.csdn.net/fivedoumi/article/details/50866481)
+
+元素是一个小范围的定义，必须是含有完整信息的结点才是一个元素，例如 `<div>…</div>`。但是一个结点不一定是一个元素，而一个元素一定是一个结点。
+
+Element 是 HTML 里的概念，是元素即标签包含内部属性及内容的总体，是HTML中的数据的组成部分之一。
+
+从范围上讲 DOM 将文档中的所有都看作节点，也就是说 Node > Element。HTML文档两个标签之间的空白也是这棵树的一个节点（Text节点）。 `<a> <b></b> <a>` 中 a 有三个节点。
+
+以下接口都从 Node 继承其方法和属性：Document, Element, Attr, CharacterData (which Text, Comment, and CDATASection inherit), ProcessingInstruction (en-US), DocumentFragment, DocumentType, Notation, Entity, EntityReference。
+
+综上理解：Element 是可以有属性和子节点的 Node。Element 是从 Node 继承的。
+
+
+除以上需要了解的，我们还需要 JS 操作元素节点的另一种方法 Element Traversal Specification。该接口是w3c在2008年12月22日发布的规范，用于 Element Traversal 规范定义了 ElementTraversal 接口，它允许脚本遍历 DOM 树中的元素（Element）节点，而不包含元素节点之外的其他节点，如注释节点、文字节点等。这个规范给我们提供了快速、方便的方法来访问元素节点。在以前的方法中，我们使用 `firstChild`、`nextSibling`、`childNodes`、`children` 等方法来进行遍历，但要得到元素节点，我们还需要来判断节点的类型。
+
+ElementTraversal接口定义了5个属性，是元素节点必须要实现的，这5个属性的原始定义如下，这些属性，看名字就不难明白它的含义，不进行翻译成中文了：
+
+- firstElementChild
+- lastElementChild
+- previousElementSibling
+- nextElementSibling
+- childElementCount
+
+## ✔ 如何获取一个节点的值 innerText、textContent、nodeValue 的区别
+
+### ✔ Node.nodeValue
+
+Node 的 `nodeValue` 属性返回或设置当前节点的值。
+
+```html
+str = node.nodeValue;
+node.nodeValue = str;
+```
+
+对于文档节点来说，`nodeValue` 返回 `null`。 对于 `text`，`comment` 和 `CDATA` 节点来说，`nodeValue` 返回该节点的文本内容. 对于 `attribute` 节点来说, 返回该属性的属性值。
+
+下表就是不同类型的节点所返回的该属性的值.
+
+![](https://qiniu1.lxfriday.xyz/blog/d69c54be-5841-96e1-bcad-ea88f16518cd.png)
+
+如果 `nodeValue` 的值为 `null`，则对它赋值也不会有任何效果。
+
+```html
+<div class="wrapper">hello</div>
+<script>
+  console.log(document.querySelector('.wrapper').childNodes[0].nodeValue); // hello
+  console.log(document.querySelector('.wrapper').nodeValue); // null
+</script>
+```
+
+例子2：
+
+```html
+<div class="wrapper">
+  hello
+  <!-- are u ok? -->
+</div>
+<script>
+  console.log('childNodes', document.querySelector('.wrapper').childNodes);
+  console.log('0 ->', document.querySelector('.wrapper').childNodes[0].nodeValue); // 带回车
+  console.log('1 ->', document.querySelector('.wrapper').childNodes[1].nodeValue); // 注释中的值
+  console.log('2 ->', document.querySelector('.wrapper').childNodes[2].nodeValue); // 回车符
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/50ee52a8-ad24-06f4-68b2-e5fc6bdfd076.png)
+
+### ✔ Node.textContent
+
+Node 接口的 `textContent` 属性表示一个节点及其后代的文本内容。
+
+```html
+let text = someNode.textContent;
+someOtherNode.textContent = string;
+```
+
+`textContent` 的值取决于具体情况：
+
+- 如果节点是一个 document，或者一个 DOCTYPE ，则 textContent 返回 null。
+- 对于其他节点类型，`textContent` 将所有子节点的 `textContent` 合并后返回，除了注释。（如果该节点没有子节点的话，返回一个空字符串。）
+
+在节点上设置 `textContent` 属性的话，会删除它的所有子节点，并替换为一个具有给定值的文本节点。
+
+与 `innerText` 的区别：
+
+- `textContent` 会获取所有元素的内容，包括 `<script>` 和 `<style>` 元素，然而 `innerText` 只展示给人看的元素。
+- `textContent` 会返回节点中的每一个元素。相反，innerText 受 CSS 样式的影响，并且不会返回隐藏元素的文本
+- 此外，由于 `innerText` 受 CSS 样式的影响，它会触发回流（ reflow ）去确保是最新的计算样式。（回流在计算上可能会非常昂贵，因此应尽可能避免。）
+
+```html
+<div class="wrapper">
+  hello
+  <!-- are u ok? -->
+  <span> i am normal </span>
+  <span style="display: none"> i am hidden display: none </span>
+  <style>
+    .xxx {
+      /* style */
+      display: none;
+    }
+  </style>
+  <script>
+    // script
+    const aa = 111
+  </script>
+</div>
+<script>
+  console.log('innerText', document.querySelector('.wrapper').innerText)
+  console.log('textContent', document.querySelector('.wrapper').textContent)
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/428e8830-0c8e-4df8-0f4d-109754935956.png)
+
+### ✔ HTMLElement.innerText
+
+innerText 属性表示一个节点及其后代的“渲染”文本内容。
+
+区别见 `Node.textContent`。
+
+## ✔ Element.innerHTML 与 Element.insertAdjacentHTML
+
+`Element.innerHTML` 属性设置或获取HTML语法表示的元素的后代。如果一个 `<div>`，`<span>` 或 `<noembed>` 节点有一个文本子节点，该节点包含字符 (&), (<),  或(>)，`innerHTML` 将这些字符分别返回为 `&amp;`，`&lt;` 和 `&gt;`。 使用 `Node.textContent` 可获取一个这些文本节点内容的正确副本。
+
+```html
+<div class="wrapper">
+  <<<<<  被转义
+  >>>>>  被转义
+  &&&&&  被转义
+  hello >ok?
+  <!-- are u ok? -->
+  <span> i am normal </span>
+  <span style="display: none"> i am hidden display: none </span>
+  <style>
+    .xxx {
+      /* style */
+      display: none;
+    }
+  </style>
+  <script>
+    // script
+    const aa = 111
+  </script>
+</div>
+<script>
+  console.log('innerHTML', document.querySelector('.wrapper').innerHTML)
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/0a23ea7d-d552-7104-c3b5-28d0af16cc8f.png)
+
+
+`Element.insertAdjacentHTML` 方法将指定的文本解析为 Element 元素，并将结果节点插入到 DOM 树中的指定位置。它不会重新解析它正在使用的元素，因此它不会破坏元素内的现有元素。这避免了额外的序列化步骤，使其比直接使用 `innerHTML` 操作更快。
+
+```js
+element.insertAdjacentHTML(position, text);
+````
+
+`position` 一个 DOMString，表示插入内容相对于元素的位置，并且必须是以下字符串之一：
+- `beforebegin` 元素自身的前面
+- `afterbegin` 插入元素内部的第一个子节点之前
+- `beforeend` 插入元素内部的最后一个子节点之后
+- `afterend` 元素自身的后面
+
+`text` 是要被解析为 HTML 或 XML 元素，并插入到 DOM 树中的 DOMString。
+
+```html
+<!-- beforebegin -->
+<p>
+  <!-- afterbegin -->
+  foo
+  <!-- beforeend -->
+</p>
+<!-- afterend -->
+```
+
+`Element.insertAdjacentText()` 与之类似，只不过第二个参数是纯文本。
+
+
 ## DOM 操作(增删改查)
 
 ## DOM 属性
-
-## textContent、innerText、innerHTML
 
 ## ✔ 事件冒泡、捕捉、代理
 
@@ -3222,8 +3401,6 @@ ref
 不管是使用 RESTful 规范还是使用普通的设计方式，其目的都是便于理解，给整个 team 带来便利。
 
 # HTML
-
-## meta
 
 ## ✔ doctype
 
