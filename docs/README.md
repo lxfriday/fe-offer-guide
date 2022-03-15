@@ -3221,6 +3221,234 @@ ref
 
 不管是使用 RESTful 规范还是使用普通的设计方式，其目的都是便于理解，给整个 team 带来便利。
 
+# HTML
+
+## meta
+
+## ✔ doctype
+
+ref
+
+- [MDN 文档类型声明](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
+
+在 HTML 中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
+
+## ✔ html5 相比以前有什么变化
+
+### ✔ html5 新增标签
+
+ref
+
+- [MDN HTML5 标签列表](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5/HTML5_element_list)
+
+html5 中新增了一些语义化的标签，方便做 seo，这些新增标签自带固定样式。
+
+- `<template>` 通过 JavaScript 在运行时实例化内容的容器
+- `<section>` 定义文档中的一个章节
+- `<nav>` 定义只包含导航链接的章节
+- `<article>` 定义可以独立于内容其余部分的完整独立内容块
+- `<aside>` 定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理
+- `<header>` 定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录
+- `<footer>` 定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址
+- `<main>` 定义文档中主要或重要的内容
+- `<figure>` 代表一个和文档有关的图例
+- `<figcaption>` 代表一个图例的说明
+- `<data>` 关联一个内容的机器可读的等价形式
+- `<time>` 代表日期和时间值；机器可读的等价形式通过 datetime 属性指定
+- `<mark>` 代表一段需要被高亮的引用 文字
+- `<ruby>` 代表被 ruby 注释标记的文本，如中文汉字和它的拼音
+- `<rt>` 代表 ruby 注释 ，如中文拼音
+- `<rp>` 代表 ruby 注释两边的额外插入文本 ，用于在不支持 ruby 注释显示的浏览器中提供友好的注释显示
+- `<bdi>` 代表需要脱离父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本
+- `<wbr>` 代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符
+- `<embed>` 代表一个嵌入 的外部资源，如应用程序或交互内容
+- `<video>` 代表一段视频及其视频文件和字幕，并提供了播放视频的用户界面
+- `<audio>` 代表一段声音 ，或音频流
+- `<source>` 为 `<video>` 或 `<audio>` 这类媒体元素指定媒体源
+- `<track>` 为 `<video>` 或 `<audio>` 这类媒体元素指定文本轨道（字幕）
+- `<canvas>` 代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等
+- `<svg>` 定义一个嵌入式矢量图
+- `<math>` 定义一段数学公式
+- `<datalist>` 代表提供给其他控件的一组预定义选项
+- `<keygen>` 代表一个密钥对生成器 控件
+- `<output>` 代表计算值
+- `<progress>` 代表进度条
+- `<meter>` 代表滑动条
+- `<details>` 代表一个用户可以(点击)获取额外信息或控件的小部件
+- `<summary>` 代表 `<details>` 元素的综述或标题
+- `<menuitem>` 代表一个用户可以点击的菜单项
+- `<menu>` 代表菜单
+
+### ✔ html5 新增 api
+
+- Websocket
+- WebRTC
+- web Workers
+- serviceWorker
+- xlocalStorage
+- IndexedDB
+- Camera
+- Canvas
+- WebGL
+- Svg
+- fetch
+- History
+- contentEditable 属性
+- requestAnimationFrame
+
+## link 标签
+
+## ✔ meta 标签
+
+ref
+- [meta标签到底是做什么的|我竟一无所知](https://juejin.cn/post/6987919006468407309)
+
+HTML `<meta>` 元素表示那些不能由其它 HTML 元相关（meta-related）元素（(`<base>`、`<link>`、 `<script>`、 `<style>` 或 `<title>`）之一表示的任何元数据信息。
+
+meta 元素定义的元数据的类型包括以下几种：
+
+- 如果设置了 `charset` 属性，meta 元素是一个字符集声明，告诉文档使用哪种字符编码。
+- 如果设置了 `name` 属性，meta 元素提供的是文档级别（document-level）的元数据，应用于整个页面。
+- 如果设置了 `http-equiv` 属性，meta 元素则是编译指令，提供的信息与类似命名的 HTTP 头部相同。
+
+`charset` 这个属性声明了文档的字符编码。如果使用了这个属性，其值必须是与 ASCII 大小写无关（ASCII case-insensitive）的"utf-8"。
+
+`content` 此属性包含 `http-equiv` 或 `name` 属性的值，具体取决于所使用的值。
+
+`http-equiv` 属性定义了一个编译指示指令。这个属性叫做 http-equiv(alent) 是因为所有允许的值都是特定 HTTP 头部的名称，如下：
+  - `content-security-policy` 
+  - `content-type` 
+  - `x-ua-compatible` 
+  - `refresh` 
+
+`name` `name` 和 `content` 属性可以一起使用，以名 - 值对的方式给文档提供元数据，其中 `name` 作为元数据的名称，`content` 作为元数据的值。
+
+### ✔ charset="UTF-8"
+
+告诉文档使用 UTF8 编码
+
+```html
+
+<meta charset="UTF-8" />
+<!-- 等同于 -->
+<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+```
+
+### ✔ name="viewport"
+
+`content` 可设置的属性：
+
+- `width=device-width` 设置设备宽度
+- `initial-scale` 初始化比例
+- `minimum-scale` 最小比例
+- `maximun-scale` 最大比例
+- `user-scalable` yes | no 是否允许缩放 
+
+### ✔ name="renderer"
+
+浏览器内核控制：国内浏览器很多都是双内核（webkit和Trident），webkit 内核高速浏览，IE 内核兼容网页和旧版网站。而添加 meta 标签的网站可以控制浏览器选择何种内核渲染。
+
+若页面需默认用极速核，增加标签： `<meta name="renderer" content="webkit">`
+
+若页面需默认用ie兼容内核，增加标签： `<meta name="renderer" content="ie-comp">`
+
+若页面需默认用ie标准内核，增加标签： `<meta name="renderer" content="ie-stand">`
+
+### ✔ http-equiv="X-UA-Compatible"
+
+`<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`
+
+IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 IE 浏览器去模拟某个特定版本的 IE 浏览器的渲染方式(如 IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF 渲染，否则使用最高版本的 IE 内核进行渲染。
+
+`<meta http-equiv="X-UA-Compatible" content="IE=6" >` 使用IE6
+
+### ✔ http-equiv="refresh"
+
+自动刷新并指向新页面。其中的5表示5秒后自动刷新并调整到URL新页面。
+
+```html
+<meta http-equiv="refresh"content="5; url=http://www.baidu.com/"/>
+```
+
+### ✔ http-equiv="Content-Security-Policy"
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:">
+```
+
+等同于在 http 头中添加如下字段：
+
+```http
+Content-Security-Policy: script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:
+```
+
+上面代码中，CSP 做了如下配置。
+
+- 脚本：只信任当前域名
+- `<object>` 标签：不信任任何URL，即不加载任何资源
+- 样式表：只信任 `cdn.example.org` 和 `third-party.org`
+- 框架（frame）：必须使用 HTTPS 协议加载
+- 其他资源：没有限制
+
+### ✔ http-equiv="Set-Cookie"
+
+```html
+<meta http-equiv="Set-Cookie"  content="cookievalue=xxx; expires=Wednesday, 21-Oct-98 16:14:21 GMT; path=/">
+```
+
+过期时间必须用 GMT 时间。
+
+### ✔ http-equiv="Pragma"
+
+缓存控制
+
+```html
+<meta http-equiv="Pragma" content="no-cache"/>
+```
+禁止浏览器从本地计算机的缓存中访问页面内容。
+
+### ✔ seo 相关
+
+#### ✔ name="robots"
+
+```html
+<meta name="robots" content="index,follow" />
+```
+
+`content` 中的值决定允许抓取的类型，必须同时包含两个值：是否允许索引（index）和是否跟踪链接（follow，也可以理解为是否允许沿着网页中的超级链接继续抓取）。共有4个参数可选，组成4个组合：
+
+- `index,follow`：允许抓取本页，允许跟踪链接
+- `index,nofollow`：允许抓取本页，但禁止跟踪链接
+- `noindex,follow`：禁止抓取本页，但允许跟踪链接
+- `noindex,nofollow`：禁止抓取本页，同时禁止跟踪本页中的链接
+
+以上1和4还有另一种写法：
+
+```html
+<!-- index,follow -->
+<meta name="robots" content="all" />
+
+<!-- noindex,nofollow -->
+<meta name="robots" content="none" />
+```
+
+#### ✔ name="keywords"
+
+为搜索引擎提供的关键字列表
+
+```html
+<meta name="keywords" content="云影同学"/>
+```
+
+#### ✔ name="description"
+
+告诉搜索引擎你的网站主要内容。
+
+```html
+<meta name="description" content="这里是网站的内容描述"/>
+```
 
 # CSS
 
@@ -6588,92 +6816,6 @@ ref
 # Axios
 
 ## Axios 封装
-
-# HTML
-
-## ✔ doctype
-
-ref
-
-- [MDN 文档类型声明](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
-
-在 HTML 中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
-
-## ✔ html5 相比以前有什么变化
-
-### ✔ html5 新增标签
-
-ref
-
-- [MDN HTML5 标签列表](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5/HTML5_element_list)
-
-html5 中新增了一些语义化的标签，方便做 seo，这些新增标签自带固定样式。
-
-- `<template>` 通过 JavaScript 在运行时实例化内容的容器
-- `<section>` 定义文档中的一个章节
-- `<nav>` 定义只包含导航链接的章节
-- `<article>` 定义可以独立于内容其余部分的完整独立内容块
-- `<aside>` 定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理
-- `<header>` 定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录
-- `<footer>` 定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址
-- `<main>` 定义文档中主要或重要的内容
-- `<figure>` 代表一个和文档有关的图例
-- `<figcaption>` 代表一个图例的说明
-- `<data>` 关联一个内容的机器可读的等价形式
-- `<time>` 代表日期和时间值；机器可读的等价形式通过 datetime 属性指定
-- `<mark>` 代表一段需要被高亮的引用 文字
-- `<ruby>` 代表被 ruby 注释标记的文本，如中文汉字和它的拼音
-- `<rt>` 代表 ruby 注释 ，如中文拼音
-- `<rp>` 代表 ruby 注释两边的额外插入文本 ，用于在不支持 ruby 注释显示的浏览器中提供友好的注释显示
-- `<bdi>` 代表需要脱离父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本
-- `<wbr>` 代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符
-- `<embed>` 代表一个嵌入 的外部资源，如应用程序或交互内容
-- `<video>` 代表一段视频及其视频文件和字幕，并提供了播放视频的用户界面
-- `<audio>` 代表一段声音 ，或音频流
-- `<source>` 为 `<video>` 或 `<audio>` 这类媒体元素指定媒体源
-- `<track>` 为 `<video>` 或 `<audio>` 这类媒体元素指定文本轨道（字幕）
-- `<canvas>` 代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等
-- `<svg>` 定义一个嵌入式矢量图
-- `<math>` 定义一段数学公式
-- `<datalist>` 代表提供给其他控件的一组预定义选项
-- `<keygen>` 代表一个密钥对生成器 控件
-- `<output>` 代表计算值
-- `<progress>` 代表进度条
-- `<meter>` 代表滑动条
-- `<details>` 代表一个用户可以(点击)获取额外信息或控件的小部件
-- `<summary>` 代表 `<details>` 元素的综述或标题
-- `<menuitem>` 代表一个用户可以点击的菜单项
-- `<menu>` 代表菜单
-
-### ✔ html5 新增 api
-
-- Websocket
-- WebRTC
-- web Workers
-- serviceWorker
-- xlocalStorage
-- IndexedDB
-- Camera
-- Canvas
-- WebGL
-- Svg
-- fetch
-- History
-- contentEditable 属性
-- requestAnimationFrame
-
-## HTML Element 和 HTML Node
-
-ref
-
-- [https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement)
-- [https://developer.mozilla.org/zh-CN/docs/Web/API/Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)
-
-## `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`
-
-IE8/9 及以后的版本都会以最高版本 IE 来渲染页面，用来指定 IE 浏览器去模拟某个特定版本的 IE 浏览器的渲染方式(如 IE6)，以此来解决部分兼容问题，如果存在 GCF(Google Chrome Frame)则使用 GCF 渲染，否则使用最高版本的 IE 内核进行渲染。
-
-## seo 优化
 
 # 协议（HTTP+TCP+UDP）
 
