@@ -2989,10 +2989,388 @@ element.insertAdjacentHTML(position, text);
 
 `Element.insertAdjacentText()` 与之类似，只不过第二个参数是纯文本。
 
+## ✔ Node.nodeType 节点类型
 
-## DOM 操作(增删改查)
+```js
+Node.ELEMENT_NODE (1)
+Node.ATTRIBUTE_NODE (2)
+Node.TEXT_NODE (3)
+Node.CDATA_SECTION_NODE(4)
+Node.COMMENT_NODE (8)
+Node.DOCUMENT_NODE (9)
+Node.DOCUMENT_TYPE_NODE (10)
+Node.DOCUMENT_FRAGMENT_NODE (11)
+```
+
+```js
+document.nodeType === Node.DOCUMENT_NODE; // true
+document.doctype.nodeType === Node.DOCUMENT_TYPE_NODE; // true
+
+document.createDocumentFragment().nodeType === Node.DOCUMENT_FRAGMENT_NODE; // true
+
+const p = document.createElement("p");
+p.textContent = "Once upon a time…";
+
+p.nodeType === Node.ELEMENT_NODE; // true
+p.firstChild.nodeType === Node.TEXT_NODE; // true
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/1db26276-adf9-26b4-9dd7-a933351875b7.png)
+
+## ✔ HTMLCollection & NodeList
+
+### ✔ HTMLCollection
+
+- [HTMLCollection](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCollection)
+- [NodeList]()
+
+`HTMLCollection` 接口表示一个包含了元素（元素顺序为文档流中的顺序）的通用集合（generic collection），还提供了用来从该集合中选择元素的方法和属性。
+
+HTML DOM 中的 `HTMLCollection` 是即时更新的（live）；**当其所包含的文档结构发生改变时，它会自动更新**。
+
+提供的方法：
+
+- `res.item()` 根据给定的索引（从0开始），返回具体的节点。如果索引超出了范围，则返回 `null`。 同 `res[x]` 下标访问。
+
+### ✔ NodeList
+
+`NodeList` 对象是节点的集合，通常是由属性，如 `Node.childNodes` 和 方法，如 `document.querySelectorAll` 返回的。
+
+`NodeList` 不是一个数组，是一个类似数组的对象(Like Array Object)。虽然 `NodeList` 不是一个数组，但是可以使用 `forEach()` 来迭代。你还可以使用 `Array.from()` 将其转换为数组。
+
+在一些情况下，`NodeList` 是一个实时集合，也就是说，如果文档中的节点树发生变化，`NodeList` 也会随之变化。例如，`Node.childNodes` 是实时的：
+
+```html
+<div id="parent">
+  <div class="box"></div>
+</div>
+<script>
+  var parent = document.getElementById('parent')
+  var child_nodes = parent.childNodes
+  console.log(child_nodes)
+  console.log(child_nodes.length)
+  parent.appendChild(document.createElement('div'))
+  console.log(child_nodes)
+  console.log(child_nodes.length)
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/78a1b629-4545-7a84-0ab5-a6fb8cc08932.png)
+
+在其他情况下，`NodeList` 是一个静态集合，也就意味着随后对文档对象模型的任何改动都不会影响集合的内容。比如  `document.querySelectorAll` 就会返回一个静态 NodeList。
+
+方法：
+
+`NodeList.item()` 返回 `NodeList` 对象中指定索引的节点，如果索引越界，则返回 `null`。等价的写法是 `nodeList[i]`，不过，在这种情况下，越界访问将返回 `undefined`。
+
+[`NodeList.entries()`](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList/entries) 返回一个迭代协议，允许遍历此对象中包含的所有键/值。该值也是一个Node 对象。
+
+```js
+var node = document.createElement("div");
+var kid1 = document.createElement("p");
+var kid2 = document.createTextNode("hey");
+var kid3 = document.createElement("span");
+node.appendChild(kid1);
+node.appendChild(kid2);
+node.appendChild(kid3);
+
+var list = node.childNodes;
+
+// 使用 for..of 循环
+for(var entry of list.entries()) {
+  console.log(entry);
+}
+
+// Array [ 0, <p> ]
+// Array [ 1, #text "hey" ]
+// Array [ 2, <span> ]
+````
+
+[`NodeList.forEach()`](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList/forEach) 按插入顺序为列表中的每个值对调用一次参数中给定的回调。
+
+```html
+someNodeList.forEach(callback[, thisArg]);
+```
+`callback(function(currentValue, currentIndex, listObj), thisArg)`
+
+[`NodeList.keys()`](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList/keys) 返回一个迭代协议，类似 `entries`，此方法允许遍历这个对象中包含的所有的键，即使这个键是 unsigned integer（无符号整数）。
+
+[`NodeList.values()`](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList/values) 返回一个迭代器协议，同 `entries`。
+
+## ✔ DOM 操作
+### ✔ document.getElementById
+
+- [document.getElementById()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById) 根据 id 查找元素
+
+
+### ✔ Document.getElementsByClassName
+
+- [Document.getElementsByClassName()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementsByClassName)
+
+返回一个包含了所有指定类名的子元素的类数组对象。当在document对象上调用时，会搜索整个DOM文档，包含根节点。你也可以在任意元素上调用 `getElementsByClassName()` 方法，它将返回的是以当前元素为根节点，所有指定类名的子元素。
+
+```js
+var elements = document.getElementsByClassName(names); // or:
+var elements = rootElement.getElementsByClassName(names);
+```
+
+`elements` 是一个[**实时集合**](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCollection)，包含了找到的所有元素。
+
+`names` 是一个字符串，表示要匹配的类名列表；类名通过空格分隔。
+
+`getElementsByClassName` 可以在任何元素上调用，不仅仅是 `document`。 调用这个方法的元素将作为本次查找的根元素。
+
+
+### ✔ Document.getElementsByName
+
+- [Document.getElementsByName()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementsByName)
+
+根据给定的 `name` 返回一个在 (X)HTML document 的节点列表集合。
+
+```html
+<form name="up"><input type="text"></form>
+<div name="down"><input type="text"></div>
+
+<script>
+var up_forms = document.getElementsByName("up");
+console.log(up_forms[0].tagName); // returns "FORM"
+</script>
+```
+
+### ✔ Document.getElementsByTagName
+
+- [Document.getElementsByTagName()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementsByTagName)
+
+返回一个包括所有给定标签名称的元素的 HTML 集合 `HTMLCollection`。 整个文件结构都会被搜索，包括根节点。返回的 HTML 集合是动态的, 意味着它可以自动更新自己来保持和 DOM 树的同步而不用再次调用 `document.getElementsByTagName()`。也可以在任意元素上调用。
+
+```js
+var elements = document.getElementsByTagName(name);
+````
+
+`elements` 是一个由发现的元素出现在树中的顺序构成的动态的 HTML 集合 HTMLCollection。
+
+`name` 是一个代表元素的名称的字符串。特殊字符 `*` 代表了所有元素。
+
+### ✔ document.querySelector
+
+- [document.querySelector()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector)
+
+文档对象模型 Document 引用的 `querySelector()` 方法返回文档中与指定选择器或选择器组匹配的**第一个** `Element` 对象。 如果找不到匹配项，则返回 `null`。
+
+### ✔ Document.querySelectorAll
+
+- [Document.querySelectorAll()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelectorAll)
+
+返回与指定的选择器组匹配的文档中的元素列表 (使用深度优先的先序遍历文档的节点)。返回的对象是 NodeList 。
+
+```html
+elementList = parentNode.querySelectorAll(selectors);
+```
+
+`elementList` 一个**静态** NodeList，包含一个与至少一个指定选择器匹配的元素的 Element 对象，或者在没有匹配的情况下为空 NodeList。
+
+注意： 如果 `selectors` 参数中包含 CSS 伪元素，则返回的列表始终为空。
+
+这里有一个很奇葩的点，`querySelectorAll()` 的行为与大多数常见的 JavaScript DOM 库不同，这可能会导致意外结果。
+
+```html
+<div class="outer">
+  <div class="select">
+    <div class="inner">
+    </div>
+  </div>
+</div>
+
+<script>
+  var select = document.querySelector('.select');
+  var inner = select.querySelectorAll('.outer .inner');
+  inner.length; // 1, not 0!
+</script>
+```
+
+在这个例子中，当在 `<div>` 上下文中选择带有 `select` 类的 `.outer .inner` 时，仍然会找到类 `.inner` 的元素，即使 `.outer` 不是基类的后代 执行搜索的元素（`.select`）。 默认情况下，`querySelectorAll()` **仅验证选择器中的最后一个元素是否在搜索范围内**。
+
+[`:scope`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:scope) 伪类符合预期的行为，只匹配基本元素后代的选择器：
+
+```js
+var select = document.querySelector('.select');
+var inner = select.querySelectorAll(':scope .outer .inner');
+inner.length; // 0
+```
+
+#### ✔ querySelectorAll 与 getElementsByClassName 的区别
+
+返回结果的类型不同：
+
+- `querySelectorAll` 返回一个 NodeList
+- `getElementsByClassName` 返回一个 HTMLCollection
+
+返回结果的实时性不同：
+
+- `querySelectorAll` 返回的 NodeList 是对 DOM 的一个快照，是一个静态结果，当对选择器命中的元素做 CURD 的时候，其并不会体现在搜索结果中
+- `getElementsByClassName` 返回的 HTMLCollection 是一个实时的结果，对命中的选择器做 CURD 会直接体现在结果中
+
+`querySelectorAll` 的**实现类似于一组元素的快照，而并非对文档结构进行搜索的动态查询**。所谓快照就是把某个时刻 DOM 中的结构记录下来，而不是通过查询 DOM 结构动态获取。这样实现可以避免使用 NodeList 对象通常会引起的大多数性能问题，但是也会带来新的问题，比如 DOM 结构发生变化，这个选择器就无法使用了。
+
+`getElementsByClassName` 是动态查询的过程，会随着 DOM 结构的变化，得到的结点列表也会发生变化。
+
+看下面的例子：
+
+```html
+<div class="wrapper">
+  <div class="box">1</div>
+  <div class="box">2</div>
+  <div class="box">3</div>
+  <div class="box">4</div>
+  <div class="box">5</div>
+</div>
+<script>
+  const querySelectorAll = document.querySelectorAll('.box');
+  const getElementsByClassName = document.getElementsByClassName('box');
+  console.log('before querySelectorAll', querySelectorAll);
+  console.log('before getElementsByClassName', getElementsByClassName);
+  console.log('-----------------------------------------------');
+  const newBox = document.createElement('div');
+  newBox.classList.add('box')
+  newBox.innerText = 6
+  const wrapper = document.querySelector('.wrapper')
+  wrapper.appendChild(newBox)
+  console.log('after querySelectorAll', querySelectorAll);
+  console.log('after getElementsByClassName', getElementsByClassName);
+
+  wrapper.removeChild(wrapper.firstElementChild)
+  wrapper.removeChild(wrapper.firstElementChild)
+  wrapper.removeChild(wrapper.firstElementChild)
+  console.log('-----------------------------------------------');
+  console.log('after2 querySelectorAll', querySelectorAll);
+  console.log('after2 getElementsByClassName', getElementsByClassName);
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/c1a368dc-7abf-2758-6ad3-2ac1366a4d88.png)
+
+### ✔ Document.createElement
+
+- [Document.createElement()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createElement)
+
+在 HTML 文档中，`Document.createElement()` 方法用于创建一个由标签名称 tagName 指定的 HTML 元素。如果用户代理无法识别 tagName，则会生成一个未知 HTML 元素 HTMLUnknownElement。
+
+### ✔ Document.createTextNode
+
+- [Document.createTextNode()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createTextNode)
+
+创建一个新的文本节点。这个方法可以用来转义 HTML 字符。
+
+```js
+var text = document.createTextNode(data);
+```
+
+### ✔ Document.createDocumentFragment
+
+- [Document.createDocumentFragment()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createDocumentFragment)
+
+创建一个新的空白的文档片段(DocumentFragment)。
+
+```js
+let fragment = document.createDocumentFragment();
+```
+
+DocumentFragments 是DOM节点。它们不是主DOM树的一部分。通常的用例是创建文档片段，将元素附加到文档片段，然后将文档片段附加到DOM树。在DOM树中，文档片段被其所有的子元素所代替。
+
+```js
+var element  = document.getElementById('ul'); // assuming ul exists
+var fragment = document.createDocumentFragment();
+var browsers = ['Firefox', 'Chrome', 'Opera',
+    'Safari', 'Internet Explorer'];
+
+browsers.forEach(function(browser) {
+    var li = document.createElement('li');
+    li.textContent = browser;
+    fragment.appendChild(li);
+});
+
+element.appendChild(fragment);
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/f701282f-c41a-6ae3-a975-f4049aaeedda.png)
+
+### ✔ Element.append
+
+- [Element.append()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/append)
+
+`Element.append` 方法在 Element的最后一个子节点之后插入一组 Node 对象或 DOMString 对象。被插入的 DOMString 对象等价为 Text 节点。
+
+
+### ✔ 
+
+- [Element.firstElementChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/firstElementChild)
+### ✔ 
+
+- [Element.lastElementChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/lastElementChild)
+### ✔ 
+
+- [Element.previousElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
+### ✔ 
+
+- [Element.nextElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling)
+### ✔ 
+
+- [Element.childElementCount](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/childElementCount) 表示给定元素的子元素数。
+### ✔ 
+
+- [Element.children](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/children) 返回一个 Node 的子 elements，是一个动态更新的 HTMLCollection
+### ✔ 
+
+- [Element.replaceChildren](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/replaceChildren)
+### ✔ 
+
+- [Node.appendChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)
+### ✔ 
+
+- [Node.insertBefore()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/insertBefore)
+### ✔ 
+
+- [Node.firstChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/firstChild)
+### ✔ 
+
+- [Node.lastChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/lastChild)
+### ✔ 
+
+- [Node.removeChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/removeChild)
+### ✔ 
+
+- [Node.replaceChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/replaceChild)
+### ✔ 
+
+- [Node.nextSibling](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nextSibling)
+### ✔ 
+
+- [Node.previousSibling](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/previousSibling)
+### ✔ 
+
+- [Node.cloneNode()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/cloneNode)
+### ✔ 
+
+- [Node.parentNode](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode)
+### ✔ 
+
+- [Node.parentElement](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentElement)
+### ✔ 
+
+- [Node.childNodes](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/childNodes)
+### ✔ 
+
+- [Node.hasChildNodes](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/hasChildNodes)
+### ✔ 
+
 
 ## DOM 属性
+
+- [Element](https://developer.mozilla.org/zh-CN/docs/Web/API/Element)
+- [Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)
+
+
+## DOM 事件
 
 ## ✔ 事件冒泡、捕捉、代理
 

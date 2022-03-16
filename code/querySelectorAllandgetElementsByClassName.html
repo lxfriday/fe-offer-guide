@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+  </div>
+  <script>
+    const querySelectorAll = document.querySelectorAll('.box');
+    const getElementsByClassName = document.getElementsByClassName('box');
+    console.log('before querySelectorAll', querySelectorAll);
+    console.log('before getElementsByClassName', getElementsByClassName);
+    console.log('-----------------------------------------------');
+    const newBox = document.createElement('div');
+    newBox.classList.add('box')
+    newBox.innerText = 6
+    const wrapper = document.querySelector('.wrapper')
+    wrapper.appendChild(newBox)
+    console.log('after querySelectorAll', querySelectorAll);
+    console.log('after getElementsByClassName', getElementsByClassName);
+
+    wrapper.removeChild(wrapper.firstElementChild)
+    wrapper.removeChild(wrapper.firstElementChild)
+    wrapper.removeChild(wrapper.firstElementChild)
+    console.log('-----------------------------------------------');
+    console.log('after2 querySelectorAll', querySelectorAll);
+    console.log('after2 getElementsByClassName', getElementsByClassName);
+  </script>
+</body>
+</html>

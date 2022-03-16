@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parent">
+      <div class="box"></div>
+    </div>
+    <script>
+      // var parent = document.getElementById('parent')
+      var parent = document.querySelector('#parent')
+      var child_nodes = parent.childNodes
+      console.log(child_nodes)
+      console.log(child_nodes.length)
+      parent.appendChild(document.createElement('div'))
+      console.log(child_nodes)
+      console.log(child_nodes.length)
+    </script>
+  </body>
+</html>
