@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper1,
+      .wrapper2 {
+        width: 45%;
+        float: left;
+        margin-right: 10px;
+      }
+      .box {
+        padding: 10px;
+        margin: 10px auto;
+        font-size: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper1">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+      <div class="box">7</div>
+      <div class="box">8</div>
+    </div>
+    <div class="wrapper2">
+      <div class="box">a</div>
+      <div class="box">b</div>
+      <div class="box">c</div>
+      <div class="box">d</div>
+      <div class="box">e</div>
+      <div class="box">f</div>
+      <div class="box">g</div>
+      <div class="box">h</div>
+    </div>
+    <script>
+      document.querySelectorAll('.box').forEach(function(box, i) {
+        switch(i % 3) {
+          case 0: 
+            box.style.backgroundColor = 'pink'
+            break
+          case 1:
+            box.style.backgroundColor = 'cyan'
+            break
+          case 2:
+            box.style.backgroundColor = 'orange'
+            break
+        }
+      })
+      const wrapper1 = document.querySelector('.wrapper1')
+      const wrapper2 = document.querySelector('.wrapper2')
+      wrapper1.addEventListener('click', function (e) {
+        if (e.target.classList.contains('box')) {
+          console.log(e.target, ...wrapper2.childNodes)
+          wrapper2.replaceChildren(e.target, ...wrapper2.childNodes)
+        }
+      })
+      wrapper2.addEventListener('click', function (e) {
+        if (e.target.classList.contains('box')) {
+          console.log(e.target, ...wrapper1.childNodes)
+          wrapper1.replaceChildren(e.target, ...wrapper1.childNodes)
+        }
+      })
+    </script>
+  </body>
+</html>

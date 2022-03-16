@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box1">
+      box1111
+      <span> i am in span </span>
+    </div>
+    <div class="wrapper1"></div>
+    <div class="wrapper2"></div>
+    <div class="wrapper3"></div>
+    <script>
+      const wrapper1 = document.querySelector('.wrapper1')
+      const wrapper2 = document.querySelector('.wrapper2')
+      const wrapper3 = document.querySelector('.wrapper3')
+      wrapper1.appendChild(document.querySelector('.box1').cloneNode(false))
+      wrapper2.appendChild(document.querySelector('.box1').cloneNode(true))
+      wrapper3.appendChild(document.querySelector('.box1').cloneNode())
+    </script>
+  </body>
+</html>

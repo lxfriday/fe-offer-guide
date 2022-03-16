@@ -3298,71 +3298,384 @@ element.appendChild(fragment);
 
 - [Element.append()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/append)
 
-`Element.append` 方法在 Element的最后一个子节点之后插入一组 Node 对象或 DOMString 对象。被插入的 DOMString 对象等价为 Text 节点。
+`Element.append` 方法在 `Element` 的最后一个子节点之后插入一组 `Node` 对象或 `DOMString` 对象。被插入的 `DOMString` 对象等价为 `Text` 节点。
 
+与 `Node.appendChild()` 的差异：
 
-### ✔ 
+- `Element.append()` 允许追加 [DOMString](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/append) 对象，而 `Node.appendChild()` 只接受 `Node` 对象
+- `Element.append()` 没有返回值，而 `Node.appendChild()` 返回追加的 `Node` 对象
+- `Element.append()` 可以追加多个节点和字符串，而 `Node.appendChild()` 只能追加一个节点
+
+用法
+
+```js
+void Element.append((Node or DOMString)... nodes);
+```
+
+用例
+
+```js
+var parent = document.createElement("div");
+
+var p = document.createElement("p");
+// 插入 Element
+parent.append(p);
+
+// 插入文本
+parent.append("Some text");
+
+// 插入多个节点
+parent.append("Some text", p);
+```
+
+而 `appendChild` 添加文本的时候会报错：
+
+![](https://qiniu1.lxfriday.xyz/blog/1c8aebae-6fbd-5074-163b-66493e993e3e.png)
+
+### ✔ Element.firstElementChild
 
 - [Element.firstElementChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/firstElementChild)
-### ✔ 
+
+`Element.firstElementChild` 只读属性，返回对象的第一个子**元素**（`Element`）, 如果没有子元素，则为 `null`。
+
+```html
+<ul id="foo">
+  <li>First  (1)</li>
+  <li>Second (2)</li>
+  <li>Third  (3)</li>
+</ul>
+
+<script>
+var foo = document.getElementById('foo');
+console.log(foo.firstElementChild.textContent); // First  (1)
+</script>
+```
+
+### ✔ Element.lastElementChild
 
 - [Element.lastElementChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/lastElementChild)
-### ✔ 
+
+返回对象的最后一个子**元素**（`Element`），如果没有子元素，则返回 `null`。
+
+### ✔ previousElementSibling
 
 - [Element.previousElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
-### ✔ 
+
+返回当前元素在其父元素的子元素节点中的前一个元素节点，如果该元素已经是第一个元素节点，则返回 `null`,该属性是只读的。
+
+### ✔ Element.nextElementSibling
 
 - [Element.nextElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling)
-### ✔ 
 
-- [Element.childElementCount](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/childElementCount) 表示给定元素的子元素数。
-### ✔ 
+返回当前元素在其父元素的子元素节点中的后一个元素节点，如果该元素已经是最后一个元素节点，则返回 `null`，该属性是只读的。
 
-- [Element.children](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/children) 返回一个 Node 的子 elements，是一个动态更新的 HTMLCollection
-### ✔ 
+### ✔ Element.childElementCount
+
+- [Element.childElementCount](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/childElementCount)
+
+返回一个无符号长整型数字，表示给定元素的子元素数。
+
+### ✔ Element.children
+
+- [Element.children](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/children)
+
+是一个只读属性，返回一个 Node 的子 elements，是一个动态更新的 HTMLCollection。
+
+### ✔ Element.replaceChildren
 
 - [Element.replaceChildren](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/replaceChildren)
-### ✔ 
+
+将一个 Node 的后代替换为指定的后代集合。这些新的后代可以为 DOMString 或 Node 对象。
+
+```js
+Element.replaceChildren(...nodesOrDOMStrings) // 返回 undefined
+```
+
+`nodesOrDOMStrings` 一组用于替换 Element 现有后代的 Node 或 DOMString 对象。若没有指定替代对象时，Element 的所有后代都将被清空。
+
+`replaceChildren()` 为清空一个节点的后代提供了非常方便的机制，您只需在父节点不指定任何实参调用该方法即可。
+
+```js
+myNode.replaceChildren();
+```
+
+在父节点之间转移节点
+
+**注意**，`myNode.replaceChildren()` 是完全覆写式的，也就是说括号里没有参数的时候会清空 `myNode`。操作过程可以理解为，先清空 `myNode`，然后把参数中的 nodes 添加到 `myNode` 中作为新的子元素。
+
+
+看下面的 Demo，点击方框，就会自动移动到另一列去：
+
+<iframe height="800" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/RwxPzer?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/RwxPzer">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+### ✔ Node.appendChild
 
 - [Node.appendChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)
-### ✔ 
+
+`Node.appendChild()` 方法将一个节点附加到指定父节点的子节点列表的末尾处。如果将被插入的节点已经存在于当前文档的文档树中，那么 `appendChild()` 只会将它从原先的位置移动到新的位置（不需要事先移除要移动的节点）。
+
+这意味着，一个节点不可能同时出现在文档的不同位置。所以，如果某个节点已经拥有父节点，在被传递给此方法后，它首先会被移除，再被插入到新的位置。若要保留已在文档中的节点，可以先使用  `Node.cloneNode()` 方法来为它创建一个副本，再将副本附加到目标父节点下。请注意，用 `cloneNode` 制作的副本不会自动保持同步。
+
+```js
+element.appendChild(aChild)
+```
+
+返回值，返回追加后的子节点 （`aChild`），除非 `aChild` 是一个文档片段（DocumentFragment），这种情况下将返回空文档片段（DocumentFragment）。
+
+看例子：
+
+```html
+<div class="wrapper1">
+  <div class="box1">box1</div>
+</div>
+<div class="wrapper2">
+  <div class="box2">box2</div>
+</div>
+<script>
+  const wrapper1 = document.querySelector('.wrapper1')
+  const wrapper2 = document.querySelector('.wrapper2')
+  const box1 = document.querySelector('.box1')
+  const box2 = document.querySelector('.box2')
+  wrapper2.appendChild(box1)
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/894e38b9-c426-4ae9-d545-0d0d5bee8f7b.png)
+
+
+```html
+<div class="wrapper1">
+  <div class="box1">box1</div>
+</div>
+<div class="wrapper2">
+  <div class="box2">box2</div>
+</div>
+<script>
+  const wrapper1 = document.querySelector('.wrapper1')
+  const wrapper2 = document.querySelector('.wrapper2')
+  const box1 = document.querySelector('.box1')
+  const box2 = document.querySelector('.box2')
+  wrapper2.appendChild(box1.cloneNode(true))
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/900f0a7a-6193-1082-d54c-aa24369f4d31.png)
+
+### ✔ Node.insertBefore
 
 - [Node.insertBefore()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/insertBefore)
-### ✔ 
+
+`Node.insertBefore()` 方法在参考节点之前插入一个拥有指定父节点的子节点。如果给定的子节点是对文档中现有节点的引用，`insertBefore()` 会将其从当前位置移动到新位置（在将节点附加到其他节点之前，不需要从其父节点删除该节点）。
+
+这意味着一个节点不能同时位于文档的两个点中。因此，如果节点已经有父节点，则首先删除该节点，然后将其插入到新位置。在将节点追加到新父节点之前，可以使用 `Node.cloneNode()` 复制节点。注意，使用 `cloneNode()` 创建的节点副本不会自动与原始节点保持同步。
+
+```js
+var insertedNode = parentNode.insertBefore(newNode, referenceNode);
+```
+
+- `insertedNode` 被插入节点(newNode)
+- `parentNode` 新插入节点的父节点
+- `newNode` 用于插入的节点
+- `referenceNode` `newNode` 将要插在这个节点之前
+
+如果 `referenceNode` 为 `null` 则 `newNode` 将被插入到子节点的末尾。`referenceNode` 引用节点不是可选参数——你必须显式传入一个 `Node` 或者 `null`。如果不提供节点或者传入无效值，在不同的浏览器中会有不同的表现。
+
+函数返回被插入过的子节点；当 `newNode` 是 `DocumentFragment` 时，返回空 `DocumentFragment`。
+
+```html
+<div class="wrapper1">
+  <div class="box1">box1</div>
+</div>
+<div class="wrapper2">
+  <div class="box2">box2</div>
+</div>
+<script>
+  const wrapper1 = document.querySelector('.wrapper1')
+  const wrapper2 = document.querySelector('.wrapper2')
+  const box1 = document.querySelector('.box1')
+  const box2 = document.querySelector('.box2')
+  wrapper2.insertBefore(box1, box2)
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/71ebe73b-2280-4208-af13-1c2f49c54ac0.png)
+
+### ✔ Node.firstChild
 
 - [Node.firstChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/firstChild)
-### ✔ 
+
+返回树中节点的第一个子节点，如果节点是无子节点，则返回 `null`。
+
+注意返回的是子 Node，也就是说不仅仅包含 Element，还有可能是 text node。看下面的例子：
+ 
+```html
+<div class="wrapper">
+  <div class="box">box</div>
+</div>
+<script>
+  console.log('firstChild', document.querySelector('.wrapper').firstChild);
+  console.log('firstElementChild', document.querySelector('.wrapper').firstElementChild);
+  console.log('childNodes', document.querySelector('.wrapper').childNodes);
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/f2231a0e-e332-1028-89d9-e2c9a010e67f.png)
+
+### ✔ Node.lastChild
 
 - [Node.lastChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/lastChild)
-### ✔ 
+
+返回当前节点的最后一个子节点。如果父节点为一个元素节点，则子节点通常为一个元素节点，或一个文本节点，或一个注释节点。如果没有子节点，则返回 `null`。
+
+### ✔ Node.removeChild
 
 - [Node.removeChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/removeChild)
-### ✔ 
+
+从 DOM 中删除一个子节点。返回删除的节点。
+
+```js
+let oldChild = node.removeChild(child);
+//OR
+element.removeChild(child);
+```
+- `child` 是要移除的那个子节点.
+- `node` 是 `child` 的父节点.
+- `oldChild` 保存对删除的子节点的引用。 `oldChild === child`。
+
+被移除的这个子节点仍然存在于内存中，只是没有添加到当前文档的 DOM 树中，因此，你还可以把这个节点重新添加回文档中，当然，实现要用另外一个变量比如上例中的 `oldChild` 来保存这个节点的引用。如果使用上述语法中的第二种方法, 即没有使用 `oldChild` 来保存对这个节点的引用, 则认为被移除的节点已经是无用的, 在短时间内将会被内存管理回收。
+
+```js
+// 无须定位父节点,通过parentNode属性直接删除自身
+var node = document.getElementById("nested");
+if (node.parentNode) {
+  node.parentNode.removeChild(node);
+}
+```
+
+```js
+// 移除一个元素节点的所有子节点
+var element = document.getElementById("top");
+while (element.firstChild) {
+  element.removeChild(element.firstChild);
+}
+````
+
+### ✔ Node.replaceChild
 
 - [Node.replaceChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/replaceChild)
-### ✔ 
+
+用指定的节点替换当前节点的一个子节点，并返回被替换掉的节点。
+
+```js
+parentNode.replaceChild(newChild, oldChild);
+```
+
+### ✔ Node.nextSibling
 
 - [Node.nextSibling](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nextSibling)
-### ✔ 
+
+返回其父节点的 `childNodes` 列表中紧跟在其后面的节点，如果指定的节点为最后一个节点，则返回 `null`。
+
+由于是下一个节点，注意下面的情况：
+
+```html
+<div class="wrapper">
+  <div class="box1">box1111</div>
+  <div class="box2">box2222</div>
+</div>
+<script>
+  console.log('nextSibling', document.querySelector('.box1').nextSibling);
+  console.log('nextElementSibling', document.querySelector('.box1').nextElementSibling);
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/32c332f9-c36e-9294-13b5-c1504df330a6.png)
+
+### ✔ Node.previousSibling
 
 - [Node.previousSibling](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/previousSibling)
-### ✔ 
+
+返回当前节点的前一个兄弟节点，没有则返回 `null`。
+
+### ✔ Node.cloneNode
 
 - [Node.cloneNode()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/cloneNode)
-### ✔ 
+
+返回调用该方法的节点的一个副本。
+
+```js
+var dupNode = node.cloneNode(deep);
+```
+
+- `node` 将要被克隆的节点
+- `dupNode` 克隆生成的副本节点
+- `deep` 可选，是否采用深度克隆，如果为 `true`，则该节点的所有后代节点也都会被克隆，如果为 `false`，则只克隆该节点本身。`deep` 是一个可选参数。在最新的规范里，该方法的行为已经改变了，其默认值变成了 `false`。虽然该参数仍旧是可选的，但是你必须要为该方法设置 `deep` 参数，无论是为了向前还是向后兼容考虑
+
+注意下面的情况：
+
+```html
+<div class="box1">
+  box1111
+  <span> i am in span </span>
+</div>
+<div class="wrapper1"></div>
+<div class="wrapper2"></div>
+<div class="wrapper3"></div>
+<script>
+  const wrapper1 = document.querySelector('.wrapper1')
+  const wrapper2 = document.querySelector('.wrapper2')
+  const wrapper3 = document.querySelector('.wrapper3')
+  wrapper1.appendChild(document.querySelector('.box1').cloneNode(false))
+  wrapper2.appendChild(document.querySelector('.box1').cloneNode(true))
+  wrapper3.appendChild(document.querySelector('.box1').cloneNode())
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/b9dbcbe2-027a-aa62-0852-67bbb044cf6c.png)
+
+克隆一个元素节点会拷贝它所有的属性以及属性值，当然也就包括了属性上绑定的事件(比如 `onclick="alert(1)"`)，但不会拷贝那些使用 `addEventListener()` 方法或者 `node.onclick = fn` 这种用 JavaScript 动态绑定的事件。
+
+如果 `deep` 参数设为 `false`，则不克隆它的任何子节点。该节点所包含的所有文本也不会被克隆，因为文本本身也是一个或多个的 Text 节点。
+
+为了防止一个文档中出现两个 ID 重复的元素，使用 `cloneNode()` 方法克隆的节点在需要时应该指定另外一个与原 ID 值不同的 ID
+
+### ✔ Node.parentNode
 
 - [Node.parentNode](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode)
-### ✔ 
+
+返回指定的节点在DOM树中的父节点.
+
+`parentNode` 是指定节点的父节点。一个元素节点的父节点可能是一个元素 Element 节点，也可能是一个文档 Document 节点，或者是个文档碎片 DocumentFragment 节点。
+
+### ✔ Node.parentElement
 
 - [Node.parentElement](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentElement)
-### ✔ 
+
+返回当前节点的父元素节点，如果该元素没有父节点，或者父节点不是一个 DOM 元素，则返回 `null`。
+
+在一些浏览器上，`parentElement` 属性只对自身为 Element 的节点定义，也就是说，对文本节点不定义。
+
+### ✔ Node.childNodes
 
 - [Node.childNodes](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/childNodes)
-### ✔ 
+
+返回包含指定节点的子节点的集合，**该集合为即时更新的集合（live collection）**
+
+### ✔ Node.hasChildNodes
 
 - [Node.hasChildNodes](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/hasChildNodes)
-### ✔ 
 
+返回一个布尔值，表明当前节点是否包含有子节点。
+
+有三种方法可以判断当前节点是否有子节点。
+
+- `node.firstChild !== null`
+- `node.childNodes.length > 0`
+- `node.hasChildNodes()`
 
 ## DOM 属性
 
