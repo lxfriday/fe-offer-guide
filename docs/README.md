@@ -3677,9 +3677,133 @@ var dupNode = node.cloneNode(deep);
 - `node.childNodes.length > 0`
 - `node.hasChildNodes()`
 
-## DOM 属性
+## ✔ Element
 
-- [Element](https://developer.mozilla.org/zh-CN/docs/Web/API/Element)
+ref [Element](https://developer.mozilla.org/zh-CN/docs/Web/API/Element)
+
+### ✔ Element.attributes
+
+`Element.attributes` 返回一个与该元素相关的所有属性集合 `NamedNodeMap`。 属性名字构成的伪数组。不是一个数组，所以它没有数组的方法，其包含的属性节点的索引顺序随浏览器不同而不同。更确切地说，`attributes` 是字符串形式的名/值对，每一对名/值对对应一个属性节点。
+
+```js
+var attr = element.attributes;
+```
+
+```html
+<div class="wrapper" id="wra" data-target="1111" resolved="yes">
+  hello
+  <span> i am span </span>
+</div>
+<script>
+  console.log(document.querySelector('.wrapper').attributes);
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/5c26eba8-3eed-7253-3ce7-981ca223ee92.png)
+
+### ✔ Element.classList
+
+返回一个元素的类属性的实时 DOMTokenList 集合。相比将 `element.className` 作为以空格分隔的字符串来使用，`classList` 是一种更方便的访问元素的类列表的方法。
+
+包含的方法：
+
+- `add` 新增一个 class
+- `remove` 删除一个指定的 class
+- `contains` 是否包含某个 class
+- `replace` 替换某个 class
+- `toggle` toggle 某个 class，存在则删除，不存在则新增
+
+```js
+const div = document.createElement('div');
+div.className = 'foo';
+
+// 初始状态：<div class="foo"></div>
+console.log(div.outerHTML);
+
+// 使用 classList API 移除、添加类值
+div.classList.remove("foo");
+div.classList.add("anotherclass");
+
+// <div class="anotherclass"></div>
+console.log(div.outerHTML);
+
+// 如果 visible 类值已存在，则移除它，否则添加它
+div.classList.toggle("visible");
+
+// add/remove visible, depending on test conditional, i less than 10
+div.classList.toggle("visible", i < 10 );
+
+console.log(div.classList.contains("foo"));
+
+// 添加或移除多个类值
+div.classList.add("foo", "bar", "baz");
+div.classList.remove("foo", "bar", "baz");
+
+// 使用展开语法添加或移除多个类值
+const cls = ["foo", "bar"];
+div.classList.add(...cls);
+div.classList.remove(...cls);
+
+// 将类值 "foo" 替换成 "bar"
+div.classList.replace("foo", "bar");
+```
+
+### ✔ Element.className
+
+获取或设置指定元素的 class 属性的值。
+
+```js
+let cName = elementNodeReference.className;
+
+elementNodeReference.className = cName;
+```
+
+`cName` 是一个字符串变量，表示当前元素的 class 属性的值，可以是由空格分隔的多个 class 属性值。
+
+```html
+<div class="wrapper container hello haha">
+  hello
+  <span> i am span </span>
+</div>
+<script>
+  console.log(document.querySelector('.wrapper').className);
+  console.log(document.querySelector('.wrapper').classList);
+</script>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/fb331cfb-5fdc-d496-4927-bbb39980aadd.png)
+
+### ✔ Element.outerHTML
+
+获取描述元素（包括其后代）的序列化 HTML 片段。它也可以设置为用从给定字符串解析的节点替换元素。
+
+```js
+// 获取
+let content = element.outerHTML;
+
+// 设置
+element.outerHTML = content;
+````
+
+```js
+// HTML:
+/*
+<div id="d">
+    <p>Content</p>
+    <p>Further Elaborated</p>
+</div>
+*/
+
+const d = document.getElementById("d");
+console.log(d.outerHTML);
+
+/*
+    字符串 '<div id="d"><p>Content</p><p>Further Elaborated</p></div>'
+    被显示到控制台窗口
+*/
+```
+
+## DOM 属性
 - [Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)
 
 
