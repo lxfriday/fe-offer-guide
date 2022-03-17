@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        padding: 20px;
+        margin: 5px;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+    <script>
+      document.querySelector('.wrapper').addEventListener('click', function (e) {
+        console.log('target', e.target);
+        console.log('currentTarget', e.currentTarget);
+      })
+    </script>
+  </body>
+</html>

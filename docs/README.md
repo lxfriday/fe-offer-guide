@@ -3098,10 +3098,9 @@ someNodeList.forEach(callback[, thisArg]);
 [`NodeList.values()`](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList/values) 返回一个迭代器协议，同 `entries`。
 
 ## ✔ DOM 操作
-### ✔ document.getElementById
+### ✔ Document.getElementById
 
 - [document.getElementById()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById) 根据 id 查找元素
-
 
 ### ✔ Document.getElementsByClassName
 
@@ -3151,7 +3150,7 @@ var elements = document.getElementsByTagName(name);
 
 `name` 是一个代表元素的名称的字符串。特殊字符 `*` 代表了所有元素。
 
-### ✔ document.querySelector
+### ✔ Document.querySelector
 
 - [document.querySelector()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector)
 
@@ -3688,12 +3687,12 @@ var dupNode = node.cloneNode(deep);
 
 选择器查询：
 
-- `document.getElementById` 查一个
-- `document.getElementsByClassName` 查一类（HTMLCollection）
-- `document.getElementsByName`  查一类（HTMLCollection）
-- `document.getElementsByTagName`  查一类（HTMLCollection）
-- `document.querySelector` 查一个
-- `document.querySelectorAll` 查一类（NodeList）
+- `Document.getElementById` 查一个
+- `Document.getElementsByClassName` 查一类（HTMLCollection）
+- `Document.getElementsByName`  查一类（HTMLCollection）
+- `Document.getElementsByTagName`  查一类（HTMLCollection）
+- `Document.querySelector` 查一个
+- `Document.querySelectorAll` 查一类（NodeList）
 
 查询父子 or 兄弟：
 
@@ -3867,11 +3866,50 @@ console.log(d.outerHTML);
 - [Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)
 
 
-## DOM 事件
+## ✔ DOM 事件
 
-## ✔ 事件冒泡、捕捉、代理
+### ✔ Event
 
-### ✔ 事件模型
+ref [Event](https://developer.mozilla.org/zh-CN/docs/Web/API/Event)
+
+|event|描述|
+|:-|:-|
+|`onabort`|当一个元素失去焦点的时候 blur 事件被触发|
+|`click`|处理点击事件|
+|`copy`|处理复制事件|
+|`dblclick`|在单个元素上单击两次鼠标的指针设备按钮 (通常是小鼠的主按钮) 时, 将触发 `dblclick` 事件|
+|`drag`|当元素或者选择的文本被拖动时触发 `drag` 事件 (每几百毫秒)|
+|`dragend`|拖放事件在拖放操作结束时触发(通过释放鼠标按钮或单击escape键)|
+|`dragenter`|当拖动的元素或被选择的文本进入有效的放置目标时，`dragenter` 事件被触发|
+|`dragleave`|当一个被拖动的元素或者被选择的文本离开一个有效的拖放目标时，将会触发 `dragleave` 事件|
+|`dragover`|当元素或者选择的文本被拖拽到一个有效的放置目标上时，触发 `dragover` 事件(每几百毫秒触发一次)。这个事件在可被放置元素的节点上触发|
+|`dragstart`|当用户开始拖动一个元素或者一个选择文本的时候 `dragstart` 事件就会触发|
+|`drop`|当一个元素或是选中的文字被拖拽释放到一个有效的释放目标位置时，`drop` 事件被抛出|
+|`error`|当JavaScript运行时错误（包括语法错误）发生时，window 会触发一个 ErrorEvent 接口的 `error` 事件，并执行 `window.onerror()`。当一项资源（如`<img>`或`<script>`）加载失败，加载资源的元素会触发一个  Event 接口的 `error` 事件，并执行该元素上的 `onerror()` 处理函数。这些 error 事件不会向上冒泡到 window，不过（至少在Firefox中）能被单一的 `window.addEventListener`捕获。|
+|`focus`|`focus` 事件在元素获取焦点时触发。这个事件和 `focusin` 最大的区别仅仅在于后者会事件冒泡.|
+|`focusout`|当元素即将失去焦点时，`focusout` 事件被触发。`focusout` 事件和 `blur` 事件之间的主要区别在于后者不会冒泡|
+|`fullscreenchange`|当浏览器进入或离开全屏时触发|
+|`input`|输入事件|
+|`load`|当**整个页面及所有依赖资源**如样式表和图片都已完成加载时，将触发 `load` 事件|
+|`DOMContentLoaded`|**当纯HTML被完全加载以及解析时**，`DOMContentLoaded` 事件会被触发，而不必等待样式表，图片或者子框架完成加载|
+|`loadstart`|当浏览器开始载入一个资源文件时 触发|
+|`keydown`|当用户按下键盘上的按键时会触发 `keydown` 事件|
+|`keyup`|在按键被松开时触发|
+|`mousedown`|在鼠标按下时触发|
+|`mouseenter`|鼠标移动到元素上时就会触发 `mouseenter` 事件。类似 `mouseover`，它们两者之间的差别是 `mouseenter` 不会冒泡（bubble），也就是说当指针从它的子层物理空间移到它的物理空间上时不会触发|
+|`mouseleave`|鼠标的指针移出某个元素时，会触发 `mouseleave` 事件。`mouseleave`  和 `mouseout` 是相似的，但是两者的不同在于 `mouseleave` 不会冒泡而 `mouseout` 会冒泡|
+|`mousemove`|鼠标在元素上移动时, `mousemove` 事件被触发|
+|`mouseout`|当移动指针设备（通常是鼠标），使指针不再包含在这个元素或其子元素中时，mouseout 事件被触发。当指针从一个元素移入其子元素时，mouseout 也会被触发，因为子元素遮盖了父元素的可视区域|
+|`mouseover`|当鼠标移动到一个元素上时，会在这个元素上触发 `mouseover` 事件|
+|`mouseup`|鼠标按钮放开时触发。`mouseup` 事件与 `mousedown` 事件相反|
+|`paste`|当用户在浏览器用户界面发起“粘贴”操作时，会触发 `paste` 事件|
+|`scroll`|文档视图或者一个元素在滚动时，会触发元素的 `scroll` 事件|
+|`touchcancel`|当触摸点被中断时会触发 `touchcancel` 事件|
+|`touchend`|当触点离开触控平面时触发 `touchend` 事件|
+|`touchmove`|当触点在触控平面上移动时触发 `touchmove` 事件|
+|`touchstart`|当一个或多个触摸点与触控设备表面接触时触发 `touchstart` 事件|
+
+### ✔ 事件冒泡、捕捉、代理
 
 ref
 

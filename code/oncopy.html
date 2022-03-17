@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>oncopy示例演示</title>
+
+    <script>
+      function log(txt) {
+        document.getElementById('log').appendChild(document.createTextNode(txt + '\n'))
+      }
+    </script>
+  </head>
+
+  <body>
+    <div oncopy="log('复制被阻止!'); return false;">试着复制这句话!</div>
+
+    <h3>Log</h3>
+    <textarea rows="15" cols="80" id="log" readonly="true"></textarea>
+  </body>
+</html>
