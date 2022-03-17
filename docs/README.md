@@ -3357,7 +3357,7 @@ console.log(foo.firstElementChild.textContent); // First  (1)
 
 返回对象的最后一个子**元素**（`Element`），如果没有子元素，则返回 `null`。
 
-### ✔ previousElementSibling
+### ✔ Element.previousElementSibling
 
 - [Element.previousElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
 
@@ -3676,6 +3676,66 @@ var dupNode = node.cloneNode(deep);
 - `node.firstChild !== null`
 - `node.childNodes.length > 0`
 - `node.hasChildNodes()`
+
+### ✔ 总结
+
+使用哪个方法的意识：
+
+- 明确是 CURD 的哪一种
+- 明确想要获取一个还是一类
+- 明确要查询的是 Node 还是 Element
+- 明确想获得的是 HTMLCollection（动态） 还是 NodeList（静态）
+
+选择器查询：
+
+- `document.getElementById` 查一个
+- `document.getElementsByClassName` 查一类（HTMLCollection）
+- `document.getElementsByName`  查一类（HTMLCollection）
+- `document.getElementsByTagName`  查一类（HTMLCollection）
+- `document.querySelector` 查一个
+- `document.querySelectorAll` 查一类（NodeList）
+
+查询父子 or 兄弟：
+
+- `Element.firstElementChild` 第一个子 Element
+- `Element.lastElementChild` 最后一个子 Element
+- `Element.previousElementSibling` 前一个兄弟 Element
+- `Element.nextElementSibling` 后一个兄弟 Element
+- `Element.children` 所有子 Elements（HTMLCollection）
+- `Node.firstChild` 第一个子节点 Node
+- `Node.lastChild` 最后一个子节点 Node
+- `Node.nextSibling` 下一个兄弟节点 Node
+- `Node.previousSibling` 前一个兄弟节点 Node
+- `Node.parentNode` 父节点 Node
+- `Node.parentElement` 父 Element
+- `Node.childNodes` 所有子节点 Node（NodeList）
+- `Node.hasChildNodes` boolean 是否有子节点
+- `Element.childElementCount` 子 Element 个数
+
+插入：
+
+- `Element.append` 在 Element 最后插入一组 Node 或者 DOMString，可以插入多个，没有返回值，且可以直接插入字符串，字符串会被当成文本节点
+- `Node.appendChild` 只能插入一个节点，且不能为字符串，返回值为插入的节点
+- `Node.insertBefore` 在父节点的某个节点前面插入一个节点
+
+创建：
+
+- `Document.createElement` 创建一个 Element
+- `Document.createTextNode` 创建一个文本节点
+- `Document.createDocumentFragment` 创建一个 DocumentFragment
+
+更新：
+
+- `Element.replaceChildren` 行为类似把 Element 子节点清空，再把参数中的节点作为子节点添加进去。可以用于快速清空所有子节点
+- `Node.replaceChild` 用指定的节点替换当前节点的一个子节点，并返回被替换掉的节点
+
+删除：
+
+- `Node.removeChild` 删除一个子节点，并返回被删除的节点
+
+复制：
+
+- `Node.cloneNodes` 克隆一个节点，参数为 `true` 表示连带其子节点一起全部克隆；`false` 表示只克隆该节点，其子节点将会为空
 
 ## ✔ Element
 
@@ -4140,8 +4200,6 @@ box2.addEventListener('click', function (e) {
 ```
 
 我们删除了 `li` 时无需删除事件绑定，也无需为新增的 `li` 绑定事件。点击事件会冒泡到 `ul` 并被这个事件处理程序处理，我们只需要拿到当前点击的元素 `e.taregt` 做对应的处理即可。
-
-## `document.querySelectorXX` 和 `document.getElementByXX` 的区别
 
 ## iframe
 
