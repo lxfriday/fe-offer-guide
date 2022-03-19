@@ -4384,7 +4384,184 @@ html5 中新增了一些语义化的标签，方便做 seo，这些新增标签�
 - contentEditable 属性
 - requestAnimationFrame
 
-## link 标签
+## ✔ link 标签
+
+ref [MDN link](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)
+
+HTML 外部资源链接元素 (`<link>`) 规定了当前文档与外部资源的关系。该元素最常用于链接样式表，此外也可以被用来创建站点图标 (比如 PC 端的 “favicon” 图标和移动设备上用以显示在主屏幕的图标) 。
+
+```html
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+      href="apple-icon-114.png" type="image/png">
+```
+
+`sizes` 属性表示图标大小，`type` 属性包含了链接资源的 MIME 类型。这些属性为浏览器选择最合适的图标提供了有用的提示。
+
+```html
+<link href="print.css" rel="stylesheet" media="print">
+<link href="mobile.css" rel="stylesheet" media="screen and (max-width: 600px)">
+```
+
+也可以提供一个媒体类型，或者在 `media` 属性内部进行查询；这种资源将只在满足媒体条件的情况下才被加载进来。
+
+`as` 属性表示获取特定的内容类。
+
+`as` 属性仅在 `<link>` 元素设置了 `rel="preload"` 或者 `rel="prefetch"` 时才能使用。它规定了 `<link>` 元素加载的内容的类型，对于内容的优先级、请求匹配、正确的内容安全策略的选择以及正确的 Accept 请求头的设置，这个属性是必需的。
+
+![](https://qiniu1.lxfriday.xyz/blog/460fb8da-e0af-e7b4-e4cb-8825550b69ad.png)
+
+
+`crossorigin` 此枚举属性指定在加载相关资源时是否必须使用 CORS。 启用 CORS 的图片 可以在 `<canvas>` 元素中重复使用，并避免其被污染. 可取的值如下：
+
+- `anonymous` 会发起一个跨域请求 (即包含 Origin: HTTP 头)， 但不会发送任何认证信息 (即不发送 cookie, X.509 证书和 HTTP 基本认证信息)。 如果服务器没有给出源站凭证 (不设置 Access-Control-Allow-Origin: HTTP 头), 资源就会被污染并限制使用。
+- `use-credentials` 会发起一个带有认证信息 (发送 cookie, X.509 证书和 HTTP 基本认证信息) 的跨域请求 (即包含 Origin: HTTP 头). 如果服务器没有给出源站凭证 (不设置 Access-Control-Allow-Origin: HTTP 头), 资源就会被污染并限制使用
+
+当不设置此属性时，资源将会不使用 CORS 加载 (即不发送 Origin: HTTP 头), 这将阻止其在 `<canvas>` 元素中进行使用。若设置了非法的值，则视为使用 `anonymous`。
+
+`href` 此属性指定被链接资源的 URL。 URL 可以是绝对的，也可以是相对的。
+
+`importance` 指示资源的相对重要性。 只有存在 `rel="preload"` 或 `rel="prefetch"` 时，`importance` 属性才能用于 `<link>` 元素。优先级提示使用以下值委托：
+
+- `auto` 表示没有偏好。 浏览器可以使用其自己的启发式方法来确定资源的优先级
+- `high` 向浏览器指示资源具有高优先级
+- `low` 向浏览器指示资源的优先级较低
+
+`integrity` 包含行内元数据，它是一个你用浏览器获取的资源文件的哈希值，以 base64 编码的方式加的密，这样用户能用它来验证一个获取到的资源，在传送时未被非法篡改。
+
+`media` 这个属性规定了外部资源适用的媒体类型。它的值必须是"媒体查询"。这个属性使得用户代理能选择最适合设备运行的媒体类型。
+
+```html
+<link href="print.css" rel="stylesheet" media="print">
+<link href="mobile.css" rel="stylesheet" media="all">
+<link href="desktop.css" rel="stylesheet" media="screen and (min-width: 600px)">
+<link href="highres.css" rel="stylesheet" media="screen and (min-resolution: 300dpi)">
+```
+
+`rel` 此属性命名链接文档与当前文档的关系。 该属性必须是链接类型值的用空格分隔的列表。
+
+`type` 这个属性被用于定义链接的内容的类型。这个属性的值应该是像 `text/html`，`text/css` 等 MIME 类型。这个属性常用的用法是定义链接的样式表，最常用的值是表明了 CSS 的 `text/css`。
+
+### ✔ rel 类型
+
+#### ✔ canonical
+
+规范链接元素是一个 HTML 元素，它通过指定 web 页面的“规范”或“首选”版本作为搜索引擎优化的一部分，帮助网站管理员防止重复的内容问题。
+
+```html
+<link rel="canonical" href="http://www.pc.com" >
+<link rel="canonical" href="https://www.youtube.com/">
+```
+
+#### ✔ alternate
+
+可用于将 PC 版页面指向移动版页面，将移动版页面指向 PC 版页面，这样有利于搜索引擎，对不同设备的用户提供不同类型的页面。
+
+下面是 youtube 的例子：
+
+```html
+<link rel="alternate" media="handheld" href="https://m.youtube.com/">
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.youtube.com/">
+<link rel="alternate" href="android-app://com.google.android.youtube/http/www.youtube.com/">
+<link rel="alternate" href="ios-app://544007664/vnd.youtube/www.youtube.com/">
+```
+
+#### ✔ apple-touch-icon
+
+```html
+<link rel="apple-touch-icon" sizes="180x180" href="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/apple-touch-icon.png">
+```
+
+苹果的 IOS 系统并不支持 icon 属性，于是苹果的 IPhone 以及 IPad 使用特殊的、非标准的 link 类型值去定义作为 Web Clip 或开始占位符。
+
+
+提供用于不同用法上下文的图标
+
+```html
+<!-- third-generation iPad with high-resolution Retina display: -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon144.png">
+<!-- iPhone with high-resolution Retina display: -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicon114.png">
+<!-- first- and second-generation iPad: -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon72.png">
+<!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+<link rel="apple-touch-icon-precomposed" href="favicon57.png">
+<!-- basic favicon -->
+<link rel="icon" href="favicon32.png">
+```
+
+#### ✔ dns-prefetch
+
+这个用的比较多。
+
+提示浏览器该资源需要在用户点击链接之前进行 DNS 查询和协议握手。
+
+```html
+<link rel="dns-prefetch" href="//lf3-cdn-tos.bytescm.com">
+```
+
+#### ✔ icon
+
+设置浏览器栏目 icon。
+
+```html
+<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+<link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+```
+
+#### ✔ preconnect
+
+向浏览器提供提示，建议浏览器提前打开与链接网站的连接，而不会泄露任何私人信息或下载任何内容，以便在跟随链接时可以更快地获取链接内容。
+
+```html
+<link rel="preconnect" href="//lf3-cdn-tos.bytescm.com" crossorigin="anonymous">
+```
+
+#### ✔ preload 
+
+告诉浏览器下载资源，因为在当前导航期间稍后将需要该资源。可以指明哪些资源是在页面加载完成后即刻需要的。对于这种即刻需要的资源，你可能希望在页面加载的生命周期的早期阶段就开始获取，在浏览器的主渲染机制介入前就进行预加载。这一机制使得资源可以更早的得到加载并可用，且更不易阻塞页面的初步渲染。
+
+```html
+<link rel="preload" href="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/561e907.js" as="script">
+```
+
+#### ✔ prefetch
+
+ref [资源预加载preload和资源预读取prefetch简明学习](https://www.cnblogs.com/xiaohuochai/p/9183874.html)
+
+它的作用是告诉浏览器加载下一页面可能会用到的资源，注意，是下一页面，而不是当前页面。因此该方法的加载优先级非常低，也就是说该方式的作用是加速下一个页面的加载速度。
+
+`preload` 是告诉浏览器页面必定需要的资源，浏览器一定会加载这些资源。
+
+`prefetch` 是告诉浏览器页面可能需要的资源，浏览器不一定会加载这些资源。
+
+```html
+<link rel="preload" href="./manifest.js" as="script">
+<link rel="preload" href="./vendor.js" as="script">
+<link rel="preload" href="./app.js" as="script">
+<link rel="prefetch" href="./vendor-async.js">
+<link rel="prefetch" href="./user.js">
+<link rel="prefetch" href="./comment.js">
+<link rel="prefetch" href="./category.js">
+<link rel="prefetch" href="./post.js">
+<link rel="prefetch" href="./home.js">
+```
+
+#### ✔ search
+
+表示超链接引用了一个文档，该文档的接口专门设计用于在此文档或站点及其资源中进行搜索。
+
+```html
+<link rel="search" title="掘金" href="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/search.xml" type="application/opensearchdescription+xml">
+```
+
+#### ✔ stylesheet
+
+加载 CSS
+
+```html
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/ionicons/css/ionicons.min.css">
+```
+
 
 ## ✔ meta 标签
 
@@ -10333,6 +10510,91 @@ axios.all([getUserAccount(), getUserPermissions()]).then(
 # CDN
 
 # 性能优化
+
+## ? 性能指标
+### ? FP （First Paint） 首次绘制
+### ✔ FCP （First Contentful Paint） 首次内容绘制
+
+ref [https://web.dev/fcp/](https://web.dev/fcp/)
+
+首次内容绘制 (FCP) 指标测量页面从**开始加载到页面内容的任何部分在屏幕上完成渲染**的时间。对于该指标，"内容"指的是文本、图像（包括背景图像）、`<svg>` 元素或非白色的 `<canvas>` 元素。
+
+![](https://qiniu1.lxfriday.xyz/blog/58cfd430-1c22-e705-e270-696f8e206538.png)
+
+在上方的加载时间轴中，FCP 发生在第二帧，因为那是首批文本和图像元素在屏幕上完成渲染的时间点。
+
+虽然部分内容已完成渲染，但并非所有内容都已经完成渲染。这是首次内容绘制 (FCP) 与**Largest Contentful Paint 最大内容绘制 (LCP)**（旨在测量页面的主要内容何时完成加载）之间的重要区别。
+
+![](https://qiniu1.lxfriday.xyz/blog/2951399a-203a-8dc6-701a-53e6f1a94296.png)
+
+为了提供良好的用户体验，网站应该努力将首次内容绘制控制在 **1.8 秒** 或以内。为了确保您能够在大部分用户的访问期间达成建议目标值，一个良好的测量阈值为页面加载的第 75 个百分位数，且该阈值同时适用于移动和桌面设备。
+
+指标和 API 之间的差异：
+
+- API 会为在后台选项卡中加载的页面分发 first-contentful-paint 条目，但在计算 FCP 时应忽略这些页面
+- 当页面通过往返缓存恢复时，API 不会报告 first-contentful-paint 条目，但在这些情况下应该测量 FCP，因为这对用户来说是多次不同的页面访问体验
+- API 可能不会报告跨域 iframe 中的绘制时机，但要想正确测量 FCP，您应该考虑所有框架的情况。子框架可以使用 API 将这些框架的绘制时机报告给父框架来进行聚合
+
+开发者不必记住所有这些细微差异，而是可以使用 [web-vitals](https://github.com/GoogleChrome/web-vitals) JavaScript 库来测量 FCP，库会自行处理这些差异（在可能的情况下）：
+
+from node_modules
+
+```js
+import {getLCP, getFID, getCLS} from 'web-vitals';
+
+getCLS(console.log);
+getFID(console.log);
+getLCP(console.log);
+````
+
+from CDN
+
+```html
+<!-- Append the `?module` param to load the module version of `web-vitals` -->
+<script type="module">
+  import {getCLS, getFID, getLCP} from 'https://unpkg.com/web-vitals?module';
+
+  getCLS(console.log);
+  getFID(console.log);
+  getLCP(console.log);
+</script>
+```
+
+
+### ✔ LCP （Largest Contentful Paint）最大内容渲染
+
+ref [https://web.dev/lcp/](https://web.dev/lcp/)
+
+诸如 load（加载）或 DOMContentLoaded（DOM 内容加载完毕）这样的旧有指标并不是很好，因为这些指标不一定与用户在屏幕上看到的内容相对应。而像 First Contentful Paint 首次内容绘制 (FCP)这类以用户为中心的较新性能指标只会捕获加载体验最开始的部分。如果某个页面显示的是一段启动画面或加载指示，那么这些时刻与用户的关联性并不大。
+
+最大内容绘制 (LCP) 指标会根据页面首次开始加载的时间点来报告可视区域内可见的**最大图像或文本块**完成渲染的相对时间。
+
+![](https://qiniu1.lxfriday.xyz/blog/11556296-2a0a-ede6-7d46-486944253d25.png)
+
+为了提供良好的用户体验，网站应该努力将最大内容绘制控制在 **2.5 秒** 或以内。为了确保您能够在大部分用户的访问期间达成建议目标值，一个良好的测量阈值为页面加载的第 75 个百分位数，且该阈值同时适用于移动和桌面设备。
+
+根据当前最大内容绘制 API 中的规定，最大内容绘制考量的元素类型为：
+
+- `<img>` 元素
+- 内嵌在 `<svg>` 元素内的 `<image>` 元素
+- `<video>` 元素（使用封面图像）
+- 通过 `url()` 函数（而非使用CSS 渐变）加载的带有背景图像的元素
+- 包含文本节点或其他行内级文本元素子元素的块级元素
+
+### ? FMP（First Meaningful Paint）首次有效绘制
+### ? TTI（Time to Interactive） 可交互时间
+### ? TBT （Total Blocking Time）页面阻塞总时长
+### ? FID （First Input Delay） 首次输入延迟
+### ? CLS （Cumulative Layout Shift）累积布局偏移
+### ? SI（Speed Index）
+
+## Performance
+
+ref [MDN Performance](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance)
+
+![](https://qiniu1.lxfriday.xyz/blog/17a5f396-1dc6-cc17-7ad3-b19c4bc9f259.png)
+
+
 
 ## ✔ 输入 URL 到页面显示发生哪些事情
 

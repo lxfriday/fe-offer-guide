@@ -11,5 +11,16 @@
       })
     </script>
   </head>
-  <body></body>
+  <body>
+    <div>hello</div>
+    <!-- Append the `?module` param to load the module version of `web-vitals` -->
+    <script type="module">
+      import { getCLS, getFID, getLCP, getFCP } from 'https://unpkg.com/web-vitals?module'
+
+      getFCP(console.log)
+      getCLS(console.log)
+      getFID(console.log)
+      getLCP(console.log)
+    </script>
+  </body>
 </html>
