@@ -4384,6 +4384,60 @@ html5 中新增了一些语义化的标签，方便做 seo，这些新增标签�
 - contentEditable 属性
 - requestAnimationFrame
 
+## ✔ script 标签
+
+ref [MDN script](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script)
+
+**`async`**
+
+对于普通脚本，如果存在 `async` 属性，那么普通脚本会被并行请求，并尽快解析和执行。
+
+对于模块脚本，如果存在 `async` 属性，那么脚本及其所有依赖都会在延缓队列中执行，因此它们会被并行请求，并尽快解析和执行。
+
+该属性能够消除解析阻塞的 Javascript。解析阻塞的 Javascript 会导致浏览器必须加载并且执行脚本，之后才能继续解析。`defer` 在这一点上也有类似的作用。
+
+**`defer`**
+
+这个布尔属性被设定用来通知浏览器该脚本将在**文档完成解析后，触发 `DOMContentLoaded` 事件前**执行。
+
+有 `defer` 属性的脚本会阻止 `DOMContentLoaded` 事件，直到脚本被加载并且解析完成。
+
+
+defer async 区别见 [async、defer 并行加载脚本](#✔-async、defer-优化脚本加载和执行)
+
+**`crossorigin`**
+
+加载脚本的时候发布发送认证信息
+
+`anonymous` 对此元素的 CORS 请求将不设置凭据标志。
+
+`use-credentials` 对此元素的 CORS 请求将设置凭证标志；这意味着请求将提供凭据。
+
+设置为空值或者不设置等同于 `anonymous`。
+
+**`integrity`**
+
+包含行内元数据，它是一个你用浏览器获取的资源文件的哈希值，以 base64 编码的方式加的密，这样用户能用它来验证一个获取到的资源，在传送时未被非法篡改。
+
+**`nomodule`**
+
+这个布尔属性被设置来标明这个脚本在支持 ES2015 modules 的浏览器中不执行。 — 实际上，这可用于在不支持模块化 JavaScript 的旧浏览器中提供回退脚本。
+
+**`src`**
+
+资源路径。
+
+**`type`**
+
+该属性定义 script 元素包含或 `src` 引用的脚本语言。属性的值为 MIME 类型; 支持的 MIME 类型包括 `text/javascript`，`text/ecmascript`，`application/javascript` 和`application/ecmascript`。如果没有定义这个属性，脚本会被视作 JavaScript。
+
+如果 `type` 属性为 `module`，代码会被当作 JavaScript 模块 。
+
+```html
+<script type="module" src="main.mjs"></script>
+<script nomodule src="fallback.js"></script>
+```
+
 ## ✔ link 标签
 
 ref [MDN link](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)
