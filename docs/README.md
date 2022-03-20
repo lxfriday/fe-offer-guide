@@ -7296,8 +7296,316 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 实际效果并不算很理想，不能处理圆角，不推荐。
 
-
 ## 基本布局
+
+### 圣杯布局
+
+三列布局；中间主体内容前置，且宽度自适应；两边内容定宽 
+
+#### ✔ 普通实现（浮动定位 + 混用 JS）
+
+纯 CSS 实现不了 `left` 和 `right` 两部分的高度完全填充，因为 `container` 的高度是随 `subcontent` 变化的，`height： 100%` 将会无效。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        background-color: #eee;
+      }
+      .container::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .left {
+        float: left;
+        width: calc((100% - 1260px) / 2);
+        background-color: cyan;
+      }
+      .right {
+        float: left;
+        width: calc((100% - 1260px) / 2);
+        background-color: yellow;
+      }
+      .content {
+        float: left;
+        width: 1260px;
+        background-color: red;
+      }
+      .subcontent {
+        height: 2000px;
+        background-color: green;
+      }
+      nav {
+        min-width: 1260px;
+        height: 60px;
+        background-color: pink;
+        overflow: hidden;
+      }
+      footer {
+        min-width: 1260px;
+        height: 200px;
+        background-color: orange;
+      }
+      .icon {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
+        margin-left: 350px;
+        margin-top: 5px;
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+      @media (max-width: 1260px) {
+        .left,
+        .right {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="icon">icon</div>
+    </nav>
+    <main class="container">
+      <div class="left">
+        <p>left 自动增高</p>
+        <p>使用 height: 100% 无效</p>
+      </div>
+      <div class="content">
+        <div class="subcontent">sub</div>
+      </div>
+      <div class="right">right 自动增高</div>
+    </main>
+    <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const subContentEle = document.querySelector('.subcontent')
+        subContentEle.style.height = subContentEle.clientHeight + 500 + 'px'
+      })
+      // 设置 left right 高度
+      function setSideHeight() {
+        const leftSideEle = document.querySelector('.left')
+        const rightSideEle = document.querySelector('.right')
+        const contentHeight = document.querySelector('.content').getBoundingClientRect().height
+        leftSideEle.style.height = contentHeight + 'px'
+        rightSideEle.style.height = contentHeight + 'px'
+      }
+      const config = { attributes: true, childList: true, subtree: true }
+      // 检测 content 的高度变化
+      const callback = function (mutationsList, observer) {
+        for (let mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            console.log('A child node has been added or removed.')
+          } else if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+            setSideHeight()
+          }
+        }
+      }
+      // 创建一个观察器实例并传入回调函数
+      const observer = new MutationObserver(callback)
+      // 以上述配置开始观察目标节点
+      observer.observe(document.querySelector('.subcontent'), config)
+      setSideHeight()
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout6.gif)
+
+#### ✔ 普通实现（绝对定位 + 混用 JS）
+
+纯 CSS 实现不了 `left` 和 `right` 两部分的高度完全填充，因为 `container` 的高度是随 `subcontent` 变化的，`height： 100%` 将会无效。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        background-color: #eee;
+        position: relative;
+        overflow-x: hidden;
+      }
+      .left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: cyan;
+      }
+      .right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: yellow;
+      }
+      .content {
+        margin-left: calc((100% - 1260px) / 2);
+        width: 1260px;
+        background-color: red;
+      }
+      .subcontent {
+        height: 1000px;
+        background-color: green;
+      }
+      nav {
+        height: 60px;
+        background-color: pink;
+        overflow: hidden;
+      }
+      footer {
+        height: 250px;
+        background-color: orange;
+      }
+      .icon {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
+        margin-left: 350px;
+        margin-top: 5px;
+      }
+      @media (max-width: 1260px) {
+        .left {
+          display: none;
+        }
+        .right {
+          display: none;
+        }
+        .content {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="icon">icon</div>
+    </nav>
+    <main class="container">
+      <div class="left">left</div>
+      <div class="content">
+        <div class="subcontent">sub</div>
+      </div>
+      <div class="right">right</div>
+    </main>
+    <footer>footer</footer>
+    <script>
+      const contentHeight = document.querySelector('.content').offsetHeight
+      const leftEle = document.querySelector('.left')
+      const rightEle = document.querySelector('.right')
+      leftEle.style.height = contentHeight + 'px'
+      rightEle.style.height = contentHeight + 'px'
+
+      function autoResizeSide() {
+        const bodyWidth = document.querySelector('body').offsetWidth
+        leftEle.style.width = (bodyWidth - 1260) / 2 + 'px'
+        rightEle.style.width = (bodyWidth - 1260) / 2 + 'px'
+      }
+      window.addEventListener('resize', autoResizeSide)
+      autoResizeSide()
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout5.gif)
+
+#### ✔ flex 实现
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
+      .container {
+        background-color: #eee;
+        display: flex;
+        align-items: stretch;
+      }
+      .left {
+        flex: 1;
+        background-color: cyan;
+      }
+      .right {
+        flex: 1;
+        background-color: yellow;
+      }
+      .content {
+        width: 1260px;
+        background-color: red;
+      }
+      .subcontent {
+        height: 1000px;
+        background-color: green;
+      }
+      nav {
+        height: 60px;
+        background-color: pink;
+        overflow: hidden;
+      }
+      footer {
+        height: 250px;
+        background-color: orange;
+      }
+      .icon {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
+        margin-left: 350px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="icon">
+        icon
+      </div>
+    </nav>
+    <main class="container">
+      <div class="left">left</div>
+      <div class="content">
+        <div class="subcontent">sub</div>
+      </div>
+      <div class="right">right</div>
+    </main>
+    <footer>footer</footer>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout4.gif)
+
+#### grid 实现
+
+
 
 ## ✔ CSS 实现省略号
 
