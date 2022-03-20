@@ -157,9 +157,40 @@
       .finished-info {
         font-weight: bold;
       }
+      .codepenWrapper {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 999;
+      }
+      .codepenContainer{
+        width: 100%;
+        height: 100%;
+      }
+      .hideCodepenWrapper {
+        display: none;
+      }
+      .closeCodePen {
+        position: absolute;
+        right: 15px;
+        top: 5px;
+        height: 40px;
+        padding: 10px 30px;
+        border-radius: 5px;
+        background-color: red;
+        color: #fff;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
+    <div class="codepenWrapper hideCodepenWrapper" id="codepenWrapper">
+      <div class="closeCodePen" onclick="toggleCodepenWrapper()">关闭</div>
+      <div class="codepenContainer"></div>
+    </div>
     <div id="app">
       <div style="z-index: 9999;" class="loading-center">
         <div class="scale2">

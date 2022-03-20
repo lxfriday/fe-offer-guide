@@ -95,4 +95,41 @@ document.addEventListener('DOMContentLoaded', () => {
   window.LXFRIDAY_GLOBAL_localStorageQuota = LXFRIDAY_GLOBAL_localStorageQuota
   window.LXFRIDAY_TEST_FETCH_GET = LXFRIDAY_TEST_FETCH_GET
   window.LXFRIDAY_TEST_FETCH_ABORT = LXFRIDAY_TEST_FETCH_ABORT
+
+  // -------------------------------------------------------------------------------
+  // codepen fullscreen
+  // 用法： iframe 的宽高要拉满，点击按钮显示为全屏
+  // <button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/RwxRKGy?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  //     See the Pen <a href="https://codepen.io/lxfriday/pen/RwxRKGy">
+  //     Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  //     on <a href="https://codepen.io">CodePen</a>.
+  //   </iframe>'>
+  //   fullscreen
+  // </button>
+  // ------------------------------------------------------------------------------- 
+  // 模板
+  /* 
+    <button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target=''>
+      fullscreen
+    </button>
+  */
+  window.toggleCodepenWrapper = function () {
+    const codepenWrapper = document.querySelector('#codepenWrapper')
+    const codepenContainer = document.querySelector('.codepenContainer')
+    if(!codepenWrapper.classList.contains('hideCodepenWrapper')) {
+      codepenWrapper.classList.add('hideCodepenWrapper')
+      codepenContainer.innerHTML = ''
+    } else {
+      codepenWrapper.classList.remove('hideCodepenWrapper')
+    }
+  }
+
+  window.codepenFullscreen = function (btn) {
+    toggleCodepenWrapper()
+    const codepenContainer = document.querySelector('.codepenContainer')
+    const codepenIframe = btn.dataset.target
+    codepenContainer.innerHTML = codepenIframe
+  }
+  // codepen fullscreen
+  // -------------------------------------------------------------------------------
 })
