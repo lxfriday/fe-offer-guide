@@ -175,7 +175,7 @@
       }
       .closeCodePen {
         position: absolute;
-        right: 15px;
+        right: 10px;
         top: 5px;
         height: 40px;
         padding: 10px 30px;
@@ -184,11 +184,30 @@
         color: #fff;
         cursor: pointer;
       }
+      .codepen-fullscreen {
+        display: flex;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #666;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+      .codepen-fullscreen::before {
+        margin-right: 3px;
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url(/static/imgs/codepenicon.ico) no-repeat center;
+        background-size: contain;
+      }
     </style>
   </head>
   <body>
     <div class="codepenWrapper hideCodepenWrapper" id="codepenWrapper">
-      <div class="closeCodePen" onclick="toggleCodepenWrapper()">关闭</div>
+      <div class="closeCodePen" onclick="toggleCodepenWrapper()">关闭（点击左侧HTML可完全全屏）</div>
       <div class="codepenContainer"></div>
     </div>
     <div id="app">

@@ -4,7 +4,6 @@
 
 ---
 
-
 # JavaScript
 
 ## ✔ 基本数据类型
@@ -6560,7 +6559,7 @@ CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一�
 
 想要改变三角形的大小形状只需要修改边框宽度就可以实现：
 
-<iframe height="800" style="width: 100%;" scrolling="no" title="border 实现三角形动态体验" src="https://codepen.io/lxfriday/embed/popvdod?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="800" style="width: 100%;" scrolling="no" title="border 实现三角形动态体验" src="https://codepen.io/lxfriday/embed/popvdod?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/lxfriday/pen/popvdod">
   Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -7451,7 +7450,7 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout6.gif)
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/qBpNRwY?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/qBpNRwY?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/lxfriday/pen/qBpNRwY">
   Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
   on <a href="https://codepen.io">CodePen</a>.</iframe>'>
@@ -7561,6 +7560,13 @@ CodePen 全屏查看
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout5.gif)
 
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%;" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/NWXrdQG?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/NWXrdQG">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 #### ✔ flex 实现（纯CSS 效果比较好）
 
 ```html
@@ -7653,6 +7659,13 @@ CodePen 全屏查看
 ```
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout4.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/QWaEpWE?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/QWaEpWE">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
 
 #### ✔ grid 实现（纯CSS 效果比较好）
 
@@ -7748,6 +7761,13 @@ CodePen 全屏查看
 ```
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout7.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/PoEzpwY?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/PoEzpwY">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
 
 ## ✔ CSS 实现省略号
 
