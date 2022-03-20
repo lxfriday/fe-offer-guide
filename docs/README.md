@@ -5912,6 +5912,29 @@ h1 {
 
 ## 基础属性
 
+### display
+
+### ✔ block、inline-block、inline 的区别
+
+`block` 块级元素，常见的块级元素有：div、p、h1~h6、table、ol、ul 等。
+
+`inline` 内联元素，常见内联元素有： span、 a、 strong、 em、 label, input, select, textarea, img, br等.
+
+`block`
+
+- 元素的特点是会独占一行，即使设置了宽高也会独占一行
+- 其宽度会自动填满父元素宽度
+
+`inline` 
+
+- 元素的特点是不会独占一行，多个相邻的行内元素会排列在同一行里，直到排不下
+- 其宽度会随着内容而变化
+- 其设置宽高无效果
+
+`inline-block`
+
+- 将元素呈现为 `inline` 对象，让 `block` 元素不再独占一行，多个 `block` 元素可以同排一行，且元素具有 `block` 的属性，可设置宽高，是 `block` 和 `inline` 元素的综合体
+
 ### ✔ getComputedStyle
 
 - ref [MDN getComputedStyle](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getComputedStyle)
