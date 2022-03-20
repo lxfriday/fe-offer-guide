@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
+      .container {
+        background-color: #eee;
+        display: flex;
+        align-items: stretch;
+      }
+      .left {
+        flex: 1;
+        max-width: 200px;
+        background-color: cyan;
+      }
+      .right {
+        flex: 1;
+        max-width: 200px;
+        background-color: yellow;
+      }
+      .content {
+        flex: 1 0 1260px;
+        background-color: red;
+      }
+      .subcontent {
+        height: 1000px;
+        background-color: green;
+      }
+      nav {
+        height: 60px;
+        background-color: pink;
+        overflow: hidden;
+        width: 100%;
+        min-width: 1260px;
+      }
+      footer {
+        height: 250px;
+        background-color: orange;
+      }
+      .icon {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
+        margin-left: 350px;
+        margin-top: 5px;
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+      @media (max-width: 1320px) {
+        .left,
+        .right {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="icon">icon</div>
+    </nav>
+    <main class="container">
+      <div class="left">left</div>
+      <div class="content">
+        <div class="subcontent">sub</div>
+      </div>
+      <div class="right">right</div>
+    </main>
+    <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const subContentEle = document.querySelector('.subcontent')
+        subContentEle.style.height = subContentEle.clientHeight + 500 + 'px'
+      })
+    </script>
+  </body>
+</html>

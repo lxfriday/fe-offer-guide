@@ -5925,7 +5925,7 @@ h1 {
 - 元素的特点是会独占一行，即使设置了宽高也会独占一行
 - 其宽度会自动填满父元素宽度
 
-`inline` 
+`inline`
 
 - 元素的特点是不会独占一行，多个相邻的行内元素会排列在同一行里，直到排不下
 - 其宽度会随着内容而变化
@@ -7553,7 +7553,7 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout5.gif)
 
-#### ✔ flex 实现
+#### ✔ flex 实现（纯CSS 效果比较好）
 
 ```html
 <!DOCTYPE html>
@@ -7573,14 +7573,16 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
       }
       .left {
         flex: 1;
+        max-width: 200px;
         background-color: cyan;
       }
       .right {
         flex: 1;
+        max-width: 200px;
         background-color: yellow;
       }
       .content {
-        width: 1260px;
+        flex: 1 0 1260px;
         background-color: red;
       }
       .subcontent {
@@ -7591,6 +7593,8 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
         height: 60px;
         background-color: pink;
         overflow: hidden;
+        width: 100%;
+        min-width: 1260px;
       }
       footer {
         height: 250px;
@@ -7604,13 +7608,22 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
         margin-left: 350px;
         margin-top: 5px;
       }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+      @media (max-width: 1320px) {
+        .left,
+        .right {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
     <nav>
-      <div class="icon">
-        icon
-      </div>
+      <div class="icon">icon</div>
     </nav>
     <main class="container">
       <div class="left">left</div>
@@ -7620,15 +7633,113 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
       <div class="right">right</div>
     </main>
     <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const subContentEle = document.querySelector('.subcontent')
+        subContentEle.style.height = subContentEle.clientHeight + 500 + 'px'
+      })
+    </script>
   </body>
 </html>
 ```
 
 ![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout4.gif)
 
-#### grid 实现
+#### ✔ grid 实现（纯CSS 效果比较好）
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .header {
+        grid-area: header;
+        background-color: pink;
+      }
+      .footer {
+        grid-area: footer;
+        background-color: orange;
+      }
+      .main {
+        grid-area: main;
+        background-color: green;
+      }
+      .aside-left {
+        grid-area: aside-left;
+        background-color: cyan;
+      }
+      .aside-right {
+        grid-area: aside-right;
+        background-color: yellow;
+      }
+      .container {
+        display: grid;
+        grid-template-areas:
+          'header header header'
+          'aside-left main aside-right'
+          'footer footer footer';
+        min-height: 100vh;
+        grid-template-columns: minmax(0, 200px) minmax(1260px, 1fr) minmax(0, 200px);
+        grid-template-rows: 50px 1fr 200px;
 
+      }
+      .subcontent {
+        height: 1000px;
+      }
+      @media screen and (max-width: 1350px) {
+        .container {
+          grid-template-areas:
+            'header'
+            'aside-left'
+            'main'
+            'aside-right'
+            'footer';
+          grid-template-columns: 100%;
+          grid-template-rows: 50px 50px minmax(300px, auto) 50px 80px;
+        }
+        .aside-left,
+        .aside-right,
+        .main {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">header</header>
+      <aside class="aside-left">aside left</aside>
+      <main class="main">
+        <div class="subcontent">subcontent</div>
+      </main>
+      <aside class="aside-right">right</aside>
+      <footer class="footer">footer</footer>
+    </div>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const subContentEle = document.querySelector('.subcontent')
+        subContentEle.style.height = subContentEle.clientHeight + 500 + 'px'
+      })
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/css%20basic%20layout7.gif)
 
 ## ✔ CSS 实现省略号
 
