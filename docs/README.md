@@ -6098,6 +6098,92 @@ result = getComputedStyle(h3, '::after').content;
   - length 绝对数值
   - percentage 百分比
 
+`background-origin`、`background-position`、`background-size` 应用案例：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      [class^='wrapper'] {
+        width: 300px;
+        height: 300px;
+        float: left;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: 20px solid pink;
+        padding: 20px;
+
+        background-image: url(https://qiniu1.lxfriday.xyz/blog/5219B1C310EF45D4E200CBD63727AB35.png);
+        background-color: cyan;
+        background-repeat: no-repeat;
+      }
+      .box {
+        width: 300px;
+        height: 300px;
+        float: left;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: 20px solid pink;
+        padding: 20px;
+
+        background-color: cyan;
+        background-repeat: no-repeat;
+        background-image: url(https://qiniu1.lxfriday.xyz/blog/backimg4_%E5%89%AF%E6%9C%ACdasd.jpg);
+        background-size: 250px 250px;
+        /* 1 */
+        background-position: center;
+
+        /* 2 */
+        /* background-position: 50%; */
+
+        /* 3 */
+        /* 下面两个要配合使用，默认的是 padding-box，使用 content-box 就可以用 boxWidth / 2 - imgWidth / 2 */
+        /* background-origin: content-box;
+        background-position: 25px 25px; */
+
+        /* 4 */
+        /* background-origin: padding-box;
+        background-position: 45px 45px; */
+      }
+      .wrapper1 {
+        background-size: cover;
+        background-position: center;
+      }
+      .wrapper2 {
+        background-size: contain;
+      }
+      .wrapper3 {
+        background-size: cover;
+      }
+      .wrapper4 {
+        background-size: contain;
+        background-origin: content-box;
+      }
+      .wrapper5 {
+        background-size: cover;
+        background-origin: content-box;
+      }
+    </style>
+    <div class="wrapper1"></div>
+    <div class="wrapper2"></div>
+    <div class="wrapper3"></div>
+    <div class="wrapper4"></div>
+    <div class="wrapper5"></div>
+    <div class="box"></div>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/3df9e0c7-e3d1-5178-2ec1-181a02a303f4.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/YzYGVWX?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/YzYGVWX">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 ```css
 /* 关键字 */
 background-size: cover
