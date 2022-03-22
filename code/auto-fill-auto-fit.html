@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      .wrapper-fill {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-rows: repeat(6, 50px);
+        border: 1px solid #999;
+      }
+      .wrapper-fit {
+        margin-top: 10px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-rows: repeat(6, 50px);
+        border: 1px solid #999;
+      }
+      .wrapper-fill .box {
+        background-color: orange;
+      }
+      .wrapper-fit .box {
+        background-color: pink;
+      }
+    </style>
+    <div class="wrapper-fill">
+      <div class="box">1(auto-fill)</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+    <div class="wrapper-fit">
+      <div class="box">1(auto-fit)</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+  </body>
+</html>

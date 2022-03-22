@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        height: 100vh;
+      }
+      .wrapper {
+        display: grid;
+        /* 每列按照 1 : 1.5 : 1 分配列宽 */
+        grid-template-columns: 1fr 1.5fr 1fr;
+        /* 每行最低高度 40px */
+        grid-template-rows: repeat(3, minmax(40px, auto));
+        grid-gap: 10px;
+        width: 100%;
+        height: 60%;
+      }
+      .one {
+        grid-row: 2 / span 1;
+        background-color: red;
+      }
+      .two {
+        grid-column: 2 / span 2;
+        background-color: cyan;
+      }
+      .three {
+        grid-row: 2 / span 2;
+        background-color: orange;
+      }
+      .four {
+        grid-row: 3 / span 1;
+        grid-column: 3 / span 1;
+        background-color: pink;
+      }
+      .five {
+        grid-row: 2 / span 1;
+        grid-column: 3 / span 1;
+        background-color: yellow;
+      }
+      .six {
+        grid-row: 1 / span 1;
+        grid-column: 1 / span 1;
+        background-color: gray;
+        color: #fff;
+      }
+      .seven {
+        grid-row: 3 / span 1;
+        grid-column: 1 / span 1;
+        background-color: blue;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="one">1</div>
+      <div class="two">2</div>
+      <div class="three">3</div>
+      <div class="four">4</div>
+      <div class="five">5</div>
+      <div class="six">6</div>
+      <div class="seven">7</div>
+    </div>
+  </body>
+</html>

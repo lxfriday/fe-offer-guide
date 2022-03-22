@@ -6433,6 +6433,698 @@ CSS 网格布局和弹性盒布局的主要区别在于弹性盒布局是为一�
 
 ![grid5](https://qiniu1.lxfriday.xyz/blog/2022-03-10%2008-23-19%5B00-00-01--00-00-08%5D.gif)
 
+### ✔ grid-area
+
+CSS 属性 `grid-area` 是一种对于 `grid-row-start`、`grid-column-start`、 `grid-row-end` 和 `grid-column-end` 的简写。
+
+Grid 布局的描述看起来都很难理解，WTF？描述再多也看不明白。还是看实际的例子。
+
+```css
+/* Keyword values */
+grid-area: auto;
+grid-area: auto / auto;
+grid-area: auto / auto / auto;
+grid-area: auto / auto / auto / auto;
+
+/* <custom-ident> values */
+grid-area: some-grid-area;
+grid-area: some-grid-area / another-grid-area;
+```
+
+`<custom-ident>` 自定义关键字数据类型，`grid-row: foo;`。自定义之后可以配合 `grid-template-areas` 实现指定的网格布局。
+
+参考 [圣杯布局-Grid 实现](#✔-grid-实现（纯css-效果比较好）)
+
+
+### ✔ grid-auto-columns
+
+`grid-auto-columns` 指定了隐式创建的网格纵向轨道（track）的宽度。如果一个表格项目被定位在没有使用 `grid-template-columns` 显式指定尺寸的列中，隐式的 grid 轨道就会被创建出来支撑它。显式地定位到超出范围的列中，或者通过自动布局算法创建额外的列。
+
+```css
+grid-auto-columns: min-content;
+grid-auto-columns: max-content;
+grid-auto-columns: auto;
+
+/* <length> values */
+grid-auto-columns: 100px;
+grid-auto-columns: 20cm;
+grid-auto-columns: 50vmax;
+
+/* <percentage> values */
+grid-auto-columns: 10%;
+grid-auto-columns: 33.3%;
+
+/* <flex> values */
+grid-auto-columns: 0.5fr;
+grid-auto-columns: 3fr;
+```
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      [class ^= wrapper] {
+        height: 100px;
+        border: 1px solid #666;
+        margin-top: 20px;
+        grid-gap: 10px;
+        display: grid;
+      }
+      .box {
+        background-color: lime;
+      }
+      .wrapper1 {
+        grid-template-areas: 'b b b';
+        grid-auto-columns: 200px;
+      }
+      .wrapper2 {
+        grid-template-areas: 'b b b';
+        grid-auto-columns: 200px;
+        grid-auto-rows: 30px;
+      }
+      .wrapper3 {
+        grid-template-areas: 'a a';
+        grid-auto-columns: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper1">
+      <div class="box">a</div>
+      <div class="box">b</div>
+      <div class="box">c</div>
+    </div>
+    <div class="wrapper2">
+      <div class="box">a</div>
+      <div class="box">b</div>
+      <div class="box">c</div>
+    </div>
+    <div class="wrapper3">
+      <div class="box">a</div>
+      <div class="box">b</div>
+      <div class="box">c</div>
+    </div>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/88a3949c-1a0d-ba59-23cf-1a04b50988f5.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/yLpJEBj?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/yLpJEBj">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+
+### ✔ grid-auto-flow
+
+`grid-auto-flow` 属性控制着自动布局算法怎样运作，精确指定在网格中被自动布局的元素怎样排列。
+
+```css
+/* Keyword values */
+grid-auto-flow: row;
+grid-auto-flow: column;
+grid-auto-flow: dense;
+grid-auto-flow: row dense;
+grid-auto-flow: column dense;
+```
+
+- `row` 该关键字指定自动布局算法按照通过**逐行**填充来排列元素，在必要时增加新行。如果既没有指定 `row` 也没有 `column`，则默认为 `row`
+- `column` 该关键字指定自动布局算法通过**逐列**填充来排列元素，在必要时增加新列
+- `dense` 该关键字指定自动布局算法使用一种“稠密”堆积算法，如果后面出现了稍小的元素，则会试图去填充网格中前面留下的空白。这样做会填上稍大元素留下的空白，但同时也可能导致原来出现的次序被打乱
+  - 如果省略它，使用一种「稀疏」算法，在网格中布局元素时，布局算法只会「向前」移动，永远不会倒回去填补空白。这保证了所有自动布局元素「按照次序」出现，即使可能会留下被后面元素填充的空白
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .wrapper {
+        height: 500px;
+        width: 300px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template: repeat(6, 1fr) / repeat(3, 1fr);
+        grid-auto-flow: column; /* or 'row', 'row dense', 'column dense' */
+
+        font-size: 10px;
+        border: 1px solid #999;
+      }
+      .box1 {
+        background-color: lime;
+        grid-row-start: 3;
+      }
+      .box2 {
+        background-color: yellow;
+      }
+      .box3 {
+        background-color: orange;
+      }
+      .box4 {
+        grid-column-start: 2;
+        background-color: red;
+      }
+      .box5 {
+        background-color: aqua;
+      }
+      .box6 {
+        background-color: blueviolet;
+      }
+      .box7 {
+        background-color: orchid;
+        grid-column-start: 3;
+        grid-row-start: 3;
+      }
+      .box8 {
+        background-color: green;
+      }
+      .box9 {
+        background-color: pink;
+      }
+      .box10 {
+        background-color: goldenrod;
+        grid-row-start: 6;
+        grid-column-start: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box1">1(grid-row-start: 3;)</div>
+      <div class="box2">2</div>
+      <div class="box3">3</div>
+      <div class="box4">4(grid-column-start: 2;)</div>
+      <div class="box5">5</div>
+      <div class="box6">6</div>
+      <div class="box7">7(grid-column-start: 3;grid-row-start: 3)</div>
+      <div class="box8">8</div>
+      <div class="box9">9</div>
+      <div class="box10">10(grid-row-start: 6;grid-column-start: 2;)</div>
+    </div>
+    <select class="direction" onchange="changeGridAutoFlow()">
+      <option value="column" selected>column</option>
+      <option value="row">row</option>
+    </select>
+    <input id="dense" type="checkbox" onchange="changeGridAutoFlow()" />
+    <label for="dense">dense</label>
+    <script>
+      function changeGridAutoFlow(target) {
+        const direction = document.querySelector('.direction')
+        const wrapper = document.querySelector('.wrapper')
+        const dense = document.querySelector('#dense')
+        if(dense.checked) {
+          wrapper.style.gridAutoFlow = direction.value + ' dense'
+        } else {
+          wrapper.style.gridAutoFlow = direction.value
+        }
+      }
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/14b6c0a9-e268-19ae-81cd-e9b4112cbd7f.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/oNpLMgW?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/oNpLMgW">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+### ✔ grid-auto-rows
+
+参考 [grid-auto-columns](#✔-grid-auto-columns)
+
+
+### ✔ grid-column、grid-column-end、grid-column-start
+
+`grid-column` CSS属性是 `grid-column-start` 和 `grid-column-end` 的简写属性，用于指定网格项目的大小和位置。
+
+如果给出两个 `<grid-line>` 值，它们之间用 `/` 分隔。 将 `grid-column-start` 的正手设置为斜线之前的值，并将 `grid-column-end` 的正手设置为斜线之后的值。
+
+### ✔ grid-gap
+
+用来设置网格行与列之间的间隙（gutters），该属性是 `row-gap` and `column-gap` 的简写形式。
+
+CSS Grid Layout 起初是用 `grid-gap`  属性来定义的，目前逐渐被 `gap` 替代。但是，为了兼容那些不支持 `gap` 属性的浏览器，你需要像上面的例子一样，使用带有前缀的属性。
+
+```css
+grid-gap: <'row-gap'> <'column-gap'>?
+````
+
+### ✔ grid-row、grid-row-start、grid-row-end
+
+`grid-row` 属性是一种 `grid-row-start` 和 `grid-row-end` 的缩写（shorthand）形式，它定义了网格单元与网格行（row）相关的尺寸和位置，可以通过在网格布局中的基线（line），跨度（span），或者什么也不做（自动），从而指定 grid area 的行起始与行结束。
+
+如果指定了两个 `<grid-line>` 值，那么斜杠号前的值就被指定为 `grid-row-start`，斜杠后面的值就被指定为 `grid-row-end` 的值。
+
+`span` 表示撑起一个跨度，下面的例子表示， row 从第2行开始，跨1个跨度（占1行），列从第3列开始，竖着跨2个跨度（占2列）。
+
+```css
+grid-row: 2 / span 1;
+grid-column: 3 / span 2;
+```
+
+看一个全面的例子
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        height: 100vh;
+      }
+      .wrapper {
+        display: grid;
+        /* 每列按照 1 : 1.5 : 1 分配列宽 */
+        grid-template-columns: 1fr 1.5fr 1fr;
+        /* 每行最低高度 40px */
+        grid-template-rows: repeat(3, minmax(40px, auto));
+        grid-gap: 10px;
+        width: 100%;
+        height: 60%;
+      }
+      .one {
+        grid-row: 2 / span 1;
+        background-color: red;
+      }
+      .two {
+        grid-column: 2 / span 2;
+        background-color: cyan;
+      }
+      .three {
+        grid-row: 2 / span 2;
+        background-color: orange;
+      }
+      .four {
+        grid-row: 3 / span 1;
+        grid-column: 3 / span 1;
+        background-color: pink;
+      }
+      .five {
+        grid-row: 2 / span 1;
+        grid-column: 3 / span 1;
+        background-color: yellow;
+      }
+      .six {
+        grid-row: 1 / span 1;
+        grid-column: 1 / span 1;
+        background-color: gray;
+        color: #fff;
+      }
+      .seven {
+        grid-row: 3 / span 1;
+        grid-column: 1 / span 1;
+        background-color: blue;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="one">1</div>
+      <div class="two">2</div>
+      <div class="three">3</div>
+      <div class="four">4</div>
+      <div class="five">5</div>
+      <div class="six">6</div>
+      <div class="seven">7</div>
+    </div>
+  </body>
+</html>
+
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/38c6a89a-1768-416e-2562-32f92ec2a083.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/vYpKPVz?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/vYpKPVz">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+
+### ✔ grid-row-gap
+
+该 CSS 属性用来设置行元素之间的间隙(gutter) 大小。
+
+Grid Layout 起初是用 `grid-row-gap` 属性来定义的，目前逐渐被 `row-gap` 替代。但是，为了兼容那些不支持 `row-gap` 属性的浏览器，你需要像上面的例子一样使用带有前缀的属性。
+
+### ✔ grid-template
+
+`grid-template` 是 `grid-template-rows`、`grid-template-columns` 与 `grid-template-areas` 的简写。
+
+```css
+grid-template: 
+            "a a a" 40px
+            "b c c" 40px
+            "b c c" 40px / 1fr 1fr 1fr;
+```
+
+```css
+grid-template: 
+            "a a ." minmax(50px, auto)
+            "a a ." 80px
+            "b b c" auto / 2em 3em auto;
+```
+
+
+`<'grid-template-rows'> / <'grid-template-columns'>` 指定 `grid-template-rows `与 `grid-template-columns` 之值，并设 `grid-template-areas` 为 `none`。
+
+
+推荐分开写，混在一起不好看懂。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        display: grid;
+        width: 100%;
+        height: 100vh;
+        grid-template:
+          [header-left] 'head head' 50px [header-right]
+          [main-left] 'nav  main' 1fr [main-right]
+          [footer-left] 'nav  foot' 30px [footer-right]
+          / 200px 1fr;
+        /* grid-template:
+          'head head' 50px
+          'nav  main' 1fr
+          'nav  foot' 30px
+          / 200px 1fr; */
+        /* grid-template-areas: 'head head'
+                                'nav main'
+                                'nav foot';
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 200px 1fr; */
+      }
+      header {
+        background-color: lime;
+        grid-area: head;
+      }
+      nav {
+        background-color: lightblue;
+        grid-area: nav;
+      }
+      main {
+        background-color: yellow;
+        grid-area: main;
+      }
+      footer {
+        background-color: red;
+        grid-column: foot;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page">
+      <header>Header</header>
+      <nav>Navigation</nav>
+      <main>Main area</main>
+      <footer>Footer</footer>
+    </section>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/1b623d95-8c28-5b99-ee49-252eeb06c8ff.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/LYeRbOE?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/LYeRbOE">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+### ✔ grid-template-areas
+
+这是一个非常牛X的能力。
+
+`grid-template-areas` CSS 属性是网格区域 `grid-areas` 在CSS中的特定命名，配合 `grid-areas` 实现特定布局效果。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      [class ^= wrapper] {
+        float: left;
+        margin-right: 10px;
+      }
+      .wrapper {
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a a b'
+          'a a c';
+      }
+      .wrapper2 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a b b'
+          'a c c'
+          'a c c';
+      }
+      .wrapper3 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a b b'
+          'a c c';
+      }
+      .wrapper4 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas: 'a b c';
+      }
+      .wrapper5 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas: 'a' 'b' 'c';
+      }
+      .wrapper6 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a a .'
+          'a a c'
+          'b b c';
+      }
+      .a {
+        grid-area: a;
+        background-color: red;
+      }
+      .b {
+        grid-area: b;
+        background-color: pink;
+      }
+      .c {
+        grid-area: c;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper2">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper3">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper4">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper5">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper6">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/c3902bb7-7c9b-0af4-4c13-0bbac0c63452.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/RwxRjXd?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/RwxRjXd">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+### ✔ grid-template-columns
+
+定义列名称、数量和列宽。
+
+```css
+/* <track-list> values */
+grid-template-columns: 100px 1fr;
+grid-template-columns: [linename] 100px;
+grid-template-columns: [linename1] 100px [linename2 linename3];
+grid-template-columns: minmax(100px, 1fr);
+grid-template-columns: fit-content(40%);
+grid-template-columns: repeat(3, 200px);
+
+/* <auto-track-list> values */
+grid-template-columns: 200px repeat(auto-fill, 100px) 300px;
+grid-template-columns: minmax(100px, max-content)
+                       repeat(auto-fill, 200px) 20%;
+grid-template-columns: [linename1] 100px [linename2]
+                       repeat(auto-fit, [linename3 linename4] 300px)
+                       100px;
+grid-template-columns: [linename1 linename2] 100px
+                       repeat(auto-fit, [linename1] 300px) [linename3];
+```
+
+常见属性解释：
+
+- `fr` 是一个弹性单位，使用 `fr` 定义会让网格按照比例来分配
+- `max-content` 是一个用来表示以网格项的最大的内容来占据网格轨道的关键字
+- `min-content` 是一个用来表示以网格项的最大的最小内容来占据网格轨道的关键字
+- `minmax(min, max)` 是一个来定义大小范围的属性，大于等于 `min` 值，并且小于等于 `max` 值。如果 `max` 值小于 `min` 值，则该值会被视为 `min` 值。最大值可以设置为网格轨道系数值 `<flex>`(fr) ，但最小值则不行
+- `fit-content( [ <length> | <percentage> ] )` 不好理解，相当于公式 `min(max-content, max(auto, argument))`，类似于 `auto` 的计算(即 `minmax(auto, max-content))`，除了网格轨道大小值是确定下来的，否则该值都大于 `auto` 的最小值
+- `repeat( [ <positive-integer> | auto-fill | auto-fit ] , <track-list> )` 表示网格轨道的重复部分，以一种更简洁的方式去表示大量而且重复列的表达式。
+
+`grid-template-columns: repeat(auto-fill, 200px)` 表示列宽是 200 px，但列的数量是不固定的，只要浏览器能够容纳得下，就可以放置元素。
+
+`grid-template: repeat(6, 1fr) / repeat(3, 1fr);` 表示 6 行 3 列，行高和列宽按等比分配。
+
+`grid-template-rows: repeat(3, minmax(40px, auto));` 表示分配 3 行，行高 >= 40px。
+
+#### ✔ auto-fill 和 auto-fit 的差别
+
+ref [grid宽度自适应中auto-fit和auto-fill的区别](https://blog.csdn.net/MFWSCQ/article/details/88632709)
+
+`auto-fill` 和 `auto-fit` 都有自动填充的效果，两者在某些情况下效果是一样的。看下面的例子，都设置了 `minmax(150px, 1fr)`，也就是说，每一个网格最小为 150px，如果能多放一个网格则多放一个，否则剩下的空间将会等比分配给每一个网格。
+
+这两者的相同点在于，当网格容器一行刚好能容纳下所有网格的时候，`auto-fit` `auto-fill` 表现的效果一模一样。
+
+而当网格容器一行就足以放下所有网格的时候，对于 `auto-fill` 它会尽可能的分配出虚网格（假定会有多余的网格）； `auto-fit` 会直接依照现有网格的数量直接把宽度等比分配给现有网格。
+
+通常 `auto-fit` 可能更适合你的意图，因为 `auto-fill` 会导致网格位置被虚占。
+
+```css
+grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+/* and */
+
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      .wrapper-fill {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-rows: repeat(6, 50px);
+        border: 1px solid #999;
+      }
+      .wrapper-fit {
+        margin-top: 10px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-rows: repeat(6, 50px);
+        border: 1px solid #999;
+      }
+      .wrapper-fill .box {
+        background-color: orange;
+      }
+      .wrapper-fit .box {
+        background-color: pink;
+      }
+    </style>
+    <div class="wrapper-fill">
+      <div class="box">1(auto-fill)</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+    <div class="wrapper-fit">
+      <div class="box">1(auto-fit)</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/grid-template-columns.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/jOYMBNb?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/jOYMBNb">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
+### ✔ grid-template-rows
+
+参考 [grid-template-columns](#✔-grid-template-columns)
+
 ## ✔ CSS 画一个三角形
 
 实现原理，border 存在四角分割，简单点说就是，border 与 border 的相交处是斜线相交。
@@ -7321,7 +8013,7 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 ## 基本布局
 
-### 圣杯布局
+### ✔ 圣杯布局
 
 三列布局；中间主体内容前置，且宽度自适应；两边内容定宽 
 

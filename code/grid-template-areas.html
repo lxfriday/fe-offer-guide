@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      [class ^= wrapper] {
+        float: left;
+        margin-right: 10px;
+      }
+      .wrapper {
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a a b'
+          'a a c';
+      }
+      .wrapper2 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a b b'
+          'a c c'
+          'a c c';
+      }
+      .wrapper3 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a b b'
+          'a c c';
+      }
+      .wrapper4 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas: 'a b c';
+      }
+      .wrapper5 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas: 'a' 'b' 'c';
+      }
+      .wrapper6 {
+        margin-top: 10px;
+        display: grid;
+        width: 500px;
+        height: 300px;
+        grid-gap: 5px;
+        grid-template-areas:
+          'a a .'
+          'a a c'
+          'b b c';
+      }
+      .a {
+        grid-area: a;
+        background-color: red;
+      }
+      .b {
+        grid-area: b;
+        background-color: pink;
+      }
+      .c {
+        grid-area: c;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper2">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper3">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper4">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper5">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+    <div class="wrapper6">
+      <div class="a">a</div>
+      <div class="b">b</div>
+      <div class="c">c</div>
+    </div>
+  </body>
+</html>
