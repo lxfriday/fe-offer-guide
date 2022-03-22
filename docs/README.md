@@ -8547,6 +8547,67 @@ CodePen 全屏查看
 CodePen 全屏查看
 </button>
 
+### ✔ 粘连布局
+
+粘连布局：当内容区域高度比较小的时候，底部 footer 会吸在底部，二挡内容区域高度比较大的时候，footer 会排在内容区域后面，滚动下滑可达到 footer。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        text-align: center;
+      }
+      nav {
+        height: 50px;
+        background-color: lime;
+      }
+      footer {
+        height: 80px;
+        background-color: cyan;
+      }
+      .content {
+        min-height: calc(100vh - 130px);
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>nav</nav>
+    <main>
+      <div class="content">content</div>
+    </main>
+    <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const contentEle = document.querySelector('.content')
+        console.log(contentEle.clientHeight)
+        contentEle.style.height = contentEle.clientHeight + 500 + 'px'
+      })
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/stickyfooter.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/KKZgJMy?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/KKZgJMy">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 ## ✔ CSS 实现省略号
 
 ```css
