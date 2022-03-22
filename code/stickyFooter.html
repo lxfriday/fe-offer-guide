@@ -8,17 +8,22 @@
         padding: 0;
         height: 100%;
         text-align: center;
+        display: flex;
+        flex-direction: column;
       }
       nav {
-        height: 50px;
+        flex: 0 0 50px;
         background-color: lime;
       }
       footer {
-        height: 80px;
+        flex: 0 0 80px;
         background-color: cyan;
       }
+      main {
+        flex: 1;
+      }
       .content {
-        min-height: calc(100vh - 130px);
+        height: 100%;
       }
       #addHeight {
         position: fixed;
@@ -37,7 +42,6 @@
     <script>
       document.querySelector('#addHeight').addEventListener('click', () => {
         const contentEle = document.querySelector('.content')
-        console.log(contentEle.clientHeight)
         contentEle.style.height = contentEle.clientHeight + 500 + 'px'
       })
     </script>

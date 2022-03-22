@@ -8551,6 +8551,8 @@ CodePen 全屏查看
 
 粘连布局：当内容区域高度比较小的时候，底部 footer 会吸在底部，二挡内容区域高度比较大的时候，footer 会排在内容区域后面，滚动下滑可达到 footer。
 
+`calc` 普通实现：
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -8607,6 +8609,60 @@ CodePen 全屏查看
   on <a href="https://codepen.io">CodePen</a>.</iframe>'>
 CodePen 全屏查看
 </button>
+
+`flex` 实现，效果和普通实现一模一样：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        flex: 0 0 50px;
+        background-color: lime;
+      }
+      footer {
+        flex: 0 0 80px;
+        background-color: cyan;
+      }
+      main {
+        flex: 1;
+      }
+      .content {
+        height: 100%;
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>nav</nav>
+    <main>
+      <div class="content">content</div>
+    </main>
+    <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const contentEle = document.querySelector('.content')
+        contentEle.style.height = contentEle.clientHeight + 500 + 'px'
+      })
+    </script>
+  </body>
+</html>
+```
 
 ## ✔ CSS 实现省略号
 
