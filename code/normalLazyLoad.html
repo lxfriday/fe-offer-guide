@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .wrapper {
+        width: 768px;
+        margin: 0 auto;
+        background: orange;
+        text-align: center;
+      }
+      img {
+        width: 300px;
+        height: 300px;
+      }
+      .paragraph {
+        height: 400px;
+        background-color: pink;
+      }
+    </style>
+    <div>normal lazyload</div>
+    <div class="wrapper">
+      <div class="content">
+        <div class="paragraph">111111111111111</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193542p667nnb1qrb67krn.png" />
+        <div class="paragraph">222222222222222</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193559ib00thmtn3ng00hh.png" />
+        <div class="paragraph">333333333333333</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material1.jpg" />
+        <div class="paragraph">444444444444444</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material2.jpg" />
+        <div class="paragraph">555555555555555</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material3.jpg" />
+        <div class="paragraph">666666666666666</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material4.jpg" />
+        <div class="paragraph">777777777777777</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material5.jpg" />
+        <div class="paragraph">888888888888888</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193445u731f7xm2xnx11kz.png" />
+      </div>
+    </div>
+    <script>
+      const wrapper = document.querySelector('.wrapper')
+      const imgs = document.querySelectorAll('img[data-origin]')
+      function lazy() {
+        const windowHeight = document.documentElement.clientHeight
+        imgs.forEach(img => {
+          if(img.dataset.origin && img.getBoundingClientRect().top <= windowHeight && img.getBoundingClientRect().bottom >= 0) {
+            img.src = img.dataset.origin
+            delete img.dataset.origin
+          }
+        })
+      }
+      const lazyLoadDebounce = debounce(lazy, 200)
+      document.addEventListener('scroll', lazyLoadDebounce)
+      lazyLoadDebounce()
+      function debounce(func, wait) {
+        let timeout = null
+        return function (...args) {
+          const ctx = this
+          if (timeout) {
+            clearTimeout(timeout)
+          }
+          timeout = setTimeout(() => {
+            func.apply(ctx, args)
+            timeout = null
+          }, wait)
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -2696,6 +2696,8 @@ Intersection Observer API 提供了一种**异步**观察目标元素与祖先�
 
 目标(target)元素与根(root)元素之间的交叉度是交叉比(intersection ratio)。这是目标(target)元素相对于根(root)的交集百分比的表示，它的取值在 0.0 和 1.0 之间。
 
+当一个 `IntersectionObserver` 对象被创建时，其被配置为监听根中一段给定比例的可见区域。一旦 `IntersectionObserver` 被创建，则无法更改其配置，所以一个给定的观察者对象只能用来监听可见区域的特定变化值；然而，****。
+
 基本用法：
 
 ```javascript
@@ -2745,61 +2747,173 @@ imgs.forEach(el => {
 
 一个简单的图片懒加载例子：
 
-```javascript
-if (typeof IntersectionObserver !== undefined) {
-  const imgObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.src = entry.target.dataset.origin
-          // 图片 src 更换之后，就不需要继续观察这个元素了
-          imgObserver.unobserve(entry.target)
-          console.log('entry', entry)
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .wrapper {
+        width: 768px;
+        margin: 0 auto;
+        background: orange;
+        text-align: center;
+      }
+      img {
+        width: 300px;
+        height: 300px;
+      }
+      .paragraph {
+        height: 400px;
+        background-color: pink;
+      }
+    </style>
+    <div class="wrapper">
+      <div class="content">
+        <div class="paragraph">111111111111111</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193542p667nnb1qrb67krn.png" />
+        <div class="paragraph">222222222222222</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193559ib00thmtn3ng00hh.png" />
+        <div class="paragraph">333333333333333</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material1.jpg" />
+        <div class="paragraph">444444444444444</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material2.jpg" />
+        <div class="paragraph">555555555555555</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material3.jpg" />
+        <div class="paragraph">666666666666666</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material4.jpg" />
+        <div class="paragraph">777777777777777</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material5.jpg" />
+        <div class="paragraph">888888888888888</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193445u731f7xm2xnx11kz.png" />
+      </div>
+    </div>
+    <script>
+      const options = { root: null, threshold: [0] }
+      const imgObserver = new IntersectionObserver(entries => {
+        for (let entry of entries) {
+          // 交叉有三种情况，打开当前页面，正好在交叉；往上滑动时交叉；往下滑动时交叉
+          if(entry.isIntersecting) {
+            entry.target.src = entry.target.dataset.origin
+            delete entry.target.dataset.origin
+            // 能加载正确图片之后取消观察
+            imgObserver.unobserve(entry.target)
+            console.log(entry);
+          }
         }
       })
-    },
-    {
-      root: null,
-      threshold: 0,
-    }
-  )
-
-  const imgs = document.querySelectorAll('img[data-origin]')
-  imgs.forEach(el => {
-    imgObserver.observe(el)
-  })
-}
+      const imgs = document.querySelectorAll('img[data-origin]')
+      imgs.forEach(img => imgObserver.observe(img))
+    </script>
+  </body>
+</html>
 ```
+
+![](https://qiniu1.lxfriday.xyz/blog/intersectionobserver2.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/rNpWero?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/rNpWero">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
 
 #### ✔ 普通懒加载
 
 通过监听滚动事件实现，使用防抖函数防止卡顿：
 
-```javascript
-function debounce(func, wait) {
-  let timer = null
-
-  return function (...args) {
-    if (timer) clearTimeout(timer)
-    timer = setTimeout(() => {
-      func(...args)
-    }, wait)
-  }
-}
-const imgs = document.querySelectorAll('img[data-origin]')
-function lazyLoad() {
-  const windowHeight = document.documentElement.clientHeight
-  imgs.forEach(($img, i) => {
-    // 重点是下面这个判断
-    if ($img.dataset.origin && $img.getBoundingClientRect().bottom >= 0 && windowHeight >= $img.getBoundingClientRect().top) {
-      $img.src = $img.dataset.origin
-      delete $img.dataset.origin
-    }
-  })
-}
-lazyLoad()
-document.addEventListener('scroll', debounce(lazyLoad, 200))
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .wrapper {
+        width: 768px;
+        margin: 0 auto;
+        background: orange;
+        text-align: center;
+      }
+      img {
+        width: 300px;
+        height: 300px;
+      }
+      .paragraph {
+        height: 400px;
+        background-color: pink;
+      }
+    </style>
+    <div>normal lazyload</div>
+    <div class="wrapper">
+      <div class="content">
+        <div class="paragraph">111111111111111</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193542p667nnb1qrb67krn.png" />
+        <div class="paragraph">222222222222222</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193559ib00thmtn3ng00hh.png" />
+        <div class="paragraph">333333333333333</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material1.jpg" />
+        <div class="paragraph">444444444444444</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material2.jpg" />
+        <div class="paragraph">555555555555555</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material3.jpg" />
+        <div class="paragraph">666666666666666</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material4.jpg" />
+        <div class="paragraph">777777777777777</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/wallpaper_material5.jpg" />
+        <div class="paragraph">888888888888888</div>
+        <img src="https://qiniu1.lxfriday.xyz/feoffer/loading1.png" data-origin="https://qiniu1.lxfriday.xyz/wallpaper/193445u731f7xm2xnx11kz.png" />
+      </div>
+    </div>
+    <script>
+      const wrapper = document.querySelector('.wrapper')
+      const imgs = document.querySelectorAll('img[data-origin]')
+      function lazy() {
+        const windowHeight = document.documentElement.clientHeight
+        imgs.forEach(img => {
+          if(img.dataset.origin && img.getBoundingClientRect().top <= windowHeight && img.getBoundingClientRect().bottom >= 0) {
+            img.src = img.dataset.origin
+            delete img.dataset.origin
+          }
+        })
+      }
+      const lazyLoadDebounce = debounce(lazy, 200)
+      document.addEventListener('scroll', lazyLoadDebounce)
+      lazyLoadDebounce()
+      function debounce(func, wait) {
+        let timeout = null
+        return function (...args) {
+          const ctx = this
+          if (timeout) {
+            clearTimeout(timeout)
+          }
+          timeout = setTimeout(() => {
+            func.apply(ctx, args)
+            timeout = null
+          }, wait)
+        }
+      }
+    </script>
+  </body>
+</html>
 ```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/MWrbRya?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/MWrbRya">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 
 ### MutationObserver
 
