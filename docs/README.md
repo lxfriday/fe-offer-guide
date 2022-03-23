@@ -10058,7 +10058,7 @@ Date: Wed, 21 Oct 2015 07:28:00 GMT
 Age: <delta-seconds>
 ```
 
-### HSTS
+### ✔ HSTS
 
 HTTP Strict Transport Security（通常简称为 HSTS）是一个安全功能，它告诉浏览器只能通过 HTTPS 访问当前资源，而不是 HTTP。
 
@@ -10082,7 +10082,7 @@ Strict-Transport-Security: max-age=<expire-seconds>; includeSubDomains
 
 Chrome、Firefox 等浏览器里，当您尝试访问该域名下的内容时，会产生一个 307 Internal Redirect（内部跳转），自动跳转到 HTTPS 请求。
 
-### CSP
+### ✔ CSP
 
 ref
 
