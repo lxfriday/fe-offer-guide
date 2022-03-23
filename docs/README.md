@@ -5912,7 +5912,7 @@ h1 {
 
 ## 基础属性
 
-### display
+### ✔ display
 
 ### ✔ block、inline-block、inline 的区别
 
@@ -8097,7 +8097,7 @@ ref [https://www.cnblogs.com/lunarorbitx/p/5287309.html](https://www.cnblogs.com
 
 实际效果并不算很理想，不能处理圆角，不推荐。
 
-## 基本布局
+## ✔ 基本布局
 
 ### ✔ 圣杯布局
 
