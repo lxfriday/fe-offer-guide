@@ -13873,7 +13873,6 @@ CodePen 全屏查看
       }
       /* 拖放时候的虚拟站位盒子 */
       .box0 {
-        box-shadow: 0px 0px 5px #eeeeee;
       }
     </style>
   </head>
@@ -13898,51 +13897,42 @@ CodePen 全屏查看
       box0.classList.add('box0')
       let dragTarget = null
       document.addEventListener('dragstart', function (e) {
-        // wrapper1.removeChild(e.target)
         dragTarget = e.target
         e.target.style.opacity = 0.5
       })
-      // dragover 监听是必须的，否则无法触发 drop 事件
-      document.addEventListener('dragover', function (e) {
-        // 阻止默认动作
-        e.preventDefault()
-        if (e.target.className.indexOf('box') !== -1 && dragTarget !== e.target) {
-          // 把 box 拖放到某个 box 上，e.target 为被拖放到的 box
+      document.addEventListener('dragenter', function (e) {
+        if (e.target.classList.contains('dropzone')) {
+          e.target.style.backgroundColor = 'green'
+        }
+        if (e.target.className.indexOf('box') !== -1 && e.target !== dragTarget && e.target !== box0) {
           e.target.parentNode.insertBefore(box0, e.target)
           autoLayout()
         }
       })
-      document.addEventListener('dragend', function (e) {
-        e.target.style.opacity = ''
-      })
-      document.addEventListener('dragenter', function (e) {
-        // 在原本的父元素内拖动不算
-        if (e.target.classList.contains('dropzone')) {
-          e.target.style.backgroundColor = 'green'
-        }
+      document.addEventListener('dragover', function (e) {
+        e.preventDefault()
       })
       document.addEventListener('dragleave', function (e) {
         if (e.target.classList.contains('dropzone')) {
           e.target.style.backgroundColor = ''
         }
-        if (e.target.className === 'box0') {
+        if (e.target.classList.contains('box0')) {
           box0.parentNode.removeChild(box0)
           autoLayout()
         }
       })
       document.addEventListener('drop', function (e) {
-        // 阻止默认动作（如打开一些元素的链接）
-        event.preventDefault()
         if (e.target.classList.contains('dropzone')) {
-          e.target.appendChild(dragTarget)
           e.target.style.backgroundColor = ''
-          box0.parentNode && box0.parentNode.removeChild(box0)
-          autoLayout(e.target)
+          e.target.appendChild(dragTarget)
         }
-        if (e.target === box0) {
+        if (e.target.classList.contains('box0')) {
           box0.parentNode.replaceChild(dragTarget, box0)
-          autoLayout()
         }
+        autoLayout()
+      })
+      document.addEventListener('dragend', function (e) {
+        e.target.style.opacity = ''
       })
     </script>
     <script>
@@ -13974,8 +13964,10 @@ CodePen 全屏查看
 
 ![](https://qiniu1.lxfriday.xyz/blog/dragdemo.gif)
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/xxpgOQV?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/lxfriday/pen/xxpgOQV">
+由于本页面比较庞大，此案例在 iframe 中演示的时候比较卡顿，建议自己在本地测试效果。
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/zYpNLpg?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/zYpNLpg">
   Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
   on <a href="https://codepen.io">CodePen</a>.</iframe>'>
 CodePen 全屏查看
