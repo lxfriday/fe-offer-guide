@@ -12298,11 +12298,122 @@ ref
 1. [节流防抖](#节流防抖)
 1. 虚拟列表
 
-### 节流防抖
+### ✔ 节流防抖
 
 ref
 
 - [https://juejin.im/post/5d88d68ae51d4561c541a796](https://juejin.im/post/5d88d68ae51d4561c541a796)
+
+#### ✔ 防抖(debounce)
+
+防抖的原理是，只要在倒计时的范围内，新触发防抖函数就会导致计时器重置，要重新等待 `wait` 时长之后才能执行。
+
+普通防抖（先防抖后执行）
+
+```js
+function debounce(func, wait) {
+  let timeout
+  return function debounced(...args) {
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      func.apply(ctx, args)
+    }, wait)
+  }
+}
+```
+
+需要立即执行的防抖（先执行后防抖）
+
+```js
+function debounce(func, wait, immediate) {
+  let timeout
+  return function debounced(...args) {
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+    if (immediate) {
+      const callNow = !timeout
+      timeout = setTimeout(() => {
+        timeout = null
+      }, wait)
+      if (callNow) func.apply(ctx, args)
+    } else {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+      }, wait)
+    }
+  }
+}
+````
+
+带有取消功能的防抖
+
+```js
+function debounce(func, wait, immediate) {
+  let timeout
+  function debounced(...args) {
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+
+    if (immediate) {
+      const callNow = !timeout
+      timeout = setTimeout(() => {
+        // 这里只有在 wait 时长之后，timeout 为 null，然后触发防抖函数才能立即执行，
+        // 否则 callNow 为 false，不会立即执行，计时器会重新计时
+        timeout = null
+      }, wait)
+      if (callNow) func.apply(ctx, args)
+    } else {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+      }, wait)
+    }
+  }
+  debounced.cancel = function cancel() {
+    clearTimeout(timeout)
+    timeout = null
+  }
+  return debounced
+}
+````
+
+#### ✔ 节流(throttle)
+
+节流分为时间戳节流和定时器节流，节流的特点是一直被触发时，每隔 `wait` 时长执行一次回调函数。 连续触发会按 `wait` 时长连续执行（这是和防抖的根本区别）。
+
+时间戳节流
+
+```js
+function throttle(func, wait) {
+  let previous = 0
+  return function throttled(...args) {
+    const ctx = this
+    const now = Date.now()
+    const remain = wait - (now - previous)
+    if (remain <= 0) {
+      func.apply(ctx, args)
+      previous = now
+    }
+  }
+}
+```
+
+定时器节流
+
+```js
+function throttle(func, wait) {
+  let timeout = 0
+  return function throttled(...args) {
+    const ctx = this
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+        timeout = null
+      }, wait)
+    }
+  }
+}
+```
 
 ### ✔ 升级协议版本到 HTTP2
 
