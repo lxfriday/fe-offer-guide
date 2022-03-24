@@ -13760,13 +13760,73 @@ function flattenDepthRecu(arr, depth) {
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 2));
 ```
 
-
-
 ## 手撕 DOM 操作
 
 ### 节点增删改查
 
-### 实现一个输入框节流防抖并带有 autocomplete 能力
+### ✔ 实现一个输入框防抖并带有 autocomplete 能力
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        height: 200px;
+      }
+      .result {
+        margin-top: 20px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      搜索框 <input type="text" name="search" />
+    </div>
+    <div>结果</div>
+    <ul class="result"></ul>
+    <script>
+      function debounce(func) {
+        let timeout = null
+        return function debounced(...args) {
+          const ctx = this
+          if (timeout) clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            func.apply(ctx, args)
+          }, 200)
+        }
+      }
+
+      async function fetchData(searchStr) {
+        return await new Array(searchStr.length).fill('').map((v, i) => '[res ' + i + '] ' + searchStr)
+      }
+
+      function inputEvent (event) {
+        const searchStr = event.target.value
+        fetchData(searchStr).then(searchRes => {
+          const resultEle = document.querySelector('.result')
+          let res = ''
+          searchRes.map(v => {
+            res += `<li>${v}</li>`
+          })
+          resultEle.innerHTML = res
+        })
+      }
+
+      document.querySelector('input[name=search]').addEventListener('input', debounce(inputEvent))
+    </script>
+  </body>
+</html>
+```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/jOYVjPK?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/jOYVjPK">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 
 ### 手写实现拖放功能
 
