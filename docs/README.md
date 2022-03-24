@@ -13828,7 +13828,159 @@ CodePen 全屏查看
 </button>
 
 
-### 手写实现拖放功能
+### ✔ 手写实现拖放功能
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      [class^='wrapper'] {
+        height: 500px;
+        border: 1px solid #999;
+        position: relative;
+        transition: background-color 1s;
+      }
+      [class^='box'] {
+        position: absolute;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+      }
+      .box1 {
+        background-color: pink;
+      }
+      .box2 {
+        background-color: cyan;
+      }
+      .box3 {
+        background-color: orange;
+      }
+      .box4 {
+        background-color: yellow;
+      }
+      .box5 {
+        background-color: brown;
+      }
+      .box6 {
+        background-color: chartreuse;
+      }
+      .box7 {
+        background-color: cornflowerblue;
+      }
+      .box8 {
+        background-color: khaki;
+      }
+      /* 拖放时候的虚拟站位盒子 */
+      .box0 {
+        box-shadow: 0px 0px 5px #eeeeee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper1 dropzone">
+      <div class="box1" draggable="true">11111111</div>
+      <div class="box2" draggable="true">22222222</div>
+      <div class="box3" draggable="true">33333333</div>
+      <div class="box4" draggable="true">44444444</div>
+      <div class="box5" draggable="true">55555555</div>
+      <div class="box6" draggable="true">66666666</div>
+      <div class="box7" draggable="true">77777777</div>
+      <div class="box8" draggable="true">88888888</div>
+      <!-- <div class="box0" draggable="true">00000000</div> -->
+    </div>
+    <br />
+    <div class="wrapper2 dropzone"></div>
+    <script>
+      const wrapper1 = document.querySelector('.wrapper1')
+      const wrapper2 = document.querySelector('.wrapper2')
+      const box0 = document.createElement('div')
+      box0.classList.add('box0')
+      let dragTarget = null
+      document.addEventListener('dragstart', function (e) {
+        // wrapper1.removeChild(e.target)
+        dragTarget = e.target
+        e.target.style.opacity = 0.5
+      })
+      // dragover 监听是必须的，否则无法触发 drop 事件
+      document.addEventListener('dragover', function (e) {
+        // 阻止默认动作
+        e.preventDefault()
+        if (e.target.className.indexOf('box') !== -1 && dragTarget !== e.target) {
+          // 把 box 拖放到某个 box 上，e.target 为被拖放到的 box
+          e.target.parentNode.insertBefore(box0, e.target)
+          autoLayout()
+        }
+      })
+      document.addEventListener('dragend', function (e) {
+        e.target.style.opacity = ''
+      })
+      document.addEventListener('dragenter', function (e) {
+        // 在原本的父元素内拖动不算
+        if (e.target.classList.contains('dropzone')) {
+          e.target.style.backgroundColor = 'green'
+        }
+      })
+      document.addEventListener('dragleave', function (e) {
+        if (e.target.classList.contains('dropzone')) {
+          e.target.style.backgroundColor = ''
+        }
+        if (e.target.className === 'box0') {
+          box0.parentNode.removeChild(box0)
+          autoLayout()
+        }
+      })
+      document.addEventListener('drop', function (e) {
+        // 阻止默认动作（如打开一些元素的链接）
+        event.preventDefault()
+        if (e.target.classList.contains('dropzone')) {
+          e.target.appendChild(dragTarget)
+          e.target.style.backgroundColor = ''
+          box0.parentNode && box0.parentNode.removeChild(box0)
+          autoLayout(e.target)
+        }
+        if (e.target === box0) {
+          box0.parentNode.replaceChild(dragTarget, box0)
+          autoLayout()
+        }
+      })
+    </script>
+    <script>
+      // 自动计算 box 布局
+      function autoLayout(noTransitionWrapper) {
+        const wrapper1 = document.querySelector('.wrapper1')
+        const wrapper2 = document.querySelector('.wrapper2')
+        wrapper1ChildCount = wrapper1.children.length
+        wrapper2ChildCount = wrapper2.children.length
+        wrapper1Width = wrapper1.clientWidth
+        wrapper2Width = wrapper2.clientWidth
+        wrapper1PerlineCount = Math.floor((wrapper1Width + 10) / 160)
+        wrapper2PerlineCount = Math.floor((wrapper2Width + 10) / 160)
+        Array.from(wrapper1.children).forEach(function (child, ind) {
+          child.style.top = `${Math.floor(ind / wrapper1PerlineCount) * 160}px`
+          child.style.left = `${(ind % wrapper1PerlineCount) * 160}px`
+        })
+        Array.from(wrapper2.children).forEach(function (child, ind) {
+          child.style.top = `${Math.floor(ind / wrapper2PerlineCount) * 160}px`
+          child.style.left = `${(ind % wrapper2PerlineCount) * 160}px`
+        })
+      }
+      autoLayout()
+      window.addEventListener('resize', autoLayout)
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/dragdemo.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/xxpgOQV?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/xxpgOQV">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
+
 
 ### 从一个字符串中提取时间
 
