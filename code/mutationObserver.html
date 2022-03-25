@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        width: 300px;
+        height: 300px;
+      }
+      .box {
+        width: 150px;
+        height: 150px;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box">box</div>
+    </div>
+    <button class="add">add</button>
+    <button class="width">width</button>
+    <button class="addchild">addchild</button>
+    <script>
+      // -------------------------------------------------------------------------------
+      const observer = new MutationObserver(function (mutationList) {
+        for (mutation of mutationList) {
+          if (mutation.type === 'attributes') {
+            console.log('attributes', mutation)
+          } else if (mutation.type === 'childList') {
+            console.log('childList', mutation)
+          }
+        }
+      })
+      observer.observe(document.querySelector('.box'), {
+        childList: true,
+        subtree: true,
+        attributes: true,
+      })
+      // -------------------------------------------------------------------------------
+      document.querySelector('.add').addEventListener('click', () => {
+        document.querySelector('.box').innerText += document.querySelector('.box').innerText
+      })
+      document.querySelector('.width').addEventListener('click', () => {
+        document.querySelector('.box').style.width = `${Math.floor(Math.random() * 100 + 150)}px`
+      })
+      document.querySelector('.addchild').addEventListener('click', () => {
+        const newchild = document.createElement('div')
+        newchild.innerText = 'hello world ' + Math.random() * 100
+        document.querySelector('.box').appendChild(newchild)
+      })
+    </script>
+  </body>
+</html>

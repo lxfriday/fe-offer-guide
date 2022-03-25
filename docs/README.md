@@ -2922,7 +2922,94 @@ CodePen 全屏查看
 </button>
 
 
-### MutationObserver
+### ✔ MutationObserver
+
+它会在触发指定 DOM 事件时，调用指定的回调函数。MutationObserver 对 DOM 的观察不会立即启动；而必须先调用 observe() 方法来确定，要监听哪一部分的 DOM 以及要响应哪些更改。
+
+```js
+var observer = new MutationObserver(callback);
+```
+
+`callback` 一个回调函数，每当被指定的节点或子树以及配置项有 DOM 变动时会被调用。回调函数拥有两个参数：一个是描述所有被触发改动的 MutationRecord 对象数组，另一个是调用该函数的 MutationObserver  对象。
+
+```js
+var targetNode = document.querySelector("#someElement");
+var observerOptions = {
+  childList: true,  // 观察目标子节点的变化，是否有添加或者删除
+  attributes: true, // 观察属性变动
+  subtree: true     // 观察后代节点，默认为 false
+}
+
+var observer = new MutationObserver(callback);
+observer.observe(targetNode, observerOptions);
+```
+
+下面是一个简单的例子：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        width: 300px;
+        height: 300px;
+      }
+      .box {
+        width: 150px;
+        height: 150px;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box">box</div>
+    </div>
+    <button class="add">add</button>
+    <button class="width">width</button>
+    <button class="addchild">addchild</button>
+    <script>
+      // -------------------------------------------------------------------------------
+      const observer = new MutationObserver(function (mutationList) {
+        for (mutation of mutationList) {
+          if (mutation.type === 'attributes') {
+            console.log('attributes', mutation)
+          } else if (mutation.type === 'childList') {
+            console.log('childList', mutation)
+          }
+        }
+      })
+      observer.observe(document.querySelector('.box'), {
+        childList: true,
+        subtree: true,
+        attributes: true,
+      })
+      // -------------------------------------------------------------------------------
+      document.querySelector('.add').addEventListener('click', () => {
+        document.querySelector('.box').innerText += document.querySelector('.box').innerText
+      })
+      document.querySelector('.width').addEventListener('click', () => {
+        document.querySelector('.box').style.width = `${Math.floor(Math.random() * 100 + 150)}px`
+      })
+      document.querySelector('.addchild').addEventListener('click', () => {
+        const newchild = document.createElement('div')
+        newchild.innerText = 'hello world ' + Math.random() * 100
+        document.querySelector('.box').appendChild(newchild)
+      })
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/mutationobserver.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/vYpgMpj?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/vYpgMpj">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
 
 ### PerformanceObserver
 
@@ -13766,6 +13853,10 @@ function flattenDepthRecu(arr, depth) {
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 1));
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 2));
 ```
+
+### ✔ 手写 LRU
+
+LRU-least recently used 最近最少使用算法，是一种内存数据淘汰策略，使用常见是当内存不足时，需要淘汰最近最少使用的数据。LRU常用语缓存系统的淘汰策略。
 
 ## 手撕 DOM 操作
 
