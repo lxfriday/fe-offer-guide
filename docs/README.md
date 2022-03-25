@@ -6056,6 +6056,13 @@ h1 {
 
 - 将元素呈现为 `inline` 对象，让 `block` 元素不再独占一行，多个 `block` 元素可以同排一行，且元素具有 `block` 的属性，可设置宽高，是 `block` 和 `inline` 元素的综合体
 
+### ✔ left 与 margin-left 的区别
+
+正常情况下，当元素没有设置 `position` 的时候，其默认值是 `static`，此时 `top`、 `right`、 `bottom`、 `left`、 `z-index` 属性无效。
+
+`margin-left` 表示相对于父元素的左外边距，一直会有效。
+
+
 ### ✔ getComputedStyle
 
 - ref [MDN getComputedStyle](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getComputedStyle)
