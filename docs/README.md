@@ -13762,8 +13762,6 @@ function flattenDepthRecu(arr, depth) {
 
 ## 手撕 DOM 操作
 
-### 节点增删改查
-
 ### ✔ 实现一个输入框防抖并带有 autocomplete 能力
 
 ```html
@@ -13966,6 +13964,8 @@ CodePen 全屏查看
 
 由于本页面比较庞大，此案例在 iframe 中演示的时候比较卡顿，建议自己在本地测试效果。
 
+[CodePen 页面查看](https://codepen.io/lxfriday/embed/zYpNLpg?default-tab=html%2Cresult&editable=true)
+
 <button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/zYpNLpg?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/lxfriday/pen/zYpNLpg">
   Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
@@ -13974,11 +13974,118 @@ CodePen 全屏查看
 </button>
 
 
-### 从一个字符串中提取时间
+### ✔ 从一个字符串中提取时间
 
 `2020-02-08 12:13:14` 提取成 => `[2020, 02, 08, 12, 13, 14]`
 
-### 实现点击表头自动正序、反序
+```js
+function extractTime(timeStr) {
+  const t = new Date(timeStr)
+  return[t.getFullYear(), t.getMonth() + 1, t.getDate(), t.getHours(), t.getMinutes(), t.getSeconds()]
+}
+```
+
+### ✔ 实现点击表头自动正序、反序
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="wrapper" border="1px">
+      <thead>
+        <tr>
+          <th style="padding: 0 10px">order</th>
+          <th style="padding: 0 10px">age</th>
+          <th style="padding: 0 10px">name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>20</td>
+          <td>dog</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>21</td>
+          <td>pig</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>15</td>
+          <td>cat</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>30</td>
+          <td>butterfly</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>10</td>
+          <td>chicken</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      const wrapper = document.querySelector('.wrapper')
+      const ths = document.querySelectorAll('thead th')
+      let orderInd = null
+      let sameColumn = false
+      document.addEventListener('click', function (e) {
+        if (e.target.tagName === 'TH') {
+          ths.forEach((th, ind) => {
+            if (th === e.target) {
+              if (orderInd === ind) {
+                sameColumn = true
+              } else {
+                orderInd = ind
+                sameColumn = false
+              }
+            }
+          })
+          const newTbodyFrag = document.createDocumentFragment()
+          let orderedTrs = []
+
+          if (sameColumn) {
+            // 这里不直接用 trs ，因为 trs 一直都是静态的，而这里要获取到实时的 trs
+            orderedTrs = Array.from(document.querySelectorAll('tbody tr')).reverse()
+          } else {
+            orderedTrs = Array.from(document.querySelectorAll('tbody tr'))
+              .sort((prev, next) => {
+                return prev.children[orderInd].textContent < next.children[orderInd].textContent
+                  ? -1
+                  : prev.children[orderInd].textContent === next.children[orderInd].textContent
+                  ? 0
+                  : 1
+              })
+          }
+          orderedTrs.forEach(tr => {
+            newTbodyFrag.appendChild(tr)
+          })
+          document.querySelector('tbody').appendChild(newTbodyFrag)
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/clickthreorder.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/BaJpGLd?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/BaJpGLd">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 全屏查看
+</button>
 
 # 设计模式
 

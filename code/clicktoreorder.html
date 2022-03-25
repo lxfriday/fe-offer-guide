@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="wrapper" border="1px">
+      <thead>
+        <tr>
+          <th style="padding: 0 10px">order</th>
+          <th style="padding: 0 10px">age</th>
+          <th style="padding: 0 10px">name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>20</td>
+          <td>dog</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>21</td>
+          <td>pig</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>15</td>
+          <td>cat</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>30</td>
+          <td>butterfly</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>10</td>
+          <td>chicken</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      const wrapper = document.querySelector('.wrapper')
+      const ths = document.querySelectorAll('thead th')
+      let orderInd = null
+      let sameColumn = false
+      document.addEventListener('click', function (e) {
+        if (e.target.tagName === 'TH') {
+          ths.forEach((th, ind) => {
+            if (th === e.target) {
+              if (orderInd === ind) {
+                sameColumn = true
+              } else {
+                orderInd = ind
+                sameColumn = false
+              }
+            }
+          })
+          const newTbodyFrag = document.createDocumentFragment()
+          let orderedTrs = []
+
+          if (sameColumn) {
+            // 这里不直接用 trs ，因为 trs 一直都是静态的，而这里要获取到实时的 trs
+            orderedTrs = Array.from(document.querySelectorAll('tbody tr')).reverse()
+          } else {
+            orderedTrs = Array.from(document.querySelectorAll('tbody tr'))
+              .sort((prev, next) => {
+                return prev.children[orderInd].textContent < next.children[orderInd].textContent
+                  ? -1
+                  : prev.children[orderInd].textContent === next.children[orderInd].textContent
+                  ? 0
+                  : 1
+              })
+          }
+          orderedTrs.forEach(tr => {
+            newTbodyFrag.appendChild(tr)
+          })
+          document.querySelector('tbody').appendChild(newTbodyFrag)
+        }
+      })
+    </script>
+  </body>
+</html>
