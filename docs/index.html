@@ -88,6 +88,10 @@
                   v.style.backgroundColor = 'rgba(109,255,51,.3)'
                   finishedCount++
                 }
+                if(v.textContent.startsWith('?')) {
+                  v.style.backgroundColor = 'pink'
+                  finishedCount++
+                }
               })
               const finishedPercent = Math.floor(finishedCount / total * 100)
               document.querySelector('.finished-info').innerText = `${finishedCount} / ${total} -> ${finishedPercent}%`
