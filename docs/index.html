@@ -80,7 +80,10 @@
               }
 
               // 侧边栏已经完成的类目，添加完成色背景
+              // 侧边所有的 links
               const sidebarLinks = document.querySelectorAll('.sidebar-nav li a')
+              // 一级标题 links
+              const l1Links = document.querySelectorAll('.sidebar-nav>ul>li>a')
               const total = sidebarLinks.length // 完成度统计
               let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
@@ -93,8 +96,16 @@
                   finishedCount++
                 }
               })
+              // 一级标题标上颜色
+              l1Links.forEach((v, i) => {
+                v.style.backgroundColor = '#CCFFFF'
+              })
+
               const finishedPercent = Math.floor(finishedCount / total * 100)
-              document.querySelector('.finished-info').innerText = `${finishedCount} / ${total} -> ${finishedPercent}%`
+              document.querySelector('.finished-info').innerHTML = `
+              ${finishedCount} / ${total - l1Links.length} -> ${finishedPercent}%  一级标题数：${l1Links.length}
+              <br/>
+              颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:pink">? 存疑很复杂</span>`
             })
           },
         ],
