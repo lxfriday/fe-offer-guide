@@ -2744,7 +2744,23 @@ history.go(2) // Logs "location: http://example.com/example.html?page=3, state: 
 
 ![](https://qiniu1.lxfriday.xyz/blog/cb084fc4-4c71-f9fe-e9d4-5ea819b25da9.png)
 
-## location
+## ✔ location
+
+`location` 反映当前页面的 URL 相关信息。`document.location` 和 `window.location` 指向同一个对象。
+
+![](https://qiniu1.lxfriday.xyz/blog/ce419811-7787-367f-73fc-09566798ac22.png)
+
+- `location.href` 包含整个 URL 的一个字符串
+- `location.protocol` 对应协议，包含最后的 `:`
+- `location.host` 包含了域名的一个 DOMString，可能在该串最后带有一个 `:` 并跟上 URL 的端口号
+- `location.hostname` 包含URL域名的一个 DOMString
+- `location.port` 端口号
+- `location.pathname` URL 路径，有前导 `/`
+- `location.search` 包含 URL 参数的一个 DOMString，开头有一个 `?`
+- `location.hash` Hash 部分
+- `location.origin` 包含页面来源的域名的标准形式 DOMString
+- `location.reload()`重新加载来自当前 URL 的资源。它有一个特殊的可选参数，类型为 `Boolean`，该参数为 `true` 时会导致该方法引发的刷新一定会从服务器上加载数据。如果是 `false` 或没有制定这个参数，浏览器可能从缓存当中加载页面
+- `location.replace()` 用给定的 URL 替换掉当前的资源。用 `replace()` 替换的新页面不会被保存在会话的历史 History中，这意味着用户将不能用后退按钮转到该页面
 
 ## navigator
 
