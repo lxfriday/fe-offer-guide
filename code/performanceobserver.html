@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <script>
+      var observer = new PerformanceObserver(function (list, obj) {
+        var entries = list.getEntries()
+        console.log(list);
+        for (var i = 0; i < entries.length; i++) {
+          // Process "mark" and "frame" events
+        }
+      })
+      observer.observe({ entryTypes: ['mark', 'frame', 'measure'] })
+    </script>
+  </body>
+</html>

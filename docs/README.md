@@ -2123,7 +2123,37 @@ setTimeout
 
 实际延迟时间可能远大于 `delay`。
 
-## encodeURIComponent 和 encodeURI
+## ✔ encodeURIComponent、decodeURIComponent 和 encodeURI、decodeURI
+
+`encodeURI` 和 `encodeURIComponent` 的差别在于编码范围有些不同，后者的会对更多的字符进行编码。
+
+`encodeURI` 不会转义的字符：
+
+![](https://qiniu1.lxfriday.xyz/blog/7d454a40-9555-492a-c939-ee2d8a1c3327.png)
+
+`encodeURIComponent` 不会转义的字符： `A-Z a-z 0-9 - _ . ! ~ * ' ( )`
+
+```js
+var set1 = ";,/?:@&=+$";  // 保留字符
+var set2 = "-_.!~*'()";   // 不转义字符
+var set3 = "#";           // 数字标志
+var set4 = "ABC abc 123"; // 字母数字字符和空格
+
+console.log(encodeURI(set1)); // ;,/?:@&=+$
+console.log(encodeURI(set2)); // -_.!~*'()
+console.log(encodeURI(set3)); // #
+console.log(encodeURI(set4)); // ABC%20abc%20123 (空格被编码为 %20)
+
+console.log(encodeURIComponent(set1)); // %3B%2C%2F%3F%3A%40%26%3D%2B%24
+console.log(encodeURIComponent(set2)); // -_.!~*'()
+console.log(encodeURIComponent(set3)); // %23
+console.log(encodeURIComponent(set4)); // ABC%20abc%20123 (the space gets encoded as %20)
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/006e8fa5-a84b-8924-5686-adbee3c59af3.png)
+
+`decodeURIComponent` 用来对 `encodeURIComponent` 编码的字符串解码；`decodeURI` 用来对 `encodeURI` 编码的字符串解码；
+
 
 ## ✔ requestIdleCallback、cancelIdleCallback
 
@@ -2504,6 +2534,8 @@ SVG 动画不在这一节做深入探讨，参考 MDN。
 
 # 浏览器特有 API
 
+## XMLHttpRequest
+
 ## ✔ localStorage
 
 localStorage 只在相同的域下共享同一空间。**协议和端口**都有影响，注意：
@@ -2682,7 +2714,7 @@ ref
 
 ## navigator
 
-## Observer
+## ✔ Observer
 
 ### ✔ IntersectionObserver
 
@@ -3010,10 +3042,6 @@ observer.observe(targetNode, observerOptions);
   on <a href="https://codepen.io">CodePen</a>.</iframe>'>
 CodePen 全屏查看
 </button>
-
-### PerformanceObserver
-
-### ResizeObserver
 
 # DOM
 
@@ -9989,7 +10017,7 @@ RTO 超时后，sshthresh 会变成 cwnd 的一半，这意味着，如果 cwnd<
 - **拥塞控制**：作用于网络，它是为了防止过多的数据注入到网络中，避免网络负载过大的情况。常用的方法是：慢开始、拥塞避免、快重传、快恢复；
 - **流量控制**：作用于接收者，它是控制发送者的发送速度从而使接收者来得及接收，防止分组丢失的；
 
-### TCP 和 UDP 的对比
+### ✔ TCP 和 UDP 的对比
 
 ref
 
@@ -10341,8 +10369,6 @@ Content-Security-Policy: default-src 'self' api2.firefoxchina.cn;
 - `style-src` 指定加载样式的途径；
 - `frame-src` 直接加载页面内 frame 的途径（iframe）；
 - `report-uri` 指定出现违规状况时上报的地址；
-
-### HTTP header
 
 ### ✔ HTTP 协议版本变迁
 
@@ -12222,7 +12248,7 @@ ref [https://web.dev/lcp/](https://web.dev/lcp/)
 ### ? CLS （Cumulative Layout Shift）累积布局偏移
 ### ? SI（Speed Index）
 
-## Performance
+## ? Performance
 
 ref [MDN Performance](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance)
 
