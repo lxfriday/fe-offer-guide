@@ -2714,9 +2714,42 @@ ref
 
 ## history
 
-## performance
+History 接口允许操作浏览器的曾经在标签页或者框架里访问的会话历史记录。
+
+![](https://qiniu1.lxfriday.xyz/blog/c2ceea49-c79b-b92d-de6d-93afd0501e52.png)
+
+- `history.back()` 在浏览器历史记录里前往上一页, 用户可点击浏览器左上角的返回(译者注：←)按钮模拟此方法. 等价于 `history.go(-1)`
+  - 当浏览器会话历史记录处于第一页时调用此方法没有效果，而且也不会报错
+- `history.forward()` 在浏览器历史记录里前往下一页，用户可点击浏览器左上角的前进(译者注：→)按钮模拟此方法. 等价于 `history.go(1)`
+  - 当浏览器历史栈处于最顶端时( 当前页面处于最后一页时 )调用此方法没有效果也不报错
+- `history.go()` 通过当前页面的相对位置从浏览器历史记录( 会话记录 )加载页面。比如：参数为-1的时候为上一页，参数为1的时候为下一页. 当整数参数超出界限时，例如: 如果当前页为第一页，前面已经没有页面了，我传参的值为-1，那么这个方法没有任何效果也不会报错。调用没有参数的 `go()` 方法或者参数值为 0 时，重新载入当前页面。
+- `history.pushState()` 以 push 的形式把 state 传入下一个 url，`history.pushState(state, title, url)`
+- `history.replaceState()` 以 replace 的形式把 state 传入下一个 url，`history.replaceState(state, title, url)`
+
+`popstate` 事件，当活动历史记录条目更改时，将触发 `popstate` 事件。如果被激活的历史记录条目是通过对 `history.pushState()`的调用创建的，或者受到对 `history.replaceState()` 的调用的影响，`popstate` 事件的 `state` 属性包含历史条目的状态对象的副本。
+
+需要注意的是调用 `history.pushState()` 或 `history.replaceState()` 不会触发 `popstate` 事件。只有在做出浏览器动作时，才会触发该事件，如用户点击浏览器的回退按钮（或者在Javascript代码中调用 `history.back()` 或者 `history.forward()` 方法）
+
+```js
+window.addEventListener('popstate', event => {
+  console.log('location: ' + document.location + ', state: ' + JSON.stringify(event.state))
+})
+history.pushState({ page: 1 }, 'title 1', '?page=1')
+history.pushState({ page: 2 }, 'title 2', '?page=2')
+history.replaceState({ page: 3 }, 'title 3', '?page=3')
+history.back() // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
+history.back() // Logs "location: http://example.com/example.html, state: null
+history.go(2) // Logs "location: http://example.com/example.html?page=3, state: {"page":3}
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/cb084fc4-4c71-f9fe-e9d4-5ea819b25da9.png)
+
+## location
 
 ## navigator
+
+## performance
+
 
 ## ✔ Observer
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="pushState">pushState</button>
+    <button id="replaceState">replaceState</button>
+    <script type="module">
+      // Can also use history.development.js in development
+      import { createBrowserHistory } from "https://unpkg.com/history/history.production.min.js";
+      const his = createBrowserHistory()
+      his.push("/home?the=query", { some: "state" });
+      // ...
+    </script>
+    <script>
+      // window.addEventListener('popstate', function (e) {
+      //   console.log(history.state)
+      // })
+      // document.getElementById('pushState').addEventListener('click', function (e) {
+      //   const state = {
+      //     a: 1,
+      //     b: 2,
+      //     type: 'pushState',
+      //   }
+      //   history.pushState(state, null, 'pushState&replaceState2.html')
+      // })
+      // document.getElementById('replaceState').addEventListener('click', function (e) {
+      //   const state = {
+      //     c: 3,
+      //     d: 4,
+      //     type: 'replaceState',
+      //   }
+      //   history.pushState(state, null, 'pushState&replaceState2.html')
+      // })
+      // window.addEventListener('popstate', event => {
+      //   console.log('location: ' + document.location + ', state: ' + JSON.stringify(event.state))
+      // })
+      // history.pushState({ page: 1 }, 'title 1', '?page=1')
+      // history.pushState({ page: 2 }, 'title 2', '?page=2')
+      // history.replaceState({ page: 3 }, 'title 3', '?page=3')
+      // history.back() // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
+      // history.back() // Logs "location: http://example.com/example.html, state: null
+      // history.go(2) // Logs "location: http://example.com/example.html?page=3, state: {"page":3}
+    </script>
+  </body>
+</html>
