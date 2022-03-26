@@ -2154,6 +2154,10 @@ console.log(encodeURIComponent(set4)); // ABC%20abc%20123 (the space gets encode
 
 `decodeURIComponent` 用来对 `encodeURIComponent` 编码的字符串解码；`decodeURI` 用来对 `encodeURI` 编码的字符串解码；
 
+对一般 URL 编码之后的结果
+
+![](https://qiniu1.lxfriday.xyz/blog/afc38670-e71d-e844-65f0-713833999e68.png)
+
 
 ## ✔ requestIdleCallback、cancelIdleCallback
 
