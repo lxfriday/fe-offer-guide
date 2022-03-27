@@ -2621,6 +2621,8 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
 
+### Axios
+
 ## ✔ fetch
 
 ref
@@ -4919,7 +4921,136 @@ box2.addEventListener('click', function (e) {
 
 我们删除了 `li` 时无需删除事件绑定，也无需为新增的 `li` 绑定事件。点击事件会冒泡到 `ul` 并被这个事件处理程序处理，我们只需要拿到当前点击的元素 `e.taregt` 做对应的处理即可。
 
-## iframe
+## ✔ iframe
+
+HTML 内联框架元素 `iframe` 表示嵌套的 browsing context。它能够将另一个 HTML 页面嵌入到当前页面中。
+
+每个嵌入的浏览上下文（embedded browsing context）都有自己的会话历史记录 (session history)和 DOM 树。包含嵌入内容的浏览上下文称为父级浏览上下文。顶级浏览上下文（没有父级）通常是由 Window 对象表示的浏览器窗口。
+
+属性
+- `allow` 用于为 `iframe` 指定其特征策略
+- `allowfullscreen` 设置为 `true` 时，可以通过调用 `iframe` 的 `requestFullscreen()` 方法激活全屏模式
+  - 这是一个历史遗留属性，已经被重新定义为 `allow="fullscreen"`
+- `allowpaymentrequest` 设置为 `true` 时，跨域的 `iframe` 就可以调用 Payment Request API
+  - 这是一个历史遗留属性，已经被重新定义为 `allow="payment"`
+- `allowtransparency` 是否允许 `iframe` 设置为透明，默认为 `false`
+- `csp` 对嵌入的资源配置内容安全策略
+- `height` 以 CSS 像素格式，或百分比格式指定 `iframe` 的高度。默认值为**150**
+- `importance` 示 `iframe` 的 `src` 属性指定的资源的加载优先级。允许的值有：
+  - `auto` 默认值，浏览器根据自身情况决定资源的加载顺序
+  - `high` 资源的加载优先级较高
+  - `low` 资源的加载优先级较低
+- `name` 用于定位嵌入的浏览上下文的名称
+- `referrerpolicy` 表示在获取 `iframe` 资源时如何发送 `referrer` 首部：`no-referrer` `no-referrer-when-downgrade` `origin` 等等 [referrerpolicy](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe#attr-referrerpolicy)
+- `sandbox` 该属性对呈现在 `iframe` 框架中的内容启用一些额外的限制条件。属性值可以为空字符串（这种情况下会启用所有限制），也可以是用空格分隔的一系列指定的字符串
+- `src` 被嵌套的页面的 URL 地址
+- `width` 以 CSS 像素格式，或以百分比格式指定的 `iframe` 的宽度。默认值是**300**
+
+不推荐使用的属性
+- `frameborder` 值为 1（默认值）时，显示此框架的边框。值为 0 时移除边框。此属性已不赞成使用，请使用 CSS 属性 `border` 代替
+- `scrolling` 这个属性控制是否要在框架内显示滚动条，允许的值包括：
+  - `auto` 仅当框架的内容超出框架的范围时显示滚动条
+  - `yes` 始终显示滚动条
+  - `no` 从不显示滚动条
+
+### ✔ iframe 与父页面的交互
+
+在父页面通过调用
+
+- `iframeEle.contentWindow` 访问内联框架的 `window` 对象
+- `iframeEle.contentDocument` 访问内联框架的 `document` 对象
+
+在 iframe 内部，可以通过 `window.parent` 引用父窗口对象。
+
+脚本访问框架内容必须遵守同源策略，并且无法访问非同源的 `window` 对象的几乎所有属性。同源策略同样适用于子窗体访问父窗体的 `window` 对象。跨域通信可以通过 `window.postMessage` 来实现。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <h1>same origin</h1>
+    <iframe id="mypage" src="http://localhost:5500/code/grid-auto-flow.html" frameborder="0" width="500" height="500" scrolling="no"></iframe>
+    <h1>different origin</h1>
+    <iframe id="juejin" src="https://www.juejin.cn" frameborder="0" width="800" height="500"></iframe>
+    <script>
+      const juejin = document.getElementById('juejin')
+      const mypage = document.getElementById('mypage')
+      console.log(window.frames);
+      console.log(window.frames[1] === juejin.contentWindow);
+      console.log('-------');
+      console.log(juejin.contentDocument);
+      console.log(mypage.contentDocument);
+      console.log('-------');
+      console.log(juejin.contentWindow);
+      console.log(mypage.contentWindow);
+    </script>
+  </body>
+</html>
+```
+
+![](https://qiniu1.lxfriday.xyz/blog/14c8a585-3c7c-662c-f279-80b91fb8f53d.png)
+
+### ✔ 防止自己的页面被 iframe 嵌套
+
+可以使用 `window.top` 来防止你的网页被 `iframe`。
+
+```js
+if(window !== window.top) {
+  // ... 当前网页被嵌套了
+}
+````
+
+当在父页面和 iframe 不同域的时候，在 iframe 内获取 `top.location.xxx` 会报错。
+
+![](https://qiniu1.lxfriday.xyz/blog/b367493d-201b-2375-ab61-59bf63adf3f8.png)
+
+![](https://qiniu1.lxfriday.xyz/blog/ba72dddb-a696-e289-9a9a-56326ea0db25.png)
+
+![](https://qiniu1.lxfriday.xyz/blog/62b3aac1-4d21-f43b-020c-1a012a0ffb82.png)
+
+所以可以用下面的办法来处理不同域
+
+```js
+try{
+　top.location.hostname;  // 检测是否出错
+　// 如果没有出错，则降级处理
+　// ... 同域的后续处理
+}
+catch(e){
+  // 不同域的后续处理
+  // 下面这行不会报错，会让父页面直接跳转到 window.location.href
+  top.location.href = window.location.href;
+}
+```
+
+### ✔ X-Frame-Options 限制 iframe 加载
+
+ref [https://segmentfault.com/a/1190000004502619](https://segmentfault.com/a/1190000004502619)
+
+`X-Frame-Options` HTTP 响应头是用来给浏览器指示允许一个页面可否在 `iframe` 中展现的标记。站点可以通过确保网站没有被嵌入到别人的站点里面，从而避免点击劫持攻击。
+
+`X-Frame-Options` 有三个可能的值：
+
+```http
+X-Frame-Options: deny
+X-Frame-Options: sameorigin
+X-Frame-Options: allow-from https://example.com/
+```
+
+- `deny` 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许
+- `sameorigin` 表示该页面可以在相同域名页面的 frame 中展示
+- `allow-from https://example.com/` 表示该页面可以在指定来源的 frame 中展示
+
+### ✔ Content-Security-Policy 限制 iframe 加载
+
+CSP 中对 `iframe` 加载有限制的指令是 `child-src` 和 `sandbox`。
+
+```http
+Content-Security-Policy: child-src 'self' http://example.com;
+```
+
+这条指令表示 `iframe` 的 `src` 就只能加载**同域**和**`example.com`**页面。 
 
 # V8 专区
 
@@ -4930,6 +5061,8 @@ box2.addEventListener('click', function (e) {
 # NodeJS
 
 ## commonJS 和 ESM 差异
+
+## Express
 
 ## Koa
 

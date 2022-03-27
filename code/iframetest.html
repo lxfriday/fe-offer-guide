@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <h1>same origin</h1>
+    <iframe id="mypage" src="http://localhost:5500/code/grid-auto-flow.html" frameborder="0" width="500" height="500" scrolling="no"></iframe>
+    <h1>different origin</h1>
+    <iframe id="juejin" src="https://www.juejin.cn" frameborder="0" width="800" height="500"></iframe>
+    <script>
+      const juejin = document.getElementById('juejin')
+      const mypage = document.getElementById('mypage')
+      console.log(window.frames);
+      console.log(window.frames[1] === juejin.contentWindow);
+      console.log('-------');
+      console.log(juejin.contentDocument);
+      console.log(mypage.contentDocument);
+      console.log('-------');
+      console.log(juejin.contentWindow);
+      console.log(mypage.contentWindow);
+    </script>
+  </body>
+</html>

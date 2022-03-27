@@ -76,12 +76,17 @@
         const direction = document.querySelector('.direction')
         const wrapper = document.querySelector('.wrapper')
         const dense = document.querySelector('#dense')
-        if(dense.checked) {
+        if (dense.checked) {
           wrapper.style.gridAutoFlow = direction.value + ' dense'
         } else {
           wrapper.style.gridAutoFlow = direction.value
         }
       }
+    </script>
+    <script>
+      console.log('from grid-auto-flow.html window.parent => ', window.parent)
+      console.log('in grid-auto-flow.html window.top === window => ', window.top === window)
+      console.log('top.location', top.location);
     </script>
   </body>
 </html>
