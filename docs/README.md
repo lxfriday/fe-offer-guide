@@ -2144,6 +2144,81 @@ parseFloat("FF2");                                        // NaN
 
 `toFixed()` 方法使用定点表示法来格式化一个数值。
 
+```js
+numObj.toFixed(digits)
+```
+
+- `digits` 小数点后数字的个数；介于 0 到 20 （包括）之间，实现环境可能支持更大范围。如果忽略该参数，则默认为 0
+
+返回的结果在必要时进行四舍五入，另外在必要时会用 0 来填充小数部分，以便小数部分有指定的位数。 如果数值大于 `1e+21`，该方法会简单调用 `Number.prototype.toString()` 并返回一个指数记数法格式的字符串。
+
+```js
+var numObj = 12345.6789;
+
+numObj.toFixed();         // 返回 "12346"：进行四舍六入五看情况，不包括小数部分
+numObj.toFixed(1);        // 返回 "12345.7"：进行四舍六入五看情况
+numObj.toFixed(6);        // 返回 "12345.678900"：用0填充
+(1.23e+20).toFixed(2);    // 返回 "123000000000000000000.00"
+(1.23e-10).toFixed(2);    // 返回 "0.00"
+2.34.toFixed(1);          // 返回 "2.3"
+2.35.toFixed(1)           // 返回 '2.4'
+2.55.toFixed(1)           // 返回 '2.5'. Note it rounds down - see warning above
+-2.34.toFixed(1);         // 返回 -2.3 （由于操作符优先级，负数不会返回字符串）
+(-2.34).toFixed(1);       // 返回 "-2.3" （若用括号提高优先级，则返回字符串）
+
+
+// 下面这条非常的诡异，原因是 浮点数不能精确地用二进制表示所有小数
+// ref https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed#%E6%8F%8F%E8%BF%B0
+2.55.toFixed(1)           // 返回 '2.5'
+```
+
+#### ✔ Number.prototype.toString()
+
+`toString()` 方法返回指定 Number 对象的字符串表示形式。
+
+```js
+numObj.toString([radix])
+```
+
+- `radix` 指定要用于数字到字符串的转换的基数(从2到36)。如果未指定 radix 参数，则默认值为 10
+
+![](https://qiniu1.lxfriday.xyz/blog/a9659362-cc47-b925-3c64-2a785cf740af.png)
+
+#### ✔ Number.prototype.toExponential()
+
+`toExponential()` 方法以指数表示法返回该数值字符串表示形式。
+
+- `fractionDigits` 可选。一个整数，用来指定小数点后有几位数字。默认情况下用尽可能多的位数来显示数字
+
+如果一个数值的小数位数多余 `fractionDigits` 参数所提供的，则该数值将会在 `fractionDigits` 指定的小数位数处四舍五入。
+
+```js
+const numObj = 77.1234;
+numObj.toExponential()  // '7.71234e+1'
+numObj.toExponential(2) // '7.71e+1'
+numObj.toExponential(4) // '7.7123e+1'
+```
+
+#### ✔ Number.prototype.toPrecision()
+
+`toPrecision()` 方法以指定的精度返回该数值对象的字符串表示。
+
+```js
+numObj.toPrecision(precision)
+```
+
+- `precision` 可选。一个用来指定有效数个数的整数
+
+如果忽略 `precision` 参数，则该方法表现类似于 `Number.prototype.toString()`。如果该参数是一个非整数值，将会向下舍入到最接近的整数。
+
+```js
+const numObj = 5.123456;
+numObj.toPrecision()  // '5.123456'
+numObj.toPrecision(1) // '5'
+numObj.toPrecision(2) // '5.1'
+numObj.toPrecision(5) // '5.1235'
+```
+
 ### ✔ JS Number 对象中的一些数
 
 #### ✔ Number.EPSILON
