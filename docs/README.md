@@ -2115,6 +2115,31 @@ parseInt('011') => 11
 ```
 
 #### ✔ parseFloat
+
+`parseFloat(string)` 函数解析一个参数（必要时先转换为字符串）并返回一个浮点数。
+
+- 不像 `parseInt` 有第二个参数
+- 如果在解析过程中遇到了正号（+）、负号（-）、数字（0-9）、小数点（.）、或者科学记数法中的指数（e 或 E）以外的字符，则它会忽略该字符以及之后的所有字符，返回当前已经解析到的浮点数
+  - `+` 加号
+  - `-` 减号
+  - `e` `E` 科学计数法中的 `e`
+  - `.` 小数点
+- 第二个小数点的出现也会使解析停止（在这之前的字符都会被解析）
+- 参数首位和末位的空白符会被忽略
+- 如果参数字符串的第一个字符不能被解析成为数字，则返回 NaN
+- `parseFloat` 也可以解析并返回 `Infinity`， `parseFloat(Infinity)` => Infinity，但是 `parseInt` 不行，`parseInt` 返回 NaN
+
+```js
+parseFloat(3.14);                                         // 3.14
+parseFloat('3.14');                                       // 3.14
+parseFloat('  3.14  ');                                   // 3.14
+parseFloat('314e-2');                                     // 3.14
+parseFloat('0.0314E+2');                                  // 3.14
+parseFloat('3.14some non-digit characters');              // 3.14
+parseFloat({ toString: function() { return "3.14" } });   // 3.14
+parseFloat("FF2");                                        // NaN
+```
+
 #### ✔ Number.prototype.toFixed()
 
 `toFixed()` 方法使用定点表示法来格式化一个数值。
