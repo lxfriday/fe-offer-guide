@@ -1991,10 +1991,128 @@ const numE = 1.1111111111111111111111111111111111111111111111111111 * 2^52
 
 ### ✔ 小数运算的解决方案
 
-记住，直接对小数做运算的方式都可能会导致错误，原因在于小数运算前就需要先转成二进制，而转换出来的二进制数和可能是不准确的（被截断了）。
+记住，直接对小数做运算的方式都可能会导致错误，原因在于小数运算前就需要先转成二进制，而转换出来的二进制数可能是不准确的（被截断了）。
 
-网络上说对小数进行 `num * 10 ** X` 的处理方式都存在问题。这里采用 [number-precision](https://github.com/nefe/number-precision) 处理逻辑。
+网络上说对小数进行 `num * 10 ** X` 的处理方式或多或少存在问题。 [number-precision](https://github.com/nefe/number-precision) 这个库采用的就是把 `num * 10 ** X` 扩大为整数之后再做运算，但是库中加入了小数扶正。
 
+关键函数：
+
+**小数位数计算**
+
+```typescript
+/**
+ * 有几位小数
+ * @param {*number} num Input number
+ */
+function digitLength(num: numType): number {
+  // Get digit length of e
+  // (23456487984564565165164654).toString() => '2.3456487984564566e+25'
+  // (23456487984564565165164654).toString().split(/[eE]/) => ['2.3456487984564566', '+25']
+  const eSplit = num.toString().split(/[eE]/);
+  // 小数点后面字符串长度 - 10 的次方数
+  const len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
+  // 得到 num 的小数点后有几位
+  return len > 0 ? len : 0;
+}
+```
+
+**小数转换成整数**
+
+```typescript
+/**
+ * 把小数转成整数，支持科学计数法。如果是小数则放大成整数，小数有两种情况
+ * 1. 普通小数，这种小数只需要把 toString() 之后小数点去掉，就变成了对应的整数
+ * 2. 科学计数法表示的小数，这个比较麻烦，使用常规的乘法放大，但是会用 strip 进行扶正
+ * @param {*number} num 输入数
+ */
+function float2Fixed(num: numType): number {
+  // 不是用科学计数法表示的，直接把小数点删掉就可以了
+  if (num.toString().indexOf('e') === -1) {
+    return Number(num.toString().replace('.', ''));
+  }
+  const dLen = digitLength(num);
+  return dLen > 0 ? strip(Number(num) * Math.pow(10, dLen)) : Number(num);
+}
+```
+
+**把错误的小数扶正**，这个函数非常关键。
+
+```typescript
+/**
+ * 把错误的数据转正
+ * strip(0.09999999999999998)=0.1
+ */
+function strip(num: numType, precision = 15): number {
+  return +parseFloat(Number(num).toPrecision(precision));
+}
+```
+
+#### ✔ 乘法
+
+把乘法处理好了后续的加减除会比较方便。
+
+```typescript
+/**
+ * 精确乘法
+ */
+function times(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const num1Changed = float2Fixed(num1); // 小数转整数 1.23456 => 123456
+  const num2Changed = float2Fixed(num2); // 小数转整数 1.23456 => 123456
+  const baseNum = digitLength(num1) + digitLength(num2); // 计算num1 num2 小数位总位数
+  const leftValue = num1Changed * num2Changed; // 计算整数的积
+
+  checkBoundary(leftValue); // 看是否超出 Number.MAX_SAFE_INTEGER
+
+  // 把两个整数的积 / 总小数位数，小数点归位
+  return leftValue / Math.pow(10, baseNum); 
+}
+```
+
+#### ✔ 加法
+
+```typescript
+/**
+ * 精确加法
+ */
+function plus(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  // 取最大的小数位
+  const baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  // 把小数都转为整数然后再计算
+  return (times(num1, baseNum) + times(num2, baseNum)) / baseNum;
+}
+```
+
+#### ✔ 减法
+
+```typescript
+/**
+ * 精确减法
+ */
+function minus(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  return (times(num1, baseNum) - times(num2, baseNum)) / baseNum;
+}
+```
+
+#### ✔ 除法
+
+```typescript
+/**
+ * 精确除法
+ */
+function divide(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const num1Changed = float2Fixed(num1);
+  const num2Changed = float2Fixed(num2);
+  checkBoundary(num1Changed);
+  checkBoundary(num2Changed);
+  // fix: 类似 10 ** -4 为 0.00009999999999999999，strip 修正
+  return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
+}
+```
 
 ### ✔ 一些数值处理方法
 #### ✔ parseInt

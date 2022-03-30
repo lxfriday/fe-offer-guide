@@ -2604,14 +2604,30 @@ setTimeout
 <h3 id="_28">✔ 单精度浮点数、双精度浮点数<a class="headerlink" href="#_28" title="Permanent link"></a></h3>
 <p>JS 使用双精度浮点数（8字节64位）来表示数字。</p>
 <p><strong>单精度浮点数</strong></p>
-<p>单精度浮点数占用4字节32位，其中第1位表示正负，中间8位表示指数，后23位存储有效数位（实际有效数位是24位），中间八位共可表示 2^8=256 个数，指数可以是二补码；或 0 到 255，0 到 126 代表-127 到-1，127 代表零，128-255 代表 1-128。</p>
+<p>单精度浮点数占用4字节32位，其中第1位表示正负，中间8位表示指数，后23位存储有效数位（实际有效数位是24位）。</p>
 <p>有效数位最左手边的 1 并不会储存，因为它一定存在（二进制的第一个有效数字必定是 1）。换言之，有效数位是 24 位，实际储存 23 位。</p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/7f6e854c-0fbd-6cda-e798-13fd41ab2967.png" /></p>
 <p><strong>双精度浮点数</strong></p>
 <p>双精度浮点数占用8字节64位，第1位表示正负，后11位是指数位，最后52位表示精确度（有效位数为53位）。</p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/993447ea-c294-e46b-5d8d-e0fcc611913a.png" /></p>
-<h3 id="5352">为什么是53次方而不是52次方<a class="headerlink" href="#5352" title="Permanent link"></a></h3>
-<h3 id="_29">✔ 安全整数和精确表示的整数<a class="headerlink" href="#_29" title="Permanent link"></a></h3>
+<p>根据国际标准IEEE 754，任意一个二进制浮点数V可以表示成下面的形式：</p>
+<p><code>V = (-1)^s×M×2^E</code></p>
+<ul>
+<li><code>(-1)^s</code> 表示符号位，当 s=0，V 为正数；当 s=1，V 为负数</li>
+<li><code>M</code> 表示有效数字，大于等于 1，小于 2，但整数部分的 1 可以省略</li>
+<li><code>2^E</code>表示指数位</li>
+</ul>
+<p><code>E</code> 为一个无符号整数（unsigned int）。这意味着，如果 <code>E</code> 为 8 位，它的取值范围为 0~255；如果 <code>E</code> 为 11 位，它的取值范围为 0~2047。然而科学计数法中的 <code>E</code> 是可以出现负数的，所以IEEE 754规定，<code>E</code> 的真实值必须再减去一个中间数，对于 8 位的 <code>E</code>，这个中间数是 127；对于 11 位的 <code>E</code>，这个中间数是1023。 比如，2^2的 <code>E</code> 是 2，所以保存成 float 32位浮点数时，必须保存成 2+127=129，即 10000001。</p>
+<h3 id="5352">✔ 为什么是53次方而不是52次方<a class="headerlink" href="#5352" title="Permanent link"></a></h3>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/1ebc2231-c93c-2e72-95d5-733bb7035fed.png" /></p>
+<p>IEEE 754规定，在计算机内部保存尾数时，默认这个数的第一位总是1，因此可以被舍去，只保存小数点后面的部分。比如保存 1.0101 的时候，只保存 0101，等到读取的时候，再把第一位的1加上去。</p>
+<p><code>2 ** 53 - 1</code> 转换成二进制科学计数法表示就是 <code>(-1)^0 * 2^52 * 1.1111111111111111111111111111111111111111111111111111</code></p>
+<ul>
+<li>小数点后面有 52 个 1，刚好填满尾数位</li>
+<li><code>1.xx</code> 开头的 1 默认一定存在，不需要存储</li>
+<li>指数位是 52</li>
+</ul>
+<h3 id="_29">✔ 安全整数<a class="headerlink" href="#_29" title="Permanent link"></a></h3>
 <p>JS 中有 <code>Number.MAX_SAFE_INTEGER</code> 表示最大的安全整数，安全整数的意思是有且唯一。</p>
 <p>按照我们通常的理解64位双精度浮点型数据，第1位是符号位，接着是11位的指数位，最后是52位的精度位，那么讲道理，指数位填满，精度位填满应该最大才是。</p>
 <p>实际情况看下面的例子：</p>
@@ -2646,41 +2662,323 @@ setTimeout
 <span class="c1">// 虽然2^53次方仍然可以正确标识出来，但是从这里开始已经出现了精度丢失</span>
 </pre></div>
 
-<p>注意，以下的运算都是基于 <code>2 ** 53</code>。</p>
-<p>再看看 <code>2 ** 53 + 1</code> 会是什么效果？</p>
-<div class="highlight"><pre><span class="c1">// 从上面的计算中就可以知道</span>
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">=&gt;</span> <span class="s2">&quot;10.0000000000000000000000000000000000000000000000000000 * 2^52&quot;</span>
-<span class="c1">// 2 ** 53 + 1</span>
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">&quot;10.0000000000000000000000000000000000000000000000000001 * 2^52&quot;</span> 
-<span class="c1">// 变成科学计数法</span>
-<span class="s2">&quot;1.00000000000000000000000000000000000000000000000000001 * 2^53&quot;</span> 
-<span class="c1">// 由于浮点数的存储机制，这串数字 小数点后有53位，存储的时候要去掉最后一位</span>
-<span class="s2">&quot;1.0000000000000000000000000000000000000000000000000000 * 2^53&quot;</span>
+<p>从下面诡异的现象就可以看出， <code>Number.MAX_SAFE_INTEGER</code> 之后的数字，已经存在问题了，也就是不安全。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/06fbe8e5-01d5-9e77-5412-122be59a631e.png" /></p>
+<p>从 <code>xx.toString(2)</code> 的结果就可以看出，不同的数字，转换成二进制表示的时候，居然会出现相同的表示，进而判断大小的时候也出现了诡异的相等。</p>
+<p>存在下面的现象，<strong>某个整数能 a 找到二进制表示，但另一个整数 b 的二进制表示可能和 a 一模一样</strong>，无法做到一一对应，也就是不安全。</p>
+<h3 id="_30">✔ 小数的底层表示<a class="headerlink" href="#_30" title="Permanent link"></a></h3>
+<p>介入 <code>0.1 + 0.2 !== 0.3</code> 的问题</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/d748a7b3-ddf5-73f7-c1d8-6be8f4b20fc3.png" /></p>
+<p>十进制数的运算都要先转换成二进制之后再进行运算。由于 <code>0.1</code> <code>0.2</code> <code>0.3</code> 转换成二进制之后都会出现精度缺失，所以直接 <code>===</code> 是很不准确的。</p>
+<p><code>0.1</code> 转换成二进制的过程：</p>
+<div class="highlight"><pre><span class="mf">0.1</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.8</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.6</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.6</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.8</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.6</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.6</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="c1">// ... 无限次重复</span>
+<span class="c1">// 所以得到的就是</span>
+<span class="mf">0.000</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="mi">1100</span><span class="p">...</span> 
+<span class="c1">// 转换成二进制科学计数法</span>
+<span class="mf">0.1100</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="p">...</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">^</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">// 实际 (0.1).toString(2)</span>
+<span class="s1">&#39;0.0001100110011001100110011001100110011001100110011001101&#39;</span>
+<span class="c1">// 最后一位应该是0，这里直接取1，变大了</span>
 </pre></div>
 
-<p>所以就会有下面的结果</p>
-<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/aed79307-f59a-43e2-e4a6-df7d6c9e12f8.png" /></p>
-<p>继续看看 <code>2 ** 53 + 2</code></p>
-<div class="highlight"><pre><span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.1111111111111111111111111111111111111111111111111111  * 2^52&quot;</span> <span class="p">(</span><span class="nx">无误差存储</span><span class="p">)</span>
+<p>同理看0.2</p>
+<div class="highlight"><pre><span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.8</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.6</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.6</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="mf">0.8</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.6</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.6</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="c1">// ... 无限次重复</span>
+<span class="c1">// 所以得到的就是</span>
+<span class="mf">0.0011</span> <span class="mi">0011</span> <span class="mi">0011</span> <span class="mi">0011</span> <span class="mi">0011</span><span class="p">...</span> 
+<span class="c1">// 转换成二进制科学计数法</span>
+<span class="mf">0.1100</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="mi">1100</span> <span class="p">...</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">^</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span>     <span class="o">=&gt;</span> <span class="s2">&quot;1.00000000000000000000000000000000000000000000000000000 * 2^53&quot;</span> <span class="nx">要删除尾0</span>
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span>     <span class="o">=&gt;</span> <span class="s2">&quot;1.0000000000000000000000000000000000000000000000000000  * 2^53&quot;</span> <span class="p">(</span><span class="nx">有误差表示</span><span class="err">，</span><span class="nx">删除了尾0</span><span class="p">)</span>
-
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.00000000000000000000000000000000000000000000000000001 * 2^53&quot;</span> <span class="nx">要删除尾1</span>
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.0000000000000000000000000000000000000000000000000000  * 2^53&quot;</span> <span class="p">(</span><span class="nx">有误差表示</span><span class="err">，</span><span class="nx">删除了尾1</span><span class="p">)</span>
-
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s2">&quot;10.00000000000000000000000000000000000000000000000000000 * 2^52 + 10&quot;</span> <span class="p">(</span><span class="nx">二进制2</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">)</span>
-            <span class="o">=&gt;</span> <span class="s2">&quot;10.00000000000000000000000000000000000000000000000000010 * 2^52&quot;</span>
-            <span class="o">=&gt;</span> <span class="s2">&quot;1.000000000000000000000000000000000000000000000000000010 * 2^53&quot;</span>
-<span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">2</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.00000000000000000000000000000000000000000000000000010 * 2^53&quot;</span>
+<span class="c1">// 实际 (0.2).toString(2)</span>
+<span class="s1">&#39;0.001100110011001100110011001100110011001100110011001101&#39;</span>
+<span class="c1">// 最后一位应该是0，也被取1，变大了</span>
 </pre></div>
 
-<p><code>2 ** 53 + 3</code></p>
-<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">3</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.00000000000000000000000000000000000000000000000000010 * 2^53&quot;</span>
-<span class="mi">2</span> <span class="o">**</span> <span class="mi">53</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s2">&quot;10.00000000000000000000000000000000000000000000000000000 * 2^52 + 11&quot;</span> <span class="p">(</span><span class="nx">二进制3</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">)</span>
-            <span class="o">=&gt;</span> <span class="s2">&quot;10.00000000000000000000000000000000000000000000000000011 * 2^52&quot;</span>
-            <span class="o">=&gt;</span> <span class="s2">&quot;1.000000000000000000000000000000000000000000000000000011 * 2^53&quot;</span>
-            <span class="o">=&gt;</span> <span class="s2">&quot;1.00000000000000000000000000000000000000000000000000011 * 2^53&quot;</span> <span class="p">(</span><span class="nx">有误差表示</span><span class="err">，</span><span class="nx">删除了尾1</span><span class="p">)</span>
+<p>那么经过上面的拆解，可以很明显看到 0.1 、 0.2 二进制表示之后都被强制变<strong>大</strong>了，不具备准确性，再进行运算实际并没有太大的意义。</p>
+<p><code>0.1 + 0.2 === 0.30000000000000004</code> 也在情理之中。</p>
+<p>再看 <code>0.1 + 0.5 === 0.6</code>：</p>
+<div class="highlight"><pre><span class="c1">// (0.1).toString(2)</span>
+<span class="s1">&#39;0.0001100110011001100110011001100110011001100110011001101&#39;</span>
+<span class="c1">// (0.5).toString(2)</span>
+<span class="s1">&#39;0.1&#39;</span>
+<span class="c1">// (0.6).toString(2)</span>
+<span class="s1">&#39;0.10011001100110011001100110011001100110011001100110011&#39;</span>
+
+<span class="c1">// 0.1 + 0.5</span>
+<span class="s1">&#39;0.0001100110011001100110011001100110011001100110011001101&#39;</span> <span class="o">+</span> 
+<span class="s1">&#39;0.1&#39;</span>
+<span class="o">=&gt;</span> <span class="mf">0.1001</span> <span class="mi">1001</span> <span class="mi">1001</span> <span class="mi">1001</span><span class="p">...</span>
+<span class="c1">// 刚好和 0.6 的二进制表示对应上</span>
+</pre></div>
+
+<p>其实从小数的二进制拆解过程就可以看到，用小数做运算极其容易出现问题，起因就在于，<strong>小数在运算前要先转换成二进制，而转换出来的这个二进制值很可能已经失真</strong>。</p>
+<h3 id="_31">✔ 小数运算的解决方案<a class="headerlink" href="#_31" title="Permanent link"></a></h3>
+<p>记住，直接对小数做运算的方式都可能会导致错误，原因在于小数运算前就需要先转成二进制，而转换出来的二进制数可能是不准确的（被截断了）。</p>
+<p>网络上说对小数进行 <code>num * 10 ** X</code> 的处理方式或多或少存在问题。 <a href="https://github.com/nefe/number-precision">number-precision</a> 这个库采用的就是把 <code>num * 10 ** X</code> 扩大为整数之后再做运算，但是库中加入了小数扶正。</p>
+<p>关键函数：</p>
+<p><strong>小数位数计算</strong></p>
+<div class="highlight"><pre>/**
+ * 有几位小数
+ * @param {*number} num Input number
+ */
+function digitLength(num: numType): number {
+  // Get digit length of e
+  // (23456487984564565165164654).toString() =&gt; &#39;2.3456487984564566e+25&#39;
+  // (23456487984564565165164654).toString().split(/[eE]/) =&gt; [&#39;2.3456487984564566&#39;, &#39;+25&#39;]
+  const eSplit = num.toString().split(/[eE]/);
+  // 小数点后面字符串长度 - 10 的次方数
+  const len = (eSplit[0].split(&#39;.&#39;)[1] || &#39;&#39;).length - +(eSplit[1] || 0);
+  // 得到 num 的小数点后有几位
+  return len &gt; 0 ? len : 0;
+}
+</pre></div>
+
+<p><strong>小数转换成整数</strong></p>
+<div class="highlight"><pre>/**
+ * 把小数转成整数，支持科学计数法。如果是小数则放大成整数，小数有两种情况
+ * 1. 普通小数，这种小数只需要把 toString() 之后小数点去掉，就变成了对应的整数
+ * 2. 科学计数法表示的小数，这个比较麻烦，使用常规的乘法放大，但是会用 strip 进行扶正
+ * @param {*number} num 输入数
+ */
+function float2Fixed(num: numType): number {
+  // 不是用科学计数法表示的，直接把小数点删掉就可以了
+  if (num.toString().indexOf(&#39;e&#39;) === -1) {
+    return Number(num.toString().replace(&#39;.&#39;, &#39;&#39;));
+  }
+  const dLen = digitLength(num);
+  return dLen &gt; 0 ? strip(Number(num) * Math.pow(10, dLen)) : Number(num);
+}
+</pre></div>
+
+<p><strong>把错误的小数扶正</strong>，这个函数非常关键。</p>
+<div class="highlight"><pre>/**
+ * 把错误的数据转正
+ * strip(0.09999999999999998)=0.1
+ */
+function strip(num: numType, precision = 15): number {
+  return +parseFloat(Number(num).toPrecision(precision));
+}
+</pre></div>
+
+<h4 id="_32">乘法<a class="headerlink" href="#_32" title="Permanent link"></a></h4>
+<p>把乘法处理好了后续的加减除会比较方便。</p>
+<div class="highlight"><pre>/**
+ * 精确乘法
+ */
+function times(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const num1Changed = float2Fixed(num1); // 小数转整数 1.23456 =&gt; 123456
+  const num2Changed = float2Fixed(num2); 
+  const baseNum = digitLength(num1) + digitLength(num2);
+  const leftValue = num1Changed * num2Changed;
+
+  checkBoundary(leftValue);
+
+  return leftValue / Math.pow(10, baseNum);
+}
+</pre></div>
+
+<h4 id="_33">加法<a class="headerlink" href="#_33" title="Permanent link"></a></h4>
+<h4 id="_34">减法<a class="headerlink" href="#_34" title="Permanent link"></a></h4>
+<h4 id="_35">除法<a class="headerlink" href="#_35" title="Permanent link"></a></h4>
+<h3 id="_36">✔ 一些数值处理方法<a class="headerlink" href="#_36" title="Permanent link"></a></h3>
+<h4 id="parseint">✔ parseInt<a class="headerlink" href="#parseint" title="Permanent link"></a></h4>
+<p><code>parseInt(string, radix)</code> 解析一个字符串并返回指定基数的十进制整数，<code>radix</code> 是2-36之间的整数，表示被解析字符串的基数。</p>
+<p>这个函数经常进入面试题，原因就在于它存在陷阱。</p>
+<ul>
+<li><code>string</code> 要被解析的值。如果参数不是一个字符串，则将其转换为字符串(使用 ToString 抽象操作)。字符串开头的空白符将会被忽略</li>
+<li><code>radix</code> 从 <strong>2 到 36</strong>，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。请注意，10 不是默认值！</li>
+</ul>
+<p>陷阱1：<strong>这里的 <code>radix</code> 默认值不是 10，<code>radix</code> 表示 <code>string</code> 所使用的进制</strong>。</p>
+<p>比如 <code>parseInt('11111', 2)</code> 表示把 2 进制的 <code>11111</code> 转换成 10 进制，对应的就是 31。而<code>parseInt('11111', 10)</code> 表示把 10 进制的 <code>11111</code> 转换成 10 进制，对应的就是 11111。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/03bde0ca-726d-eb3a-e929-aa11d0dba6d3.png" /></p>
+<h5 id="_37">✔ 将第一个参数转换成字符串<a class="headerlink" href="#_37" title="Permanent link"></a></h5>
+<p>如果 <code>parseInt</code> 遇到的字符不是指定 <code>radix</code> 参数中的数字，<strong>它将忽略该字符以及所有后续字符，并返回到该点为止已解析的整数值</strong>。 <code>parseInt</code> 将数字截断为整数值。 <strong>允许前导和尾随空格</strong>。</p>
+<ul>
+<li>忽略前导和尾随空格</li>
+<li><code>parseInt(' 12', 10)</code> <code>parseInt('12 ', 10)</code> <code>parseInt('12', 10)</code> 结果都是 12</li>
+<li>遇到 radix 无法表示的字符就会停止解析，如果第一个字符就是无法表示的就会返回 NaN</li>
+<li><code>parseInt('a12', 10)</code> =&gt; NaN</li>
+<li><code>parseInt('1a2', 10)</code> =&gt; 1</li>
+<li>可以理解两个符号。<code>+</code> 表示正数，<code>-</code> 表示负数。它是在去掉空格后作为解析的初始步骤进行的。如果没有找到符号，算法将进入下一步；否则，它将删除符号，并对字符串的其余部分进行数字解析。</li>
+</ul>
+<p><code>parseInt(string, radix)</code> 的第一个参数可以不是一个字符串，函数会先把第一个参数转换成字符串之后再进行处理。而这里转换成字符串的方式是调用 <code>toString()</code>。可想而知，会有下面的奇葩情况。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">wtf</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">parseInt</span><span class="p">(</span><span class="nx">wtf</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+<p>调用的结果就是这么个玩意：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/ee5cbef7-ffc1-7f37-cb15-68cc508e973f.png" /></p>
+<p>当然了，上面的情况并不多见，除非面试官吃屎了要搞你。通常的情况是 <code>string</code> 里面有一些稀奇古怪的东西，什么意思呢？就是字符串里头有一些字符不在 <code>radix</code> 能表示的范围内。</p>
+<p>比如：</p>
+<div class="highlight"><pre><span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39; 123&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 首部空格</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;123 &#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 尾部空格</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;a23&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// a 不在十进制表示范围内，而且a在第一位</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;2a3&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// a 不在十进制表示范围内，a不在第一位</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;2这是什么3&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 越界字符</span>
+</pre></div>
+
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/fb178d9c-af3f-2343-f75a-532bd0182a91.png" /></p>
+<p>关于极大数和极小数使用 <code>parseInt</code> 转换：</p>
+<div class="highlight"><pre><span class="c1">// (4.7 * 1e22).toString() =&gt; 4.7e+22</span>
+<span class="c1">// parseInt(&#39;4.7e+22&#39;, 10) </span>
+<span class="c1">// 碰到小数点即停止，所以得到 4</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="mf">4.7</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e22</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 非常大的数值变成 4</span>
+
+<span class="c1">// 0.00000000000434 =&gt; 4.34e-12</span>
+<span class="c1">// parseInt(&#39;4.34e-12&#39;, 10)</span>
+<span class="c1">// 碰到小数点即停止，所以得到 4</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="mf">0.00000000000434</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 非常小的数值变成 4</span>
+</pre></div>
+
+<p>注意上面是极大和极小数，普通数字 <code>toString</code> 还是普通的表示：</p>
+<div class="highlight"><pre><span class="nb">parseInt</span><span class="p">(</span><span class="mf">0.134444</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 0</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="mi">134444</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 134444</span>
+</pre></div>
+
+<h5 id="_38">✔ 需要指定第二个参数<a class="headerlink" href="#_38" title="Permanent link"></a></h5>
+<p>第二个参数 <code>radix</code> 如果是 <code>undefined</code>、<code>0</code> 或 未指定，则会由 JS 来推导 <code>radix</code>。遵循以下原则：</p>
+<ul>
+<li><code>0x</code> 开头 =&gt; 如果输入的 <code>string</code> 以 <code>0x</code>或 <code>0x</code>（一个0，后面是小写或大写的X）开头，那么 <code>radix</code> 被假定为 16，字符串的其余部分被当做十六进制数去解析</li>
+<li><code>0</code> 开头 =&gt; 如果输入的 <code>string</code> 以 <code>0</code> 开头， <code>radix</code> 被假定为 8（八进制）或 10（十进制）。具体选择哪一个 <code>radix</code> 取决于实现。ECMAScript 5 澄清了应该使用 10 (十进制)，但不是所有的浏览器都支持。因此，在使用 <code>parseInt</code> 时，一定要指定一个 <code>radix</code></li>
+<li>其它 =&gt; 如果输入的 <code>string</code> 以任何其他值开头， <code>radix</code> 是 10 (十进制)</li>
+</ul>
+<p>另外有一个规则是，如果 radix 是 1，则 <code>parseInt</code> 返回的结果都是 NaN。</p>
+<p>要将一个数字转换为特定的 <code>radix</code> 中的字符串字段，请使用 <code>thatNumber.toString(radix)</code> 函数。</p>
+<div class="highlight"><pre><span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;0x11&#39;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">17</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;0x1a&#39;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">26</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;011&#39;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">11</span>
+</pre></div>
+
+<p>常见的面试题</p>
+<p><code>['1', '2', '3'].map(parseInt)</code> 返回的结果是什么？这个问题很上头。实际返回的结果是 <code>[1, NaN, NaN]</code>。</p>
+<div class="highlight"><pre>   <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">index</span><span class="p">))</span>
+<span class="o">=&gt;</span> <span class="p">[</span><span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+
+<span class="c1">// parseInt(&#39;1&#39;, 0) =&gt; 遵循 radix 为0，等同于没有设置，此时大多数浏览器默认 radix 为 10，故</span>
+<span class="c1">// parseInt(&#39;1&#39;, 0) =&gt; parseInt(&#39;1&#39;, 10) =&gt; 1</span>
+
+<span class="c1">// parseInt(&#39;2&#39;, 1) =&gt; radix 为1，parseInt(x, 1) 无论 x 为什么，结果都是 NaN</span>
+
+<span class="c1">// parseInt(&#39;3&#39;, 2) =&gt; radix 为2，二进制只有0和1，故3超过了 radix 表示范围，返回 NaN</span>
+
+<span class="nx">所以结果是</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">]</span>
+</pre></div>
+
+<h4 id="parsefloat">✔ parseFloat<a class="headerlink" href="#parsefloat" title="Permanent link"></a></h4>
+<p><code>parseFloat(string)</code> 函数解析一个参数（必要时先转换为字符串）并返回一个浮点数。</p>
+<ul>
+<li>不像 <code>parseInt</code> 有第二个参数</li>
+<li>如果在解析过程中遇到了正号（+）、负号（-）、数字（0-9）、小数点（.）、或者科学记数法中的指数（e 或 E）以外的字符，则它会忽略该字符以及之后的所有字符，返回当前已经解析到的浮点数</li>
+<li><code>+</code> 加号</li>
+<li><code>-</code> 减号</li>
+<li><code>e</code> <code>E</code> 科学计数法中的 <code>e</code></li>
+<li><code>.</code> 小数点</li>
+<li>第二个小数点的出现也会使解析停止（在这之前的字符都会被解析）</li>
+<li>参数首位和末位的空白符会被忽略</li>
+<li>如果参数字符串的第一个字符不能被解析成为数字，则返回 NaN</li>
+<li><code>parseFloat</code> 也可以解析并返回 <code>Infinity</code>， <code>parseFloat(Infinity)</code> =&gt; Infinity，但是 <code>parseInt</code> 不行，<code>parseInt</code> 返回 NaN</li>
+</ul>
+<div class="highlight"><pre><span class="nb">parseFloat</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span>                                         <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">&#39;3.14&#39;</span><span class="p">);</span>                                       <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">&#39;  3.14  &#39;</span><span class="p">);</span>                                   <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">&#39;314e-2&#39;</span><span class="p">);</span>                                     <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">&#39;0.0314E+2&#39;</span><span class="p">);</span>                                  <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">&#39;3.14some non-digit characters&#39;</span><span class="p">);</span>              <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">({</span> <span class="nx">toString</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&quot;3.14&quot;</span> <span class="p">}</span> <span class="p">});</span>   <span class="c1">// 3.14</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s2">&quot;FF2&quot;</span><span class="p">);</span>                                        <span class="c1">// NaN</span>
+</pre></div>
+
+<h4 id="numberprototypetofixed">✔ Number.prototype.toFixed()<a class="headerlink" href="#numberprototypetofixed" title="Permanent link"></a></h4>
+<p><code>toFixed()</code> 方法使用定点表示法来格式化一个数值。</p>
+<div class="highlight"><pre><span class="nx">numObj</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="nx">digits</span><span class="p">)</span>
+</pre></div>
+
+<ul>
+<li><code>digits</code> 小数点后数字的个数；介于 0 到 20 （包括）之间，实现环境可能支持更大范围。如果忽略该参数，则默认为 0</li>
+</ul>
+<p>返回的结果在必要时进行四舍五入，另外在必要时会用 0 来填充小数部分，以便小数部分有指定的位数。 如果数值大于 <code>1e+21</code>，该方法会简单调用 <code>Number.prototype.toString()</code> 并返回一个指数记数法格式的字符串。</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">numObj</span> <span class="o">=</span> <span class="mf">12345.6789</span><span class="p">;</span>
+
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">();</span>         <span class="c1">// 返回 &quot;12346&quot;：进行四舍六入五看情况，不包括小数部分</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>        <span class="c1">// 返回 &quot;12345.7&quot;：进行四舍六入五看情况</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>        <span class="c1">// 返回 &quot;12345.678900&quot;：用0填充</span>
+<span class="p">(</span><span class="mf">1.23</span><span class="nx">e</span><span class="o">+</span><span class="mi">20</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>    <span class="c1">// 返回 &quot;123000000000000000000.00&quot;</span>
+<span class="p">(</span><span class="mf">1.23</span><span class="nx">e</span><span class="o">-</span><span class="mi">10</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>    <span class="c1">// 返回 &quot;0.00&quot;</span>
+<span class="mf">2.34</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>          <span class="c1">// 返回 &quot;2.3&quot;</span>
+<span class="mf">2.35</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1">// 返回 &#39;2.4&#39;</span>
+<span class="mf">2.55</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1">// 返回 &#39;2.5&#39;. Note it rounds down - see warning above</span>
+<span class="o">-</span><span class="mf">2.34</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>         <span class="c1">// 返回 -2.3 （由于操作符优先级，负数不会返回字符串）</span>
+<span class="p">(</span><span class="o">-</span><span class="mf">2.34</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>       <span class="c1">// 返回 &quot;-2.3&quot; （若用括号提高优先级，则返回字符串）</span>
+
+
+<span class="c1">// 下面这条非常的诡异，原因是 浮点数不能精确地用二进制表示所有小数</span>
+<span class="c1">// ref https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed#%E6%8F%8F%E8%BF%B0</span>
+<span class="mf">2.55</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1">// 返回 &#39;2.5&#39;</span>
+</pre></div>
+
+<h4 id="numberprototypetostring">✔ Number.prototype.toString()<a class="headerlink" href="#numberprototypetostring" title="Permanent link"></a></h4>
+<p><code>toString()</code> 方法返回指定 Number 对象的字符串表示形式。</p>
+<div class="highlight"><pre><span class="nx">numObj</span><span class="p">.</span><span class="nx">toString</span><span class="p">([</span><span class="nx">radix</span><span class="p">])</span>
+</pre></div>
+
+<ul>
+<li><code>radix</code> 指定要用于数字到字符串的转换的基数(从2到36)。如果未指定 radix 参数，则默认值为 10</li>
+</ul>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/a9659362-cc47-b925-3c64-2a785cf740af.png" /></p>
+<h4 id="numberprototypetoexponential">✔ Number.prototype.toExponential()<a class="headerlink" href="#numberprototypetoexponential" title="Permanent link"></a></h4>
+<p><code>toExponential()</code> 方法以指数表示法返回该数值字符串表示形式。</p>
+<ul>
+<li><code>fractionDigits</code> 可选。一个整数，用来指定小数点后有几位数字。默认情况下用尽可能多的位数来显示数字</li>
+</ul>
+<p>如果一个数值的小数位数多余 <code>fractionDigits</code> 参数所提供的，则该数值将会在 <code>fractionDigits</code> 指定的小数位数处四舍五入。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">numObj</span> <span class="o">=</span> <span class="mf">77.1234</span><span class="p">;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">()</span>  <span class="c1">// &#39;7.71234e+1&#39;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#39;7.71e+1&#39;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">// &#39;7.7123e+1&#39;</span>
+</pre></div>
+
+<h4 id="numberprototypetoprecision">✔ Number.prototype.toPrecision()<a class="headerlink" href="#numberprototypetoprecision" title="Permanent link"></a></h4>
+<p><code>toPrecision()</code> 方法以指定的精度返回该数值对象的字符串表示。</p>
+<div class="highlight"><pre><span class="nx">numObj</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="nx">precision</span><span class="p">)</span>
+</pre></div>
+
+<ul>
+<li><code>precision</code> 可选。一个用来指定有效数个数的整数</li>
+</ul>
+<p>如果忽略 <code>precision</code> 参数，则该方法表现类似于 <code>Number.prototype.toString()</code>。如果该参数是一个非整数值，将会向下舍入到最接近的整数。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">numObj</span> <span class="o">=</span> <span class="mf">5.123456</span><span class="p">;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">()</span>  <span class="c1">// &#39;5.123456&#39;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// &#39;5&#39;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#39;5.1&#39;</span>
+<span class="nx">numObj</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">// &#39;5.1235&#39;</span>
 </pre></div>
 
 <h3 id="js-number">✔ JS Number 对象中的一些数<a class="headerlink" href="#js-number" title="Permanent link"></a></h3>
@@ -2694,6 +2992,22 @@ setTimeout
 <p>因为 JS 中的数字存储使用了 IEEE 754 中规定的双精度浮点数数据类型，而这一数据类型能够安全存储 <code>-(2**53 - 1)</code> 到 <code>2**53 - 1</code> 之间的数值（包含边界值）。</p>
 <p>这里安全存储的意思是指能够准确区分两个不相同的值，例如 <code>Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2</code> 将得到 true 的结果。</p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/3ce04d4f-8a72-2306-6a9d-04cb1072e0a2.png" /></p>
+<h4 id="numbermax_value">✔ Number.MAX_VALUE<a class="headerlink" href="#numbermax_value" title="Permanent link"></a></h4>
+<p><code>Number.MAX_VALUE</code> 属性表示在 JavaScript 里所能表示的最大数值。<code>Number.MAX_VALUE</code> 属性值接近于 1.79e308，也就是双精度浮点型能表示的最大数字。大于 <code>Number.MAX_VALUE</code> 的值代表 Infinity。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/4a9f6645-4af4-6521-cda1-4b2953fb0372.png" /></p>
+<h4 id="numbermin_safe_integer">✔ Number.MIN_SAFE_INTEGER<a class="headerlink" href="#numbermin_safe_integer" title="Permanent link"></a></h4>
+<p>代表在 JavaScript 中最小的安全的 integer 型数字 <code>-(2**53 - 1) === -9007199254740991</code>。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/ceaacbc0-1ba1-01e8-ae8f-704c09890a48.png" /></p>
+<h4 id="numbermin_value">✔ Number.MIN_VALUE<a class="headerlink" href="#numbermin_value" title="Permanent link"></a></h4>
+<p><code>Number.MIN_VALUE</code> 属性表示在 JavaScript 中所能表示的最小的正值。</p>
+<p><code>Number.MIN_VALUE</code> 属性是 JavaScript 里最接近 0 的正值，而不是最小的负值。</p>
+<p><code>Number.MIN_VALUE</code> 的值约为 5e-324。小于 <code>Number.MIN_VALUE</code> (&ldquo;underflow values&rdquo;) 的值将会转换为 0。</p>
+<p>注意下，用 <code>Math.abs(0.1 + 0.2 - 0.3) &lt; Number.MIN_VALUE</code> 将会返回 false。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/004159b8-1999-51fc-dbc0-df01f0f459ff.png" /></p>
+<h4 id="numberissafeinteger">✔ Number.isSafeInteger()<a class="headerlink" href="#numberissafeinteger" title="Permanent link"></a></h4>
+<p><code>Number.isSafeInteger()</code> 方法用来判断传入的参数值是否是一个“安全整数”（safe integer）。</p>
+<p>比如，<code>2**53 - 1</code> 是一个安全整数，它能被精确表示，在任何 IEEE-754 舍入模式（rounding mode）下，没有其他整数舍入结果为该整数。作为对比，<code>2**53</code> 就不是一个安全整数，它能够使用 IEEE-754 表示，但是 <code>2**53 + 1</code> 不能使用 IEEE-754 直接表示，在就近舍入（round-to-nearest）和向零舍入中，会被舍入为 <code>2**53</code>。</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/b6c93b07-1306-0d00-740f-3789e679e1d5.png" /></p>
 <h2 id="valueof-tostring">✔ valueOf &amp;&amp; toString 及其涉及到的隐式转换<a class="headerlink" href="#valueof-tostring" title="Permanent link"></a></h2>
 <h3 id="valueof">✔ valueOf<a class="headerlink" href="#valueof" title="Permanent link"></a></h3>
 <ul>
@@ -2855,7 +3169,7 @@ setTimeout
 <li>`${param}`，<code>hint</code> =&gt; <code>string</code></li>
 </ul>
 <p><img alt="toPrimitive5" src="https://qiniu1.lxfriday.xyz/feoffer/toPrimitive5.png" /></p>
-<h2 id="_30">✔ 事件循环<a class="headerlink" href="#_30" title="Permanent link"></a></h2>
+<h2 id="_39">✔ 事件循环<a class="headerlink" href="#_39" title="Permanent link"></a></h2>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/5d81bc016fb9a06b084d2acc">JS 事件循环 event loop，前端烧脑一刻</a></li>
@@ -2949,7 +3263,7 @@ promise2
 setTimeout
 </pre></div>
 
-<h2 id="_31">正则表达式<a class="headerlink" href="#_31" title="Permanent link"></a></h2>
+<h2 id="_40">正则表达式<a class="headerlink" href="#_40" title="Permanent link"></a></h2>
 <h2 id="settimeoutsetinterval">✔ setTimeout、setInterval<a class="headerlink" href="#settimeoutsetinterval" title="Permanent link"></a></h2>
 <h3 id="settimeout-setinterval">✔ setTimeout 和 setInterval 能设置的最小延迟时间<a class="headerlink" href="#settimeout-setinterval" title="Permanent link"></a></h3>
 <ul>
@@ -3345,7 +3659,7 @@ setTimeout
       dur="3s" repeatCount="indefinite" rotate="auto">
   </rect>
 </svg></p>
-<h2 id="_32">函数式编程<a class="headerlink" href="#_32" title="Permanent link"></a></h2>
+<h2 id="_41">函数式编程<a class="headerlink" href="#_41" title="Permanent link"></a></h2>
 <h1 id="api">浏览器特有 API<a class="headerlink" href="#api" title="Permanent link"></a></h1>
 <h2 id="xmlhttprequest">✔ XMLHttpRequest<a class="headerlink" href="#xmlhttprequest" title="Permanent link"></a></h2>
 <h3 id="readystate">✔ readyState<a class="headerlink" href="#readystate" title="Permanent link"></a></h3>
@@ -3469,7 +3783,7 @@ onload DONE
 </tr>
 </tbody>
 </table>
-<h3 id="_33">✔ 事件<a class="headerlink" href="#_33" title="Permanent link"></a></h3>
+<h3 id="_42">✔ 事件<a class="headerlink" href="#_42" title="Permanent link"></a></h3>
 <p>ref <a href="https://segmentfault.com/a/1190000004322487">https://segmentfault.com/a/1190000004322487</a></p>
 <table>
 <thead>
@@ -4130,7 +4444,7 @@ onload DONE
   on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
 CodePen 全屏查看
 </button></p>
-<h4 id="_34">✔ 普通懒加载<a class="headerlink" href="#_34" title="Permanent link"></a></h4>
+<h4 id="_43">✔ 普通懒加载<a class="headerlink" href="#_43" title="Permanent link"></a></h4>
 <p>通过监听滚动事件实现，使用防抖函数防止卡顿：</p>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
@@ -5006,7 +5320,7 @@ someOtherNode.textContent = string;
 <li><code>node.childNodes.length &gt; 0</code></li>
 <li><code>node.hasChildNodes()</code></li>
 </ul>
-<h3 id="_35">✔ 总结<a class="headerlink" href="#_35" title="Permanent link"></a></h3>
+<h3 id="_44">✔ 总结<a class="headerlink" href="#_44" title="Permanent link"></a></h3>
 <p>使用哪个方法的意识：</p>
 <ul>
 <li>明确是 CURD 的哪一种</li>
@@ -5325,7 +5639,7 @@ someOtherNode.textContent = string;
 </tr>
 </tbody>
 </table>
-<h3 id="_36">✔ 事件冒泡、捕捉、代理<a class="headerlink" href="#_36" title="Permanent link"></a></h3>
+<h3 id="_45">✔ 事件冒泡、捕捉、代理<a class="headerlink" href="#_45" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://www.quirksmode.org/js/events_order.html">https://www.quirksmode.org/js/events_order.html</a></li>
@@ -5557,14 +5871,14 @@ someOtherNode.textContent = string;
 <span class="p">})</span>
 </pre></div>
 
-<h3 id="_37">✔ 禁止冒泡、捕捉<a class="headerlink" href="#_37" title="Permanent link"></a></h3>
+<h3 id="_46">✔ 禁止冒泡、捕捉<a class="headerlink" href="#_46" title="Permanent link"></a></h3>
 <p>在事件监听函数中执行 <code>e.stopPropagation()</code></p>
 <div class="highlight"><pre><span class="nx">box3</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span>
 <span class="p">})</span>
 </pre></div>
 
-<h3 id="_38">✔ 获取触发事件的元素<a class="headerlink" href="#_38" title="Permanent link"></a></h3>
+<h3 id="_47">✔ 获取触发事件的元素<a class="headerlink" href="#_47" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://www.quirksmode.org/js/events_order.html">https://www.quirksmode.org/js/events_order.html</a></li>
@@ -5595,7 +5909,7 @@ someOtherNode.textContent = string;
 </pre></div>
 
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/event-model-this.png" /></p>
-<h3 id="_39">✔ 事件代理<a class="headerlink" href="#_39" title="Permanent link"></a></h3>
+<h3 id="_48">✔ 事件代理<a class="headerlink" href="#_48" title="Permanent link"></a></h3>
 <p>事件代理是利用事件的冒泡、捕捉机制，让绑定事件更加统一的一种方式。</p>
 <p>当我们有一个 <code>ul</code>，想在其中动态的增删 <code>li</code> 时，事件代理就非常适合在这里使用。</p>
 <div class="highlight"><pre><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
@@ -5731,7 +6045,7 @@ someOtherNode.textContent = string;
 <h2 id="commonjs-esm">commonJS 和 ESM 差异<a class="headerlink" href="#commonjs-esm" title="Permanent link"></a></h2>
 <h2 id="express">Express<a class="headerlink" href="#express" title="Permanent link"></a></h2>
 <h2 id="koa">Koa<a class="headerlink" href="#koa" title="Permanent link"></a></h2>
-<h3 id="_40">洋葱模型<a class="headerlink" href="#_40" title="Permanent link"></a></h3>
+<h3 id="_49">洋葱模型<a class="headerlink" href="#_49" title="Permanent link"></a></h3>
 <h2 id="restful-api">✔ RESTful API 介绍及其优缺点<a class="headerlink" href="#restful-api" title="Permanent link"></a></h2>
 <p>ref </p>
 <ul>
@@ -5756,7 +6070,7 @@ someOtherNode.textContent = string;
 <li>客户端和服务器之间，传递这种资源的某种表现层；</li>
 <li>客户端通过四个HTTP动词，对服务器端资源进行操作，实现&rdquo;表现层状态转化&rdquo;。</li>
 </ul>
-<h3 id="_41">✔ 优缺点<a class="headerlink" href="#_41" title="Permanent link"></a></h3>
+<h3 id="_50">✔ 优缺点<a class="headerlink" href="#_50" title="Permanent link"></a></h3>
 <blockquote>
 <p>参考自 为什么少有人使用RESTful API？](<a href="https://juejin.cn/post/7051801217705443341">https://juejin.cn/post/7051801217705443341</a>)</p>
 </blockquote>
@@ -6102,8 +6416,8 @@ someOtherNode.textContent = string;
 </pre></div>
 
 <h1 id="css">CSS<a class="headerlink" href="#css" title="Permanent link"></a></h1>
-<h2 id="_42">✔ 选择器<a class="headerlink" href="#_42" title="Permanent link"></a></h2>
-<h3 id="_43">✔ 元素选择器<a class="headerlink" href="#_43" title="Permanent link"></a></h3>
+<h2 id="_51">✔ 选择器<a class="headerlink" href="#_51" title="Permanent link"></a></h2>
+<h3 id="_52">✔ 元素选择器<a class="headerlink" href="#_52" title="Permanent link"></a></h3>
 <p>元素选择器也叫类型选择器，通过node节点名称匹配元素。</p>
 <p>例如：</p>
 <div class="highlight"><pre><span class="nt">span</span> <span class="p">{</span>
@@ -6112,14 +6426,14 @@ someOtherNode.textContent = string;
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_44">✔ 通配选择器<a class="headerlink" href="#_44" title="Permanent link"></a></h3>
+<h3 id="_53">✔ 通配选择器<a class="headerlink" href="#_53" title="Permanent link"></a></h3>
 <p>一个星号(<code>*</code>)就是一个通配选择器.它可以匹配任意类型的HTML元素。</p>
 <div class="highlight"><pre><span class="o">*</span> <span class="p">{</span>
   <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_45">✔ 类选择器<a class="headerlink" href="#_45" title="Permanent link"></a></h3>
+<h3 id="_54">✔ 类选择器<a class="headerlink" href="#_54" title="Permanent link"></a></h3>
 <p>比较常见的选择器。</p>
 <div class="highlight"><pre><span class="nc">.类名</span> <span class="p">{</span><span class="err">样式声明</span> <span class="p">}</span>
 
@@ -6168,7 +6482,7 @@ someOtherNode.textContent = string;
 
 <p>只不过，在使用 <code>document.getElementById('demo-id-test1')</code> 或者 <code>document.querySelector('#demo-id-test1')</code> 的时候只会获取到一个。</p>
 <p>当然，并不推荐 id 选择器重复使用。</p>
-<h3 id="_46">✔ 属性选择器<a class="headerlink" href="#_46" title="Permanent link"></a></h3>
+<h3 id="_55">✔ 属性选择器<a class="headerlink" href="#_55" title="Permanent link"></a></h3>
 <p>属性选择器是一个比较强大的选择器，能够依据条件精准找到想要的元素。CSS 属性选择器通过已经存在的属性名或属性值匹配元素。</p>
 <p>语法：</p>
 <ul>
@@ -6242,7 +6556,7 @@ someOtherNode.textContent = string;
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_47">✔ 伪类选择器<a class="headerlink" href="#_47" title="Permanent link"></a></h3>
+<h3 id="_56">✔ 伪类选择器<a class="headerlink" href="#_56" title="Permanent link"></a></h3>
 <ul>
 <li>ref <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes">MDN 伪类</a></li>
 </ul>
@@ -6254,7 +6568,7 @@ someOtherNode.textContent = string;
 </pre></div>
 
 <p><img alt="标准伪类索引" src="https://qiniu1.lxfriday.xyz/blog/0dbbc6f8-0f2a-2d8a-98e4-d9cb4dc628bc.png" /></p>
-<h4 id="_48">✔ 常用伪类<a class="headerlink" href="#_48" title="Permanent link"></a></h4>
+<h4 id="_57">✔ 常用伪类<a class="headerlink" href="#_57" title="Permanent link"></a></h4>
 <ul>
 <li><code>:link</code> 选中尚未访问的链接</li>
 <li><code>:visited</code> 表示用户已访问过的链接</li>
@@ -6628,7 +6942,7 @@ someOtherNode.textContent = string;
 </pre></div>
 
 <p><img alt=":only-of-type" src="https://qiniu1.lxfriday.xyz/blog/3313c4dc-9d7b-c3e8-fe83-e1a14db3c921.png" /></p>
-<h3 id="_49">✔ 伪元素选择器<a class="headerlink" href="#_49" title="Permanent link"></a></h3>
+<h3 id="_58">✔ 伪元素选择器<a class="headerlink" href="#_58" title="Permanent link"></a></h3>
 <p>伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。</p>
 <p>语法：</p>
 <div class="highlight"><pre><span class="nt">selector</span><span class="o">:</span><span class="nd">:pseudo-element</span> <span class="p">{</span>
@@ -6638,7 +6952,7 @@ someOtherNode.textContent = string;
 
 <p>按照规范，应该使用双冒号（<code>::</code>）而不是单个冒号（<code>:</code>），以便区分伪类和伪元素。但是，由于旧版本的 W3C 规范并未对此进行特别区分，因此目前绝大多数的浏览器都同时支持使用这两种方式来表示伪元素。</p>
 <p><img alt="伪元素索引" src="https://qiniu1.lxfriday.xyz/blog/50e77929-3358-5a0f-4ee2-efb4687229d8.png" /></p>
-<h4 id="_50">✔ 常用伪元素<a class="headerlink" href="#_50" title="Permanent link"></a></h4>
+<h4 id="_59">✔ 常用伪元素<a class="headerlink" href="#_59" title="Permanent link"></a></h4>
 <ul>
 <li><code>::before</code> 元素前面添加伪元素</li>
 <li><code>::after</code> 元素后面添加伪元素</li>
@@ -6672,7 +6986,7 @@ someOtherNode.textContent = string;
 </ul>
 <p>只有一小部分CSS属性可以用于 <code>::selection</code> 选择器：</p>
 <p><img alt="::selection" src="https://qiniu1.lxfriday.xyz/blog/4fdb6ae9-3050-8b10-115b-5a016c57adc3.png" />  </p>
-<h3 id="_51">✔ 后代选择器<a class="headerlink" href="#_51" title="Permanent link"></a></h3>
+<h3 id="_60">✔ 后代选择器<a class="headerlink" href="#_60" title="Permanent link"></a></h3>
 <p>通常用单个空格（<code></code>）字符表示，能够匹配到元素的所有后代。</p>
 <p>这个比较常见：</p>
 <div class="highlight"><pre><span class="nt">selector1</span> <span class="nt">selector2</span> <span class="p">{</span>
@@ -6680,12 +6994,12 @@ someOtherNode.textContent = string;
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_52">✔ 子代选择器<a class="headerlink" href="#_52" title="Permanent link"></a></h3>
+<h3 id="_61">✔ 子代选择器<a class="headerlink" href="#_61" title="Permanent link"></a></h3>
 <p>使用 <code>&gt;</code> 来匹配元素的直接后代元素，注意不会像后代选择器那样匹配所有的后代。</p>
 <div class="highlight"><pre><span class="nt">元素1</span> <span class="o">&gt;</span> <span class="nt">元素2</span> <span class="p">{</span><span class="err">样式声明</span> <span class="p">}</span>
 </pre></div>
 
-<h3 id="_53">✔ 相邻兄弟选择器<a class="headerlink" href="#_53" title="Permanent link"></a></h3>
+<h3 id="_62">✔ 相邻兄弟选择器<a class="headerlink" href="#_62" title="Permanent link"></a></h3>
 <p>相邻兄弟选择器 (<code>+</code>) 介于两个选择器之间，当第二个元素紧跟在第一个元素之后，并且两个元素都是属于同一个父元素的子元素，则第二个元素将被选中。</p>
 <p>语法：</p>
 <div class="highlight"><pre><span class="nt">former_element</span> <span class="o">+</span> <span class="nt">target_element</span> <span class="p">{</span> <span class="n">style</span> <span class="n">properties</span> <span class="p">}</span>
@@ -6698,7 +7012,7 @@ someOtherNode.textContent = string;
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_54">✔ 通用兄弟选择器<a class="headerlink" href="#_54" title="Permanent link"></a></h3>
+<h3 id="_63">✔ 通用兄弟选择器<a class="headerlink" href="#_63" title="Permanent link"></a></h3>
 <p>兄弟选择符，位置无须紧邻，只须同层级，<code>A~B</code> 选择 <code>A</code> 元素之后<strong>所有</strong>同层级 <code>B</code> 元素。</p>
 <p>注意它选择的是所有的兄弟，而 <code>+</code> 只选择某个兄弟。</p>
 <p>语法：</p>
@@ -6803,7 +7117,7 @@ someOtherNode.textContent = string;
 <p>关于层叠实际上没有太多好说的，并不是说不重要，只不过层叠是随处可见的，基本都懂。</p>
 <p>ref <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade">MDN CSS 层叠</a></p>
 <p>层叠是 CSS 的一个基本特征，它是一个定义了<strong>如何合并来自多个源的属性值的算法</strong>。它在CSS处于核心地位，CSS的全称层叠样式表正是强调了这一点。</p>
-<h2 id="_55">✔ 盒模型<a class="headerlink" href="#_55" title="Permanent link"></a></h2>
+<h2 id="_64">✔ 盒模型<a class="headerlink" href="#_64" title="Permanent link"></a></h2>
 <p>当对一个文档进行布局（lay out）的时候，浏览器的渲染引擎会根据标准之一的 CSS 基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子（box）。CSS 决定这些盒子的大小、位置以及属性（例如颜色、背景、边框尺寸…）。</p>
 <p>每个盒子由四个部分（或称区域）组成，其效用由它们各自的边界（Edge）所定义。与盒子的四个组成区域相对应，每个盒子有四个边界：<strong>内容边界</strong> Content edge、<strong>内边距边界</strong> Padding Edge、<strong>边框边界</strong> Border Edge、<strong>外边框边界</strong> Margin Edge。</p>
 <p><strong>内容区域</strong> 由内容边界限制，容纳着元素的真实内容，它的尺寸为内容宽度（或称 content-box 宽度）和内容高度（或称 content-box 高度）。</p>
@@ -6878,7 +7192,7 @@ someOtherNode.textContent = string;
 <p><code>vh</code> 视窗宽度的 1%，100vh 等于视窗高度。</p>
 <p><strong>rpx</strong></p>
 <p><code>rpx</code>（responsive pixel）: 可以根据屏幕宽度进行自适应。rpx 其实是微信对于 rem 的一种应用的规定，或者说一种设计的方案，官方上规定屏幕宽度为 20rem，规定屏幕宽为 750rpx。如在 iPhone6 上，屏幕宽度为 375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</p>
-<h2 id="_56">✔ 媒体查询<a class="headerlink" href="#_56" title="Permanent link"></a></h2>
+<h2 id="_65">✔ 媒体查询<a class="headerlink" href="#_65" title="Permanent link"></a></h2>
 <p>通过媒体查询（Media queries），您可以根据各种设备特征和参数的值或者是否存在来调整您的网站或应用。</p>
 <p>在 CSS 中，使用 <code>@media</code> at-rule 根据媒体查询的结果有条件地应用样式表的一部分。 使用 <code>@import</code> 有条件地应用整个样式表。</p>
 <p><code>@media</code> 可用于基于一个或多个媒体查询的结果来应用样式表的一部分。 使用它，您可以指定一个媒体查询和一个CSS块，当且仅当该媒体查询与正在使用其内容的设备匹配时，该CSS块才能应用于该文档。</p>
@@ -7119,7 +7433,7 @@ someOtherNode.textContent = string;
 }
 </style>
 
-<h2 id="_57">基础属性<a class="headerlink" href="#_57" title="Permanent link"></a></h2>
+<h2 id="_66">基础属性<a class="headerlink" href="#_66" title="Permanent link"></a></h2>
 <h3 id="display">✔ display<a class="headerlink" href="#display" title="Permanent link"></a></h3>
 <h3 id="blockinline-blockinline">✔ block、inline-block、inline 的区别<a class="headerlink" href="#blockinline-blockinline" title="Permanent link"></a></h3>
 <p><code>block</code> 块级元素，常见的块级元素有：div、p、h1~h6、table、ol、ul 等。</p>
@@ -7171,7 +7485,7 @@ someOtherNode.textContent = string;
 <span class="nx">result</span> <span class="o">=</span> <span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">h3</span><span class="p">,</span> <span class="s1">&#39;::after&#39;</span><span class="p">).</span><span class="nx">content</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="_58">✔ 字体<a class="headerlink" href="#_58" title="Permanent link"></a></h3>
+<h3 id="_67">✔ 字体<a class="headerlink" href="#_67" title="Permanent link"></a></h3>
 <ul>
 <li>ref <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face">MDN @font-face</a></li>
 </ul>
@@ -8359,7 +8673,7 @@ CodePen 全屏查看
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 
-<h2 id="_59">✔ 写一个瀑布流布局<a class="headerlink" href="#_59" title="Permanent link"></a></h2>
+<h2 id="_68">✔ 写一个瀑布流布局<a class="headerlink" href="#_68" title="Permanent link"></a></h2>
 <h3 id="column-count-break-inside">✔ column-count + break-inside 方案<a class="headerlink" href="#column-count-break-inside" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wrapper&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -9029,7 +9343,7 @@ CodePen 全屏查看
 
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/16822506-632a-6839-6916-1b99cb3eebfb.png" /></p>
 <p>缺点比较多，更改颜色麻烦，圆角处理比较麻烦，存在边缘模糊的问题。</p>
-<h3 id="_60">✔ 渐变<a class="headerlink" href="#_60" title="Permanent link"></a></h3>
+<h3 id="_69">✔ 渐变<a class="headerlink" href="#_69" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span class="nc">.border</span> <span class="p">{</span>
   <span class="k">background</span><span class="o">:</span> <span class="n">linear</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span><span class="m">#000</span><span class="o">,</span> <span class="m">#000</span> <span class="m">100%</span><span class="o">,</span> <span class="k">transparent</span> <span class="m">100%</span><span class="p">)</span> <span class="k">left</span> <span class="o">/</span> <span class="m">1px</span> <span class="m">100%</span> <span class="k">no-repeat</span><span class="o">,</span>
     <span class="n">linear</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span><span class="m">#000</span><span class="o">,</span> <span class="m">#000</span> <span class="m">100%</span><span class="o">,</span> <span class="k">transparent</span> <span class="m">100%</span><span class="p">)</span> <span class="k">right</span> <span class="o">/</span> <span class="m">1px</span> <span class="m">100%</span> <span class="k">no-repeat</span><span class="o">,</span>
@@ -9041,8 +9355,8 @@ CodePen 全屏查看
 <p>效果（小米10 ultra <code>divicePixelRatiro = 2.75</code>）：</p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/3b589b51-a1d4-59f0-0e16-c2b08edf1f23.png" /></p>
 <p>实际效果并不算很理想，不能处理圆角，不推荐。</p>
-<h2 id="_61">✔ 基本布局<a class="headerlink" href="#_61" title="Permanent link"></a></h2>
-<h3 id="_62">✔ 圣杯布局<a class="headerlink" href="#_62" title="Permanent link"></a></h3>
+<h2 id="_70">✔ 基本布局<a class="headerlink" href="#_70" title="Permanent link"></a></h2>
+<h3 id="_71">✔ 圣杯布局<a class="headerlink" href="#_71" title="Permanent link"></a></h3>
 <p>三列布局；中间主体内容前置，且宽度自适应；两边内容定宽 </p>
 <h4 id="js_3">✔ 普通实现（浮动定位 + 混用 JS）<a class="headerlink" href="#js_3" title="Permanent link"></a></h4>
 <p>纯 CSS 实现不了 <code>left</code> 和 <code>right</code> 两部分的高度完全填充，因为 <code>container</code> 的高度是随 <code>subcontent</code> 变化的，<code>height： 100%</code> 将会无效。</p>
@@ -9470,7 +9784,7 @@ CodePen 全屏查看
   on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
 CodePen 全屏查看
 </button></p>
-<h3 id="_63">✔ 粘连布局<a class="headerlink" href="#_63" title="Permanent link"></a></h3>
+<h3 id="_72">✔ 粘连布局<a class="headerlink" href="#_72" title="Permanent link"></a></h3>
 <p>粘连布局：当内容区域高度比较小的时候，底部 footer 会吸在底部，二挡内容区域高度比较大的时候，footer 会排在内容区域后面，滚动下滑可达到 footer。</p>
 <p><code>calc</code> 普通实现：</p>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
@@ -9587,7 +9901,7 @@ CodePen 全屏查看
 <span class="p">}</span>
 </pre></div>
 
-<h2 id="_64">✔ 垂直居中<a class="headerlink" href="#_64" title="Permanent link"></a></h2>
+<h2 id="_73">✔ 垂直居中<a class="headerlink" href="#_73" title="Permanent link"></a></h2>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/5b9a4477f265da0ad82bf921">https://juejin.im/post/5b9a4477f265da0ad82bf921</a></li>
@@ -9739,7 +10053,7 @@ CodePen 全屏查看
 <li>计算 BFC 的高度时，考虑 BFC 所包含的所有元素，连浮动元素也参与计算；</li>
 <li>浮动盒区域不叠加到 BFC 上；</li>
 </ul>
-<h3 id="_65">✔ 高度坍塌和清除浮动<a class="headerlink" href="#_65" title="Permanent link"></a></h3>
+<h3 id="_74">✔ 高度坍塌和清除浮动<a class="headerlink" href="#_74" title="Permanent link"></a></h3>
 <p>高度坍塌是指父元素本来应该包括子元素的高度，但是实际上父元素比子元素的高度要小。</p>
 <div class="highlight"><pre><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
   <span class="nc">.container</span> <span class="p">{</span>
@@ -9784,7 +10098,7 @@ CodePen 全屏查看
 </pre></div>
 
 <p>4、图中有另外一个问题是 box2 被 box1 盖住了一部分，<strong>这是因为 box1 浮动起来了</strong>，显然只需要清除浮动即可。使用 BFC 清除，对应的规则是<strong>浮动盒区域不叠加到 BFC 上，给 box2 添加 <code>overflow: auto;</code> 之后显示正常</strong>。</p>
-<h3 id="_66">✔ 外边距折叠<a class="headerlink" href="#_66" title="Permanent link"></a></h3>
+<h3 id="_75">✔ 外边距折叠<a class="headerlink" href="#_75" title="Permanent link"></a></h3>
 <p>块级元素的上外边距和下外边距有时会合并（或折叠）为一个外边距，其大小取其中的最大者，这种行为称为外边距折叠（margin collapsing），有时也翻译为外边距合并。注意浮动元素和绝对定位元素的外边距不会折叠。</p>
 <p>外边距折叠的基本情况：</p>
 <p><strong>相邻元素之间</strong>：毗邻的两个元素之间的外边距会发生折叠。</p>
@@ -9803,7 +10117,7 @@ CodePen 全屏查看
 <li>如果参与折叠的外边距中包含负值，折叠后的外边距的值为最大的正边距与最小的负边距（即绝对值最大的负边距）的和；</li>
 <li>如果所有参与折叠的外边距都为负，折叠后的外边距的值为最小的负边距的值；</li>
 </ul>
-<h4 id="_67">✔ 兄弟元素间的外边距折叠<a class="headerlink" href="#_67" title="Permanent link"></a></h4>
+<h4 id="_76">✔ 兄弟元素间的外边距折叠<a class="headerlink" href="#_76" title="Permanent link"></a></h4>
 <div class="highlight"><pre><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -9831,7 +10145,7 @@ CodePen 全屏查看
 <p>而加非块级元素有会有问题。</p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/460ec9cd-1f0f-0360-1596-945566f48561.png" /></p>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/b880368b-d0dd-9935-ecc0-77e70cdf2517.png" /></p>
-<h4 id="_68">✔ 父子元素间的外边距折叠<a class="headerlink" href="#_68" title="Permanent link"></a></h4>
+<h4 id="_77">✔ 父子元素间的外边距折叠<a class="headerlink" href="#_77" title="Permanent link"></a></h4>
 <div class="highlight"><pre><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wrapper&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -10379,13 +10693,13 @@ CodePen 全屏查看
 <li>终止 FIN 标志位：用来释放一个连接。FIN=1 表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接；</li>
 </ul>
 <p><strong>大写的 SYN ACK 都是标志位，其值为 1 或 0，小写的 ack、seq 单词表示序号，和具体的传输内容有关。</strong></p>
-<h3 id="_69">✔ 三次握手<a class="headerlink" href="#_69" title="Permanent link"></a></h3>
+<h3 id="_78">✔ 三次握手<a class="headerlink" href="#_78" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzI5MzYzMDAwNw==&amp;mid=2247486033&amp;idx=1&amp;sn=679e99b0ca60ad9eb81456bba8ffbdec&amp;chksm=ec6e7309db19fa1f74da440a9980ec08a1458598bb3e57a9110b6ceee83d52dbf8cf27d982c5&amp;mpshare=1&amp;scene=1&amp;srcid=0201hefKnCRp0hm9SW35tKNb&amp;sharer_sharetime=1580534579241&amp;sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&amp;key=732653fb0fa49e86b2cb705aaaaf51f9f8a46f0369ca0a885b4b4916bc819da38977e0551641a69f6dfa36e1074df74cccb282239774e685deec1821000aacb4deaaadac4c325535942de78f26806e40&amp;ascene=1&amp;uin=MjQyMzQ2MTgzMw%3D%3D&amp;devicetype=Windows+10&amp;version=6208006f&amp;lang=zh_CN&amp;exportkey=A1nRWsKlQIXAWHd8C0NMQYo%3D&amp;pass_ticket=xlc2xiojgyuqCT6cyqwQWdbOwUCf%2BOt%2BC4jow75C87vgCsxU%2FXCzkna537BHolOS">三次握手、四次挥手</a></li>
 </ul>
 <p><img alt="三次握手" src="https://qiniu1.lxfriday.xyz/feoffer/tcp-three-times-handshake.png" /></p>
-<h3 id="_70">✔ 四次挥手<a class="headerlink" href="#_70" title="Permanent link"></a></h3>
+<h3 id="_79">✔ 四次挥手<a class="headerlink" href="#_79" title="Permanent link"></a></h3>
 <p><img alt="四次挥手" src="https://qiniu1.lxfriday.xyz/feoffer/tcp-four-times-wave.png" /></p>
 <h3 id="tcp_2">✔ TCP 为什么要三次握手（为什么不是两次）<a class="headerlink" href="#tcp_2" title="Permanent link"></a></h3>
 <p>当网络中存在延迟时，可能客户端发送了多个 SYN 建立链接，最后这些包都到达了服务端，从而导致建立多个连接浪费资源。</p>
@@ -10512,7 +10826,7 @@ CodePen 全屏查看
 </ul>
 <p>快恢复是指的快重传（cwnd = cwnd /2，sshthresh = cwnd）之后，进入拥塞避免阶段。</p>
 <p>在采用快恢复算法时，慢开始算法只是在<strong>TCP 连接建立</strong>时和<strong>网络出现超时</strong>时才使用</p>
-<h4 id="_71">✔ 拥塞控制中的乘法减小和加法增大<a class="headerlink" href="#_71" title="Permanent link"></a></h4>
+<h4 id="_80">✔ 拥塞控制中的乘法减小和加法增大<a class="headerlink" href="#_80" title="Permanent link"></a></h4>
 <p><strong>乘法减小</strong>指的是无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞，就把慢开始门限 ssthresh 设置为出现拥塞时的发送窗口大小的一半，并执行慢开始算法，所以当网络频繁出现拥塞时，ssthresh 下降的很快，以大大减少注入到网络中的分组数。</p>
 <p><strong>加法增大</strong>是指执行拥塞避免算法后，使拥塞窗口缓慢增大，以防止过早出现拥塞。</p>
 <h3 id="tcp_11">✔ TCP 拥塞控制和流量控制的区别<a class="headerlink" href="#tcp_11" title="Permanent link"></a></h3>
@@ -11441,7 +11755,7 @@ Content-Range: bytes 4590-7999/8000
 </tr>
 </tbody>
 </table>
-<h4 id="_72">✔ 增删改查<a class="headerlink" href="#_72" title="Permanent link"></a></h4>
+<h4 id="_81">✔ 增删改查<a class="headerlink" href="#_81" title="Permanent link"></a></h4>
 <p>ref</p>
 <ul>
 <li><a href="https://www.w3school.com.cn/js/js_cookies.asp">https://www.w3school.com.cn/js/js_cookies.asp</a></li>
@@ -11538,13 +11852,13 @@ Content-Range: bytes 4590-7999/8000
 <li><strong>服务器压力不同</strong>，Session 是存储在服务端的，巨大并发的时候会使服务器资源急速飙升。Cookie 则不存在此问题；</li>
 </ol>
 <h2 id="https">✔ HTTPS<a class="headerlink" href="#https" title="Permanent link"></a></h2>
-<h3 id="_73">✔ 对称加密<a class="headerlink" href="#_73" title="Permanent link"></a></h3>
+<h3 id="_82">✔ 对称加密<a class="headerlink" href="#_82" title="Permanent link"></a></h3>
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/3cd066a3-d0f0-03cb-253a-7ee41b1a5b40.png" /></p>
 <p><strong>对称加密</strong>是指加密和解密时使用的密钥都是同一个，是<strong>对称</strong>的，只要保证了密钥的安全，那整个通信过程就可以说具有了机密性。</p>
 <p>TLS 里有非常多的对称加密算法可供选择，比如 RC4、DES、3DES、AES、ChaCha20 等，但前三种算法都被认为是不安全的，通常都禁止使用，目前常用的只有 <strong>AES</strong> 和 <strong>ChaCha20</strong>。</p>
 <p><strong>AES</strong> 的意思是<strong>高级加密标准</strong>（Advanced Encryption Standard），密钥长度可以是 128、192 或 256。它是 DES 算法的替代者，安全强度很高，性能也很好，而且有的硬件还会做特殊优化，所以非常流行，是应用最广泛的对称加密算法。</p>
 <p><strong>ChaCha20</strong> 是 Google 设计的另一种加密算法，密钥长度固定为 256 位，纯软件运行性能要超过 AES，曾经在移动客户端上比较流行，但 ARMv8 之后也加入了 AES 硬件优化，所以现在不再具有明显的优势，但仍然算得上是一个不错算法。</p>
-<h4 id="_74">✔ 加密分组模式<a class="headerlink" href="#_74" title="Permanent link"></a></h4>
+<h4 id="_83">✔ 加密分组模式<a class="headerlink" href="#_83" title="Permanent link"></a></h4>
 <p>对称算法还有一个<strong>分组模式</strong>的概念，它可以让算法用<strong>固定长度的密钥</strong>加密任意长度的明文，把<strong>小秘密（即密钥）</strong>转化为<strong>大秘密（即密文）</strong>。</p>
 <p>最新的分组模式被称为 <strong>AEAD</strong>（Authenticated Encryption withAssociated Data），在<strong>加密</strong>的同时增加了<strong>认证</strong>的功能，常用的是 <strong>GCM（伽罗瓦/计数器模式）</strong>、<strong>CCM</strong> 和<strong>Poly1305</strong>。</p>
 <ul>
@@ -11560,7 +11874,7 @@ Content-Range: bytes 4590-7999/8000
 <li>输出反馈（OFB）</li>
 <li>计数器模式（CTR）</li>
 </ul>
-<h3 id="_75">✔ 非对称加密<a class="headerlink" href="#_75" title="Permanent link"></a></h3>
+<h3 id="_84">✔ 非对称加密<a class="headerlink" href="#_84" title="Permanent link"></a></h3>
 <p>它有两个密钥，一个叫<strong>公钥</strong>（public key），一个叫<strong>私钥</strong>（private key）。两个密钥是不同的，<strong>不对称</strong>，公钥可以公开给任何人使用，而私钥必须严格保密。</p>
 <p>公钥和私钥有个特别的<strong>单向</strong>性，虽然都可以用来加密解密，但公钥加密后只能用私钥解密，反过来，私钥加密后也只能用公钥解密。</p>
 <p>非对称加密可以解决<strong>密钥交换</strong>的问题。网站秘密保管私钥，在网上任意分发公钥，你想要登录网站只要用公钥加密就行了，密文只能由私钥持有者才能解密。而黑客因为没有私钥，所以就无法破解密文。</p>
@@ -11570,7 +11884,7 @@ Content-Range: bytes 4590-7999/8000
 <p>对极大整数做因数分解的难度决定了 RSA 算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA 算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用 RSA 加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的 RSA 钥匙才可能被强力方式解破。世界上还没有任何可靠的攻击 RSA 算法的方式。只要其钥匙的长度足够长，用 RSA 加密的信息实际上是不能被解破的。<strong>目前 RSA 密钥的推荐长度是 2048</strong>；</p>
 <p><strong>ECC</strong></p>
 <p>ECC（Elliptic Curve Cryptography）是非对称加密里的后起之秀，它基于椭圆曲线离散对数的数学难题，使用特定的曲线方程和基点生成公钥和私钥，<strong>子算法 ECDHE 用于密钥交换，ECDSA 用于数字签名</strong>。</p>
-<h3 id="_76">✔ 混合加密<a class="headerlink" href="#_76" title="Permanent link"></a></h3>
+<h3 id="_85">✔ 混合加密<a class="headerlink" href="#_85" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://time.geekbang.org/column/intro/100029001">透视 HTTP 协议：24 讲</a></li>
@@ -11860,8 +12174,8 @@ wss://secure.example.com/wsapi
 <h3 id="dns_1">✔ DNS 解析过程<a class="headerlink" href="#dns_1" title="Permanent link"></a></h3>
 <p>见 <a href="#✔-输入-URL-到页面显示发生哪些事情">输入 URL 到页面显示发生哪些事情</a></p>
 <h1 id="cdn">CDN<a class="headerlink" href="#cdn" title="Permanent link"></a></h1>
-<h1 id="_77">性能优化<a class="headerlink" href="#_77" title="Permanent link"></a></h1>
-<h2 id="_78">? 性能指标<a class="headerlink" href="#_78" title="Permanent link"></a></h2>
+<h1 id="_86">性能优化<a class="headerlink" href="#_86" title="Permanent link"></a></h1>
+<h2 id="_87">? 性能指标<a class="headerlink" href="#_87" title="Permanent link"></a></h2>
 <h3 id="fp-first-paint">? FP （First Paint） 首次绘制<a class="headerlink" href="#fp-first-paint" title="Permanent link"></a></h3>
 <h3 id="fcp-first-contentful-paint">✔ FCP （First Contentful Paint） 首次内容绘制<a class="headerlink" href="#fcp-first-contentful-paint" title="Permanent link"></a></h3>
 <p>ref <a href="https://web.dev/fcp/">https://web.dev/fcp/</a></p>
@@ -12038,7 +12352,7 @@ wss://secure.example.com/wsapi
    - 定时器触发线程：主要控制 <code>setInterval</code> 和 <code>setTimeout</code>，用来计时，计时完毕后，则把定时器的处理函数推进事件队列中，等待 JS 引擎线程；
    - HTTP 异步请求线程：通过 <code>XMLHttpRequest</code> 连接后，通过浏览器新开的一个线程，监控 <code>readyState</code> 状态变更时，如果设置了该状态的回调函数，则将该状态的处理函数推进事件队列中，等待 JS 引擎线程执行；</li>
 </ol>
-<h2 id="_79">前端性能优化技巧<a class="headerlink" href="#_79" title="Permanent link"></a></h2>
+<h2 id="_88">前端性能优化技巧<a class="headerlink" href="#_88" title="Permanent link"></a></h2>
 <p>ref</p>
 <ul>
 <li><a href="https://csspod.com/frontend-performance-best-practices/">https://csspod.com/frontend-performance-best-practices/</a></li>
@@ -12060,7 +12374,7 @@ wss://secure.example.com/wsapi
 <li><a href="#节流防抖">节流防抖</a></li>
 <li>虚拟列表</li>
 </ol>
-<h3 id="_80">✔ 节流防抖<a class="headerlink" href="#_80" title="Permanent link"></a></h3>
+<h3 id="_89">✔ 节流防抖<a class="headerlink" href="#_89" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/5d88d68ae51d4561c541a796">https://juejin.im/post/5d88d68ae51d4561c541a796</a></li>
@@ -12191,7 +12505,7 @@ wss://secure.example.com/wsapi
 <p><strong>什么场景下需要 DNS prefetch？</strong></p>
 <p>Chrome 会自动把当前页面的所有带 href 的 link 的 dns 都 prefetch 一遍。</p>
 <p>需要手动添加 link 标签的场景是：你预计用户在后面的访问中需要用到当前页面的所有链接都不包含的域名。</p>
-<h3 id="_81">✔ 回流重绘<a class="headerlink" href="#_81" title="Permanent link"></a></h3>
+<h3 id="_90">✔ 回流重绘<a class="headerlink" href="#_90" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzU3MzcxMzg2Mw==&amp;mid=2247483899&amp;idx=1&amp;sn=7c30a7f988b849dcf78c53d31047b53c&amp;chksm=fd3c3d53ca4bb445fb0f2daef575e692ad02de4b15d605577d05261ba626283cb6ca2b6acdcd&amp;mpshare=1&amp;scene=1&amp;srcid=0410RVR6be4t1Afbj3O5W4yT&amp;sharer_sharetime=1586450941057&amp;sharer_shareid=bf267d5902053ba7332cb6bb736b86b3&amp;key=638ad2969ef69dcf11476168c5c3cd0cce26c4f3e4e5132b1573dab7740b10a7e745075955d4771a957e8bba66d6f361c15c3fc94cc01ba68429691caf7684a2dbe58e45929eaaf9feb416d1285cdf75&amp;ascene=1&amp;uin=MjQyMzQ2MTgzMw%3D%3D&amp;devicetype=Windows+10&amp;version=62090045&amp;lang=zh_CN&amp;exportkey=A69%2Fy66UqAKVG8vtwnJza5s%3D&amp;pass_ticket=tQsZ5yMHlUVs7h0lTw%2Ffpm89BwyLVP1sKZHZS6%2BNk7ZECu67WBdy01bMx%2FEgBfv9">初探浏览器渲染原理</a></li>
@@ -12282,7 +12596,7 @@ wss://secure.example.com/wsapi
 <li>如果 <code>script</code> 无 <code>src</code> 属性，则 <code>defer</code>，<code>async</code> 会被忽略；</li>
 <li>动态添加的 <code>script</code> 标签隐含 <code>async</code> 属性，对动态嵌入的脚本使用 <code>async=false</code> 来达到 <code>defer</code> 的效果；</li>
 </ul>
-<h3 id="_82">虚拟列表<a class="headerlink" href="#_82" title="Permanent link"></a></h3>
+<h3 id="_91">虚拟列表<a class="headerlink" href="#_91" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/5db684ddf265da4d495c40e5">「前端进阶」高性能渲染十万条数据(虚拟列表)</a></li>
@@ -12313,8 +12627,8 @@ wss://secure.example.com/wsapi
 <span class="p">})</span>
 </pre></div>
 
-<h1 id="_83">浏览器及安全<a class="headerlink" href="#_83" title="Permanent link"></a></h1>
-<h2 id="_84">✔ 跨域<a class="headerlink" href="#_84" title="Permanent link"></a></h2>
+<h1 id="_92">浏览器及安全<a class="headerlink" href="#_92" title="Permanent link"></a></h1>
+<h2 id="_93">✔ 跨域<a class="headerlink" href="#_93" title="Permanent link"></a></h2>
 <p>跨域是因为浏览器同源策略的存在而产生的，它可以提升网站的安全性。</p>
 <p>同源：<strong>协议 + 域名 + 端口完全相同则为同源</strong>，即使两个不同的域名指向同一个 IP 这也算跨域。</p>
 <p>同源策略限制的内容：</p>
@@ -12536,7 +12850,7 @@ a :: e.data hello, I am b
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </pre></div>
 
-<h3 id="_85">✔ 中间层代理跨域<a class="headerlink" href="#_85" title="Permanent link"></a></h3>
+<h3 id="_94">✔ 中间层代理跨域<a class="headerlink" href="#_94" title="Permanent link"></a></h3>
 <p><img alt="代理跨域" src="https://qiniu1.lxfriday.xyz/feoffer/cross-origin-proxy.png" /></p>
 <p>使用 Nginx 或者自建代理服务，让前端页面请求自己的代理服务器，由代理服务器把原请求转发到目标地址。</p>
 <p>跨域限制只在浏览器层面才会有，浏览器向代理服务器发送请求时就可以规避掉原始 url 无法跨域的问题。</p>
@@ -12588,7 +12902,7 @@ a :: e.data hello, I am b
 </pre></div>
 
 <p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/fbb679cd-67b3-c991-dedd-5e0a3304ed3b.png" /></p>
-<h3 id="_86">✔ 防御措施<a class="headerlink" href="#_86" title="Permanent link"></a></h3>
+<h3 id="_95">✔ 防御措施<a class="headerlink" href="#_95" title="Permanent link"></a></h3>
 <ul>
 <li>CSP</li>
 <li>不要相信用户输入的内容，对用户输入的内容转义</li>
@@ -12600,7 +12914,7 @@ a :: e.data hello, I am b
 </ul>
 <p>跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法。XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。</p>
 <p>由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。</p>
-<h3 id="_87">✔ 防御措施<a class="headerlink" href="#_87" title="Permanent link"></a></h3>
+<h3 id="_96">✔ 防御措施<a class="headerlink" href="#_96" title="Permanent link"></a></h3>
 <ul>
 <li>Get 请求不对数据进行修改；</li>
 <li>关键 Cookie 使用 httponly，不让脚本访问关键 cookie；</li>
@@ -12610,12 +12924,12 @@ a :: e.data hello, I am b
 <li>服务端验证 http referer 头信息（防止从第三方网站发起请求）；</li>
 </ul>
 <h2 id="chrome">Chrome 架构<a class="headerlink" href="#chrome" title="Permanent link"></a></h2>
-<h2 id="_88">页面渲染流程<a class="headerlink" href="#_88" title="Permanent link"></a></h2>
-<h2 id="_89">分层及合成机制<a class="headerlink" href="#_89" title="Permanent link"></a></h2>
-<h2 id="_90">火焰图<a class="headerlink" href="#_90" title="Permanent link"></a></h2>
-<h2 id="_91">浏览器原理<a class="headerlink" href="#_91" title="Permanent link"></a></h2>
+<h2 id="_97">页面渲染流程<a class="headerlink" href="#_97" title="Permanent link"></a></h2>
+<h2 id="_98">分层及合成机制<a class="headerlink" href="#_98" title="Permanent link"></a></h2>
+<h2 id="_99">火焰图<a class="headerlink" href="#_99" title="Permanent link"></a></h2>
+<h2 id="_100">浏览器原理<a class="headerlink" href="#_100" title="Permanent link"></a></h2>
 <h3 id="css_7">CSS 渲染、合成<a class="headerlink" href="#css_7" title="Permanent link"></a></h3>
-<h1 id="_92">手撕代码<a class="headerlink" href="#_92" title="Permanent link"></a></h1>
+<h1 id="_101">手撕代码<a class="headerlink" href="#_101" title="Permanent link"></a></h1>
 <h2 id="js_5">手撕 JS 实现<a class="headerlink" href="#js_5" title="Permanent link"></a></h2>
 <h3 id="instanceof">✔ 手撕 instanceof<a class="headerlink" href="#instanceof" title="Permanent link"></a></h3>
 <p>ref</p>
@@ -13054,7 +13368,7 @@ a :: e.data hello, I am b
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_93">✔ 手撕深拷贝<a class="headerlink" href="#_93" title="Permanent link"></a></h3>
+<h3 id="_102">✔ 手撕深拷贝<a class="headerlink" href="#_102" title="Permanent link"></a></h3>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/5d6aa4f96fb9a06b112ad5b1">如何写出一个惊艳面试官的深拷贝?</a></li>
@@ -13415,7 +13729,7 @@ a :: e.data hello, I am b
   on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
 CodePen 全屏查看
 </button></p>
-<h3 id="_94">✔ 手写实现拖放功能<a class="headerlink" href="#_94" title="Permanent link"></a></h3>
+<h3 id="_103">✔ 手写实现拖放功能<a class="headerlink" href="#_103" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -13556,7 +13870,7 @@ CodePen 全屏查看
   on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
 CodePen 全屏查看
 </button></p>
-<h3 id="_95">✔ 从一个字符串中提取时间<a class="headerlink" href="#_95" title="Permanent link"></a></h3>
+<h3 id="_104">✔ 从一个字符串中提取时间<a class="headerlink" href="#_104" title="Permanent link"></a></h3>
 <p><code>2020-02-08 12:13:14</code> 提取成 =&gt; <code>[2020, 02, 08, 12, 13, 14]</code></p>
 <div class="highlight"><pre><span class="kd">function</span> <span class="nx">extractTime</span><span class="p">(</span><span class="nx">timeStr</span><span class="p">)</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">timeStr</span><span class="p">)</span>
@@ -13564,7 +13878,7 @@ CodePen 全屏查看
 <span class="p">}</span>
 </pre></div>
 
-<h3 id="_96">✔ 实现点击表头自动正序、反序<a class="headerlink" href="#_96" title="Permanent link"></a></h3>
+<h3 id="_105">✔ 实现点击表头自动正序、反序<a class="headerlink" href="#_105" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -13662,13 +13976,13 @@ CodePen 全屏查看
   on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
 CodePen 全屏查看
 </button></p>
-<h1 id="_97">设计模式<a class="headerlink" href="#_97" title="Permanent link"></a></h1>
+<h1 id="_106">设计模式<a class="headerlink" href="#_106" title="Permanent link"></a></h1>
 <p>ref</p>
 <ul>
 <li><a href="https://juejin.im/post/59df4f74f265da430f311909">JavaScript 设计模式</a></li>
 <li><a href="https://juejin.im/post/5afe6430518825428630bc4d">JavaScript 中常见设计模式整理</a></li>
 </ul>
-<h2 id="_98">✔ 单例模式<a class="headerlink" href="#_98" title="Permanent link"></a></h2>
+<h2 id="_107">✔ 单例模式<a class="headerlink" href="#_107" title="Permanent link"></a></h2>
 <p>两个条件：</p>
 <ul>
 <li>确保只有一个实例</li>
@@ -13697,7 +14011,7 @@ CodePen 全屏查看
 
 <h2 id="-">✔ 发布-订阅模式<a class="headerlink" href="#-" title="Permanent link"></a></h2>
 <p>见 <a href="#✔-手撕-EventEmitter">手撕 EventEmitter</a></p>
-<h2 id="_99">✔ 观察者模式<a class="headerlink" href="#_99" title="Permanent link"></a></h2>
+<h2 id="_108">✔ 观察者模式<a class="headerlink" href="#_108" title="Permanent link"></a></h2>
 <p>当观察的数据对象发生变化时, 自动调用相应函数。</p>
 <p><strong>Object.defineProperty</strong></p>
 <div class="highlight"><pre><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
@@ -13731,7 +14045,7 @@ CodePen 全屏查看
 <span class="nx">proxy</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">// 调用相应函数</span>
 </pre></div>
 
-<h2 id="_100">✔ 策略模式<a class="headerlink" href="#_100" title="Permanent link"></a></h2>
+<h2 id="_109">✔ 策略模式<a class="headerlink" href="#_109" title="Permanent link"></a></h2>
 <p>根据不同参数可以命中不同的策略</p>
 <div class="highlight"><pre><span class="kr">const</span> <span class="nx">strategy</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">S</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">salary</span><span class="p">)</span> <span class="p">{</span>
@@ -13752,7 +14066,7 @@ CodePen 全屏查看
 <span class="nx">calculateBonus</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span> <span class="c1">// 30000</span>
 </pre></div>
 
-<h2 id="_101">✔ 代理模式<a class="headerlink" href="#_101" title="Permanent link"></a></h2>
+<h2 id="_110">✔ 代理模式<a class="headerlink" href="#_110" title="Permanent link"></a></h2>
 <p>代理模式的种类有很多, 在 JS 中最常用的为虚拟代理和缓存代理。</p>
 <p><strong>虚拟代理实现图片预加载</strong></p>
 <div class="highlight"><pre><span class="kr">const</span> <span class="nx">myImage</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -13810,7 +14124,7 @@ CodePen 全屏查看
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proxyMulti</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 
-<h2 id="_102">✔ 装饰者模式<a class="headerlink" href="#_102" title="Permanent link"></a></h2>
+<h2 id="_111">✔ 装饰者模式<a class="headerlink" href="#_111" title="Permanent link"></a></h2>
 <p>动态地给函数赋能。在改造前是这样的：</p>
 <div class="highlight"><pre><span class="kd">let</span> <span class="nx">wear</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;穿上第一件衣服&#39;</span><span class="p">)</span>
