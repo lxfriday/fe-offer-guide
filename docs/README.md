@@ -14633,10 +14633,6 @@ function flattenDepthRecu(arr, depth) {
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 2));
 ```
 
-### ✔ 手写 LRU
-
-LRU-least recently used 最近最少使用算法，是一种内存数据淘汰策略，使用常见是当内存不足时，需要淘汰最近最少使用的数据。LRU常用语缓存系统的淘汰策略。
-
 ## 手撕 DOM 操作
 
 ### ✔ 实现一个输入框防抖并带有 autocomplete 能力
