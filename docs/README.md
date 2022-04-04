@@ -3426,6 +3426,12 @@ XHRWrapper({
 )
 ```
 
+详细例子参考：
+
+- [xhr.html](https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr.html)
+- [xhr-wrapper.js](https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-wrapper.js)
+- [xhr-server.js](https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-server.js)
+
 ### Axios
 
 ## ✔ fetch
