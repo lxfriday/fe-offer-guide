@@ -3200,6 +3200,232 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
 
+### ✔ 封装 XHR
+
+封装成 Promise 的形式：
+
+```js
+function XHRWrapper({
+  url,
+  method = 'GET',
+  headers = null,
+  data = null,
+  params = null,
+  formData = null,
+  timeout = null,
+  responseType = 'json',
+  withCredentials = false,
+  onTimeout = null,
+  onDownloadProgress = null,
+  onUploadProgress = null,
+  onAbort = null,
+}) {
+  const ajax = new Promise((res, rej) => {
+    const timeStart = Date.now()
+    const xhr = new XMLHttpRequest()
+
+    const requestConfig = {
+      url,
+      method,
+      headers,
+      data,
+      params,
+      formData,
+      timeout,
+      responseType,
+      withCredentials,
+    }
+
+    // --------------------request interceptors--------------
+    if (XHRWrapper.interceptors.request.requestInterceptors.length) {
+      XHRWrapper.interceptors.request.requestInterceptors.forEach(
+        interceptor => {
+          interceptor(requestConfig)
+        }
+      )
+    }
+    // --------------------------------------------------
+
+    // --------------------url拼接，处理query--------------
+    let finalUrl = requestConfig.url
+
+    if (requestConfig.params) {
+      Object.keys(requestConfig.params).forEach(k => {
+        if (finalUrl.indexOf('?') === -1) {
+          finalUrl += `?${k}=${requestConfig.params[k]}`
+        } else {
+          finalUrl += `&${k}=${requestConfig.params[k]}`
+        }
+      })
+    }
+    // --------------------------------------------------
+
+    xhr.open(requestConfig.method, finalUrl, true)
+    xhr.responseType = requestConfig.responseType
+    xhr.withCredentials = requestConfig.withCredentials
+
+    if (timeout) {
+      xhr.timeout = timeout
+      xhr.ontimeout = onTimeout.bind(xhr)
+    }
+
+    // ------------------------------header----------------
+    if (requestConfig.headers) {
+      Object.keys(requestConfig.headers).forEach(k => {
+        xhr.setRequestHeader(k, requestConfig.headers[k])
+      })
+    }
+    // ----------------------------------------------------
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        const allResponse = {
+          statusCode: xhr.status,
+          statusText: xhr.statusText,
+          response: xhr.response,
+          responseType: xhr.responseType,
+          responseURL: xhr.responseURL,
+          duration: Date.now() - timeStart, // 请求用时
+          rawAllResponseHeaders: xhr.getAllResponseHeaders(),
+          allResponseHeaders: stripRawHeaders(xhr.getAllResponseHeaders()),
+        }
+
+        // --------------------response interceptors--------------
+        if (XHRWrapper.interceptors.response.responseInterceptors.length) {
+          XHRWrapper.interceptors.response.responseInterceptors.forEach(
+            interceptor => {
+              interceptor(allResponse)
+            }
+          )
+        }
+        // --------------------------------------------------
+
+        if (xhr.status === 200) {
+          const responseInfo = {
+            data: xhr.response,
+            statusCode: xhr.status,
+            statusText: xhr.statusText,
+          }
+          res(responseInfo)
+        }
+        if (xhr.status >= 400) {
+          const rejInfo = {
+            data: null,
+            statusCode: xhr.status,
+            statusText: xhr.statusText,
+          }
+          rej(rejInfo)
+        }
+      }
+    }
+
+    xhr.upload.onprogress = onUploadProgress.bind(xhr)
+    xhr.onprogress = onDownloadProgress.bind(xhr)
+    xhr.onabort = onAbort.bind(xhr)
+    xhr.onerror = e => {
+      console.log('onerror')
+      rej(e)
+    }
+
+    if (requestConfig.data) {
+      xhr.setRequestHeader('Content-Type', 'application/json')
+      xhr.send(JSON.stringify(requestConfig.data))
+    } else if (requestConfig.formData) {
+      xhr.send(requestConfig.formData)
+    } else {
+      xhr.send()
+    }
+  })
+
+  return ajax
+}
+
+// 简易 interceptors
+XHRWrapper.interceptors = {
+  request: {
+    requestInterceptors: [],
+    use(interceptor) {
+      this.requestInterceptors.push(interceptor)
+    },
+  },
+  response: {
+    responseInterceptors: [],
+    use(interceptor) {
+      this.responseInterceptors.push(interceptor)
+    },
+  },
+}
+
+// rawHeaders => 'access-control-allow-headers: x-request-id,content-type\r\naccess-control-allow-methods: GET, PUT, POST, DELETE, PATCH, OPTIONS\r\naccess-control-allow-origin: *\r\nconnection: keep-alive\r\ncontent-type: application/json\r\ndate: Sun, 03 Apr 2022 02:58:27 GMT\r\nkeep-alive: timeout=5\r\nrequestid: 100123456465\r\ntransfer-encoding: chunked\r\nx-powered-by: Express\r\n'
+// 把 字符串 headers 提取成 kv 对
+function stripRawHeaders(rawHeaders) {
+  const res = {}
+  const rawHeadersSplit = rawHeaders.split('\r\n')
+  rawHeadersSplit.pop()
+  rawHeadersSplit.forEach(kv => {
+    const kvSplit = kv.split(':')
+    res[kvSplit[0].trim()] = kvSplit[1].trim()
+  })
+  return res
+}
+```
+
+使用
+
+```js
+XHRWrapper({
+  method: 'POST',
+  url: 'http://test.com:3457/receiveFormData',
+  headers: {
+    'x-request-id': '100123456465',
+  },
+  // qs param
+  // params: {
+  //   province: 'Wuhan',
+  //   region: 'Hongshan',
+  //   street: 'Wenhui Street',
+  // },
+  // json data
+  // data: {
+  //   name: 'yunyuv',
+  //   age: 1003,
+  //   sex: 'female',
+  //   school: 'HZAU',
+  // },
+  // formData,
+  responseType: 'json',
+  timeout: 1000,
+  withCredentials: false,
+  onTimeout() {
+    console.log('timeout')
+  },
+  onDownloadProgress(e) {
+    console.log(
+      'onDownloadProgress',
+      `${((e.loaded * 100) / e.total).toFixed(2)}%`
+    )
+  },
+  onUploadProgress(e) {
+    console.log(
+      'onUploadProgress',
+      `${((e.loaded * 100) / e.total).toFixed(2)}%`
+    )
+  },
+  onAbort(e) {
+    console.log('onAbort', e)
+  },
+  onError(e) {
+    console.log('onError', e)
+  },
+}).then(
+  response => {
+    console.log('success', response)
+  },
+  errorResponse => {
+    console.log('error', errorResponse)
+  }
+)
+```
+
 ### Axios
 
 ## ✔ fetch
