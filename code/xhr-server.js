@@ -13,12 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.all('*', function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  console.log('req.url', `${req.headers.referer}`);
+  res.setHeader('Access-Control-Allow-Origin', req.headers.referer.substring(0, req.headers.referer.length - 1))
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, PUT, POST, DELETE, PATCH, OPTIONS'
   )
   res.setHeader('Access-Control-Allow-Headers', 'x-request-id,content-type')
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Max-Age', 6000)
+
+  console.log('cookie', req.headers.cookie);
+
   next()
 })
 
@@ -75,6 +81,24 @@ app.post('/receiveFormData', function (req, res) {
     )
     res.end()
   })
+})
+
+app.get('/willReceive500', function (req, res) {
+  res.writeHead(500, {})
+  res.write(
+    JSON.stringify({
+      success: 0,
+      errMsg: '服务器错误',
+      data: {},
+    })
+  )
+  res.end()
+})
+
+app.get('/downloadBigFile', function (req, res) {
+  res.writeHead(200, {})
+  res.write()
+  res.end()
 })
 
 app.all('*', function (req, res) {

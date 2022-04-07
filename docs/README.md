@@ -3432,7 +3432,9 @@ XHRWrapper({
 - [xhr-wrapper.js](https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-wrapper.js)
 - [xhr-server.js](https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-server.js)
 
-### Axios
+### ✔ Axios
+
+ref [Axios 官方文档](https://axios-http.com/zh/docs/post_example)
 
 ## ✔ fetch
 
@@ -3694,6 +3696,8 @@ XMLHttpRequest 需要经过一次封装之后才方便业务层使用， fetch �
 - 基于 Promise 实现，能使用 async 等新特性；
 - 基本配置比较简单且集中，方便管理；
 - fetch 是事实上未来的趋势；
+- 当接收到一个代表错误的 HTTP 状态码时，从 `fetch()` 返回的 Promise 不会被标记为 `reject`，即使响应的 HTTP 状态码是 404 或 500。相反，它会将 Promise 状态标记为 `resolve` （如果响应的 HTTP 状态码不在 200 - 299 的范围内，则设置 `resolve` 返回值的 ok 属性为 false ），仅当网络故障时或请求被阻止时，才会标记为 `reject`，这一点与 Axios 不同；
+
 
 ---
 
