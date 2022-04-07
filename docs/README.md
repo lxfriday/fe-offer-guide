@@ -10661,18 +10661,27 @@ p {
 
 ## ✔ React 生命周期
 
-![](https://qiniu1.lxfriday.xyz/feoffer/28cc0a6d-9b6b-e9af-0e7f-3b2df7636ed1.png)
+![](https://qiniu1.lxfriday.xyz/blog/3ce7e947-da2b-4977-fc51-3d2290ebcb8e.png)
 
-- `componentWillMount`
-- `render`
-- `componentDidMount`
-- `shouldComponentUpdate`
-- `componentWillReceiveProps`
-- `componentWillUpdate`
-- `componentDidUpdate`
-- `componentWillUnmount`
-- `static getDerivedStateFromProps` 在组件创建时和更新时的 render 方法之前调用，它应该返回一个对象来更新状态，或者返回 null 来不更新任何内容
-- `getSnapshotBeforeUpdate` 被调用于 `render` 之后，可以读取但无法使用 DOM 的时候。它使您的组件可以在可能更改之前从 DOM 捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给 `componentDidUpdate()`
+ref [React.Component](https://reactjs.org/docs/react-component.html)
+
+- `constructor()`
+- `static getDerivedStateFromProps(props, state)`
+- `static getDerivedStateFromError(error)`
+- `shouldComponentUpdate(nextProps, nextState)`
+- `render()`
+- `componentDidMount()`
+- `getSnapshotBeforeUpdate(prevProps, prevState)`
+- `componentDidUpdate(prevProps, prevState, snapshot)`
+- `componentDidCatch(error, info)`
+- `componentWillUnmount()`
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/KKZoGjQ?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/lxfriday/pen/KKZoGjQ">
+  Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
+  on <a href="https://codepen.io">CodePen</a>.</iframe>'>
+CodePen 查看演示
+</button>
 
 ## React Context
 
