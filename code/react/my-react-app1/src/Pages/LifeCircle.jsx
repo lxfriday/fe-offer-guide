@@ -26,7 +26,7 @@ export default class LifeCircle extends Component {
   render() {
     LogR('outer render')
     return (
-      <div>
+      <div className='LifeCircleWrapper'>
         <button
           onClick={() => this.setState(prev => ({ count: prev.count + 1 }))}
         >
