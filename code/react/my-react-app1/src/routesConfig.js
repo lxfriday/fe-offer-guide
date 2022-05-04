@@ -1,6 +1,6 @@
-import Home from './Pages/Home'
-import LifeCircle from './Pages/LifeCircle'
-import Context from './Pages/Context'
+import Home from './Pages/Home/index'
+import LifeCircle from './Pages/LifeCircle/index'
+import Context from './Pages/Context/index'
 
 const routes = [
   {

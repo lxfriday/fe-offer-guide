@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import styles from './Nav.module.less'
 import { NavLink, useLocation } from 'react-router-dom'
 import classnames from 'classnames'
-import routesConfig, { getPageTitle } from '../routesConfig'
+import routesConfig, { getPageTitle } from '@/routesConfig'
 
 const sideRoutesConfig = routesConfig.slice(1)
 
 export default function Nav({ children }) {
   let location = useLocation()
-  console.log('location', location)
   return (
     <div className={styles.wrapper}>
       <div className={styles.sideWrapper}>

@@ -10715,7 +10715,615 @@ ref
 
 ## React Router 原理
 
-## Redux 原理
+## Redux 相关
+
+最新版本的 redux 已经比较完善，并且拆分出两个库，现在再也不需要写大量样板代码了。
+
+- [`Redux`](https://redux.js.org/)
+- [`Redux Toolkit`](https://redux-toolkit.js.org/)
+
+### ✔ Redux Toolkit
+
+Redux 基本还是保持原样，而 Tookit 可以更好的组织 redux 代码。一言概括就是，代码看起来像是给人看的了。
+
+几个主要的 API 如下：
+
+- `configureStore` 初始化 store 的函数
+- `createSlice` 用来创建 redux 内的 reducer 逻辑，完善的覆盖了命名空间、初始 state、reducer、effects
+- `createAsyncThunk` 用来处理网络请求等的功能函数
+- `createSelector` 使用 [reselect](https://github.com/reduxjs/reselect) 来方便地组合处理从 store 中获取的数据
+
+一个比较常见的 redux 配置如下：
+
+```js
+// store/app.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+// 模拟一个网络请求
+export const fetchUserInfo = createAsyncThunk('posts/fetchPosts', async () => {
+  // 在这里通过网络请求获取数据
+  const response = await new Promise((res, rej) => {
+    setTimeout(() => {
+      res({
+        success: true,
+        data: {
+          name: 'lxfriday',
+          sex: 'male'
+        }
+      })
+    }, 3000)
+  })
+  return response.data
+})
+
+const appSlice = createSlice({
+  name: 'app',
+  initialState: {
+    hasLogin: false,
+    status: 'idle',
+    userInfo: {}
+  },
+  reducers: {
+    setHasLogin: (state, { payload }) => {
+      state.hasLogin = payload
+    }
+  },
+  extraReducers: {
+    [fetchUserInfo.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [fetchUserInfo.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      state.userInfo = action.payload
+    },
+    [fetchUserInfo.rejected]: (state, action) => {
+      state.status = 'error'
+    }
+  }
+})
+export default appSlice.reducer
+
+// store/index.js
+import { configureStore } from '@reduxjs/toolkit'
+import { createLogger } from 'redux-logger'
+import appSlice from './app'
+
+const store = configureStore({
+  reducer: {
+    app: appSlice
+  },
+  preloadedState: {},
+  middleware: getDefaultMiddleware => {
+    return [...getDefaultMiddleware(), createLogger()]
+  }
+})
+export default store
+
+// src/index.jsx
+import { Provider } from 'react-redux'
+import store from './store'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
+)
+
+// src/App.jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchUserInfo } from './store/app'
+
+function App() {
+  const userInfo = useSelector(state => state.app.userInfo)
+  const dispatch = useDispatch()
+  return (
+    <div className="App">
+      <p>
+        <button
+          onClick={() => {
+            const promise = dispatch(fetchUserInfo('this is fetchUserInfo arg'))
+            setTimeout(() => {
+              // fetchUserInfo 是可取消的，取消之后会导致 fetchUserInfo.rejected 触发
+              promise.abort()
+            }, 1000)
+          }}
+        >
+          fetch user Info
+        </button>
+      </p>
+    </div>
+  )
+}
+export default App
+```
+
+#### ✔ configureStore
+
+[`configureStore`](https://redux-toolkit.js.org/api/configureStore) 是 redux [`createStore`](https://redux.js.org/api/createstore) 的替代版（高级版）。用来初始化 store。
+
+配置项如下：
+
+```js
+const store = configureStore({
+  // reducer
+  reducer: {
+    // namespace1: ...
+    // namespace2: ...
+  },
+  // middleware
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware(),
+     // otherMiddleware...
+  ],
+  // 是否启用 redux devtool 开发工具，true 表示开启，redux-toolkit 内部会判断 env，在 prod 模式下会自动禁用
+  devTools: true,
+  // 预置的 state，preloadedState 的 state 会覆盖到对应的命名空间下的 state，不是合并，是直接覆盖
+  preloadedState: {
+    // namespace1: namespace1PreloadedState
+    // namespace2: namespace2PreloadedState
+  },
+  enhancers: [] // enhancers
+})
+````
+
+创建出来的 `store` 的结构是这样的，其中 `dispatch`、`getState`、`subscribe` 3个属性用的比较多。
+
+![store](http://qiniu1.lxfriday.xyz/feoffer/1651582364227_62b87790-d436-4cd1-b2f1-d4a53d90d749.png)
+
+`configureStore` 最需要配置的就是 `reducer` 属性。从最开始那个例子中就可以知道。`reducer` 属性要指定一个对象，对象的 key 是每个 reducer 的命名空间，而值就是 `reducer`。
+
+#### ✔ createSlice
+
+[`createSlice`](https://redux-toolkit.js.org/api/createSlice) 是创建 reducer 的核心，其参数为初始 state、name（命名空间）、和空间下的 reducers。一个最简单的 `createSlice` 就是下面这个例子。
+
+```js
+// 一个最简单的 reducer
+import { createSlice } from '@reduxjs/toolkit'
+
+const homeSlice = createSlice({
+  name: 'home',
+  initialState: {
+    count: 0
+  },
+  reducers: {
+    inc: state => {
+      state.count += 1
+    },
+    dec: state => {
+      state.count -= 1
+    }
+  },
+  extraReducers: {
+    // [fetchUserInfo.pending]: state => {
+    //   state.count += 1
+    // }
+  }
+})
+export const { inc, dec } = homeSlice.actions
+export default homeSlice.reducer
+```
+
+`createSlice` 创建出来的 `homeSlice` 的结构如下：
+
+![createSlice](http://qiniu1.lxfriday.xyz/feoffer/1651582890070_25be4145-0b74-4869-a8d2-42d5bb22756c.png)
+
+`homeSlice.reducer` 就是要传递给 `configureStore` 参数的 `reducer` 属性的值。
+
+```js
+const store = configureStore({
+  reducer: {
+    home: homeSlice.reducer,
+    // ...
+  },
+  // ...
+})
+````
+
+`export const { inc, dec } = homeSlice.actions` 这一行代码把 action 都进行了导出，使用的时候只需要配合 `dispatch` 就可以执行了。
+
+```jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { inc, dec } from './store/home'
+
+function App() {
+  const count = useSelector(state => state.home.count)
+  const dispatch = useDispatch()
+  return (
+    <div className="App">
+      <p>{count}</p>
+      <p>
+        <button onClick={() => dispatch(inc())}>inc</button>
+        <button onClick={() => dispatch(dec())}>dec</button>
+      </p>
+    </div>
+  )
+}
+
+````
+
+有没有发现，使用了 redux-toolkit 的 redux 代码就非常正常了，完全不像以前需要声明很多 action type  常量，写很多 switch case 的情况。并且 redux-toolkit 还内置了 [immer](https://redux-toolkit.js.org/usage/immer-reducers)，这样就可以非常方便的在 reducer 中用类似 `state.count += 1` 这种写法。
+
+#### ✔ createAsyncThunk
+
+通常网络请求会使用到 [`createAsyncThunk`](https://redux-toolkit.js.org/api/createAsyncThunk)，当然如果你的项目不考虑网络请求和 react jsx 代码分离的话可能用不到它。`createAsyncThunk` 可以让你把网络请求相关的逻辑单独写在一个函数中，通常 `createAsyncThunk` 创建的 thunk 会放在对应的 reducer 文件内，并且其逻辑处理通常在 `extraReducers` 内进行。
+
+```js
+// store/users.js
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
+// 'posts/fetchPosts' 是 action type
+export const fetchUserInfo = createAsyncThunk('posts/fetchPosts', async (userId) => {
+  // 在这里通过网络请求获取数据
+  // 这里是用的 promise 模拟一个请求的过程
+  // 实际的情况是 const response = await request.fetchUser() 这种形式
+  const response = await new Promise((res, rej) => {
+    setTimeout(() => {
+      res({
+        success: true,
+        data: {
+          name: 'lxfriday',
+          sex: 'male',
+          userId
+        }
+      })
+    }, 3000)
+  })
+  return response.data
+})
+
+const usersSlice = createSlice({
+  name: 'users',
+  initialState: {
+    hasLogin: false,
+    status: 'idle',
+    userInfo: {}
+  },
+  reducers: {
+    setHasLogin: (state, { payload }) => {
+      state.hasLogin = payload
+    }
+  },
+  extraReducers: {
+    [fetchUserInfo.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [fetchUserInfo.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      state.userInfo = action.payload
+    },
+    [fetchUserInfo.rejected]: (state, action) => {
+      state.status = 'error'
+    }
+  }
+})
+
+// 使用 
+const promise = dispatch(fetchUserById(123))
+// promise.abort() // 可以取消 fetchUserById，触发 fetchUserById.rejected
+```
+
+`dispatch` 触发请求之后的 logger：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651666855247_fe9df489-ce80-4418-ba9d-c59014644386.png)
+
+会走下面的逻辑：
+
+```js
+extraReducers: {
+  [fetchUserInfo.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      state.userInfo = action.payload
+  },
+  // ...
+}
+```
+
+如果调用了 `promise.abort()`，则 logger 就是下面这样的：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651666992789_e1dc22a4-bf58-454f-956b-db91f51464fa.png)
+
+会走下面的逻辑：
+
+```js
+extraReducers: {
+  [fetchUserInfo.rejected]: (state, action) => {
+    state.status = 'error'
+  }
+  // ...
+}
+```
+
+#### ✔ createSelector
+
+[`createSelector`](https://redux-toolkit.js.org/api/createSelector) 是直接从 [`Reselect`](https://github.com/reduxjs/reselect) 中导出的。其作用就是对从 store 中获取的数据做多重加工处理，并且可以对参数进行缓存，从而优化 react 的性能。看下面的例子：
+
+```jsx
+// store/home.js
+import { createSlice } from '@reduxjs/toolkit'
+
+const homeSlice = createSlice({
+  name: 'home',
+  initialState: {
+    name: 'lxfriday',
+    sex: 'male',
+    age: 100,
+    school: 'HZAU'
+  },
+  reducers: {
+    updateSchool: (state, { payload }) => {
+      state.school = payload
+    },
+    updateName: (state, { payload }) => {
+      state.name = payload
+    }
+  },
+  extraReducers: {}
+})
+
+export default homeSlice.reducer
+export const { updateSchool, updateName } = homeSlice.actions
+
+// store/index.js
+import { configureStore } from "@reduxjs/toolkit";
+import home from "./home";
+
+const store = configureStore({
+  reducer: {
+    home
+  }
+});
+
+export default store;
+
+// App.jsx
+import React, { Component } from 'react'
+import { createSelector } from '@reduxjs/toolkit'
+import { connect } from 'react-redux'
+import { updateSchool, updateName } from './store/home'
+
+class App extends Component {
+  render() {
+    console.log('this.props', this.props)
+    return (
+      <div className="App">
+        <div>userInfo:{this.props.userInfo}</div>
+        <div>school:{this.props.school}</div>
+        <div>
+          <button
+            onClick={() => {
+              console.log('school => PKU')
+              this.props.dispatch(updateSchool('PKU'))
+            }}
+          >
+            {'school => PKU'}
+          </button>
+          <button
+            onClick={() => {
+              console.log('name => yunyuv')
+              this.props.dispatch(updateName('yunyuv'))
+            }}
+          >
+            {'name => yunyuv'}
+          </button>
+        </div>
+      </div>
+    )
+  }
+}
+const selectName = state => state.home.name
+const selectAge = state => state.home.age
+const selectSex = state => state.home.sex
+const selectSchool = state => state.home.school
+
+const selectUserInfo = createSelector(
+  [selectName, selectAge, selectSex],
+  (name, age, sex) => {
+    console.log('selectUserInfo 执行了')
+    return `name: ${name}, age: ${age}, sex: ${sex}`
+  }
+)
+
+export default connect(state => {
+  return {
+    userInfo: selectUserInfo(state),
+    name: selectName(state),
+    age: selectAge(state),
+    sex: selectSex(state),
+    school: selectSchool(state)
+  }
+})(App)
+```
+
+先后点击 `school => PKU`、`name => yunyuv`，过程如下：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651669844775_7186637a-9ab5-4671-a936-be7373c79a60.gif)
+
+从前后两次点击的差别就可以看出，`createSelector` 具备 memorize 能力，如果最后一个函数的参数都没有发生变更，则不会执行最后的计算，其会直接返回上次计算出的值。
+
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/festive-gould-mrqyee?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="festive-gould-mrqyee"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+CodeSandbox 全屏查看
+</button>
+
+#### ✔ createAction
+
+[`createAction`](https://redux-toolkit.js.org/api/createAction) 是一个功能函数，用来辅助定义 action。实际用的不多。
+
+```ts
+function createAction(type, prepareAction?)
+```
+
+用法 
+
+```js
+import { createAction } from '@reduxjs/toolkit'
+
+const increment = createAction('counter/increment')
+
+let action = increment()
+// { type: 'counter/increment' }
+
+action = increment(3)
+// returns { type: 'counter/increment', payload: 3 }
+```
+
+`createAction` 的第二个参数用来对 action 做一些定制，不过一般用不到：
+
+```js
+const addSomething = createAction('app/inc', text => {
+  return {
+    payload: {
+      text,
+      id: nanoid(),
+      createdAt: new Date()
+    }
+  }
+})
+
+console.log(addSomething('write mote docs'))
+```
+
+打印出来的内容：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651680734697_1931f51b-dc18-453a-a3f7-3d493d080f5c.png)
+
+#### ✔ createReducer
+
+[`createReducer`](https://redux-toolkit.js.org/api/createReducer) 用来替代传统 redux 代码中出现的大量 switch case。其内部自带了 immer，也就是说你可以使用 `state.key = value` 的形式来更新 state。
+
+比较常见的 redux reducer 写法是下面这样的，写法看起来比较样板化。
+
+```js
+const initialState = { value: 0 }
+
+function counterReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'increment':
+      return { ...state, value: state.value + 1 }
+    case 'decrement':
+      return { ...state, value: state.value - 1 }
+    case 'incrementByAmount':
+      return { ...state, value: state.value + action.payload }
+    default:
+      return state
+  }
+}
+````
+
+而使用 `createReducer` 之后的写法是下面这样的：
+
+```js
+import { createAction, createReducer } from '@reduxjs/toolkit'
+
+const increment = createAction('counter/increment')
+const decrement = createAction('counter/decrement')
+const incrementByAmount = createAction('counter/incrementByAmount')
+
+const initialState = { value: 0 }
+
+const counterReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(increment, (state, action) => {
+      state.value++
+    })
+    .addCase(decrement, (state, action) => {
+      state.value--
+    })
+    .addCase(incrementByAmount, (state, action) => {
+      state.value += action.payload
+    })
+})
+```
+
+写法看起来自然很多。
+
+看一个实际例子：
+
+```jsx
+// src/store/app.js
+import { createAction, createReducer } from "@reduxjs/toolkit";
+
+export const increment = createAction("app/increment");
+export const decrement = createAction("app/decrement");
+
+function isActionWithNumberPayload(action) {
+  return typeof action.payload === "number";
+}
+
+const app = createReducer(
+  {
+    count: 0
+  },
+  (builder) => {
+    builder
+      .addCase(increment, (state, action) => {
+        state.count += action.payload;
+      })
+      .addCase(decrement, (state, action) => {
+        state.count -= action.payload;
+      })
+      .addMatcher(isActionWithNumberPayload, (state, action) => {
+        console.log("isActionWithNumberPayload");
+      })
+      .addDefaultCase((state, action) => {
+        console.log("defaultCase");
+      });
+  }
+);
+
+export default app;
+
+// src/store/index.js
+import { configureStore } from "@reduxjs/toolkit";
+import app from "./app";
+
+const store = configureStore({
+  reducer: {
+    app
+  }
+});
+
+export default store;
+
+// src/App.js
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement } from "./store/app";
+
+export default function App1() {
+  const appState = useSelector((state) => state.app);
+  const dispatch = useDispatch();
+  console.log("createReducerTestState", appState);
+  return (
+    <div style={{ textAlign: "center" }}>
+      <button onClick={() => dispatch(increment(2))}>inc</button>
+      <button onClick={() => dispatch(decrement(2))}>dec</button>
+      <p>{appState.count}</p>
+    </div>
+  );
+}
+```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/modern-dust-ezkzij?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="modern-dust-ezkzij"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+Code Sandbox 全屏查看
+</button>
+
+### Redux
+
+
+
+
 
 ## Redux Saga 原理
 

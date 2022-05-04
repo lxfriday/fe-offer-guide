@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Navigate } from 'react-router-dom'
-import routesConfig from '../routesConfig'
+import routesConfig from '@/routesConfig'
 
 
 export default class Home extends Component {

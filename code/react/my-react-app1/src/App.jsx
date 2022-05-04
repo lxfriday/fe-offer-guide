@@ -1,9 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import styles from './App.module.less'
-
-import routesConfig from './routesConfig'
-
-import Nav from './Components/Nav'
+import routesConfig from '@/routesConfig'
+import Nav from '@/Components/Nav'
 
 function App() {
   return (

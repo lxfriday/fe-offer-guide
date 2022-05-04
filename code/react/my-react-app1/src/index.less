@@ -2,9 +2,11 @@ html,
 #root {
   width: 100%;
   height: 100%;
+  background-color: #eee;
 }
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -14,7 +16,9 @@ body {
   height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+// 设置 codemirror 字体
+.cm-editor * {
+  font-family: Consolas, Monaco, source-code-pro, Menlo, 'Courier New',
+    monospace !important;
+  font-size: 14px;
 }
