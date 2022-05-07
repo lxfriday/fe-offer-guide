@@ -11319,11 +11319,449 @@ export default function App1() {
 Code Sandbox 全屏查看
 </button>
 
-### Redux
+### ✔ Redux
+
+[Redux](https://redux.js.org/) 包含的就是下面几个 API 了：
+
+- [`createStore`](https://redux.js.org/api/createstore)
+- [`combineReducers`](https://redux.js.org/api/combinereducers)
+- [`applyMiddleware`](https://redux.js.org/api/applymiddleware)
+- [`compose`](https://redux.js.org/api/compose)
+
+一个传统 Redux 配置：
+
+```jsx
+// src/store/app.js
+const initialState = {
+  userInfo: {
+    name: "lxfriday",
+    age: 122,
+    sex: "maile"
+  }
+};
+
+export const appUpdateUserInfo = "app/updateUserInfo";
+
+export default function app(state = initialState, action) {
+  switch (action.type) {
+    case appUpdateUserInfo: {
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          ...action.payload
+        }
+      };
+    }
+    default: {
+      return {
+        ...state
+      };
+    }
+  }
+}
+
+// src/store/home.js
+const initialState = {
+  count: 100
+};
+
+export const homeInc = "home/inc";
+export const homeDec = "home/dec";
+
+export default function home(state = initialState, action) {
+  switch (action.type) {
+    case homeInc: {
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    }
+    case homeDec: {
+      return {
+        ...state,
+        count: state.count - 1
+      };
+    }
+    default: {
+      return {
+        ...state
+      };
+    }
+  }
+}
+
+// src/store/index.js
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+
+import app from "./app";
+import home from "./home";
+import logger from "../middleware/logger";
+
+const reducers = combineReducers({
+  app,
+  home
+});
+
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(logger, thunk))
+);
+
+export default store;
+
+// src/middleware/logger.js
+export default function logger(args) {
+  return (next) => (action) => {
+    console.log("will dispatch", action, next);
+
+    const returnValue = next(action);
+
+    console.log("state after dispatch", args.getState());
+
+    return returnValue;
+  };
+}
 
 
+// src/App.js
+import { useDispatch, useSelector } from "react-redux";
+import { homeDec, homeInc } from "./store/home";
+import { appUpdateUserInfo } from "./store/app";
 
+function thunkExample() {
+  // do something
+  return (dispatch) => {
+    return new Promise((res) => {
+      // 1.5秒后更新用户信息
+      setTimeout(() => {
+        res({
+          name: "yunyuv",
+          age: 10086,
+          sex: "male"
+        });
+      }, 1500);
+    }).then((data) => {
+      dispatch({
+        type: appUpdateUserInfo,
+        payload: data
+      });
+    });
+  };
+}
 
+export default function App() {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.app.userInfo);
+  const count = useSelector((state) => state.home.count);
+  return (
+    <div className="App">
+      <div>
+        <div>userInfo: {JSON.stringify(userInfo)}</div>
+        <div>
+          <button
+            onClick={() => {
+              dispatch(thunkExample());
+            }}
+          >
+            updateUserInfo
+          </button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <button
+            onClick={() =>
+              dispatch({
+                type: homeInc
+              })
+            }
+          >
+            inc
+          </button>
+          <button
+            onClick={() =>
+              dispatch({
+                type: homeDec
+              })
+            }
+          >
+            dec
+          </button>
+        </div>
+        <div>{count}</div>
+      </div>
+    </div>
+  );
+}
+```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/smoosh-bush-j1px09?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="smoosh-bush-j1px09"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+Code Sandbox 全屏查看
+</button>
+
+#### ✔ createStore
+
+[`createStore`](https://redux.js.org/api/createstore) 是 redux 创建 store 的关键函数。其签名为：
+
+```js
+const store = createStore(reducer[, preloadedState[, enhancer]])
+```
+
+参数：
+
+- `reducer` 第一个参数，传递 reducer，通常复杂的应用需要用 `combineReducers` 把整个架构的 reducer 全部 combine 到一个对象中
+- `preloadedState` 是预置到 store 的state，如果使用了 `combineReducers`，则 `preloadedState` 的结构要和 `combineReducers` 的结构对应
+- `enhancer` 传递类似 middleware、时间旅行、持久化等工具函数，增强 redux 的功能
+
+`createStore` 的第二个参数如果是函数，则默认为是 enhancers。
+
+返回值：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651837563200_803ff7a0-09f7-485f-98da-e0f036bdee7d.png)
+
+`store.subscribe` 用于监听 store 的变化，每次 store 发生变更，其监听函数就会触发：
+
+```js
+store.subscribe(() => {
+  console.log("store.subscribe", store.getState());
+});
+```
+
+`store.getState` 用于获取 store 中的 state。
+
+`store.dispatch` 这就不用说了。
+
+`store.replaceReducer` 可以用于动态注入新的 reducer 函数，这个能力在 代码拆分 项目中比较实用。
+
+一个简单的例子：
+
+```js
+import { createStore } from 'redux'
+
+// 项目初始情况下需要的 reducer
+const staticReducers = {
+  users: usersReducer,
+  posts: postsReducer
+}
+
+export default function configureStore(initialState) {
+  const store = createStore(createReducer(), initialState)
+
+  store.asyncReducers = {}
+
+  store.injectReducer = (key, asyncReducer) => {
+    store.asyncReducers[key] = asyncReducer
+    store.replaceReducer(createReducer(store.asyncReducers))
+  }
+
+  return store
+}
+
+function createReducer(asyncReducers) {
+  return combineReducers({
+    ...staticReducers,
+    ...asyncReducers
+  })
+}
+```
+
+关于 `preloadedState`，需要注意几点：
+
+**第一点**：如果使用了 `combineReducers` ，则 `preloadedState` 传递的参数必须要和 `combineReducers` 的对象结构对应上。
+
+```js
+createStore(combineReducers({
+  app, 
+  home
+}), {
+  // good
+  app: {
+   userInfo: {},
+   // ...
+  },
+  // bad
+  badKey: {}, // 这个 key 没有和 combineReducers 中的 key 对应上
+})
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651861990687_1b7cf11e-133c-43ce-82ce-51b6c84a64d8.png)
+
+**第二点**： `preloadedState` 传递的属性会覆盖掉 reducer 中的 `initialState`，看下面的例子：
+
+```js
+// src/store/app.js
+// 这里是 app.js 中默认的 initialState
+const initialState = {
+  name: 'lxfriday',
+  age: 99,
+  sex: 'male'
+}
+
+export default function appReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'app/updateName': {
+      return { ...state, name: action.payload }
+    }
+    case 'app/updateAge': {
+      return { ...state, age: action.payload }
+    }
+    case 'app/updateSex': {
+      return { ...state, sex: action.payload }
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+// src/store/index.js
+const store = createStore(
+  combineReducers({
+    app,
+    home
+  }),
+  {
+    // 这里直接用空对象把 app 中的 initial 全部替换掉
+    app: {}
+  },
+  applyMiddleware(logger, thunk)
+)
+```
+
+实际运行下来的结果：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651862149374_db1ad6f3-bb0c-41fb-bd53-ea76aa33fe05.png)
+
+[createStore](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/createStore.ts) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651886011860_17e12da0-cd18-49c6-8020-f75b80d3b5fa.png)
+
+#### ✔ combineReducers
+[`combineReducers`](https://redux.js.org/api/combinereducers) 的作用就是把多个 reducer 函数组合起来放进 store 中。其返回的也是一个类 reducer 函数。
+
+先看 `createStore` 的函数签名：
+
+```js
+createStore(reducer[, preloadedState[, enhancers]])
+```
+
+`createStore` 的第一个参数就是 reducer ，而通常我们的项目中 reducer 函数都不只一个，比如 `home`、`app` 等，各命名空间的 reducer 函数负责处理对应的逻辑。要把这些 reducer 函数都放进 `createStore` 中处理就需要 `combineReducers`。
+
+`combineReducers` 的参数是一个对象， `key` 是对应的命名空间，值是对应的 reducer 函数。
+
+使用方式就是下面这样：
+
+```js
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import app from './app'
+import home from './home'
+
+const store = createStore(
+  combineReducers({
+    app,
+    home
+  }),
+)
+
+console.log(
+  'combineReducers',
+  combineReducers({
+    app,
+    home
+  })
+)
+```
+
+其返回一个 reducer 函数 [`combineReducers`](https://github.com/reduxjs/redux/blob/master/src/combineReducers.ts#L157)：
+
+[combineReducers](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/combineReducers.ts) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651886424655_6d6d8af2-ee81-4d69-9266-507f050aeb6b.png)
+
+#### ✔ applyMiddleware
+
+```js
+applyMiddleware(...middleware)
+```
+
+[`applyMiddleware`](https://redux.js.org/api/applymiddleware) 的作用就是把多个 middleware 组合起来，方便作为 `createStore` 的参数。而 redux middleware 可以在 redux 执行期间做指定的一些事情。
+
+常见的 middleware 就是 [redux-logger](https://github.com/LogRocket/redux-logger) 和 [redux-thunk](https://github.com/reduxjs/redux-thunk) 了。
+
+[middleware](https://redux.js.org/api/applymiddleware#arguments) 的编写都遵循统一的格式：
+
+每个 middleware 函数会接收一个包含 `getState` 和 `dispatch` 两个属性的对象，并且返回一个函数，这个函数的参数是下一个 middleware 的 `dispatch` 方法，并且返回一个新的函数，这个新函数的参数是 `action`，且新函数需要返回 `next(action)`。
+
+简单点说： `next` 就是排在当前 middleware 后一个函数的 dispatch 触发器，而 action 就是下一个 middleware 执行的返回值，通常是普通 action（`{type: ..., payload: ...}`）。
+
+```js
+function middlewareOne({ getState, dispatch }) {
+  // do something
+  return next => action => {
+    // do something
+    const returnValue = next(action)
+    // do something
+    return returnValue
+  }
+}
+```
+
+一个简单的 logger middleware：
+
+```js
+function logger({ getState }) {
+  return next => action => {
+    console.log('before dispatch', action)
+    const returnValue =  next(action)
+    console.log('after dispatch', getState())
+    // returnValue 通常是 action 本身，除非 middleware 有对返回值做更改
+    return returnValue
+  }
+}
+```
+
+[applyMiddleware](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/applyMiddleware.ts) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651886591836_adb6b486-8517-4591-89c6-84741418d80d.png)
+
+这段代码非常难理解，看看就行了。
+
+**第一点**：`chain` 数组中的函数是 middleware 执行过一次的返回值，并且参数是 `{getState, dispatch}`，这和上面 `middlewareOne` 的定义是对应上的；
+
+**第二点**：分析 `compose` 函数的作用，就是把 `middleware(middlewareAPI)` 执行过后返回的函数给套起来，而 `compose(...chain)(store.dispacth)` 就会导致 套着的函数被执行，也就是说变成了 `a(b(c(d(e(store.dispatch)))))` 这一串函数执行之后的值又赋值给 dispatch 了。
+
+实际上对应到上面的 `middlewareOne` ，最后一个 middleware 的 `next` 就是 `store.dispatch`，其执行之后，返回 `action => {...}`，就是一个新的 dispatch 函数。这个新的 dispatch 函数会作为前一个函数的 `next`，就这样一层套一层。
+
+#### ✔ compose
+
+[`compose`](https://redux.js.org/api/compose) 函数可以把其参数函数全部套起来，一般用来组合多个 enhancers。
+
+它会把其参数函数全部套起来，并且返回一个新的函数，`compose` 的参数越靠后的越先执行，类似这种结构：
+
+`compose(a, b, c, d, e)(args)` => `a(b(c(d(e(args)))))`
+
+```js
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import DevTools from './containers/DevTools'
+import reducer from '../reducers'
+
+const store = createStore(
+  reducer,
+  compose(applyMiddleware(thunk), DevTools.instrument())
+)
+```
+
+[compose](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/compose.ts) 其源码简洁但不简单：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651887772385_116a5b31-7a65-4d1a-8d21-cca36a45e86b.png)
 
 ## Redux Saga 原理
 
