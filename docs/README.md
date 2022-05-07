@@ -10717,7 +10717,7 @@ ref
 
 ## Redux 相关
 
-最新版本的 redux 已经比较完善，并且拆分出两个库，现在再也不需要写大量样板代码了。
+新增了一个 redux toolkit 库，现在再也不需要写大量样板代码了。
 
 - [`Redux`](https://redux.js.org/)
 - [`Redux Toolkit`](https://redux-toolkit.js.org/)
@@ -10865,7 +10865,7 @@ const store = configureStore({
     // namespace1: namespace1PreloadedState
     // namespace2: namespace2PreloadedState
   },
-  enhancers: [] // enhancers
+  enhancers: [] // enhancers 或者 是一个函数，函数的参数是默认的 enhancers，且必须返回一个 enhancers 数组：(defaultEnhances) => [...yourEnhancers, ...defaultEnhances]
 })
 ````
 
@@ -10875,9 +10875,17 @@ const store = configureStore({
 
 `configureStore` 最需要配置的就是 `reducer` 属性。从最开始那个例子中就可以知道。`reducer` 属性要指定一个对象，对象的 key 是每个 reducer 的命名空间，而值就是 `reducer`。
 
+[configureStore](https://codesandbox.io/s/clever-swirles-4mecm9?file=/configureStore.ts:4193-4258) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651922514606_7f446171-f40a-4e44-9aa8-6b6ce2719586.png)
+
 #### ✔ createSlice
 
-[`createSlice`](https://redux-toolkit.js.org/api/createSlice) 是创建 reducer 的核心，其参数为初始 state、name（命名空间）、和空间下的 reducers。一个最简单的 `createSlice` 就是下面这个例子。
+[`createSlice`](https://redux-toolkit.js.org/api/createSlice) 是创建 reducer 的核心，其参数为初始 state、name（命名空间）、和空间下的 reducers，另外还有一个 `extraReducers`。
+
+`reducers` 和 `extraReducers` 的区别在于，`reducers` 声明的函数会自动生成 `action` 而 `extraReducers` 并不会，`extraReducers` 被设计来处理 “外部的” action，通常就是 `createAsyncThunk` 生成的 action。
+
+一个最简单的 `createSlice` 就是下面这个例子。
 
 ```js
 // 一个最简单的 reducer
