@@ -10954,16 +10954,83 @@ function App() {
 
 有没有发现，使用了 redux-toolkit 的 redux 代码就非常正常了，完全不像以前需要声明很多 action type  常量，写很多 switch case 的情况。并且 redux-toolkit 还内置了 [immer](https://redux-toolkit.js.org/usage/immer-reducers)，这样就可以非常方便的在 reducer 中用类似 `state.count += 1` 这种写法。
 
+[createSlice](https://codesandbox.io/s/clever-swirles-4mecm9?file=/createSlice.ts:6832-6871) 源码简化版。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651965585863_b5f413a7-0900-4ab0-b0bc-8b3da40b891a.png)
+
+对 `extraReducers` 进行处理的关键函数：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651964944518_cba2691c-76c4-438b-8ea7-f92657496cd2.png)
+
 #### ✔ createAsyncThunk
 
-通常网络请求会使用到 [`createAsyncThunk`](https://redux-toolkit.js.org/api/createAsyncThunk)，当然如果你的项目不考虑网络请求和 react jsx 代码分离的话可能用不到它。`createAsyncThunk` 可以让你把网络请求相关的逻辑单独写在一个函数中，通常 `createAsyncThunk` 创建的 thunk 会放在对应的 reducer 文件内，并且其逻辑处理通常在 `extraReducers` 内进行。
+通常网络请求会使用到 [`createAsyncThunk`](https://redux-toolkit.js.org/api/createAsyncThunk)，当然如果你的项目不考虑网络请求和 react jsx 代码分离的话可能用不到它。`createAsyncThunk` 可以让你把网络请求相关的逻辑单独写在一个函数中，通常 `createAsyncThunk` 创建的 thunk 会放在对应的 reducer 文件内，并且其逻辑处理通常在 `extraReducers` 内进行（也可以自己直接 dispatch，不走 `extraReducers`）。
+
+`createAsyncThunk` 的参数比较复杂：
+
+```js
+const doSomething = createAsyncThunk(
+  type: string, //  action type
+  // 一个函数，函数有两个参数，第一个参数作为传递给 createAsyncThunk 返回的函数的参数
+  // 从第二个参数里可以拿到 dispatch 和 getState，方便自己操作 dispatch 流程
+  // 使用这里的 dispatch 就可以不用在 extraReducers 捕捉 action 变化了
+  // ref https://redux-toolkit.js.org/api/createAsyncThunk#payloadcreator
+  payloadCreator: (arg, { dispatch, getState, ...otherArgs }),
+  // ref https://redux-toolkit.js.org/api/createAsyncThunk#options
+  // 配置比较复杂，不过好在大多数时候用不着，这里就不介绍了
+  options, 
+)
+
+const updateUserInfo = createAction('app/updateUserInfo')
+
+const doSomething = createAsyncThunk('user/getUserInfo', async (id, {getState, dispatch}) => {
+  const useInfo = await request.getUserInfo(id)
+  // 后续有两种处理方式
+  // 下面的两种方式只需要选其一
+  // 方式1：使用 dispatch ，自己控制后续流程
+  dispatch(appSlice.actions.updateUserInfo(userInfo))
+  // 方式2：直接 return，这个数据会成为 doSomething.fulfilled 的 action.payload 
+  return userInfo
+})
+
+// store/app.js
+const appSlice = createSlice({
+  name: 'app',
+  initialState: {
+    userInfo: {}``  
+  }
+  reducers: {
+    updateUserInfo(state, {payload}) {
+      // ...
+      state.userInfo = payload
+    }
+  },
+  extraReducers: {
+    [doSomething.fulfilled](state, {payload}) {
+      // ...
+      state.userInfo = payload
+    }
+  }
+})
+```
+
+`createAsyncThunk` 执行过后返回的 `doSomething` 是一个函数，你**只能**给这个函数传递一个参数，参数比较复杂则设计成对象传递进去就行了。
+
+调用方式是： 
+
+```js
+const promise = dispatch(doSomething(args))
+// promise 中有 abort 属性，可以终止 doSomething 的执行
+```
+
+实际操作流程：
 
 ```js
 // store/users.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 // 'posts/fetchPosts' 是 action type
-export const fetchUserInfo = createAsyncThunk('posts/fetchPosts', async (userId) => {
+export const fetchUserInfo = createAsyncThunk('posts/fetchPosts', async (userId, { dispatch, getState }) => {
   // 在这里通过网络请求获取数据
   // 这里是用的 promise 模拟一个请求的过程
   // 实际的情况是 const response = await request.fetchUser() 这种形式
@@ -11043,6 +11110,22 @@ extraReducers: {
   // ...
 }
 ```
+
+[createAsyncThunk](https://codesandbox.io/s/clever-swirles-4mecm9?file=/createAsyncThunk.ts:12150-12222) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651967354339_3686ea6f-8479-4067-9381-f5011c0d8f3f.png)
+
+[redux-thunk](https://github.com/reduxjs/redux-thunk/blob/master/src/index.ts#L30) 源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651996895206_82c93c14-7b54-4681-9c1f-a243be6c3de1.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/keen-murdock-gtvv20?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="keen-murdock-gtvv20"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+查看 Code Sandbox 例子
+</button>
 
 #### ✔ createSelector
 
@@ -11202,6 +11285,10 @@ console.log(addSomething('write mote docs'))
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651680734697_1931f51b-dc18-453a-a3f7-3d493d080f5c.png)
 
+[createAction](https://codesandbox.io/s/clever-swirles-4mecm9?file=/createAction.ts:7589-7649) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651967647763_25b6904f-d93e-43de-95e4-e65a6d1527de.png)
+
 #### ✔ createReducer
 
 [`createReducer`](https://redux-toolkit.js.org/api/createReducer) 用来替代传统 redux 代码中出现的大量 switch case。其内部自带了 immer，也就是说你可以使用 `state.key = value` 的形式来更新 state。
@@ -11326,6 +11413,10 @@ export default function App1() {
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
 Code Sandbox 全屏查看
 </button>
+
+[createReducer](https://codesandbox.io/s/clever-swirles-4mecm9?file=/createReducer.ts:8409-8440) 简化版源码：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1651996714656_6e77d089-ba44-413a-952a-d61537738c89.png)
 
 ### ✔ Redux
 
@@ -11580,9 +11671,9 @@ function createReducer(asyncReducers) {
 }
 ```
 
-关于 `preloadedState`，需要注意几点：
+关于 `preloadedState`，需要注意一点：
 
-**第一点**：如果使用了 `combineReducers` ，则 `preloadedState` 传递的参数必须要和 `combineReducers` 的对象结构对应上。
+如果使用了 `combineReducers` ，则 `preloadedState` 传递的参数必须要和 `combineReducers` 的对象结构对应上（也就是 namespace 这个 key 要对应上）。
 
 ```js
 createStore(combineReducers({
@@ -11600,52 +11691,6 @@ createStore(combineReducers({
 ```
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651861990687_1b7cf11e-133c-43ce-82ce-51b6c84a64d8.png)
-
-**第二点**： `preloadedState` 传递的属性会覆盖掉 reducer 中的 `initialState`，看下面的例子：
-
-```js
-// src/store/app.js
-// 这里是 app.js 中默认的 initialState
-const initialState = {
-  name: 'lxfriday',
-  age: 99,
-  sex: 'male'
-}
-
-export default function appReducer(state = initialState, action) {
-  switch (action.type) {
-    case 'app/updateName': {
-      return { ...state, name: action.payload }
-    }
-    case 'app/updateAge': {
-      return { ...state, age: action.payload }
-    }
-    case 'app/updateSex': {
-      return { ...state, sex: action.payload }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-// src/store/index.js
-const store = createStore(
-  combineReducers({
-    app,
-    home
-  }),
-  {
-    // 这里直接用空对象把 app 中的 initial 全部替换掉
-    app: {}
-  },
-  applyMiddleware(logger, thunk)
-)
-```
-
-实际运行下来的结果：
-
-![](https://qiniu1.lxfriday.xyz/feoffer/1651862149374_db1ad6f3-bb0c-41fb-bd53-ea76aa33fe05.png)
 
 [createStore](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/createStore.ts) 简化版源码：
 
@@ -11735,7 +11780,7 @@ function logger({ getState }) {
 }
 ```
 
-[applyMiddleware](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/applyMiddleware.ts) 简化版源码：
+[applyMiddleware](https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/applyMiddleware.ts:2458-2516) 简化版源码：
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651886591836_adb6b486-8517-4591-89c6-84741418d80d.png)
 
@@ -11746,6 +11791,89 @@ function logger({ getState }) {
 **第二点**：分析 `compose` 函数的作用，就是把 `middleware(middlewareAPI)` 执行过后返回的函数给套起来，而 `compose(...chain)(store.dispacth)` 就会导致 套着的函数被执行，也就是说变成了 `a(b(c(d(e(store.dispatch)))))` 这一串函数执行之后的值又赋值给 dispatch 了。
 
 实际上对应到上面的 `middlewareOne` ，最后一个 middleware 的 `next` 就是 `store.dispatch`，其执行之后，返回 `action => {...}`，就是一个新的 dispatch 函数。这个新的 dispatch 函数会作为前一个函数的 `next`，就这样一层套一层。
+
+为什么说非常难李姐呢？`dispatch = compose(...chain)(store.dispatch)` 这一行就能把你多年的脑血栓给看复发了。
+
+另外就是下面这两部分，我敢说大部分人都看不懂这是个啥玩意设计。反正我自己测试之后也是一脸懵逼，我觉得 `middlewareAPI.dispatch` 这个属性真是看看不懂。
+
+```js
+const middlewareAPI = {
+  getState: store.getState,
+  dispatch: (action, ...args) => dispatch(action, ...args)
+}
+
+dispatch = compose(...chain)(store.dispatch)
+```
+
+`middlewareAPI.dispatch` 指向一个函数，这个函数执行是返回的 `dispatch(action, ...args)`。注意函数中的 `dispatch` 指向的是后面 `dispatch = compose(...chain)(store.dispatch)` 这里。
+
+而 `dispatch = compose(...chain)(store.dispatch)` 前面第二点我们说了，dispatch 是一个被 `compose` 处理之后套起来的结构。那如果 在 middleware 中执行 `dispatch(xxx)` 会发生什么后果？
+
+看代码：
+
+```jsx
+// src/middleware/funny.js
+// 我写了一个  middleware，middleware 会执行 middlewareApi.dispatch
+export default function funny({ getState, dispatch }) {
+  return (next) => (action) => {
+    console.log("dispatch", dispatch);
+    console.log("before dispatch");
+    dispatch({
+      type: "app/updateName",
+      payload: "kkk"
+    });
+    const retValue = next(action);
+    console.log("after dispatch");
+    return retValue;
+  };
+}
+
+// src/store/index.js
+import { configureStore } from "@reduxjs/toolkit";
+import app from "./app";
+import funny from "../middleware/funny";
+
+const store = configureStore({
+  reducer: {
+    app
+  },
+  middleware: (getDefaultMiddleware) => [funny, ...getDefaultMiddleware()]
+});
+
+export default store;
+
+// src/App.js
+import { useSelector, useDispatch } from "react-redux";
+import { updateName } from "./store/app";
+import "./styles.css";
+
+export default function App() {
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.app.name);
+  return (
+    <div className="App">
+      <div>{name}</div>
+      <div>
+        <button onClick={() => dispatch(updateName("yunyuv"))}>
+          updateName
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/relaxed-joliot-f795it?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="relaxed-joliot-f795it"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>在 Code Sandbox 中全屏查看
+</button>
+
+那么你猜猜，点击 updateName 这个按钮之后会发生什么？
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652002085603_ad0d0bf4-b4a2-4d5c-afe5-8e3d778e5c15.gif)
+
+很显然，函数执行走进迷宫了，一直在循环执行，直到爆栈。所以我暂时看不懂为什么 `middlewareAPI` 中要有 `dispatch` 这个属性。实际上 `next` 就是一个 `dispatch`，但是 `next` 只会让当前 middleware 后的 middlewares 执行。这就不会出现循环执行的情况。
 
 #### ✔ compose
 
