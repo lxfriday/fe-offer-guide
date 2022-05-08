@@ -17,6 +17,118 @@
 - `Symbol`
 - `BigInt`
 
+### ✔ 关于 BigInt
+
+ref [MDN BigInt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+
+BigInt 是一种内置对象，它提供了一种方法来表示大于 `2^53 - 1` 的整数。这原本是 Javascript 中可以用 Number 表示的最大数字。BigInt 可以表示任意大的整数。
+
+可以用在一个整数字面量后面加 `n` 的方式定义一个 BigInt ，如：`10n`，或者调用函数 `BigInt()`（但不包含 new 运算符）并传递一个整数值或字符串值。
+
+```js
+const theBiggestInt = 9007199254740991n;
+const alsoHuge = BigInt(9007199254740991);
+// ↪ 9007199254740991n
+const hugeString = BigInt("9007199254740991");
+// ↪ 9007199254740991n
+const hugeHex = BigInt("0x1fffffffffffff");
+// ↪ 9007199254740991n
+const hugeBin = BigInt("0b11111111111111111111111111111111111111111111111111111");
+// ↪ 9007199254740991n
+```
+
+它在某些方面类似于 Number ，但是也有几个关键的不同点：
+
+- 不能用于 Math 对象中的方法
+- 不能和任何 Number 实例混合运算，两者必须转换成同一种类型
+- 在两种类型来回转换时要小心，因为 BigInt 变量在转换成 Number 变量时可能会丢失精度
+
+以下操作符可以和 BigInt 一起使用： `+`、`*`、`-`、`**`、`%` 。
+
+```js
+const previousMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
+// ↪ 9007199254740991n
+const maxPlusOne = previousMaxSafe + 1n;
+// ↪ 9007199254740992n
+const theFuture = previousMaxSafe + 2n;
+// ↪ 9007199254740993n, this works now!
+const multi = previousMaxSafe * 2n;
+// ↪ 18014398509481982n
+const subtr = multi – 10n;
+// ↪ 18014398509481972n
+const mod = multi % 10n;
+// ↪ 2n
+const bigN = 2n ** 54n;
+// ↪ 18014398509481984n
+bigN * -1n
+// ↪ –18014398509481984n
+```
+
+`/` 操作符对于整数的运算也没问题。可是因为这些变量是 `BigInt`（大整数）而不是 BigDecimal ，该操作符结果会向零取整，也就是说不会返回小数部分。
+
+```js
+const expected = 4n / 2n;
+// ↪ 2n
+const rounded = 5n / 2n;
+// ↪ 2n, not 2.5n
+```
+
+关于 BigInt 的比较：
+
+BigInt 和 Number 不是严格相等的，但是宽松相等的。
+
+```js
+0n === 0
+// ↪ false
+0n == 0
+// ↪ true
+```
+
+Number 和 BigInt 可以进行比较大小。
+
+```js
+1n < 2
+// ↪ true
+2n > 1
+// ↪ true
+2 > 2
+// ↪ false
+2n > 2
+// ↪ false
+2n >= 2
+// ↪ true
+````
+
+两者也可以混在一个数组内并排序。
+
+```js
+const mixed = [4n, 6, -12n, 10, 4, 0, 0n];
+// ↪  [4n, 6, -12n, 10, 4, 0, 0n]
+mixed.sort();
+// ↪ [-12n, 0, 0n, 10, 4n, 4, 6]
+```
+
+BigInt 与 JSON：
+
+对任何 BigInt 值使用 `JSON.stringify()` 都会引发 `TypeError`，因为默认情况下 BigInt 值不会在 JSON 中序列化。但是，如果需要，可以实现 toJSON 方法：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652020349662_b9fead57-8f9f-482a-926c-d6949d0a1f89.png)
+
+### ✔ 如何在不支持的设备上使用 BigInt
+
+目前最新版的 Chrome、FF、Safari、Edge 浏览器都已经支持 BigInt，而对于不支持的浏览器，可以考虑使用 [jsbi](https://github.com/GoogleChromeLabs/jsbi) 这个库来处理大数。这个库的优点在于，可以直接使用 babel 把代码转换成 native BigInt 代码。
+
+```js
+import JSBI from './jsbi.mjs';
+
+const max = JSBI.BigInt(Number.MAX_SAFE_INTEGER);
+console.log(String(max));
+// → '9007199254740991'
+const other = JSBI.BigInt('2');
+const result = JSBI.add(max, other);
+console.log(String(result));
+// → '9007199254740993'
+```
 
 ## ✔ 原始值和引用值
 
