@@ -196,11 +196,60 @@ const request = axios.create({
 
 自己手写实现，如果后端传给你以这个这样的 JSON，请你把它转换成没有误差的形式。
 
-使用 `JSON.parse` 是肯定不行的。这里用正则表达式。
+使用 `JSON.parse` 是肯定不行的。这里用正则表达式。找到数字，然后给它加上双引号，变成字符串。
 
 ```txt
-'[{ "value" : 9223372036854775807, "v2": 123 },{ "value" : 9223372036854775555, "v2": 666 }]'
+'[{"value":9223372036854775807,"v2":123},{"value":9223372036854775555,"v2":666}]'
 ```
+
+```js
+// 从 JSON 字符串中把大数变成字符串
+const jsonStr =
+  '[{"value":9223372036854775807,"v2":123},{"value":9223372036854775555,"v2":666}]';
+
+// 用函数
+const jsonStrReplaced = jsonStr.replace(/"value":(\d*),"v2"/g, function (
+  match,
+  p1
+) {
+  console.log({ match, p1 });
+  return `"value":"${p1}","v2"`;
+});
+console.log("jsonStrReplaced Obj", JSON.parse(jsonStrReplaced));
+
+// 用字符串
+const jsonStrReplaced2 = jsonStr.replace(
+  /"value":(\d*),"v2"/g,
+  '"value":"$1","v2"'
+);
+console.log("jsonStrReplaced2 Obj", JSON.parse(jsonStrReplaced2));
+
+// 逆向
+// 把大数字符串转成 JSON
+const obj = [
+  { value: "9223372036854775807", v2: 123 },
+  { value: "9223372036854775555", v2: 666 }
+];
+
+const objStr = JSON.stringify(obj);
+const objStrReplaced = objStr.replace(
+  /"value":"(\d*)","v2"/g,
+  '"value":$1,"v2"'
+);
+console.log("objStrReplaced", objStrReplaced);
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652079538317_a330c9f4-0762-4446-b7a4-75b74a209c84.png)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/json-bigint-test-tggvmm?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="JSON-Bigint-test"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+在 Code Sandbox 中查看
+</button>
+
+
 
 ## ✔ 原始值和引用值
 
@@ -12083,7 +12132,7 @@ const store = createStore(
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651887772385_116a5b31-7a65-4d1a-8d21-cca36a45e86b.png)
 
-## Redux Saga 原理
+### Redux Saga
 
 ## immer
 
