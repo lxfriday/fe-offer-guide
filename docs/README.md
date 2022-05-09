@@ -114,7 +114,7 @@ BigInt 与 JSON：
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1652020349662_b9fead57-8f9f-482a-926c-d6949d0a1f89.png)
 
-### ✔ 如何在不支持的设备上使用 BigInt
+#### ✔ 如何在不支持的设备上使用 BigInt
 
 目前最新版的 Chrome、FF、Safari、Edge 浏览器都已经支持 BigInt，而对于不支持的浏览器，可以考虑使用 [jsbi](https://github.com/GoogleChromeLabs/jsbi) 这个库来处理大数。这个库的优点在于，可以直接使用 babel 把代码转换成 native BigInt 代码。
 
@@ -128,6 +128,78 @@ const other = JSBI.BigInt('2');
 const result = JSBI.add(max, other);
 console.log(String(result));
 // → '9007199254740993'
+```
+
+#### ✔ 关于 BigInt 的面试题
+
+**如果后端传给前端一个很大的数，前端会怎么样，该怎么处理？**
+
+or **Long 类型参数传到前端精度丢失的解决方案**
+
+
+通常传给前端很大的数，意思就是超过了 `Number.MAX_SAFE_INTEGER`，而且通常是整数，一般用作 id 。
+
+如果后端是只返回了这个数(response 只有这个数)，则用 BigInt(response) 把传递过来的 reponse 转换成 BigInt，前端把这个数字传给后端的时候，就再转换成字符串。不过貌似没这个必要，前端直接把这个数字存为字符串就好了。
+
+如果后端返回的是一个 JSON，JSON 中包含很大的数，则这里比较难处理，使用 `JSON.parse` 是无法达到预期效果的，这个时候可以使用 [json-bigin](https://github.com/sidorares/json-bigint) 这个库来 parse JSON 数据。
+
+```js
+var JSONbig = require('json-bigint');
+
+var json = '{ "value" : 9223372036854775807, "v2": 123 }';
+console.log('Input:', json);
+console.log('');
+
+console.log('node.js built-in JSON:');
+var r = JSON.parse(json);
+console.log('JSON.parse(input).value : ', r.value.toString());
+console.log('JSON.stringify(JSON.parse(input)):', JSON.stringify(r));
+
+console.log('\n\nbig number JSON:');
+var r1 = JSONbig.parse(json);
+console.log('JSONbig.parse(input).value : ', r1.value.toString());
+console.log('JSONbig.stringify(JSONbig.parse(input)):', JSONbig.stringify(r1));
+````
+output
+
+```txt
+Input: { "value" : 9223372036854775807, "v2": 123 }
+
+node.js built-in JSON:
+JSON.parse(input).value :  9223372036854776000
+JSON.stringify(JSON.parse(input)): {"value":9223372036854776000,"v2":123}
+
+big number JSON:
+JSONbig.parse(input).value :  9223372036854775807
+JSONbig.stringify(JSONbig.parse(input)): {"value":9223372036854775807,"v2":123}
+````
+
+在 axios 中使用：
+
+```js
+const request = axios.create({
+  baseURL: 'http://api.com/', // 接口基础路径
+  // transformResponse 允许自定义原始的响应数据（字符串）
+  transformResponse: [function (data) {
+    try {
+      // 如果转换成功则返回转换的数据结果
+      return JSONbig.parse(data)
+    } catch (err) {
+      // 如果转换失败，则包装为统一数据格式并返回
+      return {
+        data
+      }
+    }
+  }]
+})
+```
+
+自己手写实现，如果后端传给你以这个这样的 JSON，请你把它转换成没有误差的形式。
+
+使用 `JSON.parse` 是肯定不行的。这里用正则表达式。
+
+```txt
+'[{ "value" : 9223372036854775807, "v2": 123 },{ "value" : 9223372036854775555, "v2": 666 }]'
 ```
 
 ## ✔ 原始值和引用值

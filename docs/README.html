@@ -1080,6 +1080,160 @@ body .markdown-body
 <li><code>Symbol</code></li>
 <li><code>BigInt</code></li>
 </ul>
+<h3 id="bigint">✔ 关于 BigInt<a class="headerlink" href="#bigint" title="Permanent link"></a></h3>
+<p>ref <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt">MDN BigInt</a></p>
+<p>BigInt 是一种内置对象，它提供了一种方法来表示大于 <code>2^53 - 1</code> 的整数。这原本是 Javascript 中可以用 Number 表示的最大数字。BigInt 可以表示任意大的整数。</p>
+<p>可以用在一个整数字面量后面加 <code>n</code> 的方式定义一个 BigInt ，如：<code>10n</code>，或者调用函数 <code>BigInt()</code>（但不包含 new 运算符）并传递一个整数值或字符串值。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">theBiggestInt</span> <span class="o">=</span> <span class="mi">9007199254740991</span><span class="nx">n</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">alsoHuge</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="mi">9007199254740991</span><span class="p">);</span>
+<span class="c1">// ↪ 9007199254740991n</span>
+<span class="kr">const</span> <span class="nx">hugeString</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="s2">&quot;9007199254740991&quot;</span><span class="p">);</span>
+<span class="c1">// ↪ 9007199254740991n</span>
+<span class="kr">const</span> <span class="nx">hugeHex</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="s2">&quot;0x1fffffffffffff&quot;</span><span class="p">);</span>
+<span class="c1">// ↪ 9007199254740991n</span>
+<span class="kr">const</span> <span class="nx">hugeBin</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="s2">&quot;0b11111111111111111111111111111111111111111111111111111&quot;</span><span class="p">);</span>
+<span class="c1">// ↪ 9007199254740991n</span>
+</pre></div>
+
+<p>它在某些方面类似于 Number ，但是也有几个关键的不同点：</p>
+<ul>
+<li>不能用于 Math 对象中的方法</li>
+<li>不能和任何 Number 实例混合运算，两者必须转换成同一种类型</li>
+<li>在两种类型来回转换时要小心，因为 BigInt 变量在转换成 Number 变量时可能会丢失精度</li>
+</ul>
+<p>以下操作符可以和 BigInt 一起使用： <code>+</code>、<code>*</code>、<code>-</code>、<code>**</code>、<code>%</code> 。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">previousMaxSafe</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_SAFE_INTEGER</span><span class="p">);</span>
+<span class="c1">// ↪ 9007199254740991n</span>
+<span class="kr">const</span> <span class="nx">maxPlusOne</span> <span class="o">=</span> <span class="nx">previousMaxSafe</span> <span class="o">+</span> <span class="mi">1</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 9007199254740992n</span>
+<span class="kr">const</span> <span class="nx">theFuture</span> <span class="o">=</span> <span class="nx">previousMaxSafe</span> <span class="o">+</span> <span class="mi">2</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 9007199254740993n, this works now!</span>
+<span class="kr">const</span> <span class="nx">multi</span> <span class="o">=</span> <span class="nx">previousMaxSafe</span> <span class="o">*</span> <span class="mi">2</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 18014398509481982n</span>
+<span class="kr">const</span> <span class="nx">subtr</span> <span class="o">=</span> <span class="nx">multi</span> <span class="err">–</span> <span class="mi">10</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 18014398509481972n</span>
+<span class="kr">const</span> <span class="nx">mod</span> <span class="o">=</span> <span class="nx">multi</span> <span class="o">%</span> <span class="mi">10</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 2n</span>
+<span class="kr">const</span> <span class="nx">bigN</span> <span class="o">=</span> <span class="mi">2</span><span class="nx">n</span> <span class="o">**</span> <span class="mi">54</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 18014398509481984n</span>
+<span class="nx">bigN</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="nx">n</span>
+<span class="c1">// ↪ –18014398509481984n</span>
+</pre></div>
+
+<p><code>/</code> 操作符对于整数的运算也没问题。可是因为这些变量是 <code>BigInt</code>（大整数）而不是 BigDecimal ，该操作符结果会向零取整，也就是说不会返回小数部分。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="mi">4</span><span class="nx">n</span> <span class="o">/</span> <span class="mi">2</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 2n</span>
+<span class="kr">const</span> <span class="nx">rounded</span> <span class="o">=</span> <span class="mi">5</span><span class="nx">n</span> <span class="o">/</span> <span class="mi">2</span><span class="nx">n</span><span class="p">;</span>
+<span class="c1">// ↪ 2n, not 2.5n</span>
+</pre></div>
+
+<p>关于 BigInt 的比较：</p>
+<p>BigInt 和 Number 不是严格相等的，但是宽松相等的。</p>
+<div class="highlight"><pre><span class="mi">0</span><span class="nx">n</span> <span class="o">===</span> <span class="mi">0</span>
+<span class="c1">// ↪ false</span>
+<span class="mi">0</span><span class="nx">n</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="c1">// ↪ true</span>
+</pre></div>
+
+<p>Number 和 BigInt 可以进行比较大小。</p>
+<div class="highlight"><pre><span class="mi">1</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">2</span>
+<span class="c1">// ↪ true</span>
+<span class="mi">2</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="c1">// ↪ true</span>
+<span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="c1">// ↪ false</span>
+<span class="mi">2</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="c1">// ↪ false</span>
+<span class="mi">2</span><span class="nx">n</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+<span class="c1">// ↪ true</span>
+<span class="err">````</span>
+
+<span class="nx">两者也可以混在一个数组内并排序</span><span class="err">。</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="kr">const</span> <span class="nx">mixed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="nx">n</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="nx">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="nx">n</span><span class="p">];</span>
+<span class="c1">// ↪  [4n, 6, -12n, 10, 4, 0, 0n]</span>
+<span class="nx">mixed</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span>
+<span class="c1">// ↪ [-12n, 0, 0n, 10, 4n, 4, 6]</span>
+</pre></div>
+
+<p>BigInt 与 JSON：</p>
+<p>对任何 BigInt 值使用 <code>JSON.stringify()</code> 都会引发 <code>TypeError</code>，因为默认情况下 BigInt 值不会在 JSON 中序列化。但是，如果需要，可以实现 toJSON 方法：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1652020349662_b9fead57-8f9f-482a-926c-d6949d0a1f89.png" /></p>
+<h4 id="bigint_1">✔ 如何在不支持的设备上使用 BigInt<a class="headerlink" href="#bigint_1" title="Permanent link"></a></h4>
+<p>目前最新版的 Chrome、FF、Safari、Edge 浏览器都已经支持 BigInt，而对于不支持的浏览器，可以考虑使用 <a href="https://github.com/GoogleChromeLabs/jsbi">jsbi</a> 这个库来处理大数。这个库的优点在于，可以直接使用 babel 把代码转换成 native BigInt 代码。</p>
+<div class="highlight"><pre><span class="kr">import</span> <span class="nx">JSBI</span> <span class="nx">from</span> <span class="s1">&#39;./jsbi.mjs&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">JSBI</span><span class="p">.</span><span class="nx">BigInt</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_SAFE_INTEGER</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">max</span><span class="p">));</span>
+<span class="c1">// → &#39;9007199254740991&#39;</span>
+<span class="kr">const</span> <span class="nx">other</span> <span class="o">=</span> <span class="nx">JSBI</span><span class="p">.</span><span class="nx">BigInt</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">JSBI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">max</span><span class="p">,</span> <span class="nx">other</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">result</span><span class="p">));</span>
+<span class="c1">// → &#39;9007199254740993&#39;</span>
+</pre></div>
+
+<h4 id="bigint_2">✔ 关于 BigInt 的面试题<a class="headerlink" href="#bigint_2" title="Permanent link"></a></h4>
+<p><strong>如果后端传给前端一个很大的数，前端会怎么样，该怎么处理？</strong></p>
+<p>or <strong>Long 类型参数传到前端精度丢失的解决方案</strong></p>
+<p>通常传给前端很大的数，意思就是超过了 <code>Number.MAX_SAFE_INTEGER</code>，而且通常是整数，一般用作 id 。</p>
+<p>如果后端是只返回了这个数(response 只有这个数)，则用 BigInt(response) 把传递过来的 reponse 转换成 BigInt，前端把这个数字传给后端的时候，就再转换成字符串。不过貌似没这个必要，前端直接把这个数字存为字符串就好了。</p>
+<p>如果后端返回的是一个 JSON，JSON 中包含很大的数，则这里比较难处理，使用 <code>JSON.parse</code> 是无法达到预期效果的，这个时候可以使用 <a href="https://github.com/sidorares/json-bigint">json-bigin</a> 这个库来 parse JSON 数据。</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">JSONbig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;json-bigint&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="s1">&#39;{ &quot;value&quot; : 9223372036854775807, &quot;v2&quot;: 123 }&#39;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Input:&#39;</span><span class="p">,</span> <span class="nx">json</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;node.js built-in JSON:&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;JSON.parse(input).value : &#39;</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;JSON.stringify(JSON.parse(input)):&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">r</span><span class="p">));</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;\n\nbig number JSON:&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">JSONbig</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;JSONbig.parse(input).value : &#39;</span><span class="p">,</span> <span class="nx">r1</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;JSONbig.stringify(JSONbig.parse(input)):&#39;</span><span class="p">,</span> <span class="nx">JSONbig</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">r1</span><span class="p">));</span>
+<span class="err">````</span>
+<span class="nx">output</span>
+
+<span class="err">```</span><span class="nx">txt</span>
+<span class="nx">Input</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;value&quot;</span> <span class="o">:</span> <span class="mi">9223372036854775807</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="o">:</span> <span class="mi">123</span> <span class="p">}</span>
+
+<span class="nx">node</span><span class="p">.</span><span class="nx">js</span> <span class="nx">built</span><span class="o">-</span><span class="k">in</span> <span class="nx">JSON</span><span class="o">:</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">value</span> <span class="o">:</span>  <span class="mi">9223372036854776000</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="o">:</span><span class="mi">9223372036854776000</span><span class="p">,</span><span class="s2">&quot;v2&quot;</span><span class="o">:</span><span class="mi">123</span><span class="p">}</span>
+
+<span class="nx">big</span> <span class="nx">number</span> <span class="nx">JSON</span><span class="o">:</span>
+<span class="nx">JSONbig</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">value</span> <span class="o">:</span>  <span class="mi">9223372036854775807</span>
+<span class="nx">JSONbig</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">JSONbig</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="o">:</span><span class="mi">9223372036854775807</span><span class="p">,</span><span class="s2">&quot;v2&quot;</span><span class="o">:</span><span class="mi">123</span><span class="p">}</span>
+<span class="err">````</span>
+
+<span class="nx">在</span> <span class="nx">axios</span> <span class="nx">中使用</span><span class="err">：</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;http://api.com/&#39;</span><span class="p">,</span> <span class="c1">// 接口基础路径</span>
+  <span class="c1">// transformResponse 允许自定义原始的响应数据（字符串）</span>
+  <span class="nx">transformResponse</span><span class="o">:</span> <span class="p">[</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// 如果转换成功则返回转换的数据结果</span>
+      <span class="k">return</span> <span class="nx">JSONbig</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 如果转换失败，则包装为统一数据格式并返回</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">data</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>自己手写实现，如果后端传给你以这个这样的 JSON，请你把它转换成没有误差的形式。</p>
+<p>使用 <code>JSON.parse</code> 是肯定不行的。这里用正则表达式。</p>
+<div class="highlight"><pre>&#39;[{ &quot;value&quot; : 9223372036854775807, &quot;v2&quot;: 123 },{ &quot;value&quot; : 9223372036854775555, &quot;v2&quot;: 666 }]&#39;
+</pre></div>
+
 <h2 id="_2">✔ 原始值和引用值<a class="headerlink" href="#_2" title="Permanent link"></a></h2>
 <p><strong>原始值</strong>即一些代表原始数据类型的值，也叫基本数据类型。这些基本数据类型的访问是按值进行访问的。他们被存储在栈中。包括：</p>
 <ul>
@@ -2779,7 +2933,7 @@ function strip(num: numType, precision = 15): number {
 }
 </pre></div>
 
-<h4 id="_32">乘法<a class="headerlink" href="#_32" title="Permanent link"></a></h4>
+<h4 id="_32">✔ 乘法<a class="headerlink" href="#_32" title="Permanent link"></a></h4>
 <p>把乘法处理好了后续的加减除会比较方便。</p>
 <div class="highlight"><pre>/**
  * 精确乘法
@@ -2787,19 +2941,56 @@ function strip(num: numType, precision = 15): number {
 function times(...nums: numType[]): number {
   const [num1, num2] = nums;
   const num1Changed = float2Fixed(num1); // 小数转整数 1.23456 =&gt; 123456
-  const num2Changed = float2Fixed(num2); 
-  const baseNum = digitLength(num1) + digitLength(num2);
-  const leftValue = num1Changed * num2Changed;
+  const num2Changed = float2Fixed(num2); // 小数转整数 1.23456 =&gt; 123456
+  const baseNum = digitLength(num1) + digitLength(num2); // 计算num1 num2 小数位总位数
+  const leftValue = num1Changed * num2Changed; // 计算整数的积
 
-  checkBoundary(leftValue);
+  checkBoundary(leftValue); // 看是否超出 Number.MAX_SAFE_INTEGER
 
-  return leftValue / Math.pow(10, baseNum);
+  // 把两个整数的积 / 总小数位数，小数点归位
+  return leftValue / Math.pow(10, baseNum); 
 }
 </pre></div>
 
-<h4 id="_33">加法<a class="headerlink" href="#_33" title="Permanent link"></a></h4>
-<h4 id="_34">减法<a class="headerlink" href="#_34" title="Permanent link"></a></h4>
-<h4 id="_35">除法<a class="headerlink" href="#_35" title="Permanent link"></a></h4>
+<h4 id="_33">✔ 加法<a class="headerlink" href="#_33" title="Permanent link"></a></h4>
+<div class="highlight"><pre>/**
+ * 精确加法
+ */
+function plus(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  // 取最大的小数位
+  const baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  // 把小数都转为整数然后再计算
+  return (times(num1, baseNum) + times(num2, baseNum)) / baseNum;
+}
+</pre></div>
+
+<h4 id="_34">✔ 减法<a class="headerlink" href="#_34" title="Permanent link"></a></h4>
+<div class="highlight"><pre>/**
+ * 精确减法
+ */
+function minus(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  return (times(num1, baseNum) - times(num2, baseNum)) / baseNum;
+}
+</pre></div>
+
+<h4 id="_35">✔ 除法<a class="headerlink" href="#_35" title="Permanent link"></a></h4>
+<div class="highlight"><pre>/**
+ * 精确除法
+ */
+function divide(...nums: numType[]): number {
+  const [num1, num2] = nums;
+  const num1Changed = float2Fixed(num1);
+  const num2Changed = float2Fixed(num2);
+  checkBoundary(num1Changed);
+  checkBoundary(num2Changed);
+  // fix: 类似 10 ** -4 为 0.00009999999999999999，strip 修正
+  return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
+}
+</pre></div>
+
 <h3 id="_36">✔ 一些数值处理方法<a class="headerlink" href="#_36" title="Permanent link"></a></h3>
 <h4 id="parseint">✔ parseInt<a class="headerlink" href="#parseint" title="Permanent link"></a></h4>
 <p><code>parseInt(string, radix)</code> 解析一个字符串并返回指定基数的十进制整数，<code>radix</code> 是2-36之间的整数，表示被解析字符串的基数。</p>
@@ -3827,7 +4018,235 @@ onload DONE
 </tr>
 </tbody>
 </table>
-<h3 id="axios">Axios<a class="headerlink" href="#axios" title="Permanent link"></a></h3>
+<h3 id="xhr">✔ 封装 XHR<a class="headerlink" href="#xhr" title="Permanent link"></a></h3>
+<p>封装成 Promise 的形式：</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">XHRWrapper</span><span class="p">({</span>
+  <span class="nx">url</span><span class="p">,</span>
+  <span class="nx">method</span> <span class="o">=</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+  <span class="nx">headers</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">params</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">formData</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">timeout</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">responseType</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">onTimeout</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">onDownloadProgress</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">onUploadProgress</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">onAbort</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">})</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">ajax</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">res</span><span class="p">,</span> <span class="nx">rej</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">timeStart</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span>
+    <span class="kr">const</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">()</span>
+
+    <span class="kr">const</span> <span class="nx">requestConfig</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">url</span><span class="p">,</span>
+      <span class="nx">method</span><span class="p">,</span>
+      <span class="nx">headers</span><span class="p">,</span>
+      <span class="nx">data</span><span class="p">,</span>
+      <span class="nx">params</span><span class="p">,</span>
+      <span class="nx">formData</span><span class="p">,</span>
+      <span class="nx">timeout</span><span class="p">,</span>
+      <span class="nx">responseType</span><span class="p">,</span>
+      <span class="nx">withCredentials</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1">// --------------------request interceptors--------------</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">XHRWrapper</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">requestInterceptors</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">XHRWrapper</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">requestInterceptors</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+        <span class="nx">interceptor</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">interceptor</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// --------------------------------------------------</span>
+
+    <span class="c1">// --------------------url拼接，处理query--------------</span>
+    <span class="kd">let</span> <span class="nx">finalUrl</span> <span class="o">=</span> <span class="nx">requestConfig</span><span class="p">.</span><span class="nx">url</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">params</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">k</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">finalUrl</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">finalUrl</span> <span class="o">+=</span> <span class="err">`</span><span class="o">?</span><span class="nx">$</span><span class="p">{</span><span class="nx">k</span><span class="p">}</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="nx">k</span><span class="p">]}</span><span class="err">`</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">finalUrl</span> <span class="o">+=</span> <span class="err">`</span><span class="o">&amp;</span><span class="nx">$</span><span class="p">{</span><span class="nx">k</span><span class="p">}</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="nx">k</span><span class="p">]}</span><span class="err">`</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="c1">// --------------------------------------------------</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">method</span><span class="p">,</span> <span class="nx">finalUrl</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="nx">requestConfig</span><span class="p">.</span><span class="nx">responseType</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="nx">requestConfig</span><span class="p">.</span><span class="nx">withCredentials</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timeout</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">timeout</span> <span class="o">=</span> <span class="nx">timeout</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">ontimeout</span> <span class="o">=</span> <span class="nx">onTimeout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ------------------------------header----------------</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">headers</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">k</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">requestConfig</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="nx">k</span><span class="p">])</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="c1">// ----------------------------------------------------</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">allResponse</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nx">statusCode</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="nx">response</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">,</span>
+          <span class="nx">responseType</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span><span class="p">,</span>
+          <span class="nx">responseURL</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseURL</span><span class="p">,</span>
+          <span class="nx">duration</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">timeStart</span><span class="p">,</span> <span class="c1">// 请求用时</span>
+          <span class="nx">rawAllResponseHeaders</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">getAllResponseHeaders</span><span class="p">(),</span>
+          <span class="nx">allResponseHeaders</span><span class="o">:</span> <span class="nx">stripRawHeaders</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">getAllResponseHeaders</span><span class="p">()),</span>
+        <span class="p">}</span>
+
+        <span class="c1">// --------------------response interceptors--------------</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">XHRWrapper</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">responseInterceptors</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">XHRWrapper</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">responseInterceptors</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+            <span class="nx">interceptor</span> <span class="o">=&gt;</span> <span class="p">{</span>
+              <span class="nx">interceptor</span><span class="p">(</span><span class="nx">allResponse</span><span class="p">)</span>
+            <span class="p">}</span>
+          <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="c1">// --------------------------------------------------</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kr">const</span> <span class="nx">responseInfo</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">data</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">,</span>
+            <span class="nx">statusCode</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+            <span class="nx">statusText</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="p">}</span>
+          <span class="nx">res</span><span class="p">(</span><span class="nx">responseInfo</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kr">const</span> <span class="nx">rejInfo</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">data</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">statusCode</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+            <span class="nx">statusText</span><span class="o">:</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="p">}</span>
+          <span class="nx">rej</span><span class="p">(</span><span class="nx">rejInfo</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">upload</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">onUploadProgress</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="nx">onDownloadProgress</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onabort</span> <span class="o">=</span> <span class="nx">onAbort</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onerror&#39;</span><span class="p">)</span>
+      <span class="nx">rej</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">data</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">formData</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">.</span><span class="nx">formData</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+
+  <span class="k">return</span> <span class="nx">ajax</span>
+<span class="p">}</span>
+
+<span class="c1">// 简易 interceptors</span>
+<span class="nx">XHRWrapper</span><span class="p">.</span><span class="nx">interceptors</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">request</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">requestInterceptors</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">use</span><span class="p">(</span><span class="nx">interceptor</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">requestInterceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">interceptor</span><span class="p">)</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">response</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">responseInterceptors</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">use</span><span class="p">(</span><span class="nx">interceptor</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">responseInterceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">interceptor</span><span class="p">)</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1">// rawHeaders =&gt; &#39;access-control-allow-headers: x-request-id,content-type\r\naccess-control-allow-methods: GET, PUT, POST, DELETE, PATCH, OPTIONS\r\naccess-control-allow-origin: *\r\nconnection: keep-alive\r\ncontent-type: application/json\r\ndate: Sun, 03 Apr 2022 02:58:27 GMT\r\nkeep-alive: timeout=5\r\nrequestid: 100123456465\r\ntransfer-encoding: chunked\r\nx-powered-by: Express\r\n&#39;</span>
+<span class="c1">// 把 字符串 headers 提取成 kv 对</span>
+<span class="kd">function</span> <span class="nx">stripRawHeaders</span><span class="p">(</span><span class="nx">rawHeaders</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="kr">const</span> <span class="nx">rawHeadersSplit</span> <span class="o">=</span> <span class="nx">rawHeaders</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\r\n&#39;</span><span class="p">)</span>
+  <span class="nx">rawHeadersSplit</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+  <span class="nx">rawHeadersSplit</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">kv</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">kvSplit</span> <span class="o">=</span> <span class="nx">kv</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">[</span><span class="nx">kvSplit</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">trim</span><span class="p">()]</span> <span class="o">=</span> <span class="nx">kvSplit</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>使用</p>
+<div class="highlight"><pre><span class="nx">XHRWrapper</span><span class="p">({</span>
+  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://test.com:3457/receiveFormData&#39;</span><span class="p">,</span>
+  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;x-request-id&#39;</span><span class="o">:</span> <span class="s1">&#39;100123456465&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="c1">// qs param</span>
+  <span class="c1">// params: {</span>
+  <span class="c1">//   province: &#39;Wuhan&#39;,</span>
+  <span class="c1">//   region: &#39;Hongshan&#39;,</span>
+  <span class="c1">//   street: &#39;Wenhui Street&#39;,</span>
+  <span class="c1">// },</span>
+  <span class="c1">// json data</span>
+  <span class="c1">// data: {</span>
+  <span class="c1">//   name: &#39;yunyuv&#39;,</span>
+  <span class="c1">//   age: 1003,</span>
+  <span class="c1">//   sex: &#39;female&#39;,</span>
+  <span class="c1">//   school: &#39;HZAU&#39;,</span>
+  <span class="c1">// },</span>
+  <span class="c1">// formData,</span>
+  <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="nx">timeout</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">onTimeout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">onDownloadProgress</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+      <span class="s1">&#39;onDownloadProgress&#39;</span><span class="p">,</span>
+      <span class="err">`</span><span class="nx">$</span><span class="p">{((</span><span class="nx">e</span><span class="p">.</span><span class="nx">loaded</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="nx">e</span><span class="p">.</span><span class="nx">total</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="o">%</span><span class="err">`</span>
+    <span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">onUploadProgress</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+      <span class="s1">&#39;onUploadProgress&#39;</span><span class="p">,</span>
+      <span class="err">`</span><span class="nx">$</span><span class="p">{((</span><span class="nx">e</span><span class="p">.</span><span class="nx">loaded</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="nx">e</span><span class="p">.</span><span class="nx">total</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="o">%</span><span class="err">`</span>
+    <span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">onAbort</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onAbort&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">onError</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onError&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+  <span class="p">},</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span>
+  <span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">errorResponse</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">errorResponse</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>详细例子参考：</p>
+<ul>
+<li><a href="https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr.html">xhr.html</a></li>
+<li><a href="https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-wrapper.js">xhr-wrapper.js</a></li>
+<li><a href="https://github.com/lxfriday/fe-offer-guide/blob/master/code/xhr-server.js">xhr-server.js</a></li>
+</ul>
+<h3 id="axios">✔ Axios<a class="headerlink" href="#axios" title="Permanent link"></a></h3>
+<p>ref <a href="https://axios-http.com/zh/docs/post_example">Axios 官方文档</a></p>
 <h2 id="fetch">✔ fetch<a class="headerlink" href="#fetch" title="Permanent link"></a></h2>
 <p>ref</p>
 <ul>
@@ -4061,6 +4480,7 @@ onload DONE
 <li>基于 Promise 实现，能使用 async 等新特性；</li>
 <li>基本配置比较简单且集中，方便管理；</li>
 <li>fetch 是事实上未来的趋势；</li>
+<li>当接收到一个代表错误的 HTTP 状态码时，从 <code>fetch()</code> 返回的 Promise 不会被标记为 <code>reject</code>，即使响应的 HTTP 状态码是 404 或 500。相反，它会将 Promise 状态标记为 <code>resolve</code> （如果响应的 HTTP 状态码不在 200 - 299 的范围内，则设置 <code>resolve</code> 返回值的 ok 属性为 false ），仅当网络故障时或请求被阻止时，才会标记为 <code>reject</code>，这一点与 Axios 不同；</li>
 </ul>
 <hr />
 <p><strong>axios</strong></p>
@@ -10187,19 +10607,26 @@ CodePen 全屏查看
 
 <h1 id="react">React<a class="headerlink" href="#react" title="Permanent link"></a></h1>
 <h2 id="react_1">✔ React 生命周期<a class="headerlink" href="#react_1" title="Permanent link"></a></h2>
-<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/28cc0a6d-9b6b-e9af-0e7f-3b2df7636ed1.png" /></p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/blog/3ce7e947-da2b-4977-fc51-3d2290ebcb8e.png" /></p>
+<p>ref <a href="https://reactjs.org/docs/react-component.html">React.Component</a></p>
 <ul>
-<li><code>componentWillMount</code></li>
-<li><code>render</code></li>
-<li><code>componentDidMount</code></li>
-<li><code>shouldComponentUpdate</code></li>
-<li><code>componentWillReceiveProps</code></li>
-<li><code>componentWillUpdate</code></li>
-<li><code>componentDidUpdate</code></li>
-<li><code>componentWillUnmount</code></li>
-<li><code>static getDerivedStateFromProps</code> 在组件创建时和更新时的 render 方法之前调用，它应该返回一个对象来更新状态，或者返回 null 来不更新任何内容</li>
-<li><code>getSnapshotBeforeUpdate</code> 被调用于 <code>render</code> 之后，可以读取但无法使用 DOM 的时候。它使您的组件可以在可能更改之前从 DOM 捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给 <code>componentDidUpdate()</code></li>
+<li><code>constructor()</code></li>
+<li><code>static getDerivedStateFromProps(props, state)</code></li>
+<li><code>static getDerivedStateFromError(error)</code></li>
+<li><code>shouldComponentUpdate(nextProps, nextState)</code></li>
+<li><code>render()</code></li>
+<li><code>componentDidMount()</code></li>
+<li><code>getSnapshotBeforeUpdate(prevProps, prevState)</code></li>
+<li><code>componentDidUpdate(prevProps, prevState, snapshot)</code></li>
+<li><code>componentDidCatch(error, info)</code></li>
+<li><code>componentWillUnmount()</code></li>
 </ul>
+<p><button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe height="100%" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/lxfriday/embed/KKZoGjQ?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen \<a href="https://codepen.io/lxfriday/pen/KKZoGjQ">
+  Untitled\</a> by 云影sky (\<a href="https://codepen.io/lxfriday">@lxfriday\</a>)
+  on \<a href="https://codepen.io">CodePen\</a>.\</iframe>'>
+CodePen 查看演示
+</button></p>
 <h2 id="react-context">React Context<a class="headerlink" href="#react-context" title="Permanent link"></a></h2>
 <h2 id="react_2">React 事件机制<a class="headerlink" href="#react_2" title="Permanent link"></a></h2>
 <p>ref</p>
@@ -10223,7 +10650,1063 @@ CodePen 全屏查看
 <h2 id="hooks">HOOKS 原理<a class="headerlink" href="#hooks" title="Permanent link"></a></h2>
 <h2 id="dom_4">虚拟 DOM<a class="headerlink" href="#dom_4" title="Permanent link"></a></h2>
 <h2 id="react-router">React Router 原理<a class="headerlink" href="#react-router" title="Permanent link"></a></h2>
-<h2 id="redux">Redux 原理<a class="headerlink" href="#redux" title="Permanent link"></a></h2>
+<h2 id="redux">Redux 相关<a class="headerlink" href="#redux" title="Permanent link"></a></h2>
+<p>新增了一个 redux toolkit 库，现在再也不需要写大量样板代码了。</p>
+<ul>
+<li><a href="https://redux.js.org/"><code>Redux</code></a></li>
+<li><a href="https://redux-toolkit.js.org/"><code>Redux Toolkit</code></a></li>
+</ul>
+<h3 id="redux-toolkit">✔ Redux Toolkit<a class="headerlink" href="#redux-toolkit" title="Permanent link"></a></h3>
+<p>Redux 基本还是保持原样，而 Tookit 可以更好的组织 redux 代码。一言概括就是，代码看起来像是给人看的了。</p>
+<p>几个主要的 API 如下：</p>
+<ul>
+<li><code>configureStore</code> 初始化 store 的函数</li>
+<li><code>createSlice</code> 用来创建 redux 内的 reducer 逻辑，完善的覆盖了命名空间、初始 state、reducer、effects</li>
+<li><code>createAsyncThunk</code> 用来处理网络请求等的功能函数</li>
+<li><code>createSelector</code> 使用 <a href="https://github.com/reduxjs/reselect">reselect</a> 来方便地组合处理从 store 中获取的数据</li>
+</ul>
+<p>一个比较常见的 redux 配置如下：</p>
+<div class="highlight"><pre><span class="c1">// store/app.js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createSlice</span><span class="p">,</span> <span class="nx">createAsyncThunk</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+
+<span class="c1">// 模拟一个网络请求</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">fetchUserInfo</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span><span class="s1">&#39;posts/fetchPosts&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 在这里通过网络请求获取数据</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">res</span><span class="p">,</span> <span class="nx">rej</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">({</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;lxfriday&#39;</span><span class="p">,</span>
+          <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">appSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app&#39;</span><span class="p">,</span>
+  <span class="nx">initialState</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">hasLogin</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;idle&#39;</span><span class="p">,</span>
+    <span class="nx">userInfo</span><span class="o">:</span> <span class="p">{}</span>
+  <span class="p">},</span>
+  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">setHasLogin</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">payload</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">hasLogin</span> <span class="o">=</span> <span class="nx">payload</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">pending</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;loading&#39;</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;succeeded&#39;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">rejected</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">appSlice</span><span class="p">.</span><span class="nx">reducer</span>
+
+<span class="c1">// store/index.js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">configureStore</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createLogger</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;redux-logger&#39;</span>
+<span class="kr">import</span> <span class="nx">appSlice</span> <span class="nx">from</span> <span class="s1">&#39;./app&#39;</span>
+
+<span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="nx">reducer</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="o">:</span> <span class="nx">appSlice</span>
+  <span class="p">},</span>
+  <span class="nx">preloadedState</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">middleware</span><span class="o">:</span> <span class="nx">getDefaultMiddleware</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[...</span><span class="nx">getDefaultMiddleware</span><span class="p">(),</span> <span class="nx">createLogger</span><span class="p">()]</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">store</span>
+
+<span class="c1">// src/index.jsx</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Provider</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-redux&#39;</span>
+<span class="kr">import</span> <span class="nx">store</span> <span class="nx">from</span> <span class="s1">&#39;./store&#39;</span>
+<span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./App&#39;</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)).</span><span class="nx">render</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">Provider</span> <span class="nx">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">React</span><span class="p">.</span><span class="nx">StrictMode</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="err">/React.StrictMode&gt;</span>
+  <span class="o">&lt;</span><span class="err">/Provider&gt;</span>
+<span class="p">)</span>
+
+<span class="c1">// src/App.jsx</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useSelector</span><span class="p">,</span> <span class="nx">useDispatch</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-redux&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">fetchUserInfo</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./store/app&#39;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">userInfo</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;App&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">button</span>
+          <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchUserInfo</span><span class="p">(</span><span class="s1">&#39;this is fetchUserInfo arg&#39;</span><span class="p">))</span>
+            <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+              <span class="c1">// fetchUserInfo 是可取消的，取消之后会导致 fetchUserInfo.rejected 触发</span>
+              <span class="nx">promise</span><span class="p">.</span><span class="nx">abort</span><span class="p">()</span>
+            <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+          <span class="p">}}</span>
+        <span class="o">&gt;</span>
+          <span class="nx">fetch</span> <span class="nx">user</span> <span class="nx">Info</span>
+        <span class="o">&lt;</span><span class="err">/button&gt;</span>
+      <span class="o">&lt;</span><span class="err">/p&gt;</span>
+    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span>
+</pre></div>
+
+<h4 id="configurestore">✔ configureStore<a class="headerlink" href="#configurestore" title="Permanent link"></a></h4>
+<p><a href="https://redux-toolkit.js.org/api/configureStore"><code>configureStore</code></a> 是 redux <a href="https://redux.js.org/api/createstore"><code>createStore</code></a> 的替代版（高级版）。用来初始化 store。</p>
+<p>配置项如下：</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="c1">// reducer</span>
+  <span class="nx">reducer</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// namespace1: ...</span>
+    <span class="c1">// namespace2: ...</span>
+  <span class="p">},</span>
+  <span class="c1">// middleware</span>
+  <span class="nx">middleware</span><span class="o">:</span> <span class="nx">getDefaultMiddleware</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="p">...</span><span class="nx">getDefaultMiddleware</span><span class="p">(),</span>
+     <span class="c1">// otherMiddleware...</span>
+  <span class="p">],</span>
+  <span class="c1">// 是否启用 redux devtool 开发工具，true 表示开启，redux-toolkit 内部会判断 env，在 prod 模式下会自动禁用</span>
+  <span class="nx">devTools</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// 预置的 state，preloadedState 的 state 会覆盖到对应的命名空间下的 state，不是合并，是直接覆盖</span>
+  <span class="nx">preloadedState</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// namespace1: namespace1PreloadedState</span>
+    <span class="c1">// namespace2: namespace2PreloadedState</span>
+  <span class="p">},</span>
+  <span class="nx">enhancers</span><span class="o">:</span> <span class="p">[]</span> <span class="c1">// enhancers 或者 是一个函数，函数的参数是默认的 enhancers，且必须返回一个 enhancers 数组：(defaultEnhances) =&gt; [...yourEnhancers, ...defaultEnhances]</span>
+<span class="p">})</span>
+<span class="err">````</span>
+
+<span class="nx">创建出来的</span> <span class="err">`</span><span class="nx">store</span><span class="err">`</span> <span class="nx">的结构是这样的</span><span class="err">，</span><span class="nx">其中</span> <span class="err">`</span><span class="nx">dispatch</span><span class="err">`、`</span><span class="nx">getState</span><span class="err">`、`</span><span class="nx">subscribe</span><span class="err">`</span> <span class="mi">3</span><span class="nx">个属性用的比较多</span><span class="err">。</span>
+
+<span class="o">!</span><span class="p">[</span><span class="nx">store</span><span class="p">](</span><span class="nx">http</span><span class="o">:</span><span class="c1">//qiniu1.lxfriday.xyz/feoffer/1651582364227_62b87790-d436-4cd1-b2f1-d4a53d90d749.png)</span>
+
+<span class="err">`</span><span class="nx">configureStore</span><span class="err">`</span> <span class="nx">最需要配置的就是</span> <span class="err">`</span><span class="nx">reducer</span><span class="err">`</span> <span class="nx">属性</span><span class="err">。</span><span class="nx">从最开始那个例子中就可以知道</span><span class="err">。`</span><span class="nx">reducer</span><span class="err">`</span> <span class="nx">属性要指定一个对象</span><span class="err">，</span><span class="nx">对象的</span> <span class="nx">key</span> <span class="nx">是每个</span> <span class="nx">reducer</span> <span class="nx">的命名空间</span><span class="err">，</span><span class="nx">而值就是</span> <span class="err">`</span><span class="nx">reducer</span><span class="err">`。</span>
+
+<span class="p">[</span><span class="nx">configureStore</span><span class="p">](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//codesandbox.io/s/clever-swirles-4mecm9?file=/configureStore.ts:4193-4258) 简化版源码：</span>
+
+<span class="o">!</span><span class="p">[](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//qiniu1.lxfriday.xyz/feoffer/1651922514606_7f446171-f40a-4e44-9aa8-6b6ce2719586.png)</span>
+
+<span class="err">####</span> <span class="err">✔</span> <span class="nx">createSlice</span>
+
+<span class="p">[</span><span class="err">`</span><span class="nx">createSlice</span><span class="err">`</span><span class="p">](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//redux-toolkit.js.org/api/createSlice) 是创建 reducer 的核心，其参数为初始 state、name（命名空间）、和空间下的 reducers，另外还有一个 `extraReducers`。</span>
+
+<span class="err">`</span><span class="nx">reducers</span><span class="err">`</span> <span class="nx">和</span> <span class="err">`</span><span class="nx">extraReducers</span><span class="err">`</span> <span class="nx">的区别在于</span><span class="err">，`</span><span class="nx">reducers</span><span class="err">`</span> <span class="nx">声明的函数会自动生成</span> <span class="err">`</span><span class="nx">action</span><span class="err">`</span> <span class="nx">而</span> <span class="err">`</span><span class="nx">extraReducers</span><span class="err">`</span> <span class="nx">并不会</span><span class="err">，`</span><span class="nx">extraReducers</span><span class="err">`</span> <span class="nx">被设计来处理</span> <span class="err">“</span><span class="nx">外部的</span><span class="err">”</span> <span class="nx">action</span><span class="err">，</span><span class="nx">通常就是</span> <span class="err">`</span><span class="nx">createAsyncThunk</span><span class="err">`</span> <span class="nx">生成的</span> <span class="nx">action</span><span class="err">。</span>
+
+<span class="nx">一个最简单的</span> <span class="err">`</span><span class="nx">createSlice</span><span class="err">`</span> <span class="nx">就是下面这个例子</span><span class="err">。</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="c1">// 一个最简单的 reducer</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createSlice</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+
+<span class="kr">const</span> <span class="nx">homeSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span>
+  <span class="nx">initialState</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">inc</span><span class="o">:</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nx">dec</span><span class="o">:</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// [fetchUserInfo.pending]: state =&gt; {</span>
+    <span class="c1">//   state.count += 1</span>
+    <span class="c1">// }</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="p">{</span> <span class="nx">inc</span><span class="p">,</span> <span class="nx">dec</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">homeSlice</span><span class="p">.</span><span class="nx">actions</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">homeSlice</span><span class="p">.</span><span class="nx">reducer</span>
+</pre></div>
+
+<p><code>createSlice</code> 创建出来的 <code>homeSlice</code> 的结构如下：</p>
+<p><img alt="createSlice" src="http://qiniu1.lxfriday.xyz/feoffer/1651582890070_25be4145-0b74-4869-a8d2-42d5bb22756c.png" /></p>
+<p><code>homeSlice.reducer</code> 就是要传递给 <code>configureStore</code> 参数的 <code>reducer</code> 属性的值。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="nx">reducer</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">home</span><span class="o">:</span> <span class="nx">homeSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+  <span class="p">},</span>
+  <span class="c1">// ...</span>
+<span class="p">})</span>
+<span class="err">````</span>
+
+<span class="err">`</span><span class="kr">export</span> <span class="kr">const</span> <span class="p">{</span> <span class="nx">inc</span><span class="p">,</span> <span class="nx">dec</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">homeSlice</span><span class="p">.</span><span class="nx">actions</span><span class="err">`</span> <span class="nx">这一行代码把</span> <span class="nx">action</span> <span class="nx">都进行了导出</span><span class="err">，</span><span class="nx">使用的时候只需要配合</span> <span class="err">`</span><span class="nx">dispatch</span><span class="err">`</span> <span class="nx">就可以执行了</span><span class="err">。</span>
+
+<span class="err">```</span><span class="nx">jsx</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useSelector</span><span class="p">,</span> <span class="nx">useDispatch</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-redux&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">inc</span><span class="p">,</span> <span class="nx">dec</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./store/home&#39;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;App&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">inc</span><span class="p">())}</span><span class="o">&gt;</span><span class="nx">inc</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">dec</span><span class="p">())}</span><span class="o">&gt;</span><span class="nx">dec</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+      <span class="o">&lt;</span><span class="err">/p&gt;</span>
+    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="err">````</span>
+
+<span class="nx">有没有发现</span><span class="err">，</span><span class="nx">使用了</span> <span class="nx">redux</span><span class="o">-</span><span class="nx">toolkit</span> <span class="nx">的</span> <span class="nx">redux</span> <span class="nx">代码就非常正常了</span><span class="err">，</span><span class="nx">完全不像以前需要声明很多</span> <span class="nx">action</span> <span class="nx">type</span>  <span class="nx">常量</span><span class="err">，</span><span class="nx">写很多</span> <span class="k">switch</span> <span class="k">case</span> <span class="nx">的情况</span><span class="err">。</span><span class="nx">并且</span> <span class="nx">redux</span><span class="o">-</span><span class="nx">toolkit</span> <span class="nx">还内置了</span> <span class="p">[</span><span class="nx">immer</span><span class="p">](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//redux-toolkit.js.org/usage/immer-reducers)，这样就可以非常方便的在 reducer 中用类似 `state.count += 1` 这种写法。</span>
+
+<span class="p">[</span><span class="nx">createSlice</span><span class="p">](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//codesandbox.io/s/clever-swirles-4mecm9?file=/createSlice.ts:6832-6871) 源码简化版。</span>
+
+<span class="o">!</span><span class="p">[](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//qiniu1.lxfriday.xyz/feoffer/1651965585863_b5f413a7-0900-4ab0-b0bc-8b3da40b891a.png)</span>
+
+<span class="nx">对</span> <span class="err">`</span><span class="nx">extraReducers</span><span class="err">`</span> <span class="nx">进行处理的关键函数</span><span class="err">：</span>
+
+<span class="o">!</span><span class="p">[](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//qiniu1.lxfriday.xyz/feoffer/1651964944518_cba2691c-76c4-438b-8ea7-f92657496cd2.png)</span>
+
+<span class="err">####</span> <span class="err">✔</span> <span class="nx">createAsyncThunk</span>
+
+<span class="nx">通常网络请求会使用到</span> <span class="p">[</span><span class="err">`</span><span class="nx">createAsyncThunk</span><span class="err">`</span><span class="p">](</span><span class="nx">https</span><span class="o">:</span><span class="c1">//redux-toolkit.js.org/api/createAsyncThunk)，当然如果你的项目不考虑网络请求和 react jsx 代码分离的话可能用不到它。`createAsyncThunk` 可以让你把网络请求相关的逻辑单独写在一个函数中，通常 `createAsyncThunk` 创建的 thunk 会放在对应的 reducer 文件内，并且其逻辑处理通常在 `extraReducers` 内进行（也可以自己直接 dispatch，不走 `extraReducers`）。</span>
+
+<span class="err">`</span><span class="nx">createAsyncThunk</span><span class="err">`</span> <span class="nx">的参数比较复杂</span><span class="err">：</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="kr">const</span> <span class="nx">doSomething</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="c1">//  action type</span>
+  <span class="c1">// 一个函数，函数有两个参数，第一个参数作为传递给 createAsyncThunk 返回的函数的参数</span>
+  <span class="c1">// 从第二个参数里可以拿到 dispatch 和 getState，方便自己操作 dispatch 流程</span>
+  <span class="c1">// 使用这里的 dispatch 就可以不用在 extraReducers 捕捉 action 变化了</span>
+  <span class="c1">// ref https://redux-toolkit.js.org/api/createAsyncThunk#payloadcreator</span>
+  <span class="nx">payloadCreator</span><span class="o">:</span> <span class="p">(</span><span class="nx">arg</span><span class="p">,</span> <span class="p">{</span> <span class="nx">dispatch</span><span class="p">,</span> <span class="nx">getState</span><span class="p">,</span> <span class="p">...</span><span class="nx">otherArgs</span> <span class="p">}),</span>
+  <span class="c1">// ref https://redux-toolkit.js.org/api/createAsyncThunk#options</span>
+  <span class="c1">// 配置比较复杂，不过好在大多数时候用不着，这里就不介绍了</span>
+  <span class="nx">options</span><span class="p">,</span> 
+<span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">updateUserInfo</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;app/updateUserInfo&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">doSomething</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span><span class="s1">&#39;user/getUserInfo&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="p">{</span><span class="nx">getState</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">useInfo</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">getUserInfo</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+  <span class="c1">// 后续有两种处理方式</span>
+  <span class="c1">// 下面的两种方式只需要选其一</span>
+  <span class="c1">// 方式1：使用 dispatch ，自己控制后续流程</span>
+  <span class="nx">dispatch</span><span class="p">(</span><span class="nx">appSlice</span><span class="p">.</span><span class="nx">actions</span><span class="p">.</span><span class="nx">updateUserInfo</span><span class="p">(</span><span class="nx">userInfo</span><span class="p">))</span>
+  <span class="c1">// 方式2：直接 return，这个数据会成为 doSomething.fulfilled 的 action.payload </span>
+  <span class="k">return</span> <span class="nx">userInfo</span>
+<span class="p">})</span>
+
+<span class="c1">// store/app.js</span>
+<span class="kr">const</span> <span class="nx">appSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app&#39;</span><span class="p">,</span>
+  <span class="nx">initialState</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">userInfo</span><span class="o">:</span> <span class="p">{}</span><span class="err">``</span>  
+  <span class="p">}</span>
+  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">updateUserInfo</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span><span class="nx">payload</span><span class="p">})</span> <span class="p">{</span>
+      <span class="c1">// ...</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">payload</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">doSomething</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">](</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span><span class="nx">payload</span><span class="p">})</span> <span class="p">{</span>
+      <span class="c1">// ...</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">payload</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><code>createAsyncThunk</code> 执行过后返回的 <code>doSomething</code> 是一个函数，你<strong>只能</strong>给这个函数传递一个参数，参数比较复杂则设计成对象传递进去就行了。</p>
+<p>调用方式是： </p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">(</span><span class="nx">args</span><span class="p">))</span>
+<span class="c1">// promise 中有 abort 属性，可以终止 doSomething 的执行</span>
+</pre></div>
+
+<p>实际操作流程：</p>
+<div class="highlight"><pre><span class="c1">// store/users.js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createAsyncThunk</span><span class="p">,</span> <span class="nx">createSlice</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+
+<span class="c1">// &#39;posts/fetchPosts&#39; 是 action type</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">fetchUserInfo</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span><span class="s1">&#39;posts/fetchPosts&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="p">{</span> <span class="nx">dispatch</span><span class="p">,</span> <span class="nx">getState</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 在这里通过网络请求获取数据</span>
+  <span class="c1">// 这里是用的 promise 模拟一个请求的过程</span>
+  <span class="c1">// 实际的情况是 const response = await request.fetchUser() 这种形式</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">res</span><span class="p">,</span> <span class="nx">rej</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">({</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;lxfriday&#39;</span><span class="p">,</span>
+          <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span>
+          <span class="nx">userId</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">usersSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+  <span class="nx">initialState</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">hasLogin</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;idle&#39;</span><span class="p">,</span>
+    <span class="nx">userInfo</span><span class="o">:</span> <span class="p">{}</span>
+  <span class="p">},</span>
+  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">setHasLogin</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">payload</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">hasLogin</span> <span class="o">=</span> <span class="nx">payload</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">pending</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;loading&#39;</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;succeeded&#39;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">rejected</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// 使用 </span>
+<span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchUserById</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+<span class="c1">// promise.abort() // 可以取消 fetchUserById，触发 fetchUserById.rejected</span>
+</pre></div>
+
+<p><code>dispatch</code> 触发请求之后的 logger：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651666855247_fe9df489-ce80-4418-ba9d-c59014644386.png" /></p>
+<p>会走下面的逻辑：</p>
+<div class="highlight"><pre><span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;succeeded&#39;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">userInfo</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+  <span class="p">},</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>如果调用了 <code>promise.abort()</code>，则 logger 就是下面这样的：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651666992789_e1dc22a4-bf58-454f-956b-db91f51464fa.png" /></p>
+<p>会走下面的逻辑：</p>
+<div class="highlight"><pre><span class="nx">extraReducers</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">fetchUserInfo</span><span class="p">.</span><span class="nx">rejected</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><a href="https://codesandbox.io/s/clever-swirles-4mecm9?file=/createAsyncThunk.ts:12150-12222">createAsyncThunk</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651967354339_3686ea6f-8479-4067-9381-f5011c0d8f3f.png" /></p>
+<p><a href="https://github.com/reduxjs/redux-thunk/blob/master/src/index.ts#L30">redux-thunk</a> 源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651996895206_82c93c14-7b54-4681-9c1f-a243be6c3de1.png" /></p>
+<p><button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe src="https://codesandbox.io/embed/keen-murdock-gtvv20?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="keen-murdock-gtvv20"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">\</iframe>'>
+查看 Code Sandbox 例子
+</button></p>
+<h4 id="createselector">✔ createSelector<a class="headerlink" href="#createselector" title="Permanent link"></a></h4>
+<p><a href="https://redux-toolkit.js.org/api/createSelector"><code>createSelector</code></a> 是直接从 <a href="https://github.com/reduxjs/reselect"><code>Reselect</code></a> 中导出的。其作用就是对从 store 中获取的数据做多重加工处理，并且可以对参数进行缓存，从而优化 react 的性能。看下面的例子：</p>
+<div class="highlight"><pre>// store/home.js
+import { createSlice } from &#39;@reduxjs/toolkit&#39;
+
+const homeSlice = createSlice({
+  name: &#39;home&#39;,
+  initialState: {
+    name: &#39;lxfriday&#39;,
+    sex: &#39;male&#39;,
+    age: 100,
+    school: &#39;HZAU&#39;
+  },
+  reducers: {
+    updateSchool: (state, { payload }) =&gt; {
+      state.school = payload
+    },
+    updateName: (state, { payload }) =&gt; {
+      state.name = payload
+    }
+  },
+  extraReducers: {}
+})
+
+export default homeSlice.reducer
+export const { updateSchool, updateName } = homeSlice.actions
+
+// store/index.js
+import { configureStore } from &quot;@reduxjs/toolkit&quot;;
+import home from &quot;./home&quot;;
+
+const store = configureStore({
+  reducer: {
+    home
+  }
+});
+
+export default store;
+
+// App.jsx
+import React, { Component } from &#39;react&#39;
+import { createSelector } from &#39;@reduxjs/toolkit&#39;
+import { connect } from &#39;react-redux&#39;
+import { updateSchool, updateName } from &#39;./store/home&#39;
+
+class App extends Component {
+  render() {
+    console.log(&#39;this.props&#39;, this.props)
+    return (
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;div&gt;userInfo:{this.props.userInfo}&lt;/div&gt;
+        &lt;div&gt;school:{this.props.school}&lt;/div&gt;
+        &lt;div&gt;
+          &lt;button
+            onClick={() =&gt; {
+              console.log(&#39;school =&gt; PKU&#39;)
+              this.props.dispatch(updateSchool(&#39;PKU&#39;))
+            }}
+          &gt;
+            {&#39;school =&gt; PKU&#39;}
+          &lt;/button&gt;
+          &lt;button
+            onClick={() =&gt; {
+              console.log(&#39;name =&gt; yunyuv&#39;)
+              this.props.dispatch(updateName(&#39;yunyuv&#39;))
+            }}
+          &gt;
+            {&#39;name =&gt; yunyuv&#39;}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+const selectName = state =&gt; state.home.name
+const selectAge = state =&gt; state.home.age
+const selectSex = state =&gt; state.home.sex
+const selectSchool = state =&gt; state.home.school
+
+const selectUserInfo = createSelector(
+  [selectName, selectAge, selectSex],
+  (name, age, sex) =&gt; {
+    console.log(&#39;selectUserInfo 执行了&#39;)
+    return `name: ${name}, age: ${age}, sex: ${sex}`
+  }
+)
+
+export default connect(state =&gt; {
+  return {
+    userInfo: selectUserInfo(state),
+    name: selectName(state),
+    age: selectAge(state),
+    sex: selectSex(state),
+    school: selectSchool(state)
+  }
+})(App)
+</pre></div>
+
+<p>先后点击 <code>school =&gt; PKU</code>、<code>name =&gt; yunyuv</code>，过程如下：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651669844775_7186637a-9ab5-4671-a936-be7373c79a60.gif" /></p>
+<p>从前后两次点击的差别就可以看出，<code>createSelector</code> 具备 memorize 能力，如果最后一个函数的参数都没有发生变更，则不会执行最后的计算，其会直接返回上次计算出的值。</p>
+<p><button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe src="https://codesandbox.io/embed/festive-gould-mrqyee?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="festive-gould-mrqyee"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">\</iframe>'>
+CodeSandbox 全屏查看
+</button></p>
+<h4 id="createaction">✔ createAction<a class="headerlink" href="#createaction" title="Permanent link"></a></h4>
+<p><a href="https://redux-toolkit.js.org/api/createAction"><code>createAction</code></a> 是一个功能函数，用来辅助定义 action。实际用的不多。</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">createAction</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">prepareAction</span><span class="o">?</span><span class="p">)</span>
+</pre></div>
+
+<p>用法 </p>
+<div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span> <span class="nx">createAction</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+
+<span class="kr">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;counter/increment&#39;</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">action</span> <span class="o">=</span> <span class="nx">increment</span><span class="p">()</span>
+<span class="c1">// { type: &#39;counter/increment&#39; }</span>
+
+<span class="nx">action</span> <span class="o">=</span> <span class="nx">increment</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">// returns { type: &#39;counter/increment&#39;, payload: 3 }</span>
+</pre></div>
+
+<p><code>createAction</code> 的第二个参数用来对 action 做一些定制，不过一般用不到：</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">addSomething</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;app/inc&#39;</span><span class="p">,</span> <span class="nx">text</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">payload</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">text</span><span class="p">,</span>
+      <span class="nx">id</span><span class="o">:</span> <span class="nx">nanoid</span><span class="p">(),</span>
+      <span class="nx">createdAt</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">addSomething</span><span class="p">(</span><span class="s1">&#39;write mote docs&#39;</span><span class="p">))</span>
+</pre></div>
+
+<p>打印出来的内容：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651680734697_1931f51b-dc18-453a-a3f7-3d493d080f5c.png" /></p>
+<p><a href="https://codesandbox.io/s/clever-swirles-4mecm9?file=/createAction.ts:7589-7649">createAction</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651967647763_25b6904f-d93e-43de-95e4-e65a6d1527de.png" /></p>
+<h4 id="createreducer">✔ createReducer<a class="headerlink" href="#createreducer" title="Permanent link"></a></h4>
+<p><a href="https://redux-toolkit.js.org/api/createReducer"><code>createReducer</code></a> 用来替代传统 redux 代码中出现的大量 switch case。其内部自带了 immer，也就是说你可以使用 <code>state.key = value</code> 的形式来更新 state。</p>
+<p>比较常见的 redux reducer 写法是下面这样的，写法看起来比较样板化。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">counterReducer</span><span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s1">&#39;increment&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}</span>
+    <span class="k">case</span> <span class="s1">&#39;decrement&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">}</span>
+    <span class="k">case</span> <span class="s1">&#39;incrementByAmount&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span> <span class="p">}</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">````</span>
+
+<span class="nx">而使用</span> <span class="err">`</span><span class="nx">createReducer</span><span class="err">`</span> <span class="nx">之后的写法是下面这样的</span><span class="err">：</span>
+
+<span class="err">```</span><span class="nx">js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createAction</span><span class="p">,</span> <span class="nx">createReducer</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span>
+
+<span class="kr">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;counter/increment&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">decrement</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;counter/decrement&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">incrementByAmount</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="s1">&#39;counter/incrementByAmount&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">counterReducer</span> <span class="o">=</span> <span class="nx">createReducer</span><span class="p">(</span><span class="nx">initialState</span><span class="p">,</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">builder</span>
+    <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">increment</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="o">++</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">decrement</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="o">--</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">incrementByAmount</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>写法看起来自然很多。</p>
+<p>看一个实际例子：</p>
+<div class="highlight"><pre>// src/store/app.js
+import { createAction, createReducer } from &quot;@reduxjs/toolkit&quot;;
+
+export const increment = createAction(&quot;app/increment&quot;);
+export const decrement = createAction(&quot;app/decrement&quot;);
+
+function isActionWithNumberPayload(action) {
+  return typeof action.payload === &quot;number&quot;;
+}
+
+const app = createReducer(
+  {
+    count: 0
+  },
+  (builder) =&gt; {
+    builder
+      .addCase(increment, (state, action) =&gt; {
+        state.count += action.payload;
+      })
+      .addCase(decrement, (state, action) =&gt; {
+        state.count -= action.payload;
+      })
+      .addMatcher(isActionWithNumberPayload, (state, action) =&gt; {
+        console.log(&quot;isActionWithNumberPayload&quot;);
+      })
+      .addDefaultCase((state, action) =&gt; {
+        console.log(&quot;defaultCase&quot;);
+      });
+  }
+);
+
+export default app;
+
+// src/store/index.js
+import { configureStore } from &quot;@reduxjs/toolkit&quot;;
+import app from &quot;./app&quot;;
+
+const store = configureStore({
+  reducer: {
+    app
+  }
+});
+
+export default store;
+
+// src/App.js
+import React from &quot;react&quot;;
+import { useDispatch, useSelector } from &quot;react-redux&quot;;
+import { increment, decrement } from &quot;./store/app&quot;;
+
+export default function App1() {
+  const appState = useSelector((state) =&gt; state.app);
+  const dispatch = useDispatch();
+  console.log(&quot;createReducerTestState&quot;, appState);
+  return (
+    &lt;div style={{ textAlign: &quot;center&quot; }}&gt;
+      &lt;button onClick={() =&gt; dispatch(increment(2))}&gt;inc&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch(decrement(2))}&gt;dec&lt;/button&gt;
+      &lt;p&gt;{appState.count}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</pre></div>
+
+<p><button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe src="https://codesandbox.io/embed/modern-dust-ezkzij?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="modern-dust-ezkzij"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">\</iframe>'>
+Code Sandbox 全屏查看
+</button></p>
+<p><a href="https://codesandbox.io/s/clever-swirles-4mecm9?file=/createReducer.ts:8409-8440">createReducer</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651996714656_6e77d089-ba44-413a-952a-d61537738c89.png" /></p>
+<h3 id="redux_1">✔ Redux<a class="headerlink" href="#redux_1" title="Permanent link"></a></h3>
+<p><a href="https://redux.js.org/">Redux</a> 包含的就是下面几个 API 了：</p>
+<ul>
+<li><a href="https://redux.js.org/api/createstore"><code>createStore</code></a></li>
+<li><a href="https://redux.js.org/api/combinereducers"><code>combineReducers</code></a></li>
+<li><a href="https://redux.js.org/api/applymiddleware"><code>applyMiddleware</code></a></li>
+<li><a href="https://redux.js.org/api/compose"><code>compose</code></a></li>
+</ul>
+<p>一个传统 Redux 配置：</p>
+<div class="highlight"><pre>// src/store/app.js
+const initialState = {
+  userInfo: {
+    name: &quot;lxfriday&quot;,
+    age: 122,
+    sex: &quot;maile&quot;
+  }
+};
+
+export const appUpdateUserInfo = &quot;app/updateUserInfo&quot;;
+
+export default function app(state = initialState, action) {
+  switch (action.type) {
+    case appUpdateUserInfo: {
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          ...action.payload
+        }
+      };
+    }
+    default: {
+      return {
+        ...state
+      };
+    }
+  }
+}
+
+// src/store/home.js
+const initialState = {
+  count: 100
+};
+
+export const homeInc = &quot;home/inc&quot;;
+export const homeDec = &quot;home/dec&quot;;
+
+export default function home(state = initialState, action) {
+  switch (action.type) {
+    case homeInc: {
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    }
+    case homeDec: {
+      return {
+        ...state,
+        count: state.count - 1
+      };
+    }
+    default: {
+      return {
+        ...state
+      };
+    }
+  }
+}
+
+// src/store/index.js
+import { createStore, applyMiddleware, compose, combineReducers } from &quot;redux&quot;;
+import { composeWithDevTools } from &quot;redux-devtools-extension&quot;;
+import thunk from &quot;redux-thunk&quot;;
+
+import app from &quot;./app&quot;;
+import home from &quot;./home&quot;;
+import logger from &quot;../middleware/logger&quot;;
+
+const reducers = combineReducers({
+  app,
+  home
+});
+
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(logger, thunk))
+);
+
+export default store;
+
+// src/middleware/logger.js
+export default function logger(args) {
+  return (next) =&gt; (action) =&gt; {
+    console.log(&quot;will dispatch&quot;, action, next);
+
+    const returnValue = next(action);
+
+    console.log(&quot;state after dispatch&quot;, args.getState());
+
+    return returnValue;
+  };
+}
+
+
+// src/App.js
+import { useDispatch, useSelector } from &quot;react-redux&quot;;
+import { homeDec, homeInc } from &quot;./store/home&quot;;
+import { appUpdateUserInfo } from &quot;./store/app&quot;;
+
+function thunkExample() {
+  // do something
+  return (dispatch) =&gt; {
+    return new Promise((res) =&gt; {
+      // 1.5秒后更新用户信息
+      setTimeout(() =&gt; {
+        res({
+          name: &quot;yunyuv&quot;,
+          age: 10086,
+          sex: &quot;male&quot;
+        });
+      }, 1500);
+    }).then((data) =&gt; {
+      dispatch({
+        type: appUpdateUserInfo,
+        payload: data
+      });
+    });
+  };
+}
+
+export default function App() {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) =&gt; state.app.userInfo);
+  const count = useSelector((state) =&gt; state.home.count);
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;div&gt;
+        &lt;div&gt;userInfo: {JSON.stringify(userInfo)}&lt;/div&gt;
+        &lt;div&gt;
+          &lt;button
+            onClick={() =&gt; {
+              dispatch(thunkExample());
+            }}
+          &gt;
+            updateUserInfo
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div&gt;
+          &lt;button
+            onClick={() =&gt;
+              dispatch({
+                type: homeInc
+              })
+            }
+          &gt;
+            inc
+          &lt;/button&gt;
+          &lt;button
+            onClick={() =&gt;
+              dispatch({
+                type: homeDec
+              })
+            }
+          &gt;
+            dec
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div&gt;{count}&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</pre></div>
+
+<p><button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe src="https://codesandbox.io/embed/smoosh-bush-j1px09?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="smoosh-bush-j1px09"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">\</iframe>'>
+Code Sandbox 全屏查看
+</button></p>
+<h4 id="createstore">✔ createStore<a class="headerlink" href="#createstore" title="Permanent link"></a></h4>
+<p><a href="https://redux.js.org/api/createstore"><code>createStore</code></a> 是 redux 创建 store 的关键函数。其签名为：</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">[,</span> <span class="nx">preloadedState</span><span class="p">[,</span> <span class="nx">enhancer</span><span class="p">]])</span>
+</pre></div>
+
+<p>参数：</p>
+<ul>
+<li><code>reducer</code> 第一个参数，传递 reducer，通常复杂的应用需要用 <code>combineReducers</code> 把整个架构的 reducer 全部 combine 到一个对象中</li>
+<li><code>preloadedState</code> 是预置到 store 的state，如果使用了 <code>combineReducers</code>，则 <code>preloadedState</code> 的结构要和 <code>combineReducers</code> 的结构对应</li>
+<li><code>enhancer</code> 传递类似 middleware、时间旅行、持久化等工具函数，增强 redux 的功能</li>
+</ul>
+<p><code>createStore</code> 的第二个参数如果是函数，则默认为是 enhancers。</p>
+<p>返回值：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651837563200_803ff7a0-09f7-485f-98da-e0f036bdee7d.png" /></p>
+<p><code>store.subscribe</code> 用于监听 store 的变化，每次 store 发生变更，其监听函数就会触发：</p>
+<div class="highlight"><pre><span class="nx">store</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;store.subscribe&quot;</span><span class="p">,</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+
+<p><code>store.getState</code> 用于获取 store 中的 state。</p>
+<p><code>store.dispatch</code> 这就不用说了。</p>
+<p><code>store.replaceReducer</code> 可以用于动态注入新的 reducer 函数，这个能力在 代码拆分 项目中比较实用。</p>
+<p>一个简单的例子：</p>
+<div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span> <span class="nx">createStore</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;redux&#39;</span>
+
+<span class="c1">// 项目初始情况下需要的 reducer</span>
+<span class="kr">const</span> <span class="nx">staticReducers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="o">:</span> <span class="nx">usersReducer</span><span class="p">,</span>
+  <span class="nx">posts</span><span class="o">:</span> <span class="nx">postsReducer</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">configureStore</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">createReducer</span><span class="p">(),</span> <span class="nx">initialState</span><span class="p">)</span>
+
+  <span class="nx">store</span><span class="p">.</span><span class="nx">asyncReducers</span> <span class="o">=</span> <span class="p">{}</span>
+
+  <span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">asyncReducer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nx">asyncReducers</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">asyncReducer</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nx">replaceReducer</span><span class="p">(</span><span class="nx">createReducer</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">asyncReducers</span><span class="p">))</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">store</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createReducer</span><span class="p">(</span><span class="nx">asyncReducers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">combineReducers</span><span class="p">({</span>
+    <span class="p">...</span><span class="nx">staticReducers</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">asyncReducers</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>关于 <code>preloadedState</code>，需要注意一点：</p>
+<p>如果使用了 <code>combineReducers</code> ，则 <code>preloadedState</code> 传递的参数必须要和 <code>combineReducers</code> 的对象结构对应上（也就是 namespace 这个 key 要对应上）。</p>
+<div class="highlight"><pre><span class="nx">createStore</span><span class="p">(</span><span class="nx">combineReducers</span><span class="p">({</span>
+  <span class="nx">app</span><span class="p">,</span> 
+  <span class="nx">home</span>
+<span class="p">}),</span> <span class="p">{</span>
+  <span class="c1">// good</span>
+  <span class="nx">app</span><span class="o">:</span> <span class="p">{</span>
+   <span class="nx">userInfo</span><span class="o">:</span> <span class="p">{},</span>
+   <span class="c1">// ...</span>
+  <span class="p">},</span>
+  <span class="c1">// bad</span>
+  <span class="nx">badKey</span><span class="o">:</span> <span class="p">{},</span> <span class="c1">// 这个 key 没有和 combineReducers 中的 key 对应上</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651861990687_1b7cf11e-133c-43ce-82ce-51b6c84a64d8.png" /></p>
+<p><a href="https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/createStore.ts">createStore</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651886011860_17e12da0-cd18-49c6-8020-f75b80d3b5fa.png" /></p>
+<h4 id="combinereducers">✔ combineReducers<a class="headerlink" href="#combinereducers" title="Permanent link"></a></h4>
+<p><a href="https://redux.js.org/api/combinereducers"><code>combineReducers</code></a> 的作用就是把多个 reducer 函数组合起来放进 store 中。其返回的也是一个类 reducer 函数。</p>
+<p>先看 <code>createStore</code> 的函数签名：</p>
+<div class="highlight"><pre><span class="nx">createStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">[,</span> <span class="nx">preloadedState</span><span class="p">[,</span> <span class="nx">enhancers</span><span class="p">]])</span>
+</pre></div>
+
+<p><code>createStore</code> 的第一个参数就是 reducer ，而通常我们的项目中 reducer 函数都不只一个，比如 <code>home</code>、<code>app</code> 等，各命名空间的 reducer 函数负责处理对应的逻辑。要把这些 reducer 函数都放进 <code>createStore</code> 中处理就需要 <code>combineReducers</code>。</p>
+<p><code>combineReducers</code> 的参数是一个对象， <code>key</code> 是对应的命名空间，值是对应的 reducer 函数。</p>
+<p>使用方式就是下面这样：</p>
+<div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span> <span class="nx">createStore</span><span class="p">,</span> <span class="nx">combineReducers</span><span class="p">,</span> <span class="nx">applyMiddleware</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;redux&#39;</span>
+<span class="kr">import</span> <span class="nx">app</span> <span class="nx">from</span> <span class="s1">&#39;./app&#39;</span>
+<span class="kr">import</span> <span class="nx">home</span> <span class="nx">from</span> <span class="s1">&#39;./home&#39;</span>
+
+<span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span>
+  <span class="nx">combineReducers</span><span class="p">({</span>
+    <span class="nx">app</span><span class="p">,</span>
+    <span class="nx">home</span>
+  <span class="p">}),</span>
+<span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+  <span class="s1">&#39;combineReducers&#39;</span><span class="p">,</span>
+  <span class="nx">combineReducers</span><span class="p">({</span>
+    <span class="nx">app</span><span class="p">,</span>
+    <span class="nx">home</span>
+  <span class="p">})</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>其返回一个 reducer 函数 <a href="https://github.com/reduxjs/redux/blob/master/src/combineReducers.ts#L157"><code>combineReducers</code></a>：</p>
+<p><a href="https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/combineReducers.ts">combineReducers</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651886424655_6d6d8af2-ee81-4d69-9266-507f050aeb6b.png" /></p>
+<h4 id="applymiddleware">✔ applyMiddleware<a class="headerlink" href="#applymiddleware" title="Permanent link"></a></h4>
+<div class="highlight"><pre><span class="nx">applyMiddleware</span><span class="p">(...</span><span class="nx">middleware</span><span class="p">)</span>
+</pre></div>
+
+<p><a href="https://redux.js.org/api/applymiddleware"><code>applyMiddleware</code></a> 的作用就是把多个 middleware 组合起来，方便作为 <code>createStore</code> 的参数。而 redux middleware 可以在 redux 执行期间做指定的一些事情。</p>
+<p>常见的 middleware 就是 <a href="https://github.com/LogRocket/redux-logger">redux-logger</a> 和 <a href="https://github.com/reduxjs/redux-thunk">redux-thunk</a> 了。</p>
+<p><a href="https://redux.js.org/api/applymiddleware#arguments">middleware</a> 的编写都遵循统一的格式：</p>
+<p>每个 middleware 函数会接收一个包含 <code>getState</code> 和 <code>dispatch</code> 两个属性的对象，并且返回一个函数，这个函数的参数是下一个 middleware 的 <code>dispatch</code> 方法，并且返回一个新的函数，这个新函数的参数是 <code>action</code>，且新函数需要返回 <code>next(action)</code>。</p>
+<p>简单点说： <code>next</code> 就是排在当前 middleware 后一个函数的 dispatch 触发器，而 action 就是下一个 middleware 执行的返回值，通常是普通 action（<code>{type: ..., payload: ...}</code>）。</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">middlewareOne</span><span class="p">({</span> <span class="nx">getState</span><span class="p">,</span> <span class="nx">dispatch</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="c1">// do something</span>
+  <span class="k">return</span> <span class="nx">next</span> <span class="o">=&gt;</span> <span class="nx">action</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// do something</span>
+    <span class="kr">const</span> <span class="nx">returnValue</span> <span class="o">=</span> <span class="nx">next</span><span class="p">(</span><span class="nx">action</span><span class="p">)</span>
+    <span class="c1">// do something</span>
+    <span class="k">return</span> <span class="nx">returnValue</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>一个简单的 logger middleware：</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">logger</span><span class="p">({</span> <span class="nx">getState</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">next</span> <span class="o">=&gt;</span> <span class="nx">action</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;before dispatch&#39;</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">returnValue</span> <span class="o">=</span>  <span class="nx">next</span><span class="p">(</span><span class="nx">action</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;after dispatch&#39;</span><span class="p">,</span> <span class="nx">getState</span><span class="p">())</span>
+    <span class="c1">// returnValue 通常是 action 本身，除非 middleware 有对返回值做更改</span>
+    <span class="k">return</span> <span class="nx">returnValue</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><a href="https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/applyMiddleware.ts:2458-2516">applyMiddleware</a> 简化版源码：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651886591836_adb6b486-8517-4591-89c6-84741418d80d.png" /></p>
+<p>这段代码非常难理解，看看就行了。</p>
+<p><strong>第一点</strong>：<code>chain</code> 数组中的函数是 middleware 执行过一次的返回值，并且参数是 <code>{getState, dispatch}</code>，这和上面 <code>middlewareOne</code> 的定义是对应上的；</p>
+<p><strong>第二点</strong>：分析 <code>compose</code> 函数的作用，就是把 <code>middleware(middlewareAPI)</code> 执行过后返回的函数给套起来，而 <code>compose(...chain)(store.dispacth)</code> 就会导致 套着的函数被执行，也就是说变成了 <code>a(b(c(d(e(store.dispatch)))))</code> 这一串函数执行之后的值又赋值给 dispatch 了。</p>
+<p>实际上对应到上面的 <code>middlewareOne</code> ，最后一个 middleware 的 <code>next</code> 就是 <code>store.dispatch</code>，其执行之后，返回 <code>action =&gt; {...}</code>，就是一个新的 dispatch 函数。这个新的 dispatch 函数会作为前一个函数的 <code>next</code>，就这样一层套一层。</p>
+<p>为什么说非常难李姐呢？<code>dispatch = compose(...chain)(store.dispatch)</code> 这一行就能把你多年的脑血栓给看复发了。</p>
+<p>另外就是下面这两部分，我敢说大部分人都看不懂这是个啥玩意设计。反正我自己测试之后也是一脸懵逼，我觉得 <code>middlewareAPI.dispatch</code> 这个属性真是看看不懂。</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">middlewareAPI</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">getState</span><span class="o">:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="p">,</span>
+  <span class="nx">dispatch</span><span class="o">:</span> <span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(...</span><span class="nx">chain</span><span class="p">)(</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">)</span>
+</pre></div>
+
+<p><code>middlewareAPI.dispatch</code> 指向一个函数，这个函数执行是返回的 <code>dispatch(action, ...args)</code>。注意函数中的 <code>dispatch</code> 指向的是后面 <code>dispatch = compose(...chain)(store.dispatch)</code> 这里。</p>
+<p>而 <code>dispatch = compose(...chain)(store.dispatch)</code> 前面第二点我们说了，dispatch 是一个被 <code>compose</code> 处理之后套起来的结构。那如果 在 middleware 中执行 <code>dispatch(xxx)</code> 会发生什么后果？</p>
+<p>看代码：</p>
+<p><div class="highlight"><pre>// src/middleware/funny.js
+// 我写了一个  middleware，middleware 会执行 middlewareApi.dispatch
+export default function funny({ getState, dispatch }) {
+  return (next) =&gt; (action) =&gt; {
+    console.log(&quot;dispatch&quot;, dispatch);
+    console.log(&quot;before dispatch&quot;);
+    dispatch({
+      type: &quot;app/updateName&quot;,
+      payload: &quot;kkk&quot;
+    });
+    const retValue = next(action);
+    console.log(&quot;after dispatch&quot;);
+    return retValue;
+  };
+}
+
+// src/store/index.js
+import { configureStore } from &quot;@reduxjs/toolkit&quot;;
+import app from &quot;./app&quot;;
+import funny from &quot;../middleware/funny&quot;;
+
+const store = configureStore({
+  reducer: {
+    app
+  },
+  middleware: (getDefaultMiddleware) =&gt; [funny, ...getDefaultMiddleware()]
+});
+
+export default store;
+
+// src/App.js
+import { useSelector, useDispatch } from &quot;react-redux&quot;;
+import { updateName } from &quot;./store/app&quot;;
+import &quot;./styles.css&quot;;
+
+export default function App() {
+  const dispatch = useDispatch();
+  const name = useSelector((state) =&gt; state.app.name);
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;div&gt;{name}&lt;/div&gt;
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; dispatch(updateName(&quot;yunyuv&quot;))}&gt;
+          updateName
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</pre></div>
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='\<iframe src="https://codesandbox.io/embed/relaxed-joliot-f795it?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="relaxed-joliot-f795it"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">\</iframe>'>在 Code Sandbox 中全屏查看
+</button></p>
+<p>那么你猜猜，点击 updateName 这个按钮之后会发生什么？</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1652002085603_ad0d0bf4-b4a2-4d5c-afe5-8e3d778e5c15.gif" /></p>
+<p>很显然，函数执行走进迷宫了，一直在循环执行，直到爆栈。所以我暂时看不懂为什么 <code>middlewareAPI</code> 中要有 <code>dispatch</code> 这个属性。实际上 <code>next</code> 就是一个 <code>dispatch</code>，但是 <code>next</code> 只会让当前 middleware 后的 middlewares 执行。这就不会出现循环执行的情况。</p>
+<h4 id="compose">✔ compose<a class="headerlink" href="#compose" title="Permanent link"></a></h4>
+<p><a href="https://redux.js.org/api/compose"><code>compose</code></a> 函数可以把其参数函数全部套起来，一般用来组合多个 enhancers。</p>
+<p>它会把其参数函数全部套起来，并且返回一个新的函数，<code>compose</code> 的参数越靠后的越先执行，类似这种结构：</p>
+<p><code>compose(a, b, c, d, e)(args)</code> =&gt; <code>a(b(c(d(e(args)))))</code></p>
+<div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span> <span class="nx">createStore</span><span class="p">,</span> <span class="nx">applyMiddleware</span><span class="p">,</span> <span class="nx">compose</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;redux&#39;</span>
+<span class="kr">import</span> <span class="nx">thunk</span> <span class="nx">from</span> <span class="s1">&#39;redux-thunk&#39;</span>
+<span class="kr">import</span> <span class="nx">DevTools</span> <span class="nx">from</span> <span class="s1">&#39;./containers/DevTools&#39;</span>
+<span class="kr">import</span> <span class="nx">reducer</span> <span class="nx">from</span> <span class="s1">&#39;../reducers&#39;</span>
+
+<span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span>
+  <span class="nx">reducer</span><span class="p">,</span>
+  <span class="nx">compose</span><span class="p">(</span><span class="nx">applyMiddleware</span><span class="p">(</span><span class="nx">thunk</span><span class="p">),</span> <span class="nx">DevTools</span><span class="p">.</span><span class="nx">instrument</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+
+<p><a href="https://codesandbox.io/s/divine-shadow-e6snmf?file=/src/compose.ts">compose</a> 其源码简洁但不简单：</p>
+<p><img alt="" src="https://qiniu1.lxfriday.xyz/feoffer/1651887772385_116a5b31-7a65-4d1a-8d21-cca36a45e86b.png" /></p>
 <h2 id="redux-saga">Redux Saga 原理<a class="headerlink" href="#redux-saga" title="Permanent link"></a></h2>
 <h2 id="immer">immer<a class="headerlink" href="#immer" title="Permanent link"></a></h2>
 <h2 id="immutable">immutable<a class="headerlink" href="#immutable" title="Permanent link"></a></h2>
@@ -13666,8 +15149,6 @@ a :: e.data hello, I am b
 <span class="c1">// console.log(flattenDepth([1, [2, [3, [4]], 5]], 2));</span>
 </pre></div>
 
-<h3 id="lru">✔ 手写 LRU<a class="headerlink" href="#lru" title="Permanent link"></a></h3>
-<p>LRU-least recently used 最近最少使用算法，是一种内存数据淘汰策略，使用常见是当内存不足时，需要淘汰最近最少使用的数据。LRU常用语缓存系统的淘汰策略。</p>
 <h2 id="dom_5">手撕 DOM 操作<a class="headerlink" href="#dom_5" title="Permanent link"></a></h2>
 <h3 id="autocomplete">✔ 实现一个输入框防抖并带有 autocomplete 能力<a class="headerlink" href="#autocomplete" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
