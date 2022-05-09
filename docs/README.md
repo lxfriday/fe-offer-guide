@@ -12134,7 +12134,171 @@ const store = createStore(
 
 ### Redux Saga
 
-## immer
+## ✔ immer
+
+[immer](https://immerjs.github.io/immer/) 用来简化不可变数据的生成，在以往 redux reducer 中或者 setState 的时候，都需要用 `{...prevState, newKey: v}` 的形式来返回新的对象，略显麻烦。immer 可以解决这一痛点。
+
+immer 最主要的工具函数就是默认导出的 `produce` 函数。
+
+```js
+import produce from "immer"
+
+const nextState = produce(baseState, draft => {
+    draft[1].done = true
+    draft.push({title: "Tweet about it"})
+})
+````
+
+这样执行出来的 nextState 是更改过后的新对象，而更改对象的方式是在 draft 对象上直接更改，比较符合传统的更改对象的方式。
+
+immer 的工作原理：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652080292023_de1f2568-873a-4eac-83c5-39cea541cbc0.png)
+
+### ✔ produce 函数的基本使用
+
+```js
+produce(baseState, recipe: (draft) => void): nextState
+```
+
+- `baseState` 要操作的数据
+- `draft` 是对 `baseState` 的代理
+- `nextState` 是把对 `draft` 的操作全部应用过后生成的数据
+
+对 `draft` 的操作可以像对普通对象一样，即使是很深层次的对象操作也是可以的：`draft.todos[0].tags["urgent"].author.age = 56` 也照样支持。
+
+这里要注意一点：
+
+在 `recipe` 这个函数中，**对 draft 进行了操作** 和 **`return` 返回一个新对象** 只能选择其中一种方式，否则会报错，因为 `produce` 函数也不知道你的真实意图是什么。即：
+
+- 对 draft 进行了操作，`draft.xx = yy`，则不使用 `return`，得到的 `nextState` 就是应用了对 draft 的更改而形成的新对象
+- 使用了 `return newObj`，则不使用 `draft`，得到的 `nextState` 就是这个 `newObj`
+
+`produce` 函数支持柯里化。传递一个函数给 `produce` 之后，`produce` 将会返回一个新的函数，新函数可以接受一个 state 作为参数。
+
+```js
+import produce from "immer"
+const toggleTodo = produce((draft, id) => {
+    const todo = draft.find(todo => todo.id === id)
+    todo.done = !todo.done
+})
+const baseState = [
+    /* as is */
+]
+
+const nextState = toggleTodo(baseState, "Immer")
+```
+
+柯里化的写法非常适合 React 项目。看下面的例子：
+
+```jsx
+import { useState } from "react";
+import produce from "immer";
+import "./styles.css";
+
+export default function App() {
+  const [state, setState] = useState({ a: 1, b: 2, c: 3 });
+
+  function click() {
+    setState(
+      produce((s) => {
+        s.a = 100;
+        s.b = 200;
+        s.c = 300;
+      })
+    );
+  }
+
+  console.log(state);
+
+  return (
+    <div className="App">
+      <div>
+        <button onClick={click}>click</button>
+      </div>
+      state: {JSON.stringify(state)}
+    </div>
+  );
+}
+
+```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/recursing-gould-v4odiu?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="recursing-gould-v4odiu"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>在 Code Sandbox 中操作
+</button>
+
+使用 `useImmer` 来简化 state 设置：
+
+```jsx
+import { useImmer } from "use-immer";
+import "./styles.css";
+
+export default function App() {
+  const [state, setState] = useImmer({
+    a: 1,
+    b: 2,
+    c: 3
+  });
+
+  function click() {
+    // 看起来非常简洁
+    setState((draft) => {
+      draft.a = 100;
+      draft.b = 200;
+      draft.c = 300;
+    });
+  }
+
+  return (
+    <div className="App">
+      <div>
+        <button onClick={click}>click</button>
+      </div>
+      state: {JSON.stringify(state)}
+    </div>
+  );
+}
+```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/unruffled-wozniak-gpxnkh?fontsize=10&hidenavigation=1&theme=dark"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="unruffled-wozniak-gpxnkh"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>在 Code Sandbox 中操作
+</button>
+
+使用 `useImmerReducer`：
+
+```js
+import React, { useCallback } from "react";
+import { useImmerReducer } from "use-immer";
+
+const TodoList = () => {
+  const [todos, dispatch] = useImmerReducer(
+    (draft, action) => {
+      switch (action.type) {
+        case "toggle":
+          const todo = draft.find((todo) => todo.id === action.id);
+          todo.done = !todo.done;
+          break;
+        case "add":
+          draft.push({
+            id: action.id,
+            title: "A new todo",
+            done: false
+          });
+          break;
+        default:
+          break;
+      }
+    },
+    [ /* initial todos */ ]
+  );
+  //etc
+```
 
 ## immutable
 
