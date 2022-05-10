@@ -691,6 +691,31 @@ FunctionExectionContext = {
 
 JavaScript 使用原始链实现继承，基本原理是实例可以通过 `__proto__` 属性获取到构造函数的原型属性（`prototype`）。实例查找属性的时候先从自身开始查找，如果没有找到就到 `__proto__` 指向的地址查找，如果还没有找到就继续从上层的 `__proto__` 指向的地址查找，直到 `__proto__ === null`，表示没有找到，返回 `null`。
 
+### ✔ 原型链面试题1
+
+```js
+var foo = {}
+F = function(){}
+
+Object.prototype.a = 'value a'
+Function.prototype.b = 'value b'
+
+// 打印出的结果是什么
+console.log({fooa: foo.a, foob: foo.b, Fa:F.a, Fb:F.b})
+```
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652198186616_e985c4d9-b569-4fb7-938e-144f22b1d109.png)
+
+只要知道下面的结论就可以推断出上面的答案：
+
+```js
+Function.__proto__ === Function.prototype // true
+Object.__proto__ === Function.prototype // true
+Function.prototype.__proto__ === Object.prototype // true
+Object.prototype.__proto__ === null // true
+```
+![](https://qiniu1.lxfriday.xyz/feoffer/1652198473321_285da3e2-64d5-4a0d-80d6-ea46294500a8.png)
+
 ## ✔ this（如何确定 this 的指向）
 
 ref
