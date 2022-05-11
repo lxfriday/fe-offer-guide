@@ -1,3 +1,7 @@
+<div class="finished-info-wrapper">
+  完成度 <span class="finished-info">500 / 500 -> 100%<span>
+</div>
+
 # 数据结构
 
 ref
@@ -893,7 +897,7 @@ var lengthOfLongestSubstring = function (s) {
   }
   return max
 }
-````
+```
 
 ## ✔ 20 有效的括号
 
@@ -948,17 +952,17 @@ var deleteDuplicates = function (head) {
 二叉树、中序遍历、DFS、深度优先遍历
 
 ```js
-var inorderTraversal = function(root) {
+var inorderTraversal = function (root) {
   const res = []
-  const dfs = (node) => {
-    if(!node) return
+  const dfs = node => {
+    if (!node) return
     dfs(node.left)
     res.push(node.val)
     dfs(node.right)
   }
   dfs(root)
   return res
-};
+}
 ```
 
 ## ✔ 102 二叉树的层序遍历
@@ -966,19 +970,19 @@ var inorderTraversal = function(root) {
 二叉树、BFS、广度优先遍历、层序遍历
 
 ```js
-var levelOrder = function(root) {
-  if(!root) return []
+var levelOrder = function (root) {
+  if (!root) return []
   const q = [[root, 0]]
   const res = []
-  while(q.length) {
+  while (q.length) {
     const [node, depth] = q.shift()
-    res[depth] ? (res[depth].push(node.val)) : (res[depth] = [node.val])
+    res[depth] ? res[depth].push(node.val) : (res[depth] = [node.val])
     node.left && q.push([node.left, depth + 1])
     node.right && q.push([node.right, depth + 1])
   }
 
   return res
-};
+}
 ```
 
 ## ✔ 104 二叉树的最大深度
@@ -986,17 +990,17 @@ var levelOrder = function(root) {
 二叉树、深度优先遍历、DFS
 
 ```js
-var maxDepth = function(root) {
+var maxDepth = function (root) {
   let maxLen = 0
   const dfs = (node, l) => {
-    if(!node) return
+    if (!node) return
     maxLen = Math.max(maxLen, l)
     dfs(node.left, l + 1)
     dfs(node.right, l + 1)
   }
   dfs(root, 1)
   return maxLen
-};
+}
 ```
 
 ## ✔ 111 二叉树的最小深度
@@ -1004,16 +1008,16 @@ var maxDepth = function(root) {
 二叉树、广度优先遍历、BFS
 
 ```js
-var minDepth = function(root) {
-  if(!root) return 0
+var minDepth = function (root) {
+  if (!root) return 0
   const q = [[root, 1]]
-  while(q.length) {
+  while (q.length) {
     const [node, depth] = q.shift()
-    if(!node.left && !node.right) return depth
+    if (!node.left && !node.right) return depth
     node.left && q.push([node.left, depth + 1])
-    node.right && q.push([node.right, depth + 1 ])
+    node.right && q.push([node.right, depth + 1])
   }
-};
+}
 ```
 
 ## ✔ 112 路径总和
@@ -1021,12 +1025,12 @@ var minDepth = function(root) {
 二叉树、二叉树的路径总和、DFS、深度优先遍历
 
 ```js
-var hasPathSum = function(root, targetSum) {
-  if(!root) return false
+var hasPathSum = function (root, targetSum) {
+  if (!root) return false
   let has = false
   const dfs = (node, sum) => {
-    if(!node.left && !node.right) {
-      if(node.val + sum === targetSum) {
+    if (!node.left && !node.right) {
+      if (node.val + sum === targetSum) {
         has = true
       }
     }
@@ -1036,7 +1040,7 @@ var hasPathSum = function(root, targetSum) {
 
   dfs(root, 0)
   return has
-};
+}
 ```
 
 ## ✔ 141 环形链表
@@ -1055,7 +1059,7 @@ var hasCycle = function (head) {
 
   return false
 }
-````
+```
 
 ## ✔ 206 反转链表
 
@@ -1083,7 +1087,7 @@ var reverseList = function (head) {
 
 ```js
 var intersection = function (nums1, nums2) {
-  return [...new Set(nums1.filter((v) => nums2.includes(v)))]
+  return [...new Set(nums1.filter(v => nums2.includes(v)))]
 }
 ```
 
@@ -1109,4 +1113,3 @@ RecentCounter.prototype.ping = function (t) {
   return this.q.length
 }
 ```
-
