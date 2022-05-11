@@ -22,3 +22,12 @@ function debounce(func, wait, immediate) {
 
   return debounced
 }
+
+var a = { a: 1 }
+var b = { b: 1 }
+var c = { c: 1 }
+
+a.next = b
+b.next = c
+
+console.log(a)

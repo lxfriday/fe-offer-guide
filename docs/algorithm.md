@@ -590,7 +590,8 @@ class LRUCache {
   }
   put(k, v) {
     if (this.cache.has(k)) this.cache.delete(k)
-    else if (this.cache.size >= this.capacity) this.cache.delete(this.cache.keys().next().value)
+    else if (this.cache.size >= this.capacity)
+      this.cache.delete(this.cache.keys().next().value)
     this.cache.set(k, v)
   }
   get(k) {
@@ -794,3 +795,318 @@ const twoSum = (nums, target) => {
 ```
 
 # from - leetcode
+
+# leetcode 刷题记录
+
+## ✔ 1 两数之和
+
+Map、字典
+
+```js
+var twoSum = function (nums, target) {
+  // for (var i = 0; i < nums.length; i++) {
+  //   for (var j = i + 1; j < nums.length; j++) {
+  //     if (nums[i] + nums[j] === target) return [i, j]
+  //   }
+  // }
+  const m = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i]
+    const other = target - num
+    if (m.has(other)) {
+      return [m.get(other), i]
+    } else {
+      m.set(num, i)
+    }
+  }
+}
+```
+
+## ✔ 2 两数相加
+
+链表
+
+```js
+var addTwoNumbers = function (l1, l2) {
+  const head = new ListNode()
+  let curr = head
+  let add = 0
+  let sum = 0
+  while (l1 || l2) {
+    sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + add
+    add = Math.floor(sum / 10)
+    curr.next = new ListNode(sum - 10 * add)
+    l1 = l1 && l1.next
+    l2 = l2 && l2.next
+    curr = curr.next
+  }
+  if (add > 0) {
+    curr.next = new ListNode(1)
+  }
+
+  return head.next
+}
+
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val
+  this.next = next === undefined ? null : next
+}
+```
+
+## ✔ 3 无重复字符的最长子串
+
+滑动窗口、字典
+
+```js
+var lengthOfLongestSubstring = function (s) {
+  let maxLen = 0
+  let currStr = ''
+  for (let i = 0; i < s.length; i++) {
+    const indInCurrStr = currStr.indexOf(s[i])
+    let len
+    if (indInCurrStr === -1) {
+      currStr += s[i]
+      len = currStr.length
+    } else {
+      len = currStr.length
+      currStr = currStr.slice(indInCurrStr + 1) + s[i]
+    }
+    maxLen = len > maxLen ? len : maxLen
+  }
+  return maxLen
+}
+```
+
+or
+
+```js
+var lengthOfLongestSubstring = function (s) {
+  let l = 0
+  let max = 0
+  const m = new Map()
+  for (let r = 0; r < s.length; r++) {
+    if (m.has(s[r]) && m.get(s[r]) >= l) {
+      l = m.get(s[r]) + 1
+    }
+    m.set(s[r], r)
+    max = Math.max(max, r - l + 1)
+  }
+  return max
+}
+````
+
+## ✔ 20 有效的括号
+
+关键词：栈
+
+```js
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const leftValues = '({['
+  const map = {
+    '(': ')',
+    '{': '}',
+    '[': ']',
+  }
+  const stack = []
+  for (let i = 0; i < s.length; i++) {
+    if (leftValues.includes(s[i])) {
+      stack.push(s[i])
+    } else {
+      const lastValue = stack.pop()
+      if (map[lastValue] !== s[i]) return false
+    }
+  }
+  return !stack.length
+}
+```
+
+## ✔ 83 删除排序链表中的重复元素
+
+链表
+
+```js
+var deleteDuplicates = function (head) {
+  let t = head
+  while (t && t.next) {
+    const tNext = t.next
+    if (t.val !== tNext.val) {
+      t = t.next
+    } else {
+      t.next = tNext.next
+    }
+  }
+  return head
+}
+```
+
+## ✔ 94 二叉树的中序遍历
+
+二叉树、中序遍历、DFS、深度优先遍历
+
+```js
+var inorderTraversal = function(root) {
+  const res = []
+  const dfs = (node) => {
+    if(!node) return
+    dfs(node.left)
+    res.push(node.val)
+    dfs(node.right)
+  }
+  dfs(root)
+  return res
+};
+```
+
+## ✔ 102 二叉树的层序遍历
+
+二叉树、BFS、广度优先遍历、层序遍历
+
+```js
+var levelOrder = function(root) {
+  if(!root) return []
+  const q = [[root, 0]]
+  const res = []
+  while(q.length) {
+    const [node, depth] = q.shift()
+    res[depth] ? (res[depth].push(node.val)) : (res[depth] = [node.val])
+    node.left && q.push([node.left, depth + 1])
+    node.right && q.push([node.right, depth + 1])
+  }
+
+  return res
+};
+```
+
+## ✔ 104 二叉树的最大深度
+
+二叉树、深度优先遍历、DFS
+
+```js
+var maxDepth = function(root) {
+  let maxLen = 0
+  const dfs = (node, l) => {
+    if(!node) return
+    maxLen = Math.max(maxLen, l)
+    dfs(node.left, l + 1)
+    dfs(node.right, l + 1)
+  }
+  dfs(root, 1)
+  return maxLen
+};
+```
+
+## ✔ 111 二叉树的最小深度
+
+二叉树、广度优先遍历、BFS
+
+```js
+var minDepth = function(root) {
+  if(!root) return 0
+  const q = [[root, 1]]
+  while(q.length) {
+    const [node, depth] = q.shift()
+    if(!node.left && !node.right) return depth
+    node.left && q.push([node.left, depth + 1])
+    node.right && q.push([node.right, depth + 1 ])
+  }
+};
+```
+
+## ✔ 112 路径总和
+
+二叉树、二叉树的路径总和、DFS、深度优先遍历
+
+```js
+var hasPathSum = function(root, targetSum) {
+  if(!root) return false
+  let has = false
+  const dfs = (node, sum) => {
+    if(!node.left && !node.right) {
+      if(node.val + sum === targetSum) {
+        has = true
+      }
+    }
+    node.left && dfs(node.left, node.val + sum)
+    node.right && dfs(node.right, node.val + sum)
+  }
+
+  dfs(root, 0)
+  return has
+};
+```
+
+## ✔ 141 环形链表
+
+环形链表，双指针，快慢指针
+
+```js
+var hasCycle = function (head) {
+  let p1 = head
+  let p2 = head
+  while (p2 && p2.next) {
+    p1 = p1.next
+    p2 = p2.next.next
+    if (p1 === p2) return true
+  }
+
+  return false
+}
+````
+
+## ✔ 206 反转链表
+
+链表
+
+```js
+var reverseList = function (head) {
+  if (head === null) return head
+  let curr = head
+  let next = head.next
+  curr.next = null
+  while (next) {
+    const n = next.next
+    next.next = curr
+    curr = next
+    next = n
+  }
+  return curr
+}
+```
+
+## ✔ 349 两个数组的交集
+
+集合
+
+```js
+var intersection = function (nums1, nums2) {
+  return [...new Set(nums1.filter((v) => nums2.includes(v)))]
+}
+```
+
+## ✔ 933 最近的请求次数
+
+这个题的描述很容易看不懂，但是实现起来非常简单
+
+关键词：队列
+
+```js
+var RecentCounter = function () {
+  this.q = []
+}
+/**
+ * @param {number} t
+ * @return {number}
+ */
+RecentCounter.prototype.ping = function (t) {
+  this.q.push(t)
+  while (t - this.q[0] > 3000) {
+    this.q.shift()
+  }
+  return this.q.length
+}
+```
+
