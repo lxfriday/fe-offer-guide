@@ -804,6 +804,8 @@ const twoSum = (nums, target) => {
 
 ## ✔ 1 两数之和
 
+[ref](https://leetcode.cn/problems/two-sum/)
+
 Map、字典
 
 ```js
@@ -827,6 +829,8 @@ var twoSum = function (nums, target) {
 ```
 
 ## ✔ 2 两数相加
+
+[ref](https://leetcode.cn/problems/add-two-numbers/)
 
 链表
 
@@ -858,6 +862,8 @@ function ListNode(val, next) {
 ```
 
 ## ✔ 3 无重复字符的最长子串
+
+[ref](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 滑动窗口、字典
 
@@ -901,6 +907,8 @@ var lengthOfLongestSubstring = function (s) {
 
 ## ✔ 20 有效的括号
 
+[ref](https://leetcode.cn/problems/valid-parentheses/)
+
 关键词：栈
 
 ```js
@@ -928,7 +936,112 @@ var isValid = function (s) {
 }
 ```
 
+## ✔ 65 有效的数字
+
+[ref](https://leetcode.cn/problems/valid-number/)
+
+```js
+var isNumber = function(s) {
+  // if(s === 'Infinity' || s === '+Infinity' || s === '-Infinity') return false
+  // const num = Number(s)
+  // if(isNaN(num)) return false
+  // return true
+  // 模拟法
+  let numLeft = ''
+  let numRight = ''
+  s = s.trim().toLowerCase()
+ if(s.includes('e')) {
+    const sSplit = s.split('e')
+    if(sSplit.length > 2) { return false }
+    [numLeft, numRight] = sSplit
+    if(validateNumLeft(numLeft) && validateNumRight(numRight)) return true
+  } else {
+    numLeft = s
+    if(validateNumLeft(numLeft)) return true
+  }
+  return false
+};
+
+function validateNumLeft(numLeft) {
+  if('-+'.includes(numLeft[0])) {
+    numLeft = numLeft.slice(1)
+    if(numLeft.includes('-') || numLeft.includes('+')) return false
+  }
+  if(!numLeft.length) return false
+  let numLeftSplit
+  if(numLeft.includes('.')) {
+    numLeftSplit = numLeft.split('.')
+    if(numLeftSplit.length > 2 ) return false
+    if(!numLeftSplit[0].length && isNumStr(numLeftSplit[1])) return true
+    if(!numLeftSplit[1].length && isNumStr(numLeftSplit[0])) return true
+    if(isNumStr(numLeftSplit[0]) && isNumStr(numLeftSplit[1])) return true
+    return false
+  } else {
+    return isNumStr(numLeft)
+  }
+}
+
+function validateNumRight(numRight) {
+  if(numRight[0] === '-' || numRight[0] === '+') {
+    numRight = numRight.slice(1)
+  }
+  return isNumStr(numRight)
+}
+
+function isNumStr(numStr) {
+  if(!numStr.length) return false
+  for(let c of numStr) {
+    if(!(c >= '0' && c <= '9')) return false
+  }
+  return true
+}
+```
+
+## ✔ 76 最小覆盖子串
+
+[ref](https://leetcode.cn/problems/minimum-window-substring/)
+
+双指针、滑动窗口
+
+```js
+var minWindow = function(s, t) {
+  const need = new Map()
+  let needType = 0
+  for(let c of t) {
+    if(need.has(c)) {
+      need.set(c, need.get(c) + 1)
+    } else {
+      need.set(c, 1)
+      needType += 1
+    }
+  }
+
+  let l = 0
+  let minStr = ''
+  for(let r = 0;r < s.length; r++) {
+    const c = s[r]
+    if(need.has(c)) {
+      need.set(c, need.get(c) - 1)
+      if(need.get(c) === 0) needType -= 1 
+    }
+    while(needType === 0) {
+      if(!minStr.length || s.slice(l, r + 1).length < minStr.length) minStr = s.slice(l, r + 1)
+      if(need.has(s[l])) {
+        need.set(s[l], need.get(s[l]) + 1)
+        if(need.get(s[l]) === 1) {
+          needType += 1
+        }
+      }
+      l++
+    }
+  }
+  return minStr
+};
+```
+
 ## ✔ 83 删除排序链表中的重复元素
+
+[ref](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 
 链表
 
@@ -949,6 +1062,8 @@ var deleteDuplicates = function (head) {
 
 ## ✔ 94 二叉树的中序遍历
 
+[ref](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
+
 二叉树、中序遍历、DFS、深度优先遍历
 
 ```js
@@ -966,6 +1081,8 @@ var inorderTraversal = function (root) {
 ```
 
 ## ✔ 102 二叉树的层序遍历
+
+[ref](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
 二叉树、BFS、广度优先遍历、层序遍历
 
@@ -987,6 +1104,8 @@ var levelOrder = function (root) {
 
 ## ✔ 104 二叉树的最大深度
 
+[ref](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
+
 二叉树、深度优先遍历、DFS
 
 ```js
@@ -1005,6 +1124,8 @@ var maxDepth = function (root) {
 
 ## ✔ 111 二叉树的最小深度
 
+[ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
+
 二叉树、广度优先遍历、BFS
 
 ```js
@@ -1021,6 +1142,8 @@ var minDepth = function (root) {
 ```
 
 ## ✔ 112 路径总和
+
+[ref](https://leetcode.cn/problems/path-sum/)
 
 二叉树、二叉树的路径总和、DFS、深度优先遍历
 
@@ -1043,7 +1166,66 @@ var hasPathSum = function (root, targetSum) {
 }
 ```
 
+## ✔ 113 克隆图
+
+[ref](https://leetcode.cn/problems/clone-graph/)
+
+图、深度优先遍历、广度优先遍历、DFS、BFS
+
+```js
+// DFS
+/**
+ * // Definition for a Node.
+ * function Node(val, neighbors) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.neighbors = neighbors === undefined ? [] : neighbors;
+ * };
+ */
+
+/**
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function(node) {
+  if(!node) return 
+  const visited = new Map()
+  function dfs (targetNode) {
+    const newNode = new Node(targetNode.val)
+    visited.set(targetNode, newNode);
+    (targetNode.neighbors || []).forEach(neighborNode => {
+      if(!visited.has(neighborNode)) {
+        dfs(neighborNode)
+      }
+      newNode.neighbors.push(visited.get(neighborNode))
+    })
+  }
+  dfs(node)
+  return visited.get(node)
+};
+
+// BFS
+var cloneGraph = function(node) {
+  if(!node) return 
+  const visited = new Map()
+  const q = [node]
+  visited.set(node, new Node(node.val));
+  while(q.length) {
+    const targetNode = q.shift();
+    (targetNode.neighbors || []).forEach(neighborNode => {
+      if(!visited.has(neighborNode)) {
+        q.push(neighborNode)
+        visited.set(neighborNode, new Node(neighborNode.val))
+      }
+      visited.get(targetNode).neighbors.push(visited.get(neighborNode))
+    })
+  }
+  return visited.get(node)
+};
+```
+
 ## ✔ 141 环形链表
+
+[ref](https://leetcode.cn/problems/linked-list-cycle/)
 
 环形链表，双指针，快慢指针
 
@@ -1062,6 +1244,8 @@ var hasCycle = function (head) {
 ```
 
 ## ✔ 206 反转链表
+
+[ref](https://leetcode.cn/problems/reverse-linked-list/)
 
 链表
 
@@ -1083,6 +1267,8 @@ var reverseList = function (head) {
 
 ## ✔ 349 两个数组的交集
 
+[ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
+
 集合
 
 ```js
@@ -1091,7 +1277,57 @@ var intersection = function (nums1, nums2) {
 }
 ```
 
+
+## ✔ 417 太平洋大西洋水流问题
+
+[ref](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
+
+深度优先遍历、DFS、图、逆流而上
+
+```js
+var pacificAtlantic = function(heights) {
+  const m = heights.length
+  const n = heights[0].length
+  const leftTopFlow = new Array(m).fill(1).map(() => new Array(n).fill(false))
+  const rightBottomFlow = new Array(m).fill(1).map(() => new Array(n).fill(false))
+  const res = []
+
+  function dfs(i, j, flow) {
+    flow[i][j] = true;
+    [[i - 1, j], [i + 1, j], [i, j - 1], [i, j + 1]].forEach(([ni, nj]) => {
+      if(
+        ni >= 0 && ni < m &&
+        nj >= 0 && nj < n &&
+        !flow[ni][nj] &&
+        heights[ni][nj] >= heights[i][j]
+      ) {
+        dfs(ni, nj, flow)
+      }
+    })
+  }
+
+  for(let i = 0;i < m; i++) {
+    dfs(i, 0, leftTopFlow)
+    dfs(i, n - 1, rightBottomFlow)
+  }
+  for(let j = 0;j < n; j++) {
+    dfs(0, j, leftTopFlow)
+    dfs(m - 1, j, rightBottomFlow)
+  }
+
+  for(let i = 0;i < m; i++) {
+    for(let j = 0;j < n; j++) {
+      if(leftTopFlow[i][j] && rightBottomFlow[i][j]) res.push([i, j])
+    }
+  }
+
+  return res
+};
+```
+
 ## ✔ 933 最近的请求次数
+
+[ref](https://leetcode.cn/problems/number-of-recent-calls/)
 
 这个题的描述很容易看不懂，但是实现起来非常简单
 
@@ -1113,3 +1349,4 @@ RecentCounter.prototype.ping = function (t) {
   return this.q.length
 }
 ```
+
