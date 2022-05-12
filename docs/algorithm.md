@@ -13,6 +13,7 @@
 - 集合
 - 字典
 - 树
+- 堆
 - 图
 - 分治法
 - 动态规划
@@ -49,6 +50,11 @@
 - [111 二叉树的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
 - [112 路径总和](https://leetcode.cn/problems/path-sum/)
 
+## 堆
+
+- [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+- [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
+
 ## 图、深度优先、广度优先
 
 - [113 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -61,6 +67,10 @@
 
 
 # ✔ 基础排序算法
+
+常见复杂度曲线：
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652356442444_09edc6aa-6dfe-41aa-bd02-b9f3097b3717.png)
 
 ## ✔ 排序算法
 
@@ -1209,6 +1219,198 @@ var reverseList = function (head) {
   }
   return curr
 }
+```
+
+## ✔ 215 数组中的第K个最大元素
+
+[ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+
+堆、小顶堆、第K大
+
+```js
+ // 时间复杂度：O(nlogk)
+ // 空间复杂度：O(k)
+var findKthLargest = function(nums, k) {
+  const heap = new MinHeap()
+
+  nums.forEach(n => {
+      heap.insert(n)
+    if(heap.size() > k) {
+      heap.pop()
+    }
+  })
+  return heap.peek()
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+
+  insert(num) {
+    this.heap.push(num)
+    this.shiftUp(this.heap.length - 1)
+  }
+
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    this.heap.pop()
+    this.shiftDown(0)
+  }
+
+  peek() {
+    return this.heap[0]
+  }
+
+  size() {
+    return this.heap.length
+  }
+
+  shiftDown(i) {
+    const left = this.getLeftIndex(i)
+    const right = this.getRightIndex(i)
+    if (left < this.heap.length && this.heap[i] > this.heap[left]) {
+      this.swap(i, left)
+      this.shiftDown(left)
+    }
+    if (right < this.heap.length && this.heap[i] > this.heap[right]) {
+      this.swap(i, right)
+      this.shiftDown(right)
+    }
+  }
+
+  shiftUp(i) {
+    if (i === 0) return
+    const parentIndex = this.getParentIndex(i)
+    if (this.heap[parentIndex] > this.heap[i]) {
+      this.swap(parentIndex, i)
+      this.shiftUp(parentIndex)
+    }
+  }
+
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+
+  getParentIndex(i) {
+    return Math.floor((i - 1) / 2)
+  }
+  getLeftIndex(i) {
+    return 2 * i + 1
+  }
+  getRightIndex(i) {
+    return 2 * i + 2
+  }
+}
+```
+
+## 347 前 K 个高频元素
+
+[ref](https://leetcode.cn/problems/top-k-frequent-elements/)
+
+堆、小顶堆、前K大
+
+```js
+// 时间复杂度：O(nlogk)
+// 空间复杂度：O(n)
+var topKFrequent = function(nums, k) {
+  const map = new Map()
+  const h = new MinHeap()
+  for(let n of nums) {
+    map.set(n, map.has(n) ? map.get(n) + 1 : 1)
+  }
+
+  map.forEach((frequence, num) => {
+    h.insert({num, frequence})
+    if(h.size() > k) {
+      h.pop()
+    }
+  })
+
+  return h.heap.map(_ => _.num)
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+
+  insert(num) {
+    this.heap.push(num)
+    this.shiftUp(this.heap.length - 1)
+  }
+
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    let p = this.heap.pop()
+    this.shiftDown(0)
+    return p
+  }
+
+  peek() {
+    return this.heap[0]
+  }
+
+  size() {
+    return this.heap.length
+  }
+
+  shiftDown(i) {
+    const left = this.getLeftIndex(i)
+    const right = this.getRightIndex(i)
+    if (left < this.heap.length && this.heap[i].frequence > this.heap[left].frequence) {
+      this.swap(i, left)
+      this.shiftDown(left)
+    }
+    if (right < this.heap.length && this.heap[i].frequence > this.heap[right].frequence) {
+      this.swap(i, right)
+      this.shiftDown(right)
+    }
+  }
+
+  shiftUp(i) {
+    if (i === 0) return
+    const parentIndex = this.getParentIndex(i)
+    if (this.heap[parentIndex].frequence > this.heap[i].frequence) {
+      this.swap(parentIndex, i)
+      this.shiftUp(parentIndex)
+    }
+  }
+
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+
+  getParentIndex(i) {
+    return Math.floor((i - 1) / 2)
+  }
+  getLeftIndex(i) {
+    return 2 * i + 1
+  }
+  getRightIndex(i) {
+    return 2 * i + 2
+  }
+}
+```
+
+还有一个解法，时间复杂度稍微差点
+
+```js
+// 时间复杂度：O(nlogn) 快排
+// 空间复杂度：O(n)
+var topKFrequent = function(nums, k) {
+  const map = new Map()
+  for(let n of nums) {
+    map.set(n, map.has(n) ? map.get(n) + 1 : 1)
+  }
+  const mapArr = Array.from(map)
+  mapArr.sort((a, b) => b[1] - a[1])
+  return mapArr.slice(0, k).map(_ => _[0]) 
+};
 ```
 
 ## ✔ 349 两个数组的交集
