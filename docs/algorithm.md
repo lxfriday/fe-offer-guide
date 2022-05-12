@@ -28,9 +28,11 @@
 ## 链表
 
 - [2 两数相加](https://leetcode.cn/problems/add-two-numbers/)
+- [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
 - [83 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 - [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
 - [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+
 
 ## 集合
 
@@ -52,6 +54,7 @@
 
 ## 堆
 
+- [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
 - [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 - [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
@@ -892,6 +895,190 @@ var isValid = function (s) {
 }
 ```
 
+## ✔ 23 合并K个升序链表
+
+[ref](https://leetcode.cn/problems/merge-k-sorted-lists/)
+
+链表、堆
+
+```js
+// 时间复杂度：O(nlogk)
+// 空间复杂度：O(k)
+// k 是 list.lenght
+// n 是所有链表节点的个数
+var mergeKLists = function(lists) {
+  const head = new ListNode()
+  let th = head
+  const h = new MinHeap()
+  for(let list of lists) {
+    list && h.insert(list)
+  }
+
+  while(h.size()) {
+    let hPop = h.pop()
+    th.next = hPop
+    th = th.next
+    if(hPop.next) h.insert(hPop.next)
+  }
+
+  return head.next
+};
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+
+  insert(num) {
+    this.heap.push(num)
+    this.shiftUp(this.heap.length - 1)
+  }
+
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    let p = this.heap.pop()
+    this.shiftDown(0)
+    return p
+  }
+
+  peek() {
+    return this.heap[0]
+  }
+
+  size() {
+    return this.heap.length
+  }
+
+  shiftDown(i) {
+    const left = this.getLeftIndex(i)
+    const right = this.getRightIndex(i)
+    if (left < this.heap.length && this.heap[i].val > this.heap[left].val) {
+      this.swap(i, left)
+      this.shiftDown(left)
+    }
+    if (right < this.heap.length && this.heap[i].val > this.heap[right].val) {
+      this.swap(i, right)
+      this.shiftDown(right)
+    }
+  }
+
+  shiftUp(i) {
+    if (i === 0) return
+    const parentIndex = this.getParentIndex(i)
+    if (this.heap[parentIndex].val > this.heap[i].val) {
+      this.swap(parentIndex, i)
+      this.shiftUp(parentIndex)
+    }
+  }
+
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+
+  getParentIndex(i) {
+    return Math.floor((i - 1) / 2)
+  }
+  getLeftIndex(i) {
+    return 2 * i + 1
+  }
+  getRightIndex(i) {
+    return 2 * i + 2
+  }
+}
+```
+
+或者
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(n)
+var mergeKLists = function(lists) {
+  const head = new ListNode()
+  let th = head
+  const h = new MinHeap() // 小顶堆
+  for(let list of lists) {
+    while(list) {
+      h.insert(list.val)
+      list = list.next
+    }
+  }
+
+  while(h.size()) {
+    th.next = new ListNode(h.pop())
+    th = th.next
+  }
+
+  return head.next
+};
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+
+  insert(num) {
+    this.heap.push(num)
+    this.shiftUp(this.heap.length - 1)
+  }
+
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    this.heap.pop()
+    this.shiftDown(0)
+  }
+
+  peek() {
+    return this.heap[0]
+  }
+
+  size() {
+    return this.heap.length
+  }
+
+  shiftDown(i) {
+    const left = this.getLeftIndex(i)
+    const right = this.getRightIndex(i)
+    if (left < this.heap.length && this.heap[i] > this.heap[left]) {
+      this.swap(i, left)
+      this.shiftDown(left)
+    }
+    if (right < this.heap.length && this.heap[i] > this.heap[right]) {
+      this.swap(i, right)
+      this.shiftDown(right)
+    }
+  }
+
+  shiftUp(i) {
+    if (i === 0) return
+    const parentIndex = this.getParentIndex(i)
+    if (this.heap[parentIndex] > this.heap[i]) {
+      this.swap(parentIndex, i)
+      this.shiftUp(parentIndex)
+    }
+  }
+
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+
+  getParentIndex(i) {
+    return Math.floor((i - 1) / 2)
+  }
+  getLeftIndex(i) {
+    return 2 * i + 1
+  }
+  getRightIndex(i) {
+    return 2 * i + 2
+  }
+}
+```
+
+更优解
+
+
+
 ## ✔ 65 有效的数字
 
 [ref](https://leetcode.cn/problems/valid-number/)
@@ -1306,7 +1493,7 @@ class MinHeap {
 }
 ```
 
-## 347 前 K 个高频元素
+## ✔ 347 前 K 个高频元素
 
 [ref](https://leetcode.cn/problems/top-k-frequent-elements/)
 
