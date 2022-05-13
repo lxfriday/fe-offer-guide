@@ -126,8 +126,6 @@
                 if (v.textContent === 'leetcode 刷题记录') isLeetCodePage = true
               })
 
-              console.log({ isLeetCodePage, leetCodeCount })
-
               const finishedPercent = Math.floor((finishedCount / total) * 100)
               document.querySelector('.finished-info').innerHTML = `
               ${finishedCount} / ${

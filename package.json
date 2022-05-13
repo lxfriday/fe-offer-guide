@@ -17,5 +17,10 @@
     "formidable": "^2.0.1",
     "react-dev-utils": "^10.2.1"
   },
-  "repository": "https://github.com/lxfriday/fe-offer-guide"
+  "repository": "https://github.com/lxfriday/fe-offer-guide",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }

@@ -6,7 +6,7 @@
 
 刷题的时候要按照大概的题目分类来刷，每个方面都要有所了解。
 
-- [基础排序算法](#✔-基础排序算法)
+- [基础算法](#✔-基础算法)
 - 栈
 - 队列
 - 链表
@@ -15,6 +15,7 @@
 - 树
 - 堆
 - 图
+- 搜索、排序
 - 分治法
 - 动态规划
 - 贪心算法
@@ -28,6 +29,7 @@
 ## 链表
 
 - [2 两数相加](https://leetcode.cn/problems/add-two-numbers/)
+- [21 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
 - [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
 - [83 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 - [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
@@ -47,15 +49,19 @@
 ## 树、深度优先、广度优先
 
 - [94 二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
+- [100 相同的树](https://leetcode.cn/problems/same-tree/)
+- [101 对称二叉树](https://leetcode.cn/problems/symmetric-tree/)
 - [102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 - [104 二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
 - [111 二叉树的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
 - [112 路径总和](https://leetcode.cn/problems/path-sum/)
+- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 
 ## 堆
 
 - [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
 - [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
 ## 图、深度优先、广度优先
@@ -63,17 +69,29 @@
 - [113 克隆图](https://leetcode.cn/problems/clone-graph/)
 - [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 
+## 搜索、排序
+
+- [374 猜数字大小](https://leetcode.cn/problems/guess-number-higher-or-lower/)
+
 ## 分治法
+
+- [100 相同的树](https://leetcode.cn/problems/same-tree/)
+- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+
 ## 动态规划
 ## 贪心算法
 ## 回溯算法
 
 
-# ✔ 基础排序算法
+# ✔ 基础算法
 
 常见复杂度曲线：
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1652356442444_09edc6aa-6dfe-41aa-bd02-b9f3097b3717.png)
+
+排序算法排序流程图解：
+
+[https://visualgo.net/zh/sorting](https://visualgo.net/zh/sorting)
 
 ## ✔ 排序算法
 
@@ -195,6 +213,29 @@ function quickSort(arr, l, r) {
   }
 
   return arr
+}
+```
+
+更好理解的快排
+
+```js
+function partition2(arr) {
+  if (arr.length <= 1) return arr
+  const target = arr[0]
+  const leftArr = []
+  const rightArr = []
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < target) {
+      leftArr.push(arr[i])
+    } else {
+      rightArr.push(arr[i])
+    }
+  }
+  return [...partition2(leftArr), target, ...partition2(rightArr)]
+}
+
+function quickSort2(arr) {
+  return partition2(arr)
 }
 ```
 
@@ -530,6 +571,30 @@ function bucketSort(arr, size = 5) {
     }
   }
   return res
+}
+```
+
+## ✔ 搜索算法
+
+### ✔ 二分搜索算法
+
+二分搜索算法的前提是目标数组已经排好序了。
+
+```js
+function binarySearch(arr, target) {
+  let l = 0
+  let r = arr.length - 1
+  while (l <= r) {
+    const med = Math.floor((l + r) / 2)
+    if (target < arr[med]) {
+      r = med - 1
+    } else if (target > arr[med]) {
+      l = med + 1
+    } else {
+      return med
+    }
+  }
+  return -1
 }
 ```
 
@@ -895,6 +960,38 @@ var isValid = function (s) {
 }
 ```
 
+## ✔ 21 合并两个有序链表
+
+[ref](https://leetcode.cn/problems/merge-two-sorted-lists/)
+
+链表
+
+```js
+// 时间复杂度：O(n) n=list1.length + list2.length
+// 空间复杂度：O(1)
+var mergeTwoLists = function(list1, list2) {
+  const head = new ListNode()
+  let th = head
+  while(list1 && list2) {
+    if(list1.val < list2.val) {
+      th.next = list1
+      list1 = list1.next
+    } else {
+      th.next = list2
+      list2 = list2.next
+    }
+    th = th.next
+  }
+  if(list1) {
+    th.next = list1
+  }
+  if(list2) {
+    th.next = list2
+  }
+  return head.next
+};
+```
+
 ## ✔ 23 合并K个升序链表
 
 [ref](https://leetcode.cn/problems/merge-k-sorted-lists/)
@@ -1220,7 +1317,45 @@ var inorderTraversal = function (root) {
   }
   dfs(root)
   return res
-}
+}1
+```
+
+## ✔ 100 相同的树
+
+二叉树、树
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(logn)~O(n)
+var isSameTree = function(p, q) {
+  if(!p && !q) return true
+  if(p && q && p.val === q.val) {
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+  }
+  return false
+};
+```
+
+## ✔ 101 对称二叉树
+
+[ref](https://leetcode.cn/problems/symmetric-tree/)
+
+二叉树
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(logn)~O(n)
+var isSymmetric = function(root) {
+  if(!root) return true
+  const isMirror = (l, r) => {
+    if(!l && !r) return true
+    if(l && r && l.val === r.val) {
+      return isMirror(l.left, r.right) && isMirror(l.right, r.left)
+    }
+    return false
+  }
+  return isMirror(root.left, root.right)
+};
 ```
 
 ## ✔ 102 二叉树的层序遍历
@@ -1493,6 +1628,54 @@ class MinHeap {
 }
 ```
 
+## ✔ 226 翻转二叉树
+
+[ref](https://leetcode.cn/problems/invert-binary-tree/)
+
+翻转二叉树实际就是把每个节点的子树全部翻转一次
+
+二叉树、二叉树翻转、翻转二叉树、堆
+
+```js
+// 时间复杂度：O(n) 每个节点都访问到了
+// 空间复杂度：O(h) h 是树的高度，h 最坏的情况是 n
+var invertTree = function(root) {
+  if(!root) return root
+  return {
+    val: root.val,
+    left: invertTree(root.right),
+    right: invertTree(root.left),
+  }
+};
+``` 
+
+解法2
+
+```js
+var invertTree = function(root) {
+  if(!root) return root
+  const head = new TreeNode(root.val)
+
+  const dfs = (node, parent, isLeft) => {
+    if(!node) return
+    if(isLeft) {
+      parent.right = new TreeNode(node.val)
+      dfs(node.left, parent.right, true)
+      dfs(node.right, parent.right, false)
+    } else {
+      parent.left = new TreeNode(node.val)
+      dfs(node.left, parent.left, true)
+      dfs(node.right, parent.left, false)
+    }
+  }
+
+  dfs(root.left, head, true)
+  dfs(root.right, head, false)
+
+  return head
+};
+```
+
 ## ✔ 347 前 K 个高频元素
 
 [ref](https://leetcode.cn/problems/top-k-frequent-elements/)
@@ -1597,6 +1780,29 @@ var topKFrequent = function(nums, k) {
   const mapArr = Array.from(map)
   mapArr.sort((a, b) => b[1] - a[1])
   return mapArr.slice(0, k).map(_ => _[0]) 
+};
+```
+
+## ✔ 374 猜数字大小
+
+[ref](https://leetcode.cn/problems/guess-number-higher-or-lower/)
+
+二分搜索
+
+```js
+var guessNumber = function(n) {
+  let l = 0
+  let r = n
+  while(l <= r) {
+    const med = Math.floor((l + r) / 2)
+    if(guess(med) === -1) {
+      r = med - 1
+    } else if(guess(med) === 1) {
+      l = med + 1
+    } else {
+      return med
+    }
+  }
 };
 ```
 
