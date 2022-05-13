@@ -104,6 +104,7 @@
                 if (/✔\s\d+\s/.test(v.textContent)) {
                   leetCodeCount++
                 }
+                v.parentNode.style.padding = '1px 0'
               })
               // 一级标题 links
               const l1Links = document.querySelectorAll('.sidebar-nav>ul>li>a')
@@ -111,15 +112,24 @@
               let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
                 if (v.textContent.includes('✔')) {
-                  v.style.backgroundColor = 'rgba(109,255,51,.3)'
+                  v.parentNode.style.backgroundColor = 'rgba(109,255,51,.3)'
                   finishedCount++
                 }
                 if (v.textContent.includes('?')) {
-                  v.style.backgroundColor = 'pink'
+                  v.parentNode.style.backgroundColor = 'pink'
                   finishedCount++
                 }
                 if (v.textContent.includes('😻')) {
-                  v.style.backgroundColor = '#FFDEAD'
+                  v.parentNode.style.backgroundColor = '#FFDEAD'
+                }
+                if (v.textContent.includes('【easy】')) {
+                  v.style.borderRight = '3px solid #00DD00'
+                }
+                if (v.textContent.includes('【medium】')) {
+                  v.style.borderRight = '3px solid #FF8800 '
+                }
+                if (v.textContent.includes('【hard】')) {
+                  v.style.borderRight = '3px solid #CC0000'
                 }
               })
               let isLeetCodePage = false
