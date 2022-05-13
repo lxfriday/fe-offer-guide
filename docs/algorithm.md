@@ -2,7 +2,7 @@
   完成度 <span class="finished-info">500 / 500 -> 100%<span>
 </div>
 
-# 算法知名仓库
+# ✔ 算法知名仓库
 
 - [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
 - [路西法](https://github.com/azl397985856/leetcode)
@@ -28,17 +28,17 @@
 
 ## 栈、队列
 
-- [20 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
-- [933 最近的请求次数](https://leetcode.cn/problems/number-of-recent-calls/)
+- 【easy】 [20 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
+- 【easy】 [933 最近的请求次数](https://leetcode.cn/problems/number-of-recent-calls/)
 
 ## 链表
 
-- [2 两数相加](https://leetcode.cn/problems/add-two-numbers/)
-- [21 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
-- [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
-- [83 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
-- [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
-- [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+- 【medium】 [2 两数相加](https://leetcode.cn/problems/add-two-numbers/)
+- 【easy】 [21 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
+- 【hard】 [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+- 【easy】 [83 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+- 【easy】 [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
+- 【easy】 [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 
 
 ## 集合
@@ -47,36 +47,36 @@
 
 ## 字典、滑动窗口、双指针
 
-- [1 两数之和](https://leetcode.cn/problems/two-sum/)
-- [3 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
-- [76 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
+- 【easy】 [1 两数之和](https://leetcode.cn/problems/two-sum/)
+- 【medium】 [3 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+- 【hard】 [76 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
 
 ## 树、深度优先、广度优先
 
-- [94 二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
-- [100 相同的树](https://leetcode.cn/problems/same-tree/)
-- [101 对称二叉树](https://leetcode.cn/problems/symmetric-tree/)
-- [102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
-- [104 二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
-- [111 二叉树的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
-- [112 路径总和](https://leetcode.cn/problems/path-sum/)
-- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+- 【easy】 [94 二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
+- 【easy】 [100 相同的树](https://leetcode.cn/problems/same-tree/)
+- 【easy】 [101 对称二叉树](https://leetcode.cn/problems/symmetric-tree/)
+- 【medium】 [102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
+- 【easy】 [104 二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
+- 【easy】 [111 二叉树的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
+- 【easy】 [112 路径总和](https://leetcode.cn/problems/path-sum/)
+- 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 
 ## 堆
 
-- [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
-- [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
-- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
-- [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
+- 【hard】 [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+- 【medium】 [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+- 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+- 【easy】 [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
 ## 图、深度优先、广度优先
 
-- [113 克隆图](https://leetcode.cn/problems/clone-graph/)
-- [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
+- 【medium】 [113 克隆图](https://leetcode.cn/problems/clone-graph/)
+- 【medium】 [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 
 ## 搜索、排序
 
-- [374 猜数字大小](https://leetcode.cn/problems/guess-number-higher-or-lower/)
+- 【easy】 [374 猜数字大小](https://leetcode.cn/problems/guess-number-higher-or-lower/)
 
 ## 分治法
 
