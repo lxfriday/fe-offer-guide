@@ -65,3 +65,7 @@ template
 ```md
 ### ? performance
 ```
+
+## emoji 参考
+
+- [https://funletu.com/emoji/](https://funletu.com/emoji/)

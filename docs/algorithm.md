@@ -6,7 +6,7 @@
 
 刷题的时候要按照大概的题目分类来刷，每个方面都要有所了解。
 
-- [基础算法](#✔-基础算法)
+- [基础算法](#😻✔-基础算法)
 - 栈
 - 队列
 - 链表
@@ -75,15 +75,24 @@
 
 ## 分治法
 
+分支的特征是：先拆分、再解决、后合并
+
+将一个问题拆分成很多个和原问题相似的小问题，递归解决小问题，再将结果合并以解决原来的问题
+
 - [100 相同的树](https://leetcode.cn/problems/same-tree/)
 - [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 
 ## 动态规划
+
+动态规划的特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
+
+- [爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+
 ## 贪心算法
 ## 回溯算法
 
 
-# ✔ 基础算法
+# 😻✔ 基础算法 
 
 常见复杂度曲线：
 
@@ -93,7 +102,7 @@
 
 [https://visualgo.net/zh/sorting](https://visualgo.net/zh/sorting)
 
-## ✔ 排序算法
+## 😻✔ 排序算法 
 
 ref
 
@@ -102,7 +111,7 @@ ref
 
 ![排序算法一览](https://qiniu1.lxfriday.xyz/feoffer/sort.png)
 
-### ✔ 冒泡排序
+### 😻✔ 冒泡排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/bubbleSort.png)
 
@@ -125,7 +134,7 @@ function bubbleSort(arr) {
 }
 ```
 
-### ✔ 选择排序
+### 😻✔ 选择排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/ec43f415-5224-bd9b-ad33-0ee480cd19e7.png)
 
@@ -150,7 +159,7 @@ function selectionSort(arr) {
 }
 ```
 
-### ✔ 插入排序
+### 😻✔ 插入排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/6e79c1d5-2896-68bc-ebc0-280ee2881035.png)
 
@@ -178,7 +187,7 @@ function insertionSort(arr) {
 }
 ```
 
-### ✔ 快速排序
+### 😻✔ 快速排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/008ba6a2-d847-8894-a3b4-70b09a1b44b8.png)
 
@@ -239,7 +248,7 @@ function quickSort2(arr) {
 }
 ```
 
-### ✔ 归并排序
+### 😻✔ 归并排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/3ccf988e-b992-84f0-a622-dd03c51123c9.png)
 
@@ -284,7 +293,7 @@ function mergeSort(arr) {
 }
 ```
 
-### ✔ 希尔排序
+### 😻✔ 希尔排序 
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/907976b2-e3b0-91fc-0b6d-3ead3ee08c1c.png)
 
@@ -321,7 +330,7 @@ function shellSort(arr) {
 }
 ```
 
-### ✔ 堆排序(heap-sort)
+### 😻✔ 堆排序(heap-sort) 
 
 ![堆排序](https://qiniu1.lxfriday.xyz/feoffer/heapSort2.png)
 ![堆排序](https://qiniu1.lxfriday.xyz/feoffer/heapSort.gif)
@@ -415,7 +424,7 @@ function heapSort(arr, asc = false) {
 }
 ```
 
-### ✔ 计数排序(counting-sort)
+### 😻✔ 计数排序(counting-sort) 
 
 ![计数排序](https://qiniu1.lxfriday.xyz/feoffer/countingSort.png)
 
@@ -451,7 +460,7 @@ function countingSort(arr) {
 }
 ```
 
-### ✔ 基数排序(radix-sort)
+### 😻✔ 基数排序(radix-sort) 
 
 ![基数排序](https://qiniu1.lxfriday.xyz/feoffer/radixSort.png)
 
@@ -509,7 +518,7 @@ function radixSort(arr) {
 }
 ```
 
-### ✔ 桶排序、箱排序(bucket-sort)
+### 😻✔ 桶排序、箱排序(bucket-sort) 
 
 ![桶排序](https://qiniu1.lxfriday.xyz/feoffer/bucketSort.png)
 
@@ -576,7 +585,7 @@ function bucketSort(arr, size = 5) {
 
 ## ✔ 搜索算法
 
-### ✔ 二分搜索算法
+### 😻✔ 二分搜索算法 
 
 二分搜索算法的前提是目标数组已经排好序了。
 
@@ -598,7 +607,7 @@ function binarySearch(arr, target) {
 }
 ```
 
-## ✔ LRU 缓存算法
+## 😻✔ LRU 缓存算法 
 
 ref
 
@@ -721,7 +730,7 @@ class LRUCache {
 }
 ```
 
-## ✔ 斐波拉契数列
+## 😻✔ 斐波拉契数列 
 
 ```
 1 1 2 3 5 8 13 21 34 55 89
@@ -750,7 +759,7 @@ function Fibonacci(n) {
 }
 ```
 
-## ✔ 因式分解
+## 😻✔ 因式分解 
 
 实现一个 `calc` 方法，可以将输入的数拆解为尽可能多的乘数，所有数相乘等于输入数。
 
@@ -826,7 +835,7 @@ const twoSum = (nums, target) => {
 
 # leetcode 刷题记录
 
-## ✔ 1 两数之和
+## 😻✔ 1 两数之和 
 
 [ref](https://leetcode.cn/problems/two-sum/)
 
@@ -852,7 +861,7 @@ var twoSum = function (nums, target) {
 }
 ```
 
-## ✔ 2 两数相加
+## 😻✔ 2 两数相加 
 
 [ref](https://leetcode.cn/problems/add-two-numbers/)
 
@@ -885,7 +894,7 @@ function ListNode(val, next) {
 }
 ```
 
-## ✔ 3 无重复字符的最长子串
+## 😻✔ 3 无重复字符的最长子串 
 
 [ref](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
@@ -929,7 +938,7 @@ var lengthOfLongestSubstring = function (s) {
 }
 ```
 
-## ✔ 20 有效的括号
+## 😻✔ 20 有效的括号 
 
 [ref](https://leetcode.cn/problems/valid-parentheses/)
 
@@ -960,7 +969,7 @@ var isValid = function (s) {
 }
 ```
 
-## ✔ 21 合并两个有序链表
+## 😻✔ 21 合并两个有序链表 
 
 [ref](https://leetcode.cn/problems/merge-two-sorted-lists/)
 
@@ -992,7 +1001,7 @@ var mergeTwoLists = function(list1, list2) {
 };
 ```
 
-## ✔ 23 合并K个升序链表
+## 😻✔ 23 合并K个升序链表 
 
 [ref](https://leetcode.cn/problems/merge-k-sorted-lists/)
 
@@ -1176,7 +1185,7 @@ class MinHeap {
 
 
 
-## ✔ 65 有效的数字
+## 😻✔ 65 有效的数字 
 
 [ref](https://leetcode.cn/problems/valid-number/)
 
@@ -1237,7 +1246,46 @@ function isNumStr(numStr) {
 }
 ```
 
-## ✔ 76 最小覆盖子串
+## 😻✔ 70 爬楼梯 
+
+[ref](https://leetcode.cn/problems/climbing-stairs/)
+
+动态规划
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var climbStairs = function(n) {
+  if(n === 1) return 1
+  if(n === 2) return 2
+  d1 = 1
+  d2 = 2
+  for(let i = 3; i <= n; i++) {
+    const tmpD2 = d2
+    d2 = d1 + d2
+    d1 = tmpD2
+  }
+  return d2
+};
+```
+
+数组解
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var climbStairs = function(n) {
+  const d = []
+  d[1] = 1
+  d[2] = 2
+  for(let i = 3; i <= n; i++) {
+    d[i] = d[i - 1] + d[i - 2]
+  }
+  return d[n]
+};
+````
+
+## 😻✔ 76 最小覆盖子串 
 
 [ref](https://leetcode.cn/problems/minimum-window-substring/)
 
@@ -1300,7 +1348,7 @@ var deleteDuplicates = function (head) {
 }
 ```
 
-## ✔ 94 二叉树的中序遍历
+## 😻✔ 94 二叉树的中序遍历 
 
 [ref](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
 
@@ -1320,7 +1368,7 @@ var inorderTraversal = function (root) {
 }1
 ```
 
-## ✔ 100 相同的树
+## 😻✔ 100 相同的树 
 
 二叉树、树
 
@@ -1336,7 +1384,7 @@ var isSameTree = function(p, q) {
 };
 ```
 
-## ✔ 101 对称二叉树
+## 😻✔ 101 对称二叉树 
 
 [ref](https://leetcode.cn/problems/symmetric-tree/)
 
@@ -1358,7 +1406,7 @@ var isSymmetric = function(root) {
 };
 ```
 
-## ✔ 102 二叉树的层序遍历
+## 😻✔ 102 二叉树的层序遍历 
 
 [ref](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
@@ -1380,7 +1428,7 @@ var levelOrder = function (root) {
 }
 ```
 
-## ✔ 104 二叉树的最大深度
+## 😻✔ 104 二叉树的最大深度 
 
 [ref](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
 
@@ -1400,7 +1448,7 @@ var maxDepth = function (root) {
 }
 ```
 
-## ✔ 111 二叉树的最小深度
+## 😻✔ 111 二叉树的最小深度 
 
 [ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
 
@@ -1419,7 +1467,7 @@ var minDepth = function (root) {
 }
 ```
 
-## ✔ 112 路径总和
+## 😻✔ 112 路径总和 
 
 [ref](https://leetcode.cn/problems/path-sum/)
 
@@ -1444,7 +1492,7 @@ var hasPathSum = function (root, targetSum) {
 }
 ```
 
-## ✔ 113 克隆图
+## 😻✔ 113 克隆图 
 
 [ref](https://leetcode.cn/problems/clone-graph/)
 
@@ -1501,7 +1549,7 @@ var cloneGraph = function(node) {
 };
 ```
 
-## ✔ 141 环形链表
+## 😻✔ 141 环形链表 
 
 [ref](https://leetcode.cn/problems/linked-list-cycle/)
 
@@ -1521,7 +1569,7 @@ var hasCycle = function (head) {
 }
 ```
 
-## ✔ 206 反转链表
+## 😻✔ 206 反转链表 
 
 [ref](https://leetcode.cn/problems/reverse-linked-list/)
 
@@ -1543,7 +1591,7 @@ var reverseList = function (head) {
 }
 ```
 
-## ✔ 215 数组中的第K个最大元素
+## 😻✔ 215 数组中的第K个最大元素 
 
 [ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 
@@ -1628,7 +1676,7 @@ class MinHeap {
 }
 ```
 
-## ✔ 226 翻转二叉树
+## 😻✔ 226 翻转二叉树 
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
 
@@ -1676,7 +1724,7 @@ var invertTree = function(root) {
 };
 ```
 
-## ✔ 347 前 K 个高频元素
+## 😻✔ 347 前 K 个高频元素 
 
 [ref](https://leetcode.cn/problems/top-k-frequent-elements/)
 
@@ -1783,7 +1831,7 @@ var topKFrequent = function(nums, k) {
 };
 ```
 
-## ✔ 374 猜数字大小
+## 😻✔ 374 猜数字大小 
 
 [ref](https://leetcode.cn/problems/guess-number-higher-or-lower/)
 
@@ -1806,7 +1854,7 @@ var guessNumber = function(n) {
 };
 ```
 
-## ✔ 349 两个数组的交集
+## 😻✔ 349 两个数组的交集 
 
 [ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
 
@@ -1819,7 +1867,7 @@ var intersection = function (nums1, nums2) {
 ```
 
 
-## ✔ 417 太平洋大西洋水流问题
+## 😻✔ 417 太平洋大西洋水流问题 
 
 [ref](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 

@@ -101,7 +101,7 @@
                 document.querySelectorAll('.sidebar-nav li a')
               let leetCodeCount = 0
               sidebarLinks.forEach((v, i) => {
-                if (/^✔\s\d+\s/.test(v.textContent)) {
+                if (/✔\s\d+\s/.test(v.textContent)) {
                   leetCodeCount++
                 }
               })
@@ -110,13 +110,16 @@
               const total = sidebarLinks.length // 完成度统计
               let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
-                if (v.textContent.startsWith('✔')) {
+                if (v.textContent.includes('✔')) {
                   v.style.backgroundColor = 'rgba(109,255,51,.3)'
                   finishedCount++
                 }
-                if (v.textContent.startsWith('?')) {
+                if (v.textContent.includes('?')) {
                   v.style.backgroundColor = 'pink'
                   finishedCount++
+                }
+                if (v.textContent.includes('😻')) {
+                  v.style.backgroundColor = '#FFDEAD'
                 }
               })
               let isLeetCodePage = false
@@ -136,7 +139,7 @@
                 isLeetCodePage ? 'LeetCode 刷题进度：' + leetCodeCount : ''
               }
               <br/>
-              颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:pink">? 存疑很复杂</span>`
+              颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:pink">? 存疑很复杂</span>  <span style="background-color:#FFDEAD">😻 面试不可缺少的算法</span>`
             })
           },
         ],

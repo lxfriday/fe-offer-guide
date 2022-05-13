@@ -11,3 +11,5 @@ function bubbleSort(arr) {
   }
   return arr
 }
+const data = [2, 3, 1, 0, 10, 5, 100, 10, 20, 4, 70, 5, 6, 3, 8, 4, 2, 5]
+console.log('quickSort', bubbleSort([...data]))
