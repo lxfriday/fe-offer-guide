@@ -135,7 +135,7 @@
               let isLeetCodePage = false
               // 一级标题标上颜色
               l1Links.forEach((v, i) => {
-                v.style.backgroundColor = '#CCFFFF'
+                v.parentNode.style.backgroundColor = '#CCFFFF'
                 if (v.textContent === 'leetcode 刷题记录') isLeetCodePage = true
               })
 

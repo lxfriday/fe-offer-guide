@@ -110,3 +110,8 @@ img {
 .markdown-section > * {
   font-size: 15px;
 }
+.sidebar ul li.active > a {
+  border-right: 0;
+  color: var(--theme-color, #42b983);
+  font-weight: 600;
+}

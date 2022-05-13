@@ -2,6 +2,11 @@
   完成度 <span class="finished-info">500 / 500 -> 100%<span>
 </div>
 
+# 算法知名仓库
+
+- [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
+- [路西法](https://github.com/azl397985856/leetcode)
+
 # 刷题指南
 
 刷题的时候要按照大概的题目分类来刷，每个方面都要有所了解。
