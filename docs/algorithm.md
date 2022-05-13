@@ -86,7 +86,8 @@
 
 动态规划的特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
 
-- [爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+- [70 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+- [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
 
 ## 贪心算法
 ## 回溯算法
@@ -835,7 +836,7 @@ const twoSum = (nums, target) => {
 
 # leetcode 刷题记录
 
-## 😻✔ 1 两数之和 
+## 😻✔ 1 两数之和【easy】
 
 [ref](https://leetcode.cn/problems/two-sum/)
 
@@ -861,7 +862,7 @@ var twoSum = function (nums, target) {
 }
 ```
 
-## 😻✔ 2 两数相加 
+## 😻✔ 2 两数相加【meidum】
 
 [ref](https://leetcode.cn/problems/add-two-numbers/)
 
@@ -894,7 +895,7 @@ function ListNode(val, next) {
 }
 ```
 
-## 😻✔ 3 无重复字符的最长子串 
+## 😻✔ 3 无重复字符的最长子串【meidum】
 
 [ref](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
@@ -938,7 +939,7 @@ var lengthOfLongestSubstring = function (s) {
 }
 ```
 
-## 😻✔ 20 有效的括号 
+## 😻✔ 20 有效的括号【easy】
 
 [ref](https://leetcode.cn/problems/valid-parentheses/)
 
@@ -969,7 +970,7 @@ var isValid = function (s) {
 }
 ```
 
-## 😻✔ 21 合并两个有序链表 
+## 😻✔ 21 合并两个有序链表【easy】
 
 [ref](https://leetcode.cn/problems/merge-two-sorted-lists/)
 
@@ -1001,7 +1002,7 @@ var mergeTwoLists = function(list1, list2) {
 };
 ```
 
-## 😻✔ 23 合并K个升序链表 
+## 😻✔ 23 合并K个升序链表【hard】
 
 [ref](https://leetcode.cn/problems/merge-k-sorted-lists/)
 
@@ -1185,7 +1186,7 @@ class MinHeap {
 
 
 
-## 😻✔ 65 有效的数字 
+## 😻✔ 65 有效的数字【hard】
 
 [ref](https://leetcode.cn/problems/valid-number/)
 
@@ -1246,7 +1247,7 @@ function isNumStr(numStr) {
 }
 ```
 
-## 😻✔ 70 爬楼梯 
+## 😻✔ 70 爬楼梯【easy】
 
 [ref](https://leetcode.cn/problems/climbing-stairs/)
 
@@ -1285,7 +1286,7 @@ var climbStairs = function(n) {
 };
 ````
 
-## 😻✔ 76 最小覆盖子串 
+## 😻✔ 76 最小覆盖子串【hard】
 
 [ref](https://leetcode.cn/problems/minimum-window-substring/)
 
@@ -1327,7 +1328,7 @@ var minWindow = function(s, t) {
 };
 ```
 
-## ✔ 83 删除排序链表中的重复元素
+## ✔ 83 删除排序链表中的重复元素【easy】
 
 [ref](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 
@@ -1348,7 +1349,7 @@ var deleteDuplicates = function (head) {
 }
 ```
 
-## 😻✔ 94 二叉树的中序遍历 
+## 😻✔ 94 二叉树的中序遍历【easy】
 
 [ref](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
 
@@ -1368,7 +1369,9 @@ var inorderTraversal = function (root) {
 }1
 ```
 
-## 😻✔ 100 相同的树 
+## 😻✔ 100 相同的树【easy】
+
+[ref](https://leetcode.cn/problems/same-tree/)
 
 二叉树、树
 
@@ -1384,7 +1387,7 @@ var isSameTree = function(p, q) {
 };
 ```
 
-## 😻✔ 101 对称二叉树 
+## 😻✔ 101 对称二叉树【easy】
 
 [ref](https://leetcode.cn/problems/symmetric-tree/)
 
@@ -1406,7 +1409,7 @@ var isSymmetric = function(root) {
 };
 ```
 
-## 😻✔ 102 二叉树的层序遍历 
+## 😻✔ 102 二叉树的层序遍历【medium】
 
 [ref](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
@@ -1428,7 +1431,7 @@ var levelOrder = function (root) {
 }
 ```
 
-## 😻✔ 104 二叉树的最大深度 
+## 😻✔ 104 二叉树的最大深度【easy】
 
 [ref](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
 
@@ -1448,7 +1451,7 @@ var maxDepth = function (root) {
 }
 ```
 
-## 😻✔ 111 二叉树的最小深度 
+## 😻✔ 111 二叉树的最小深度【easy】
 
 [ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
 
@@ -1467,7 +1470,7 @@ var minDepth = function (root) {
 }
 ```
 
-## 😻✔ 112 路径总和 
+## 😻✔ 112 路径总和【easy】
 
 [ref](https://leetcode.cn/problems/path-sum/)
 
@@ -1492,7 +1495,7 @@ var hasPathSum = function (root, targetSum) {
 }
 ```
 
-## 😻✔ 113 克隆图 
+## 😻✔ 113 克隆图【medium】
 
 [ref](https://leetcode.cn/problems/clone-graph/)
 
@@ -1549,7 +1552,7 @@ var cloneGraph = function(node) {
 };
 ```
 
-## 😻✔ 141 环形链表 
+## 😻✔ 141 环形链表【easy】
 
 [ref](https://leetcode.cn/problems/linked-list-cycle/)
 
@@ -1569,7 +1572,44 @@ var hasCycle = function (head) {
 }
 ```
 
-## 😻✔ 206 反转链表 
+## 😻✔ 198 打家劫舍【medium】
+
+[ref](https://leetcode.cn/problems/house-robber/)
+
+动态规划
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var rob = function(nums) {
+  if(nums.length === 1) return nums[0]
+  if(nums.length === 2) return Math.max(nums[0], nums[1])
+  let d0 = nums[0]
+  let d1 = Math.max(nums[0], nums[1])
+  for(let i = 2;i < nums.length; i++) {
+    const t = d1
+    d1 = Math.max(d0 + nums[i], d1)
+    d0 = t
+  }
+  return d1
+};
+```
+or
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var rob = function(nums) {
+  const dp = []
+  dp[0] = nums[0]
+  dp[1] = Math.max(nums[0], nums[1])
+  for(let i = 2;i < nums.length; i++) {
+    dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
+  }
+  return dp[nums.length - 1]
+};
+```
+
+## 😻✔ 206 反转链表【easy】
 
 [ref](https://leetcode.cn/problems/reverse-linked-list/)
 
@@ -1591,7 +1631,7 @@ var reverseList = function (head) {
 }
 ```
 
-## 😻✔ 215 数组中的第K个最大元素 
+## 😻✔ 215 数组中的第K个最大元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 
@@ -1676,7 +1716,7 @@ class MinHeap {
 }
 ```
 
-## 😻✔ 226 翻转二叉树 
+## 😻✔ 226 翻转二叉树【easy】
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
 
@@ -1724,7 +1764,7 @@ var invertTree = function(root) {
 };
 ```
 
-## 😻✔ 347 前 K 个高频元素 
+## 😻✔ 347 前 K 个高频元素【medium】
 
 [ref](https://leetcode.cn/problems/top-k-frequent-elements/)
 
@@ -1831,7 +1871,7 @@ var topKFrequent = function(nums, k) {
 };
 ```
 
-## 😻✔ 374 猜数字大小 
+## 😻✔ 374 猜数字大小【easy】
 
 [ref](https://leetcode.cn/problems/guess-number-higher-or-lower/)
 
@@ -1854,7 +1894,7 @@ var guessNumber = function(n) {
 };
 ```
 
-## 😻✔ 349 两个数组的交集 
+## 😻✔ 349 两个数组的交集【easy】
 
 [ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
 
@@ -1867,7 +1907,7 @@ var intersection = function (nums1, nums2) {
 ```
 
 
-## 😻✔ 417 太平洋大西洋水流问题 
+## 😻✔ 417 太平洋大西洋水流问题【medium】
 
 [ref](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 
@@ -1914,7 +1954,7 @@ var pacificAtlantic = function(heights) {
 };
 ```
 
-## ✔ 933 最近的请求次数
+## ✔ 933 最近的请求次数【easy】
 
 [ref](https://leetcode.cn/problems/number-of-recent-calls/)
 
