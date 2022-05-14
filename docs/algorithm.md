@@ -92,22 +92,28 @@
 特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
 
 - 【easy】 [70 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+- 【easy】[121 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
+- 【medium】 [122 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
+- 【hard】 [123 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/)
+- 【hard】 [188 买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/)
+- 【medium】 [714 买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 - 【medium】 [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
+- 【medium】 [309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 
 ## 贪心算法
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
 
 - 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
-- 【easy】[121 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
-- 【medium】 [122 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
+
 
 ## 回溯算法
+
+回溯法（探索与回溯法）是一种选优搜索法，又称为试探法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。
 
 - 【medium】 [46 全排列](https://leetcode.cn/problems/permutations/)
 - 【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 - 【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
-
 
 
 # 😻✔ 基础算法 
@@ -1703,29 +1709,70 @@ var cloneGraph = function(node) {
 
 [ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
 
-贪心算法
+动态规划
 
 ```js
-// 抓住一个点：从后往前看，到某一天的时候，能获得的最大利润是：Math.max(前一天能获得的最大利润, 当天能获得的最大利润)
+// 抓住一个点：从后往前看，到某一天的时候，能获得的最大利润是：Math.max(至前一天能获得的最大利润, 至当天能获得的最大利润)
 // 时间复杂度：O(n)
 // 空间复杂度：O(1)
 var maxProfit = function(prices) {
   let maxProfit = 0
   let everMin = prices[0]
   for(let i = 1 ;i < prices.length; i++) {
-    if(prices[i] < everMin) {
-      everMin = prices[i]
-    } else {
-      maxProfit = Math.max(prices[i] - everMin, maxProfit)
-    }
+    everMin = Math.min(everMin, prices[i])
+    maxProfit = Math.max(maxProfit, prices[i] - everMin)
   }
   return maxProfit
 };
 ```
 
+数组版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var maxProfit = function(prices) {
+  let dp = []
+  let everMin = prices[0]
+  dp[0] = 0
+  for(let i = 1 ;i < prices.length; i++) {
+    everMin = Math.min(everMin, prices[i])
+    dp[i] = Math.max(dp[i - 1], prices[i] - everMin)
+  }
+  return dp[prices.length - 1]
+};
+```
+
 ## 😻✔ 122 买卖股票的最佳时机 II【medium】
 
-贪心算法
+[ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
+
+动态规划
+
+```js
+var maxProfit = function(prices) {
+  let maxProfit = 0
+  for(let i = 1; i < prices.length; i++) {
+    maxProfit = Math.max(maxProfit, maxProfit + prices[i] - prices[i - 1])
+  }
+  return maxProfit
+};
+```
+
+数组版本
+
+```js
+var maxProfit = function(prices) {
+  const dp = []
+  dp[0] = 0
+  for(let i = 1; i < prices.length; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 1] + prices[i] - prices[i - 1])
+  }
+  return dp[prices.length - 1]
+};
+```
+
+or
 
 ```js
 // 时间复杂度：O(n)
@@ -1743,6 +1790,87 @@ var maxProfit = function(prices) {
     buyPrice = prices[i]
   }
   return maxProfit
+};
+```
+
+
+
+## 😻✔ 123 买卖股票的最佳时机 III【hard】
+
+[ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/)
+
+动态规划
+
+超高效版本
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var maxProfit = function(prices) {
+  const n = prices.length;
+  let buy1 = -prices[0], buy2 = -prices[0];
+  let sell1 = 0, sell2 = 0;
+  for (let i = 1; i < n; i++) {
+      sell2 = Math.max(sell2, buy2 + prices[i]);
+      buy2 = Math.max(buy2, sell1 - prices[i]);
+      sell1 = Math.max(sell1, buy1 + prices[i]);
+      buy1 = Math.max(buy1, -prices[i]);
+  }
+  return sell2;
+};
+```
+
+普通版本
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+// ref https://blog.csdn.net/qq_35027690/article/details/118557921
+var maxProfit = function(prices) {
+  // 最多操作两次时
+  // 第i天的收益，总共包含5中情况（i 对应数组下标）
+  // 0：没操作，收益为0，可以直接排除，对应 d[i][0] = 0 一直是 0
+  // 1：只买了一次，流动资金相比初始状态是负值
+  // 2：买了一次，卖了一次，流动资金相比初始状态是正值（只赚不赔）
+  // 3：买了一次，卖了一次，又买了一次，流动资金相比初始状态是未知的
+  // 4：买了一次，卖了一次，又买了一次，又卖了一次，流动资金相比初始状态是正值（只赚不赔）
+  const dp = new Array(prices.length).fill('').map(_ =>[])
+  // 把初始值定出来
+  dp[0][0] = 0
+  dp[0][1] = -prices[0]
+  dp[0][2] = 0
+  dp[0][3] = -prices[0]
+  dp[0][4] = 0
+  for(let i = 1; i < prices.length; i++) {
+    // 构建状态转移方程
+    // --------------------------
+    // i 天内只买了一次的最大收益
+    // dp[i][1] = max(dp[i - 1][1] , dp[i - 1][0] - prices[i])
+    // dp[i - 1][1]： 第i天没操作，顺延到 i - 1 天内只买了一次，没卖
+    // dp[i - 1][0] - prices[i]： i - 1 天内没操作，在 i 天买了,  - prices[i]
+    // 实际就是：dp[i][1] = max(dp[i - 1][1] , - prices[i])
+    dp[i][1] = Math.max(dp[i-1][1], -prices[i])
+    // --------------------------
+    // i 天内只买了一次又卖了一次的最大收益
+    // dp[i][2] = max(dp[i-1][2], dp[i-1][1] + prices[i])
+    // dp[i-1][2]：第 i 天没操作，顺延到 i - 1 天内进行了买卖各一次
+    // dp[i-1][1] + prices[i]：第 i 天卖了，在第 i - 1 天内进行了一次买入操作
+    dp[i][2] = Math.max(dp[i-1][2], dp[i-1][1] + prices[i])
+    // --------------------------
+    // i 天内进行了买一次，卖一次，又买一次的最大收益
+    // dp[i][3] = max(dp[i-1][3], dp[i-1][2] - prices[i])
+    // dp[i-1][3]：第 i 天没有操作，顺延到 i - 1 天内进行买卖买操作后的结果
+    // dp[i-1][2] - prices[i]：第 i 天买了，在 i - 1 天内进行了一次买卖操作
+    dp[i][3] = Math.max(dp[i-1][3], dp[i-1][2] - prices[i])
+    // --------------------------
+    // i 天内进行了买一次，卖一次，又买一次，又卖一次的最大收益
+    // dp[i][4] = max(dp[i-1][4], dp[i-1][3] + prices[i])
+    // dp[i-1][4]：第 i 天没操作，顺延到 i - 1 天内进行了买卖各两次
+    // dp[i-1][3] + prices[i]：第 i 天卖了一次，并且在 i - 1 天内进行了买卖买操作
+    dp[i][4] = Math.max(dp[i-1][4], dp[i-1][3] + prices[i])
+    // --------------------------
+  }
+  return dp[prices.length - 1][4]
 };
 ```
 
@@ -1764,6 +1892,31 @@ var hasCycle = function (head) {
 
   return false
 }
+```
+
+## 😻✔ 188 买卖股票的最佳时机 IV【hard】
+
+[ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/)
+
+动态规划
+
+```js
+// 时间复杂度：O(n*k)
+// 空间复杂度：O(n*k)
+var maxProfit = function(k, prices) {
+  if(prices.length < 1) return 0
+  const dp = new Array(prices.length).fill('').map(_ => new Array(2 * k + 1).fill(0))
+  for(let j = 1;j <= k; j++) {
+    dp[0][2 * j - 1] = -prices[0]
+  }
+  for(let i = 1; i < prices.length; i++) {
+    for(let j = 1;j <= 2 * k; j++) {
+      const isOdd = j % 2 === 1
+      dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - 1] + (isOdd? - prices[i] : prices[i]))
+    }
+  }
+  return Math.max(...dp[prices.length - 1])
+};
 ```
 
 ## 😻✔ 198 打家劫舍【medium】
@@ -1955,6 +2108,85 @@ var invertTree = function(root) {
   dfs(root.right, head, false)
 
   return head
+};
+```
+
+## 😻✔ 309 最佳买卖股票时机含冷冻期【medium】
+
+[ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+高效版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var maxProfit = function(prices) {
+  const len = prices.length
+  // 确定初始值
+  let profitWithShare = -prices[0]
+  let profitWithCooldown = 0
+  let profitWithoutCooldown = 0
+
+  for(let i = 1; i < len; i++) {
+    const profitWithShareBefore = profitWithShare
+    const profitWithCooldownBefore = profitWithCooldown
+    const profitWithoutCooldownBefore = profitWithoutCooldown
+    profitWithShare = Math.max(profitWithShareBefore, profitWithoutCooldownBefore - prices[i])
+    profitWithCooldown = profitWithShareBefore + prices[i]
+    profitWithoutCooldown = Math.max(profitWithoutCooldownBefore, profitWithCooldownBefore)
+  }
+
+  return Math.max(profitWithCooldown, profitWithoutCooldown)
+};
+```
+
+数组版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var maxProfit = function(prices) {
+  // -------------------------------------
+  // i 天结束之后会存在三种状态（注意，是 i 天结束）：
+  // 0. 持有股票
+  // 1. 不持有股票，且处于冷冻期
+  // 2. 不持有股票，且不处于冷冻期
+  // -------------------------------------
+  // 三种状态的转移方程
+  // -------------------------------------
+  // 0. 持有股票：
+  // i - 1 天结束的时候就持有股票
+  // 或者 i 天买了股票（i - 1 天的时候不处于冷冻期）
+  // dp[i][0] = Math.max(dp[i-1][0], dp[i-1][2] - prices[i])
+  // -------------------------------------
+  // 1. 不持有股票，且处于冷冻期
+  // i 天卖出了股票, i - 1 结束的时候持有股票
+  // dp[i][1] = dp[i-1][0] + prices[i]
+  // -------------------------------------
+  // 2. 不持有股票，且不处于冷冻期
+  // i - 1 天结束的时候就是不持有股票且不处于冷冻期
+  // i - 1 天结束的时候处于冷冻期
+  // dp[i][2] = Math.max(dp[i-1][2], dp[i-1][1])
+  // -------------------------------------
+  // 综合下来 i 天结束之后，能获得的最大收益
+  // Math.max(dp[i][0], d[i][1], dp[i][2])
+  // 要注意一点，i 天结束之后，如果还持有股票，这肯定比 i 天结束之后不持有股票的收益低
+  // 则最终结果 Math.max(d[i][1], dp[i][2])
+
+  const len = prices.length
+  // 确定初始值
+  const dp = new Array(len).fill(1).map(_ => [])
+  dp[0][0] = -prices[0]
+  dp[0][1] = 0
+  dp[0][2] = 0
+
+  for(let i = 1; i < len; i++) {
+    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][2] - prices[i])
+    dp[i][1] = dp[i-1][0] + prices[i]
+    dp[i][2] = Math.max(dp[i-1][2], dp[i-1][1])
+  }
+
+  return Math.max(dp[len - 1][1], dp[len - 1][2])
 };
 ```
 
@@ -2170,6 +2402,47 @@ var findContentChildren = function(g, s) {
   return i
 };
 ```
+
+## 😻✔ 714 买卖股票的最佳时机含手续费【medium】
+
+动态规划
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var maxProfit = function(prices, fee) {
+  let profitWithoutShare = 0
+  let profitWithShare = -prices[0]
+  for(let i = 1;i < prices.length; i++) {
+    const profitWithoutShareBefore = profitWithoutShare
+    const profitWithShareBefore = profitWithShare
+    profitWithoutShare = Math.max(profitWithoutShareBefore, profitWithShareBefore + prices[i] - fee)
+    profitWithShare = Math.max(profitWithShareBefore, profitWithoutShare - prices[i])
+  }
+  return profitWithoutShare
+};
+```
+
+数组版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var maxProfit = function(prices, fee) {
+  // 0 不持有股票
+  // 1 持有股票
+  const len = prices.length
+  const dp = new Array(len).fill(1).map(_ => [])
+  dp[0][0] = 0
+  dp[0][1] = -prices[0]
+  for(let i = 1;i < prices.length; i++) {
+    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i] - fee)
+    dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i])
+  }
+  return dp[prices.length - 1][0]
+};
+```
+
 
 ## ✔ 933 最近的请求次数【easy】
 
