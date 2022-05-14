@@ -43,7 +43,7 @@
 
 ## 集合
 
-- [349 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)
+- 【easy】 [349 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)
 
 ## 字典、滑动窗口、双指针
 
@@ -80,22 +80,34 @@
 
 ## 分治法
 
-分支的特征是：先拆分、再解决、后合并
+特征是：先拆分、再解决、后合并
 
 将一个问题拆分成很多个和原问题相似的小问题，递归解决小问题，再将结果合并以解决原来的问题
 
-- [100 相同的树](https://leetcode.cn/problems/same-tree/)
-- [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+- 【easy】[100 相同的树](https://leetcode.cn/problems/same-tree/)
+- 【easy】[226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 
 ## 动态规划
 
-动态规划的特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
+特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
 
-- [70 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
-- [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
+- 【easy】 [70 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+- 【medium】 [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
 
 ## 贪心算法
+
+特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
+
+- 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
+- 【easy】[121 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
+- 【medium】 [122 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
+
 ## 回溯算法
+
+- 【medium】 [46 全排列](https://leetcode.cn/problems/permutations/)
+- 【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
+- 【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
+
 
 
 # 😻✔ 基础算法 
@@ -867,7 +879,7 @@ var twoSum = function (nums, target) {
 }
 ```
 
-## 😻✔ 2 两数相加【meidum】
+## 😻✔ 2 两数相加【medium】
 
 [ref](https://leetcode.cn/problems/add-two-numbers/)
 
@@ -900,7 +912,7 @@ function ListNode(val, next) {
 }
 ```
 
-## 😻✔ 3 无重复字符的最长子串【meidum】
+## 😻✔ 3 无重复字符的最长子串【medium】
 
 [ref](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
@@ -1187,9 +1199,117 @@ class MinHeap {
 }
 ```
 
-更优解
+## 😻✔ 46 全排列【medium】
 
+[ref](https://leetcode.cn/problems/permutations/)
 
+排列组合、回溯法、递归
+
+```js
+var permute = function(nums) {
+  const numsLen = nums.length
+  const res = []
+  const used = {}
+  function dfs(path) {
+    if(path.length === numsLen) {
+      res.push([...path])
+      return
+    }
+    for(let i = 0; i < numsLen; i++){
+      const num = nums[i]
+      if(used[i]) continue
+      used[i] = true
+      dfs([...path, num])
+      used[i] = false
+    }
+  }
+
+  dfs([])
+  return res
+};
+```
+or
+
+```js
+// 时间复杂度：O(n!)
+// 空间复杂度：O(n) 递归的层数
+var permute = function(nums) {
+  const res = []
+
+  function calc(path) {
+    if(path.length === nums.length) {
+      res.push(path)
+      return
+    }
+    nums.forEach(n => {
+      if(!path.includes(n)) {
+        calc([...path, n])
+      }
+    })
+  }
+  calc([])
+  return res
+};
+```
+
+or
+
+```js
+// 时间复杂度：O(n!)
+// 空间复杂度：O(n)
+var permute = function(nums) {
+  if(nums.length === 1) return [nums]
+  const res = []
+  for(let i = 0;i < nums.length; i++) {
+    permute(nums.slice(0, i).concat(nums.slice(i + 1))).forEach(_ => {
+      res.push([nums[i], ..._])
+    })
+  }
+  return res
+};
+```
+
+## 😻✔ 47 全排列 II【medium】
+
+[ref](https://leetcode.cn/problems/permutations-ii/)
+
+排列组合、回溯法、递归
+
+```js
+// 时间复杂度：O(n*n!)
+// 空间复杂度：O(n)
+var permuteUnique = function(nums) {
+  // 把无序数组排成有序的，方便后面相同数字的处理
+  nums.sort((a, b) => a - b)
+  const numsLen = nums.length
+  const res = []
+  // 对某个值是否使用过做一个记录
+  const used = {}
+  function dfs(path) {
+    if(path.length === numsLen) {
+      res.push([...path])
+      return
+    }
+    for(let i = 0; i < numsLen; i++){
+      const num = nums[i]
+      // 在相同层级的情况下，如果后续还有很多相同的数字，则都会直接跳过
+      // 而这里 num === nums[i - 1] 就是表示相同的数字
+      // !used[i - 1] 表示的是相同层级，即数组中装填的数字个数相同就表示是同一层级
+      if(used[i] || (i >= 1 && num === nums[i - 1] && !used[i - 1])) continue
+      used[i] = true
+      path.push(num)
+      // 这个地方在 dfs 前后会把 used[i] 的值更改两次
+      // 原因是：执行 dfs 前，置为 true，然后进行 dfs 内的递归调用时，该调用栈内都会得到 used[i] 为 true
+      dfs(path)
+      path.pop()
+      used[i] = false
+    }
+  }
+
+  dfs([])
+  return res
+};
+```
 
 ## 😻✔ 65 有效的数字【hard】
 
@@ -1330,6 +1450,28 @@ var minWindow = function(s, t) {
     }
   }
   return minStr
+};
+```
+
+## 😻✔ 78 子集【medium】
+
+回溯、递归
+
+```js
+// 时间复杂度：O(2^N)
+// 时间复杂度：O(N)
+var subsets = function(nums) {
+  const res = []
+
+  function calc(path, start = 0) {
+    res.push(path)
+    for(let i = start; i < nums.length; i++) {
+      calc([...path, nums[i]], i + 1)
+    }
+  }
+
+  calc([])
+  return res
 };
 ```
 
@@ -1554,6 +1696,53 @@ var cloneGraph = function(node) {
     })
   }
   return visited.get(node)
+};
+```
+
+## 😻✔ 121 买卖股票的最佳时机【easy】
+
+[ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
+
+贪心算法
+
+```js
+// 抓住一个点：从后往前看，到某一天的时候，能获得的最大利润是：Math.max(前一天能获得的最大利润, 当天能获得的最大利润)
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var maxProfit = function(prices) {
+  let maxProfit = 0
+  let everMin = prices[0]
+  for(let i = 1 ;i < prices.length; i++) {
+    if(prices[i] < everMin) {
+      everMin = prices[i]
+    } else {
+      maxProfit = Math.max(prices[i] - everMin, maxProfit)
+    }
+  }
+  return maxProfit
+};
+```
+
+## 😻✔ 122 买卖股票的最佳时机 II【medium】
+
+贪心算法
+
+```js
+// 时间复杂度：O(n)
+// 时间复杂度：O(1)
+// 赚钱的宗旨：只要后一天比前一天价格高，我就会赚，所以我每天都买，但是我知道第二天会跌
+// 会涨：则默认为我昨天就买了，今天的涨幅算进利润里
+// 会跌：那我前一天买了又卖了
+var maxProfit = function(prices) {
+  let maxProfit = 0
+  let buyPrice = prices[0]
+  for(let i = 1;i < prices.length; i++) {
+    if(prices[i] >= buyPrice) {
+      maxProfit += prices[i] - buyPrice
+    }
+    buyPrice = prices[i]
+  }
+  return maxProfit
 };
 ```
 
@@ -1956,6 +2145,29 @@ var pacificAtlantic = function(heights) {
   }
 
   return res
+};
+```
+
+## 😻✔ 455 分发饼干【easy】
+
+[ref](https://leetcode.cn/problems/assign-cookies/)
+
+贪心算法
+
+```js
+// 时间复杂度：O(nlogn) 排序时间复杂度
+// 时间复杂度：O(logn) 排序空间复杂度
+var findContentChildren = function(g, s) {
+  g.sort((a, b) => a - b)
+  s.sort((a, b) => a - b)
+
+  let i = 0
+  s.forEach((n) => {
+    if(n >= g[i]) {
+      i++
+    }
+  })
+  return i
 };
 ```
 
