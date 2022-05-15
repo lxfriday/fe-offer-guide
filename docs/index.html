@@ -106,17 +106,15 @@
               const sidebarLinks =
                 document.querySelectorAll('.sidebar-nav li a')
               let leetCodeCount = 0
-              sidebarLinks.forEach((v, i) => {
-                if (/✔\s\d+\s/.test(v.textContent)) {
-                  leetCodeCount++
-                }
-                v.parentNode.style.padding = '1px 0'
-              })
               // 一级标题 links
+              let easyCount = 0
+              let mediumCount = 0
+              let hardCount = 0
               const l1Links = document.querySelectorAll('.sidebar-nav>ul>li>a')
               const total = sidebarLinks.length // 完成度统计
               let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
+                v.parentNode.style.padding = '1px 0'
                 if (v.textContent.includes('✔')) {
                   v.parentNode.style.backgroundColor = 'rgba(109,255,51,.3)'
                   finishedCount++
@@ -130,12 +128,18 @@
                 }
                 if (v.textContent.includes('【easy】')) {
                   v.style.borderRight = '3px solid #00DD00'
+                  easyCount++
+                  leetCodeCount++
                 }
                 if (v.textContent.includes('【medium】')) {
-                  v.style.borderRight = '3px solid #FF8800 '
+                  v.style.borderRight = '3px solid #FF8800'
+                  mediumCount++
+                  leetCodeCount++
                 }
                 if (v.textContent.includes('【hard】')) {
                   v.style.borderRight = '3px solid #CC0000'
+                  hardCount++
+                  leetCodeCount++
                 }
               })
               let isLeetCodePage = false
@@ -152,7 +156,9 @@
               } -> ${finishedPercent}% 待完成数：${
                 total - l1Links.length - finishedCount
               }  一级标题数：${l1Links.length} ${
-                isLeetCodePage ? 'LeetCode 刷题进度：' + leetCodeCount : ''
+                isLeetCodePage
+                  ? `LeetCode 刷题进度：${leetCodeCount} 【easy】${easyCount} 【medium】${mediumCount} 【hard]${hardCount}`
+                  : ''
               }
               <br/>
               颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:pink">? 存疑很复杂</span>  <span style="background-color:#FFDEAD">😻 面试不可缺少的算法</span>`

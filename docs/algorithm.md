@@ -99,13 +99,14 @@
 - 【medium】 [714 买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 - 【medium】 [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
 - 【medium】 [309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+- 【hard】 [42 接雨水](https://leetcode.cn/problems/trapping-rain-water/)
 
 ## 贪心算法
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
 
+- 【medium】 [5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
 - 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
-
 
 ## 回溯算法
 
@@ -114,6 +115,11 @@
 - 【medium】 [46 全排列](https://leetcode.cn/problems/permutations/)
 - 【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 - 【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
+
+## 二分查找
+
+- 【easy】 [704 二分查找](https://leetcode.cn/problems/binary-search/)
+- 🌟【hard】 [4 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
 
 
 # 😻✔ 基础算法 
@@ -962,6 +968,255 @@ var lengthOfLongestSubstring = function (s) {
 }
 ```
 
+## 🌟😻✔ 4 寻找两个正序数组的中位数【hard】
+
+[ref](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
+
+二分查找
+
+```js
+
+// 时间复杂度：O(log(m + n))
+// 空间复杂度：O(1)
+var findMedianSortedArrays = function(nums1, nums2) {
+  // 利用中位数的特殊属性
+  const m = nums1.length
+  const n = nums2.length
+  const totalLength = m + n
+  if(totalLength % 2 === 1) {
+    // 中位数就在数组中
+    const mid = (totalLength - 1) / 2
+    return getTarget(mid + 1, nums1, nums2)
+  } else {
+    // 中位数是最中间两个数的均值
+    const mid = totalLength / 2
+    return (getTarget(mid, nums1, nums2) + getTarget(mid + 1, nums1, nums2)) / 2
+  }
+};
+
+// 转化为获取 nums1 和 nums2 数组中的第 k 大的数
+// 两个数组是排好序的数组
+function getTarget(k, nums1, nums2) {
+  // 对于两个数组中下标为 k / 2 - 1(即第 k / 2 个) 的数字A(k / 2 - 1)和 B(k / 2 - 1)
+  // ----------------------------------------------------------------------
+  // 如果 A(k / 2 - 1) < B(k / 2 - 1) ，则有这样一个规则存在
+  // 在 A、B 两个数组的前 k / 2 个数字中（即 A+B 的前K个数字中），A(k / 2 - 1)最多只能是第 k - 1 个数字，不可能是第 K 个数字
+  // 由于 A(k / 2 - 1)  前面的数字比它还小，则其前面的数字只能排在A + B 数组的 k - 1 之前，则可以断定，第 K 个数字肯定不在 A[0]~A[k / 2 - 1] 内
+  // 就可以把 A 中下标在 k / 2 之前的全部排除
+  // 排除之后，新的 newK = k - (k / 2)
+  // ----------------------------------------------------------------------
+  // 如果 A(k / 2 - 1) > B(k / 2 - 1) 则对 B 进行上面的操作
+  // ----------------------------------------------------------------------
+  // 如果 A(k / 2 - 1) === B(k / 2 - 1) ，则 A 中 k / 2 - 1 前面的数字和 B 中 k / 2 - 1 前面的数字合并起来，也最多只能排在 k - 2 位
+  // 则实际上 A(k / 2 - 1) 和 B(k / 2 - 1) 前面的数字都可以【排除掉】
+  // 因为 A(k / 2 - 1) 和 B(k / 2 - 1) 是相等的，则 A(k / 2 - 1) 这一项也可以排除掉，极端情况下，刚好 B(k / 2 - 1) 就是想要的值
+  // 综合之后就是，两者相等的时候，选择同 A(k / 2 - 1) < B(k / 2 - 1) 一样的操作，把 A 中前 k / 2 个数字全部排除掉
+  // ----------------------------------------------------------------------
+  // 由于 k 表示的是在 剩下的 nums1 和 nums2 合并后的有序数组中，第 k 个数字
+  // 则当 k = 1 的时候 ，直接比较剩下的 nums1 和 nums2 两数组中靠在最前面且未被排除的下标，即可得出结果。
+  // ----------------------------------------------------------------------
+  // 这里 k 可能是奇数也可能是偶数，是偶数就完全符合上面的推断，是奇数的时候， k / 2 向下取整
+  // 这样 Math.floor(k / 2) * 2 < k，所以从两个数组上取的数之和小于 k
+  // 当 A(Math.floor(k / 2) - 1) < B(Math.floor(k / 2) - 1) 成立的时候，A(Math.floor(k / 2) - 1) 最多只能排在第 Math.floor(k / 2) * 2 - 1 的位置上
+  // Math.floor(k / 2) * 2 - 1 < k - 1，故 A(Math.floor(k / 2) - 1) 对应的数字及其前面的数字都能排除掉，这和 k 是偶数的时候完全一样
+  // 当 A(Math.floor(k / 2) - 1) === B(Math.floor(k / 2) - 1) 成立的时候
+  // A(Math.floor(k / 2) - 1) 最多排在第 Math.floor(k / 2) * 2 的位置，而 Math.floor(k / 2) * 2 < k，故结果 k 是偶数的时候也是一致的
+  // ----------------------------------------------------------------------
+  // 上述思路对应的是两个数组中存在数字大于中位数，则一直执行上述操作直到获取到第k个数数字的时候，两个数组中都还有数字
+  // 还有另外一种情况，某个数组中的数字全部排在中位数前面
+  // 则肯定会出现一个数组中的所有数字全部是不需要的数字
+  // 当上述操作执行到某个数组的下标超过边界的时候，只需要在另一个数组中找到第 k（去掉被排除的数字） 个数字即是结果
+
+  let nums1Target
+  let nums2Target
+  let halfK
+  let showDropCount
+  let ind1 = 0
+  let ind2 = 0
+
+  while(true) {
+    if(ind1 >= nums1.length) {
+      return nums2[ind2 + k - 1]
+    }
+    if(ind2 >= nums2.length) {
+      return nums1[ind1 + k - 1]
+    }
+    if(k === 1) {
+      return Math.min(nums1[ind1], nums2[ind2])
+    }
+    halfK = Math.floor(k / 2)
+    // showDropCount 表示应该丢弃的数字个数，由于可能存在下标越界的问题，当下标越界出现的时候
+    // 默认使用数组的最后一个数字来做比较，而这个时候要排除的数字个数就可能不是 halfK 个了
+    showDropCount = halfK
+    // 超出了数组长度，则使用最后一个，也就是数组中最大的一个数
+    if(ind1 + halfK - 1 >= nums1.length) {
+      nums1Target = nums1[nums1.length - 1]
+      showDropCount = nums1.length  - ind1
+    } else {
+      nums1Target = nums1[ind1 + halfK - 1]
+    }
+    if(ind2 + halfK - 1 >= nums2.length) {
+      nums2Target = nums2[nums2.length - 1]
+      showDropCount = nums2.length - ind2
+    } else {
+      nums2Target = nums2[ind2 + halfK - 1]
+    }
+
+    if(nums1Target <= nums2Target) {
+      ind1 = ind1 + showDropCount
+    } else {
+      ind2 = ind2 + showDropCount
+    }
+
+    k = k - showDropCount
+  }
+}
+```
+
+## 😻✔ 5 最长回文子串【medium】
+
+[ref](https://leetcode.cn/problems/longest-palindromic-substring/submissions/)
+
+贪心算法
+
+核心就是尝试以每个字符为中心，往两侧扩散
+
+```js
+// 时间复杂度：O(0^2)
+// 空间复杂度：O(1)
+var longestPalindrome = function(s) {
+  let res = ''
+  for(let i = 0; i < s.length; i++) {
+    let end = findDuplicate(s, i)
+    let l, r
+    l = i - 1
+    if(end === i + 1) {
+      // 中心不是重复值
+      r = i + 1
+    } else {
+      // 中心是重复值
+      r = end
+      // 因为都是重复值，所以直接把所有重复的值都跳过
+      i = end - 1
+    }
+    while(l >= 0 && r < s.length && s[l] === s[r]) {
+      l--
+      r++
+    }
+    if(r - l - 1 > res.length) {
+      res = s.slice(l + 1, r)
+    }
+  }
+  return res
+};
+
+
+function findDuplicate(s, i) {
+  let r = i
+  while(s[i] === s[r]) {
+    r++
+  }
+  return r
+}
+```
+
+## ✔ 13 罗马数字转整数【easy】
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var romanToInt = function(s) {
+  const map = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000,
+  }
+  let sum = 0
+  for(let i = 0; i < s.length; i++) {
+    if(
+      (s[i] === 'I' && (s[i + 1] === 'V' || s[i + 1] === 'X')) || 
+      (s[i] === 'X' && (s[i + 1] === 'L' || s[i + 1] === 'C')) || 
+      (s[i] === 'C' && (s[i + 1] === 'D' || s[i + 1] === 'M'))
+    ) {
+      sum -= map[s[i]]
+    } else {
+      sum += map[s[i]]
+    }
+  }
+  return sum
+};
+```
+
+## ✔ 14 最长公共前缀【easy】
+
+[ref](https://leetcode.cn/problems/longest-common-prefix/)
+
+```js
+// 时间复杂度：O(n*k) k 公共前缀的长度
+// 空间复杂度：O(1) 
+var longestCommonPrefix = function(strs) {
+  for(let i = 0;i <= strs[0].length; i++) {
+    const target = strs[0].slice(0, i)
+    for(let j = 1; j < strs.length; j++) {
+      if(strs[j].indexOf(target) !== 0) {
+        return strs[0].slice(0, i - 1)
+      }
+    }
+  }
+  return strs[0]
+};
+```
+
+## 🌟😻✔ 15 三数之和 【medium】
+
+[ref](https://leetcode.cn/problems/3sum/)
+
+双指针
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(logN) 排序的空间复杂度
+var threeSum = function(nums) {
+  if(nums.length < 3) return []
+  const res = []
+  nums.sort((a, b) => a - b)
+  const len = nums.length
+  for(let i = 0; i < len - 2; i++) {
+    if(nums[i] === nums[i - 1]) continue
+    let l = i + 1
+    let r = len - 1
+    while(l < r) {
+      if(l > i + 1 && nums[l] === nums[l - 1]) {
+        l++
+        continue
+      }
+      if(r < len - 1 && nums[r] === nums[r + 1]) {
+        r--
+        continue
+      }
+      const sum = nums[i] + nums[l] + nums[r]
+      if(sum === 0) {
+        res.push([nums[i], nums[l], nums[r]])
+        l++
+        r--
+      } else if(sum > 0) {
+        // 在每一个轮次中 nums[i] 固定不变，且知道 nums[l] <= nums[r]
+        // sum > 0 则三个数中最大的数 nums[r] 一定大了， 要往左移
+        // sum < 0 则 sum[l] 小了，要变大
+        r--
+      } else {
+        l++
+      }
+    }
+  }
+  return res
+};
+```
+
 ## 😻✔ 20 有效的括号【easy】
 
 [ref](https://leetcode.cn/problems/valid-parentheses/)
@@ -1203,6 +1458,96 @@ class MinHeap {
     return 2 * i + 2
   }
 }
+```
+
+## 🌟😻✔ 42 接雨水【hard】
+
+[ref](https://leetcode.cn/problems/trapping-rain-water/)
+
+动态规划
+
+双指针版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var trap = function(height) {
+  let lMax = 0
+  let rMax = 0
+  let l = 0
+  let r = height.length - 1
+  let total = 0
+  while(l < r) {
+    if(height[l] < height[r]) {
+      lMax = Math.max(lMax, height[l])
+      total += lMax - height[l]
+      l ++
+    } else {
+      rMax = Math.max(rMax, height[r])
+      total += rMax - height[r]
+      r--
+    }
+  }
+  return total
+};
+```
+
+动态规划版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var trap = function(height) {
+  const len = height.length
+  const leftMax = [0]
+  const rightMax = []
+  rightMax[len - 1] = [0]
+  let total = 0
+  for(let i = 1; i < len; i++) {
+    leftMax[i] = Math.max(height[i - 1], leftMax[i - 1])
+  }
+  for(let i = len - 2; i >= 0; i--) {
+    rightMax[i] = Math.max(height[i + 1], rightMax[i + 1])
+  }
+  for(let i = 0; i < len; i++) {
+    total += Math.max(Math.min(leftMax[i], rightMax[i]) - height[i], 0)
+  }
+
+  return total
+};
+```
+
+常规思路版
+
+```js
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(1)
+var trap = function(height) {
+  const len = height.length
+  let total = 0
+  for(let i = 1; i < len - 1; i++) {
+    let l = i - 1
+    let r = i + 1
+    let lMax = height[i]
+    let rMax = height[i]
+
+    while(l >= 0) {
+      if(height[l] > lMax) {
+        lMax = height[l]
+      } 
+      l--
+    }
+    while(r <= len - 1) {
+      if(height[r] > rMax) {
+        rMax = height[r]
+      } 
+      r++
+    }
+    const receive = Math.min(lMax, rMax) - height[i]
+    total += receive
+  }
+  return total
+};
 ```
 
 ## 😻✔ 46 全排列【medium】
@@ -2063,6 +2408,16 @@ class MinHeap {
 }
 ```
 
+## ✔ 217 存在重复元素【easy】
+
+[ref](https://leetcode.cn/problems/contains-duplicate/)
+
+```js
+var containsDuplicate = function(nums) {
+  return [...new Set(nums)].length !== nums.length
+};
+```
+
 ## 😻✔ 226 翻转二叉树【easy】
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
@@ -2403,6 +2758,32 @@ var findContentChildren = function(g, s) {
 };
 ```
 
+## 😻✔ 704 二分查找【easy】
+
+[ref](https://leetcode.cn/problems/binary-search/)
+
+二分查找
+
+```js
+// 时间复杂度：O(logn)
+// 时间复杂度：O(1)
+var search = function(nums, target) {
+  let l = 0
+  let r = nums.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] < target) {
+      l = mid + 1
+    } else if(nums[mid] > target) {
+      r = mid - 1
+    } else {
+      return mid
+    }
+  }
+  return -1
+};
+```
+
 ## 😻✔ 714 买卖股票的最佳时机含手续费【medium】
 
 动态规划
@@ -2469,3 +2850,43 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
+
+## ✔ 剑指 Offer 09. 用两个栈实现队列【easy】
+
+[ref](https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
+
+```js
+var CQueue = function() {
+  this.inStack = []
+  this.outStack = []
+};
+
+/** 
+ * @param {number} value
+ * @return {void}
+ */
+CQueue.prototype.appendTail = function(value) {
+  this.inStack.push(value)
+};
+
+/**
+ * @return {number}
+ */
+CQueue.prototype.deleteHead = function() {
+  // 必须要把 outStack 出干净之后才能再次从 instack 中拿数据
+  if(!this.outStack.length) {
+    if(this.inStack.length) {
+      this.toOut()
+      return this.outStack.pop()
+    }
+    return -1
+  }
+  return this.outStack.pop()
+};
+
+CQueue.prototype.toOut = function() {
+  while(this.inStack.length) {
+    this.outStack.push(this.inStack.pop())
+  }
+}
+```
