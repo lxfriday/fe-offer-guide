@@ -91,6 +91,7 @@
 
 特征是：某个结果会依赖前面的结果，或者前面的几个结果之间有关联
 
+
 - 【easy】 [70 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
 - 【easy】[121 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
 - 【medium】 [122 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)
@@ -100,6 +101,7 @@
 - 【medium】 [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
 - 【medium】 [309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 - 【hard】 [42 接雨水](https://leetcode.cn/problems/trapping-rain-water/)
+- 🌟【easy】 [53 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
 
 ## 贪心算法
 
@@ -115,6 +117,7 @@
 - 【medium】 [46 全排列](https://leetcode.cn/problems/permutations/)
 - 【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 - 【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
+- 【medium】 [22 括号生成](https://leetcode.cn/problems/generate-parentheses/)
 
 ## 二分查找
 
@@ -1120,6 +1123,50 @@ function findDuplicate(s, i) {
 }
 ```
 
+## 😻✔ 7 整数反转【medium】
+
+[ref](https://leetcode.cn/problems/reverse-integer/)
+
+```js
+var reverse = function(x) {
+  if(x === 0) return 0
+  let isNegative = x < 0 ? true : false
+  x = isNegative ? -x : x
+  let result = 0
+  while(x > 0) {
+    const n = x % 10
+    if(result > (2 ** 31 - 1 - n) / 10) return 0
+    x = Math.floor(x / 10)
+    result = 10 * result + n
+  }
+  return isNegative? -result : result
+};
+```
+
+## 🌟😻✔ 9 回文数【easy】
+
+[ref](https://leetcode.cn/problems/palindrome-number/)
+
+对回文数比较好的解决办法是，把从数字中取到的余数全部存进数组中，这样就算是0也可以表示，如果是直接计算成数字则可能出现 00123 这种情况，而前导0会被省略，导致出错。
+
+```js
+var isPalindrome = function(x) {
+  if(x < 0) return false
+  if(x === 0) return true
+  let nums = []
+  while(x > 0) {
+    nums.push(x % 10)
+    x = Math.floor(x / 10)
+  }
+  for(let i=0;i<nums.length / 2;i++) {
+    if(nums[i] !== nums[nums.length - 1 - i]) {
+      return false
+    }
+  }
+  return true
+};
+```
+
 ## ✔ 13 罗马数字转整数【easy】
 
 ```js
@@ -1217,7 +1264,7 @@ var threeSum = function(nums) {
 };
 ```
 
-## 😻✔ 20 有效的括号【easy】
+## 🌟😻✔ 20 有效的括号【easy】
 
 [ref](https://leetcode.cn/problems/valid-parentheses/)
 
@@ -1277,6 +1324,35 @@ var mergeTwoLists = function(list1, list2) {
     th.next = list2
   }
   return head.next
+};
+```
+
+## 😻✔ 22 括号生成【medium】
+
+[ref](https://leetcode.cn/problems/generate-parentheses/)
+
+回溯、递归
+
+```js
+var generateParenthesis = function(n) {
+  const res = []
+  let leftCount = 0
+  let rightCount = 0
+  function calc(str) {
+    if(leftCount < rightCount || leftCount > n || rightCount > n) return
+    if(leftCount === n && rightCount === n) {
+      res.push(str)
+      return
+    }
+    leftCount++
+    calc(str + '(')
+    leftCount--
+    rightCount++
+    calc(str + ')')
+    rightCount--
+  }
+  calc('')
+  return res
 };
 ```
 
@@ -1550,6 +1626,60 @@ var trap = function(height) {
 };
 ```
 
+## 😻✔ 45 跳跃游戏 II【medium】
+
+[ref](https://leetcode.cn/problems/jump-game-ii/)
+
+贪心算法
+
+```js
+// 从后往前分析，贪心的找到能到达最后一个数字的最远数字
+// 可能会担心到不了这个下标，实际上，如果到不了这个下标，则一定到不了最后一个下标，故这个下标是一定能到的
+// 用相同的办法，不断地把下标以每次最远的距离往前靠近，直到到达第一个数字
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var jump = function(nums) {
+  let r = nums.length - 1
+  let min = 0
+  while(r > 0) {
+    for(let i = 0; i < r; i++) {
+      if(i + nums[i] >= r) {
+        r = i
+        min++
+        break
+      }
+    }
+  }
+  return min
+};
+```
+
+更优版本
+
+不太好理解，可以参照这张图，黑色的蹦跶线代表每次跳的时候能跳的最远距离，红色线从终点反过来推，在每个黑色起跳区间内找一个值，最终推到起跳点位于0。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1652678598702_5db9138d-58b3-4bbf-81ae-44b6795bacc5.png)
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var jump = function(nums) {
+  // 每移动一次下标都计算一次能走到的最远距离
+  let maxIndex1 = 0
+  // 当走到上一轮能走到的最远下标的时候，更新当前轮次能走的最远下标
+  let maxIndex2 = 0
+  let count = 0
+  for(let i = 0; i < nums.length - 1; i++) {
+    maxIndex1 = Math.max(maxIndex1, i + nums[i])
+    if(i === maxIndex2) {
+      count++
+      maxIndex2 = maxIndex1
+    }
+  }
+  return count
+};
+```
+
 ## 😻✔ 46 全排列【medium】
 
 [ref](https://leetcode.cn/problems/permutations/)
@@ -1659,6 +1789,76 @@ var permuteUnique = function(nums) {
 
   dfs([])
   return res
+};
+```
+
+## 🌟😻✔ 53 最大子数组和【easy】
+
+[ref](https://leetcode.cn/problems/maximum-subarray/)
+
+动态规划
+
+数组版
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var maxSubArray = function(nums) {
+ const dp = []
+ // dp[i] 定义的是以 i 作为结束的连续子数组的 最大值
+ // 则整个数组的最大连续子数组必然会命中 dp 中的一项，且为值最大的那一项
+ dp[0] = nums[0]
+ for(let i = 1;i<nums.length;i++) {
+   if(dp[i - 1] < 0) {
+     dp[i] = nums[i]
+   } else {
+     dp[i] = dp[i - 1] + nums[i]
+   }
+ }
+ return Math.max(...dp)
+};
+```
+
+精简版
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+// 这个解法相比数组解法更难理解
+var maxSubArray = function(nums) {
+ // 前 i 个数字中连续子数组的最大和
+ let max = nums[0]
+ // 以 i 为结尾的连续子数组的最大和
+ let sum = 0
+ for(let i = 0; i < nums.length; i++) {
+   if(sum < 0) {
+     sum = nums[i]
+   } else {
+     sum = sum + nums[i]
+   }
+   max = Math.max(max, sum)
+ }
+ return max
+};
+```
+
+## 😻✔ 55 跳跃游戏【medium】
+
+[ref](https://leetcode.cn/problems/jump-game/)
+
+```js
+// 从左往右扫描 i 位置往后最多能跳到哪
+// maxIndex 用来记录 i 前面最多能跳到哪个下标，每到一个位置都刷新 maxIndex
+// 如果出现 maxIndex < i，则说明i前面的位置无法跳到 i
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var canJump = function(nums) {
+  let maxIndex = 0
+  for(let i = 0; i < nums.length; i++) {
+    if(i > maxIndex) return false
+    maxIndex = Math.max(i + nums[i], maxIndex)
+  }
+  return true
 };
 ```
 
@@ -2219,6 +2419,21 @@ var maxProfit = function(prices) {
 };
 ```
 
+## ✔ 136 只出现一次的数字【easy】
+
+[ref](https://leetcode.cn/problems/single-number/)
+
+```js
+// 要求时间空间复杂度是：O(n) O(1)
+var singleNumber = function(nums) {
+  let res = 0
+  for(let i = 0; i < nums.length; i++) {
+    res ^= nums[i]
+  }
+  return res
+};
+```
+
 ## 😻✔ 141 环形链表【easy】
 
 [ref](https://leetcode.cn/problems/linked-list-cycle/)
@@ -2237,6 +2452,49 @@ var hasCycle = function (head) {
 
   return false
 }
+```
+
+## 😻✔ 146 LRU 缓存【medium】
+
+[ref](https://leetcode.cn/problems/lru-cache/)
+
+```js
+var LRUCache = function(capacity) {
+  this.capacity = capacity
+  this.cache = new Map()
+};
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+  if(!this.cache.has(key)) {
+    return -1
+  }
+  const value = this.cache.get(key)
+  this.moveToEnd(key, value)
+  return value
+};
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+  if(this.cache.has(key)) {
+    this.cache.delete(key)
+  } else if(this.cache.size === this.capacity) {
+    this.cache.delete(this.cache.keys().next().value)
+  }
+  this.cache.set(key, value)
+};
+
+LRUCache.prototype.moveToEnd = function(key, value) {
+  this.cache.delete(key)
+  this.cache.set(key, value)
+};
 ```
 
 ## 😻✔ 188 买卖股票的最佳时机 IV【hard】
@@ -2850,6 +3108,63 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
+## ✔ 1306 跳跃游戏 III【medium】
+
+[ref](https://leetcode.cn/problems/jump-game-iii/)
+
+广度优先遍历
+
+```js
+// BFS
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var canReach = function(arr, start) {
+  if(arr[start] === 0) return true
+  const len = arr.length
+  const usedIndexes = []
+  const nextIndexes = [start]
+  while(nextIndexes.length > 0) {
+    const targetIndex = nextIndexes.pop()
+    if(arr[targetIndex] === 0) return true
+    usedIndexes.push(targetIndex)
+    if((targetIndex - arr[targetIndex] >= 0) && !usedIndexes.includes(targetIndex - arr[targetIndex])) {
+      nextIndexes.push(targetIndex - arr[targetIndex])
+    }
+    if((targetIndex + arr[targetIndex] <= len - 1) && !usedIndexes.includes(targetIndex + arr[targetIndex])) {
+      nextIndexes.push(targetIndex + arr[targetIndex])
+    }
+  }
+  return false
+};
+```
+
+深度优先遍历
+
+```js
+// DFS
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var canReach = function(arr, start) {
+  if(arr[start] === 0) return true
+  const usedIndexes = []
+  usedIndexes.push(start)
+
+  function jump(index) {
+    if(arr[index] === 0) {
+      usedIndexes.push(index)
+      return true
+    }
+    if(index < 0 || index >= arr.length || usedIndexes.includes(index)) {
+      return false
+    }
+    usedIndexes.push(index)
+    return jump(index - arr[index]) || jump(index + arr[index])
+  }
+
+  return jump(start - arr[start]) || jump(start + arr[start])
+};
+
+```
 
 ## ✔ 剑指 Offer 09. 用两个栈实现队列【easy】
 
