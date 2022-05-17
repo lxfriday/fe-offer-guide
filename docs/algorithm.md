@@ -65,7 +65,7 @@
 ## 堆
 
 - 【hard】 [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
-- 【medium】 [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+- 🌟【medium】 [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 - 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - 【easy】 [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
@@ -73,6 +73,7 @@
 
 - 【medium】 [113 克隆图](https://leetcode.cn/problems/clone-graph/)
 - 【medium】 [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
+- 【medium】 [200 岛屿数量](https://leetcode.cn/problems/number-of-islands/)
 
 ## 搜索、排序
 
@@ -123,7 +124,7 @@
 
 - 【easy】 [704 二分查找](https://leetcode.cn/problems/binary-search/)
 - 🌟【hard】 [4 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
-
+- 🌟【easy】 [278 第一个错误的版本](https://leetcode.cn/problems/first-bad-version/)
 
 # 😻✔ 基础算法 
 
@@ -1123,6 +1124,38 @@ function findDuplicate(s, i) {
 }
 ```
 
+## 🌟😻✔ 6 Z 字形变换【medium】
+
+[ref](https://leetcode.cn/problems/zigzag-conversion/)
+
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(k) k=numRows
+var convert = function(s, numRows) {
+  // 行数为 1 则直接返回 s
+  if(numRows === 1) return s
+  // 建一个 长度为 numRows 的数组，数组中每个元素为空字符串
+  // 一个空字符串对应结果中的一行
+  const resArr = new Array(numRows).fill('')
+  // 对每个字符，计算出其所处的行
+  for(let i = 0; i < s.length; i++) {
+    // 2 * numRows - 2 最小的一个排列来回
+    const m = i % (2 * numRows - 2)
+    if(m <= numRows - 1) {
+      // 从上往下
+      resArr[m] += s[i]
+    } else {
+      // 从下往上
+      const n = m - (numRows - 1)
+      resArr[numRows - 1 - n] += s[i]
+    }
+  }
+  return resArr.join('')
+};
+```
+
+
 ## 😻✔ 7 整数反转【medium】
 
 [ref](https://leetcode.cn/problems/reverse-integer/)
@@ -1167,7 +1200,36 @@ var isPalindrome = function(x) {
 };
 ```
 
+## 🌟😻✔ 11 盛最多水的容器【medium】
+
+[ref](https://leetcode.cn/problems/container-with-most-water/)
+
+双指针
+
+[我的题解](https://leetcode.cn/problems/container-with-most-water/solution/by-lxfriday-udsc/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxArea = function(height) {
+  let l = 0
+  let r = height.length - 1
+  let max = 0
+  while(l < r) {
+    max = Math.max(Math.min(height[l], height[r]) * (r - l), max)
+    if(height[l] <= height[r]) {
+      l++
+    } else {
+      r--
+    }
+  }
+  return max
+}; 
+```
+
 ## ✔ 13 罗马数字转整数【easy】
+
+[ref](https://leetcode.cn/problems/roman-to-integer/)
 
 ```js
 // 时间复杂度：O(n)
@@ -1261,6 +1323,37 @@ var threeSum = function(nums) {
     }
   }
   return res
+};
+```
+
+## 🌟😻✔ 16 最接近的三数之和【medium】
+
+[ref](https://leetcode.cn/problems/3sum-closest/)
+
+双指针
+
+```js
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(logn) 排序
+var threeSumClosest = function(nums, target) {
+  nums.sort((a, b) => a - b)
+  let finalSum
+  let minGap = Infinity
+  const len = nums.length
+  for(let i=0;i<len;i++) {
+    let l = i + 1
+    let r = len - 1
+    while(l < r) {
+      const sum = nums[i] + nums[l] + nums[r]
+      const gap = Math.abs(sum - target)
+      if(gap < minGap) {
+        finalSum = sum
+        minGap = gap
+      }
+      (sum < target) ? (l++) : (r--)
+    }
+  }
+  return finalSum
 };
 ```
 
@@ -1534,6 +1627,24 @@ class MinHeap {
     return 2 * i + 2
   }
 }
+```
+
+## ✔ 26 删除有序数组中的重复项【easy】
+
+[ref](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
+
+```js
+var removeDuplicates = function(nums) {
+  if(!nums.length) return 0
+  let count = 1
+  for(let i = 1; i < nums.length; i++) {
+    if(nums[i] !== nums[i - 1]) {
+      nums[count] = nums[i]
+      count++
+    }
+  }
+  return count 
+};
 ```
 
 ## 🌟😻✔ 42 接雨水【hard】
@@ -1842,6 +1953,64 @@ var maxSubArray = function(nums) {
 };
 ```
 
+## 🌟😻✔ 54 螺旋矩阵【medium】
+
+[ref](https://leetcode.cn/problems/spiral-matrix/)
+
+```js
+// 直接递归硬找，好理解
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var spiralOrder = function(matrix) {
+  const m = matrix.length
+  const n = matrix[0].length
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  const res = []
+
+  function walk(i, j, direction) {
+    used[i][j] = true
+    res.push(matrix[i][j])
+
+    if(direction === 'right') {
+      if((j + 1 < n) && !used[i][j + 1]) {
+        walk(i, j + 1, 'right')
+      } else {
+        (i + 1 < m) && !used[i + 1][j] && walk(i + 1, j, 'bottom')
+      }
+    }
+
+    if(direction === 'bottom') {
+      if((i + 1 < m) && !used[i + 1][j]) {
+        walk(i + 1, j, 'bottom')
+      } else {
+        (j - 1 >= 0) && !used[i][j - 1] && walk(i, j - 1, 'left')
+      }
+    }
+
+    if(direction === 'left') {
+      if((j - 1 >= 0) && !used[i][j - 1]) {
+        walk(i, j - 1, 'left')
+      } else {
+        (i - 1 >= 0) && !used[i-1][j] && walk(i-1, j, 'top')
+      }
+    }
+
+    if(direction === 'top') {
+      if((i - 1 >= 0) && !used[i - 1][j]) {
+        walk(i - 1, j, 'top')
+      } else {
+        (j + 1 < n) && !used[i][j + 1] && walk(i, j + 1, 'right')
+      }
+    }
+  }
+
+  walk(0, 0, 'right')
+
+  return res
+};
+```
+
+
 ## 😻✔ 55 跳跃游戏【medium】
 
 [ref](https://leetcode.cn/problems/jump-game/)
@@ -1859,6 +2028,34 @@ var canJump = function(nums) {
     maxIndex = Math.max(i + nums[i], maxIndex)
   }
   return true
+};
+```
+
+## 😻✔ 56 合并区间【medium】
+
+[ref](https://leetcode.cn/problems/merge-intervals/)
+
+```js
+// 时间复杂度：O(NlogN) 排序
+// 空间复杂度：O(logN) 排序
+var merge = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0])
+  const res = []
+  while(intervals.length > 1) {
+    let first = intervals.shift()
+    let second = intervals.shift()
+    // 区间有交集
+    if(first[1] >= second[1]) {
+      second = first
+    } else if(first[1] >= second[0]) {
+      second = [first[0], second[1]]
+    } else {
+      res.push(first)
+    }
+    intervals.unshift(second)
+  }
+  res.push(intervals.shift())
+  return res
 };
 ```
 
@@ -2045,6 +2242,38 @@ var deleteDuplicates = function (head) {
   }
   return head
 }
+```
+
+## ✔ 88 合并两个有序数组【easy】
+
+[ref](https://leetcode.cn/problems/merge-sorted-array/)
+
+```js
+// 时间复杂度：O(m+n)
+// 空间复杂度：O(1)
+var merge = function(nums1, m, nums2, n) {
+  let mn = m + n - 1
+  let mIndex = m - 1
+  let nIndex = n - 1
+  while(mIndex >= 0 && nIndex >= 0) {
+    if(nums1[mIndex] > nums2[nIndex]) {
+      nums1[mn] = nums1[mIndex]
+      mIndex--
+    } else {
+      nums1[mn] = nums2[nIndex]
+      nIndex--
+    }
+    mn--
+  }
+  // 有可能 nums1 中的数字都复制完了，nums2 中还存在数字
+  // 则把 nums2 中的数字都复制过来
+  // 如果是 nums2 没有需要复制的，而 nums1 有需要复制的，则可以直接跳过
+  while(nIndex >= 0) {
+    nums1[nIndex] = nums2[nIndex]
+    nIndex--
+    mn--
+  }
+};
 ```
 
 ## 😻✔ 94 二叉树的中序遍历【easy】
@@ -2559,6 +2788,48 @@ var rob = function(nums) {
 };
 ```
 
+## 😻✔ 200 岛屿数量【medium】
+
+[ref](https://leetcode.cn/problems/number-of-islands/)
+
+深度优先搜索
+
+```js
+// 贪心标记法，DFS
+// 时间复杂度：O(M*N)
+// 空间复杂度：O(M*N)
+var numIslands = function(grid) {
+  const m = grid.length
+  const n = grid[0].length
+  let count = 0
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(used[i][j]) continue
+      if(grid[i][j] === "1") {
+        count++
+        walk(i, j)
+      }
+    }
+  }
+
+  function walk(i, j) {
+    if(used[i][j]) return
+    if(grid[i][j] === "1") {
+      used[i][j] = true
+    } else {
+      return  
+    }
+    (i - 1 >= 0) && walk(i - 1, j);
+    (i + 1 <  m) && walk(i + 1, j);
+    (j - 1 >= 0) && walk(i, j - 1);
+    (j + 1 < n) && walk(i, j + 1);
+  }
+
+  return count
+};
+```
+
 ## 😻✔ 206 反转链表【easy】
 
 [ref](https://leetcode.cn/problems/reverse-linked-list/)
@@ -2581,15 +2852,16 @@ var reverseList = function (head) {
 }
 ```
 
-## 😻✔ 215 数组中的第K个最大元素【medium】
+## 🌟😻✔ 215 数组中的第K个最大元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 
-堆、小顶堆、第K大
+堆、小顶堆、第K大、大顶堆
 
 ```js
- // 时间复杂度：O(nlogk)
- // 空间复杂度：O(k)
+ // 小顶堆解法
+ // 时间复杂度：O(nlogn)
+ // 空间复杂度：O(logn)
 var findKthLargest = function(nums, k) {
   const heap = new MinHeap()
 
@@ -2666,6 +2938,112 @@ class MinHeap {
 }
 ```
 
+```js
+// 大顶堆解法
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(logn)
+var findKthLargest = function(nums, k) {
+  const maxHeap = new MaxHeap(k)
+  for(let n of nums) {
+    maxHeap.insert(n)
+  }
+  while (k > 1) {
+    maxHeap.pop()
+    k--
+  }
+  return maxHeap.peek()
+};
+// 大顶堆法，从大顶堆执行 pop() k - 1 次，则数组首个就是第 k 大
+class MaxHeap{
+  constructor() {
+    this.heap = []
+  }
+  insert(n) {
+    this.heap.push(n)
+    this.up(this.heap.length - 1)
+  }
+  pop() {
+    const target = this.heap[0]
+    swap(this.heap, 0, this.heap.length - 1)
+    this.heap.pop()
+    this.down(0)
+    return target
+  }
+  peek() {
+    return this.heap[0]
+  }
+  get size () {
+    return this.heap.length
+  }
+  up(index) {
+    const parentIndex = Math.floor((index - 1) / 2)
+    if(this.heap[index] > this.heap[parentIndex]) {
+      swap(this.heap, index, parentIndex)
+      this.up(parentIndex)
+    }
+  }
+  down(index) {
+    const lIndex = 2 * index + 1
+    const rIndex = 2 * index + 2
+    if(this.heap[index] < this.heap[lIndex]) {
+      swap(this.heap, lIndex, index)
+      this.down(lIndex)
+    }
+    if(this.heap[index] < this.heap[rIndex]) {
+      swap(this.heap, rIndex, index)
+      this.down(rIndex)
+    }
+  }
+}
+function swap(arr, i, j) {
+  let t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+更优解、也是用大顶堆，但是没有创建新数组
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(logn)
+var findKthLargest = function(nums, k) {
+  const len = nums.length
+  buildMaxHeap(nums)
+  for(let i = 0;i < k - 1; i++) {
+    swap(nums, 0, len - 1 - i)
+    maxHeapify(nums, 0, len - 2 - i)
+  }
+  return nums[0]
+};
+
+function buildMaxHeap(nums) {
+  const len = nums.length
+  for(let i = Math.floor(len / 2); i >= 0 ; i--) {
+    maxHeapify(nums, i, len - 1)
+  }
+}
+
+function maxHeapify(nums, i, endIndex) {
+  const lIndex =  2 * i + 1
+  const rIndex =  2 * i + 2
+  if(lIndex <= endIndex && nums[i] < nums[lIndex]) {
+    swap(nums, i, lIndex)
+    maxHeapify(nums, lIndex, endIndex)
+  }
+  if(rIndex <= endIndex && nums[i] < nums[rIndex]) {
+    swap(nums, i, rIndex)
+    maxHeapify(nums, rIndex, endIndex)
+  }
+}
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
 ## ✔ 217 存在重复元素【easy】
 
 [ref](https://leetcode.cn/problems/contains-duplicate/)
@@ -2721,6 +3099,41 @@ var invertTree = function(root) {
   dfs(root.right, head, false)
 
   return head
+};
+```
+
+## 🌟😻✔ 278 第一个错误的版本【easy】
+
+[ref](https://leetcode.cn/problems/first-bad-version/)
+
+二分查找
+
+```js
+var solution = function(isBadVersion) {
+  /**
+   * @param {integer} n Total versions
+   * @return {integer} The first bad version
+   */
+  return function(n) {
+      let r = n
+      let l = 1
+      while(l <= r) {
+        const mid = Math.floor((l + r) / 2)
+        const midRes = isBadVersion(mid)
+        const midBiggerRes = isBadVersion(mid + 1)
+        if(!midRes && midBiggerRes) {
+          return mid + 1
+        }
+        if(midRes === false) {
+          l = mid + 1
+        } else {
+          r = mid - 1
+        }
+      }
+      // 上述二分查找无法区分全是 true 的情形，全是 true 则 badVersion =1
+      // n = 1 的时候，也全是 true，badVersion =1
+      return 1
+  };
 };
 ```
 
