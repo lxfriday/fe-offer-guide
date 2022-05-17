@@ -3117,22 +3117,15 @@ var solution = function(isBadVersion) {
   return function(n) {
       let r = n
       let l = 1
-      while(l <= r) {
+      while(l < r) {
         const mid = Math.floor((l + r) / 2)
-        const midRes = isBadVersion(mid)
-        const midBiggerRes = isBadVersion(mid + 1)
-        if(!midRes && midBiggerRes) {
-          return mid + 1
-        }
-        if(midRes === false) {
+        if(!isBadVersion(mid)) {
           l = mid + 1
         } else {
-          r = mid - 1
+          r = mid
         }
       }
-      // 上述二分查找无法区分全是 true 的情形，全是 true 则 badVersion =1
-      // n = 1 的时候，也全是 true，badVersion =1
-      return 1
+      return r
   };
 };
 ```
