@@ -39,7 +39,7 @@
 - 【easy】 [83 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 - 【easy】 [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
 - 【easy】 [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
-
+- 🌟【hard】[K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
 
 ## 集合
 
@@ -61,6 +61,7 @@
 - 【easy】 [111 二叉树的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
 - 【easy】 [112 路径总和](https://leetcode.cn/problems/path-sum/)
 - 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+- 🌟【easy】 [543 二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
 
 ## 堆
 
@@ -103,6 +104,9 @@
 - 【medium】 [309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 - 【hard】 [42 接雨水](https://leetcode.cn/problems/trapping-rain-water/)
 - 🌟【easy】 [53 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
+- 🌟【medium】 [300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+- 🌟【hard】 [72 编辑距离](https://leetcode.cn/problems/edit-distance/)
+
 
 ## 贪心算法
 
@@ -125,6 +129,20 @@
 - 【easy】 [704 二分查找](https://leetcode.cn/problems/binary-search/)
 - 🌟【hard】 [4 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
 - 🌟【easy】 [278 第一个错误的版本](https://leetcode.cn/problems/first-bad-version/)
+
+
+# 时间复杂度和空间复杂度
+
+递归时间复杂度就是看它 每次递归进行了什么操作和递归了多少次
+
+递归算法的空间复杂度 = 每次递归的空间复杂度 * 递归深度
+
+或者说递归算法的空间复杂度是任一时刻，占用的空间是多少
+
+## 递归算法的时间与空间复杂度分析
+
+- [递归算法的时间与空间复杂度分析！](https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%89%8D%E5%BA%8F/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.md)
+- [程序员算法面试中，递归算法的空间复杂度你知道怎么求么？](https://blog.csdn.net/youngyangyang04/article/details/106313759)
 
 # 😻✔ 基础算法 
 
@@ -227,6 +245,15 @@ function insertionSort(arr) {
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/quicksort.gif)
 
+复杂度分析：
+
+- [快速排序的时间复杂度](https://www.cnblogs.com/tuyang1129/p/12857821.html#22-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6)
+
+快排的最好时间复杂度是O(logn)、最差会退化到 O(n^2)。
+
+
+
+
 单路快排
 
 ```javascript
@@ -297,6 +324,17 @@ function quickSort2(arr) {
 1. 分割：递归地把当前序列平均分割成两半。
 1. 集成：在保持元素顺序的同时将上一步得到的子序列集成到一起（归并）。
 
+归并排序时间复杂度分析
+
+- [快速排序和归并排序的时间复杂度分析——通俗易懂](https://www.cnblogs.com/tuyang1129/p/12857821.html)
+
+时间复杂度计算方式：递归层数 * 每层的时间复杂度(logn * n)，每层的时间复杂度都是n，都会把 n 个元素全部遍历一遍，而递归的层数取决于拆分的次数，n个元素需要拆分 logn 次。
+
+空间复杂度计算方式：任一时刻占用的空间，
+
+
+比较容易理解的版本
+
 ```javascript
 function merge(arr1, arr2) {
   const res = []
@@ -324,6 +362,111 @@ function mergeSort(arr) {
   const arr1 = arr.slice(0, m)
   const arr2 = arr.slice(m)
   return merge(mergeSort(arr1), mergeSort(arr2))
+}
+```
+
+执行效率更高的版本
+
+```js
+function mergeSort1(arr, l, r) {
+  l = typeof l === 'number' ? l : 0
+  r = typeof r === 'number' ? r : arr.length - 1
+  if (r === l) return [arr[l]]
+  const mid = Math.floor((l + r) / 2)
+  return merge1(mergeSort1(arr, l, mid), mergeSort1(arr, mid + 1, r))
+}
+function merge1(arr1, arr2) {
+  const res = []
+  const len1 = arr1.length
+  const len2 = arr2.length
+  let l1 = 0
+  let l2 = 0
+  while (l1 < len1 && l2 < len2) {
+    if (arr1[l1] <= arr2[l2]) {
+      res.push(arr1[l1++])
+    } else {
+      res.push(arr2[l2++])
+    }
+  }
+  while (l1 < len1) {
+    res.push(arr1[l1++])
+  }
+  while (l2 < len2) {
+    res.push(arr2[l2++])
+  }
+  return res
+}
+```
+
+上面两个的归并排序在排序大数据量时将会有非常大的差距，原因在于前一个易于理解的版本大量使用了数组操作的函数(slice、shift)，而后者并没有这种操作。
+
+```js
+// 比较时间
+const data = new Array(500000).fill(Math.random() * 1000000)
+const data1 = data.slice(0)
+console.time('mergeSort1')
+mergeSort1(data)
+console.timeLog('mergeSort1')
+console.time('mergeSort2')
+mergeSort2(data1)
+console.timeLog('mergeSort2')
+
+// mergeSort1: 44.905s
+// mergeSort2: 81.709ms
+```
+
+迭代法实现
+
+```js
+// 迭代法实现归并排序
+// 对 [i, j] 范围内的数字进行排序
+// [i, j] 范围内的数字分为两半之后，两个部分都是已经排好序数组
+function sort(arr, i, j) {
+  const len = arr.length
+  let firstL = i
+  const firstR = Math.floor((i + j) / 2) // midIndex
+  let secondL = firstR + 1
+  const secondR = j
+  // 需要一个数字暂存排序结果
+  const tmp = []
+  while (firstL <= firstR && secondL <= secondR && secondL < len) {
+    if (arr[firstL] < arr[secondL]) {
+      tmp.push(arr[firstL++])
+    } else {
+      tmp.push(arr[secondL++])
+    }
+  }
+  while (firstL <= firstR) {
+    tmp.push(arr[firstL++])
+  }
+  while (secondL <= secondR && secondL < len) {
+    tmp.push(arr[secondL++])
+  }
+  let k = i
+  while (k <= j && k < len) {
+    arr[k] = tmp[k - i]
+    k++
+  }
+}
+
+function mergeSort(arr) {
+  const len = arr.length
+  // 拆分 logn 次
+  // 每次拆分之后，总和来看进行的是对 n 个数字排序，空间复杂度是 O(n)，所有的数子都会被放到 tmp 数组中一次
+  for (let i = 2; i < 2 * len; i *= 2) {
+    // 对拆分的所有子序列进行排序，复杂度是 n
+    for (let j = 0; i * j < len; j++) {
+      const startIndex = i * j
+      const endIndex = startIndex + i - 1
+      const midIndex = Math.floor((startIndex + endIndex) / 2)
+      // 结尾可能存在小于i个数的情况，这时候要判断要不要排序
+      // 如果结尾有k个数，且 k > i / 2，则是需要排序的
+      if (midIndex < len - 1) {
+        sort(arr, startIndex, endIndex)
+      }
+    }
+  }
+  return arr
 }
 ```
 
@@ -624,6 +767,8 @@ function bucketSort(arr, size = 5) {
 二分搜索算法的前提是目标数组已经排好序了。
 
 ```js
+// 时间复杂度：O(1 * logn)  => O(logn)
+// 空间复杂度：O(1* logn) => O(logn)
 function binarySearch(arr, target) {
   let l = 0
   let r = arr.length - 1
@@ -640,6 +785,16 @@ function binarySearch(arr, target) {
   return -1
 }
 ```
+
+复杂度分析：
+
+- [二分法（递归实现）的性能分析](https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%89%8D%E5%BA%8F/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.md#%E4%BA%8C%E5%88%86%E6%B3%95%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90)
+
+二分法的拆分次数是 logn 次
+
+时间复杂度 = 拆分次数 * 每次拆分的时间复杂度，则结果是 logn * 1 = O(logn)
+
+空间复杂度= 递归深度 * 每次递归的空间复杂度，则结果是 logn * 1 = O(logn)
 
 ## 😻✔ LRU 缓存算法 
 
@@ -775,6 +930,8 @@ class LRUCache {
 现在浏览器和 NodeJS 已经禁用了尾递归优化，所以仅仅是尾递归，并不会起到优化的作用。
 
 ```javascript
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
 function Fibonacci(n, prev1 = 1, prev2 = 0) {
   if (n === 1) return prev1
   return Fibonacci(n - 1, prev1 + prev2, prev1)
@@ -784,6 +941,8 @@ function Fibonacci(n, prev1 = 1, prev2 = 0) {
 **迭代**
 
 ```javascript
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
 function Fibonacci(n) {
   const init = [1, 0]
   for (let i = 1; i < n; i++) {
@@ -792,6 +951,26 @@ function Fibonacci(n) {
   return init[0]
 }
 ```
+
+递归版本，极其低效，其实际进行了大量的重复计算
+
+```js
+// 时间复杂度：O(2 ^ n)
+// 空间复杂度：O(n)
+function Fibonacci(n) {
+  if(n === 1) return 1
+  if(n <= 0) return 0
+  return Fibonacci(n - 1) + Fibonacci(n - 2)
+}
+```
+
+## ✔ 斐波拉契数列的时间复杂度和空间复杂度
+
+依据实现存在较大的差异。
+
+[ref](https://blog.csdn.net/youngyangyang04/article/details/106313759)
+[递归算法的时间与空间复杂度分析！](https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%89%8D%E5%BA%8F/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.md)
+
 
 ## 😻✔ 因式分解 
 
@@ -1629,6 +1808,91 @@ class MinHeap {
 }
 ```
 
+利用归并思路实现
+
+```js
+// 时间复杂度：O(k * n)
+// 空间复杂度：O(1)
+// k 是 list.lenght
+// n 是所有链表节点的个数
+var mergeKLists = function(lists) {
+  if(lists.length === 0) return null
+  if(lists.length === 1) return lists[0]
+  const head = new ListNode()
+  let t = head
+  let list1 = lists[0]
+  for(let i=1;i<lists.length;i++) {
+    let list2 = lists[i]
+    while(list1 && list2) {
+      if(list1.val < list2.val) {
+        t.next = list1
+        list1 = list1.next
+      } else {
+        t.next = list2
+        list2 = list2.next
+      }
+      t = t.next
+    }
+    if(list1) {
+      t.next = list1
+    }
+    if(list2) {
+      t.next = list2
+    }
+    list1 = head.next
+    t = head
+  }
+  return head.next
+};
+```
+
+## 🌟😻✔ 25 K 个一组翻转链表【hard】
+
+[ref](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var reverseKGroup = function(head, k) {
+  let count = 0
+  const myHead = new ListNode()
+  let t = myHead
+  const gapHead = new ListNode()
+  let tGapHead
+  while(head) {
+    gapHead.next = head
+    tGapHead = gapHead // *
+    while(tGapHead.next) {
+      tGapHead = tGapHead.next
+      count++
+      head = head.next
+      if(count % k === 0) {
+        tGapHead.next = null
+        while(t.next) t = t.next
+        t.next = reverse(gapHead.next) // *
+        break // *
+      }
+    }
+    if(count % k !== 0) {
+      while(t.next) t = t.next
+      t.next = gapHead.next
+    }
+  }
+  return myHead.next
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const prev = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = prev
+  }
+  return myHead.next
+}
+```
+
 ## ✔ 26 删除有序数组中的重复项【easy】
 
 [ref](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
@@ -1645,6 +1909,82 @@ var removeDuplicates = function(nums) {
   }
   return count 
 };
+```
+
+## 🌟😻✔ 31 下一个排列【medium】
+
+[ref](https://leetcode.cn/problems/next-permutation/)
+
+```js
+var nextPermutation = function(nums) {
+  const len = nums.length
+  let i = len - 1
+  for(;i>0;i--) {
+    if(nums[i] > nums[i - 1]) {
+      break
+    }
+  }
+  for(let j = len - 1;j >= i ;j--) {
+    if(nums[j] > nums[i - 1]) {
+      swap(nums, i - 1, j)
+      break
+    }
+  }
+  reverse(nums, i, len - 1)
+  return nums
+};
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+
+function reverse(arr, l, r) {
+  const mid = Math.floor((l + r) / 2)
+  for(let i=l;i<=mid;i++) {
+    const t = arr[i]
+    arr[i] = arr[r + l - i]
+    arr[r + l - i] = t
+  }
+}
+```
+
+## 🌟😻✔ 33 搜索旋转排序数组【medium】
+
+[ref](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+
+```js
+// 时间复杂度：O(logn)
+// 空间复杂度：O(n)
+var search = function(nums, target) {
+  const len = nums.length
+  if(!len) return -1
+  if(len === 1) return target === nums[0] ? 0 : -1
+  let l = 0
+  let r = len - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(target === nums[mid]) {
+      return mid
+    }
+    if(nums[0] <= nums[mid]) {
+      if(nums[0] <= target && target < nums[mid]) {
+        r= mid - 1
+      } else {
+        l = mid + 1
+      }
+    } else {
+      if(nums[mid] < target && target <= nums[r]) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    }
+  }
+  return  -1
+};
+
 ```
 
 ## 🌟😻✔ 42 接雨水【hard】
@@ -2157,7 +2497,57 @@ var climbStairs = function(n) {
   }
   return d[n]
 };
-````
+```
+
+## 🌟😻✔ 72 编辑距离【hard】
+
+[ref](https://leetcode.cn/problems/edit-distance/)
+
+定义 `dp[i][j]` 是 word1 长度为 i 的字符串转换成 word2 长度为 j 字符串的最少操作次数。则 `dp[i][j]` 可由下面三种情况得到：
+
+- `dp[i - 1][j - 1]` 替换掉 word1 中第 i 个字符
+- `dp[i - 1][j]`  删除 word1 中第 i 个字符
+- `dp[i][j - 1]`  在 word1 中第 i 个字符后面新增一个字符
+
+上面三种情况的最小值 + 1，就是 `dp[i][j]`。
+
+所以状态转移方程为：
+
+```js
+dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+```
+
+然后设置初始值， i 为 0 则最短操作次数就是 j，j 为 0 则最短操作次数就是 i。
+
+
+动态规划
+
+```js
+// m=word1.length n=word2.length
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var minDistance = function(word1, word2) {
+  const len1 = word1.length
+  const len2 = word2.length
+  const dp = new Array(len1 + 1).fill(0).map(_ => new Array(len2 + 1).fill(0))
+  for(let i = 0; i <= len1; i++) {
+    dp[i][0] = i
+  }
+  for(let j = 0; j <= len2; j++) {
+    dp[0][j] = j
+  }
+  for(let i = 1; i <= len1; i++) {
+    for(let j = 1; j <= len2; j++) {
+      if(word1[i - 1] === word2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1]
+      } else {
+        dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+      }
+    }
+  }
+  return dp[len1][len2]
+};
+```
 
 ## 😻✔ 76 最小覆盖子串【hard】
 
@@ -2648,6 +3038,37 @@ var maxProfit = function(prices) {
 };
 ```
 
+## 🌟😻✔ 124 二叉树中的最大路径和【hard】
+
+[ref](https://leetcode.cn/problems/binary-tree-maximum-path-sum/)
+
+一般涉及到路径的问题，都可以从路径根节点下手，任一一条路径必然会有一个根节点，二叉树中以任意一个节点为根节点的最大路径节点总和的**最大值**即为答案。
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n) 空间复杂度取决于递归调用的层数，最差情况下为 O(n)
+var maxPathSum = function(root) {
+  let max = root.val
+  function dfs(node) {
+    let leftMax = 0
+    let rightMax = 0
+    if(node.left) {
+      leftMax = dfs(node.left)
+    }
+    if(node.right) {
+      rightMax = dfs(node.right)
+    }
+    const ret = Math.max(leftMax + node.val, rightMax + node.val, node.val)
+    max = Math.max(ret, leftMax + rightMax + node.val, max)
+    return ret
+  }
+
+  dfs(root)
+  return max
+};
+
+```
+
 ## ✔ 136 只出现一次的数字【easy】
 
 [ref](https://leetcode.cn/problems/single-number/)
@@ -2830,7 +3251,7 @@ var numIslands = function(grid) {
 };
 ```
 
-## 😻✔ 206 反转链表【easy】
+## 🌟😻✔ 206 反转链表【easy】
 
 [ref](https://leetcode.cn/problems/reverse-linked-list/)
 
@@ -2838,18 +3259,14 @@ var numIslands = function(grid) {
 
 ```js
 var reverseList = function (head) {
-  if (head === null) return head
-  let curr = head
-  let next = head.next
-  curr.next = null
-  while (next) {
-    const n = next.next
-    next.next = curr
-    curr = next
-    next = n
+  const t = new ListNode()
+  while(head) {
+    const prev = t.next
+    t.next = head
+    head = head.next
+    t.next.next = prev
   }
-  return curr
-}
+  return t.next
 ```
 
 ## 🌟😻✔ 215 数组中的第K个最大元素【medium】
@@ -3127,6 +3544,182 @@ var solution = function(isBadVersion) {
       }
       return r
   };
+};
+```
+
+## 🌟😻✔ 239 滑动窗口最大值【hard】
+
+[ref](https://leetcode.cn/problems/sliding-window-maximum/)
+
+优先队列、大顶堆、单调队列
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(n)
+var maxSlidingWindow = function(nums, k) {
+  const len = nums.length
+  const res = []
+  const maxHeap = new MaxHeap()
+  for(let i=0;i<k - 1;i++) {
+    maxHeap.insert({
+      index: i,
+      val: nums[i]
+    })
+  }
+  for(let i=k - 1;i<len;i++) {
+    maxHeap.insert({
+      index: i,
+      val: nums[i]
+    })
+    while(maxHeap.peek().index < i + 1 - k) maxHeap.pop()
+    res.push(maxHeap.peek().val)
+  }
+  return res
+};
+
+class MaxHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(target) {
+    this.heap.push(target)
+    this.shiftUp(this.size - 1)
+  }
+  pop() {
+    this.swap(0, this.size - 1)
+    this.heap.pop()
+    this.shiftDown(0)
+  }
+  get size() {
+    return this.heap.length
+  }
+  peek() {
+    return this.heap[0]
+  }
+  shiftUp(i) {
+    const parentIndex =  Math.floor((i - 1) / 2)
+    if(parentIndex >= 0 && this.heap[parentIndex].val < this.heap[i].val) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i) {
+    const l = 2 * i + 1
+    const r = 2 * i + 2
+    let maxIndex = i
+    if(l < this.size && this.heap[maxIndex].val < this.heap[l].val) {
+      maxIndex = l
+    }
+    if(r < this.size && this.heap[maxIndex].val < this.heap[r].val) {
+      maxIndex = r
+    }
+    if(maxIndex !== i) {
+      this.swap(i, maxIndex)
+      this.shiftDown(maxIndex)
+    }
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+}
+```
+
+单调队列解法，比较难理解
+
+```js
+// 时间复杂度：O(n) 每个下标被放进队列1次，且出队列1次
+// 空间复杂度：O(k) 
+var maxSlidingWindow = function(nums, k) {
+  const len = nums.length
+  const q = []
+  const res = []
+  for(let i=0;i<k - 1;i++) {
+    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
+      q.pop()
+    }
+    q.push(i)
+  }
+  for(let i=k - 1;i<len;i++) {
+    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
+      q.pop()
+    }
+    q.push(i)
+    while(q[0] < i - k + 1) {
+      q.shift()
+    }
+    res.push(nums[q[0]])
+  }
+  return res
+};
+};
+```
+
+## 🌟😻✔ 300 最长递增子序列【medium】
+
+[ref](https://leetcode.cn/problems/longest-increasing-subsequence/)
+
+动态规划
+
+```js
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(n)
+var lengthOfLIS = function(nums) {
+  let len = nums.length
+  const dp = new Array(len).fill(1)
+  for(let i=0;i<len;i++) {
+    dp[i] = 1
+    for(let j = i - 1; j>=0; j--) {
+      if(nums[j] < nums[i]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1)
+      }
+    }
+  }
+  return Math.max(...dp)
+};
+```
+
+更高效版
+
+理论依据：在查找最长递增子序列的过程中，需要尽可能让长度为 x 的子序列的最大值最小，这样才能尽可能多的在后面补上新数字
+
+dp[i] 代表长度为 i 的最长递增子序列的最后一个数的最小值
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(n)
+var lengthOfLIS = function(nums) {
+  let len = nums.length
+  const dp = []
+  // dp[i] 代表长度为 i 的最长递增子序列的最后一个数的最小值
+  // 最长递增子序列、最后一个数、最小值
+  let count = 0
+  dp[++count] = nums[0]
+  for(let i = 1; i < len; i++) {
+    if(nums[i] > dp[count]) {
+      dp[++count] = nums[i]
+    } else {
+      // 在 dp 中找到 nums[i] > dp[j - 1] 且 nums[i] <= dp[j]
+      let l = 1
+      let r = count
+      let pos = 0
+      while(l <= r) {
+        const mid = Math.floor((l + r) / 2)
+        if(dp[mid] === nums[i]) {
+          pos = mid
+          break
+        } else if(dp[mid] < nums[i]) {
+          l++
+        } else {
+          pos = r
+          r--
+        }
+      }
+      dp[pos] = nums[i]
+    }
+  }
+  return count
 };
 ```
 
@@ -3422,6 +4015,34 @@ var findContentChildren = function(g, s) {
 };
 ```
 
+## 🌟😻✔ 543 二叉树的直径【easy】
+
+[ref](https://leetcode.cn/problems/diameter-of-binary-tree/)
+
+二叉树
+
+一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。
+
+二叉树的任何一条路径都会以某个节点作为根，而最长路径则是 Max(左子树深度 + 右子树深度) 。
+
+```js
+// 时间复杂度：O(n) n 是二叉树的节点数
+// 空间复杂度：O(H) H 是二叉树的高度
+var diameterOfBinaryTree = function(root) {
+  let maxRes = 0
+
+  function depth(node) {
+    if(!node) return 0
+    let lDepth = depth(node.left)
+    let rDepth = depth(node.right)
+    maxRes = Math.max(maxRes, lDepth + rDepth)
+    return Math.max(lDepth, rDepth) + 1
+  }
+  depth(root)
+  return maxRes
+};
+```
+
 ## 😻✔ 704 二分查找【easy】
 
 [ref](https://leetcode.cn/problems/binary-search/)
@@ -3610,4 +4231,63 @@ CQueue.prototype.toOut = function() {
     this.outStack.push(this.inStack.pop())
   }
 }
+```
+
+## 🌟😻✔ 剑指 Offer 51 数组中的逆序对【medium】
+
+[ref](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+
+归并排序
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(n)
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var reversePairs = function(nums) {
+  let total = 0
+  /**
+  * @param {number[]} arr
+  * @return {number[]}
+  */
+  function mergeSort(arr, l, r) {
+    if (r === l) return [arr[l]]
+    if (r < l) return []
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(arr, l, mid), mergeSort(arr, mid + 1, r))
+  }
+
+  /**
+  * @param {number[]} arr1
+  * @param {number[]} arr2
+  * @return {number[]}
+  */
+  function merge(arr1, arr2) {
+    const res = []
+    const len1 = arr1.length
+    const len2 = arr2.length
+    let l1 = 0
+    let l2 = 0
+    while(l1 < len1 && l2 < len2) {
+      if(arr1[l1] <= arr2[l2]) {
+        res.push(arr1[l1++])
+      } else {
+        total += len1 - l1
+        res.push(arr2[l2++])
+      }
+    }
+    while(l1 < len1) {
+      res.push(arr1[l1++])
+    }
+    while(l2<len2) {
+      res.push(arr2[l2++])
+    }
+    return res
+  }
+
+  mergeSort(nums, 0, nums.length - 1)
+  return total
+};
 ```
