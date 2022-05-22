@@ -4,6 +4,18 @@
 
 ---
 
+# 新问题未归类
+## ? forin、forof、for、while效率问题以及差别
+## ? 迭代器协议
+## ? map、set各个方法的时间复杂度
+
+- [https://leetcode.cn/problems/longest-consecutive-sequence/solution/zui-chang-lian-xu-xu-lie-by-leetcode-solution/](https://leetcode.cn/problems/longest-consecutive-sequence/solution/zui-chang-lian-xu-xu-lie-by-leetcode-solution/)
+- [https://stackoverflow.com/questions/33611509/es6-map-and-set-complexity-v8-implementation](https://stackoverflow.com/questions/33611509/es6-map-and-set-complexity-v8-implementation)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1653259309718_af8aab52-bc88-4c1d-9775-3c6f51fb0534.png)
+
+
+
 # JavaScript
 
 ## ✔ 基本数据类型
@@ -16072,8 +16084,32 @@ MPromise.all([p1, p2, p3]).then(
 100 =>  100
 [100, 200, 300] =>  [ 100, 200, 300 ]
 ```
+### ? 手撕 Set
+
+Set 各个方法的时间复杂度
+
+```js
+const arr = new Array(1000000).fill(1).map((_, i) => i)
+const set = new Set(arr)
+set.has(1000000000) // 并不是 O(1)
+
+```
+
+### ? 手撕 Map
+
+Map 各个方法的时间复杂度
+
+```js
+const Obj = {}
+new Array(1000000).fill(1).map((_, i) => {
+  Obj[i] = i
+})
+Obj[10000000] // O(1)
+```
 
 ### ✔ 手撕 map 函数
+
+map 的时间复杂度和空间复杂度
 
 ```javascript
 function map(arr, iteratee) {

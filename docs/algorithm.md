@@ -25,6 +25,11 @@
 - 动态规划
 - 贪心算法
 - 回溯算法
+- 模拟
+
+## 数组题 
+
+- 🌟【medium】[128 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
 
 ## 栈、队列
 
@@ -40,6 +45,7 @@
 - 【easy】 [141 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
 - 【easy】 [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 - 🌟【hard】[K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+- 🌟【medium】[143 重排链表](https://leetcode.cn/problems/reorder-list/)
 
 ## 集合
 
@@ -62,6 +68,7 @@
 - 【easy】 [112 路径总和](https://leetcode.cn/problems/path-sum/)
 - 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - 🌟【easy】 [543 二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
+- 【medium】 [298 二叉树最长连续序列](https://leetcode.cn/problems/binary-tree-longest-consecutive-sequence/)
 
 ## 堆
 
@@ -106,7 +113,9 @@
 - 🌟【easy】 [53 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
 - 🌟【medium】 [300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
 - 🌟【hard】 [72 编辑距离](https://leetcode.cn/problems/edit-distance/)
-
+- 🌟【hard】 [10 正则表达式匹配](https://leetcode.cn/problems/regular-expression-matching/)
+- 🌟【hard】 [32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
+- 🌟【medium】 [152 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
 
 ## 贪心算法
 
@@ -114,6 +123,7 @@
 
 - 【medium】 [5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
 - 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
+- 🌟【hard】 [135 分发糖果](https://leetcode.cn/problems/candy/)
 
 ## 回溯算法
 
@@ -123,12 +133,21 @@
 - 【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 - 【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
 - 【medium】 [22 括号生成](https://leetcode.cn/problems/generate-parentheses/)
+- 🌟【medium】 [93 复原 IP 地址](https://leetcode.cn/problems/restore-ip-addresses/)
 
-## 二分查找
+
+
+## 二分查找、二分搜索
 
 - 【easy】 [704 二分查找](https://leetcode.cn/problems/binary-search/)
 - 🌟【hard】 [4 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
 - 🌟【easy】 [278 第一个错误的版本](https://leetcode.cn/problems/first-bad-version/)
+- 🌟【medium】[33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+- 🌟【medium】[34 在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+## 模拟
+
+- 🌟【medium】[400 第 N 位数字](https://leetcode.cn/problems/nth-digit/)
 
 
 # 时间复杂度和空间复杂度
@@ -1379,6 +1398,42 @@ var isPalindrome = function(x) {
 };
 ```
 
+## ?🌟😻✔ 10 正则表达式匹配【hard】
+
+[ref](https://leetcode.cn/problems/regular-expression-matching/)
+
+动态规划
+
+```js
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var isMatch = function(s, p) {
+  const m = s.length
+  const n = p.length
+  const dp = new Array(m + 1).fill(false).map(_ => new Array(n + 1).fill(false))
+  dp[0][0] = true
+  for(let j=2;j<=n;j+=2) {
+    if(p[j - 1] === '*') {
+      dp[0][j] = dp[0][j - 2]
+    }
+  }
+  for(let i=1;i<=m;i++) {
+    for(let j=1;j<=n;j++) {
+      if(s[i - 1] === p[j - 1] || p[j - 1] === '.') {
+        dp[i][j] = dp[i - 1][j - 1]
+      } else if (p[j - 1] === '*') {
+        dp[i][j] = dp[i][j-2] || false
+        if(p[j - 2] === s[i - 1] || p[j - 2] === '.') {
+          dp[i][j] = dp[i][j] || dp[i-1][j]
+        }
+      }
+    }
+  }
+  return dp[m][n]
+};
+
+```
+
 ## 🌟😻✔ 11 盛最多水的容器【medium】
 
 [ref](https://leetcode.cn/problems/container-with-most-water/)
@@ -1851,6 +1906,48 @@ var mergeKLists = function(lists) {
 [ref](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
 
 ```js
+// 比较优秀的版本
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var reverseKGroup = function(head, k) {
+  let count = 0
+  const myHead = new ListNode()
+  myHead.next = head
+  let start = myHead
+  let end = start
+
+  while(end.next) {
+    end = end.next
+    count++
+    if(count % k === 0) {
+      start = reverse(start, end)
+      end = start
+    }
+  }
+  return myHead.next
+};
+
+// start 的下一个节点才是起点
+// 返回反转后的 end 节点
+function reverse(start, end) {
+  const myHead = new ListNode()
+  const reversePrev = start
+  const reverseNext = end.next
+  start = start.next
+  const prevStart = start
+  while(myHead.next !== end) {
+    const prev = myHead.next
+    myHead.next = start
+    start = start.next
+    myHead.next.next = prev
+  }
+  reversePrev.next = myHead.next
+  prevStart.next = reverseNext
+  return prevStart
+}
+```
+
+```js
 // 时间复杂度：O(n)
 // 空间复杂度：O(1)
 var reverseKGroup = function(head, k) {
@@ -1911,6 +2008,23 @@ var removeDuplicates = function(nums) {
 };
 ```
 
+## ✔ 27 移除元素【easy】
+
+[ref](https://leetcode.cn/problems/remove-element/)
+
+```js
+var removeElement = function(nums, val) {
+  const len = nums.length
+  let index = 0
+  for(let i=0;i<len;i++) {
+    if(nums[i] !== val) {
+      nums[index++] = nums[i]
+    }
+  }
+  return index
+};
+```
+
 ## 🌟😻✔ 31 下一个排列【medium】
 
 [ref](https://leetcode.cn/problems/next-permutation/)
@@ -1950,9 +2064,37 @@ function reverse(arr, l, r) {
 }
 ```
 
+## 🌟😻✔ 32 最长有效括号【hard】
+
+[ref](https://leetcode.cn/problems/longest-valid-parentheses/)
+
+动态规划
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var longestValidParentheses = function(s) {
+  const len = s.length
+  const dp = new Array(len).fill(0)
+  dp[0] = 0
+  for(let i=1;i<len;i++) {
+    if(s[i] === ')') {
+      if(s[i - 1] === '(') {
+        dp[i] = (i - 2 >= 0?dp[i - 2] : 0) + 2
+      } else if(i - 1 - dp[i - 1] >=0 && s[i - 1 - dp[i - 1]] === '(') {
+        dp[i] = 2 + dp[i - 1] + (i - 2 - dp[i - 1] >=0 ? dp[i - 2 - dp[i - 1]] : 0) 
+      }
+    }
+  }
+  return Math.max(...dp)
+};
+```
+
 ## 🌟😻✔ 33 搜索旋转排序数组【medium】
 
 [ref](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1653007574423_685e61d8-c663-4699-8719-3b7d78a01427.png)
 
 ```js
 // 时间复杂度：O(logn)
@@ -1985,6 +2127,48 @@ var search = function(nums, target) {
   return  -1
 };
 
+```
+
+## ?🌟😻✔ 34 在排序数组中查找元素的第一个和最后一个位置【medium】
+
+[ref](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logn)
+// 空复杂度：O(1)
+var searchRange = function(nums, target) {
+  const leftIndex = binarySearch(nums, target, true)
+  const rightIndex = binarySearch(nums, target, false) - 1
+  if(
+    leftIndex >= 0 &&
+    rightIndex < nums.length &&
+    nums[leftIndex] === target &&
+    nums[rightIndex] === target
+  ) {
+    return [leftIndex, rightIndex]
+  }
+  
+  return [-1, -1]
+};
+
+function binarySearch(nums, target, lower) {
+  const len = nums.length
+  let l = 0
+  let r = len - 1
+  let resIndex = len
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(target < nums[mid] || (lower && target <= nums[mid])) {
+      r = mid - 1
+      resIndex = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return resIndex
+}
 ```
 
 ## 🌟😻✔ 42 接雨水【hard】
@@ -2075,6 +2259,105 @@ var trap = function(height) {
   }
   return total
 };
+```
+
+## 🌟😻✔ 43 字符串相乘【medium】
+
+[ref](https://leetcode.cn/problems/multiply-strings/)
+
+字符串相加、字符串相乘
+
+```js
+// 时间复杂度：O(mn)
+// 空间复杂度：O(m + n)
+var multiply = function(num1, num2) {
+  if(num1 === '0' || num2 === '0') return '0'
+  const m = num1.length
+  const n = num2.length
+  const numArr = new Array(m + n).fill(0)
+  for(let i=m - 1;i>=0;i--) {
+    for(let j=n - 1;j>=0;j--) {
+      let addIndex = i + j + 1
+      const sum = Number(num1[i]) * Number(num2[j]) + numArr[addIndex]
+      numArr[addIndex] = sum % 10
+      k = Math.floor(sum / 10)
+      while(k > 0) {
+        addIndex--
+        const s = k + numArr[addIndex]
+        numArr[addIndex] = s % 10
+        k = Math.floor(s / 10)
+      }
+    }
+  }
+  while(numArr[0] === 0) numArr.shift()
+  return numArr.join('')
+};
+```
+
+or
+
+```js
+// 时间复杂度：O(mn + n^2)
+// 空间复杂度：O(m + n) 空间复杂度取决于 sum 这个存储中间状态的字符串长度，实际上也可以认为是 O(1)
+var multiply = function(num1, num2) {
+  if(num1 === '0' || num2 === '0') return "0"
+  const len1 = num1.length
+  let sum = '0'
+  for(let i=len1 -1;i>=0;i--) {
+    const target = num1[i]
+    sum = stringAdd(smallMulti(target, num2, len1 - i - 1), sum)
+  }
+  return sum
+};
+
+// 字符串相乘，x只有一位
+// zeroCount 是后置0的个数
+function smallMulti(x, y, zeroCount) {
+  if(x === '0') return '0'
+  const yLen = y.length
+  let add = 0
+  let res = ''
+  
+  for(let i=yLen - 1;i>=0;i--) {
+    const n = Number(x) * Number(y[i]) + add
+    add = Math.floor(n / 10)
+    res = (n - add * 10) + res
+  }
+  if(add > 0) {
+    res = add + res
+  }
+  let zeros = ''
+  for(let i=0;i<zeroCount;i++) {
+    zeros +='0'
+  }
+  return res + zeros
+}
+
+// 任意数字字符串相加
+function stringAdd(x, y) {
+  const xLen = x.length
+  const yLen = y.length
+  if(xLen >= yLen) {
+    for(let i=0;i<xLen - yLen;i++) {
+      y = '0' + y
+    }
+  } else {
+    for(let i=0;i<yLen - xLen;i++) {
+      x = '0' + x
+    }
+  }
+  let res = ''
+  let add = 0
+  for(let i=x.length - 1;i>=0;i--) {
+    const sum = Number(x[i]) + Number(y[i]) + add
+    add = Math.floor(sum / 10)
+    res = (sum - add * 10) + res
+  }
+  if(add > 0) {
+    res = add + res
+  }
+  return res
+}
 ```
 
 ## 😻✔ 45 跳跃游戏 II【medium】
@@ -2591,12 +2874,12 @@ var minWindow = function(s, t) {
 };
 ```
 
-## 😻✔ 78 子集【medium】
+## 🌟😻✔ 78 子集【medium】
 
 回溯、递归
 
 ```js
-// 时间复杂度：O(2^N)
+// 时间复杂度：O(N*2^N)
 // 时间复杂度：O(N)
 var subsets = function(nums) {
   const res = []
@@ -2664,6 +2947,76 @@ var merge = function(nums1, m, nums2, n) {
     mn--
   }
 };
+```
+
+## 🌟😻✔ 90 子集 II【medium】
+
+[ref](https://leetcode.cn/problems/subsets-ii/)
+
+回溯、深度优先遍历
+
+```js
+// 时间复杂度：O(n×2^n)
+// 空间复杂度：O(n)
+var subsetsWithDup = function(nums) {
+  nums.sort((a, b) => a - b)
+  const res = []
+  const len = nums.length
+  const used = []
+  function dfs(path, index) {
+    res.push(path)
+    for(let i=index;i<len;i++) {
+      if(i - 1 >= index && !used[i - 1] && nums[i] === nums[i - 1]) continue
+      used[i] = true
+      dfs([...path, nums[i]], i + 1)
+      used[i] = false
+    }
+  }
+  dfs([], 0)
+  return res
+};
+```
+
+## 🌟😻✔ 93 复原 IP 地址【medium】
+
+[ref](https://leetcode.cn/problems/restore-ip-addresses/)
+
+回溯法
+
+```js
+// SEG_COUNT=4 表示 ip 的地址段数
+// 时间复杂度：O(3*SEG_COUNT)
+// 空间复杂度：O(SEG_COUNT)
+var restoreIpAddresses = function(s) {
+  if(s.length < 4) return []
+  const res = []
+
+  function calc(path, start, dotLeft) {
+    if(dotLeft === 0) {
+      const end = s.slice(start)
+      if(isValidSub(end)) {
+        res.push(path + end)
+      }
+      return
+    }
+    ;([1, 2, 3]).forEach(l => {
+      const current = s.slice(start, start + l)
+      if(isValidSub(current)) {
+        calc(path + current + '.', start + l, dotLeft - 1)
+      }
+    })
+  }
+
+  calc('', 0, 3)
+  return res
+};
+
+function isValidSub(str) {
+  if(str === '0' || str.indexOf('0') !== 0 && Number(str) > 0 && Number(str) <= 255) {
+    return true
+  }
+  return false
+}
 ```
 
 ## 😻✔ 94 二叉树的中序遍历【easy】
@@ -3069,6 +3422,93 @@ var maxPathSum = function(root) {
 
 ```
 
+## ?🌟😻✔ 128 最长连续序列【medium】
+
+数组题
+
+[ref](https://leetcode.cn/problems/longest-consecutive-sequence/)
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1653261522967_db2092bf-f1fd-4013-b0e6-67a1cfd5909f.png)
+
+```js
+// 别一看到 for 里面套着 while 就认为大于 O(n)
+// 并不是所有的 value 都会进入 while 循环，只有作为区间左值的 value 才会进入 while
+// for+while 的组合刚好可以把所有的数字统计一遍
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var longestConsecutive = function(nums) {
+  const set = new Set(nums)
+  let max = 0
+  for(let value of set.values()) {
+    // 把这个值作为左起点
+    if(!set.has(value - 1)) {
+      let count = 1
+      let curr = value
+      while(set.has(curr + 1)) {
+        count++
+        curr++
+      }
+      max = Math.max(max, count)
+    }
+  }
+  return max
+};
+```
+
+## ?🌟😻✔ 135 分发糖果【hard】
+
+[ref](https://leetcode.cn/problems/candy/)
+
+贪心
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1653173511115_0db6c0f3-47bc-4bf7-8a84-ed7366d2f8ca.png)
+
+给任何一个人发糖果都要考虑这个人和他左右两边人的发糖果数量。
+
+- -> 从左往右看，如果右边人的评分大于左边，则右边人糖果的数量一定是大于左边人的，如果左边人糖果数最少为 l1，右边人糖果最少数则为 l1 + 1
+  - 如果右边人的评分小于等于左边人，则右边人糖果数可以设为 1
+- <- 从右往左看，如果左边人的评分大于右边，则左边人糖果的数量一定是大于右边人的，如果右边人糖果数最少为 r1，则左边人糖果数最少则为 r1 + 1
+  - 如果左边人的评分小于等于右边人，则左边人糖果数可以设为 1
+
+
+对于任意挨着的两个人，如果其评分分别为 `rate1 < rate2`，且 rate1 在 rate2 左边，则存在下面的关系：
+
+- 第1个人糖果数：从左往右为 `l1`，从右往左为 `1`，其中 `l1 >= 1`
+- 第2个人糖果数：从左往右为 `l1 + 1`，从右往左为 `r2`，其中 `l2 >= 1`
+
+则必然会有这个关系存在 `max(l1, 1) < max(l1 + 1, l2)`
+
+因为 `l1 >= 1`，则推出 `max(l1, 1) = l1`，而 `max(l1 + 1, l2) >= l1 + 1`，故 `max(l1 + 1, l2) > l1 = max(l1, 1)`
+
+综合上述的推论就可以知道，只需要从左往右和从右往左扫描评分数组两次，然后综合每个位置上两个方向所需要的最小糖果数，就可以得到总的最少糖果数。
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var candy = function(ratings) {
+  const len = ratings.length
+  const leftDp = []
+  const rightDp = []
+  let sum = 0
+  for(let i=0;i<len;i++) {
+    if(i - 1 >= 0 && ratings[i] > ratings[i - 1]) {
+      leftDp[i] = leftDp[i - 1] + 1
+    } else {
+      leftDp[i] = 1
+    }
+  }
+  for(let i=len-1;i>=0;i--) {
+    if(i + 1 < len && ratings[i] > ratings[i + 1]) {
+      rightDp[i] = rightDp[i + 1] + 1
+    }else {
+      rightDp[i] = 1
+    }
+    sum += Math.max(leftDp[i], rightDp[i])
+  }
+  return sum
+};
+```
+
 ## ✔ 136 只出现一次的数字【easy】
 
 [ref](https://leetcode.cn/problems/single-number/)
@@ -3102,6 +3542,127 @@ var hasCycle = function (head) {
 
   return false
 }
+```
+
+## ?🌟😻✔ 143 重排链表【medium】
+
+[ref](https://leetcode.cn/problems/reorder-list/)
+
+```js
+// 快慢指针+链表反转
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var reorderList = function(head) {
+  const beginNode = new ListNode()
+  let tHead = beginNode
+  let fast = beginNode
+  let slow = beginNode
+  beginNode.next = head
+  while(fast.next && fast.next.next && slow.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  let left = head
+  let right = slow.next
+  slow.next = null
+  right = reverse(right)
+  while(left) {
+    const lNode = left
+    const rNode = right
+    left = left.next
+    right = right.next
+
+    tHead.next = lNode
+    lNode.next = rNode
+    tHead = tHead.next.next
+  }
+  if(right) {
+    tHead.next = right
+    tHead = tHead.next
+  }
+  tHead.next = null
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const prev = myHead.next
+    const target = head
+    head = head.next
+    target.next = prev
+    myHead.next = target
+  }
+  return myHead.next
+}
+```
+
+```js
+// 用数组存储节点，然后操作
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var reorderList = function(head) {
+  let tHead = head
+  let myHead = new ListNode()
+  const leftNodes = []
+  const rightNodes = []
+  let count = 0
+  while(tHead) {
+    leftNodes.push(tHead)
+    rightNodes.unshift(tHead)
+    tHead = tHead.next
+    count++
+  }
+  let showUseLeftNodes = true
+  let leftIndex = 0
+  let rightIndex = 0
+  while(count > 0) {
+    if(showUseLeftNodes) {
+      myHead.next = leftNodes[leftIndex++]
+      showUseLeftNodes = false
+    } else {
+      myHead.next = rightNodes[rightIndex++]
+      showUseLeftNodes = true
+    }
+    myHead = myHead.next
+    count--
+  }
+  myHead.next = null
+};
+```
+
+```js
+// 提取数字，然后进行重新赋值，不符合题目要求
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var reorderList = function(head) {
+  const nums = []
+  const reverseNums = []
+  const resNums = []
+  let tHead = head
+  
+  while(tHead) {
+    nums.push(tHead.val)
+    reverseNums.unshift(tHead.val)
+    tHead = tHead.next
+  }
+  const len = nums.length
+  let showAddReverse = false
+  while(resNums.length < len) {
+    if(!showAddReverse) {
+      resNums.push(nums.shift())
+      showAddReverse = true
+    } else {
+      resNums.push(reverseNums.shift())
+      showAddReverse = false
+    }
+  }
+  tHead = head
+  let i = 0
+  while(tHead) {
+    tHead.val = resNums[i++]
+    tHead = tHead.next
+  }
+};
 ```
 
 ## 😻✔ 146 LRU 缓存【medium】
@@ -3144,6 +3705,70 @@ LRUCache.prototype.put = function(key, value) {
 LRUCache.prototype.moveToEnd = function(key, value) {
   this.cache.delete(key)
   this.cache.set(key, value)
+};
+```
+
+## 🌟😻✔ 152 乘积最大子数组【medium】
+
+[ref](https://leetcode.cn/problems/maximum-product-subarray/)
+
+
+动态规划
+
+```js
+// 数组版
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var maxProduct = function(nums) {
+  const len = nums.length
+  const dpMax = [nums[0]]
+  const dpMin = [nums[0]]
+  for(let i=1;i<len;i++) {
+    // 以 i 为结尾的非空连续子数组
+    dpMax[i] = Math.max(nums[i], nums[i] * dpMax[i-1], nums[i] * dpMin[i-1])
+    dpMin[i] = Math.min(nums[i], nums[i] * dpMax[i-1], nums[i] * dpMin[i-1])
+  }
+  return Math.max(...dpMax)
+};
+```
+
+```js
+// 空间复杂度优化版
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+var maxProduct = function(nums) {
+  const len = nums.length
+  let prevMax = nums[0]
+  let prevMin = nums[0]
+  let res = prevMax
+  for(let i=1;i<len;i++) {
+    // 以 i 为结尾的非空连续子数组
+    const tmpPrevMax = prevMax
+    const tmpPrevMin = prevMin
+
+    prevMax = Math.max(nums[i], nums[i] * tmpPrevMax, nums[i] * tmpPrevMin)
+    prevMin = Math.min(nums[i], nums[i] * tmpPrevMax, nums[i] * tmpPrevMin)
+    res = Math.max(res, prevMax)
+  }
+  return res
+};
+```
+
+
+## ✔ 169 多数元素【easy】
+
+[ref](https://leetcode.cn/problems/majority-element/)
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var majorityElement = function(nums) {
+  const map = new Map()
+  const len = nums.length
+  for(let i=0;i<len;i++) {
+    map.set(nums[i], map.has(nums[i])? map.get(nums[i]) + 1: 1)
+    if(map.get(nums[i]) > len / 2) return nums[i] 
+  }
 };
 ```
 
@@ -3653,6 +4278,33 @@ var maxSlidingWindow = function(nums, k) {
   }
   return res
 };
+```
+
+## 😻✔ 298 二叉树最长连续序列【medium】
+
+[ref](https://leetcode.cn/problems/binary-tree-longest-consecutive-sequence/)
+
+二叉树、深度优先遍历
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var longestConsecutive = function(root) {
+  let max = 1
+
+  function dfs(node, parentValue, len) {
+    if(node.val === parentValue + 1) {
+      len++
+      max = Math.max(max, len)
+    } else {
+      len = 1
+    }
+    node.left && dfs(node.left, node.val, len)
+    node.right && dfs(node.right, node.val, len)
+  }
+
+  dfs(root, undefined, 0)
+  return max
 };
 ```
 
@@ -3944,6 +4596,34 @@ var intersection = function (nums1, nums2) {
 }
 ```
 
+## ?🌟😻✔ 400 第 N 位数字【medium】
+
+[ref](https://leetcode.cn/problems/nth-digit/)
+
+模拟法
+
+```js
+// 时间复杂度：O()
+// 空间复杂度：O(1)
+var findNthDigit = function(n) {
+ let k = 0
+ let count = 0
+ while(count + (k + 1) * 9 * 10 ** k < n) {
+   count += (k + 1) * 9 * 10 ** k
+   k++
+ }
+ k++
+ n -= count
+ let num
+ if(k === 1) {
+   num = n
+ } else {
+   num = 10 ** (k - 1) + Math.floor((n - 1) / k)
+ }
+ const x = (n - 1) % k
+ return Math.floor(num / 10 ** (k - 1 - x)) % 10
+};
+```
 
 ## 😻✔ 417 太平洋大西洋水流问题【medium】
 
@@ -4043,6 +4723,45 @@ var diameterOfBinaryTree = function(root) {
 };
 ```
 
+## ?🌟😻✔ 560 和为 K 的子数组【medium】
+
+[ref](https://leetcode.cn/problems/subarray-sum-equals-k/)
+
+巧妙设计一个统计 `0~i` 位置总和数量的 map。
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var subarraySum = function(nums, k) {
+  const len = nums.length
+  let sum = 0
+  const map = new Map()
+  let count = 0
+  for(let i = 0; i < len; i++) {
+    sum += nums[i]
+    if(sum === k) count++
+    if(map.has(sum - k)) {
+      count += map.get(sum - k)
+    }
+    map.set(sum, map.has(sum)? map.get(sum) + 1: 1)
+  }
+  return count
+};
+```
+
+## ✔ 575 分糖果【easy】
+
+[ref](https://leetcode.cn/problems/distribute-candies/)
+
+```js
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+var distributeCandies = function(candyType) {
+  const set = new Set(candyType)
+  return Math.min(candyType.length / 2, set.size)
+};
+```
+
 ## 😻✔ 704 二分查找【easy】
 
 [ref](https://leetcode.cn/problems/binary-search/)
@@ -4135,6 +4854,31 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
+## 🌟✔ 1103 分糖果 II【easy】
+
+[ref](https://leetcode.cn/problems/distribute-candies-to-people/)
+
+```js
+var distributeCandies = function(candies, num_people) {
+  const res = new Array(num_people).fill(0)
+  let n = 1
+  let index = 0
+  while(candies) {
+    if(candies <= n) {
+      res[index] += candies
+      candies = 0
+    } else {
+      res[index] += n
+      candies -= n
+    }
+    n++
+    index++
+    if(index === num_people) index = 0
+  }
+  return res
+};
+```
+
 ## ✔ 1306 跳跃游戏 III【medium】
 
 [ref](https://leetcode.cn/problems/jump-game-iii/)
@@ -4191,6 +4935,21 @@ var canReach = function(arr, start) {
   return jump(start - arr[start]) || jump(start + arr[start])
 };
 
+```
+
+## ✔ 剑指 Offer 06. 从尾到头打印链表【easy】
+
+[ref](https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
+
+```js
+var reversePrint = function(head) {
+  const res = []
+  while(head) {
+    res.unshift(head.val)
+    head = head.next
+  }
+  return res
+};
 ```
 
 ## ✔ 剑指 Offer 09. 用两个栈实现队列【easy】

@@ -46,7 +46,7 @@
               } else {
                 return 'edit on git'
               }
-            }
+            },
           ),
           function (hook, vm) {
             hook.doneEach(function (...args) {
@@ -91,7 +91,7 @@
                   {
                     root: null,
                     threshold: 0,
-                  }
+                  },
                 )
 
                 const imgs = document.querySelectorAll('img[data-origin]')
@@ -115,17 +115,6 @@
               let finishedCount = 0
               sidebarLinks.forEach((v, i) => {
                 v.parentNode.style.padding = '1px 0'
-                if (v.textContent.includes('✔')) {
-                  v.parentNode.style.backgroundColor = 'rgba(109,255,51,.3)'
-                  finishedCount++
-                }
-                if (v.textContent.includes('?')) {
-                  v.parentNode.style.backgroundColor = 'pink'
-                  finishedCount++
-                }
-                if (v.textContent.includes('😻')) {
-                  v.parentNode.style.backgroundColor = '#FFDEAD'
-                }
                 if (v.textContent.includes('【easy】')) {
                   v.style.borderRight = '3px solid #00DD00'
                   easyCount++
@@ -140,6 +129,21 @@
                   v.style.borderRight = '3px solid #CC0000'
                   hardCount++
                   leetCodeCount++
+                }
+                if (v.textContent.includes('✔')) {
+                  v.parentNode.style.backgroundColor = 'rgba(109,255,51,.3)'
+                  finishedCount++
+                }
+                if (v.textContent.includes('😻')) {
+                  v.parentNode.style.backgroundColor = '#FFDEAD'
+                }
+                if (v.textContent.includes('🌟')) {
+                  v.parentNode.style.backgroundColor = '#D8BFD8'
+                }
+
+                if (v.textContent.includes('?')) {
+                  v.parentNode.style.backgroundColor = '#FF69B4'
+                  finishedCount++
                 }
               })
               let isLeetCodePage = false
@@ -161,7 +165,7 @@
                   : ''
               }
               <br/>
-              颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:pink">? 存疑很复杂</span>  <span style="background-color:#FFDEAD">😻 面试不可缺少的算法</span>`
+              颜色指示 <span style="background-color:#CCFFFF">一级标题</span> <span style="background-color:rgba(109,255,51,.3)">✔ 已完成</span>  <span style="background-color:#FF69B4">? 存疑很复杂</span>  <span style="background-color:#FFDEAD">😻 面试不可缺少的算法</span>  <span style="background-color:#D8BFD8">🌟 非常典型</span>`
             })
           },
         ],
