@@ -30,6 +30,8 @@
 ## 数组题 
 
 - 🌟【medium】[128 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
+- 🌟【medium】[33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+- 🌟【medium】[560 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)
 
 ## 栈、队列
 
@@ -1683,14 +1685,49 @@ var generateParenthesis = function(n) {
 };
 ```
 
-## 😻✔ 23 合并K个升序链表【hard】
+## ?😻✔ 23 合并K个升序链表【hard】
 
 [ref](https://leetcode.cn/problems/merge-k-sorted-lists/)
 
-链表、堆
+链表、堆、分治法、归并
 
 ```js
-// 时间复杂度：O(nlogk)
+// 时间复杂度：O(kn*logk)
+// 空间复杂度：O(logk)
+var mergeKLists = function(lists, l, r) {
+  l = typeof l === 'number' ? l : 0
+  r = typeof r === 'number' ? r: lists.length - 1
+  if(l === r) return lists[l]
+  if(l > r) return null
+  const mid = Math.floor((l + r) / 2)
+  return merge(mergeKLists(lists, l, mid), mergeKLists(lists, mid + 1, r))
+};
+
+function merge(list1, list2) {
+  const head = new ListNode()
+  let tHead = head
+  while(list1 && list2) {
+    if(list1.val < list2.val) {
+      tHead.next = list1
+      list1 = list1.next
+    } else {
+      tHead.next = list2
+      list2 = list2.next
+    }
+    tHead = tHead.next
+  }
+  if(list1) {
+    tHead.next = list1
+  }
+  if(list2) {
+    tHead.next = list2
+  }
+  return head.next
+}
+```
+
+```js
+// 时间复杂度：O(kn*logk)
 // 空间复杂度：O(k)
 // k 是 list.lenght
 // n 是所有链表节点的个数
@@ -1776,129 +1813,43 @@ class MinHeap {
 }
 ```
 
-或者
+常规顺序合并
 
 ```js
-// 时间复杂度：O(nlogn)
-// 空间复杂度：O(n)
-var mergeKLists = function(lists) {
-  const head = new ListNode()
-  let th = head
-  const h = new MinHeap() // 小顶堆
-  for(let list of lists) {
-    while(list) {
-      h.insert(list.val)
-      list = list.next
-    }
-  }
-
-  while(h.size()) {
-    th.next = new ListNode(h.pop())
-    th = th.next
-  }
-
-  return head.next
-};
-class MinHeap {
-  constructor() {
-    this.heap = []
-  }
-
-  insert(num) {
-    this.heap.push(num)
-    this.shiftUp(this.heap.length - 1)
-  }
-
-  pop() {
-    this.swap(0, this.heap.length - 1)
-    this.heap.pop()
-    this.shiftDown(0)
-  }
-
-  peek() {
-    return this.heap[0]
-  }
-
-  size() {
-    return this.heap.length
-  }
-
-  shiftDown(i) {
-    const left = this.getLeftIndex(i)
-    const right = this.getRightIndex(i)
-    if (left < this.heap.length && this.heap[i] > this.heap[left]) {
-      this.swap(i, left)
-      this.shiftDown(left)
-    }
-    if (right < this.heap.length && this.heap[i] > this.heap[right]) {
-      this.swap(i, right)
-      this.shiftDown(right)
-    }
-  }
-
-  shiftUp(i) {
-    if (i === 0) return
-    const parentIndex = this.getParentIndex(i)
-    if (this.heap[parentIndex] > this.heap[i]) {
-      this.swap(parentIndex, i)
-      this.shiftUp(parentIndex)
-    }
-  }
-
-  swap(i, j) {
-    const t = this.heap[i]
-    this.heap[i] = this.heap[j]
-    this.heap[j] = t
-  }
-
-  getParentIndex(i) {
-    return Math.floor((i - 1) / 2)
-  }
-  getLeftIndex(i) {
-    return 2 * i + 1
-  }
-  getRightIndex(i) {
-    return 2 * i + 2
-  }
-}
-```
-
-利用归并思路实现
-
-```js
-// 时间复杂度：O(k * n)
+// 时间复杂度：O(n*k^2)
 // 空间复杂度：O(1)
-// k 是 list.lenght
-// n 是所有链表节点的个数
 var mergeKLists = function(lists) {
-  if(lists.length === 0) return null
-  if(lists.length === 1) return lists[0]
+  if(!lists.length) return null
+  const len = lists.length
   const head = new ListNode()
-  let t = head
-  let list1 = lists[0]
-  for(let i=1;i<lists.length;i++) {
-    let list2 = lists[i]
-    while(list1 && list2) {
-      if(list1.val < list2.val) {
-        t.next = list1
-        list1 = list1.next
-      } else {
-        t.next = list2
-        list2 = list2.next
-      }
-      t = t.next
-    }
-    if(list1) {
-      t.next = list1
-    }
-    if(list2) {
-      t.next = list2
-    }
-    list1 = head.next
-    t = head
+  head.next = lists[0]
+  for(let i=1;i<len;i++) {
+    head.next = merge(head.next, lists[i])
   }
   return head.next
 };
+
+function merge(list1, list2) {
+  const head = new ListNode()
+  let tHead = head
+  while(list1 && list2) {
+    if(list1.val < list2.val) {
+      tHead.next = list1
+      list1 = list1.next
+    } else {
+      tHead.next = list2
+      list2 = list2.next
+    }
+    tHead = tHead.next
+  }
+  if(list1) {
+    tHead.next = list1
+  }
+  if(list2) {
+    tHead.next = list2
+  }
+  return head.next
+}
 ```
 
 ## 🌟😻✔ 25 K 个一组翻转链表【hard】
@@ -2090,7 +2041,7 @@ var longestValidParentheses = function(s) {
 };
 ```
 
-## 🌟😻✔ 33 搜索旋转排序数组【medium】
+## ?🌟😻✔ 33 搜索旋转排序数组【medium】
 
 [ref](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
 
@@ -4545,7 +4496,31 @@ class MinHeap {
 }
 ```
 
-还有一个解法，时间复杂度稍微差点
+or
+
+```js
+// 时间复杂度：O(n*k) => O(n^2)
+// 空间复杂度：O(k)
+var topKFrequent = function(nums, k) {
+  const map = new Map()
+  const q = []
+  for(let num of nums) {
+    map.set(num, map.has(num)? map.get(num) + 1:1)
+  }
+  for(let [num, count] of map.entries()) {
+    let index = q.length - 1
+    while(q[index] && q[index].count < count) {
+      q[index + 1] = q[index]
+      index--
+    }
+    q[++index] = {num, count}
+    if(q.length > k) q.pop()
+  }
+  return q.map(_ => _.num)
+};
+```
+
+or 直接对次数排序
 
 ```js
 // 时间复杂度：O(nlogn) 快排
@@ -4603,25 +4578,19 @@ var intersection = function (nums1, nums2) {
 模拟法
 
 ```js
-// 时间复杂度：O()
+// 时间复杂度：O(log10n)
 // 空间复杂度：O(1)
 var findNthDigit = function(n) {
- let k = 0
- let count = 0
- while(count + (k + 1) * 9 * 10 ** k < n) {
-   count += (k + 1) * 9 * 10 ** k
-   k++
- }
- k++
- n -= count
- let num
- if(k === 1) {
-   num = n
- } else {
-   num = 10 ** (k - 1) + Math.floor((n - 1) / k)
- }
- const x = (n - 1) % k
- return Math.floor(num / 10 ** (k - 1 - x)) % 10
+  let k = 1
+  let count = 0
+  while(count + 9 * k * 10 ** (k - 1) < n) {
+    count += 9 * k * 10 ** (k - 1)
+    k++
+  }
+  n -= count
+  const targetNum = 10 ** (k - 1) + Math.floor((n - 1) / k)
+  const targetIndex = (n - 1) % k
+  return Math.floor(targetNum / 10 ** (k - targetIndex - 1)) % 10
 };
 ```
 
