@@ -32,6 +32,7 @@
 - 🌟【medium】[128 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
 - 🌟【medium】[33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
 - 🌟【medium】[560 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)
+- 🌟【medium】[剑指 Offer 04 二维数组中的查找](https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
 ## 栈、队列
 
@@ -58,6 +59,7 @@
 - 【easy】 [1 两数之和](https://leetcode.cn/problems/two-sum/)
 - 【medium】 [3 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 - 【hard】 [76 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
+- 【medium】 [567 字符串的排列](https://leetcode.cn/problems/permutation-in-string/)
 
 ## 树、深度优先、广度优先
 
@@ -118,6 +120,7 @@
 - 🌟【hard】 [10 正则表达式匹配](https://leetcode.cn/problems/regular-expression-matching/)
 - 🌟【hard】 [32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
 - 🌟【medium】 [152 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
+- 🌟【medium】 [剑指 Offer 13 机器人的运动范围](https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
 ## 贪心算法
 
@@ -4718,6 +4721,57 @@ var subarraySum = function(nums, k) {
 };
 ```
 
+## 😻✔ 567 字符串的排列【medium】
+
+[ref](https://leetcode.cn/problems/permutation-in-string/)
+
+滑动窗口
+
+```js
+// m = s1.length, n = s2.length
+// 时间复杂度：O(m + n)
+// 时间复杂度：O(m)
+var checkInclusion = function(s1, s2) {
+  if(s2.length < s1.length) return false
+  const len = s1.length
+  const map = new Map()
+  let typeCount = 0
+  for(let i=0;i<len;i++) {
+    if(map.has(s1[i])) {
+      map.set(s1[i], map.get(s1[i]) + 1)
+    } else {
+      map.set(s1[i], 1)
+      typeCount ++
+    }
+  }
+  for(let i=0;i<len;i++) {
+    if(map.has(s2[i])) {
+      map.set(s2[i], map.get(s2[i]) - 1)
+      if(map.get(s2[i]) === 0) {
+        typeCount--
+      }
+    }
+  }
+  if(typeCount === 0) return true
+  for(let i=len;i<s2.length;i++) {
+    if(map.has(s2[i])) {
+      map.set(s2[i], map.get(s2[i]) - 1)
+      if(map.get(s2[i]) === 0) {
+        typeCount--
+      }
+    }
+    if(map.has(s2[i - len])) {
+      map.set(s2[i - len], map.get(s2[i - len]) + 1)
+      if(map.get(s2[i - len]) === 1) {
+        typeCount++
+      }
+    }
+    if(typeCount === 0) return true
+  }
+  return false
+};
+```
+
 ## ✔ 575 分糖果【easy】
 
 [ref](https://leetcode.cn/problems/distribute-candies/)
@@ -4906,6 +4960,60 @@ var canReach = function(arr, start) {
 
 ```
 
+## 🌟😻✔ 剑指 Offer 04. 二维数组中的查找【medium】
+
+[ref](https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
+
+```js
+// 普通版
+var findNumberIn2DArray = function(matrix, target) {
+  if(!matrix.length) return false
+  const m = matrix.length
+  const n = matrix[0].length
+  for(let j = n - 1; j >= 0; j--) {
+    if(target === matrix[0][j]) {
+      return true
+    } else if(target < matrix[0][j]) {
+      continue
+    } else {
+      for(let i = 1; i < m; i++) {
+        if(matrix[i][j] === target) {
+          return true
+        } else if(matrix[i][j] < target) {
+          continue
+        } else {
+          break
+        }
+      }
+    }
+  }
+  return false
+};
+```
+
+```js
+// 高效版
+// 时间复杂度：O(m+n)
+// 空间复杂度：O(1)
+var findNumberIn2DArray = function(matrix, target) {
+  if(!matrix.length || !matrix[0].length) return false
+  const m  = matrix.length
+  const n  = matrix[0].length
+  let i = 0
+  let j = n - 1
+  while(i < m && j >= 0) {
+    if(matrix[i][j] === target) {
+      return true
+    } else if(matrix[i][j] > target) {
+      j--
+    } else {
+      i++
+    }
+  }
+  return false
+};
+```
+
 ## ✔ 剑指 Offer 06. 从尾到头打印链表【easy】
 
 [ref](https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
@@ -4960,6 +5068,88 @@ CQueue.prototype.toOut = function() {
   }
 }
 ```
+
+## 😻✔ 剑指 Offer 13. 机器人的运动范围【medium】
+
+[ref](https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
+
+动态规划、递归
+
+```js
+// 动态规划、递推
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var movingCount = function(m, n, k) {
+  const dp = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  dp[0][0] = true
+  let count = 1
+  for(let i=1;i<m;i++) {
+    dp[i][0] = sum(i, 0) <= k && dp[i - 1][0]
+    dp[i][0] && count++
+  }
+  for(let j=1;j<n;j++) {
+    dp[0][j] = sum(0, j) <= k && dp[0][j - 1]
+    dp[0][j] && count++
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      dp[i][j] = sum(i, j) <= k && (
+        i - 1 >= 0 && dp[i - 1][j] ||
+        j - 1 >= 0 && dp[i][j - 1]
+      )
+      dp[i][j] && count++
+    }
+  }
+  return count
+};
+
+function sum(i, j) {
+  let s = 0
+  while(i>0) {
+    s += i % 10
+    i = Math.floor(i / 10)
+  }
+  while(j > 0) {
+    s += j % 10
+    j = Math.floor(j / 10)
+  }
+  return s
+}
+```
+
+```js
+// 递归
+// 时间复杂度：O(mn)
+// 空间复杂度：O(mn)
+var movingCount = function(m, n, k) {
+  let count = 0
+  const walked = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  function walk(i, j) {
+    if(i < m && j < n && sum(i, j) <= k && !walked[i][j]) {
+      walked[i][j] = true
+      count++
+      walk(i + 1, j)
+      walk(i, j + 1)
+    }
+  }
+  walk(0, 0)
+  return count
+};
+
+function sum(i, j) {
+  let s = 0
+  while(i > 0) {
+    s += i % 10
+    i = Math.floor(i / 10)
+  }
+  while(j > 0) {
+    s += j % 10
+    j = Math.floor(j / 10)
+  }
+  return s
+}
+```
+
 
 ## 🌟😻✔ 剑指 Offer 51 数组中的逆序对【medium】
 
