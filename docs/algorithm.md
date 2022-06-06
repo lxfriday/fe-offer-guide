@@ -10,10 +10,18 @@
 # 刷题日记
 
 - 20220602
-  - [🌟😻✔ 279 完全平方数【medium】](https://leetcode.cn/problems/perfect-squares/)
+  - ? [🌟【medium】 279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 - 20220604
-  - [🌟😻✔ 475 供暖器【medium】](https://leetcode.cn/problems/heaters/)
-  - 🌟【01背包】【medium】 [416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+  - ? [🌟【medium】 475 供暖器](https://leetcode.cn/problems/heaters/)
+  - ? [🌟【medium】【01背包】 416 分割等和子集 ](https://leetcode.cn/problems/partition-equal-subset-sum/)
+- 20220605
+  - ? [🌟【medium】 540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/) 二分
+  - [【medium】 24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/) 
+  - ? [🌟【medium】 209 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/) 滑动窗口、双指针、前缀数组
+  - ? [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/) 哈希
+  - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
+- 20220606
+  - ? [🌟【medium】 394 字符串解码](https://leetcode.cn/problems/decode-string/)
 
 # 刷题指南
 
@@ -38,6 +46,7 @@
 ## 字符串题
 
 - 🌟【medium】[8 字符串转换整数 (atoi)](https://leetcode.cn/problems/string-to-integer-atoi/)
+- 🌟【medium】[394 字符串解码](https://leetcode.cn/problems/decode-string/)
 
 ## 数组题 
 
@@ -46,6 +55,8 @@
 - 🌟【medium】[560 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)
 - 🌟【medium】[剑指 Offer 04 二维数组中的查找](https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 - 🌟【medium】[48 旋转图像](https://leetcode.cn/problems/rotate-image/)
+- 🌟【medium】[209 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+- 🌟【hard】[41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
 
 ## 栈、队列
 
@@ -62,6 +73,7 @@
 - 【easy】 [206 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 - 🌟【hard】[K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
 - 🌟【medium】[143 重排链表](https://leetcode.cn/problems/reorder-list/)
+- 【medium】[24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 
 ## 集合
 
@@ -138,6 +150,7 @@
 - 🌟【medium】 [152 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
 - 🌟【medium】 [剑指 Offer 13 机器人的运动范围](https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 - 🌟【01背包】【medium】 [416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+- 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
 
 ## 贪心算法
 
@@ -167,6 +180,8 @@
 - 🌟【medium】[33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
 - 🌟【medium】[34 在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
 - 🌟【medium】[475 供暖器](https://leetcode.cn/problems/heaters/)
+- 🌟【medium】[540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/)
+
 
 ## 模拟
 
@@ -1907,6 +1922,30 @@ function merge(list1, list2) {
 }
 ```
 
+## 😻✔ 24 两两交换链表中的节点【medium】
+
+[ref](https://leetcode.cn/problems/swap-nodes-in-pairs/)
+
+```js
+var swapPairs = function(head) {
+  let tHead = new ListNode()
+  tHead.next = head
+  let slow = tHead
+  let fast = tHead
+  while(fast.next && fast.next.next) {
+    const tPrevSlow = slow
+    slow = slow.next
+    fast = fast.next.next
+    const tFastNext = fast.next
+    tPrevSlow.next = fast
+    fast.next = slow
+    slow.next = tFastNext
+    fast = slow
+  }
+  return tHead.next
+};
+```
+
 ## 🌟😻✔ 25 K 个一组翻转链表【hard】
 
 [ref](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
@@ -2198,6 +2237,56 @@ function binarySearch(nums, target, lower) {
   }
   return resIndex
 }
+```
+
+## ?🌟😻✔ 41 缺失的第一个正数【hard】
+
+[]()
+
+数组、哈希
+
+```js
+// 原地哈希就相当于，让每个数字n都回到下标为n-1的家里。
+// 而那些没有回到家里的就成了孤魂野鬼流浪在外，他们要么是根本就没有自己的家（数字小于等于0或者大于nums.size()），要么是自己的家被别人占领了（出现了重复）。
+// 这些流浪汉被临时安置在下标为i的空房子里，之所以有空房子是因为房子i的主人i+1失踪了（数字i+1缺失）。
+// 因此通过原地构建哈希让各个数字回家，我们就可以找到原始数组中重复的数字还有消失的数字。
+// 时间复杂度：O(N)
+// 时间复杂度：O(1)
+var firstMissingPositive = function(nums) {
+ const len = nums.length
+ for(let i=0;i<len;i++) {
+   while(nums[i] - 1 >= 0 && nums[i] - 1 < len && nums[nums[i] - 1] !== nums[i]) {
+     swap(nums, i, nums[i] - 1)
+   }
+ }
+ for(let i=0;i<len;i++) {
+   if(i + 1 !== nums[i]) {
+     return i + 1
+   }
+ }
+ return len + 1
+};
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+
+```js
+// 常规思路
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var firstMissingPositive = function(nums) {
+  const s = new Set(nums)
+  let i=1
+  while(true) {
+    if(!s.has(i)) return i
+    i++
+  }
+};
 ```
 
 ## 🌟😻✔ 42 接雨水【hard】
@@ -2604,7 +2693,22 @@ var rotate = function(matrix) {
 // 3 0 => 0 0
 ```
 
+## ✔ 49 字母异位词分组【medium】
 
+[ref](https://leetcode.cn/problems/group-anagrams/)
+
+```js
+// 时间复杂度：O(NKlogK)
+// 空间复杂度：O(NK)
+var groupAnagrams = function(strs) {
+  const map = new Map()
+  for(let i=0;i<strs.length;i++) {
+    const hash = strs[i].split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('')
+    map.set(hash,map.has(hash) ? [...map.get(hash), strs[i]]: [strs[i]])
+  }
+  return Array.from(map.values())
+};
+```
 
 ## 🌟😻✔ 53 最大子数组和【easy】
 
@@ -3623,6 +3727,33 @@ var singleNumber = function(nums) {
 };
 ```
 
+## 😻✔ 139 单词拆分【medium】
+
+[ref](https://leetcode.cn/problems/word-break/)
+
+动态规划
+
+```js
+// 动态规划
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var wordBreak = function(s, wordDict) {
+  const wordSet = new Set(wordDict)
+  const sLen = s.length
+  const dp = new Array(sLen).fill(false)
+  
+  for(let i=0;i<sLen;i++) {
+    for(let j=i; j>=0; j--) {
+      if(wordSet.has(s.slice(j, i + 1))) {
+        dp[i] = dp[i] || (j - 1 >= 0 ? dp[j - 1] : true)
+      }
+    }
+  }
+
+  return dp[sLen - 1]
+};
+```
+
 ## 😻✔ 141 环形链表【easy】
 
 [ref](https://leetcode.cn/problems/linked-list-cycle/)
@@ -3991,6 +4122,53 @@ var reverseList = function (head) {
     t.next.next = prev
   }
   return t.next
+```
+
+## 😻✔ 209 长度最小的子数组【medium】
+
+[ref](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+
+滑动窗口
+
+
+```js
+// 双指针滑动窗口
+// 时间复杂度：O(N) start end 最多移动 N 次
+// 空间复杂度：O(1)
+var minSubArrayLen = function(target, nums) {
+  const len = nums.length
+  let sum = 0
+  let min = Number.MAX_SAFE_INTEGER
+  for(let start=0,end=0;end<len;end++) {
+    sum+=nums[end]
+    while(sum>=target) {
+      min = Math.min(end - start + 1, min)
+      sum-=nums[start]
+      start++
+    }
+  }
+  return min === Number.MAX_SAFE_INTEGER ? 0 : min
+};
+```
+
+```js
+// 暴力解法
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var minSubArrayLen = function(target, nums) {
+  let min = Number.MAX_SAFE_INTEGER
+  for(let i=0;i<nums.length;i++) {
+    let sum = 0
+    for(let j=i;j>=0;j--) {
+      sum += nums[j]
+      if(sum >= target) {
+        min = Math.min(min, i - j + 1)
+        break
+      }
+    }
+  }
+  return min === Number.MAX_SAFE_INTEGER ? 0 : min
+};
 ```
 
 ## 🌟😻✔ 215 数组中的第K个最大元素【medium】
@@ -4756,6 +4934,26 @@ var topKFrequent = function(nums, k) {
 };
 ```
 
+## ✔ 349 两个数组的交集【easy】
+
+[ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
+
+```js
+// 时间复杂度：O(M+N)
+// 空间复杂度：O(M+N)
+var intersection = function(nums1, nums2) {
+  const s1 =new Set(nums1)
+  const s2 =new Set(nums2)
+  const res = []
+  for(let v of s1.values()) {
+    if(s2.has(v)) {
+      res.push(v)
+    }
+  }
+  return res
+};
+```
+
 ## 😻✔ 374 猜数字大小【easy】
 
 [ref](https://leetcode.cn/problems/guess-number-higher-or-lower/)
@@ -4788,6 +4986,57 @@ var guessNumber = function(n) {
 ```js
 var intersection = function (nums1, nums2) {
   return [...new Set(nums1.filter(v => nums2.includes(v)))]
+}
+```
+
+## ?🌟😻✔ 394 字符串解码【medium】
+
+[ref](https://leetcode.cn/problems/decode-string/)
+
+字符串题、递归
+
+```js
+var decodeString = function(s) {
+  const len = s.length
+  let res = ''
+  for(let i=0;i<len;i++) {
+    if(s[i] >= 'a' && s[i] <= 'z') {
+      res+=s[i]
+    } else if(s[i] >= '1' && s[i] <= '9') {
+      let count = parseInt(s.slice(i), 10)
+      i += String(count).length
+      const j = searchEnd(s, i)
+      const temp = decodeString(s.slice(i + 1, j))
+      res+=gen(count, temp)
+      i=j
+    }
+  }
+  return res
+};
+
+// 生成字符串
+function gen(count, temp) {
+  let res = ''
+  for(let i=0;i<count;i++) {
+    res+=temp
+  }
+  return res
+}
+
+// 从 i 开始，搜索 i 的结束括号 j
+function searchEnd(s, i) {
+  let leftCount = 0
+  while(i<s.length) {
+    if(s[i] === '[') {
+      leftCount++
+    } else if(s[i] === ']') {
+      leftCount--
+    }
+    if(leftCount === 0) {
+      return i
+    }
+    i++
+  }
 }
 ```
 
@@ -4970,6 +5219,40 @@ function binarySearch(heaters, target) {
 }
 ```
 
+## 🌟😻✔ 540 有序数组中的单一元素【medium】
+
+[ref](https://leetcode.cn/problems/single-element-in-a-sorted-array/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var singleNonDuplicate = function(nums) {
+  const len = nums.length
+  let l = 0,r=nums.length - 1
+  while(l<r) {
+    const mid = Math.floor((l + r) / 2)
+    if(mid % 2 === 0) {
+      if(mid + 1 < len && nums[mid] === nums[mid + 1]) {
+        l = mid + 2
+      } else {
+        r = mid
+      }
+    } else {
+      if(mid - 1 >= 0 && nums[mid] === nums[mid - 1]) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    }
+  }
+  return nums[r]
+};
+
+```
+
+
 ## 🌟😻✔ 543 二叉树的直径【easy】
 
 [ref](https://leetcode.cn/problems/diameter-of-binary-tree/)
@@ -5111,6 +5394,125 @@ var search = function(nums, target) {
     }
   }
   return -1
+};
+```
+
+## 😻✔ 707 设计链表【medium】
+
+[ref](https://leetcode.cn/problems/design-linked-list/)
+
+链表
+
+```js
+function Node(val, next) {
+  this.val = val
+  this.next = next || null
+}
+
+var MyLinkedList = function() {
+ this.head = new Node()
+ this.tail = new Node()
+ this.size = 0
+};
+
+/** 
+ * @param {number} index
+ * @return {number}
+ */
+MyLinkedList.prototype.get = function(index) {
+  if(index<0 || index>= this.size) return -1
+  let tHead = this.head
+  let i = 0
+  while(tHead) {
+    if(i === index) {
+      return tHead.next.val
+    } else {
+      tHead = tHead.next
+      i++
+    }
+  }
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function(val) {
+  const first = this.head.next
+  this.head.next = new Node(val, first)
+  this.size++
+  if(!first) {
+    this.tail.next = this.head.next
+  }
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function(val) {
+  if(this.tail.next) {
+    const newEnd = new Node(val)
+    this.tail.next.next = newEnd
+    this.tail.next = newEnd
+  } else {
+    const node = new Node(val)
+    this.head.next = node
+    this.tail.next = node
+  }
+  this.size++
+};
+
+/** 
+ * @param {number} index 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+  if(index<0) {
+    this.addAtHead(val)
+    return
+  }
+  let i = 0
+  let tHead = this.head
+  while(tHead) {
+    if(i === index) {
+      const next = tHead.next
+      tHead.next = new Node(val, next)
+      if(index === this.size) {
+        this.tail.next = tHead.next
+      }
+      this.size++
+      break
+    } else {
+      tHead = tHead.next
+      i++
+    }
+  }
+};
+
+/** 
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function(index) {
+  if(index<0 || index>= this.size) return
+  let i = 0
+  let tHead = this.head
+  while(tHead) {
+    if(i === index) {
+      const next = tHead.next.next
+      tHead.next = next
+      if(index === this.size - 1) {
+        this.tail.next = tHead
+      }
+      this.size--
+      break
+    } else {
+      tHead = tHead.next
+      i++
+    }
+  }
 };
 ```
 
