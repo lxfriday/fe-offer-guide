@@ -38,6 +38,15 @@
 - 20220608
   - [🌟【medium】 82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
   - [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
+- 20220609
+  - [【medium】 343 整数拆分](https://leetcode.cn/problems/integer-break/)
+  - ? [🌟【hard】 84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
+  - ? [🌟【medium】 179 最大数](https://leetcode.cn/problems/largest-number/)
+  - ? [🌟【medium】 189 轮转数组](https://leetcode.cn/problems/rotate-array/)
+  - [🌟【easy】 202. 快乐数](https://leetcode.cn/problems/happy-number/)
+- 20220610
+  - ? [🌟【hard】 85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+
 
 # 刷题指南
 
@@ -59,6 +68,11 @@
 - 回溯算法
 - 模拟
 
+## 数字大小题
+
+- 🌟【medium】[179 最大数](https://leetcode.cn/problems/largest-number/)
+
+
 ## 字符串题
 
 - 🌟【medium】[8 字符串转换整数 (atoi)](https://leetcode.cn/problems/string-to-integer-atoi/)
@@ -75,6 +89,10 @@
 - 🌟【hard】[41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
 - 🌟【medium】[剑指 Offer 29 顺时针打印矩阵](https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
 - 🌟【easy】[977 有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/) 
+- 🌟【hard】[84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
+- 🌟【medium】[189 轮转数组](https://leetcode.cn/problems/rotate-array/)
+- 🌟【hard】[85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+
 
 ## 模拟
 
@@ -181,6 +199,7 @@
 - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
 - 【medium】 [剑指 Offer 46 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
 - 🌟【01背包】【medium】 [322 零钱兑换](https://leetcode.cn/problems/coin-change/)
+- 【medium】 [343 整数拆分](https://leetcode.cn/problems/integer-break/)
 
 ## 贪心算法
 
@@ -3204,6 +3223,78 @@ var deleteDuplicates = function (head) {
 }
 ```
 
+## ?🌟😻✔ 84 柱状图中最大的矩形【hard】
+
+[ref](https://leetcode.cn/problems/largest-rectangle-in-histogram/)
+
+单调栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var largestRectangleArea = function(heights) {
+  heights = [0, ...heights, 0]
+  let max = 0
+  const q = [0]
+  for(let i=1;i<heights.length;i++) {
+    while(heights[i] < heights[q[q.length - 1]]) {
+      const h = heights[q.pop()]
+      const w = i - q[q.length - 1] - 1
+      max = Math.max(max, w * h)
+    }
+    if(heights[i] >= heights[q[q.length - 1]]) {
+      q.push(i)
+    }
+  }
+  return max
+};
+```
+
+## ?🌟😻✔ 85 最大矩形【hard】
+
+[ref](https://leetcode.cn/problems/maximal-rectangle/)
+
+单调栈
+
+相关请看 84 题
+
+```js
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var maximalRectangle = function(matrix) {
+  if(!matrix.length || !matrix[0].length) return 0
+  const m = matrix.length
+  const n = matrix[0].length
+  const left = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(matrix[i][j] === '1') {
+        left[i][j] = (j - 1 >= 0 ? left[i][j - 1] : 0) + 1
+      }
+    }
+  }
+  // 给每列加前导0和后置0，具体原因请看
+  // #84 https://leetcode.cn/problems/largest-rectangle-in-histogram/
+  // 前导0可以用于 w 宽度计算时的左边界
+  // 后置0可以用于清空q栈，q是必须要清空的，如果不加后置0，则对于递增的高度需要做额外的后置处理
+  left.unshift(new Array(n).fill(0))
+  left.push(new Array(n).fill(0))
+  let max = 0
+  for(let j=0;j< n;j++) {
+    const q = []
+    for(let i=0;i<m + 2;i++) {
+      while(q.length - 1 >= 0 && left[q[q.length - 1]][j] > left[i][j]) {
+        const h = left[q.pop()][j]
+        const w = i - q[q.length - 1] - 1
+        max = Math.max(max, w * h)
+      }
+      q.push(i)
+    }
+  }
+  return max
+};
+```
+
 ## ✔ 88 合并两个有序数组【easy】
 
 [ref](https://leetcode.cn/problems/merge-sorted-array/)
@@ -4276,6 +4367,20 @@ var majorityElement = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 179 最大数【medium】
+
+[ref](https://leetcode.cn/problems/largest-number/)
+
+数学理论
+
+```js
+var largestNumber = function(nums) {
+  nums.sort((x, y) => (String(y) + String(x)) - (String(x) + String(y)))
+  if (nums[0] === 0) return '0'
+  return nums.join('');
+};
+```
+
 ## 😻✔ 188 买卖股票的最佳时机 IV【hard】
 
 [ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/)
@@ -4298,6 +4403,37 @@ var maxProfit = function(k, prices) {
     }
   }
   return Math.max(...dp[prices.length - 1])
+};
+```
+
+## ?🌟😻✔ 189 轮转数组【medium】
+
+[ref](https://leetcode.cn/problems/rotate-array/)
+
+数组轮转、数组原地操作、规律题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var rotate = function(nums, k) {
+  const len = nums.length
+  k = k % len
+  let count = 0
+  for(let i=0;i<len;i++) {
+    let prevI = (i + k) % len
+    let prevV = nums[prevI]
+    nums[prevI] = nums[i]
+    count++
+    while(prevI !== i) {
+      const targetI = (prevI + k) % len
+      const targetV = nums[targetI]
+      nums[targetI] = prevV
+      prevI = targetI
+      prevV = targetV
+      count++
+      if(count === len) return
+    }
+  }
 };
 ```
 
@@ -4378,6 +4514,31 @@ var numIslands = function(grid) {
 
   return count
 };
+```
+
+## ✔ 202 快乐数【easy】
+
+[ref](https://leetcode.cn/problems/happy-number/)
+
+```js
+var isHappy = function(n) {
+  const set = new Set()
+  while(true) {
+    let newN = 0
+    n.toString().split('').forEach(v => {
+      newN += Number(v) ** 2
+    })
+    if(newN === 1) {
+      return true
+    } else if(set.has(newN)) {
+      return false
+    } else {
+      set.add(newN)
+      n = newN
+    }
+  }
+};
+
 ```
 
 ## 🌟😻✔ 206 反转链表【easy】
@@ -5103,6 +5264,29 @@ var coinChange = function(coins, amount) {
 };
 ```
 
+## 😻✔ 343 整数拆分【medium】
+
+[ref](https://leetcode.cn/problems/integer-break/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var integerBreak = function(n) {
+  const dp = new Array(n + 1).fill(1)
+  dp[0] = 1
+  dp[1] = 1
+  dp[2] = 1
+  for(let i=3;i<=n;i++) {
+    for(j = 1;j<i;j++) {
+      dp[i] = Math.max(dp[i], j * (i - j), j * dp[i - j])
+    }
+  }
+  return dp[n]
+};
+```
+
 ## 😻✔ 347 前 K 个高频元素【medium】
 
 [ref](https://leetcode.cn/problems/top-k-frequent-elements/)
@@ -5366,6 +5550,32 @@ var findNthDigit = function(n) {
 ## ?🌟😻✔ 402 移掉 K 位数字【medium】
 
 [ref](https://leetcode.cn/problems/remove-k-digits/)
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(N)
+var removeKdigits = function(num, k) {
+  const stack = []
+  let l = 0
+  while(l < num.length) {
+    while(stack.length - 1 >= 0 && num[l] < stack[stack.length - 1] && k > 0) {
+      stack.pop()
+      k--
+    }
+    stack.push(num[l])
+    l++
+  }
+  while(k > 0) {
+    stack.pop()
+    k--
+  }
+  while(stack[0] === '0') {
+    stack.shift()
+  }
+  if(!stack.length) return '0'
+  return stack.join('')
+};
+```
 
 ```js
 // 时间复杂度：O(N)
