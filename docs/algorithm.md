@@ -46,7 +46,15 @@
   - [🌟【easy】 202. 快乐数](https://leetcode.cn/problems/happy-number/)
 - 20220610
   - ? [🌟【hard】 85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
-
+  - ? [🌟【medium】 剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
+  - ? [🌟【medium】 739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+  - ? [🌟【hard】 440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+  - [【medium】 62 不同路径](https://leetcode.cn/problems/unique-paths/)
+- 20220611
+  - ? [🌟【medium】 1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
+- 20220616
+  - ? [🌟【hard】 51 N 皇后](https://leetcode.cn/problems/n-queens/)
+  - ? [🌟【hard】 37 解数独](https://leetcode.cn/problems/sudoku-solver/)
 
 # 刷题指南
 
@@ -71,6 +79,7 @@
 ## 数字大小题
 
 - 🌟【medium】[179 最大数](https://leetcode.cn/problems/largest-number/)
+- 🌟【medium】[剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
 
 
 ## 字符串题
@@ -92,6 +101,7 @@
 - 🌟【hard】[84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
 - 🌟【medium】[189 轮转数组](https://leetcode.cn/problems/rotate-array/)
 - 🌟【hard】[85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+- 🌟【medium】[739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
 
 
 ## 模拟
@@ -130,6 +140,7 @@
 - 【medium】 [3 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 - 【hard】 [76 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
 - 【medium】 [567 字符串的排列](https://leetcode.cn/problems/permutation-in-string/)
+- 🌟【hard】 [440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
 
 ## 树、深度优先、广度优先
 
@@ -200,6 +211,9 @@
 - 【medium】 [剑指 Offer 46 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
 - 🌟【01背包】【medium】 [322 零钱兑换](https://leetcode.cn/problems/coin-change/)
 - 【medium】 [343 整数拆分](https://leetcode.cn/problems/integer-break/)
+- 【medium】 [62 不同路径](https://leetcode.cn/problems/unique-paths/)
+- 🌟【medium】 [1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
+
 
 ## 贪心算法
 
@@ -219,6 +233,9 @@
 - 【medium】 [22 括号生成](https://leetcode.cn/problems/generate-parentheses/)
 - 🌟【medium】 [93 复原 IP 地址](https://leetcode.cn/problems/restore-ip-addresses/)
 - 【medium】 [17 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+- 🌟【hard】 [51 N 皇后](https://leetcode.cn/problems/n-queens/)
+- 🌟【hard】 [37 解数独](https://leetcode.cn/problems/sudoku-solver/)
+
 
 ## 二分查找、二分搜索
 
@@ -2329,6 +2346,80 @@ function binarySearch(nums, target, lower) {
 }
 ```
 
+## ?🌟😻✔ 37 解数独【hard】
+
+[ref](https://leetcode.cn/problems/sudoku-solver/)
+
+同[#51 N皇后](https://leetcode.cn/problems/n-queens/)问题比较类似
+
+回溯、枚举
+
+```js
+// 基本上只要是涉及到枚举的，都可以用下面的这种方式，解法同样适用于 N 皇后问题
+// 先扫描矩阵，把矩阵中的数字填充到其对应的行、列、3x3 宫格中，用于后续填充数字时的冲突检测
+// 后面用 dfs 枚举每个空格处能填充的数字，且 dfs 会返回一个布尔值
+// 表示当前位置填充对应数字之后后续 dfs 能否成功把九宫格填满，返回 true 就表示填满了，那就直接也返回 true
+// 这题需要用原地修改的处理方式，所以直接 return 用来阻断后续的枚举
+// 另外我使用了 matrixIndex 来表示九宫格格中对应的位置，这样可以避免 i 或者 j 到头之后难以找到下一个 i j 的问题
+// matrixIndex 能直接推断出 i j，而 matrixIndex 最大为 n ** 2 - 1 = 80
+var solveSudoku = function(board) {
+  const rows = new Array(9).fill(0).map(_ => new Set())
+  const cols = new Array(9).fill(0).map(_ => new Set())
+  const blocks = new Array(9).fill(0).map(_ => new Set())
+
+  for(let i=0;i<9;i++) {
+    for(let j=0;j<9;j++) {
+      if(board[i][j] !== '.') {
+        rows[i].add(board[i][j])
+        cols[j].add(board[i][j])
+        blocks[Math.floor(i / 3) * 3 + Math.floor(j / 3)].add(board[i][j])
+      }
+    }
+  }
+
+  function dfs(matrixIndex) {
+    let i = Math.floor(matrixIndex / 9)
+    let j = matrixIndex - i * 9
+    while(matrixIndex < 81 && board[i][j] !== '.') {
+      matrixIndex ++
+      i = Math.floor(matrixIndex / 9)
+      j = matrixIndex - i * 9
+    }
+
+    if(matrixIndex === 81) {
+      return true
+    } else {
+      for(let num = 1;num<=9;num++) {
+        const numStr = String(num)
+        const blockIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3)
+        if(
+          !rows[i].has(numStr) &&
+          !cols[j].has(numStr) &&
+          !blocks[blockIndex].has(numStr)
+        ) {
+          board[i][j] = numStr
+          rows[i].add(numStr)
+          cols[j].add(numStr)
+          blocks[blockIndex].add(numStr)
+
+          if(dfs(matrixIndex + 1)) {
+            return true
+          } else {
+            board[i][j] = '.'
+            rows[i].delete(numStr)
+            cols[j].delete(numStr)
+            blocks[blockIndex].delete(numStr)
+          }
+        }
+      }
+      return false
+    }
+  }
+
+  dfs(0)
+};
+```
+
 ## ?🌟😻✔ 41 缺失的第一个正数【hard】
 
 [ref](https://leetcode.cn/problems/first-missing-positive/)
@@ -2800,6 +2891,71 @@ var groupAnagrams = function(strs) {
 };
 ```
 
+## ?🌟😻✔ 51 N 皇后【hard】
+
+[ref](https://leetcode.cn/problems/n-queens/)
+
+回溯、枚举
+
+```js
+var solveNQueens = function(n) {
+  const rows = new Set()
+  const cols = new Set()
+  // 对称轴左上
+  const leftTop = new Set()
+  // 对称轴右上
+  const rightTop = new Set()
+  const preRes = []
+
+  function dfs(matrixIndex, path, k) {
+    if(k === 0) {
+      preRes.push([...path])
+      return
+    }
+    if(matrixIndex >= n ** 2) {
+      return
+    }
+
+    let i = Math.floor(matrixIndex / n)
+    let j = matrixIndex - i * n
+    if(
+      !rows.has(i) &&
+      !cols.has(j) &&
+      !leftTop.has(i + j) &&
+      !rightTop.has(j - i)
+    ) {
+      path.push(matrixIndex)
+      rows.add(i)
+      cols.add(j)
+      leftTop.add(i + j)
+      rightTop.add(j - i)
+
+      dfs(matrixIndex + 1, path, k - 1)
+
+      path.pop()
+      rows.delete(i)
+      cols.delete(j)
+      leftTop.delete(i + j)
+      rightTop.delete(j - i)
+    }
+    dfs(matrixIndex + 1, path, k)
+  }
+
+  dfs(0, [],  n)
+  const res = []
+  preRes.forEach(_ => {
+    const tplArr = new Array(n).fill(0).map(_ => new Array(n).fill('.'))
+    for(let ind of _) {
+      let i = Math.floor(ind / n)
+      let j = ind - i * n
+      tplArr[i][j] = 'Q'
+    }
+    res.push(tplArr.map(__ => __.join('')))
+  })
+  return res
+};
+```
+
 ## 🌟😻✔ 53 最大子数组和【easy】
 
 [ref](https://leetcode.cn/problems/maximum-subarray/)
@@ -2953,6 +3109,33 @@ var merge = function(intervals) {
   }
   res.push(intervals.shift())
   return res
+};
+```
+
+## 😻✔ 62 不同路径【medium】
+
+[ref](https://leetcode.cn/problems/unique-paths/)
+
+动态规划
+
+```js
+// 时间复杂度：O(mn)
+// 空间复杂度：O(mn)
+var uniquePaths = function(m, n) {
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  dp[0][0] = 1
+  for(let i=1;i<m;i++) {
+    dp[i][0] = dp[i - 1][0]
+  }
+  for(let j=1;j<n;j++) {
+    dp[0][j] = dp[0][j - 1]
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+    } 
+  }
+  return dp[m - 1][n - 1]
 };
 ```
 
@@ -5718,6 +5901,46 @@ var pacificAtlantic = function(heights) {
 };
 ```
 
+## ?🌟😻✔ 440 字典序的第K小数字【hard】
+
+[ref](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+
+字典序、字典树
+
+```js
+// 字典序
+// 时间复杂度：O()
+// 空间复杂度：O()
+var findKthNumber = function(n, k) {
+  let s = 1
+  k--
+  while(k>0) {
+    const count = getCount(s, n)
+    if(count < k) {
+      s++
+      k-=count
+    } else {
+      s*=10
+    }
+    k--
+  }
+  return s
+};
+
+function getCount(s, n) {
+  let min = 10 * s
+  let max = 10 * s + 9
+  let count = 0
+  while(max <= n) {
+    count += max - min + 1
+    min = 10 * min
+    max = 10 * max + 9
+  }
+  count += Math.max(0, n - min + 1)
+  return count
+}
+```
+
 ## 😻✔ 455 分发饼干【easy】
 
 [ref](https://leetcode.cn/problems/assign-cookies/)
@@ -5741,7 +5964,7 @@ var findContentChildren = function(g, s) {
 };
 ```
 
-## 🌟😻✔ 475 供暖器【medium】
+## ?🌟😻✔ 475 供暖器【medium】
 
 [ref](https://leetcode.cn/problems/heaters/)
 
@@ -6152,6 +6375,34 @@ var maxProfit = function(prices, fee) {
 ```
 
 
+## ?🌟😻✔ 739. 每日温度【medium】
+
+[ref](https://leetcode.cn/problems/daily-temperatures/)
+
+单调栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var dailyTemperatures = function(temperatures) {
+  const len = temperatures.length
+  const res = new Array(len).fill(0)
+  const s = []
+  for(let i = len - 1;i>=0;i--) {
+    while(s.length && temperatures[s[s.length - 1]] <= temperatures[i]) {
+      s.pop()
+    }
+    if(s.length) {
+      res[i] = s[s.length - 1] - i
+    } else {
+      res[i] = 0
+    }
+    s.push(i)
+  }
+  return res
+};
+```
+
 ## ✔ 933 最近的请求次数【easy】
 
 [ref](https://leetcode.cn/problems/number-of-recent-calls/)
@@ -6223,6 +6474,44 @@ var sortedSquares = function(nums) {
     }
   }
   return res
+};
+```
+
+## ?🌟😻✔ 1143 最长公共子序列【medium】
+
+[ref](https://leetcode.cn/problems/longest-common-subsequence/)
+
+子序列问题，动态规划
+
+```js
+var longestCommonSubsequence = function(text1, text2) {
+  const m = text1.length
+  const n = text2.length
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<m;i++) {
+    if(text1[i] === text2[0]) {
+      dp[i][0] = 1
+    } else {
+      dp[i][0] = i - 1 >= 0 ?dp[i - 1][0] : 0
+    }
+  }
+  for(let j=0;j<n;j++) {
+    if(text1[0] === text2[j]) {
+      dp[0][j] = 1
+    } else {
+      dp[0][j] = j - 1 >= 0 ?dp[0][j - 1] : 0
+    }
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      if(text1[i] === text2[j]) {
+        dp[i][j] = 1 + dp[i - 1][j - 1]
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+      }
+    }
+  }
+  return dp[m - 1][n - 1]
 };
 ```
 
@@ -6577,40 +6866,16 @@ var spiralOrder = function(matrix) {
 // m=4 n=3
 ```
 
-## 😻✔ 剑指 Offer 51 数组中的逆序对【medium】
+## ?🌟😻✔ 剑指 Offer 45 把数组排成最小的数【medium】
 
-[ref](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
+[ref](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
+
+同 [#179 最大数](https://leetcode.cn/problems/largest-number/)
 
 ```js
-// 动态规划
-// 时间复杂度：O(N)
-// 空间复杂度：O(N)
-var translateNum = function(num) {
-  const s = num.toString()
-  const len = s.length
-  const dp = []
-  dp[0] = 1
-  for(let i=1;i<len;i++) {
-    if(s[i] >= '0' && s[i] <= '5') {
-      if(s[i-1] === '1' || s[i-1] === '2') {
-        dp[i] = (i - 2 >= 0 ? dp[i - 2]: 1) + dp[i - 1]
-      } else {
-        dp[i] = dp[i - 1]
-      }
-    }
-    if(s[i] >= '6') {
-      if(s[i-1] === '1') {
-        dp[i] = (i - 2 >= 0 ? dp[i - 2]: 1) + dp[i - 1]
-      } else {
-        dp[i] = dp[i - 1]
-      }
-    }
-  }
-  return dp[len-1]
+var minNumber = function(nums) {
+  return nums.sort((x, y) => ('' + x + y) - ('' + y + x)).join('')
 };
-
-// 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-// a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
 ```
 
 ## 🌟😻✔ 剑指 Offer 51 数组中的逆序对【hard】
