@@ -55,6 +55,13 @@
 - 20220616
   - ? [🌟【hard】 51 N 皇后](https://leetcode.cn/problems/n-queens/)
   - ? [🌟【hard】 37 解数独](https://leetcode.cn/problems/sudoku-solver/)
+- 20220620
+  - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+- 20220623
+  - 🌟【medium】[213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+  - ? [🌟【medium】 337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
+  - [🌟【medium】 剑指 Offer 40 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
+  - [【medium】 695 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/)
 
 # 刷题指南
 
@@ -86,6 +93,7 @@
 
 - 🌟【medium】[8 字符串转换整数 (atoi)](https://leetcode.cn/problems/string-to-integer-atoi/)
 - 🌟【medium】[394 字符串解码](https://leetcode.cn/problems/decode-string/)
+- 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
 
 ## 数组题 
 
@@ -213,7 +221,8 @@
 - 【medium】 [343 整数拆分](https://leetcode.cn/problems/integer-break/)
 - 【medium】 [62 不同路径](https://leetcode.cn/problems/unique-paths/)
 - 🌟【medium】 [1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
-
+- 🌟【medium】 [213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+- 🌟【medium】 [337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
 
 ## 贪心算法
 
@@ -4789,6 +4798,31 @@ var minSubArrayLen = function(target, nums) {
 };
 ```
 
+## 🌟😻✔ 213 打家劫舍 II【medium】
+
+[ref](https://leetcode.cn/problems/house-robber-ii/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rob = function(nums) {
+  const len = nums.length
+  if(len === 1) return nums[0]
+  const dp1 = new Array(len).fill(0)
+  const dp2 = new Array(len - 1).fill(0)
+  dp1[0] = nums[0]
+  dp1[1] = Math.max(nums[0], nums[1])
+  dp2[0] = nums[1]
+  for(let i=2;i<len;i++) {
+    dp1[i] = Math.max(dp1[i - 1], (i - 2 >=0 ? dp1[i - 2] : 0) + nums[i])
+    dp2[i-1] = Math.max(dp2[i - 2], (i - 3 >=0 ? dp2[i - 3] : 0) + nums[i])
+  }
+  return Math.max(dp1[len - 2], dp2[len - 2])
+};
+```
+
 ## 🌟😻✔ 215 数组中的第K个最大元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
@@ -5656,6 +5690,32 @@ var intersection = function (nums1, nums2) {
 }
 ```
 
+## ?🌟😻✔ 337 打家劫舍 III【medium】
+
+[ref](https://leetcode.cn/problems/house-robber-iii/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rob = function(root) {
+  const s = new Map()
+  const notS = new Map()
+
+  function dfs(node) {
+    node.left && dfs(node.left)
+    node.right && dfs(node.right)
+    notS.set(node,(s.get(node.left) || 0) + (s.get(node.right) || 0))
+    s.set(node, Math.max(
+      node.val + ((notS.get(node.left) || 0) + (notS.get(node.right) || 0)),
+      notS.get(node)
+    ))
+  }
+
+  dfs(root)
+  return s.get(root)
+};
+```
+
 ## ?🌟😻✔ 394 字符串解码【medium】
 
 [ref](https://leetcode.cn/problems/decode-string/)
@@ -6189,6 +6249,49 @@ var findDuplicateSubtrees = function(root) {
 };
 ```
 
+## 😻✔ 695 岛屿的最大面积【medium】
+
+[ref](https://leetcode.cn/problems/max-area-of-island/)
+
+```js
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+var maxAreaOfIsland = function(grid) {
+  const m = grid.length
+  const n = grid[0].length
+  const used = new Array(m).fill(false).map(() => new Array(n).fill(false))
+  let max = 0
+
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1 && !used[i][j]) {
+        max = Math.max(calc(i, j), max)
+      }
+    }
+  }
+
+  function calc(i, j) {
+    let sum = 1
+    used[i][j] = true
+    if(i - 1 >= 0 && !used[i - 1][j] && grid[i - 1][j] === 1) {
+      sum += calc(i - 1, j)
+    }
+    if(i + 1 <  m && !used[i + 1][j] && grid[i + 1][j] === 1) {
+      sum += calc(i + 1, j)
+    }
+    if(j - 1 >= 0 && !used[i][j - 1] && grid[i][j - 1] === 1) {
+      sum += calc(i,j - 1)
+    }
+    if(j + 1 < n  && !used[i][j + 1] && grid[i][j + 1] === 1) {
+      sum += calc(i, j + 1)
+    }
+    return sum
+  }
+
+  return max
+};
+```
+
 ## 😻✔ 704 二分查找【easy】
 
 [ref](https://leetcode.cn/problems/binary-search/)
@@ -6371,6 +6474,35 @@ var maxProfit = function(prices, fee) {
     dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i])
   }
   return dp[prices.length - 1][0]
+};
+```
+
+## ?🌟😻✔ 763 划分字母区间【medium】
+
+[ref](https://leetcode.cn/problems/partition-labels/)
+
+字符串、区间、关联线段
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var partitionLabels = function(s) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], i)
+  }
+  const res = []
+  let endIndex = 0
+  let beginIndex = 0
+  for(let i=0;i<s.length;i++) {
+    const w = s[i]
+    endIndex = Math.max(map.get(w), endIndex)
+    if(i === endIndex) {
+      res.push(endIndex - beginIndex + 1)
+      beginIndex = i + 1
+    }
+  }
+  return res
 };
 ```
 
@@ -6864,6 +6996,35 @@ var spiralOrder = function(matrix) {
 // 5 6  7  8
 // 9 10 11 12
 // m=4 n=3
+```
+
+## 🌟😻✔ 剑指 Offer 40 最小的k个数【medium】
+
+[ref](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
+
+单调队列、小顶堆
+
+```js
+// 时间复杂度：O(N^2)
+// 时间复杂度：O(N)
+var getLeastNumbers = function(arr, k) {
+  const res = []
+  for(let i=0;i<arr.length;i++) {
+    res.push(arr[i])
+    let j = res.length - 1
+    while(j - 1 >= 0 && res[j] < res[j - 1]) {
+      swap(res, j, j - 1)
+      j--
+    }
+    if(res.length > k) res.pop()
+  }
+  return res
+};
+function swap(arr, i, j) {
+  let t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
 ```
 
 ## ?🌟😻✔ 剑指 Offer 45 把数组排成最小的数【medium】
