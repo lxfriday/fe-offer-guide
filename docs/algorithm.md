@@ -62,6 +62,17 @@
   - ? [🌟【medium】 337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
   - [🌟【medium】 剑指 Offer 40 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
   - [【medium】 695 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/)
+- 20220624
+  - ? [🌟【medium】 380 O(1) 时间插入、删除和获取随机元素](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
+- 20220627
+  - ? [🌟【medium】 79 单词搜索](https://leetcode.cn/problems/word-search/solution/dan-ci-sou-suo-by-leetcode-solution/)
+- 20220628
+  - [🌟【easy】 268 丢失的数字](https://leetcode.cn/problems/missing-number/)
+- 20220629
+  - [🌟【medium】 494 目标和](https://leetcode.cn/problems/target-sum/)
+  - [【medium】 165 比较版本号](https://leetcode.cn/problems/compare-version-numbers/)
+- 20220630
+  - [🌟【medium】 240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
 
 # 刷题指南
 
@@ -110,7 +121,7 @@
 - 🌟【medium】[189 轮转数组](https://leetcode.cn/problems/rotate-array/)
 - 🌟【hard】[85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
 - 🌟【medium】[739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
-
+- 🌟【medium】[240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
 
 ## 模拟
 
@@ -244,7 +255,8 @@
 - 【medium】 [17 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
 - 🌟【hard】 [51 N 皇后](https://leetcode.cn/problems/n-queens/)
 - 🌟【hard】 [37 解数独](https://leetcode.cn/problems/sudoku-solver/)
-
+- 🌟【medium】 [79 单词搜索](https://leetcode.cn/problems/word-search/solution/dan-ci-sou-suo-by-leetcode-solution/)
+- 🌟【medium】[494 目标和](https://leetcode.cn/problems/target-sum/)
 
 ## 二分查找、二分搜索
 
@@ -1239,6 +1251,23 @@ function ListNode(val, next) {
 [ref](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 滑动窗口、字典
+
+```js
+var lengthOfLongestSubstring = function(s) {
+  let max = 0
+  const set = new Set()
+  let i=0
+  for(let j=0;j<s.length;j++) {
+    while(set.has(s[j])) {
+      set.delete(s[i])
+      i++
+    }
+    set.add(s[j])
+    max = Math.max(max, set.size)
+  }
+  return max
+};
+```
 
 ```js
 var lengthOfLongestSubstring = function (s) {
@@ -3362,6 +3391,48 @@ var subsets = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 79 单词搜索【medium】
+
+[ref](https://leetcode.cn/problems/word-search/)
+
+```js
+var exist = function(board, word) {
+  const m = board.length
+  const n = board[0].length
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  const words = word.split('')
+  let has = false
+
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      find(i, j, words)
+    }
+  }
+
+  function find(i, j) {
+    if(used[i][j]) return
+    if(board[i][j] === words[0]) {
+      const w = words.shift()
+      used[i][j] = true
+
+      if(!words.length) {
+        has = true
+        return
+      }
+
+      j + 1 < n && find(i, j + 1)
+      j - 1 >= 0 && find(i, j - 1)
+      i - 1 >=0 && find(i - 1, j)
+      i + 1 < m && find(i + 1, j)
+      words.unshift(w)
+      used[i][j] = false
+    }
+  }
+
+  return has
+};
+```
+
 ## ?🌟😻✔ 82 删除排序链表中的重复元素 II【medium】
 
 [ref](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
@@ -4520,6 +4591,30 @@ var findMin = function(nums) {
 };
 ```
 
+## ✔ 165 比较版本号【medium】
+
+[ref](https://leetcode.cn/problems/compare-version-numbers/)
+
+```js
+var compareVersion = function(version1, version2) {
+  // 去除前导零
+  let v1Arr = version1.split('.').map(_ => parseInt(_, 10))
+  let v2Arr = version2.split('.').map(_ => parseInt(_, 10))
+  // 补齐数组长度
+  if(v1Arr.length > v2Arr.length) {
+    v2Arr = v2Arr.concat(new Array(v1Arr.length - v2Arr.length).fill(0))
+  } else {
+    v1Arr = v1Arr.concat(new Array(v2Arr.length - v1Arr.length).fill(0))
+  }
+  for(let i=0;i<v1Arr.length;i++) {
+    if(v1Arr[i] < v2Arr[i]) return -1
+    else if(v1Arr[i] > v2Arr[i]) return 1
+  }
+  return 0
+};
+
+```
+
 ## ✔ 167 两数之和 II - 输入有序数组【medium】
 
 [ref](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
@@ -5104,6 +5199,59 @@ var lowestCommonAncestor = function(root, p, q) {
   }
   dfs(root, 1)
   return target
+};
+```
+
+## 🌟😻✔ 240 搜索二维矩阵 II【medium】
+
+[ref](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
+
+```js
+// 时间复杂度：O(m+n)
+// 空间复杂度：O(1)
+var searchMatrix = function(matrix, target) {
+  const m = matrix.length, n = matrix[0].length
+  let i = 0,j = n - 1
+  while(i < m && j >=0) {
+    if(matrix[i][j] === target) return true
+    else if(target < matrix[i][j]) {
+      j--
+    } else {
+      i++
+    }
+  }
+  return false
+};
+```
+
+## 🌟😻✔ 268 丢失的数字【easy】
+
+[ref](https://leetcode.cn/problems/missing-number/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var missingNumber = function(nums) {
+  const s = new Set()
+  for(let i=0;i<nums.length;i++) {
+    s.add(nums[i])
+  }
+  for(let i=0;i<nums.length;i++) {
+    if(!s.has(i)) return i
+  }
+  return nums.length
+};
+```
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N+logN)
+var missingNumber = function(nums) {
+  nums.sort((a, b) => a - b)
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] !== i) return i
+  }
+  return nums.length
 };
 ```
 
@@ -5716,6 +5864,51 @@ var rob = function(root) {
 };
 ```
 
+## ?🌟😻✔ 380 O(1) 时间插入、删除和获取随机元素【medium】
+
+[ref](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
+
+```js
+var RandomizedSet = function() {
+  this.map = new Map()
+  this.vals = []
+};
+
+/** 
+ * @param {number} val
+ * @return {boolean}
+ */
+RandomizedSet.prototype.insert = function(val) {
+  if(this.map.has(val)) return false
+  this.vals.push(val)
+  this.map.set(val, this.vals.length - 1)
+  return true
+};
+
+/** 
+ * @param {number} val
+ * @return {boolean}
+ */
+RandomizedSet.prototype.remove = function(val) {
+  if(!this.map.has(val)) return false
+  const ind = this.map.get(val)
+  this.vals[ind] = this.vals[this.vals.length - 1]
+  this.vals.pop()
+  this.map.delete(val)
+  this.map.set(this.vals[ind], ind)
+  return true
+};
+
+/**
+ * @return {number}
+ */
+RandomizedSet.prototype.getRandom = function() {
+  const size = this.vals.length
+  const randomIndex = Math.floor(Math.random() * size)
+  return this.vals[randomIndex]
+};
+```
+
 ## ?🌟😻✔ 394 字符串解码【medium】
 
 [ref](https://leetcode.cn/problems/decode-string/)
@@ -6064,6 +6257,30 @@ function binarySearch(heaters, target) {
   }
   return l
 }
+```
+
+## 🌟😻✔ 494 目标和【medium】
+
+[ref](https://leetcode.cn/problems/target-sum/)
+
+动态规划、回溯
+
+```js
+// 时间复杂度：O(2**N)
+// 空间复杂度：O(N)
+var findTargetSumWays = function(nums, target) {
+  let count = 0
+  function search(i, sum) {
+    if(i === nums.length) {
+      if(sum === target) count++
+      return
+    }
+    search(i + 1, sum + nums[i])
+    search(i + 1, sum - nums[i])
+  }
+  search(0, 0)
+  return count
+};
 ```
 
 ## 🌟😻✔ 540 有序数组中的单一元素【medium】
