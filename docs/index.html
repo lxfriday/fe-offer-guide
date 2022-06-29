@@ -132,7 +132,6 @@
                 }
                 if (v.textContent.includes('✔')) {
                   v.parentNode.style.backgroundColor = 'rgba(109,255,51,.3)'
-                  finishedCount++
                 }
                 if (v.textContent.includes('😻')) {
                   v.parentNode.style.backgroundColor = '#FFDEAD'
@@ -140,9 +139,10 @@
                 if (v.textContent.includes('🌟')) {
                   v.parentNode.style.backgroundColor = '#D8BFD8'
                 }
-
                 if (v.textContent.includes('?')) {
                   v.parentNode.style.backgroundColor = '#FF69B4'
+                }
+                 if (v.textContent.includes('✔') || v.textContent.includes('?')) {
                   finishedCount++
                 }
               })
@@ -156,9 +156,9 @@
               const finishedPercent = Math.floor((finishedCount / total) * 100)
               document.querySelector('.finished-info').innerHTML = `
               ${finishedCount} / ${
-                total - l1Links.length
+                total
               } -> ${finishedPercent}% 待完成数：${
-                total - l1Links.length - finishedCount
+                total - finishedCount
               }  一级标题数：${l1Links.length} ${
                 isLeetCodePage
                   ? `LeetCode 刷题进度：${leetCodeCount} 【easy】${easyCount} 【medium】${mediumCount} 【hard]${hardCount}`
