@@ -73,6 +73,12 @@
   - [【medium】 165 比较版本号](https://leetcode.cn/problems/compare-version-numbers/)
 - 20220630
   - [🌟【medium】 240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
+- 20220701
+  - [【easy】 746 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+- 20220702
+  - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+  - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+  - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
 
 # 刷题指南
 
@@ -105,6 +111,12 @@
 - 🌟【medium】[8 字符串转换整数 (atoi)](https://leetcode.cn/problems/string-to-integer-atoi/)
 - 🌟【medium】[394 字符串解码](https://leetcode.cn/problems/decode-string/)
 - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+
+回文串相关
+
+- 🌟【medium】[5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+- 🌟【medium】[516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+- 🌟【medium】[647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
 
 ## 数组题 
 
@@ -1415,6 +1427,70 @@ function getTarget(k, nums1, nums2) {
 ## 😻✔ 5 最长回文子串【medium】
 
 [ref](https://leetcode.cn/problems/longest-palindromic-substring/submissions/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var longestPalindrome = function(s) {
+  const len = s.length
+  let maxStr = s[0]
+  const dp = new Array(len).fill(false).map(_ => new Array(len).fill(false))
+
+  for(let i=0;i<len;i++) {
+    dp[i][i] = true
+  }
+
+  for(let L=2;L<=len;L++) {
+    for(let i=0;i + L - 1 <len;i++) {
+      if(s[i] === s[i + L - 1]) {
+        dp[i][i + L - 1] = i + L - 2 >= i + 1 ? dp[i + 1][i + L - 2] : true
+        if(dp[i][i + L - 1] && L > maxStr.length) {
+          maxStr = s.slice(i, i + L)
+        }
+      }
+    }
+  }
+  return maxStr
+};
+```
+
+常规中心往两侧扩散
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var longestPalindrome = function(s) {
+  let maxStr = ''
+  for(let i=0;i<s.length;i++) {
+    // 扫描两次
+    // 单中心扫描
+    let l=r=i
+    while(r + 1 < s.length && l - 1 >= 0 && s[r + 1] === s[l - 1]) {
+      l--
+      r++
+    }
+    if(maxStr.length < r - l + 1) {
+      maxStr = s.slice(l, r + 1)
+    }
+    // 双中心扫描
+    if(i + 1 < s.length && s[i] === s[i + 1]) {
+      l = i
+      r = i + 1
+      while(r + 1 < s.length && l - 1 >= 0 && s[r + 1] === s[l - 1]) {
+        l--
+        r++
+      }
+      if(maxStr.length < r - l + 1) {
+        maxStr = s.slice(l, r + 1)
+      }
+    }
+
+  }
+  return maxStr
+};
+```
 
 贪心算法
 
@@ -6283,6 +6359,32 @@ var findTargetSumWays = function(nums, target) {
 };
 ```
 
+## 🌟😻✔ 516 最长回文子序列【medium】
+
+[ref](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+
+```js
+// 时间复杂度：O(N*2)
+// 空间复杂度：O(N*2)
+var longestPalindromeSubseq = function(s) {
+  const len = s.length
+  const dp = new Array(len).fill(0).map(_ => new Array(len).fill(0))
+  for(let i=0;i<len;i++) {
+    dp[i][i] = 1
+  }
+  for(let L = 2;L <= len;L++) {
+    for(let i=0;i + L - 1<len;i++) {
+      if(s[i] === s[i + L - 1]) {
+        dp[i][i + L - 1] = (i + L - 2 >= i + 1 ? dp[i + 1][i + L - 2] : 0) + 2
+      } else {
+        dp[i][i + L - 1] = Math.max(dp[i][i + L - 2], dp[i + 1][i + L - 1])
+      }
+    }
+  }
+  return dp[0][len-1]
+};
+```
+
 ## 🌟😻✔ 540 有序数组中的单一元素【medium】
 
 [ref](https://leetcode.cn/problems/single-element-in-a-sorted-array/)
@@ -6432,6 +6534,35 @@ var checkInclusion = function(s1, s2) {
 var distributeCandies = function(candyType) {
   const set = new Set(candyType)
   return Math.min(candyType.length / 2, set.size)
+};
+```
+
+## 🌟😻✔ 647 回文子串【medium】
+
+[ref](https://leetcode.cn/problems/palindromic-substrings/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var countSubstrings = function(s) {
+  const len = s.length
+  const dp = new Array(len).fill(false).map(_ => new Array(len).fill(false))
+  let count = 0
+  for(let i=0;i<len;i++) {
+    dp[i][i] = true
+    count++
+  }
+
+  for(let L=2;L<=len;L++) {
+    for(let i=0;i + L - 1<len;i++) {
+      if(s[i] === s[i + L - 1]) {
+        dp[i][i + L - 1] = i + L - 2 >= i + 1 ? dp[i + 1][i + L - 2] : true
+        if(dp[i][i + L - 1]) count++
+      }
+    }
+  }
+
+  return count
 };
 ```
 
@@ -6749,6 +6880,25 @@ var dailyTemperatures = function(temperatures) {
     s.push(i)
   }
   return res
+};
+```
+
+## ✔ 746 使用最小花费爬楼梯【easy】
+
+[ref](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var minCostClimbingStairs = function(cost) {
+  const len = cost.length
+  const dp = new Array(len).fill(0)
+  dp[0] = cost[0]
+  dp[1] = cost[1]
+  for(let i=2;i<len;i++) {
+    dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2])
+  }
+  return Math.min(dp[len - 1], dp[len - 2])
 };
 ```
 
