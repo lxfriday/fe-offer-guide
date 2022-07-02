@@ -5705,6 +5705,32 @@ var coinChange = function(coins, amount) {
 };
 ```
 
+## ?🌟😻✔ 337 打家劫舍 III【medium】
+
+[ref](https://leetcode.cn/problems/house-robber-iii/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rob = function(root) {
+  const s = new Map()
+  const notS = new Map()
+
+  function dfs(node) {
+    node.left && dfs(node.left)
+    node.right && dfs(node.right)
+    notS.set(node,(s.get(node.left) || 0) + (s.get(node.right) || 0))
+    s.set(node, Math.max(
+      node.val + ((notS.get(node.left) || 0) + (notS.get(node.right) || 0)),
+      notS.get(node)
+    ))
+  }
+
+  dfs(root)
+  return s.get(root)
+};
+```
+
 ## 😻✔ 343 整数拆分【medium】
 
 [ref](https://leetcode.cn/problems/integer-break/)
@@ -5859,7 +5885,7 @@ var topKFrequent = function(nums, k) {
 };
 ```
 
-## ✔ 349 两个数组的交集【easy】
+## 😻✔ 349 两个数组的交集【easy】
 
 [ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
 
@@ -5902,43 +5928,7 @@ var guessNumber = function(n) {
 };
 ```
 
-## 😻✔ 349 两个数组的交集【easy】
 
-[ref](https://leetcode.cn/problems/intersection-of-two-arrays/)
-
-集合
-
-```js
-var intersection = function (nums1, nums2) {
-  return [...new Set(nums1.filter(v => nums2.includes(v)))]
-}
-```
-
-## ?🌟😻✔ 337 打家劫舍 III【medium】
-
-[ref](https://leetcode.cn/problems/house-robber-iii/)
-
-```js
-// 时间复杂度：O(N)
-// 空间复杂度：O(N)
-var rob = function(root) {
-  const s = new Map()
-  const notS = new Map()
-
-  function dfs(node) {
-    node.left && dfs(node.left)
-    node.right && dfs(node.right)
-    notS.set(node,(s.get(node.left) || 0) + (s.get(node.right) || 0))
-    s.set(node, Math.max(
-      node.val + ((notS.get(node.left) || 0) + (notS.get(node.right) || 0)),
-      notS.get(node)
-    ))
-  }
-
-  dfs(root)
-  return s.get(root)
-};
-```
 
 ## ?🌟😻✔ 380 O(1) 时间插入、删除和获取随机元素【medium】
 
