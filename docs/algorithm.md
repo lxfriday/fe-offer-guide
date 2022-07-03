@@ -79,6 +79,14 @@
   - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
   - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
   - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
+- 20220703
+
+  - ? [🌟【hard】 315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
+  - ? [🌟【hard】 剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+  - ? [🌟【medium】 148 排序链表](https://leetcode.cn/problems/sort-list/)
+  - [🌟【easy】 剑指 Offer 50 第一个只出现一次的字符](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
+  - [🌟【medium】 199 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
+  - ? [🌟【medium】 103 二叉树的锯齿形层序遍历](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
 
 # 刷题指南
 
@@ -281,6 +289,22 @@
 - 🌟【medium】[540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/)
 - 🌟【medium】[153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
 - 🌟【hard】[154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
+
+## 排序算法的应用
+
+### 归并
+
+逆序对、链表排序
+
+- 🌟【medium】[48 排序链表](https://leetcode.cn/problems/sort-list/)
+- 🌟【hard】[315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
+- 🌟【hard】[剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+
+### 堆排序
+
+前 K 大、前 K 小、单调队列
+
+- 🌟【medium】[347 前 K 个高频元素【medium】](https://leetcode.cn/problems/top-k-frequent-elements/)
 
 # 时间复杂度和空间复杂度
 
@@ -3867,6 +3891,39 @@ var levelOrder = function (root) {
 }
 ```
 
+## ?😻✔ 103. 二叉树的锯齿形层序遍历【medium】
+
+[ref](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
+
+二叉树、广度优先搜索
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var zigzagLevelOrder = function(root) {
+  if(!root) return []
+  const res = [[root.val]]
+  let q = [root]
+  let tmp = []
+  let isLeft = false
+  while(q.length) {
+    const node = q.shift()
+    node.left && tmp.push(node.left)
+    node.right && tmp.push(node.right)
+    if(!q.length) {
+      const tRes = []
+      q = [...tmp]
+      while(tmp.length) {
+        tRes.push(tmp.shift().val)
+      }
+      tRes.length && res.push(isLeft ? tRes : tRes.reverse())
+      isLeft = !isLeft
+    }
+  }
+  return res
+};
+```
+
 ## 😻✔ 104 二叉树的最大深度【easy】
 
 [ref](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
@@ -4569,6 +4626,53 @@ LRUCache.prototype.moveToEnd = function(key, value) {
 };
 ```
 
+## ?🌟😻✔ 148 排序链表【medium】
+
+[ref](https://leetcode.cn/problems/sort-list/)
+
+链表归并排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var sortList = function(head) {
+  const tHead = new ListNode()
+  tHead.next = head
+  let slow = tHead
+  let fast = tHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  if(slow === fast) return head
+  const next = slow.next
+  slow.next = null
+  return merge(sortList(tHead.next), sortList(next))
+};
+
+function merge(list1, list2) {
+  const myHead = new ListNode()
+  let tHead = myHead
+  while(list1 && list2) {
+    if(list1.val < list2.val) {
+      tHead.next = list1
+      list1 = list1.next
+    } else {
+      tHead.next = list2
+      list2 = list2.next
+    }
+    tHead = tHead.next
+  }
+  if(list1) {
+    tHead.next = list1
+  }
+  if(list2) {
+    tHead.next = list2
+  }
+  return myHead.next
+}
+```
+
 ## 🌟😻✔ 152 乘积最大子数组【medium】
 
 [ref](https://leetcode.cn/problems/maximum-product-subarray/)
@@ -4834,6 +4938,34 @@ var rob = function(nums) {
     dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
   }
   return dp[nums.length - 1]
+};
+```
+
+## 😻✔ 199 二叉树的右视图【medium】
+
+[ref](https://leetcode.cn/problems/binary-tree-right-side-view/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rightSideView = function(root) {
+  if(!root) return []
+  const res = []
+  let q = [root]
+  let tmpQ = []
+
+  while(q.length) {
+    const node = q.pop()
+    node.left && tmpQ.unshift(node.left)
+    node.right && tmpQ.unshift(node.right)
+    if(!q.length) {
+      res.push(node.val)
+      q = [...tmpQ]
+      tmpQ = []
+    }
+  }
+
+  return res
 };
 ```
 
@@ -5679,6 +5811,55 @@ var maxProfit = function(prices) {
 };
 ```
 
+## ?🌟😻✔ 315 计算右侧小于当前元素的个数【hard】
+
+[ref](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
+
+逆序对、归并排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var countSmaller = function(nums) {
+  for(let i=0;i<nums.length;i++) {
+    nums[i] = {ind: i, val: nums[i]}
+  }
+  const ret = new Array(nums.length).fill(0)
+  function mergeSort(nums, l, r) {
+    l = typeof l === 'number' ? l : 0
+    r = typeof r === 'number' ? r : nums.length - 1
+    if(l === r) return [nums[l]]
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(nums, l, mid), mergeSort(nums, mid + 1, r))
+  }
+
+  function merge(arr1, arr2) {
+    const len1 = arr1.length
+    const len2 = arr2.length
+    let l1 = l2 = 0
+    const res = []
+    while(l1 < len1 && l2 < len2) {
+      if(arr1[l1].val > arr2[l2].val) {
+        ret[arr1[l1].ind] += len2 - l2
+        res.push(arr1[l1++])
+      } else {
+        res.push(arr2[l2++])
+      }
+    }
+    while(l1 < len1) {
+      res.push(arr1[l1++])
+    }
+    while(l2 < len2) {
+      res.push(arr2[l2++])
+    }
+    return res
+  }
+
+  mergeSort(nums)
+  return ret
+};
+```
+
 ## ?🌟😻✔ 322 零钱兑换【medium】
 
 [ref](https://leetcode.cn/problems/coin-change/)
@@ -5973,6 +6154,14 @@ RandomizedSet.prototype.getRandom = function() {
   const randomIndex = Math.floor(Math.random() * size)
   return this.vals[randomIndex]
 };
+```
+
+## ✔ 383 赎金信【easy】
+
+[ref](https://leetcode.cn/problems/ransom-note/)
+
+```js
+
 ```
 
 ## ?🌟😻✔ 394 字符串解码【medium】
@@ -7393,6 +7582,25 @@ function swap(arr, i, j) {
 ```js
 var minNumber = function(nums) {
   return nums.sort((x, y) => ('' + x + y) - ('' + y + x)).join('')
+};
+```
+
+## ✔ 剑指 Offer 50 第一个只出现一次的字符【easy】
+
+[ref](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var firstUniqChar = function(s) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], map.has(s[i])? map.get(s[i]) + 1 : 1)
+  }
+  for(let i=0;i<s.length;i++) {
+    if(map.get(s[i]) === 1) return s[i]
+  }
+  return ' '
 };
 ```
 
