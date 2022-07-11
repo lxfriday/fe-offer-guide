@@ -79,6 +79,10 @@
   - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
   - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
   - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
+- 20220708
+  - ? [🌟【medium】 221 最大正方形](https://leetcode.cn/problems/maximal-square/)
+  - [🌟【medium】 113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
+  - ? [🌟【hard】 329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
 
 # 刷题指南
 
@@ -134,6 +138,8 @@
 - 🌟【hard】[85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
 - 🌟【medium】[739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
 - 🌟【medium】[240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
+- 🌟【medium】[221 最大正方形](https://leetcode.cn/problems/maximal-square/)
+- 🌟【hard】[329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
 
 ## 模拟
 
@@ -189,6 +195,7 @@
 - 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 - 【medium】 [剑指 Offer 26 树的子结构](https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/)
 - 🌟【medium】 [652. 寻找重复的子树](https://leetcode.cn/problems/find-duplicate-subtrees/)
+- 🌟【medium】[113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
 
 ## 堆
 
@@ -199,7 +206,7 @@
 
 ## 图、深度优先、广度优先
 
-- 【medium】 [113 克隆图](https://leetcode.cn/problems/clone-graph/)
+- 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
 - 【medium】 [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 - 【medium】 [200 岛屿数量](https://leetcode.cn/problems/number-of-islands/)
 
@@ -3887,6 +3894,31 @@ var maxDepth = function (root) {
 }
 ```
 
+## ?🌟😻✔ 105 从前序与中序遍历序列构造二叉树【medium】
+
+[ref](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+二叉树、二叉树的构造
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var buildTree = function(preorder, inorder) {
+  const root = new TreeNode(preorder.shift())
+  let i= inorder.indexOf(root.val)
+  const leftOrders = inorder.slice(0, i)
+  const rightOrders = inorder.slice(i + 1)
+  if(leftOrders.length) {
+    root.left = buildTree(preorder, leftOrders)
+  }
+  if(rightOrders.length) {
+    root.right = buildTree(preorder, rightOrders)
+  }
+  return root
+};
+
+```
+
 ## 😻✔ 111 二叉树的最小深度【easy】
 
 [ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
@@ -3931,62 +3963,35 @@ var hasPathSum = function (root, targetSum) {
 }
 ```
 
-## 😻✔ 113 克隆图【medium】
+## 😻✔ 113 路径总和 II【medium】
 
-[ref](https://leetcode.cn/problems/clone-graph/)
-
-图、深度优先遍历、广度优先遍历、DFS、BFS
+[ref](https://leetcode.cn/problems/path-sum-ii/)
 
 ```js
-// DFS
-/**
- * // Definition for a Node.
- * function Node(val, neighbors) {
- *    this.val = val === undefined ? 0 : val;
- *    this.neighbors = neighbors === undefined ? [] : neighbors;
- * };
- */
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pathSum = function(root, targetSum) {
+  if(!root) return []
+  const res = []
 
-/**
- * @param {Node} node
- * @return {Node}
- */
-var cloneGraph = function(node) {
-  if(!node) return 
-  const visited = new Map()
-  function dfs (targetNode) {
-    const newNode = new Node(targetNode.val)
-    visited.set(targetNode, newNode);
-    (targetNode.neighbors || []).forEach(neighborNode => {
-      if(!visited.has(neighborNode)) {
-        dfs(neighborNode)
+  function dfs(node, path, sum) {
+    if(!node.left && !node.right) {
+      if(sum + node.val === targetSum) {
+        res.push([...path, node.val])
       }
-      newNode.neighbors.push(visited.get(neighborNode))
-    })
+      return
+    }
+    path.push(node.val)
+    node.left && dfs(node.left, path, sum + node.val)
+    node.right && dfs(node.right, path, sum + node.val)
+    path.pop()
   }
-  dfs(node)
-  return visited.get(node)
-};
 
-// BFS
-var cloneGraph = function(node) {
-  if(!node) return 
-  const visited = new Map()
-  const q = [node]
-  visited.set(node, new Node(node.val));
-  while(q.length) {
-    const targetNode = q.shift();
-    (targetNode.neighbors || []).forEach(neighborNode => {
-      if(!visited.has(neighborNode)) {
-        q.push(neighborNode)
-        visited.set(neighborNode, new Node(neighborNode.val))
-      }
-      visited.get(targetNode).neighbors.push(visited.get(neighborNode))
-    })
-  }
-  return visited.get(node)
+  dfs(root, [], 0)
+
+  return res
 };
-```
+````
 
 ## 🌟✔ 118 杨辉三角【easy】
 
@@ -4287,6 +4292,63 @@ function isPalindrome(str) {
   }
   return true
 }
+```
+
+## 😻✔ 133 克隆图【medium】
+
+[ref](https://leetcode.cn/problems/clone-graph/)
+
+图、深度优先遍历、广度优先遍历、DFS、BFS
+
+```js
+// DFS
+/**
+ * // Definition for a Node.
+ * function Node(val, neighbors) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.neighbors = neighbors === undefined ? [] : neighbors;
+ * };
+ */
+
+/**
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function(node) {
+  if(!node) return 
+  const visited = new Map()
+  function dfs (targetNode) {
+    const newNode = new Node(targetNode.val)
+    visited.set(targetNode, newNode);
+    (targetNode.neighbors || []).forEach(neighborNode => {
+      if(!visited.has(neighborNode)) {
+        dfs(neighborNode)
+      }
+      newNode.neighbors.push(visited.get(neighborNode))
+    })
+  }
+  dfs(node)
+  return visited.get(node)
+};
+
+// BFS
+var cloneGraph = function(node) {
+  if(!node) return 
+  const visited = new Map()
+  const q = [node]
+  visited.set(node, new Node(node.val));
+  while(q.length) {
+    const targetNode = q.shift();
+    (targetNode.neighbors || []).forEach(neighborNode => {
+      if(!visited.has(neighborNode)) {
+        q.push(neighborNode)
+        visited.set(neighborNode, new Node(neighborNode.val))
+      }
+      visited.get(targetNode).neighbors.push(visited.get(neighborNode))
+    })
+  }
+  return visited.get(node)
+};
 ```
 
 ## ?🌟😻✔ 135 分发糖果【hard】
@@ -5196,6 +5258,43 @@ var containsDuplicate = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 221 最大正方形【medium】
+
+[ref](https://leetcode.cn/problems/maximal-square/)
+
+动态规划
+
+```js
+// 时间复杂度：O(M*N)
+// 空间复杂度：O(M*N)
+var maximalSquare = function(matrix) {
+  const m = matrix.length
+  const n = matrix[0].length
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  let max = 0
+
+  for(let i = 1;i<m;i++) {
+    dp[i][0] = parseInt(matrix[i][0], 10)
+    max = Math.max(max, dp[i][0])
+  }
+
+  for(let j = 0;j<n;j++) {
+    dp[0][j] = parseInt(matrix[0][j], 10)
+    max = Math.max(max, dp[0][j])
+  }
+
+  for(let i = 1;i<m;i++) {
+    for(let j = 1;j<n;j++) {
+      if(matrix[i][j] === '1') {
+        dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1
+        max = Math.max(dp[i][j], max)
+      }
+    }
+  }
+  return max * max
+};
+````
+
 ## 😻✔ 226 翻转二叉树【easy】
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
@@ -5703,6 +5802,56 @@ var coinChange = function(coins, amount) {
   }
   return dp[amount] > amount? -1 : dp[amount]
 };
+```
+
+## ?🌟😻✔ 329 矩阵中的最长递增路径【hard】
+
+[ref](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
+
+记忆化深度优先
+
+```js
+// 时间复杂度：O(M*N)
+// 空间复杂度：O(M*N)
+var longestIncreasingPath = function(matrix) {
+  const m = matrix.length
+  const n = matrix[0].length
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(-1))
+  let max = 0
+
+  for(let i = 0; i < m; i++) {
+    for(let j = 0; j < n; j++) {
+      max = Math.max(max, find(i, j, -1))
+    }
+  }
+
+  function find(i, j, prevValue) {
+    if(
+        i < m
+        && i >= 0
+        && j < n
+        && j >= 0
+        && !used[i][j]
+        && matrix[i][j] > prevValue
+      ) {
+      if(dp[i][j] >= 0) return dp[i][j]
+      used[i][j] = true
+      const maxLen = Math.max(
+        find(i - 1, j, matrix[i][j]),
+        find(i + 1, j, matrix[i][j]),
+        find(i, j - 1, matrix[i][j]),
+        find(i, j + 1, matrix[i][j])
+      ) + 1
+      used[i][j] = false
+      dp[i][j] = maxLen
+      return maxLen
+    }
+    return 0
+  }
+  return max
+};
+
 ```
 
 ## ?🌟😻✔ 337 打家劫舍 III【medium】
