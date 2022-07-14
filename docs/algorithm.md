@@ -91,6 +91,15 @@
   - ? [🌟【medium】 221 最大正方形](https://leetcode.cn/problems/maximal-square/)
   - [🌟【medium】 113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
   - ? [🌟【hard】 329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
+- 20220711
+  - [🌟【easy】 415 字符串相加](https://leetcode.cn/problems/add-strings/)
+  - ? [🌟【easy】 160 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
+- 20220712
+  - ? [🌟【medium】 445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
+  - ? [🌟【hard】 224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
+  - ? [🌟【medium】 227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
+- 20220713
+  - ? [🌟【medium】 162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
 
 # 刷题指南
 
@@ -123,6 +132,9 @@
 - 🌟【medium】[8 字符串转换整数 (atoi)](https://leetcode.cn/problems/string-to-integer-atoi/)
 - 🌟【medium】[394 字符串解码](https://leetcode.cn/problems/decode-string/)
 - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+- 🌟【easy】[415 字符串相加](https://leetcode.cn/problems/add-strings/)
+- 🌟【hard】[224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
+- 🌟【medium】[227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
 
 回文串相关
 
@@ -174,6 +186,7 @@
 - 🌟【medium】[143 重排链表](https://leetcode.cn/problems/reorder-list/)
 - 【medium】[24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 - 🌟【medium】[82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
+- 🌟【medium】[445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
 
 ## 集合
 
@@ -296,6 +309,7 @@
 - 🌟【medium】[540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/)
 - 🌟【medium】[153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
 - 🌟【hard】[154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
+- 🌟【medium】[162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
 
 ## 排序算法的应用
 
@@ -4833,6 +4847,48 @@ var findMin = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 160 相交链表【easy】
+
+[ref](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
+
+```js
+// 时间复杂度：O(M + N)
+// 空间复杂度：O(1)
+var getIntersectionNode = function(headA, headB) {
+  let pA = headA
+  let pB = headB
+  while(pA !== pB) {
+    pA = pA !== null ? pA.next : headB
+    pB = pB !== null ? pB.next : headA
+  }
+  return pA
+};
+```
+
+## ?🌟😻✔ 162 寻找峰值【medium】
+
+[ref](https://leetcode.cn/problems/find-peak-element/)
+
+二分法
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var findPeakElement = function(nums) {
+  let l = 0
+  let r = nums.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] < nums[mid + 1]) {
+      l = mid + 1
+    } else {
+      r = mid
+    }
+  }
+  return l
+};
+```
+
 ## ✔ 165 比较版本号【medium】
 
 [ref](https://leetcode.cn/problems/compare-version-numbers/)
@@ -5427,6 +5483,47 @@ var maximalSquare = function(matrix) {
 };
 ````
 
+## ?🌟😻✔ 224 基本计算器【hard】
+
+[ref](https://leetcode.cn/problems/basic-calculator/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var calculate = function(s) {
+  const len = s.length
+  const signs = [1]
+  let sign = 1
+  let i=0
+  let ret = 0
+  while(i<len) {
+    if(s[i] === ' ') {
+      i++
+    } else if(s[i] === '(') {
+      signs.push(sign)
+      i++
+    } else if(s[i] === ')') {
+      signs.pop()
+      i++
+    } else if(s[i] === '+') {
+      sign = signs[signs.length - 1]
+      i++
+    } else if(s[i] === '-') {
+      sign = -signs[signs.length - 1]
+      i++
+    } else {
+      let num = 0
+      while(i < len && !isNaN(Number(s[i])) && s[i] !== ' ') {
+        num = 10 * num + Number(s[i])
+        i++
+      }
+      ret += sign * num
+    }
+  }
+  return ret
+};
+```
+
 ## 😻✔ 226 翻转二叉树【easy】
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
@@ -5473,6 +5570,62 @@ var invertTree = function(root) {
 
   return head
 };
+```
+
+## ?🌟😻✔ 227. 基本计算器 II【medium】
+
+[ref](https://leetcode.cn/problems/basic-calculator-ii/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var calculate = function(s) {
+  const len = s.length
+  let sign = '+'
+  let ret = 0
+  let i = 0
+  let tmp = 0
+  while(i<len) {
+    if(s[i] === ' ') {
+      i++
+    } else if (s[i] === '+') {
+      sign = '+'
+      ret += tmp
+      tmp = 0
+      i++
+    } else if (s[i] === '-') {
+      sign = '-'
+      ret += tmp
+      tmp = 0
+      i++
+    } else if (s[i] === '*') {
+      sign = '*'
+      i++
+    } else if (s[i] === '/') {
+      sign = '/'
+      i++
+    } else {
+      let num = 0
+      while(i < len && s[i] !== ' ' && !isNaN(Number(s[i]))) {
+        num = num * 10 + Number(s[i])
+        i++
+      }
+      if(sign === '+') {
+        tmp = num
+      } else if(sign === '-') {
+        tmp = -num
+      }else if(sign === '*') {
+        tmp = tmp * num
+      } else if(sign === '/') {
+        tmp = tmp < 0 ?Math.ceil(tmp / num) : Math.floor(tmp / num)
+      }
+    }
+  }
+  ret += tmp
+  return ret
+};
+
+
 ```
 
 ## 😻✔ 236 二叉树的最近公共祖先【medium】
@@ -6468,6 +6621,57 @@ var removeKdigits = function(num, k) {
 };
 ```
 
+## 🌟😻✔ 415 字符串相加【easy】
+
+[ref](https://leetcode.cn/problems/add-strings/)
+
+```js
+// 双指针法，不需要补充前导 0
+// 时间复杂度：O(max(len1,len2))
+// 空间复杂度：O(1)
+var addStrings = function(num1, num2) {
+  let i1 = num1.length - 1
+  let i2 = num2.length - 1
+  let sum = ''
+  let add = 0
+  while(i1 >= 0 || i2 >= 0) {
+    const tmpSum = (i1 >= 0 ? +num1[i1] : 0) + (i2 >= 0 ? +num2[i2] : 0) + add
+    sum = tmpSum % 10 + sum
+    add = Math.floor(tmpSum / 10)
+    i1--
+    i2--
+  }
+  if(add > 0) {
+    sum = 1 + sum
+  }
+  return sum
+};
+````
+
+```js
+// 常规方法，补充前导 0
+// 时间复杂度：O(max(len1,len2))
+// 空间复杂度：O(1)
+var addStrings = function(num1, num2) {
+  if(num1.length > num2.length) {
+    num2 = new Array(num1.length - num2.length).fill('0').join('') + num2
+  } else if(num1.length < num2.length) {
+    num1 = new Array(num2.length - num1.length).fill('0').join('') + num1
+  }
+  let sum = ''
+  let add = 0
+  for(let i=num1.length - 1; i>=0; i--) {
+    const tmpSum = parseInt(num1[i], 10) + parseInt(num2[i], 10) + add
+    sum = (tmpSum % 10) + sum
+    add = Math.floor(tmpSum / 10)
+  }
+  if(add > 0) {
+    sum = 1 + sum
+  }
+  return sum
+};
+```
+
 ## ?🌟😻✔ 416 分割等和子集【medium】
 
 [ref](https://leetcode.cn/problems/partition-equal-subset-sum/)
@@ -6596,6 +6800,43 @@ function getCount(s, n) {
   count += Math.max(0, n - min + 1)
   return count
 }
+```
+
+## ?🌟😻✔ 445 两数相加 II【medium】
+
+[ref](https://leetcode.cn/problems/add-two-numbers-ii/)
+
+链表
+
+```js
+// 时间复杂度：O(max(M, N))
+// 空间复杂度：O(M + N)
+var addTwoNumbers = function(l1, l2) {
+  const s1 = [], s2 = []
+  while(l1) {
+    s1.push(l1.val)
+    l1 = l1.next
+  }
+  while(l2) {
+    s2.push(l2.val)
+    l2 = l2.next
+  }
+  let add = 0
+  let head = new ListNode()
+  while(s1.length || s2.length) {
+    const tmpS = (s1.length ? s1.pop() : 0) + (s2.length ? s2.pop() : 0) + add
+    const newH = new ListNode(tmpS % 10)
+    newH.next = head.next
+    head.next = newH
+    add = Math.floor(tmpS / 10)
+  }
+  if(add > 0) {
+    const newH = new ListNode(add)
+    newH.next = head.next
+    head.next = newH
+  }
+  return head.next
+};
 ```
 
 ## 😻✔ 455 分发饼干【easy】
