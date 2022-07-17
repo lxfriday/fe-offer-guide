@@ -100,6 +100,21 @@
   - ? [🌟【medium】 227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
 - 20220713
   - ? [🌟【medium】 162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
+  - [🌟【hard】 面试题 17.21 直方图的水量](https://leetcode.cn/problems/volume-of-histogram-lcci/)
+- 20220714
+  - ? [🌟【medium】 386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
+  - [🌟【medium】 面试题 02.05 链表求和](https://leetcode.cn/problems/sum-lists-lcci/)
+  - [🌟【easy】 剑指 Offer 25 合并两个排序的链表](https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
+- 20220715
+  - ? [🌟【medium】 253 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/)
+  - [【easy】 252 会议室](https://leetcode.cn/problems/meeting-rooms/)
+  - [🌟【medium】 56 合并区间](https://leetcode.cn/problems/merge-intervals/)
+  - [🌟【medium】 77 组合](https://leetcode.cn/problems/combinations/)
+- 20220715
+  - ? [🌟【hard】 862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
+  - [🌟【hard】 297 二叉树的序列化与反序列化](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
+- 20220717
+  - ?? [🌟【medium】 424 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
 
 # 刷题指南
 
@@ -160,6 +175,7 @@
 - 🌟【medium】[240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
 - 🌟【medium】[221 最大正方形](https://leetcode.cn/problems/maximal-square/)
 - 🌟【hard】[329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
+- 🌟【hard】[862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
 
 ## 模拟
 
@@ -3490,6 +3506,35 @@ var minWindow = function(s, t) {
 };
 ```
 
+## 🌟😻✔ 77 组合【medium】
+
+[ref](https://leetcode.cn/problems/combinations/)
+
+```js
+// 时间复杂度：O(C(n, k)) 组合数
+// 空间复杂度：O(k)
+var combine = function(n, k) {
+  const res = []
+
+  function run(path, start) {
+    if(path.length === k) {
+      res.push([...path])
+      return
+    }
+
+    for(let i=start;i<=n;i++) {
+      path.push(i)
+      run(path, i + 1)
+      path.pop()
+    }
+  }
+
+  run([], 1)
+
+  return res
+};
+```
+
 ## 🌟😻✔ 78 子集【medium】
 
 回溯、递归
@@ -5851,6 +5896,57 @@ var maxSlidingWindow = function(nums, k) {
 };
 ```
 
+## ✔ 252 会议室【easy】
+
+[ref](https://leetcode.cn/problems/meeting-rooms/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var canAttendMeetings = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0])
+  for(let i=0;i<intervals.length - 1;i++) {
+    if(intervals[i][1] > intervals[i+1][0]) return false
+  }
+  return true
+};
+```
+
+## ?🌟😻✔ 253 会议室 II【medium】
+
+[ref](https://leetcode.cn/problems/meeting-rooms-ii/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var minMeetingRooms = function(intervals) {
+  const start = []  
+  const end = []
+  for(let i=0;i<intervals.length;i++) {
+    start.push(intervals[i][0])
+    end.push(intervals[i][1])
+  }
+  start.sort((a, b) => a - b)
+  end.sort((a, b) => a - b)
+  let max = 0
+  let curr = 0
+
+  while(start.length && end.length) {
+    if(start[0] < end[0]) {
+      curr++
+      max = Math.max(max, curr)
+      start.shift()
+    } else {
+      curr--
+      end.shift()
+    }
+  }
+
+  return max
+};
+
+```
+
 ## 🌟😻✔ 279 完全平方数【medium】
 
 [ref](https://leetcode.cn/problems/perfect-squares/)
@@ -5886,6 +5982,40 @@ var moveZeroes = function(nums) {
   while(realIndex<nums.length) {
     nums[realIndex++] = 0
   }
+};
+```
+
+## 🌟😻✔ 297 二叉树的序列化与反序列化【hard】
+
+[ref](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
+
+```js
+
+var serialize = function(root) {
+  function dfs(node) {
+    if(!node) return null
+    return {
+      v: node.val,
+      l: dfs(node.left),
+      r: dfs(node.right),
+    }
+  }
+  const resObj = dfs(root)
+  return JSON.stringify(resObj)
+};
+
+var deserialize = function(data) {
+  const obj = JSON.parse(data)
+
+  function dfs(o) {
+    if(!o) return null
+    const node = new TreeNode(o.v)
+    node.left = dfs(o.l)
+    node.right = dfs(o.r)
+    return node
+  }
+
+  return dfs(obj)
 };
 ```
 
@@ -6463,7 +6593,49 @@ RandomizedSet.prototype.getRandom = function() {
 [ref](https://leetcode.cn/problems/ransom-note/)
 
 ```js
+// 时间复杂度：O(M+N)
+// 空间复杂度：O(N)
+var canConstruct = function(ransomNote, magazine) {
+  const map = new Map()
+  for(let i=0;i<magazine.length;i++) {
+    map.set(magazine[i], map.has(magazine[i]) ? map.get(magazine[i]) + 1: 1)
+  }
 
+  for(let i=0;i<ransomNote.length;i++) {
+    if(!map.has(ransomNote[i]) || map.get(ransomNote[i]) === 0) return false
+    map.set(ransomNote[i], map.get(ransomNote[i]) - 1)
+  }
+  return true
+};
+```
+
+## ?🌟😻✔ 386 字典序排数【medium】
+
+[ref](https://leetcode.cn/problems/lexicographical-numbers/)
+
+字典树、字典序
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(1)
+var lexicalOrder = function(n) {
+  let k = 1
+  const res = []
+  while(res.length < n) {
+    res.push(k)
+    const small = 10 * k
+    if(n >= small) {
+      k = small
+    } else {
+      while(k % 10 === 9 || k + 1 > n) {
+        k = Math.floor(k / 10)
+      }
+      k++
+    }
+  }
+
+  return res
+};
 ```
 
 ## ?🌟😻✔ 394 字符串解码【medium】
@@ -6760,6 +6932,33 @@ var pacificAtlantic = function(heights) {
 
   return res
 };
+```
+
+## ??🌟😻✔ 424 替换后的最长重复字符【medium】
+
+[ref](https://leetcode.cn/problems/longest-repeating-character-replacement/)
+
+双指针、滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(∣Σ∣)，其中 ∣Σ∣ 是字符集的大小
+var characterReplacement = function(s, k) {
+  const nums = new Map()
+  let l = r = 0
+  let maxn = 0
+  while(r < s.length) {
+    nums.set(s[r], nums.has(s[r]) ? nums.get(s[r]) + 1 : 1)
+    maxn = Math.max(maxn, nums.get(s[r]))
+    if(r - l + 1 - maxn > k) {
+      nums.set(s[l], nums.get(s[l]) - 1)
+      l++
+    }
+    r++
+  }
+  return r - l
+};
+
 ```
 
 ## ?🌟😻✔ 440 字典序的第K小数字【hard】
@@ -7471,6 +7670,77 @@ var minCostClimbingStairs = function(cost) {
 };
 ```
 
+## ?🌟😻✔ 862 和至少为 K 的最短子数组【hard】
+
+[ref](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
+
+
+单调队列、前缀数组、滑动窗口、双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var shortestSubarray = function(nums, k) {
+  const len = nums.length
+  let min = Number.MAX_SAFE_INTEGER
+  let P = new Array(len + 1).fill(0) // 前缀数组
+  let S = [] // 下标单调队列
+ 
+  for(let i=0;i<len;i++) {
+    P[i + 1] = P[i] + nums[i]
+  }
+
+  for(let i=0;i<len;i++) {
+    while(S.length > 0 && P[i] < P[S[S.length - 1]]) {
+      S.pop()
+    }
+    S.push(i)
+
+    while(S.length && P[i] + nums[i] - P[S[0]] >= k) {
+      min = Math.min(min, i - S.shift() + 1)
+    }
+  }
+
+  return min === Number.MAX_SAFE_INTEGER ? -1 : min
+};
+```
+
+or
+
+```js
+var shortestSubarray = function(nums, k) {
+  const len = nums.length
+  let l = 0
+  let r = 0
+  let min = Number.MAX_SAFE_INTEGER
+  let sum = 0
+
+  while(r < len) {
+    sum += nums[r]
+    if(sum >= k) {
+      let tS = 0
+      for(let j=r;j>=l;j--) {
+        tS += nums[j]
+        if(tS >= k) {
+          l = j
+          sum = tS
+          break
+        }
+      }
+      min = Math.min(r - l + 1, min)
+    } else {
+      while((nums[l] <= 0 || sum <= 0) && l <= r) {
+        sum -= nums[l]
+        l++
+      }
+    }
+    r++
+  }
+
+  return min === Number.MAX_SAFE_INTEGER ? -1 : min
+};
+```
+
 ## ✔ 933 最近的请求次数【easy】
 
 [ref](https://leetcode.cn/problems/number-of-recent-calls/)
@@ -7871,6 +8141,34 @@ var getKthFromEnd = function(head, k) {
 };
 ```
 
+## ✔ 剑指 Offer 25 合并两个排序的链表【easy】
+
+[ref](https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
+
+```js
+var mergeTwoLists = function(l1, l2) {
+  const head = new ListNode()
+  let tHead = head
+  while(l1 && l2) {
+    if(l1.val < l2.val) {
+      tHead.next = l1
+      l1 = l1.next
+    } else {
+      tHead.next = l2
+      l2 = l2.next
+    }
+    tHead = tHead.next
+  }
+  if(l1) {
+    tHead.next = l1
+  }
+  if(l2) {
+    tHead.next = l2
+  }
+  return head.next
+};
+```
+
 ## 😻✔ 剑指 Offer 26 树的子结构【medium】
 
 [ref](https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/)
@@ -8050,5 +8348,31 @@ var reversePairs = function(nums) {
 
   mergeSort(nums, 0, nums.length - 1)
   return total
+};
+```
+
+## 🌟😻✔ 面试题 02.05 链表求和【medium】
+
+[ref](https://leetcode.cn/problems/sum-lists-lcci/)
+
+链表
+
+```js
+var addTwoNumbers = function(l1, l2) {
+  let add = 0
+  const head = new ListNode()
+  let tHead = head
+  while(l1 || l2) {
+    const tS = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + add
+    add = Math.floor(tS / 10)
+    tHead.next = new ListNode(tS % 10)
+    tHead = tHead.next
+    l1 && (l1 = l1.next)
+    l2 && (l2 = l2.next)
+  }
+  if(add > 0) {
+    tHead.next = new ListNode(add)
+  }
+  return head.next
 };
 ```
