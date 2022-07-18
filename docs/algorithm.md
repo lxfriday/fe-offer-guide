@@ -115,6 +115,10 @@
   - [🌟【hard】 297 二叉树的序列化与反序列化](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
 - 20220717
   - ?? [🌟【medium】 424 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
+  - ? [🌟【hard】 295 数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream/)
+- 20220718
+  - ?? [🌟【medium】 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+  - ?? [🌟【hard】 354 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/)
 
 # 刷题指南
 
@@ -5985,6 +5989,145 @@ var moveZeroes = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 295. 数据流的中位数【hard】
+
+[ref](https://leetcode.cn/problems/find-median-from-data-stream/)
+
+优先队列、大顶堆、小顶堆
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(N)
+var MedianFinder = function() {
+  this.maxHeap = new MaxHeap() // 小的部分
+  this.minHeap = new MinHeap() // 大的部分
+};
+
+MedianFinder.prototype.addNum = function(num) {
+  if(
+    this.maxHeap.size() === 0
+    || num < this.maxHeap.peek()) {
+      this.maxHeap.insert(num)
+      if(this.maxHeap.size() > this.minHeap.size() + 1) {
+        this.minHeap.insert(this.maxHeap.pop())
+      }
+  } else {
+    this.minHeap.insert(num)
+    if(this.minHeap.size() > this.maxHeap.size()) {
+      this.maxHeap.insert(this.minHeap.pop())
+    }
+  }
+};
+
+MedianFinder.prototype.findMedian = function() {
+  if(this.minHeap.size() === this.maxHeap.size()) {
+    return (this.minHeap.peek() + this.maxHeap.peek()) / 2
+  } else {
+    return this.maxHeap.peek()
+  }
+};
+
+// 小顶堆
+class MinHeap {
+  constructor(isMin) {
+    this.heap = []
+  }
+  insert(v) {
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    const target = this.heap.pop()
+    this.shiftDown(0)
+    return target
+  }
+  shiftUp(i) {
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(this.heap[i] < this.heap[parentIndex]) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i) {
+    const lIndex = 2 * i + 1
+    const rIndex = 2 * i + 2
+    let minIndex = i
+    if(this.heap[lIndex] < this.heap[minIndex]) {
+      minIndex = lIndex
+    }
+    if(this.heap[rIndex] < this.heap[minIndex]) {
+      minIndex = rIndex
+    }
+    if(minIndex !== i) {
+      this.swap(minIndex, i)
+      this.shiftDown(minIndex)
+    }
+  }
+  peek() {
+    return this.heap[0]
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  size() {
+    return this.heap.length
+  }
+}
+
+// 大顶堆
+class MaxHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v) {
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    const target = this.heap.pop()
+    this.shiftDown(0)
+    return target
+  }
+  shiftUp(i) {
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(this.heap[i] > this.heap[parentIndex]) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i) {
+    const lIndex = 2 * i + 1
+    const rIndex = 2 * i + 2
+    let maxIndex = i
+    if(this.heap[lIndex] > this.heap[maxIndex]) {
+      maxIndex = lIndex
+    }
+    if(this.heap[rIndex] > this.heap[maxIndex]) {
+      maxIndex = rIndex
+    }
+    if(maxIndex !== i) {
+      this.swap(maxIndex, i)
+      this.shiftDown(maxIndex)
+    }
+  }
+  peek() {
+    return this.heap[0]
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  size() {
+    return this.heap.length
+  }
+}
+```
+
 ## 🌟😻✔ 297 二叉树的序列化与反序列化【hard】
 
 [ref](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
@@ -6047,7 +6190,7 @@ var longestConsecutive = function(root) {
 };
 ```
 
-## 🌟😻✔ 300 最长递增子序列【medium】
+## ??🌟😻✔ 300 最长递增子序列【medium】
 
 [ref](https://leetcode.cn/problems/longest-increasing-subsequence/)
 
@@ -6078,39 +6221,31 @@ var lengthOfLIS = function(nums) {
 dp[i] 代表长度为 i 的最长递增子序列的最后一个数的最小值
 
 ```js
-// 时间复杂度：O(nlogn)
-// 空间复杂度：O(n)
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
 var lengthOfLIS = function(nums) {
-  let len = nums.length
+  const len = nums.length
   const dp = []
-  // dp[i] 代表长度为 i 的最长递增子序列的最后一个数的最小值
-  // 最长递增子序列、最后一个数、最小值
   let count = 0
-  dp[++count] = nums[0]
-  for(let i = 1; i < len; i++) {
+  dp[count] = nums[0]
+  for(let i=1;i<len;i++) {
     if(nums[i] > dp[count]) {
       dp[++count] = nums[i]
     } else {
-      // 在 dp 中找到 nums[i] > dp[j - 1] 且 nums[i] <= dp[j]
-      let l = 1
-      let r = count
-      let pos = 0
-      while(l <= r) {
+      let l = 0, r = count
+      while(l < r) {
         const mid = Math.floor((l + r) / 2)
-        if(dp[mid] === nums[i]) {
-          pos = mid
-          break
-        } else if(dp[mid] < nums[i]) {
-          l++
+        if(nums[i] > dp[mid]) {
+          l = mid + 1
         } else {
-          pos = r
-          r--
+          pos = mid
+          r = mid
         }
       }
-      dp[pos] = nums[i]
+      dp[l] = nums[i]
     }
   }
-  return count
+  return count + 1
 };
 ```
 
@@ -6516,6 +6651,51 @@ var intersection = function(nums1, nums2) {
   }
   return res
 };
+```
+
+## ??🌟😻✔ 354 俄罗斯套娃信封问题【hard】
+
+[ref](https://leetcode.cn/problems/russian-doll-envelopes/)
+
+二分法、递增子序列
+
+相关
+- [300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var maxEnvelopes = function(envelopes) {
+  envelopes.sort((a, b) => {
+    if(a[0] !== b[0]) {
+      return a[0] - b[0]
+    } else {
+      return  b[1] - a[1]
+    }
+  })
+  const len = envelopes.length
+  const dp = []
+  let count = 0
+  dp[count] = envelopes[0]
+  for(let i=1;i<len;i++) {
+    if(envelopes[i][1] > dp[count][1]) {
+      dp[++count] = envelopes[i]
+    } else {
+      let l = 0, r = count
+      while(l < r) {
+        const mid = Math.floor((l + r) / 2)
+        if(envelopes[i][1] > dp[mid][1]) {
+          l = mid + 1
+        } else {
+          r = mid
+        }
+      }
+      dp[l] = envelopes[i]
+    }
+  }
+  return count + 1
+};
+
 ```
 
 ## 😻✔ 374 猜数字大小【easy】
