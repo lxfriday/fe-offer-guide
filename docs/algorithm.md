@@ -80,7 +80,6 @@
   - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
   - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
 - 20220703
-
   - ? [🌟【hard】 315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
   - ? [🌟【hard】 剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
   - ? [🌟【medium】 148 排序链表](https://leetcode.cn/problems/sort-list/)
@@ -119,6 +118,18 @@
 - 20220718
   - ?? [🌟【medium】 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
   - ?? [🌟【hard】 354 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/)
+- 20220719
+  - ?? [🌟【hard】 1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
+- 20220720
+  - ?? [🌟【hard】 815 公交路线](https://leetcode.cn/problems/bus-routes/) BFS
+  - ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
+  - ?? [🌟【medium】 698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+- 20220721
+  - ?? [🌟【hard】 879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
+  - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
+  - 🌟【medium】[204 计数质数](https://leetcode.cn/problems/count-primes/)
+  - ? 🌟【easy】[263 丑数](https://leetcode.cn/problems/ugly-number/)
+  - ? 🌟【medium】[264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
 
 # 刷题指南
 
@@ -139,6 +150,9 @@
 - 贪心算法
 - 回溯算法
 - 模拟
+
+## 数学规律、推导题
+  - 🌟【hard】[1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
 
 ## 数字大小题
 
@@ -250,6 +264,7 @@
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
 - 【medium】 [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 - 【medium】 [200 岛屿数量](https://leetcode.cn/problems/number-of-islands/)
+- 🌟【hard】 [815 公交路线](https://leetcode.cn/problems/bus-routes/)
 
 ## 搜索、排序
 
@@ -288,12 +303,19 @@
 - 🌟【01背包】【medium】 [416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
 - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
 - 【medium】 [剑指 Offer 46 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
-- 🌟【01背包】【medium】 [322 零钱兑换](https://leetcode.cn/problems/coin-change/)
 - 【medium】 [343 整数拆分](https://leetcode.cn/problems/integer-break/)
 - 【medium】 [62 不同路径](https://leetcode.cn/problems/unique-paths/)
 - 🌟【medium】 [1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
 - 🌟【medium】 [213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
 - 🌟【medium】 [337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
+- 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
+
+### 动态规划 - 背包问题
+- 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
+- 🌟【medium】[322 零钱兑换](https://leetcode.cn/problems/coin-change/) 【01背包】
+- 🌟【medium】[416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
+- 🌟【medium】[698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+- 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 
 ## 贪心算法
 
@@ -5203,6 +5225,29 @@ var isHappy = function(n) {
 
 ```
 
+## ?🌟😻✔ 204 计数质数【medium】
+
+[ref](https://leetcode.cn/problems/count-primes/)
+
+埃氏筛法、质数统计
+
+```js
+var countPrimes = function(n) {
+  let count = 0
+  const p = new Array(n).fill(true)
+  for(let i=2;i<n;i++) {
+    if(p[i]) {
+      count++
+      for(let j = i * i;j<n;j += i) {
+        p[j] = false
+      }
+    }
+  }
+  return count
+};
+ 
+```
+
 ## 🌟😻✔ 206 反转链表【easy】
 
 [ref](https://leetcode.cn/problems/reverse-linked-list/)
@@ -5948,6 +5993,97 @@ var minMeetingRooms = function(intervals) {
 
   return max
 };
+
+```
+
+## ✔ 263 丑数【easy】
+
+[ref](https://leetcode.cn/problems/ugly-number/)
+
+```js
+var isUgly = function(n) {
+  if(n === 0) return false
+  if(n === 1) return true
+  if(n % 2 === 0) return isUgly(n / 2)
+  if(n % 3 === 0) return isUgly(n / 3)
+  if(n % 5 === 0) return isUgly(n / 5)
+  return false
+};
+```
+
+## ?🌟😻✔ 263 丑数【medium】
+
+[ref](https://leetcode.cn/problems/ugly-number-ii/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var nthUglyNumber = function(n) {
+  let c = 1
+  n--
+  const s = new Set()
+  const minHeap = new MinHeap()
+  while(n > 0) {
+    if(!s.has(2 * c)) {
+      s.add(2 * c)
+      minHeap.insert(2 * c)
+    }
+    if(!s.has(3 * c)) {
+      s.add(3 * c)
+      minHeap.insert(3 * c)
+    }
+    if(!s.has(5 * c)) {
+      s.add(5 * c)
+      minHeap.insert(5 * c)
+    }
+    c = minHeap.pop()
+    n--
+  }
+  return c
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop(){
+    this.swap(0, this.heap.length - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  shiftUp(i){
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(this.heap[i] < this.heap[parentIndex]) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i){
+    const leftIndex= 2 * i + 1
+    const rightIndex= 2 * i + 2
+    let minIndex = i
+    if(this.heap[minIndex] > this.heap[leftIndex]) {
+      minIndex = leftIndex
+    }
+    if(this.heap[minIndex] > this.heap[rightIndex]) {
+      minIndex = rightIndex
+    }
+    if(minIndex !== i) {
+      this.swap(i, minIndex)
+      this.shiftDown(minIndex)
+    }
+  }
+  swap(i,j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+}
 
 ```
 
@@ -7588,6 +7724,54 @@ var maxAreaOfIsland = function(grid) {
 };
 ```
 
+## ??🌟😻✔ 698 划分为k个相等的子集【medium】
+
+[ref](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+
+相关
+
+- ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
+
+
+回溯
+
+```js
+var canPartitionKSubsets = function(nums, k) {
+  let sum = 0
+  let max = nums[0]
+  const len = nums.length
+  for(let i=0;i<len;i++) {
+    sum += nums[i]
+    max = Math.max(max, nums[i])
+  }
+  const target0 = sum / k
+  if(Math.floor(target0) !== target0 || max > target0) return false
+  nums.sort((a, b) => a - b)
+  const used = new Array(len).fill(false)
+
+  function dfs(n, s, startIndex) {
+    if(s === target0) {
+      // 每找到一次就会刷新 startIndex
+      return dfs(n - 1, 0, 0)
+    }
+    // 只要找到 n - 1 个 符合条件的捅即可，剩余的一个自然会符合条件
+    if(n === 1)  return true
+    for(let i=startIndex;i<nums.length;i++) {
+      if(s + nums[i] > target0) break
+      if(used[i]) continue
+      used[i] = true
+      const r = dfs(n, s + nums[i], i + 1)
+      used[i] = false
+      if(r) {
+        return true
+      }
+    }
+    return false
+  }
+  return dfs(k, 0, 0)
+};
+```
+
 ## 😻✔ 704 二分查找【easy】
 
 [ref](https://leetcode.cn/problems/binary-search/)
@@ -7850,6 +8034,81 @@ var minCostClimbingStairs = function(cost) {
 };
 ```
 
+## ??🌟😻✔ 815 公交路线【hard】
+
+[ref](https://leetcode.cn/problems/bus-routes/)
+
+BFS、图
+
+```js
+var numBusesToDestination = function(routes, source, target) {
+  // 还有这种恶心人的 case?，直接给我滚蛋
+  if(source === target) return 0
+  // 一个站点有哪几条公交线路经过
+  const pointMap = new Map()
+  // 公交路线交叉图
+  const crossMap = new Map()
+  // 能够从哪些公交路线开始
+  const startArr = []
+  // 能够结束于哪些公交路线
+  const endSet = new Set()
+  for(let i = 0;i < routes.length; i++) {
+    const l = routes[i].length
+    if(l === 1) continue
+    for(let j = 0;j < l;j++) {
+      if(routes[i][j] === target) {
+        endSet.add(i)
+      }
+      if(routes[i][j] === source) {
+        startArr.push(i)
+      }
+      if(pointMap.has(routes[i][j])) {
+        pointMap.get(routes[i][j]).push(i)
+      } else {
+        pointMap.set(routes[i][j], [i])
+      }
+    }
+  }
+  // 没有开始的公交线路或者没有到达结束点的公交线路 直接 return
+  if(!startArr.length || !endSet.size) return -1
+  // 构建公交路线交叉图
+  for(let rs of pointMap.values()) {
+    for(let i=0;i<rs.length;i++) {
+      for(let j=0;j<rs.length;j++) {
+        if(i === j) continue
+        if(crossMap.has(rs[i])) {
+          crossMap.get(rs[i]).add(rs[j])
+        } else {
+          crossMap.set(rs[i], new Set([rs[j]]))
+        }
+      }
+    }
+  }
+  // BFS 从开始线路往外扩展，搜到第一个结束线路即可认为结束了
+  let q = startArr
+  let next = []
+  let min = 1
+  const passed = new Set()
+  while(q.length) {
+    const cr = q.shift()
+    if(endSet.has(cr)) return min
+    if(!passed.has(cr)) {
+      if(crossMap.has(cr)) {
+        next = [...next, ...crossMap.get(cr)]
+      }
+      passed.add(cr)
+    }
+    if(!q.length && next.length > 0) {
+      min++
+      q = next
+      next = []
+    }
+  }
+  return -1
+};
+
+```
+
 ## ?🌟😻✔ 862 和至少为 K 的最短子数组【hard】
 
 [ref](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
@@ -7921,6 +8180,45 @@ var shortestSubarray = function(nums, k) {
 };
 ```
 
+## ✔ ??🌟😻✔ 879 盈利计划【hard】
+
+[ref](https://leetcode.cn/problems/profitable-schemes/)
+
+动态规划、多维背包问题
+
+```js
+// 特殊的多维费用背包问题
+var profitableSchemes = function(n, minProfit, group, profit) {
+  const mod = 10 ** 9 + 7
+  const len = group.length
+  const dp = new Array(n + 1).fill(0)
+              .map(_ => new Array(len + 1).fill(0)
+              .map(__ => new Array(minProfit + 1).fill(0)))
+
+  for(let i=0;i<=n;i++) {
+    dp[i][0][0] = 1
+  }
+
+  for(let i=0;i<=n;i++) {
+    for(let j=1;j<=len;j++) {
+      const p = profit[j-1]
+      const g = group[j-1]
+      for(let k=0;k<=minProfit;k++) {
+        dp[i][j][k] = dp[i][j - 1][k]
+        if(i >= g) {
+          dp[i][j][k] += dp[i - g][j - 1][Math.max(k - p, 0)]
+          if(dp[i][j][k] >= mod) {
+            dp[i][j][k] -= mod
+          }
+        }
+      }
+    }
+  }
+  return dp[n][len][minProfit]
+};
+
+```
+
 ## ✔ 933 最近的请求次数【easy】
 
 [ref](https://leetcode.cn/problems/number-of-recent-calls/)
@@ -7946,30 +8244,6 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
-## 🌟✔ 1103 分糖果 II【easy】
-
-[ref](https://leetcode.cn/problems/distribute-candies-to-people/)
-
-```js
-var distributeCandies = function(candies, num_people) {
-  const res = new Array(num_people).fill(0)
-  let n = 1
-  let index = 0
-  while(candies) {
-    if(candies <= n) {
-      res[index] += candies
-      candies = 0
-    } else {
-      res[index] += n
-      candies -= n
-    }
-    n++
-    index++
-    if(index === num_people) index = 0
-  }
-  return res
-};
-```
 
 ## 🌟✔ 977 有序数组的平方【easy】
 
@@ -7990,6 +8264,31 @@ var sortedSquares = function(nums) {
       res.unshift(nums[r] ** 2)
       r--
     }
+  }
+  return res
+};
+```
+
+## 🌟✔ 1103 分糖果 II【easy】
+
+[ref](https://leetcode.cn/problems/distribute-candies-to-people/)
+
+```js
+var distributeCandies = function(candies, num_people) {
+  const res = new Array(num_people).fill(0)
+  let n = 1
+  let index = 0
+  while(candies) {
+    if(candies <= n) {
+      res[index] += candies
+      candies = 0
+    } else {
+      res[index] += n
+      candies -= n
+    }
+    n++
+    index++
+    if(index === num_people) index = 0
   }
   return res
 };
@@ -8088,6 +8387,68 @@ var canReach = function(arr, start) {
 
   return jump(start - arr[start]) || jump(start + arr[start])
 };
+
+```
+
+## ??🌟😻✔ 1411 给 N x 3 网格图涂色的方案数【hard】
+
+[ref](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
+
+数学推导题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numOfWays = function(n) {
+  let f0 = 6, f1 = 6
+  for(let i=1;i<n;i++) {
+    const nf0 = (3*f0 + 2*f1) % 1000000007
+    const nf1 = (2*f0 + 2*f1) % 1000000007
+    f0 = nf0
+    f1 = nf1
+  }
+
+  return (f0 + f1) % 1000000007
+};
+
+// 0 1 2
+// 0 2 1
+// 1 0 2
+// 1 2 0
+// 2 0 1
+// 2 1 0
+
+// 0 1 0
+// 0 2 0
+// 1 0 1
+// 1 2 1
+// 2 0 2
+// 2 1 2
+
+// -----
+// A B A
+
+// B A B
+// C A C
+// B C B
+
+// B A C
+// C A B
+// -----
+
+// -----
+// A B C
+
+// B A B
+// B C B
+
+// B C A
+// C A B
+// -----
+// f0 = 6, f1 = 6
+
+// nf0 = 3*f0 + 2*f1
+// nf1 = 2*f0 + 2*f1
 
 ```
 
