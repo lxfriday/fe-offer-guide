@@ -126,10 +126,18 @@
   - ?? [🌟【medium】 698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
 - 20220721
   - ?? [🌟【hard】 879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
-  - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
-  - 🌟【medium】[204 计数质数](https://leetcode.cn/problems/count-primes/)
-  - ? 🌟【easy】[263 丑数](https://leetcode.cn/problems/ugly-number/)
-  - ? 🌟【medium】[264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
+  - [🌟【medium】279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
+  - [🌟【medium】204 计数质数](https://leetcode.cn/problems/count-primes/)
+  - ? [🌟【easy】263 丑数](https://leetcode.cn/problems/ugly-number/)
+  - ? [🌟【medium】264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
+  - ? [🌟【medium】313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
+  - [🌟【hard】23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+- 20220722
+  - [🌟【medium】33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+  - [🌟【medium】81 搜索旋转排序数组 II](https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/)
+  - [🌟【medium】153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+  - [🌟【hard】154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
+  - [🌟【easy】796 旋转字符串](https://leetcode.cn/problems/rotate-string/)
 
 # 刷题指南
 
@@ -309,6 +317,7 @@
 - 🌟【medium】 [213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
 - 🌟【medium】 [337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
+- 🌟【medium】[313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -6011,9 +6020,36 @@ var isUgly = function(n) {
 };
 ```
 
-## ?🌟😻✔ 263 丑数【medium】
+## ?🌟😻✔ 264 丑数 II【medium】
 
 [ref](https://leetcode.cn/problems/ugly-number-ii/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var nthUglyNumber = function(n) {
+  const dp = new Array(n + 1).fill(1)
+  let j2 = 1,j3 = 1,j5 = 1
+  for(let i=2;i<=n;i++) {
+    const v2 = dp[j2] * 2
+    const v3 = dp[j3] * 3
+    const v5 = dp[j5] * 5
+    const min = Math.min(v2, v3, v5)
+
+    if(min === v2) j2++
+    if(min === v3) j3++
+    if(min === v5) j5++
+    dp[i] = min
+  }
+
+  return dp[n]
+};
+```
+
+or 优先队列、小顶堆
+
 
 ```js
 // 时间复杂度：O(NlogN)
@@ -6461,6 +6497,34 @@ var maxProfit = function(prices) {
   }
 
   return Math.max(dp[len - 1][1], dp[len - 1][2])
+};
+```
+
+## ?🌟😻✔ 313. 超级丑数【medium】
+
+[ref](https://leetcode.cn/problems/super-ugly-number/)
+
+```js
+// 时间复杂度：O(n*m)
+// 空间复杂度：O(n + m)
+var nthSuperUglyNumber = function(n, primes) {
+  const len = primes.length
+  const baseCalc = new Array(len).fill(1)
+  const dp = new Array(n + 1).fill(1)
+  for(let i=2;i<=n;i++) {
+    let min = Number.MAX_SAFE_INTEGER
+    for(let j = 0;j<primes.length;j++) {
+      min = Math.min(dp[baseCalc[j]] * primes[j], min)
+    }
+    for(let j = 0;j<primes.length;j++) {
+      if(dp[baseCalc[j]] * primes[j] === min) {
+        baseCalc[j]++
+      }
+    }
+
+    dp[i] = min
+  }
+  return dp[n]
 };
 ```
 
@@ -8031,6 +8095,32 @@ var minCostClimbingStairs = function(cost) {
     dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2])
   }
   return Math.min(dp[len - 1], dp[len - 2])
+};
+```
+
+## 🌟✔ 796. 旋转字符串【easy】
+
+[ref](https://leetcode.cn/problems/rotate-string/submissions/)
+
+略有趣
+
+```js
+var rotateString = function(s, goal) {
+  return s.length === goal.length && (s + s).includes(goal)
+};
+```
+
+or
+
+```js
+var rotateString = function(s, goal) {
+  for(let i=1;i<=s.length;i++) {
+     if(s === goal) return true
+     const sA = s.split('')
+     sA.push(sA.shift())
+     s = sA.join('')
+  }
+  return false
 };
 ```
 
