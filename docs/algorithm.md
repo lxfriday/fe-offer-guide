@@ -9,23 +9,113 @@
 
 # 刷题日记
 
-- 20220602
-  - ? [🌟【medium】 279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
-- 20220604
-  - ? [🌟【medium】 475 供暖器](https://leetcode.cn/problems/heaters/)
-  - ? [🌟【medium】【01背包】 416 分割等和子集 ](https://leetcode.cn/problems/partition-equal-subset-sum/)
-- 20220605
-  - ? [🌟【medium】 540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/) 二分
-  - [【medium】 24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/) 
-  - ? [🌟【medium】 209 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/) 滑动窗口、双指针、前缀数组
-  - ? [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/) 哈希
-  - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
-- 20220606
-  - ? [🌟【medium】 394 字符串解码](https://leetcode.cn/problems/decode-string/)
-  - [🌟【easy】 118 杨辉三角](https://leetcode.cn/problems/pascals-triangle/)
-  - [【medium】 17 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
-  - [【medium】 167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
-  - [🌟【medium】 153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+- 20220723
+  - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+  - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
+- 20220722
+  - [🌟【medium】33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+  - [🌟【medium】81 搜索旋转排序数组 II](https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/)
+  - [🌟【medium】153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+  - [🌟【hard】154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
+  - [🌟【easy】796 旋转字符串](https://leetcode.cn/problems/rotate-string/)
+  - [🌟【easy】509 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
+- 20220721
+  - ?? [🌟【hard】 879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
+  - [🌟【medium】279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
+  - [🌟【medium】204 计数质数](https://leetcode.cn/problems/count-primes/)
+  - ? [🌟【easy】263 丑数](https://leetcode.cn/problems/ugly-number/)
+  - ? [🌟【medium】264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
+  - ? [🌟【medium】313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
+  - [🌟【hard】23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+- 20220720
+  - ?? [🌟【hard】 815 公交路线](https://leetcode.cn/problems/bus-routes/) BFS
+  - ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
+  - ?? [🌟【medium】 698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+- 20220719
+  - ?? [🌟【hard】 1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
+- 20220718
+  - ?? [🌟【medium】 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+  - ?? [🌟【hard】 354 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/)
+- 20220717
+  - ?? [🌟【medium】 424 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
+  - ? [🌟【hard】 295 数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream/)
+- 20220716
+  - ? [🌟【hard】 862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
+  - [🌟【hard】 297 二叉树的序列化与反序列化](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
+- 20220715
+  - ? [🌟【medium】 253 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/)
+  - [【easy】 252 会议室](https://leetcode.cn/problems/meeting-rooms/)
+  - [🌟【medium】 56 合并区间](https://leetcode.cn/problems/merge-intervals/)
+  - [🌟【medium】 77 组合](https://leetcode.cn/problems/combinations/)
+- 20220714
+  - ? [🌟【medium】 386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
+  - [🌟【medium】 面试题 02.05 链表求和](https://leetcode.cn/problems/sum-lists-lcci/)
+  - [🌟【easy】 剑指 Offer 25 合并两个排序的链表](https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
+- 20220713
+  - ? [🌟【medium】 162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
+  - [🌟【hard】 面试题 17.21 直方图的水量](https://leetcode.cn/problems/volume-of-histogram-lcci/)
+- 20220712
+  - ? [🌟【medium】 445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
+  - ? [🌟【hard】 224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
+  - ? [🌟【medium】 227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
+- 20220711
+  - [🌟【easy】 415 字符串相加](https://leetcode.cn/problems/add-strings/)
+  - ? [🌟【easy】 160 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
+- 20220708
+  - ? [🌟【medium】 221 最大正方形](https://leetcode.cn/problems/maximal-square/)
+  - [🌟【medium】 113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
+  - ? [🌟【hard】 329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
+- 20220703
+  - ? [🌟【hard】 315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
+  - ? [🌟【hard】 剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+  - ? [🌟【medium】 148 排序链表](https://leetcode.cn/problems/sort-list/)
+  - [🌟【easy】 剑指 Offer 50 第一个只出现一次的字符](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
+  - [🌟【medium】 199 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
+  - ? [🌟【medium】 103 二叉树的锯齿形层序遍历](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
+- 20220702
+  - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+  - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+  - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
+- 20220701
+  - [【easy】 746 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+- 20220630
+  - [🌟【medium】 240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
+- 20220629
+  - [🌟【medium】 494 目标和](https://leetcode.cn/problems/target-sum/)
+  - [【medium】 165 比较版本号](https://leetcode.cn/problems/compare-version-numbers/)
+- 20220628
+  - [🌟【easy】 268 丢失的数字](https://leetcode.cn/problems/missing-number/)
+- 20220627
+  - ? [🌟【medium】 79 单词搜索](https://leetcode.cn/problems/word-search/solution/dan-ci-sou-suo-by-leetcode-solution/)
+- 20220624
+  - ? [🌟【medium】 380 O(1) 时间插入、删除和获取随机元素](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
+- 20220623
+  - 🌟【medium】[213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+  - ? [🌟【medium】 337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
+  - [🌟【medium】 剑指 Offer 40 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
+  - [【medium】 695 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/)
+- 20220620
+  - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+- 20220616
+  - ? [🌟【hard】 51 N 皇后](https://leetcode.cn/problems/n-queens/)
+  - ? [🌟【hard】 37 解数独](https://leetcode.cn/problems/sudoku-solver/)
+- 20220611
+  - ? [🌟【medium】 1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
+- 20220610
+  - ? [🌟【hard】 85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+  - ? [🌟【medium】 剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
+  - ? [🌟【medium】 739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+  - ? [🌟【hard】 440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+  - [【medium】 62 不同路径](https://leetcode.cn/problems/unique-paths/)
+- 20220609
+  - [【medium】 343 整数拆分](https://leetcode.cn/problems/integer-break/)
+  - ? [🌟【hard】 84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
+  - ? [🌟【medium】 179 最大数](https://leetcode.cn/problems/largest-number/)
+  - ? [🌟【medium】 189 轮转数组](https://leetcode.cn/problems/rotate-array/)
+  - [🌟【easy】 202. 快乐数](https://leetcode.cn/problems/happy-number/)
+- 20220608
+  - [🌟【medium】 82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
+  - [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
 - 20220607
   - [🌟【hard】 154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
   - ? [🌟【medium】 剑指 Offer 29 顺时针打印矩阵](https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
@@ -35,113 +125,23 @@
   - [【medium】 102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
   - [【medium】 102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
   - ? [🌟【medium】 131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
-- 20220608
-  - [🌟【medium】 82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
-  - [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
-- 20220609
-  - [【medium】 343 整数拆分](https://leetcode.cn/problems/integer-break/)
-  - ? [🌟【hard】 84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
-  - ? [🌟【medium】 179 最大数](https://leetcode.cn/problems/largest-number/)
-  - ? [🌟【medium】 189 轮转数组](https://leetcode.cn/problems/rotate-array/)
-  - [🌟【easy】 202. 快乐数](https://leetcode.cn/problems/happy-number/)
-- 20220610
-  - ? [🌟【hard】 85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
-  - ? [🌟【medium】 剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
-  - ? [🌟【medium】 739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
-  - ? [🌟【hard】 440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
-  - [【medium】 62 不同路径](https://leetcode.cn/problems/unique-paths/)
-- 20220611
-  - ? [🌟【medium】 1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
-- 20220616
-  - ? [🌟【hard】 51 N 皇后](https://leetcode.cn/problems/n-queens/)
-  - ? [🌟【hard】 37 解数独](https://leetcode.cn/problems/sudoku-solver/)
-- 20220620
-  - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
-- 20220623
-  - 🌟【medium】[213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
-  - ? [🌟【medium】 337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
-  - [🌟【medium】 剑指 Offer 40 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
-  - [【medium】 695 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/)
-- 20220624
-  - ? [🌟【medium】 380 O(1) 时间插入、删除和获取随机元素](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
-- 20220627
-  - ? [🌟【medium】 79 单词搜索](https://leetcode.cn/problems/word-search/solution/dan-ci-sou-suo-by-leetcode-solution/)
-- 20220628
-  - [🌟【easy】 268 丢失的数字](https://leetcode.cn/problems/missing-number/)
-- 20220629
-  - [🌟【medium】 494 目标和](https://leetcode.cn/problems/target-sum/)
-  - [【medium】 165 比较版本号](https://leetcode.cn/problems/compare-version-numbers/)
-- 20220630
-  - [🌟【medium】 240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
-- 20220701
-  - [【easy】 746 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
-- 20220702
-  - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
-  - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
-  - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
-- 20220703
-  - ? [🌟【hard】 315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
-  - ? [🌟【hard】 剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
-  - ? [🌟【medium】 148 排序链表](https://leetcode.cn/problems/sort-list/)
-  - [🌟【easy】 剑指 Offer 50 第一个只出现一次的字符](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
-  - [🌟【medium】 199 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
-  - ? [🌟【medium】 103 二叉树的锯齿形层序遍历](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
-- 20220708
-  - ? [🌟【medium】 221 最大正方形](https://leetcode.cn/problems/maximal-square/)
-  - [🌟【medium】 113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
-  - ? [🌟【hard】 329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
-- 20220711
-  - [🌟【easy】 415 字符串相加](https://leetcode.cn/problems/add-strings/)
-  - ? [🌟【easy】 160 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
-- 20220712
-  - ? [🌟【medium】 445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
-  - ? [🌟【hard】 224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
-  - ? [🌟【medium】 227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
-- 20220713
-  - ? [🌟【medium】 162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
-  - [🌟【hard】 面试题 17.21 直方图的水量](https://leetcode.cn/problems/volume-of-histogram-lcci/)
-- 20220714
-  - ? [🌟【medium】 386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
-  - [🌟【medium】 面试题 02.05 链表求和](https://leetcode.cn/problems/sum-lists-lcci/)
-  - [🌟【easy】 剑指 Offer 25 合并两个排序的链表](https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
-- 20220715
-  - ? [🌟【medium】 253 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/)
-  - [【easy】 252 会议室](https://leetcode.cn/problems/meeting-rooms/)
-  - [🌟【medium】 56 合并区间](https://leetcode.cn/problems/merge-intervals/)
-  - [🌟【medium】 77 组合](https://leetcode.cn/problems/combinations/)
-- 20220715
-  - ? [🌟【hard】 862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
-  - [🌟【hard】 297 二叉树的序列化与反序列化](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
-- 20220717
-  - ?? [🌟【medium】 424 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
-  - ? [🌟【hard】 295 数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream/)
-- 20220718
-  - ?? [🌟【medium】 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
-  - ?? [🌟【hard】 354 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/)
-- 20220719
-  - ?? [🌟【hard】 1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
-- 20220720
-  - ?? [🌟【hard】 815 公交路线](https://leetcode.cn/problems/bus-routes/) BFS
-  - ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
-  - ?? [🌟【medium】 698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
-- 20220721
-  - ?? [🌟【hard】 879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
-  - [🌟【medium】279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
-  - [🌟【medium】204 计数质数](https://leetcode.cn/problems/count-primes/)
-  - ? [🌟【easy】263 丑数](https://leetcode.cn/problems/ugly-number/)
-  - ? [🌟【medium】264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
-  - ? [🌟【medium】313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
-  - [🌟【hard】23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
-- 20220722
-  - [🌟【medium】33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
-  - [🌟【medium】81 搜索旋转排序数组 II](https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/)
-  - [🌟【medium】153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
-  - [🌟【hard】154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
-  - [🌟【easy】796 旋转字符串](https://leetcode.cn/problems/rotate-string/)
-  - [🌟【easy】509 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
-- 20220723
-  - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
-  - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
+- 20220606
+  - ? [🌟【medium】 394 字符串解码](https://leetcode.cn/problems/decode-string/)
+  - [🌟【easy】 118 杨辉三角](https://leetcode.cn/problems/pascals-triangle/)
+  - [【medium】 17 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+  - [【medium】 167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
+  - [🌟【medium】 153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+- 20220605
+  - ? [🌟【medium】 540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/) 二分
+  - [【medium】 24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/) 
+  - ? [🌟【medium】 209 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/) 滑动窗口、双指针、前缀数组
+  - ? [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/) 哈希
+  - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
+- 20220604
+  - ? [🌟【medium】 475 供暖器](https://leetcode.cn/problems/heaters/)
+  - ? [🌟【medium】【01背包】 416 分割等和子集 ](https://leetcode.cn/problems/partition-equal-subset-sum/)
+- 20220602
+  - ? [🌟【medium】 279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 
 # 刷题指南
 
