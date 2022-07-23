@@ -138,6 +138,10 @@
   - [🌟【medium】153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
   - [🌟【hard】154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
   - [🌟【easy】796 旋转字符串](https://leetcode.cn/problems/rotate-string/)
+  - [🌟【easy】509 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
+- 20220723
+  - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+  - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
 
 # 刷题指南
 
@@ -4403,6 +4407,42 @@ var longestConsecutive = function(nums) {
 
 [ref](https://leetcode.cn/problems/palindrome-partitioning/)
 
+回溯、动态规划
+
+```js
+// 时间复杂度：O(N*2^N)
+// 空间复杂度：O(N^2)
+var partition = function(s) {
+  const n = s.length
+  const f = new Array(n).fill(true).map(_ => new Array(n).fill(true))
+
+  for(let i=n-1;i>=0;i--) {
+    for(let j=i+1;j<n;j++) {
+      f[i][j] = s[i] === s[j] && f[i + 1][j - 1]
+    }
+  }
+
+  const res = []
+
+  function run(si, path) {
+    if(si >= n) {
+      res.push([...path])
+    }
+    for(let i=si;i<n;i++) {
+      if(f[si][i]) {
+        path.push(s.slice(si, i + 1))
+        run(i + 1, path)
+        path.pop()
+      }
+    }
+  }
+
+  run(0, [])
+
+  return res
+};
+```
+
 回溯
 
 ```js
@@ -4443,6 +4483,38 @@ function isPalindrome(str) {
   }
   return true
 }
+```
+
+## ?🌟😻✔ 132 分割回文串 II【hard】
+
+[ref](https://leetcode.cn/problems/palindrome-partitioning-ii/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var minCut = function(s) {
+  const n = s.length
+  const f = new Array(n).fill(true).map(_ => new Array(n).fill(true))
+  for(let i=n - 1;i>=0;i--) {
+    for(let j=i + 1;j < n;j++) {
+      f[i][j] = s[i] === s[j] && f[i + 1][j - 1]
+    }
+  }
+  const dp = new Array(n).fill(0)
+  dp[0] = 1
+  for(let j=1;j<n;j++) {
+    let min = j + 1
+    for(let i = j;i>=0;i--) {
+      if(f[i][j]) {
+        min = Math.min(min, (i - 1 >=0 ? dp[i - 1] : 0) + 1)
+      }
+    }
+    dp[j] = min
+  }
+  return dp[n - 1] - 1
+};
 ```
 
 ## 😻✔ 133 克隆图【medium】
