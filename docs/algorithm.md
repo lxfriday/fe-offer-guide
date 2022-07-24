@@ -9,9 +9,20 @@
 
 # 刷题日记
 
+- 20220724
+
+
 - 20220723
   - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
   - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
+  - ? [🌟【easy】232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+  - ? [🌟【easy】225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
+  - [🌟【easy】1 两数之和](https://leetcode.cn/problems/two-sum/)
+  - ? [🌟【medium】15 三数之和](https://leetcode.cn/problems/3sum/)
+  - [🌟【medium】18 四数之和](https://leetcode.cn/problems/4sum/)
+  - [🌟【medium】16 最接近的三数之和](https://leetcode.cn/problems/3sum-closest/)
+  - [🌟【medium】259 较小的三数之和](https://leetcode.cn/problems/3sum-smaller/)
+  - [🌟【medium】259 较小的三数之和](https://leetcode.cn/problems/3sum-smaller/)
 - 20220722
   - [🌟【medium】33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
   - [🌟【medium】81 搜索旋转排序数组 II](https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/)
@@ -1982,6 +1993,52 @@ var letterCombinations = function(digits) {
 
 // [['a', 'b', 'c'], ['g', 'h', 'i'], ]
 // [['a', 'b', 'c'], ['g', 'h', 'i'], ['g', 'h', 'i']]
+```
+
+## 🌟😻✔ 18 四数之和【medium】
+
+[ref](https://leetcode.cn/problems/4sum/)
+
+```js
+// 时间复杂度：O(N^3)
+// 空间复杂度：O(logN)
+var fourSum = function(nums, target) {
+  if(nums.length < 4) return []
+  nums.sort((a, b) => a - b)
+  const n = nums.length
+  const res = []
+  for(let i = 0;i<n - 3;i++) {
+    if(i - 1 >= 0 && nums[i] === nums[i - 1]) continue
+    const a = nums[i]
+    const atarget = target - a
+    for(let ii = i + 1;ii<n - 2;ii++) {
+      if(ii - 1 >= i + 1 && nums[ii] === nums[ii - 1]) continue
+      let b = nums[ii]
+      let l = ii + 1, r = n - 1
+      while(l < r) {
+        const s = b + nums[l] + nums[r]
+        if(s === atarget) {
+          res.push([a, b, nums[l], nums[r]])
+          while(nums[l] === nums[l + 1] && l < r) {
+            l++
+          }
+          while(nums[r] === nums[r - 1] && l < r) {
+            r--
+          }
+          l++
+          r--
+        } else {
+          if(s > atarget) {
+            r--
+          } else {
+            l++
+          }
+        }
+      }
+    }
+  }
+  return res
+};
 ```
 
 ## 🌟😻✔ 20 有效的括号【easy】
@@ -5699,6 +5756,56 @@ var calculate = function(s) {
 };
 ```
 
+## ?🌟😻✔ 225 用队列实现栈【easy】
+
+[ref](https://leetcode.cn/problems/implement-stack-using-queues/)
+
+相关
+
+- [232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+
+```js
+var MyStack = function() {
+  this.q = []
+  this.preq = []
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MyStack.prototype.push = function(x) {
+  this.preq.push(x)
+  while(this.q.length){
+    this.preq.push(this.q.shift())
+  }
+  while(this.preq.length){
+    this.q.push(this.preq.shift())
+  }
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.pop = function() {
+  return this.q.shift()
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.top = function() {
+  return this.q[0]
+};
+
+/**
+ * @return {boolean}
+ */
+MyStack.prototype.empty = function() {
+  return !this.q.length && !this.preq.length
+};
+```
+
 ## 😻✔ 226 翻转二叉树【easy】
 
 [ref](https://leetcode.cn/problems/invert-binary-tree/)
@@ -5803,6 +5910,61 @@ var calculate = function(s) {
 
 ```
 
+## ✔ 232 用栈实现队列【easy】
+
+[ref](https://leetcode.cn/problems/implement-queue-using-stacks/)
+
+相关
+
+- [225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
+
+
+```js
+var MyQueue = function() {
+  this.stack = []
+  this.prestack = []
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MyQueue.prototype.push = function(x) {
+  this.prestack.push(x)
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.pop = function() {
+  if(!this.stack.length) {
+    while(this.prestack.length) {
+      this.stack.push(this.prestack.pop())
+    }
+  }
+  return this.stack.pop()
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.peek = function() {
+  if(!this.stack.length) {
+    while(this.prestack.length) {
+      this.stack.push(this.prestack.pop())
+    }
+  }
+  return this.stack[this.stack.length - 1]
+};
+
+/**
+ * @return {boolean}
+ */
+MyQueue.prototype.empty = function() {
+  return !this.stack.length && !this.prestack.length
+};
+```
+
 ## 😻✔ 236 二叉树的最近公共祖先【medium】
 
 [ref](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
@@ -5858,6 +6020,77 @@ var searchMatrix = function(matrix, target) {
   return false
 };
 ```
+
+## 🌟😻✔ 268 丢失的数字【easy】
+
+[ref](https://leetcode.cn/problems/3sum-smaller/submissions/)
+
+常规
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(logN)
+var threeSumSmaller = function(nums, target) {
+  const n = nums.length
+  if(n < 3) return 0
+  nums.sort((a, b) => a - b)
+  let res = 0
+  for(let i=0; i < n - 2; i++) {
+    let l = i + 1, r = n - 1
+    while(l < r) {
+      const s = nums[i] + nums[l] + nums[r]
+      if(s < target) {
+        let tl = l
+        while(tl < r && nums[i] + nums[tl] + nums[r] < target) {
+          tl++
+          res++
+        }
+        r--
+      } else {
+        r--
+      }
+    }
+  }
+
+  return res
+};
+```
+
+二分
+
+```js
+// 时间复杂度：O(N^2*logN)
+// 空间复杂度：O(logN)
+var threeSumSmaller = function(nums, target) {
+  const n = nums.length
+  if(n < 3) return 0
+  nums.sort((a, b) => a - b)
+  let res = 0
+  for(let i=0; i < n - 2; i++) {
+    for(let j = i + 1;j<n-1;j++) {
+      const t = target - nums[i] - nums[j]
+      const ind = binarySearch(t, nums, j + 1, n - 1)
+      res += ind - j
+    }
+  }
+
+  return res
+};
+
+function binarySearch(t, nums, l, r) {
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] >= t) {
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  return l - 1
+}
+
+```
+
 
 ## 🌟😻✔ 268 丢失的数字【easy】
 
@@ -6075,6 +6308,38 @@ var minMeetingRooms = function(intervals) {
   return max
 };
 
+```
+
+## 🌟😻✔ 259 较小的三数之和【medium】
+
+[ref](https://leetcode.cn/problems/3sum-smaller/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(logN)
+var threeSumSmaller = function(nums, target) {
+  const n = nums.length
+  if(n < 3) return 0
+  nums.sort((a, b) => a - b)
+  let res = 0
+  for(let i=0; i < n - 2; i++) {
+    let l = i + 1, r = n - 1
+    while(l < r) {
+      const s = nums[i] + nums[l] + nums[r]
+      if(s < target) {
+        let tl = l
+        while(tl < r && nums[i] + nums[tl] + nums[r] < target) {
+          tl++
+          res++
+        }
+        r--
+      } else {
+        r--
+      }
+    }
+  }
+  return res
+};
 ```
 
 ## ✔ 263 丑数【easy】
