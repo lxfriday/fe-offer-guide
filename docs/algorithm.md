@@ -9,9 +9,30 @@
 
 # 刷题日记
 
+
+- 20220726
+  - [🌟【medium】406 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
+  - ?[🌟【hard】315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/) 归并排序
+  - ?[🌟【hard】493 翻转对](https://leetcode.cn/problems/reverse-pairs/) 归并排序
+  - ?[🌟【hard】327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
+
+- 20220725
+  - [🌟【medium】256 粉刷房子](https://leetcode.cn/problems/paint-house/)
+  - [🌟【hard】265 粉刷房子 II](https://leetcode.cn/problems/paint-house-ii/)
+  - [🌟【medium】276 栅栏涂色](https://leetcode.cn/problems/paint-fence/)
+  - [🌟【hard】239 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
+  - [🌟【hard】25 K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+  - [🌟【easy】1446 连续字符](https://leetcode.cn/problems/consecutive-characters/)
 - 20220724
-
-
+  - [🌟【medium】560 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)
+  - ? [🌟【medium】713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
+  - ?? [🌟【medium】152 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
+  - [🌟【medium】325 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/)
+  - [🌟【medium】198 打家劫舍](https://leetcode.cn/problems/house-robber/)
+  - [🌟【medium】213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+  - [🌟【medium】337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
+  - [🌟【medium】238 除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)
+  - ? [🌟【medium】454. 四数相加 II](https://leetcode.cn/problems/4sum-ii/)
 - 20220723
   - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
   - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
@@ -217,6 +238,9 @@
 - 🌟【medium】[221 最大正方形](https://leetcode.cn/problems/maximal-square/)
 - 🌟【hard】[329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
 - 🌟【hard】[862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
+- 🌟【hard】[315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
+- 🌟【hard】[493 翻转对](https://leetcode.cn/problems/reverse-pairs/)
+- 🌟【hard】[327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
 
 ## 模拟
 
@@ -225,6 +249,7 @@
 ## 双指针
 
 - 【medium】[167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
+- 🌟【medium】[713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
 
 ## 栈、队列
 
@@ -333,6 +358,7 @@
 - 🌟【medium】 [337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
 - 🌟【medium】[313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
+- 🌟【medium】[256 粉刷房子](https://leetcode.cn/problems/paint-house/)
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -4958,7 +4984,7 @@ function merge(list1, list2) {
 }
 ```
 
-## 🌟😻✔ 152 乘积最大子数组【medium】
+## ??🌟😻✔ 152 乘积最大子数组【medium】
 
 [ref](https://leetcode.cn/problems/maximum-product-subarray/)
 
@@ -5999,6 +6025,56 @@ var lowestCommonAncestor = function(root, p, q) {
 };
 ```
 
+## 🌟😻✔ 238 除自身以外数组的乘积【medium】
+
+[ref](https://leetcode.cn/problems/product-of-array-except-self/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)  输出数组不计算在内
+var productExceptSelf = function(nums) {
+  const n = nums.length 
+  let lm = 1
+  let rm = 1
+  const res = []
+  for(let i=0;i<n;i++) {
+    res[i] = lm
+    lm *= nums[i]
+  }
+  for(let i=n-1;i>=0;i--) {
+    res[i] = rm * res[i]
+    rm *= nums[i]
+  }
+  return res
+};
+
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var productExceptSelf = function(nums) {
+  const n = nums.length 
+  const lp = []
+  const rp = []
+  let lm = 1
+  let rm = 1
+  const res = []
+  for(let i=0;i<n;i++) {
+    lp[i] = lm
+    lm *= nums[i]
+  }
+  for(let i=n-1;i>=0;i--) {
+    rp[i] = rm
+    rm *= nums[i]
+  }
+  for(let i=0;i<n;i++) {
+    res[i] = lp[i]*rp[i]
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 240 搜索二维矩阵 II【medium】
 
 [ref](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
@@ -6019,6 +6095,126 @@ var searchMatrix = function(matrix, target) {
   }
   return false
 };
+```
+
+## 🌟😻✔ 256 粉刷房子【medium】
+
+[ref](https://leetcode.cn/problems/paint-house/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minCost = function(costs) {
+  let a = costs[0][0]
+  let b = costs[0][1]
+  let c = costs[0][2]
+  for(let i=1;i<costs.length;i++) {
+    const pa = a, pb = b, pc = c
+    a = costs[i][0] + Math.min(pb, pc)
+    b = costs[i][1] + Math.min(pa, pc)
+    c = costs[i][2] + Math.min(pa, pb)
+  }
+  return Math.min(a, b, c)
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var minCost = function(costs) {
+  const dp = new Array(costs.length).fill(0).map(_ => new Array(3).fill(0))
+  dp[0][0] = costs[0][0]
+  dp[0][1] = costs[0][1]
+  dp[0][2] = costs[0][2]
+  for(let i=1;i<costs.length;i++) {
+    dp[i][0] = costs[i][0] + Math.min(dp[i-1][1], dp[i-1][2])
+    dp[i][1] = costs[i][1] + Math.min(dp[i-1][0], dp[i-1][2])
+    dp[i][2] = costs[i][2] + Math.min(dp[i-1][0], dp[i-1][1])
+  }
+  return Math.min(...dp[costs.length - 1])
+};
+```
+
+## 🌟😻✔ 265 粉刷房子 II【hard】
+
+[ref](https://leetcode.cn/problems/paint-house-ii/)
+
+动态规划
+
+极致优化方案
+
+```js
+// 时间复杂度：O(N*K)
+// 空间复杂度：O(1)
+var minCostII = function(costs) {
+  const n = costs.length
+  const k = costs[0].length
+  let min1 = Number.MAX_SAFE_INTEGER, min1j = 0
+  let min2 = Number.MAX_SAFE_INTEGER
+  for(let j=0;j<k;j++) {
+    if(costs[0][j] < min1) {
+      min2 = min1
+      min1 = costs[0][j]
+      min1j = j
+    } else if(costs[0][j] < min2) {
+      min2 = costs[0][j]
+    }
+  }
+  for(let i=1;i<n;i++) {
+    let tmin1 = Number.MAX_SAFE_INTEGER, tmin1j = 0
+    let tmin2 = Number.MAX_SAFE_INTEGER
+    for(let j=0;j<k;j++) {
+      let s
+      if(j !== min1j) {
+        s = costs[i][j] + min1
+      } else {
+        s = costs[i][j] + min2
+      }
+      if(s < tmin1) {
+        tmin2 = tmin1
+        tmin1 = s
+        tmin1j = j
+      } else if(s < tmin2) {
+        tmin2 = s
+      }
+    }
+    min1 = tmin1
+    min1j = tmin1j
+    min2 = tmin2
+  }
+  return min1
+};
+
+```
+
+常规 dp
+
+```js
+// 时间复杂度：O(N*K^2)
+// 空间复杂度：O(N*K)
+var minCostII = function(costs) {
+  const n = costs.length
+  const k = costs[0].length
+  const dp = new Array(n).fill(0).map(_ => new Array(k).fill(0))
+  for(let j=0;j<k;j++) {
+    dp[0][j] = costs[0][j]
+  }
+  for(let i=1;i<n;i++) {
+    for(let j=0;j<k;j++) {
+      let min = Number.MAX_SAFE_INTEGER
+      for(let jj=0;jj<k;jj++) {
+        if(jj !== j) {
+          min = Math.min(min, dp[i-1][jj])
+        }
+      }
+      dp[i][j] = costs[i][j] + min
+    }
+  }
+  return Math.min(...dp[n-1])
+};
+
 ```
 
 ## 🌟😻✔ 268 丢失的数字【easy】
@@ -6120,6 +6316,43 @@ var missingNumber = function(nums) {
     if(nums[i] !== i) return i
   }
   return nums.length
+};
+```
+
+## 🌟😻✔ 276. 栅栏涂色【medium】
+
+[ref](https://leetcode.cn/problems/paint-fence/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numWays = function(n, k) {
+  let s = 0, nos = k
+  for(let i=1;i<n;i++) {
+    const ts = s, tnos = nos
+    s = tnos
+    nos = (ts + tnos) * (k - 1)
+  }
+  return s + nos
+};
+```
+
+or
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var numWays = function(n, k) {
+  const dp = new Array(n).fill(0).map(_ => new Array(2).fill(0))
+  dp[0][0] = 0
+  dp[0][1] = k
+  for(let i=1;i<n;i++) {
+    dp[i][0] = dp[i-1][1]
+    dp[i][1] = (dp[i-1][0] + dp[i-1][1]) * (k - 1)
+  }
+  return dp[n-1][0] + dp[n-1][1]
 };
 ```
 
@@ -6940,6 +7173,101 @@ var coinChange = function(coins, amount) {
 };
 ```
 
+## ✔ 325 和等于 k 的最长子数组长度【medium】
+
+[ref](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var maxSubArrayLen = function(nums, k) {
+  const n = nums.length
+  const m = new Map()
+  let sum = 0
+  let max = 0
+  for(let i=0;i<n;i++) {
+    sum += nums[i]
+    if(sum === k) {
+      max = Math.max(max, i + 1)
+    }
+    if(m.has(sum - k)) {
+      max = Math.max(max, i - m.get(sum - k))
+    }
+    if(!m.has(sum)) {
+      m.set(sum, i)
+    }
+  }
+  return max
+};
+```
+
+## ?🌟😻✔ 327. 区间和的个数【hard】
+
+[ref](https://leetcode.cn/problems/count-of-range-sum/)
+
+归并排序、前缀树组、数组题
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var countRangeSum = function(nums, lower, upper) {
+  const n = nums.length
+  const sum = []
+  let s = 0
+  let count = 0
+
+  for(let i = 0; i < n; i++) {
+    s += nums[i]
+    sum[i] = s
+    if(s >= lower && s <= upper) count++
+  }
+
+  function mergeSort(l, r) {
+    l = typeof l === 'number' ? l : 0
+    r = typeof r === 'number' ? r : n - 1
+    if(l === r) return [sum[l]]
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(l, mid), mergeSort(mid + 1, r))
+  }
+
+  function merge(arr1, arr2) {
+    const len1 = arr1.length, len2 = arr2.length
+
+    let arr2l = 0, arr2r = 0
+    for(let i = 0; i < len1; i++) {
+      while(arr2l < len2 && arr2[arr2l] - arr1[i] < lower) {
+        arr2l++
+      }
+      while(arr2r < len2 && arr2[arr2r] - arr1[i] <= upper) {
+        arr2r++
+      }
+      count += arr2r - arr2l
+    }
+
+    const mergeRes = new Array(len1 + len2)
+    let ind = 0
+    let l1 = 0, l2 = 0
+    while(l1 < len1 && l2 < len2) {
+      if(arr1[l1] < arr2[l2]) {
+        mergeRes[ind++] = arr1[l1++]
+      } else {
+        mergeRes[ind++] = arr2[l2++]
+      }
+    }
+    while(l1 < len1) {
+      mergeRes[ind++] = arr1[l1++]
+    }
+    while(l2 < len2) {
+      mergeRes[ind++] = arr2[l2++]
+    }
+    return mergeRes
+  }
+
+  mergeSort()
+  return count
+};
+```
+
 ## ?🌟😻✔ 329 矩阵中的最长递增路径【hard】
 
 [ref](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
@@ -7510,6 +7838,30 @@ var removeKdigits = function(num, k) {
 };
 ```
 
+## 🌟😻✔ 406 根据身高重建队列【medium】
+
+[ref](https://leetcode.cn/problems/queue-reconstruction-by-height/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(logN)
+var reconstructQueue = function(people) {
+  people.sort((a, b) => {
+    if(a[0] !== b[0]) {
+      return b[0] - a[0]
+    } else {
+      return a[1] - b[1]
+    }
+  })
+  let res = []
+  for(let i=0;i<people.length;i++) {
+    res.splice(people[i][1], 0, people[i])
+  }
+  return res
+};
+
+```
+
 ## 🌟😻✔ 415 字符串相加【easy】
 
 [ref](https://leetcode.cn/problems/add-strings/)
@@ -7755,6 +8107,36 @@ var addTwoNumbers = function(l1, l2) {
 };
 ```
 
+## ?🌟😻✔ 454 四数相加 II【medium】
+
+[ref](https://leetcode.cn/problems/4sum-ii/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var fourSumCount = function(nums1, nums2, nums3, nums4) {
+  let c = 0
+  const m = new Map()
+  for(let i=0;i<nums1.length;i++) {
+    for(let j=0;j<nums2.length;j++) {
+      const s = nums1[i] + nums2[j]
+      m.set(s, m.has(s)?m.get(s)+1: 1)
+    }
+  }
+
+  for(let i=0;i<nums3.length;i++) {
+    for(let j=0;j<nums4.length;j++) {
+      const s = nums3[i] + nums4[j]
+      if(m.has(-s)) {
+        c += m.get(-s)
+      }
+    }
+  }
+
+  return c
+};
+```
+
 ## 😻✔ 455 分发饼干【easy】
 
 [ref](https://leetcode.cn/problems/assign-cookies/)
@@ -7818,6 +8200,58 @@ function binarySearch(heaters, target) {
   }
   return l
 }
+```
+
+## ?🌟😻✔ 493. 翻转对【hard】
+
+[ref](https://leetcode.cn/problems/reverse-pairs/)
+
+数组题，归并排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var reversePairs = function(nums) {
+  let count = 0
+  function mergeSort(l, r) {
+    l = typeof l === 'number' ? l : 0
+    r = typeof r === 'number' ? r : nums.length - 1
+    if(l === r) return [nums[l]]
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(l, mid), mergeSort(mid + 1, r))
+  }
+  function merge(arr1, arr2) {
+    const r = new Array(arr1.length + arr2.length)
+    let ind = 0
+    let l1 = 0, l2 = 0
+    // 这里时间复杂度是 O(M+N) M=arr1.length N=arr2.length
+    while(l1<arr1.length) {
+      while(l2 < arr2.length && arr1[l1] > 2* arr2[l2]) {
+        l2++
+      }
+      count += l2
+      l1++
+    }
+    l1=0, l2=0
+    while(l1 < arr1.length && l2 < arr2.length) {
+      if(arr1[l1] < arr2[l2]) {
+        r[ind++] = arr1[l1++]
+      } else {
+        r[ind++] = arr2[l2++]
+      }
+    }
+    while(l1 < arr1.length) {
+      r[ind++] = arr1[l1++]
+    }
+    while(l2 < arr2.length) {
+      r[ind++] = arr2[l2++]
+    }
+    return r
+  }
+  mergeSort()
+  return count
+};
+
 ```
 
 ## 🌟😻✔ 494 目标和【medium】
@@ -8315,6 +8749,29 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
       i++
     }
   }
+};
+```
+
+## ?🌟😻✔ 713 乘积小于 K 的子数组【medium】
+
+[ref](https://leetcode.cn/problems/subarray-product-less-than-k/submissions/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numSubarrayProductLessThanK = function(nums, k) {
+  let count = 0
+  let mul = 1
+  let i = 0
+  for(let j = 0;j<nums.length;j++) {
+    mul*=nums[j]
+    while(i<=j && mul>=k) {
+      mul /= nums[i]
+      i++
+    }
+    count+=j-i+1
+  }
+  return count
 };
 ```
 
@@ -8877,6 +9334,28 @@ var numOfWays = function(n) {
 // nf0 = 3*f0 + 2*f1
 // nf1 = 2*f0 + 2*f1
 
+```
+
+## ✔ 1446. 连续字符【easy】
+
+[ref](https://leetcode.cn/problems/consecutive-characters/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxPower = function(s) {
+  let max = 1
+  let len = 1
+  for(let i=1;i<s.length;i++) {
+    if(s[i] === s[i - 1]) {
+      len++
+      max = Math.max(max, len)
+    } else {
+      len = 1
+    }
+  }
+  return max
+};
 ```
 
 ## 🌟😻✔ 剑指 Offer 04. 二维数组中的查找【medium】
