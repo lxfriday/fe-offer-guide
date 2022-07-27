@@ -54,26 +54,44 @@ function mergeSort(arr, l, r) {
   return merge(mergeSort(arr, l, mid), mergeSort(arr, mid + 1, r))
 }
 
+function shiftDown(arr, i, len) {
+  const lIndex = 2 * i + 1
+  const rIndex = 2 * i + 2
+  if (lIndex < len && arr[i] < arr[lIndex]) {
+    swap(arr, i, lIndex)
+    shiftDown(arr, lIndex, len)
+  }
+  if (rIndex < len && arr[i] < arr[rIndex]) {
+    swap(arr, i, rIndex)
+    shiftDown(arr, rIndex, len)
+  }
+}
+
 function buildMaxHeap(arr) {
   const len = arr.length
-  for(let i= len / 2)
+  for (let i = len / 2; i >= 0; i--) {
+    shiftDown(arr, i, len)
+  }
 }
-function heapify(arr, i) {}
 
 function heapSort(arr) {
   const len = arr.length
   buildMaxHeap(arr)
   for (let i = 0; i < len; i++) {
     swap(arr, 0, len - i - 1)
-    heapify(arr, 0)
+    shiftDown(arr, 0, len - i - 1)
   }
+  return arr
 }
 
 const data = new Array(50).fill(0).map(_ => Math.floor(Math.random() * 10000))
 const quickSortRes = JSON.stringify(quickSort([...data]))
 const mergeSortRes = JSON.stringify(mergeSort([...data]))
-// const r2 = JSON.stringify([...data].sort((a, b) => a - b))
+const heapSortRes = JSON.stringify(heapSort([...data]))
+const standardSortRes = JSON.stringify([...data].sort((a, b) => a - b))
 // console.log(r1, r2, r1 === r2)
 console.log(data)
-console.log(quickSortRes)
-console.log(mergeSortRes)
+console.log('quickSortRes', quickSortRes)
+console.log('mergeSortRes', mergeSortRes)
+console.log('heapSortRes', heapSortRes)
+console.log('heapSortRes === standardSortRes', heapSortRes === standardSortRes)

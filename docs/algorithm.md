@@ -9,6 +9,12 @@
 
 # 刷题日记
 
+- 20220727
+  - [🌟【easy】9 回文数](https://leetcode.cn/problems/palindrome-number/)
+  - [🌟【medium】5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+  - ?[🌟【medium】516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+  - [🌟【medium】647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
+  - ?[🌟【hard】336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
 
 - 20220726
   - [🌟【medium】406 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
@@ -216,8 +222,10 @@
 回文串相关
 
 - 🌟【medium】[5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+- 🌟【easy】[9 回文数](https://leetcode.cn/problems/palindrome-number/)
 - 🌟【medium】[516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
 - 🌟【medium】[647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
+- 🌟【hard】[336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
 
 ## 数组题 
 
@@ -7318,6 +7326,46 @@ var longestIncreasingPath = function(matrix) {
 
 ```
 
+## ??🌟😻✔ 336 回文对【hard】
+
+[ref](https://leetcode.cn/problems/palindrome-pairs/)
+
+```js
+var palindromePairs = function(words) {
+  const res = []
+  const m = new Map()
+  for(let i=0;i<words.length;i++) {
+    m.set(words[i].split('').reverse().join(''), i)
+  }
+  for(let i=0;i<words.length;i++) {
+    const curStr = words[i]
+    if(is(curStr) && curStr !== '' && m.has('')) {
+      res.push([i, m.get('')])
+      res.push([m.get(''), i])
+    }
+    for(let j = 0;j<curStr.length;j++) {
+      const lStr = curStr.slice(0, j + 1)
+      const rStr = curStr.slice(j + 1)
+      if(is(lStr) && m.has(rStr) && m.get(rStr) !== i && rStr !== '') {
+        res.push([m.get(rStr), i])
+      }
+      if(is(rStr) && m.has(lStr) && m.get(lStr) !== i) {
+        res.push([i, m.get(lStr)])
+      }
+    }
+  }
+  return res
+};
+
+function is(s) {
+  let l = 0, r = s.length - 1
+  while(l <= r) {
+    if(s[l++] !== s[r--]) return false
+  }
+  return true
+}
+```
+
 ## ?🌟😻✔ 337 打家劫舍 III【medium】
 
 [ref](https://leetcode.cn/problems/house-robber-iii/)
@@ -8278,7 +8326,7 @@ var findTargetSumWays = function(nums, target) {
 };
 ```
 
-## 🌟😻✔ 516 最长回文子序列【medium】
+## ？🌟😻✔ 516 最长回文子序列【medium】
 
 [ref](https://leetcode.cn/problems/longest-palindromic-subsequence/)
 
