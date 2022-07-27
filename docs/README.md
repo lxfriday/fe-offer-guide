@@ -7,14 +7,6 @@
 # 新问题未归类
 ## ? forin、forof、for、while效率问题以及差别
 ## ? 迭代器协议
-## ? map、set各个方法的时间复杂度
-
-- [https://leetcode.cn/problems/longest-consecutive-sequence/solution/zui-chang-lian-xu-xu-lie-by-leetcode-solution/](https://leetcode.cn/problems/longest-consecutive-sequence/solution/zui-chang-lian-xu-xu-lie-by-leetcode-solution/)
-- [https://stackoverflow.com/questions/33611509/es6-map-and-set-complexity-v8-implementation](https://stackoverflow.com/questions/33611509/es6-map-and-set-complexity-v8-implementation)
-
-![](https://qiniu1.lxfriday.xyz/feoffer/1653259309718_af8aab52-bc88-4c1d-9775-3c6f51fb0534.png)
-
-
 
 # JavaScript
 
@@ -1148,6 +1140,71 @@ setTimeout
 **注意**，使用 `Object.defineProperty` 设置的属性和直接设置的属性在描述符默认属性上会有差别。
 
 ![Object_defineProperty2](https://qiniu1.lxfriday.xyz/feoffer/Object_defineProperty2.png)
+
+## Map、Set
+
+### ✔ 时间复杂度
+
+`Map` 和 `Set` 查找(`has`、`get`、`delete`)的时间复杂度是 **O(1)**，而 `Array.prototype.includes` 的时间复杂度是 **O(N)**。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1653259309718_af8aab52-bc88-4c1d-9775-3c6f51fb0534.png)
+
+测试代码
+
+```js
+console.time('prepare')
+const count = 10000000
+const data = new Array(count)
+  .fill(0)
+  .map(_ => Math.floor(Math.random() * count))
+const dataArr = data.map((_, i) => [_, i])
+
+const s = new Set([...data])
+const m = new Map(dataArr)
+console.timeEnd('prepare')
+
+console.time('arr.includes')
+console.log('arr.includes -> ', data.includes(10000000))
+console.timeEnd('arr.includes')
+
+console.time('set.has')
+console.log('set.has -> ', s.has(10000000))
+console.timeEnd('set.has')
+
+console.time('map.has')
+console.log('map.has -> ', m.has(10000000))
+console.timeEnd('map.has')
+
+console.time('map.get')
+console.log('map.get -> ', m.get(100))
+console.timeEnd('map.get')
+```
+
+执行结果
+
+```
+# 第一次执行
+prepare: 5.557s
+arr.includes ->  false
+arr.includes: 8.775ms
+set.has ->  false
+set.has: 0.054ms
+map.has ->  false
+map.has: 0.046ms
+map.get ->  6568215
+map.get: 0.119ms
+
+# 第二次执行
+prepare: 5.515s
+arr.includes ->  false
+arr.includes: 7.713ms
+set.has ->  true
+set.has: 0.056ms
+map.has ->  true
+map.has: 0.051ms
+map.get ->  6684360
+map.get: 0.104ms
+```
 
 ## ✔ Proxy
 
