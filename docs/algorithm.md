@@ -9,27 +9,34 @@
 
 # 刷题日记
 
-- 20220727
+- 20220728(8)
+  - [🌟【easy】234 回文链表](https://leetcode.cn/problems/palindrome-linked-list/) 快慢指针、链表
+  - ?? [🌟【medium】207 课程表](https://leetcode.cn/problems/palindrome-linked-list/) 图、拓扑排序、BFS
+  - ?? [🌟【medium】210 课程表 II](https://leetcode.cn/problems/course-schedule-ii/) 图、拓扑排序、BFS
+  - ?? [🌟【hard】630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
+  - ?? [🌟【medium】11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
+  - [🌟【hard】42 接雨水](https://leetcode.cn/problems/trapping-rain-water/) 动态规划、双指针、单调栈
+  - [🌟【hard】815 公交路线](https://leetcode.cn/problems/bus-routes/) 图、BFS
+  - ? [🌟【medium】98 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/) 二叉树、二叉搜索树、DFS
+- 20220727(5)
   - [🌟【easy】9 回文数](https://leetcode.cn/problems/palindrome-number/)
   - [🌟【medium】5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
-  - ?[🌟【medium】516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
+  - ? [🌟【medium】516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
   - [🌟【medium】647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
-  - ?[🌟【hard】336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
-
-- 20220726
+  - ? [🌟【hard】336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
+- 20220726(4)
   - [🌟【medium】406 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
-  - ?[🌟【hard】315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/) 归并排序
-  - ?[🌟【hard】493 翻转对](https://leetcode.cn/problems/reverse-pairs/) 归并排序
-  - ?[🌟【hard】327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
-
-- 20220725
+  - ? [🌟【hard】315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/) 归并排序
+  - ? [🌟【hard】493 翻转对](https://leetcode.cn/problems/reverse-pairs/) 归并排序
+  - ? [🌟【hard】327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
+- 20220725(6)
   - [🌟【medium】256 粉刷房子](https://leetcode.cn/problems/paint-house/)
   - [🌟【hard】265 粉刷房子 II](https://leetcode.cn/problems/paint-house-ii/)
   - [🌟【medium】276 栅栏涂色](https://leetcode.cn/problems/paint-fence/)
   - [🌟【hard】239 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
   - [🌟【hard】25 K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
   - [🌟【easy】1446 连续字符](https://leetcode.cn/problems/consecutive-characters/)
-- 20220724
+- 20220724(9)
   - [🌟【medium】560 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)
   - ? [🌟【medium】713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
   - ?? [🌟【medium】152 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
@@ -39,7 +46,7 @@
   - [🌟【medium】337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
   - [🌟【medium】238 除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)
   - ? [🌟【medium】454. 四数相加 II](https://leetcode.cn/problems/4sum-ii/)
-- 20220723
+- 20220723(10)
   - [🌟【hard】131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
   - ? [🌟【hard】132 分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
   - ? [🌟【easy】232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
@@ -50,14 +57,14 @@
   - [🌟【medium】16 最接近的三数之和](https://leetcode.cn/problems/3sum-closest/)
   - [🌟【medium】259 较小的三数之和](https://leetcode.cn/problems/3sum-smaller/)
   - [🌟【medium】259 较小的三数之和](https://leetcode.cn/problems/3sum-smaller/)
-- 20220722
+- 20220722(6)
   - [🌟【medium】33 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
   - [🌟【medium】81 搜索旋转排序数组 II](https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/)
   - [🌟【medium】153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
   - [🌟【hard】154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
   - [🌟【easy】796 旋转字符串](https://leetcode.cn/problems/rotate-string/)
   - [🌟【easy】509 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
-- 20220721
+- 20220721(7)
   - ?? [🌟【hard】 879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
   - [🌟【medium】279 完全平方数](https://leetcode.cn/problems/profitable-schemes/)
   - [🌟【medium】204 计数质数](https://leetcode.cn/problems/count-primes/)
@@ -65,96 +72,96 @@
   - ? [🌟【medium】264 丑数 II](https://leetcode.cn/problems/ugly-number-ii/)
   - ? [🌟【medium】313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
   - [🌟【hard】23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
-- 20220720
+- 20220720(3)
   - ?? [🌟【hard】 815 公交路线](https://leetcode.cn/problems/bus-routes/) BFS
   - ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
   - ?? [🌟【medium】 698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
-- 20220719
+- 20220719(1)
   - ?? [🌟【hard】 1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
-- 20220718
+- 20220718(2)
   - ?? [🌟【medium】 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
   - ?? [🌟【hard】 354 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/)
-- 20220717
+- 20220717(2)
   - ?? [🌟【medium】 424 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
   - ? [🌟【hard】 295 数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream/)
-- 20220716
+- 20220716(2)
   - ? [🌟【hard】 862 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
   - [🌟【hard】 297 二叉树的序列化与反序列化](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/)
-- 20220715
+- 20220715(4)
   - ? [🌟【medium】 253 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/)
   - [【easy】 252 会议室](https://leetcode.cn/problems/meeting-rooms/)
   - [🌟【medium】 56 合并区间](https://leetcode.cn/problems/merge-intervals/)
   - [🌟【medium】 77 组合](https://leetcode.cn/problems/combinations/)
-- 20220714
+- 20220714(3)
   - ? [🌟【medium】 386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
   - [🌟【medium】 面试题 02.05 链表求和](https://leetcode.cn/problems/sum-lists-lcci/)
   - [🌟【easy】 剑指 Offer 25 合并两个排序的链表](https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)
-- 20220713
+- 20220713(2)
   - ? [🌟【medium】 162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
   - [🌟【hard】 面试题 17.21 直方图的水量](https://leetcode.cn/problems/volume-of-histogram-lcci/)
-- 20220712
+- 20220712(3)
   - ? [🌟【medium】 445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
   - ? [🌟【hard】 224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
   - ? [🌟【medium】 227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
-- 20220711
+- 20220711(2)
   - [🌟【easy】 415 字符串相加](https://leetcode.cn/problems/add-strings/)
   - ? [🌟【easy】 160 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
-- 20220708
+- 20220708(3)
   - ? [🌟【medium】 221 最大正方形](https://leetcode.cn/problems/maximal-square/)
   - [🌟【medium】 113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
   - ? [🌟【hard】 329 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/)
-- 20220703
+- 20220703(6)
   - ? [🌟【hard】 315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
   - ? [🌟【hard】 剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
   - ? [🌟【medium】 148 排序链表](https://leetcode.cn/problems/sort-list/)
   - [🌟【easy】 剑指 Offer 50 第一个只出现一次的字符](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/)
   - [🌟【medium】 199 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
   - ? [🌟【medium】 103 二叉树的锯齿形层序遍历](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
-- 20220702
+- 20220702(3)
   - [🌟【medium】 5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
   - [🌟【medium】 516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
   - [🌟【medium】 647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
-- 20220701
+- 20220701(1)
   - [【easy】 746 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
-- 20220630
+- 20220630(1)
   - [🌟【medium】 240 搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
-- 20220629
+- 20220629(2)
   - [🌟【medium】 494 目标和](https://leetcode.cn/problems/target-sum/)
   - [【medium】 165 比较版本号](https://leetcode.cn/problems/compare-version-numbers/)
-- 20220628
+- 20220628(1)
   - [🌟【easy】 268 丢失的数字](https://leetcode.cn/problems/missing-number/)
-- 20220627
+- 20220627(1)
   - ? [🌟【medium】 79 单词搜索](https://leetcode.cn/problems/word-search/solution/dan-ci-sou-suo-by-leetcode-solution/)
-- 20220624
+- 20220624(1)
   - ? [🌟【medium】 380 O(1) 时间插入、删除和获取随机元素](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
-- 20220623
+- 20220623(4)
   - 🌟【medium】[213 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
   - ? [🌟【medium】 337 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
   - [🌟【medium】 剑指 Offer 40 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
   - [【medium】 695 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/)
-- 20220620
+- 20220620(1)
   - 🌟【medium】[763 划分字母区间](https://leetcode.cn/problems/partition-labels/)
-- 20220616
+- 20220616(2)
   - ? [🌟【hard】 51 N 皇后](https://leetcode.cn/problems/n-queens/)
   - ? [🌟【hard】 37 解数独](https://leetcode.cn/problems/sudoku-solver/)
-- 20220611
+- 20220611(1)
   - ? [🌟【medium】 1143 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
-- 20220610
+- 20220610(5)
   - ? [🌟【hard】 85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
   - ? [🌟【medium】 剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
   - ? [🌟【medium】 739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
   - ? [🌟【hard】 440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
   - [【medium】 62 不同路径](https://leetcode.cn/problems/unique-paths/)
-- 20220609
+- 20220609(5)
   - [【medium】 343 整数拆分](https://leetcode.cn/problems/integer-break/)
   - ? [🌟【hard】 84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
   - ? [🌟【medium】 179 最大数](https://leetcode.cn/problems/largest-number/)
   - ? [🌟【medium】 189 轮转数组](https://leetcode.cn/problems/rotate-array/)
   - [🌟【easy】 202. 快乐数](https://leetcode.cn/problems/happy-number/)
-- 20220608
+- 20220608(2)
   - [🌟【medium】 82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
   - [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
-- 20220607
+- 20220607(8)
   - [🌟【hard】 154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
   - ? [🌟【medium】 剑指 Offer 29 顺时针打印矩阵](https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
   - [🌟【easy】 977 有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/)
@@ -163,22 +170,22 @@
   - [【medium】 102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
   - [【medium】 102 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
   - ? [🌟【medium】 131 分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
-- 20220606
+- 20220606(5)
   - ? [🌟【medium】 394 字符串解码](https://leetcode.cn/problems/decode-string/)
   - [🌟【easy】 118 杨辉三角](https://leetcode.cn/problems/pascals-triangle/)
   - [【medium】 17 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
   - [【medium】 167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
   - [🌟【medium】 153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
-- 20220605
+- 20220605(5)
   - ? [🌟【medium】 540 有序数组中的单一元素](https://leetcode.cn/problems/single-element-in-a-sorted-array/) 二分
   - [【medium】 24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/) 
   - ? [🌟【medium】 209 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/) 滑动窗口、双指针、前缀数组
   - ? [🌟【hard】 41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/) 哈希
   - 【medium】 [139 单词拆分](https://leetcode.cn/problems/word-break/)
-- 20220604
+- 20220604(2)
   - ? [🌟【medium】 475 供暖器](https://leetcode.cn/problems/heaters/)
   - ? [🌟【medium】【01背包】 416 分割等和子集 ](https://leetcode.cn/problems/partition-equal-subset-sum/)
-- 20220602
+- 20220602(1)
   - ? [🌟【medium】 279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 
 # 刷题指南
@@ -258,6 +265,7 @@
 
 - 【medium】[167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
 - 🌟【medium】[713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
+- 🌟【medium】[11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
 
 ## 栈、队列
 
@@ -277,6 +285,7 @@
 - 【medium】[24 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 - 🌟【medium】[82 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
 - 🌟【medium】[445 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
+- 🌟【easy】[234 回文链表](https://leetcode.cn/problems/palindrome-linked-list/) 快慢指针、链表
 
 ## 集合
 
@@ -306,7 +315,8 @@
 - 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 - 【medium】 [剑指 Offer 26 树的子结构](https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/)
 - 🌟【medium】 [652. 寻找重复的子树](https://leetcode.cn/problems/find-duplicate-subtrees/)
-- 🌟【medium】[113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
+- 🌟【medium】 [113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
+- 🌟【medium】[98 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/) 二叉树、二叉搜索树、DFS
 
 ## 堆
 
@@ -314,6 +324,7 @@
 - 🌟【medium】 [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 - 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - 【easy】 [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
+- 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
 
 ## 图、深度优先、广度优先
 
@@ -321,6 +332,8 @@
 - 【medium】 [417 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
 - 【medium】 [200 岛屿数量](https://leetcode.cn/problems/number-of-islands/)
 - 🌟【hard】 [815 公交路线](https://leetcode.cn/problems/bus-routes/)
+- 🌟【medium】 [207 课程表](https://leetcode.cn/problems/palindrome-linked-list/) 图、拓扑排序
+- 🌟【medium】[210 课程表 II](https://leetcode.cn/problems/course-schedule-ii/) 图、拓扑排序
 
 ## 搜索、排序
 
@@ -382,6 +395,7 @@
 - 【medium】 [5 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
 - 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
 - 🌟【hard】 [135 分发糖果](https://leetcode.cn/problems/candy/)
+- 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
 
 ## 回溯算法
 
@@ -1826,7 +1840,7 @@ var isMatch = function(s, p) {
 
 ```
 
-## 🌟😻✔ 11 盛最多水的容器【medium】
+## ??🌟😻✔ 11 盛最多水的容器【medium】
 
 [ref](https://leetcode.cn/problems/container-with-most-water/)
 
@@ -3998,6 +4012,55 @@ var numTrees = function(n) {
 };
 ```
 
+## ?🌟😻✔ 98. 验证二叉搜索树【medium】
+
+[ref](https://leetcode.cn/problems/validate-binary-search-tree/submissions/)
+
+二叉树、二叉搜索树
+
+```js
+// 自顶向下，碰到异常情况直接结束，效率更优，不需要扫描所有节点
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var isValidBST = function(root) {
+  function dfs(node, max, min) {
+    if(!node) return true
+    if(!(node.val > min && node.val < max)) return false
+    return dfs(node.left, node.val, min) && dfs(node.right, max, node.val)
+  }
+  return dfs(root, Infinity, -Infinity)
+};
+```
+
+```js
+// DFS
+// 自底向上，必须扫描所有节点
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var isValidBST = function(root) {
+  let is = true
+  function dfs(node) {
+    let min = node.val, max = node.val
+    if(node.left) {
+      const [lmin, lmax] = dfs(node.left)
+      if(lmax >= node.val) is = false
+      min = Math.min(lmin, lmax, min)
+      max = Math.max(lmin, lmax, max)
+    }
+    if(node.right) {
+      const [rmin, rmax] = dfs(node.right)
+      if(rmin <= node.val) is = false
+      min = Math.min(rmin, rmax, min)
+      max = Math.max(rmin, rmax, max)
+    }
+    return [min, max]
+  }
+  dfs(root)
+  return is
+};
+
+```
+
 ## 😻✔ 100 相同的树【easy】
 
 [ref](https://leetcode.cn/problems/same-tree/)
@@ -4992,6 +5055,54 @@ function merge(list1, list2) {
 }
 ```
 
+## ??🌟😻✔ 207 课程表【medium】
+
+[ref](https://leetcode.cn/problems/course-schedule/)
+
+图、拓扑
+
+```js
+// 其中 N 为课程数，M 为先修课程的要求数
+// 时间复杂度：O(M + N)
+// 空间复杂度：O(M + N)
+var canFinish = function(numCourses, prerequisites) {
+  const n = prerequisites.length
+  const pre = new Array(numCourses).fill(0)
+  const aft = new Map()
+  let count = 0
+  for(let i=0;i<n;i++) {
+    const target = prerequisites[i]
+    pre[target[0]]++
+    if(aft.has(target[1])) {
+      aft.get(target[1]).push(target[0])
+    } else {
+      aft.set(target[1], [target[0]])
+    }
+  }
+  let q = []
+  for(let i=0;i<pre.length;i++) {
+    if(pre[i] === 0) q.push(i)
+  }
+
+  while(q.length) {
+    const target = q.shift()
+    count ++
+    const next = aft.get(target)
+
+    if(next && next.length > 0) {
+      for(let i=0;i<next.length;i++) {
+        pre[next[i]]--
+        if(pre[next[i]] === 0) {
+          q.push(next[i])
+        }
+      }
+    }
+  }
+  return count === numCourses
+};
+
+```
+
 ## ??🌟😻✔ 152 乘积最大子数组【medium】
 
 [ref](https://leetcode.cn/problems/maximum-product-subarray/)
@@ -5483,6 +5594,50 @@ var minSubArrayLen = function(target, nums) {
   }
   return min === Number.MAX_SAFE_INTEGER ? 0 : min
 };
+```
+
+## ??🌟😻✔ 210 课程表 II【medium】
+
+[ref](https://leetcode.cn/problems/course-schedule-ii/)
+
+拓扑排序、图
+
+```js
+var findOrder = function(numCourses, prerequisites) {
+  const pre = new Array(numCourses).fill(0)
+  const aft = new Map()
+  for(let i=0;i<prerequisites.length;i++) {
+    const target = prerequisites[i]
+    pre[target[0]]++
+    if(aft.has(target[1])) {
+      aft.get(target[1]).push(target[0])
+    } else {
+      aft.set(target[1], [target[0]])
+    }
+  }
+  const q = []
+  for(let i=0;i<pre.length;i++) {
+    if(pre[i] === 0) q.push(i)
+  }
+  let count = 0
+  const res = []
+  while(q.length) {
+    const target = q.shift()
+    count++
+    res.push(target)
+    const next = aft.get(target)
+    if(next && next.length) {
+      for(let i=0;i<next.length;i++) {
+        pre[next[i]]--
+        if(pre[next[i]] === 0) {
+          q.push(next[i])
+        }
+      }
+    }
+  }
+  return count === numCourses ? res : []
+};
+
 ```
 
 ## 🌟😻✔ 213 打家劫舍 II【medium】
@@ -5997,6 +6152,49 @@ MyQueue.prototype.peek = function() {
 MyQueue.prototype.empty = function() {
   return !this.stack.length && !this.prestack.length
 };
+```
+
+## 🌟😻✔ 236 二叉树的最近公共祖先【medium】
+
+[ref](https://leetcode.cn/problems/palindrome-linked-list/)
+
+链表、快慢指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isPalindrome = function(head) {
+  if(!head) return true
+  const myHead = new ListNode()
+  myHead.next = head
+  let fast = myHead
+  let slow = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  let h1 = head
+  let h2 = slow.next
+  slow.next = null
+  h2 = reverse(h2)
+  while(h1 && h2) {
+    if(h1.val !== h2.val) return false
+    h1 = h1.next
+    h2 = h2.next
+  }
+  return true
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const next = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = next
+  }
+  return myHead.next
+}
 ```
 
 ## 😻✔ 236 二叉树的最近公共祖先【medium】
@@ -8502,6 +8700,78 @@ var distributeCandies = function(candyType) {
   const set = new Set(candyType)
   return Math.min(candyType.length / 2, set.size)
 };
+```
+
+## ??🌟😻✔ 630 课程表 III【hard】
+
+[ref](https://leetcode.cn/problems/course-schedule-iii/)
+
+贪心、优先队列、堆
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var scheduleCourse = function(courses) {
+  courses.sort((a, b) => a[1] - b[1])
+  let sum = 0
+  const heap = new MaxHeap()
+  for(let i=0;i<courses.length;i++) {
+    const target = courses[i]
+    sum += target[0]
+    heap.insert(target[0])
+    if(sum > target[1]) {
+      sum -= heap.pop()
+    }
+  }
+  return heap.size()
+};
+
+class MaxHeap {
+  constructor() {
+    this.heap = []
+  }
+  size() {
+    return this.heap.length
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  insert(v) {
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop() {
+    this.swap(0, this.heap.length - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  shiftUp(i) {
+    const pi = Math.floor((i - 1) / 2)
+    if(this.heap[i] > this.heap[pi]) {
+      this.swap(i, pi)
+      this.shiftUp(pi)
+    }
+  }
+  shiftDown(i) {
+    const li = 2 * i + 1
+    const ri = 2 * i + 2
+    let maxi = i
+    if(this.heap[li] > this.heap[maxi]) {
+      maxi = li
+    }
+    if(this.heap[ri] > this.heap[maxi]) {
+      maxi = ri
+    }
+    if(maxi !== i) {
+      this.swap(maxi, i)
+      this.shiftDown(maxi)
+    }
+  }
+}
+
 ```
 
 ## 🌟😻✔ 647 回文子串【medium】

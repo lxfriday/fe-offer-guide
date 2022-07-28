@@ -2133,7 +2133,7 @@ console.log(g(1)) // 严格模式为[2, 1]
 
 为了向将来 JavaScript 的新版本过渡，严格模式新增了一些保留字：`implements`, `interface`, `let`, `package`, `private`, `protected`, `public`, `static`, `yield`。
 
-## ✔浮点数运算不准确
+## ✔ 浮点数运算不准确
 
 这个问题往深了讲很多人短时间看不懂。
 
