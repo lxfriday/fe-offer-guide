@@ -9,6 +9,16 @@
 
 # 刷题日记
 
+- 20220729
+  - ? [🌟【medium】581 最短无序连续子数组](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/)
+  - ? [🌟【hard】407 接雨水 II](https://leetcode.cn/problems/trapping-rain-water-ii/) 优先队列
+  - ? [🌟【medium】21 任务调度器](https://leetcode.cn/problems/task-scheduler/) 模拟推断
+  - [🌟【easy】20 有效的括号](https://leetcode.cn/problems/valid-parentheses/) 栈
+  - [🌟【medium】22 括号生成](https://leetcode.cn/problems/generate-parentheses/) 回溯
+  - ? [🌟【hard】32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
+  - ?? [🌟【hard】301 删除无效的括号](https://leetcode.cn/problems/remove-invalid-parentheses/) BFS
+  - ?? [🌟【medium】142 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/) 链表、快慢指针、双指针
+
 - 20220728(8)
   - [🌟【easy】234 回文链表](https://leetcode.cn/problems/palindrome-linked-list/) 快慢指针、链表
   - ?? [🌟【medium】207 课程表](https://leetcode.cn/problems/palindrome-linked-list/) 图、拓扑排序、BFS
@@ -225,6 +235,10 @@
 - 🌟【easy】[415 字符串相加](https://leetcode.cn/problems/add-strings/)
 - 🌟【hard】[224 基本计算器](https://leetcode.cn/problems/basic-calculator/)
 - 🌟【medium】[227 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/)
+- 🌟【hard】[301 删除无效的括号](https://leetcode.cn/problems/remove-invalid-parentheses/) BFS
+- 🌟【easy】[20 有效的括号](https://leetcode.cn/problems/valid-parentheses/) 栈
+- 🌟【medium】[22 括号生成](https://leetcode.cn/problems/generate-parentheses/) 回溯
+- 🌟【hard】[32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
 
 回文串相关
 
@@ -260,6 +274,8 @@
 ## 模拟
 
 - 🌟【medium】[400 第 N 位数字](https://leetcode.cn/problems/nth-digit/)
+- 🌟【medium】[21 任务调度器](https://leetcode.cn/problems/task-scheduler/)
+- 🌟【hard】 [440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
 
 ## 双指针
 
@@ -2558,7 +2574,7 @@ function reverse(arr, l, r) {
 }
 ```
 
-## 🌟😻✔ 32 最长有效括号【hard】
+## ?🌟😻✔ 32 最长有效括号【hard】
 
 [ref](https://leetcode.cn/problems/longest-valid-parentheses/)
 
@@ -4842,6 +4858,52 @@ var hasCycle = function (head) {
 
   return false
 }
+```
+
+## ??🌟😻✔ 142 环形链表 II【medium】
+
+[ref](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
+链表、快慢指针、双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var detectCycle = function(head) {
+  const myHead = new ListNode()
+  myHead.next = head
+  let slow = myHead, fast = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+    if(slow === fast) {
+      slow = slow.next
+      let t = head
+      while(t !== slow) {
+        t = t.next
+        slow = slow.next
+      }
+      return t
+    }
+  }
+  return null
+};
+```
+
+集合解法
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var detectCycle = function(head) {
+  const s = new Set()
+  while(head) {
+    if(s.has(head)) return head
+    s.add(head)
+    head = head.next
+  }
+  return null
+};
 ```
 
 ## ?🌟😻✔ 143 重排链表【medium】
@@ -7138,6 +7200,47 @@ var longestConsecutive = function(root) {
 };
 ```
 
+## ??🌟😻✔ 301 删除无效的括号【hard】
+
+[ref](https://leetcode.cn/problems/remove-invalid-parentheses/)
+
+BFS
+
+```js
+var removeInvalidParentheses = function(s) {
+  let q = new Set([s])
+  while(true) {
+    const nextQ = new Set()
+    const valids = [...q].filter(isValid)
+    if(valids.length) {
+      return valids
+    }
+    for(let targetStr of q) {
+      for(let i=0;i<targetStr.length;i++) {
+        if('()'.includes(targetStr[i])) {
+          nextQ.add(targetStr.slice(0, i) + targetStr.slice(i + 1))
+        }
+      }
+    }
+    q = nextQ
+  }
+};
+
+function isValid(s) {
+  let count = 0
+  for(let i=0;i<s.length;i++) {
+    if(s[i] === '(') {
+      count++
+    } else if(s[i] === ')') {
+      count--
+      if(count < 0) return false
+    }
+  }
+  return count === 0
+}
+
+```
+
 ## ??🌟😻✔ 300 最长递增子序列【medium】
 
 [ref](https://leetcode.cn/problems/longest-increasing-subsequence/)
@@ -8108,6 +8211,93 @@ var reconstructQueue = function(people) {
 
 ```
 
+## ??🌟😻✔ 407 接雨水 II【hard】
+
+[ref](https://leetcode.cn/problems/trapping-rain-water-ii/)
+
+优先队列
+
+```js
+// 时间复杂度：O(MNlog(M+N))
+// 空间复杂度：O(MN)
+var trapRainWater = function(heightMap) {
+  const m = heightMap.length
+  const n = heightMap[0].length
+  const used = new Array(m).fill(0).map(_ => new Array(n).fill(false))
+  const heap = new MinHeap()
+  let res = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(!used[i][j] && (i === 0 || j === 0 || i === m - 1 || j === n - 1)) {
+        used[i][j] = true
+        heap.insert([heightMap[i][j], i, j])
+      }
+    }
+  }
+
+  const nexts = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  while(heap.size()) {
+    const min = heap.pop()
+    for(let i=0;i<nexts.length;i++) {
+      const ni = min[1] + nexts[i][0]
+      const nj = min[2] + nexts[i][1]
+      if(ni >= 0 && ni < m && nj >=0 && nj < n && !used[ni][nj]) {
+        used[ni][nj] = true
+        res += Math.max(min[0] - heightMap[ni][nj], 0) 
+        heap.insert([Math.max(heightMap[ni][nj], min[0]), ni, nj])
+      }
+    }
+  }
+  return res
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  pop(){
+    this.swap(0, this.heap.length - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  insert(t){
+    this.heap.push(t)
+    this.shiftUp(this.heap.length - 1)
+  }
+  swap(i, j){
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  shiftUp(i){
+    const pi = Math.floor((i - 1) / 2)
+    if(pi >= 0 && this.heap[i][0] < this.heap[pi][0]) {
+      this.swap(i, pi)
+      this.shiftUp(pi)
+    }
+  }
+  shiftDown(i){
+    const li = 2 * i + 1
+    const ri = 2 * i + 2
+    let mini = i
+    if(li < this.size() && this.heap[li][0] < this.heap[mini][0]) {
+      mini = li
+    }
+    if(ri < this.size() && this.heap[ri][0] < this.heap[mini][0]) {
+      mini = ri
+    }
+    if(mini !== i) {
+      this.swap(i, mini)
+      this.shiftDown(mini)
+    }
+  }
+  size(){
+    return this.heap.length
+  }
+}
+```
+
 ## 🌟😻✔ 415 字符串相加【easy】
 
 [ref](https://leetcode.cn/problems/add-strings/)
@@ -8700,6 +8890,127 @@ var distributeCandies = function(candyType) {
   const set = new Set(candyType)
   return Math.min(candyType.length / 2, set.size)
 };
+```
+
+## ?🌟😻✔ 581 最短无序连续子数组【medium】
+
+[ref](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/)
+
+直接排序，双指针找到左右两侧首个不同的数字
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var findUnsortedSubarray = function(nums) {
+  const numsSorted = [...nums].sort((a, b) => a - b)
+  let l = 0, r = nums.length - 1
+  while(l < nums.length || r >= 0) {
+    if(nums[l] === numsSorted[l]) {
+      l++
+    }
+    if(nums[r] === numsSorted[r]) {
+      r--
+    }
+    if(nums[l] !== numsSorted[l] && nums[r] !== numsSorted[r]) return r - l + 1
+  }
+  return 0
+};
+```
+
+确定无序子数组的上下边界
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findUnsortedSubarray = function(nums) {
+  const n = nums.length
+  let max = -Infinity, maxi = -1 
+  let min = Infinity, mini = -1
+  for(let i=0;i<n;i++) {
+    if(nums[i] >= max) {
+      max = nums[i]
+    } else {
+      maxi = i
+    }
+
+    const j = n - 1 - i
+    if(nums[j] <= min) {
+      min = nums[j]
+    } else {
+      mini = j
+    }
+  }
+  return maxi !== -1 ? maxi - mini + 1 : 0
+};
+```
+
+上面的解法比较难想到，下面的更容易理解
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var findUnsortedSubarray = function(nums) {
+  const lArr = []
+  for(let i=0;i<nums.length;i++) {
+    while(lArr.length && nums[lArr[lArr.length - 1]] > nums[i]) {
+      lArr.pop()
+    }
+    lArr.push(i)
+  }
+  const rArr = []
+  for(let i=nums.length - 1;i>=0;i--) {
+    while(rArr.length && nums[rArr[0]] < nums[i]) {
+      rArr.shift()
+    }
+    rArr.unshift(i)
+  }
+  let l, r
+  let has = false
+  for(let i=0;i<nums.length;i++) {
+    const t = lArr.shift()
+    if(i !== t) {
+      l = i
+      has = true
+      break
+    }
+  }
+  for(let i=nums.length - 1;i>=0;i--) {
+    const t = rArr.pop()
+    if(i !== t) {
+      r = i
+      has = true
+      break
+    }
+  }
+  return has ? r - l + 1 : 0
+};
+```
+
+## ??🌟😻✔ 621 任务调度器【medium】
+
+[ref](https://leetcode.cn/problems/task-scheduler/)
+
+模拟
+
+```js
+// 模拟题，不要扯什么算法，就是直接模拟硬推
+// 时间复杂度：O(N+K) K 是大写字母的种类
+// 空间复杂度：O(K)
+var leastInterval = function(tasks, n) {
+  const taskCount = new Array(26).fill(0)
+  for(let i=0;i<tasks.length;i++) {
+    taskCount[tasks[i].charCodeAt(0) - 'A'.charCodeAt(0)]++
+  }
+  taskCount.sort((a, b) => b - a)
+  let bucketCount = 1
+  let i = 1
+  while(i < taskCount.length && taskCount[0] === taskCount[i]) {
+    bucketCount++
+    i++
+  }
+  return Math.max(bucketCount + (n + 1) * (taskCount[0] - 1), tasks.length)
+};
+
 ```
 
 ## ??🌟😻✔ 630 课程表 III【hard】
