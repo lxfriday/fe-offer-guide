@@ -6216,50 +6216,8 @@ MyQueue.prototype.empty = function() {
 };
 ```
 
+
 ## 🌟😻✔ 236 二叉树的最近公共祖先【medium】
-
-[ref](https://leetcode.cn/problems/palindrome-linked-list/)
-
-链表、快慢指针
-
-```js
-// 时间复杂度：O(N)
-// 空间复杂度：O(1)
-var isPalindrome = function(head) {
-  if(!head) return true
-  const myHead = new ListNode()
-  myHead.next = head
-  let fast = myHead
-  let slow = myHead
-  while(fast.next && fast.next.next) {
-    slow = slow.next
-    fast = fast.next.next
-  }
-  let h1 = head
-  let h2 = slow.next
-  slow.next = null
-  h2 = reverse(h2)
-  while(h1 && h2) {
-    if(h1.val !== h2.val) return false
-    h1 = h1.next
-    h2 = h2.next
-  }
-  return true
-};
-
-function reverse(head) {
-  const myHead = new ListNode()
-  while(head) {
-    const next = myHead.next
-    myHead.next = head
-    head = head.next
-    myHead.next.next = next
-  }
-  return myHead.next
-}
-```
-
-## 😻✔ 236 二叉树的最近公共祖先【medium】
 
 [ref](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
 
@@ -6343,6 +6301,114 @@ var productExceptSelf = function(nums) {
 };
 ```
 
+## 🌟😻✔ 239 滑动窗口最大值【hard】
+
+[ref](https://leetcode.cn/problems/sliding-window-maximum/)
+
+优先队列、大顶堆、单调队列
+
+```js
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(n)
+var maxSlidingWindow = function(nums, k) {
+  const len = nums.length
+  const res = []
+  const maxHeap = new MaxHeap()
+  for(let i=0;i<k - 1;i++) {
+    maxHeap.insert({
+      index: i,
+      val: nums[i]
+    })
+  }
+  for(let i=k - 1;i<len;i++) {
+    maxHeap.insert({
+      index: i,
+      val: nums[i]
+    })
+    while(maxHeap.peek().index < i + 1 - k) maxHeap.pop()
+    res.push(maxHeap.peek().val)
+  }
+  return res
+};
+
+class MaxHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(target) {
+    this.heap.push(target)
+    this.shiftUp(this.size - 1)
+  }
+  pop() {
+    this.swap(0, this.size - 1)
+    this.heap.pop()
+    this.shiftDown(0)
+  }
+  get size() {
+    return this.heap.length
+  }
+  peek() {
+    return this.heap[0]
+  }
+  shiftUp(i) {
+    const parentIndex =  Math.floor((i - 1) / 2)
+    if(parentIndex >= 0 && this.heap[parentIndex].val < this.heap[i].val) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i) {
+    const l = 2 * i + 1
+    const r = 2 * i + 2
+    let maxIndex = i
+    if(l < this.size && this.heap[maxIndex].val < this.heap[l].val) {
+      maxIndex = l
+    }
+    if(r < this.size && this.heap[maxIndex].val < this.heap[r].val) {
+      maxIndex = r
+    }
+    if(maxIndex !== i) {
+      this.swap(i, maxIndex)
+      this.shiftDown(maxIndex)
+    }
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+}
+```
+
+单调队列解法，比较难理解
+
+```js
+// 时间复杂度：O(n) 每个下标被放进队列1次，且出队列1次
+// 空间复杂度：O(k) 
+var maxSlidingWindow = function(nums, k) {
+  const len = nums.length
+  const q = []
+  const res = []
+  for(let i=0;i<k - 1;i++) {
+    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
+      q.pop()
+    }
+    q.push(i)
+  }
+  for(let i=k - 1;i<len;i++) {
+    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
+      q.pop()
+    }
+    q.push(i)
+    while(q[0] < i - k + 1) {
+      q.shift()
+    }
+    res.push(nums[q[0]])
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 240 搜索二维矩阵 II【medium】
 
 [ref](https://leetcode.cn/problems/search-a-2d-matrix-ii/)
@@ -6362,6 +6428,56 @@ var searchMatrix = function(matrix, target) {
     }
   }
   return false
+};
+```
+
+## ✔ 252 会议室【easy】
+
+[ref](https://leetcode.cn/problems/meeting-rooms/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var canAttendMeetings = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0])
+  for(let i=0;i<intervals.length - 1;i++) {
+    if(intervals[i][1] > intervals[i+1][0]) return false
+  }
+  return true
+};
+```
+
+## ?🌟😻✔ 253 会议室 II【medium】
+
+[ref](https://leetcode.cn/problems/meeting-rooms-ii/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var minMeetingRooms = function(intervals) {
+  const start = []  
+  const end = []
+  for(let i=0;i<intervals.length;i++) {
+    start.push(intervals[i][0])
+    end.push(intervals[i][1])
+  }
+  start.sort((a, b) => a - b)
+  end.sort((a, b) => a - b)
+  let max = 0
+  let curr = 0
+
+  while(start.length && end.length) {
+    if(start[0] < end[0]) {
+      curr++
+      max = Math.max(max, curr)
+      start.shift()
+    } else {
+      curr--
+      end.shift()
+    }
+  }
+
+  return max
 };
 ```
 
@@ -6403,6 +6519,156 @@ var minCost = function(costs) {
   }
   return Math.min(...dp[costs.length - 1])
 };
+```
+
+## 🌟😻✔ 259 较小的三数之和【medium】
+
+[ref](https://leetcode.cn/problems/3sum-smaller/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(logN)
+var threeSumSmaller = function(nums, target) {
+  const n = nums.length
+  if(n < 3) return 0
+  nums.sort((a, b) => a - b)
+  let res = 0
+  for(let i=0; i < n - 2; i++) {
+    let l = i + 1, r = n - 1
+    while(l < r) {
+      const s = nums[i] + nums[l] + nums[r]
+      if(s < target) {
+        let tl = l
+        while(tl < r && nums[i] + nums[tl] + nums[r] < target) {
+          tl++
+          res++
+        }
+        r--
+      } else {
+        r--
+      }
+    }
+  }
+  return res
+};
+```
+
+## ✔ 263 丑数【easy】
+
+[ref](https://leetcode.cn/problems/ugly-number/)
+
+```js
+var isUgly = function(n) {
+  if(n === 0) return false
+  if(n === 1) return true
+  if(n % 2 === 0) return isUgly(n / 2)
+  if(n % 3 === 0) return isUgly(n / 3)
+  if(n % 5 === 0) return isUgly(n / 5)
+  return false
+};
+```
+
+## ?🌟😻✔ 264 丑数 II【medium】
+
+[ref](https://leetcode.cn/problems/ugly-number-ii/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var nthUglyNumber = function(n) {
+  const dp = new Array(n + 1).fill(1)
+  let j2 = 1,j3 = 1,j5 = 1
+  for(let i=2;i<=n;i++) {
+    const v2 = dp[j2] * 2
+    const v3 = dp[j3] * 3
+    const v5 = dp[j5] * 5
+    const min = Math.min(v2, v3, v5)
+
+    if(min === v2) j2++
+    if(min === v3) j3++
+    if(min === v5) j5++
+    dp[i] = min
+  }
+
+  return dp[n]
+};
+```
+
+or 优先队列、小顶堆
+
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var nthUglyNumber = function(n) {
+  let c = 1
+  n--
+  const s = new Set()
+  const minHeap = new MinHeap()
+  while(n > 0) {
+    if(!s.has(2 * c)) {
+      s.add(2 * c)
+      minHeap.insert(2 * c)
+    }
+    if(!s.has(3 * c)) {
+      s.add(3 * c)
+      minHeap.insert(3 * c)
+    }
+    if(!s.has(5 * c)) {
+      s.add(5 * c)
+      minHeap.insert(5 * c)
+    }
+    c = minHeap.pop()
+    n--
+  }
+  return c
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop(){
+    this.swap(0, this.heap.length - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  shiftUp(i){
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(this.heap[i] < this.heap[parentIndex]) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i){
+    const leftIndex= 2 * i + 1
+    const rightIndex= 2 * i + 2
+    let minIndex = i
+    if(this.heap[minIndex] > this.heap[leftIndex]) {
+      minIndex = leftIndex
+    }
+    if(this.heap[minIndex] > this.heap[rightIndex]) {
+      minIndex = rightIndex
+    }
+    if(minIndex !== i) {
+      this.swap(i, minIndex)
+      this.shiftDown(minIndex)
+    }
+  }
+  swap(i,j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+}
+
 ```
 
 ## 🌟😻✔ 265 粉刷房子 II【hard】
@@ -6556,37 +6822,6 @@ function binarySearch(t, nums, l, r) {
 ```
 
 
-## 🌟😻✔ 268 丢失的数字【easy】
-
-[ref](https://leetcode.cn/problems/missing-number/)
-
-```js
-// 时间复杂度：O(N)
-// 空间复杂度：O(N)
-var missingNumber = function(nums) {
-  const s = new Set()
-  for(let i=0;i<nums.length;i++) {
-    s.add(nums[i])
-  }
-  for(let i=0;i<nums.length;i++) {
-    if(!s.has(i)) return i
-  }
-  return nums.length
-};
-```
-
-```js
-// 时间复杂度：O(NlogN)
-// 空间复杂度：O(N+logN)
-var missingNumber = function(nums) {
-  nums.sort((a, b) => a - b)
-  for(let i=0;i<nums.length;i++) {
-    if(nums[i] !== i) return i
-  }
-  return nums.length
-};
-```
-
 ## 🌟😻✔ 276. 栅栏涂色【medium】
 
 [ref](https://leetcode.cn/problems/paint-fence/)
@@ -6652,314 +6887,6 @@ var solution = function(isBadVersion) {
 };
 ```
 
-## 🌟😻✔ 239 滑动窗口最大值【hard】
-
-[ref](https://leetcode.cn/problems/sliding-window-maximum/)
-
-优先队列、大顶堆、单调队列
-
-```js
-// 时间复杂度：O(nlogn)
-// 空间复杂度：O(n)
-var maxSlidingWindow = function(nums, k) {
-  const len = nums.length
-  const res = []
-  const maxHeap = new MaxHeap()
-  for(let i=0;i<k - 1;i++) {
-    maxHeap.insert({
-      index: i,
-      val: nums[i]
-    })
-  }
-  for(let i=k - 1;i<len;i++) {
-    maxHeap.insert({
-      index: i,
-      val: nums[i]
-    })
-    while(maxHeap.peek().index < i + 1 - k) maxHeap.pop()
-    res.push(maxHeap.peek().val)
-  }
-  return res
-};
-
-class MaxHeap {
-  constructor() {
-    this.heap = []
-  }
-  insert(target) {
-    this.heap.push(target)
-    this.shiftUp(this.size - 1)
-  }
-  pop() {
-    this.swap(0, this.size - 1)
-    this.heap.pop()
-    this.shiftDown(0)
-  }
-  get size() {
-    return this.heap.length
-  }
-  peek() {
-    return this.heap[0]
-  }
-  shiftUp(i) {
-    const parentIndex =  Math.floor((i - 1) / 2)
-    if(parentIndex >= 0 && this.heap[parentIndex].val < this.heap[i].val) {
-      this.swap(i, parentIndex)
-      this.shiftUp(parentIndex)
-    }
-  }
-  shiftDown(i) {
-    const l = 2 * i + 1
-    const r = 2 * i + 2
-    let maxIndex = i
-    if(l < this.size && this.heap[maxIndex].val < this.heap[l].val) {
-      maxIndex = l
-    }
-    if(r < this.size && this.heap[maxIndex].val < this.heap[r].val) {
-      maxIndex = r
-    }
-    if(maxIndex !== i) {
-      this.swap(i, maxIndex)
-      this.shiftDown(maxIndex)
-    }
-  }
-  swap(i, j) {
-    const t = this.heap[i]
-    this.heap[i] = this.heap[j]
-    this.heap[j] = t
-  }
-}
-```
-
-单调队列解法，比较难理解
-
-```js
-// 时间复杂度：O(n) 每个下标被放进队列1次，且出队列1次
-// 空间复杂度：O(k) 
-var maxSlidingWindow = function(nums, k) {
-  const len = nums.length
-  const q = []
-  const res = []
-  for(let i=0;i<k - 1;i++) {
-    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
-      q.pop()
-    }
-    q.push(i)
-  }
-  for(let i=k - 1;i<len;i++) {
-    while(q.length && nums[q[q.length - 1]] <= nums[i]) {
-      q.pop()
-    }
-    q.push(i)
-    while(q[0] < i - k + 1) {
-      q.shift()
-    }
-    res.push(nums[q[0]])
-  }
-  return res
-};
-```
-
-## ✔ 252 会议室【easy】
-
-[ref](https://leetcode.cn/problems/meeting-rooms/)
-
-```js
-// 时间复杂度：O(NlogN)
-// 空间复杂度：O(logN)
-var canAttendMeetings = function(intervals) {
-  intervals.sort((a, b) => a[0] - b[0])
-  for(let i=0;i<intervals.length - 1;i++) {
-    if(intervals[i][1] > intervals[i+1][0]) return false
-  }
-  return true
-};
-```
-
-## ?🌟😻✔ 253 会议室 II【medium】
-
-[ref](https://leetcode.cn/problems/meeting-rooms-ii/)
-
-```js
-// 时间复杂度：O(NlogN)
-// 空间复杂度：O(N)
-var minMeetingRooms = function(intervals) {
-  const start = []  
-  const end = []
-  for(let i=0;i<intervals.length;i++) {
-    start.push(intervals[i][0])
-    end.push(intervals[i][1])
-  }
-  start.sort((a, b) => a - b)
-  end.sort((a, b) => a - b)
-  let max = 0
-  let curr = 0
-
-  while(start.length && end.length) {
-    if(start[0] < end[0]) {
-      curr++
-      max = Math.max(max, curr)
-      start.shift()
-    } else {
-      curr--
-      end.shift()
-    }
-  }
-
-  return max
-};
-
-```
-
-## 🌟😻✔ 259 较小的三数之和【medium】
-
-[ref](https://leetcode.cn/problems/3sum-smaller/)
-
-```js
-// 时间复杂度：O(N^2)
-// 空间复杂度：O(logN)
-var threeSumSmaller = function(nums, target) {
-  const n = nums.length
-  if(n < 3) return 0
-  nums.sort((a, b) => a - b)
-  let res = 0
-  for(let i=0; i < n - 2; i++) {
-    let l = i + 1, r = n - 1
-    while(l < r) {
-      const s = nums[i] + nums[l] + nums[r]
-      if(s < target) {
-        let tl = l
-        while(tl < r && nums[i] + nums[tl] + nums[r] < target) {
-          tl++
-          res++
-        }
-        r--
-      } else {
-        r--
-      }
-    }
-  }
-  return res
-};
-```
-
-## ✔ 263 丑数【easy】
-
-[ref](https://leetcode.cn/problems/ugly-number/)
-
-```js
-var isUgly = function(n) {
-  if(n === 0) return false
-  if(n === 1) return true
-  if(n % 2 === 0) return isUgly(n / 2)
-  if(n % 3 === 0) return isUgly(n / 3)
-  if(n % 5 === 0) return isUgly(n / 5)
-  return false
-};
-```
-
-## ?🌟😻✔ 264 丑数 II【medium】
-
-[ref](https://leetcode.cn/problems/ugly-number-ii/)
-
-动态规划
-
-```js
-// 时间复杂度：O(N)
-// 空间复杂度：O(N)
-var nthUglyNumber = function(n) {
-  const dp = new Array(n + 1).fill(1)
-  let j2 = 1,j3 = 1,j5 = 1
-  for(let i=2;i<=n;i++) {
-    const v2 = dp[j2] * 2
-    const v3 = dp[j3] * 3
-    const v5 = dp[j5] * 5
-    const min = Math.min(v2, v3, v5)
-
-    if(min === v2) j2++
-    if(min === v3) j3++
-    if(min === v5) j5++
-    dp[i] = min
-  }
-
-  return dp[n]
-};
-```
-
-or 优先队列、小顶堆
-
-
-```js
-// 时间复杂度：O(NlogN)
-// 空间复杂度：O(N)
-var nthUglyNumber = function(n) {
-  let c = 1
-  n--
-  const s = new Set()
-  const minHeap = new MinHeap()
-  while(n > 0) {
-    if(!s.has(2 * c)) {
-      s.add(2 * c)
-      minHeap.insert(2 * c)
-    }
-    if(!s.has(3 * c)) {
-      s.add(3 * c)
-      minHeap.insert(3 * c)
-    }
-    if(!s.has(5 * c)) {
-      s.add(5 * c)
-      minHeap.insert(5 * c)
-    }
-    c = minHeap.pop()
-    n--
-  }
-  return c
-};
-
-class MinHeap {
-  constructor() {
-    this.heap = []
-  }
-  insert(v){
-    this.heap.push(v)
-    this.shiftUp(this.heap.length - 1)
-  }
-  pop(){
-    this.swap(0, this.heap.length - 1)
-    const ret = this.heap.pop()
-    this.shiftDown(0)
-    return ret
-  }
-  shiftUp(i){
-    const parentIndex = Math.floor((i - 1) / 2)
-    if(this.heap[i] < this.heap[parentIndex]) {
-      this.swap(i, parentIndex)
-      this.shiftUp(parentIndex)
-    }
-  }
-  shiftDown(i){
-    const leftIndex= 2 * i + 1
-    const rightIndex= 2 * i + 2
-    let minIndex = i
-    if(this.heap[minIndex] > this.heap[leftIndex]) {
-      minIndex = leftIndex
-    }
-    if(this.heap[minIndex] > this.heap[rightIndex]) {
-      minIndex = rightIndex
-    }
-    if(minIndex !== i) {
-      this.swap(i, minIndex)
-      this.shiftDown(minIndex)
-    }
-  }
-  swap(i,j) {
-    const t = this.heap[i]
-    this.heap[i] = this.heap[j]
-    this.heap[j] = t
-  }
-}
-
-```
 
 ## 🌟😻✔ 279 完全平方数【medium】
 
