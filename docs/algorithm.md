@@ -8,8 +8,25 @@
 - [路西法](https://github.com/azl397985856/leetcode)
 
 # 刷题日记
-
-- 20220729
+- 20220731
+  - ? [🌟【medium】538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
+  - ? [🌟【easy】338 比特位计数](https://leetcode.cn/problems/counting-bits/) 规律、模拟
+  - ? [🌟【easy】461 汉明距离](https://leetcode.cn/problems/hamming-distance/) 规律、模拟
+  - ? [🌟【easy】112 路径总和](https://leetcode.cn/problems/path-sum/) 二叉树
+  - [🌟【medium】113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/) 二叉树
+  - ? [🌟【medium】437 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 前缀和
+  - ?? [🌟【medium】208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
+  - ? [🌟【medium】386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/) 前缀树、字典树
+  - ? [🌟【hard】440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/) 字典树
+- 20220730(7)
+  - ?? [🌟【medium】287 寻找重复数](https://leetcode.cn/problems/linked-list-cycle-ii/) 快慢指针、双指针
+  - ? [🌟【easy】448 找到所有数组中消失的数字](https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/)
+  - ? [🌟【hard】41 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)
+  - ?? [🌟【hard】312. 戳气球](https://leetcode.cn/problems/burst-balloons/) 开区间动态规划
+  - [🌟【easy】617 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
+  - [🌟【medium】438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/) 双指针、滑动窗口
+  - ? [🌟【medium】114 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/) 二叉树、链表
+- 20220729(8)
   - ? [🌟【medium】581 最短无序连续子数组](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/)
   - ? [🌟【hard】407 接雨水 II](https://leetcode.cn/problems/trapping-rain-water-ii/) 优先队列
   - ? [🌟【medium】21 任务调度器](https://leetcode.cn/problems/task-scheduler/) 模拟推断
@@ -18,7 +35,6 @@
   - ? [🌟【hard】32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
   - ?? [🌟【hard】301 删除无效的括号](https://leetcode.cn/problems/remove-invalid-parentheses/) BFS
   - ?? [🌟【medium】142 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/) 链表、快慢指针、双指针
-
 - 20220728(8)
   - [🌟【easy】234 回文链表](https://leetcode.cn/problems/palindrome-linked-list/) 快慢指针、链表
   - ?? [🌟【medium】207 课程表](https://leetcode.cn/problems/palindrome-linked-list/) 图、拓扑排序、BFS
@@ -217,15 +233,21 @@
 - 贪心算法
 - 回溯算法
 - 模拟
+- trie、字典树
 
-## 数学规律、推导题
-  - 🌟【hard】[1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
 
 ## 数字大小题
 
 - 🌟【medium】[179 最大数](https://leetcode.cn/problems/largest-number/)
 - 🌟【medium】[剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
 
+## 前缀和
+- 🌟【medium】[437 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 前缀和
+
+## trie、字典树
+  - 🌟【medium】[386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
+  - 🌟【hard】[440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+  - 🌟【medium】[208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
 
 ## 字符串题
 
@@ -271,17 +293,15 @@
 - 🌟【hard】[493 翻转对](https://leetcode.cn/problems/reverse-pairs/)
 - 🌟【hard】[327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
 
-## 模拟
+## 模拟、规律
 
 - 🌟【medium】[400 第 N 位数字](https://leetcode.cn/problems/nth-digit/)
 - 🌟【medium】[21 任务调度器](https://leetcode.cn/problems/task-scheduler/)
 - 🌟【hard】 [440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
-
-## 双指针
-
-- 【medium】[167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
-- 🌟【medium】[713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
-- 🌟【medium】[11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
+- 🌟【easy】[338 比特位计数](https://leetcode.cn/problems/counting-bits/) 规律、模拟
+- 🌟【medium】[21 任务调度器](https://leetcode.cn/problems/task-scheduler/) 模拟推断
+- 🌟【easy】[461 汉明距离【easy】](https://leetcode.cn/problems/hamming-distance/) 规律、模拟
+- 🌟【hard】[1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
 
 ## 栈、队列
 
@@ -314,6 +334,10 @@
 - 【hard】 [76 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
 - 【medium】 [567 字符串的排列](https://leetcode.cn/problems/permutation-in-string/)
 - 🌟【hard】 [440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+- 【medium】[167 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
+- 🌟【medium】[713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
+- 🌟【medium】[11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
+- 🌟【medium】[438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/) 双指针、滑动窗口
 
 ## 树、深度优先、广度优先
 
@@ -333,6 +357,9 @@
 - 🌟【medium】 [652. 寻找重复的子树](https://leetcode.cn/problems/find-duplicate-subtrees/)
 - 🌟【medium】 [113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
 - 🌟【medium】[98 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/) 二叉树、二叉搜索树、DFS
+- 🌟【easy】[617 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
+- 🌟【medium】[114 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/) 二叉树、链表
+- 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
 
 ## 堆
 
@@ -396,6 +423,7 @@
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/)
 - 🌟【medium】[313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
 - 🌟【medium】[256 粉刷房子](https://leetcode.cn/problems/paint-house/)
+- 🌟【hard】[312. 戳气球](https://leetcode.cn/problems/burst-balloons/) 开区间动态规划
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -4318,6 +4346,33 @@ var pathSum = function(root, targetSum) {
 };
 ````
 
+## ?🌟😻✔ 114 二叉树展开为链表【medium】
+
+[ref](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/)
+
+二叉树、链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var flatten = function(root) {
+  if(!root) return root
+  let left = flatten(root.left)
+  let right = flatten(root.right)
+  root.left = null
+  if(left) {
+    root.right = left
+    while(left.right) {
+      left = left.right
+    }
+    left.right = right
+  } else {
+    root.right = right
+  }
+  return root
+};
+```
+
 ## 🌟✔ 118 杨辉三角【easy】
 
 [ref](https://leetcode.cn/problems/pascals-triangle/)
@@ -5609,6 +5664,73 @@ var reverseList = function (head) {
     t.next.next = prev
   }
   return t.next
+```
+
+## ??🌟😻✔ 208 实现 Trie (前缀树)【medium】
+
+[ref](https://leetcode.cn/problems/implement-trie-prefix-tree/)
+
+前缀树、字典树、trie
+
+```js
+var Trie = function() {
+  this.tree = new TrieNode()
+};
+
+/** 
+ * @param {string} word
+ * @return {void}
+ */
+Trie.prototype.insert = function(word) {
+  let curr = this.tree
+  for(let i=0;i<word.length;i++) {
+    const c = word[i]
+    if(!curr[c]) {
+      curr[c] = new TrieNode(c)
+    }
+    if(i === word.length - 1) {
+      curr[c].isEnd = true
+    }
+    curr = curr[c]
+  }
+};
+
+/** 
+ * @param {string} word
+ * @return {boolean}
+ */
+Trie.prototype.search = function(word) {
+  let curr = this.tree
+  for(let i=0;i<word.length;i++) {
+    const c = word[i]
+    if(!curr[c]) return false
+    curr = curr[c]
+    if(i === word.length - 1) {
+      return !!curr.isEnd
+    }
+  }
+};
+
+/** 
+ * @param {string} prefix
+ * @return {boolean}
+ */
+Trie.prototype.startsWith = function(prefix) {
+  let curr = this.tree
+  for(let i=0;i<prefix.length;i++) {
+    const c = prefix[i]
+    if(!curr[c]) return false
+    curr = curr[c]
+  }
+  return true
+};
+
+class TrieNode {
+  constructor(val, isEnd = false) {
+    this.val = val
+    this.isEnd = isEnd
+  }
+}
 ```
 
 ## 😻✔ 209 长度最小的子数组【medium】
@@ -6926,6 +7048,34 @@ var moveZeroes = function(nums) {
 };
 ```
 
+## ??🌟😻✔ 287 寻找重复数【medium】
+
+[ref](https://leetcode.cn/problems/find-the-duplicate-number/)
+
+双指针、快慢指针、环链表
+
+参考
+- [142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findDuplicate = function(nums) {
+  let slow = 0, fast = 0
+  do {
+    slow = nums[slow]
+    fast = nums[nums[fast]]
+  } while(slow !== fast)
+
+  slow = 0
+  while(slow !== fast) {
+    slow = nums[slow]
+    fast = nums[fast]
+  }
+  return slow
+};
+```
+
 ## ?🌟😻✔ 295. 数据流的中位数【hard】
 
 [ref](https://leetcode.cn/problems/find-median-from-data-stream/)
@@ -7306,6 +7456,32 @@ var maxProfit = function(prices) {
 };
 ```
 
+## ??🌟😻✔ 312 戳气球【hard】
+
+[ref](https://leetcode.cn/problems/burst-balloons/)
+
+开区间动态规划
+
+```js
+// 时间复杂度：O(N^3)
+// 空间复杂度：O(N^2)
+var maxCoins = function(nums) {
+  nums.unshift(1)
+  nums.push(1)
+  const n = nums.length
+  const dp = new Array(n).fill(0).map(_ => new Array(n).fill(0))
+  for(let i = n; i >=0 ; i--) {
+    for(let j = i + 2; j < n; j++) {
+      for(let k = i + 1; k < j; k++) {
+        dp[i][j] = Math.max(dp[i][j], dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j])
+      }
+    }
+  }
+  return dp[0][n-1]
+};
+
+```
+
 ## ?🌟😻✔ 313. 超级丑数【medium】
 
 [ref](https://leetcode.cn/problems/super-ugly-number/)
@@ -7618,6 +7794,30 @@ var rob = function(root) {
   dfs(root)
   return s.get(root)
 };
+```
+
+## ?😻✔ 338 比特位计数【easy】
+
+[ref](https://leetcode.cn/problems/counting-bits/)
+
+规律、模拟
+
+```js
+var countBits = function(n) {
+  const res = [0]
+
+  // 分奇数偶数讨论
+  for(let i=1;i<=n;i++) {
+    if(i % 2 === 0) {
+      res[i] = res[i / 2]
+    } else {
+      res[i] = res[i - 1] + 1
+    }
+  }
+
+  return res
+};
+
 ```
 
 ## 😻✔ 343 整数拆分【medium】
@@ -8393,6 +8593,87 @@ var characterReplacement = function(s, k) {
 
 ```
 
+## ?🌟😻✔ 437. 路径总和 III【medium】
+
+[ref](https://leetcode.cn/problems/path-sum-iii/)
+
+前缀和
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pathSum = function(root, targetSum) {
+  if(!root) return 0
+  const map = new Map()
+  let count = 0
+  function dfs(node, sum) {
+    if(!node) return
+    sum += node.val
+    if(sum === targetSum) count++
+    if(map.has(sum - targetSum)) {
+      count += map.get(sum - targetSum)
+    }
+    map.set(sum, map.has(sum) ? map.get(sum) + 1: 1)
+    dfs(node.left, sum)
+    dfs(node.right, sum)
+    map.set(sum, map.get(sum) - 1)
+  }
+  dfs(root, 0)
+  return count
+};
+```
+
+## 🌟😻✔ 438 找到字符串中所有字母异位词【medium】
+
+[ref](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
+
+滑动窗口、双指针
+
+```js
+// 时间复杂度：O(M+N) M=s.length N=p.length
+// 空间复杂度：O(N)
+var findAnagrams = function(s, p) {
+  const pMap = new Map()
+  let pCount = 0
+  for(let i=0;i<p.length;i++) {
+    pMap.set(p[i], pMap.has(p[i])?pMap.get(p[i]) + 1 : 1)
+    if(pMap.get(p[i]) === 1) {
+      pCount++
+    }
+  }
+  let l = 0, r = 0
+  const res = []
+  let sCount = 0
+  let sMap = new Map()
+  while(r<s.length) {
+    if(!pMap.has(s[r])) {
+      r++
+      l=r
+      sCount = 0
+      sMap = new Map()
+    } else if(sMap.get(s[r]) === pMap.get(s[r])){
+      while(l <= r&& s[l] !== s[r]) {
+        sMap.set(s[l], sMap.get(s[l]) - 1)
+        if(sMap.get(s[l]) + 1 === pMap.get(s[l])) sCount--
+        l++
+      }
+      l++
+      r++
+    } else {
+      sMap.set(s[r], sMap.has(s[r])?sMap.get(s[r]) + 1 : 1)
+      if(sMap.get(s[r]) === pMap.get(s[r])) {
+        sCount++
+      }
+      r++
+    }
+    if(sCount === pCount) {
+      res.push(l)
+    }
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 440 字典序的第K小数字【hard】
 
 [ref](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
@@ -8431,6 +8712,27 @@ function getCount(s, n) {
   count += Math.max(0, n - min + 1)
   return count
 }
+```
+
+## ?🌟😻✔ 448 找到所有数组中消失的数字【easy】
+
+[ref](https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findDisappearedNumbers = function(nums) {
+  const n = nums.length
+  for(let i=0;i<n;i++) {
+    const num = nums[i] % (n + 1)
+    nums[num - 1] += n + 1
+  }
+  const res = []
+  for(let i=0;i<n;i++) {
+    if(nums[i] < n + 1) res.push(i + 1)
+  }
+  return res
+};
 ```
 
 ## ?🌟😻✔ 445 两数相加 II【medium】
@@ -8521,6 +8823,32 @@ var findContentChildren = function(g, s) {
   })
   return i
 };
+```
+
+## ?🌟😻✔ 461 汉明距离【easy】
+
+[ref](https://leetcode.cn/problems/hamming-distance/)
+
+模拟、推断、规律
+
+```js
+var hammingDistance = function(x, y) {
+  let res = 0
+  while(x !== y) {
+    if(x % 2 !== y % 2) res ++
+    x = Math.floor(x / 2)
+    y = Math.floor(y / 2)
+  }
+  return res
+};
+
+// 1   (0 0 0 1)
+// 2   (0 0 1 0)
+// 3   (0 0 1 1)
+// 4   (0 1 0 0)
+// 5   (0 1 0 1)
+// 6   (0 1 1 0)
+
 ```
 
 ## ?🌟😻✔ 475 供暖器【medium】
@@ -8665,6 +8993,28 @@ var longestPalindromeSubseq = function(s) {
   }
   return dp[0][len-1]
 };
+```
+
+## ??🌟😻✔ 538 把二叉搜索树转换为累加树【medium】
+
+[ref](https://leetcode.cn/problems/convert-bst-to-greater-tree/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var convertBST = function(root) {
+  convert(root, 0)
+  return root
+};
+
+function convert(node, bigger) {
+  if(!node) return 0
+  const v = node.val
+  const rightSum = convert(node.right, bigger)
+  node.val = bigger + v + rightSum
+  const leftSum = convert(node.left, node.val)
+  return leftSum + v + rightSum
+}
 ```
 
 ## 🌟😻✔ 540 有序数组中的单一元素【medium】
@@ -8910,6 +9260,27 @@ var findUnsortedSubarray = function(nums) {
     }
   }
   return has ? r - l + 1 : 0
+};
+```
+
+## 🌟😻✔ 617 合并二叉树【easy】
+
+[ref](https://leetcode.cn/problems/merge-two-binary-trees/)
+
+```js
+// 时间复杂度：O(min(M, N))
+// 空间复杂度：O(min(M, N))
+var mergeTrees = function(root1, root2) {
+  function merge(node1, node2) {
+    if(!node1) return node2
+    if(!node2) return node1
+    let sum = node1.val + node2.val
+    const node = new TreeNode(sum)
+    node.left = merge(node1.left, node2.left)
+    node.right = merge(node1.right, node2.right)
+    return node
+  }
+  return merge(root1, root2)
 };
 ```
 
