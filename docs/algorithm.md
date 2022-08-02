@@ -7,9 +7,20 @@
 - [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
 - [路西法](https://github.com/azl397985856/leetcode)
 
+# 随便记录
+- [LeetCode平台值得做的题目分类列表与参考难度](https://zhuanlan.zhihu.com/p/453897447)
+
 # 刷题日记
 
-- 20220801
+- 20220802
+  - [🌟【hard】剑指 Offer 59 - I. 滑动窗口的最大值](https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 单调队列
+  
+- 20220801(4)
+  - ?? [🌟【medium】剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
+  - [🌟【hard】剑指 Offer 51. 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 归并排序
+  - ?? [🌟【hard】剑指 Offer 41. 数据流中的中位数](https://leetcode.cn/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/) 优先队列、大顶堆、小顶堆
+  - ?? [🌟【hard】剑指 Offer 37. 序列化二叉树](https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/) 二叉树
+- 20220801(7)
   - ?? [🌟【medium】211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
   - ? [🌟【medium】230 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/) 二叉搜索树
   - ? [🌟【easy】557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
@@ -17,8 +28,7 @@
   - [🌟【easy】292 Nim 游戏](https://leetcode.cn/problems/nim-game/) 规律题
   - [🌟【easy】231 2 的幂](https://leetcode.cn/problems/power-of-two/) 规律题
   - ?? [🌟【medium】89 格雷编码](https://leetcode.cn/problems/gray-code/) 规律题
-
-- 20220731
+- 20220731(9)
   - ? [🌟【medium】538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
   - ? [🌟【easy】338 比特位计数](https://leetcode.cn/problems/counting-bits/) 规律、模拟
   - ? [🌟【easy】461 汉明距离](https://leetcode.cn/problems/hamming-distance/) 规律、模拟
@@ -255,10 +265,17 @@
 - 🌟【medium】[437 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 前缀和
 
 ## trie、字典树
-  - 🌟【medium】[386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
-  - 🌟【hard】[440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
-  - 🌟【medium】[208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
-  - 🌟【medium】[211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
+
+初识字典树
+
+- [【图解算法】模板+变式——带你彻底搞懂字典树(Trie树)](https://blog.csdn.net/m0_46202073/article/details/107253959)
+
+---
+
+- 🌟【medium】[386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
+- 🌟【hard】[440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
+- 🌟【medium】[208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
+- 🌟【medium】[211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
 
 ## 字符串题
 
@@ -365,16 +382,20 @@
 - 🌟【easy】 [543 二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
 - 【medium】 [298 二叉树最长连续序列](https://leetcode.cn/problems/binary-tree-longest-consecutive-sequence/)
 - 【medium】 [236 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
-- 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 - 【medium】 [剑指 Offer 26 树的子结构](https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/)
 - 🌟【medium】 [652. 寻找重复的子树](https://leetcode.cn/problems/find-duplicate-subtrees/)
 - 🌟【medium】 [113 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
 - 🌟【medium】[98 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/) 二叉树、二叉搜索树、DFS
 - 🌟【easy】[617 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
 - 🌟【medium】[114 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/) 二叉树、链表
+- 🌟【hard】[剑指 Offer 37. 序列化二叉树](https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/) 二叉树
+
+### 二叉搜索树
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
 - 🌟【medium】[230 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/) 二叉搜索树
 - [🌟【easy】235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
+- 🌟【medium】[剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
+- 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 
 ## 堆
 
@@ -10874,6 +10895,126 @@ var spiralOrder = function(matrix) {
 // 5 6  7  8
 // 9 10 11 12
 // m=4 n=3
+```
+
+## ?? 🌟😻✔ 剑指 Offer 36. 二叉搜索树与双向链表【medium】
+
+[ref](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
+
+二叉搜索树、双向链表
+
+最优解
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(N)
+var treeToDoublyList = function(root) {
+  let head = null, prev = null
+  if(!root) return null
+  function dfs(node) {
+    if(!node) return
+    dfs(node.left)
+    if(!head) {
+      head = node
+    } else {
+      prev.right = node
+      node.left = prev
+    }
+    prev = node
+    dfs(node.right)
+  }
+  dfs(root)
+  prev.right = head
+  head.left = prev
+  return head
+};
+```
+
+略差解
+
+```js
+var treeToDoublyList = function(root) {
+  if(!root) return null
+  function dfs(node) {
+    if(!node) return [null, null]
+    let [leftMin, leftMax] = dfs(node.left) 
+    const [rightMin, rightMax] = dfs(node.right)
+    if(leftMax) {
+      leftMax.right = node
+      node.left = leftMax
+    }
+    if(rightMin) {
+      node.right = rightMin
+      rightMin.left = node
+    }
+    return [leftMin ? leftMin : node, rightMax ? rightMax : node]
+  }
+
+  const [minNode, maxNode] = dfs(root)
+
+  minNode.left = maxNode
+  maxNode.right = minNode
+  return minNode
+};
+```
+
+## ??🌟😻✔ 剑指 Offer 37. 序列化二叉树【hard】
+
+[ref](https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/)
+
+二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+  return reserialize(root, '')
+};
+
+function reserialize(node, str) {
+  if(!node) {
+    str += 'null,'
+    return str
+  }
+  str += node.val + ','
+  str = reserialize(node.left, str)
+  str = reserialize(node.right, str)
+  return str
+}
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function(data) {
+  return redeserialize(data.split(','), {i:0})
+};
+
+function redeserialize(datalist, indObj) {
+  if(datalist[indObj.i] === 'null') {
+    indObj.i++
+    return null
+  }
+  const node = new TreeNode(parseInt(datalist[indObj.i], 10))
+  indObj.i++
+  node.left = redeserialize(datalist, indObj)
+  node.right = redeserialize(datalist, indObj)
+  return node
+}
 ```
 
 ## 🌟😻✔ 剑指 Offer 40 最小的k个数【medium】
