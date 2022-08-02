@@ -8,6 +8,16 @@
 - [路西法](https://github.com/azl397985856/leetcode)
 
 # 刷题日记
+
+- 20220801
+  - ?? [🌟【medium】211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
+  - ? [🌟【medium】230 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/) 二叉搜索树
+  - ? [🌟【easy】557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
+  - [🌟【easy】235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
+  - [🌟【easy】292 Nim 游戏](https://leetcode.cn/problems/nim-game/) 规律题
+  - [🌟【easy】231 2 的幂](https://leetcode.cn/problems/power-of-two/) 规律题
+  - ?? [🌟【medium】89 格雷编码](https://leetcode.cn/problems/gray-code/) 规律题
+
 - 20220731
   - ? [🌟【medium】538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
   - ? [🌟【easy】338 比特位计数](https://leetcode.cn/problems/counting-bits/) 规律、模拟
@@ -248,6 +258,7 @@
   - 🌟【medium】[386 字典序排数](https://leetcode.cn/problems/lexicographical-numbers/)
   - 🌟【hard】[440 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/)
   - 🌟【medium】[208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
+  - 🌟【medium】[211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
 
 ## 字符串题
 
@@ -261,6 +272,7 @@
 - 🌟【easy】[20 有效的括号](https://leetcode.cn/problems/valid-parentheses/) 栈
 - 🌟【medium】[22 括号生成](https://leetcode.cn/problems/generate-parentheses/) 回溯
 - 🌟【hard】[32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
+- 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
 
 回文串相关
 
@@ -338,6 +350,7 @@
 - 🌟【medium】[713 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/)
 - 🌟【medium】[11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
 - 🌟【medium】[438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/) 双指针、滑动窗口
+- 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
 
 ## 树、深度优先、广度优先
 
@@ -360,6 +373,8 @@
 - 🌟【easy】[617 合并二叉树](https://leetcode.cn/problems/merge-two-binary-trees/)
 - 🌟【medium】[114 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/) 二叉树、链表
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
+- 🌟【medium】[230 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/) 二叉搜索树
+- [🌟【easy】235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
 
 ## 堆
 
@@ -3944,6 +3959,55 @@ var merge = function(nums1, m, nums2, n) {
 };
 ```
 
+## ?? 🌟😻✔ 89 格雷编码【medium】
+
+[ref](https://leetcode.cn/problems/gray-code/)
+
+规律题
+
+```js
+// 规律题
+// 时间复杂度：O(2^N)
+// 时间复杂度：O(2^N)
+// 注意条件：
+// 结果数组中有 2^N 个数，且刚好是 [0, 2^N -1] 内的数
+// 1. 对于 N-1 的格雷编码，N 中的数字是N-1中数字的一倍
+// 2. N-1 中已形成格雷编码的情况下，对这 N-1 个数字的二进制前面加一个1，然后翻转就是另外 2^(N-1) 个数字
+// 0 01 => 0 01 0 01 => 0 01 10 11 => 0 01 11 10
+// 0 01 11 10 => 0 01 11 10 0 01 11 10 => 0 01 11 10 100 101 111 110 => 0 01 11 10 110 111 101 100
+var grayCode = function(n) {
+  const res = [0];
+  for (let i = 1; i <= n; i++) {
+    const len = res.length;
+    for (let j = len - 1; j >= 0; j--) {
+      res.push(res[j] + len)
+    }
+  }
+  return res;
+};
+
+// 0 1 11 10
+// 0 1 3 2
+
+// 0  0
+// 1  1
+// 2  10
+// 3  11 
+// 4  100
+// 5  101
+// 6  110
+// 7  111
+// 8  1000
+// 9  1001
+// 10 1010
+// 11 1011
+// 12 1100
+// 13 1101
+// 14 1110
+// 15 1111
+
+```
+
 ## 🌟😻✔ 90 子集 II【medium】
 
 [ref](https://leetcode.cn/problems/subsets-ii/)
@@ -5821,7 +5885,79 @@ var findOrder = function(numCourses, prerequisites) {
   }
   return count === numCourses ? res : []
 };
+```
 
+## ?? 🌟😻✔ 211 添加与搜索单词 - 数据结构设计【medium】
+
+[ref](https://leetcode.cn/problems/design-add-and-search-words-data-structure/)
+
+字典树
+
+![时空复杂度](http://qiniu1.lxfriday.xyz/feoffer/1659318737209_acbeaa0b-3502-4808-92de-623f0224d55a.png)
+
+```js
+var WordDictionary = function() {
+  this.tree = new TrieNode()
+};
+
+/** 
+ * @param {string} word
+ * @return {void}
+ */
+WordDictionary.prototype.addWord = function(word) {
+  let curr = this.tree
+  for(let i=0;i<word.length;i++) {
+    const c = word[i]
+    if(!curr[c]) {
+      curr[c] = new TrieNode(c)
+    }
+    if(i === word.length - 1) {
+      curr[c].end = true
+    }
+    curr = curr[c]
+  }
+};
+
+/** 
+ * @param {string} word
+ * @return {boolean}
+ */
+WordDictionary.prototype.search = function(word) {
+  function searchFrom(curr, startIndex) {
+    if(startIndex >= word.length) return curr.end
+    const c = word[startIndex]
+    if(c === '.') {
+      // 只搜有的 key 不泛化的搜索 a-z
+      for(let key of Object.keys(curr)) {
+        if(key === 'val' || key === 'end') continue
+        if(searchFrom(curr[key], startIndex + 1)) {
+          return true
+        }
+      }
+      return false
+    } else if(curr[c] && curr[c].val === c) {
+      return searchFrom(curr[c], startIndex + 1)
+    }
+    return false
+  }
+  return searchFrom(this.tree, 0)
+};
+
+
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * var obj = new WordDictionary()
+ * obj.addWord(word)
+ * var param_2 = obj.search(word)
+ */
+
+class TrieNode {
+  constructor(val) {
+    this.val = val
+    this.end = false
+  }
+}
 ```
 
 ## 🌟😻✔ 213 打家劫舍 II【medium】
@@ -6279,8 +6415,43 @@ var calculate = function(s) {
   ret += tmp
   return ret
 };
+```
 
+## ?🌟😻✔ 230 二叉搜索树中第K小的元素【medium】
 
+[ref](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/)
+
+二叉搜索树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var kthSmallest = function(root, k) {
+  let target
+  function dfs(node, extraCount) {
+    if(!node) return 0
+    const leftCount = dfs(node.left, extraCount)
+    const allCount = extraCount + leftCount + 1
+    if(allCount === k) {
+      target = node.val
+    }
+    const rightCount = dfs(node.right, allCount)
+    return leftCount + 1 + rightCount
+  }
+
+  dfs(root, 0)
+  return target
+};
+```
+
+## ✔ 231 2 的幂【easy】
+
+[ref](https://leetcode.cn/problems/power-of-two/)
+
+```js
+var isPowerOfTwo = function(n) {
+  return n > 0 && (n & (n - 1)) === 0
+};
 ```
 
 ## ✔ 232 用栈实现队列【easy】
@@ -6338,6 +6509,50 @@ MyQueue.prototype.empty = function() {
 };
 ```
 
+
+## 🌟😻✔ 235 二叉搜索树的最近公共祖先【easy】
+
+[ref](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+二叉搜索树
+
+```js
+// 迭代
+// 时间复杂度：O(N)
+// 时间复杂度：O(1)
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+  while(true) {
+    if(root.val < p.val && root.val < q.val) {
+      root = root.right
+    } else if(root.val > p.val && root.val > q.val) {
+      root = root.left
+    } else {
+      return root
+    }
+  }
+};
+```
+
+```js
+// 递归
+var lowestCommonAncestor = function(root, p, q) {
+  let min = Math.min(p.val, q.val)
+  let max = Math.max(p.val, q.val)
+  if(root.val < min) {
+    return lowestCommonAncestor(root.right, p, q)
+  } else if(root.val > max) {
+    return lowestCommonAncestor(root.left, p, q)
+  } else {
+    return root
+  }
+};
+```
 
 ## 🌟😻✔ 236 二叉树的最近公共祖先【medium】
 
@@ -7076,7 +7291,17 @@ var findDuplicate = function(nums) {
 };
 ```
 
-## ?🌟😻✔ 295. 数据流的中位数【hard】
+## ✔ 292 Nim 游戏【easy】
+
+[ref](https://leetcode.cn/problems/nim-game/)
+
+```js
+var canWinNim = function(n) {
+  return n % 4 === 0 ? false : true
+};
+```
+
+## ?🌟😻✔ 295 数据流的中位数【hard】
 
 [ref](https://leetcode.cn/problems/find-median-from-data-stream/)
 
@@ -9077,6 +9302,51 @@ var diameterOfBinaryTree = function(root) {
   depth(root)
   return maxRes
 };
+```
+
+## ?🌟😻✔ 557 反转字符串中的单词 III【easy】
+
+[ref](https://leetcode.cn/problems/reverse-words-in-a-string-iii/)
+
+双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var reverseWords = function(s) {
+  const n = s.length
+  let l = 0, r = 0
+  let res = ''
+
+  while(r < n) {
+    if(s[r] === ' ') {
+      res += ' '
+      r++
+      l=r
+    } else if(r + 1 < n && s[r + 1] === ' ') {
+      res += reverse(s.slice(l, r + 1))
+      r++
+      l = r
+    } else {
+      r++
+    }
+  }
+  if(l !== r) {
+    res += reverse(s.slice(l, r))
+  }
+
+  return res
+};
+
+function reverse(s) {
+  let res = ''
+  let r = s.length - 1
+  while(r >= 0) {
+    res += s[r]
+    r--
+  }
+  return res
+}
 ```
 
 ## ?🌟😻✔ 560 和为 K 的子数组【medium】
