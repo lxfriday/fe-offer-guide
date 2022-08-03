@@ -14,7 +14,9 @@
 
 - 20220802
   - [🌟【hard】剑指 Offer 59 - I. 滑动窗口的最大值](https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 单调队列
-  
+  - ?? [🌟【hard】剑指 Offer 19. 正则表达式匹配](https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/) 动态规划
+  - ?? [🌟【easy】剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/) 二分搜索
+
 - 20220801(4)
   - ?? [🌟【medium】剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
   - [🌟【hard】剑指 Offer 51. 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 归并排序
@@ -504,6 +506,8 @@
 - 🌟【medium】[153 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
 - 🌟【hard】[154 寻找旋转排序数组中的最小值 II](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/)
 - 🌟【medium】[162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
+- 🌟【easy】[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/) 二分搜索
+
 
 ## 排序算法的应用
 
@@ -10786,6 +10790,46 @@ function sum(i, j) {
 }
 ```
 
+## ??🌟😻✔ 剑指 Offer 19. 正则表达式匹配【hard】
+
+[ref](https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/)
+
+动态规划
+
+```js
+// 动态规划
+// 时间复杂度：O(M*N)
+// 空间复杂度：O(M*N)
+var isMatch = function(s, p) {
+  const m = s.length, n = p.length
+  const dp = new Array(m + 1).fill(0).map(_ => new Array(n + 1).fill(false))
+
+  dp[0][0] = true
+
+  for(let j=2;j<=n;j++) {
+    if(p[j-1] === '*') {
+      dp[0][j] = dp[0][j-2]
+    }
+  }
+  
+  for(let i=1;i<=m;i++) {
+    for(let j=1;j<=n;j++) {
+      if(p[j - 1] === '.' || s[i - 1] === p[j - 1]) {
+        dp[i][j] = dp[i-1][j-1]
+      } else if(p[j-1] === '*') {
+        dp[i][j] = dp[i][j-2]
+        if(p[j - 2] === '.' || p[j - 2] === s[i - 1]) {
+          dp[i][j] = dp[i][j] || dp[i-1][j]
+        }
+      }
+    }
+  }
+
+  return dp[m][n]
+};
+
+```
+
 ## 😻✔ 剑指 Offer 22 链表中倒数第k个节点【easy】
 
 [ref](https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
@@ -11133,6 +11177,44 @@ var reversePairs = function(nums) {
 
   mergeSort(nums, 0, nums.length - 1)
   return total
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 53 - II. 0～n-1中缺失的数字【easy】
+
+[ref](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/)
+
+二分查找
+
+```js
+// 二分
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var missingNumber = function(nums) {
+  let l = 0, r = nums.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] !== mid) {
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  return ++r
+};
+```
+
+```js
+// 常规遍历
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var missingNumber = function(nums) {
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] !== i) {
+      return i
+    }
+  }
+  return nums.length
 };
 ```
 
