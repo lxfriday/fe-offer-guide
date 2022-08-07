@@ -6,18 +6,49 @@
 
 - [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
 - [路西法](https://github.com/azl397985856/leetcode)
+- [Krahets](https://leetcode.cn/u/jyd/)
 
 # 随便记录
 - [LeetCode平台值得做的题目分类列表与参考难度](https://zhuanlan.zhihu.com/p/453897447)
 
 # 刷题日记
 
-- 20220802
+- 20220807
+  - [🌟【medium】剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
+- 20220806(10)
+  - ?? [🌟【medium】剑指 Offer 14- I. 剪绳子](https://leetcode.cn/problems/jian-sheng-zi-lcof/) 动态规划
+  - ?? [🌟【medium】剑指 Offer 60. n个骰子的点数](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/) 动态规划
+  - ?? [🌟【medium】剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
+  - ?? [🌟【medium】剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
+  - [🌟【medium】剑指 Offer 12. 矩阵中的路径](https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/) 回溯法
+  - ?? [🌟【medium】剑指 Offer 31. 栈的压入、弹出序列](https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/) 栈
+  - [🌟【easy】剑指 Offer 58 - I. 翻转单词顺序](https://leetcode.cn/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
+  - [🌟【medium】151. 颠倒字符串中的单词](https://leetcode.cn/problems/reverse-words-in-a-string/)
+  - [🌟【medium】186. 翻转字符串里的单词 II](https://leetcode.cn/problems/reverse-words-in-a-string-ii/)
+  - ?? [🌟【medium】189. 轮转数组](https://leetcode.cn/problems/rotate-array/) 规律题
+- 20220805(9)
+  - ?? [🌟【easy】剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/) 双指针、滑动窗口
+  - ?? [🌟【hard】剑指 Offer 43. 1～n 整数中 1 出现的次数](https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/) 规律题
+  - ?? [🌟【easy】剑指 Offer 62. 圆圈中最后剩下的数字](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/) 规律题、约瑟夫环、直接背结论
+  - ?? [🌟【medium】剑指 Offer 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 二叉搜索树、后序遍历
+  - [🌟【easy】剑指 Offer 39. 数组中出现次数超过一半的数字](https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/) 哈希表
+  - [🌟【medium】剑指 Offer 32 - I. 从上到下打印二叉树](https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/) BFS
+  - [【easy】剑指 Offer 58 - II. 左旋转字符串](https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+  - ?? [🌟【medium】剑指 Offer 49. 丑数](https://leetcode.cn/problems/chou-shu-lcof/) 动态规划
+  - ? [🌟【medium】313. 超级丑数](https://leetcode.cn/problems/super-ugly-number/) 动态规划
+- 20220804(7)
+  - [🌟【medium】122. 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/) 动态规划
+  - [🌟【hard】123. 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/) 动态规划
+  - ?? [🌟【hard】188. 买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/) 动态规划
+  - ?? [🌟【medium】309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/) 动态规划
+  - ? [🌟【easy】剑指 Offer 10- II. 青蛙跳台阶问题](https://leetcode.cn/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/) 动态规划
+  - ? [🌟【easy】剑指 Offer 61. 扑克牌中的顺子](https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/) 规律题
+  - [🌟【easy】剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/) 数组题
+- 20220803(3)
   - [🌟【hard】剑指 Offer 59 - I. 滑动窗口的最大值](https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 单调队列
   - ?? [🌟【hard】剑指 Offer 19. 正则表达式匹配](https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/) 动态规划
   - ?? [🌟【easy】剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/) 二分搜索
-
-- 20220801(4)
+- 20220802(4)
   - ?? [🌟【medium】剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
   - [🌟【hard】剑指 Offer 51. 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) 归并排序
   - ?? [🌟【hard】剑指 Offer 41. 数据流中的中位数](https://leetcode.cn/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/) 优先队列、大顶堆、小顶堆
@@ -257,6 +288,9 @@
 - 模拟
 - trie、字典树
 
+## 二进制相关
+- 🌟【medium】[剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
+- 🌟【medium】[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
 
 ## 数字大小题
 
@@ -323,6 +357,7 @@
 - 🌟【hard】[315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
 - 🌟【hard】[493 翻转对](https://leetcode.cn/problems/reverse-pairs/)
 - 🌟【hard】[327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
+- 🌟【easy】[剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 
 ## 模拟、规律
 
@@ -333,11 +368,30 @@
 - 🌟【medium】[21 任务调度器](https://leetcode.cn/problems/task-scheduler/) 模拟推断
 - 🌟【easy】[461 汉明距离【easy】](https://leetcode.cn/problems/hamming-distance/) 规律、模拟
 - 🌟【hard】[1411 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid/)
+- 🌟【easy】[剑指 Offer 61. 扑克牌中的顺子](https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/) 规律题
+- 🌟【hard】[剑指 Offer 43. 1～n 整数中 1 出现的次数](https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/) 规律题
+- 🌟【easy】[剑指 Offer 62. 圆圈中最后剩下的数字](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/) 规律题、约瑟夫环、直接背结论
+- 🌟【medium】[剑指 Offer 60. n个骰子的点数](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/) 动态规划
 
-## 栈、队列
+## 栈
 
 - 【easy】 [20 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
 - 【easy】 [933 最近的请求次数](https://leetcode.cn/problems/number-of-recent-calls/)
+- 🌟【easy】[20 有效的括号](https://leetcode.cn/problems/valid-parentheses/) 栈
+- 🌟【easy】[232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+- 🌟【easy】[225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
+- 🌟【medium】[剑指 Offer 31. 栈的压入、弹出序列](https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/) 栈
+
+### 单调栈
+
+- 🌟【hard】[84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
+- 🌟【hard】[85 最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+- 🌟【medium】[739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+
+## 队列
+
+- 🌟【easy】[232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+- 🌟【easy】[225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
 
 ## 链表
 
@@ -370,6 +424,7 @@
 - 🌟【medium】[11 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 双指针
 - 🌟【medium】[438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/) 双指针、滑动窗口
 - 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
+- 🌟【easy】[剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/) 双指针、滑动窗口
 
 ## 树、深度优先、广度优先
 
@@ -398,6 +453,7 @@
 - [🌟【easy】235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
 - 🌟【medium】[剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
 - 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
+- 🌟【medium】[剑指 Offer 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 二叉搜索树、后序遍历
 
 ## 堆
 
@@ -462,6 +518,8 @@
 - 🌟【medium】[313 超级丑数](https://leetcode.cn/problems/super-ugly-number/)
 - 🌟【medium】[256 粉刷房子](https://leetcode.cn/problems/paint-house/)
 - 🌟【hard】[312. 戳气球](https://leetcode.cn/problems/burst-balloons/) 开区间动态规划
+- 🌟【medium】[剑指 Offer 14- I. 剪绳子](https://leetcode.cn/problems/jian-sheng-zi-lcof/) 动态规划
+- 🌟【medium】[剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -4583,6 +4641,51 @@ var maxProfit = function(prices) {
 
 动态规划
 
+
+容易理解的版本
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var maxProfit = function(prices) {
+  const n = prices.length
+  const lDp = new Array(n).fill(0)
+  const rDp = new Array(n).fill(0)
+
+  // 从左往右扫描，记录 0~i 范围内操作一次的最大收益
+  let lMin = prices[0]
+  let lProMax = 0
+  for(let i=1;i<n;i++) {
+    if(prices[i] > lMin) {
+      lProMax = Math.max(prices[i] - lMin, lProMax)
+    } else {
+      lMin = prices[i]
+    }
+    lDp[i] = lProMax
+  }
+
+  // 从右往左扫描，记录 i~n-1 范围内操作一次的最大收益
+  let rMax = prices[n-1]
+  let rProMax = 0
+  for(let i=n-2;i>=0;i--) {
+    if(prices[i] < rMax) {
+      rProMax = Math.max(rMax - prices[i], rProMax)
+    } else {
+      rMax = prices[i]
+    }
+    rDp[i] = rProMax
+  }
+
+  let maxPro = 0
+  // 最多操作两次，而且两次不能重叠，所以上面 lDp 和 rDp 刚好互补
+  // 从0~n做一次扫描，记录左右操作的和，取最大值即为结果
+  for(let i = 0; i < n; i++) {
+    maxPro = Math.max(lDp[i] + rDp[i], maxPro)
+  }
+  return maxPro
+};
+```
+
 超高效版本
 
 ```js
@@ -5309,6 +5412,35 @@ var canFinish = function(numCourses, prerequisites) {
 
 ```
 
+## 🌟😻✔ 151. 颠倒字符串中的单词【medium】
+
+[ref](https://leetcode.cn/problems/reverse-words-in-a-string/)
+
+```js
+var reverseWords = function(s) {
+    return s.trim().split(/\s+/).reverse().join(' ');
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var reverseWords = function(s) {
+  const arr = s.split(' ').reverse()
+  let res = ''
+  for(let i=0;i<arr.length;i++) {
+    if(arr[i] !== '') {
+      if(!res.length) {
+        res = arr[i]
+      } else {
+        res += (' ' + arr[i])
+      }
+    }
+  }
+  return res
+};
+```
+
 ## ??🌟😻✔ 152 乘积最大子数组【medium】
 
 [ref](https://leetcode.cn/problems/maximum-product-subarray/)
@@ -5526,11 +5658,73 @@ var largestNumber = function(nums) {
 };
 ```
 
-## 😻✔ 188 买卖股票的最佳时机 IV【hard】
+## 🌟😻✔ 186. 翻转字符串里的单词 II【medium】
+
+[ref](https://leetcode.cn/problems/reverse-words-in-a-string-ii/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var reverseWords = function(s) {
+  function reverse(i, j) {
+    while(i < j) {
+      const t = s[i]
+      s[i] = s[j]
+      s[j] = t
+      i++
+      j--
+    }
+  }
+
+  reverse(0, s.length - 1)
+
+  let l = 0
+
+  for(let i=0;i<s.length;i++) {
+    if(s[i] === ' ') {
+      reverse(l, i - 1)
+      l = i + 1
+    }
+    if(i === s.length - 1) {
+      reverse(l, i)
+    }
+  }
+
+  return s
+};
+```
+
+## ??🌟😻✔ 188 买卖股票的最佳时机 IV【hard】
 
 [ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/)
 
 动态规划
+
+```js
+// 时间复杂度：O(KN)
+// 空间复杂度：O(KN)
+var maxProfit = function(k, prices) {
+  if(prices.length < 2) return 0
+  const n = prices.length
+  const buyDp = new Array(n).fill(0).map(_ => new Array(k + 1).fill(0))
+  const sellDp = new Array(n).fill(0).map(_ => new Array(k + 1).fill(0))
+  for(let j=0;j<=k;j++) {
+    buyDp[0][j] = -prices[0]
+  }
+  for(let i=1;i<n;i++) {
+    buyDp[i][0] = Math.max(-prices[i], buyDp[i-1][0])
+  }
+
+  for(let i = 1; i < n; i++) {
+    for(let j = 1; j <= k; j++) {
+      buyDp[i][j] = Math.max(buyDp[i-1][j], -prices[i] + sellDp[i-1][j])
+      sellDp[i][j] = Math.max(sellDp[i-1][j], prices[i] + buyDp[i-1][j-1])
+    }
+  }
+
+  return Math.max(...sellDp[n-1])
+};
+```
 
 ```js
 // 时间复杂度：O(n*k)
@@ -5556,6 +5750,47 @@ var maxProfit = function(k, prices) {
 [ref](https://leetcode.cn/problems/rotate-array/)
 
 数组轮转、数组原地操作、规律题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var rotate = function(nums, k) {
+  const n = nums.length
+  k = k % n
+  reverse(nums, 0, n - 1)
+  reverse(nums, 0, k - 1)
+  reverse(nums, k, n - 1)
+};
+
+function reverse(arr, i, j) {
+  while(i < j) {
+    const t = arr[i]
+    arr[i] = arr[j]
+    arr[j] = t
+    i++
+    j--
+  }
+}
+
+// n = 8, k = 5
+// [1,2,3,4,5,6,7,8] 
+// [6,2,3,4,5,1,7,8] 
+// [3,2,6,4,5,1,7,8] 
+// [8,2,6,4,5,1,7,3] 
+// [5,2,6,4,8,1,7,3] 
+// [2,5,6,4,8,1,7,3] 
+// [7,5,6,4,8,1,2,3] 
+// [4,5,6,7,8,1,2,3] 
+
+// n = 7, k = 3
+// [1,2,3,4,5,6,7] 
+// [4,2,3,1,5,6,7] 
+// [7,2,3,1,5,6,4] 
+// [3,2,7,1,5,6,4] 
+// [6,2,7,1,5,3,4] 
+// [2,6,7,1,5,3,4] 
+// [5,6,7,1,2,3,4] 
+```
 
 ```js
 // 时间复杂度：O(N)
@@ -7627,7 +7862,7 @@ var lengthOfLIS = function(nums) {
 };
 ```
 
-## 😻✔ 309 最佳买卖股票时机含冷冻期【medium】
+## ??🌟😻✔ 309 最佳买卖股票时机含冷冻期【medium】
 
 [ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 
@@ -10709,6 +10944,69 @@ CQueue.prototype.toOut = function() {
 }
 ```
 
+## ?🌟😻✔ 剑指 Offer 10- II. 青蛙跳台阶问题【easy】
+
+[ref](https://leetcode.cn/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
+
+动态规划、斐波拉契数列
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numWays = function(n) {
+  if(n === 1 || n === 0) return 1
+  let prev1 = 1
+  let prev2 = 2
+  for(let i=3;i<=n;i++) {
+    const prev1Bf = prev1
+    const prev2Bf = prev2
+    prev2 = (prev1Bf + prev2Bf) % 1000000007
+    prev1 = prev2Bf
+  }
+  return prev2
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer 12. 矩阵中的路径【medium】
+
+[ref](https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/)
+
+回溯
+
+```js
+// 时间复杂度：O(MN*3**L) L=word.length
+// 空间复杂度：O(MN)
+var exist = function(board, word) {
+  const m = board.length
+  const n = board[0].length
+
+  function find(i, j, startIndex) {
+    if(i < 0 || i >= m || j < 0 || j >= n || used[i][j] || board[i][j] !== word[startIndex]) return false
+    if(startIndex === word.length - 1) return true
+    used[i][j] = true
+
+    const res = find(i + 1, j, startIndex + 1)
+      || find(i - 1, j, startIndex + 1)
+      || find(i, j + 1, startIndex + 1)
+      || find(i, j - 1, startIndex + 1)
+
+    used[i][j] = false
+    return res
+  }
+
+  const used = new Array(m).fill(false).map(_ =>  new Array(n).fill(false))
+
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(find(i, j, 0)) return true
+    }
+  }
+
+  return false
+};
+```
+
 ## 😻✔ 剑指 Offer 13. 机器人的运动范围【medium】
 
 [ref](https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
@@ -10790,6 +11088,26 @@ function sum(i, j) {
 }
 ```
 
+## ??🌟😻✔ 剑指 Offer 14- I. 剪绳子【medium】
+
+[ref](https://leetcode.cn/problems/jian-sheng-zi-lcof/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 时间复杂度：O(N)
+var cuttingRope = function(n) {
+  const dp = new Array(n + 1).fill(1)
+  for(let i=2;i<=n;i++) {
+    for(let j=1;j<i;j++) {
+      dp[i] = Math.max(dp[i], j * (i - j), j * dp[i - j])
+    }
+  }
+  return dp[n]
+};
+```
+
 ## ??🌟😻✔ 剑指 Offer 19. 正则表达式匹配【hard】
 
 [ref](https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/)
@@ -10828,6 +11146,31 @@ var isMatch = function(s, p) {
   return dp[m][n]
 };
 
+```
+
+## 😻✔ 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面【easy】
+
+[ref](https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var exchange = function(nums) {
+  let l = 0
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] % 2 === 1) {
+      swap(nums, l, i)
+      l++
+    }
+  }
+  return nums
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
 ```
 
 ## 😻✔ 剑指 Offer 22 链表中倒数第k个节点【easy】
@@ -10939,6 +11282,78 @@ var spiralOrder = function(matrix) {
 // 5 6  7  8
 // 9 10 11 12
 // m=4 n=3
+```
+
+## ??🌟😻✔ 剑指 Offer 31. 栈的压入、弹出序列【medium】
+
+[ref](https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)
+
+栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var validateStackSequences = function(pushed, popped) {
+  let j=0
+  const stack = []
+  for(let i=0;i<pushed.length;i++) {
+    stack.push(pushed[i])
+    while(stack.length && stack[stack.length - 1] === popped[j]) {
+      stack.pop()
+      j++
+    }
+  }
+  return stack.length === 0
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer 32 - I. 从上到下打印二叉树【medium】
+
+[ref](https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/)
+
+BFS
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var levelOrder = function(root) {
+  if(!root) return []
+  const q = [root]
+  const res = []
+  while(q.length) {
+    const t = q.shift()
+    res.push(t.val)
+    if(t.left) q.push(t.left)
+    if(t.right) q.push(t.right)
+  }
+  return res
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 33. 二叉搜索树的后序遍历序列【medium】
+
+[ref](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
+
+二叉搜索树、后序遍历
+
+```js
+var verifyPostorder = function(postorder) {
+  function verify(i, j) {
+    if(i >= j) return true
+    let l = i
+    while(postorder[l] < postorder[j]) {
+      l++
+    }
+    let leftMaxI = l
+    while(postorder[l] > postorder[j]) {
+      l++
+    }
+    return l === j && verify(i, leftMaxI - 1) && verify(leftMaxI, j - 1)
+  }
+
+  return verify(0, postorder.length - 1)
+};
 ```
 
 ## ?? 🌟😻✔ 剑指 Offer 36. 二叉搜索树与双向链表【medium】
@@ -11061,6 +11476,25 @@ function redeserialize(datalist, indObj) {
 }
 ```
 
+## ✔ 剑指 Offer 39. 数组中出现次数超过一半的数字【easy】
+
+[ref](https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
+
+哈希表
+
+```js
+var majorityElement = function(nums) {
+  const n = nums.length
+  const map = new Map()
+  for(let i=0;i<nums.length;i++) {
+    map.set(nums[i], map.has(nums[i]) ? map.get(nums[i]) + 1 : 1)
+    if(map.get(nums[i]) > n / 2) {
+      return nums[i]
+    }
+  }
+};
+```
+
 ## 🌟😻✔ 剑指 Offer 40 最小的k个数【medium】
 
 [ref](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
@@ -11090,6 +11524,59 @@ function swap(arr, i, j) {
 }
 ```
 
+## ??🌟😻✔ 剑指 Offer 43. 1～n 整数中 1 出现的次数【hard】
+
+[ref](https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/submissions/)
+
+规律题
+
+```js
+// 规律题
+// 参考 https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/jin-hu-shuang-bai-javascriptai-hao-zhe-by-tang_cha/
+var countDigitOne = function(n) {
+  const prevArr = [0, 1, 20, 300, 4000, 50000, 600000, 7000000, 80000000, 900000000]
+  let count = 0
+  let str = '' + n
+  const len = str.length
+  let i=0
+  while(i < len) {
+    const targetNum = str[i]
+    const numCount = len - i - 1
+    count += targetNum * prevArr[numCount]
+    if(targetNum === '1') {
+      count++
+      if(i !== len - 1) {
+        count += Number(str.slice(i + 1))
+      }
+    }
+    if(targetNum > 1) {
+      count += 10 ** numCount
+    }
+    i++
+  }
+  return count
+};
+
+// // 位数        1 的个数               总1的个数
+// 0               0                       0 (0~0)
+// 1               1                       1  => (0~9)
+// 2               11 + 8 => 19            20 => 10 ^ 1 + 10 * 1 (0~99)
+// 3               100 + 20*9              300 => 10 ^ 2 + 10 * 20 (0~999)
+// 4                                       4000 => 10 ^ 3 + 10 * 300 (0~9999)
+// 5                                       50000 => 10 ^ 4 + 10 * 4000 (0~99999)
+// 6                                       600000 => 10 ^ 5 + 10 * 50000 (0~999999)
+// 7                                       7000000 => 10 ^ 6 + 10 * 550000
+// 8                                       80000000 => 10 ^ 6 + 10 * 550000
+// 9                                       900000000 => 10 ^ 6 + 10 * 550000
+
+// 54321
+// 0-50000
+// 0-4000
+// 0-300
+// 0-20
+// 0-1
+```
+
 ## ?🌟😻✔ 剑指 Offer 45 把数组排成最小的数【medium】
 
 [ref](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
@@ -11100,6 +11587,69 @@ function swap(arr, i, j) {
 var minNumber = function(nums) {
   return nums.sort((x, y) => ('' + x + y) - ('' + y + x)).join('')
 };
+```
+
+## 🌟😻✔ 剑指 Offer 45 把数组排成最小的数【medium】
+
+[ref](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(1) 直接在给定的 grid 上进行的更改，没有创建额外的空间
+var maxValue = function(grid) {
+  if(grid.length === 0 || grid[0].length === 0) return 0
+  const m = grid.length
+  const n = grid[0].length
+  for(let i=1;i<m;i++) {
+    grid[i][0] += grid[i - 1][0]
+  }
+  for(let j=1;j<n;j++) {
+    grid[0][j] += grid[0][j - 1]
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      grid[i][j] += Math.max(grid[i-1][j], grid[i][j - 1])
+    }
+  }
+  return grid[m-1][n-1]
+};
+```
+
+## ??🌟😻✔ 剑指 Offer 49. 丑数【medium】
+
+[ref](https://leetcode.cn/problems/chou-shu-lcof/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var nthUglyNumber = function(n) {
+  const dp = new Array(n + 1).fill(1)
+  let l2 = 1, l3 = 1, l5 = 1
+  for(let i=2;i<=n;i++) {
+    const p2 = dp[l2] * 2
+    const p3 = dp[l3] * 3
+    const p5 = dp[l5] * 5
+    const min = Math.min(p2, p3, p5)
+    if(min === p2) {
+      l2++
+    }
+
+    if(min === p3) {
+      l3++
+    }
+
+    if(min === p5) {
+      l5++
+    }
+    dp[i] = min
+  }
+  return dp[n]
+};
+
 ```
 
 ## ✔ 剑指 Offer 50 第一个只出现一次的字符【easy】
@@ -11215,6 +11765,296 @@ var missingNumber = function(nums) {
     }
   }
   return nums.length
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 56 - I. 数组中数字出现的次数【medium】
+
+[ref](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
+
+二进制、与或非、位运算
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var singleNumbers = function(nums) {
+  let x = 0, a, b, first = 1;
+  for(let val of nums) {
+    x ^= val; // 对原数组所有数进行异或操作，最后的 x = a ^ b，  a 和 b 是要返回的两个数字
+  }
+
+  // 从 x 中任意找一个1，因为 1 代表着是 a 和 b 肯定不同的位置，为了方便，找到最低位的 1 即可
+  while((first & x) === 0) {
+    first <<= 1;
+  }
+
+  // 然后通过 first 对原数组进行分组，二进制串中在这一位为 1 或 0 的分为两组，因此相同数字肯定被分到一组，a 和 b 肯定一个是1， 一个是0，所以被分到两组
+  for(let val of nums) {
+    if(val & first) {
+      // 这里最终异或完是 val 跟 a 的从最右侧开始数，一样长度的数，都是一样的
+      a ^= val;
+    } else {
+      // 这里最终异或完是 val 跟 a 的从最右侧开始数，一样长度的数，除了最低位1那里不一样，右侧都一样的
+      b ^= val;
+    }
+  }
+  return [a, b];
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 56 - II. 数组中数字出现的次数 II【medium】
+
+[ref](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
+
+二进制、位运算、规律题
+
+```js
+// ref https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/solution/jian-zhi-56-shu-zu-zhong-shu-zi-chu-xian-rgt7/
+// 利用三个相同数的特性，在二进制表示中，每一位上三个相同数的二进制位对3取余数必为0
+// 把所有数的二进制位相加，所有位对3取余数，则得到落单的那个数的二进制表示，再转换为十进制即可
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var singleNumber = function(nums) {
+  const dp = new Array(32).fill(0)
+  for(let i = 0; i < nums.length; i++) {
+    let j = 0
+    while(nums[i]) {
+      dp[j] += nums[i] % 2
+      nums[i] >>= 1
+      j++
+    }
+  }
+  let res = 0
+  for(let i = 0; i < 32; i++) {
+    res += (1 << i) * (dp[i] % 3)
+  }
+  return res
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 57 - II. 和为s的连续正数序列【easy】
+
+[ref](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/)
+
+双指针、滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findContinuousSequence = function(target) {
+  let l = 1, r = 2
+  let sum = 1
+  const max = Math.ceil(target / 2)
+  const res = []
+  while(r <= max) {
+    sum += r
+    while(l < r && sum > target) {
+      sum -= l
+      l++
+    }
+    if(sum === target) {
+      const t = []
+      for(let j=l;j<=r;j++) {
+        t.push(j)
+      }
+      res.push(t)
+    }
+    r++
+  }
+  return res
+};
+```
+
+
+## ✔ 剑指 Offer 58 - I. 翻转单词顺序【easy】
+
+[ref](https://leetcode.cn/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var reverseWords = function(s) {
+  let res = ''
+  const arr = s.split(' ').reverse()
+  for(let str of arr) {
+    if(str !== '') {
+      res = res + str + ' '
+    }
+  }
+  return res.slice(0, res.length - 1)
+};
+```
+
+## ✔ 剑指 Offer 58 - II. 左旋转字符串【easy】
+
+[ref](https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+
+```js
+var reverseLeftWords = function(s, n) {
+  return s.slice(n) + s.slice(0, n)
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 60. n个骰子的点数【medium】
+
+[ref](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var dicesProbability = function(n) {
+  let dp = [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6]
+  for(let i=2;i<=n;i++) {
+    const tmp = new Array(5 * i + 1).fill(0)
+    for(let j = 0; j < dp.length; j++) {
+      for(let k = 0; k < 6; k++) {
+        tmp[j + k] += dp[j] / 6
+      }
+    }
+    dp = tmp
+  }
+
+  return dp
+};
+```
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var dicesProbability = function(n) {
+  const min = n
+  const max = 6 * n
+  const dp = new Array(n + 1).fill(0).map(_ => new Array(max + 1).fill(0))
+  dp[1][1] = 1 / 6
+  dp[1][2] = 1 / 6
+  dp[1][3] = 1 / 6
+  dp[1][4] = 1 / 6
+  dp[1][5] = 1 / 6
+  dp[1][6] = 1 / 6
+
+  for(let i=2;i<=n;i++) {
+    const iMin = i
+    const iMax = i * 6
+    for(let j = iMin; j <= iMax; j++) {
+      dp[i][j] = 
+          (j - 1 >= i - 1 && j - 1 <= 6 * (i - 1) ? dp[i - 1][j - 1] : 0)
+        + (j - 2 >= i - 1 && j - 2 <= 6 * (i - 1) ? dp[i - 1][j - 2] : 0)
+        + (j - 3 >= i - 1 && j - 3 <= 6 * (i - 1) ? dp[i - 1][j - 3] : 0)
+        + (j - 4 >= i - 1 && j - 4 <= 6 * (i - 1) ? dp[i - 1][j - 4] : 0)
+        + (j - 5 >= i - 1 && j - 5 <= 6 * (i - 1) ? dp[i - 1][j - 5] : 0)
+        + (j - 6 >= i - 1 && j - 6 <= 6 * (i - 1) ? dp[i - 1][j - 6] : 0)
+      dp[i][j] *= 1 / 6
+    }
+  }
+
+  return dp[n].slice(min, max + 1)
+};
+
+//    1        2         3      4       5      6
+// [0.16667,0.16667,0.16667,0.16667,0.16667,0.16667]
+
+// 2                   3               4              5            6          7       8         9      10     11     12
+// f(1) * f(1)   f(1) * f(2)      f(1) * f(3)    f(1) * f(4)     1  5       1   6   2   6
+//               f(2) * f(1)      f(2) * f(2)    f(2) * f(3)     2  4       2   5   3   5
+//                                f(3) * f(1)    f(3) * f(2)     3  3       3   4   4   4
+//                                               f(4) * f(1)     4  2       4   3   5   3
+//                                                               5  1       5   2   6   2
+//                                                                          6   1
+
+// 3          4             5      
+// 1*1*1     1*1*2        1 1 3
+//                        1 2 2
+
+// f(n,s)=f(n-1,s-1)+f(n-1,s-2)+f(n-1,s-3)+f(n-1,s-4)+f(n-1,s-5)+f(n-1,s-6)
+```
+
+## ? 🌟😻✔ 剑指 Offer 61. 扑克牌中的顺子【easy】
+
+[ref](https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/)
+
+```js
+var isStraight = function(nums) {
+  nums.sort((a, b) => a - b)
+  let kingCount = 0
+  let l = 0
+  while(l < nums.length && nums[l] === 0) {
+    kingCount++
+    l++
+  }
+  if(kingCount === 5) return true
+  let prev = nums[l]
+  l++
+  while(l < nums.length) {
+    if(nums[l] === prev) {
+      return false
+    } else if(nums[l] - prev - 1 <= kingCount) {
+      kingCount -= nums[l] - prev - 1
+      prev = nums[l]
+      l++
+    } else {
+      return false
+    }
+  }
+  return true
+};
+```
+
+## ??? 🌟😻✔ 剑指 Offer 62. 圆圈中最后剩下的数字【easy】
+
+[ref](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)
+
+规律题、约瑟夫环、直接背结论
+
+- [约瑟夫环——公式法（递推公式）](https://blog.csdn.net/u011500062/article/details/72855826)
+
+```js
+// 约瑟夫环、根据结果反推、直接背递推公式
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var lastRemaining = function(n, m) {
+  let ans = 0
+  for(let i=2;i<=n;i++) {
+    ans = (ans + m) % i
+  }
+  return ans
+};
+
+// 0 1 2 3 4 5 m = 6   3
+// 0 1 2 3 4           3
+// 1 2 3 4             2
+// 3 4 1               0
+// 3 4                 0
+// 3                   0
+
+// nextX = (x + m) % nextLen
+// 0
+// 0 = (0 + 6) % 2
+// 0 = (0 + 6) % 3
+// 2 = (0 + 6) % 4
+// 3 = (2 + 6) % 5
+// 3 = (3 + 6) % 6
+
+```
+
+## 🌟😻✔ 剑指 Offer 63 股票的最大利润【easy】
+
+[ref](https://leetcode.cn/problems/gu-piao-de-zui-da-li-run-lcof/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxProfit = function(prices) {
+  if(prices.length < 2) return 0
+  let max = 0
+  let min = prices[0]
+  for(let i=1;i<prices.length;i++) {
+    max = Math.max(max, prices[i] - min)
+
+    if(prices[i] < min) {
+      min = prices[i]
+    }
+  }
+  return max
 };
 ```
 
