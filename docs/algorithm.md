@@ -7,6 +7,7 @@
 - [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
 - [路西法](https://github.com/azl397985856/leetcode)
 - [Krahets](https://leetcode.cn/u/jyd/)
+- [全栈潇晨](https://xiaochen1024.com/)
 
 # 大佬面试技巧
 
@@ -16,6 +17,17 @@
 - [LeetCode平台值得做的题目分类列表与参考难度](https://zhuanlan.zhihu.com/p/453897447)
 
 # 刷题日记
+
+- 20220808
+  - [🌟【medium】剑指 Offer 68 - II. 二叉树的最近公共祖先](https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/) 二叉树、二叉树的最近公共祖先
+  - [🌟【easy】剑指 Offer 55 - I. 二叉树的深度](https://leetcode.cn/problems/er-cha-shu-de-shen-du-lcof/) 二叉树、二叉树的深度
+  - [🌟【easy】剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/) 二叉搜索树
+  - ?? [🌟【easy】剑指 Offer 65. 不用加减乘除做加法](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 二进制、位运算
+  - [🌟【easy】剑指 Offer 55 - II. 平衡二叉树](https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/) 二叉树、平衡二叉树
+  - ? [🌟【medium】剑指 Offer 34. 二叉树中和为某一值的路径](https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/) 二叉树、二叉树路径和
+  - [🌟【medium】437. 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 二叉树、二叉树中的路径和
+  - [【easy】剑指 Offer 57. 和为s的两个数字](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/) 双指针
+  - ? [🌟【easy】剑指 Offer 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/) 二叉树、对称二叉树
 
 - 20220807(11)
   - [🌟【medium】剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
@@ -305,6 +317,7 @@
 ## 二进制相关
 - 🌟【medium】[剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
 - 🌟【medium】[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
+- 🌟【easy】[剑指 Offer 65. 不用加减乘除做加法](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 二进制、位运算、规律题
 
 ## 数字大小题
 
@@ -443,6 +456,7 @@
 - 🌟【medium】[438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/) 双指针、滑动窗口
 - 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
 - 🌟【easy】[剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/) 双指针、滑动窗口
+- 【easy】[剑指 Offer 57. 和为s的两个数字](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/) 双指针
 
 ## 树、深度优先、广度优先
 
@@ -466,6 +480,11 @@
 - 🌟【hard】[剑指 Offer 37. 序列化二叉树](https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/) 二叉树
 - 🌟【medium】[剑指 Offer 32 - III. 从上到下打印二叉树 III](https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/) 二叉树、BFS
 - 🌟【easy】[剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/) 二叉树、BFS
+- 🌟【medium】[剑指 Offer 68 - II. 二叉树的最近公共祖先](https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/) 二叉树、二叉树的最近公共祖先
+- 🌟【easy】[剑指 Offer 55 - II. 平衡二叉树](https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/) 二叉树、平衡二叉树
+- 🌟【medium】[剑指 Offer 34. 二叉树中和为某一值的路径](https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/) 二叉树、二叉树路径和
+- 🌟【medium】[437. 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 二叉树、二叉树中的路径和
+- 🌟【easy】[剑指 Offer 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/) 二叉树、对称二叉树
 
 ### 二叉搜索树
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
@@ -11291,6 +11310,29 @@ function isSub(A, B) {
 }
 ```
 
+## ?🌟😻✔ 剑指 Offer 28. 对称的二叉树【easy】
+
+[ref](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/)
+
+二叉树、对称二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var isSymmetric = function(root) {
+  if(!root) return true
+  return compare(root.left, root.right)  
+};
+
+function compare(lnode, rnode) {
+  if(!lnode && !rnode) return true
+  if(lnode && rnode && lnode.val === rnode.val) {
+    return compare(lnode.left, rnode.right) && compare(lnode.right, rnode.left)
+  }
+  return false
+}
+```
+
 ## ?🌟😻✔ 剑指 Offer 29. 顺时针打印矩阵【medium】
 
 [ref](https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
@@ -11468,6 +11510,35 @@ var verifyPostorder = function(postorder) {
   }
 
   return verify(0, postorder.length - 1)
+};
+```
+
+## ? 🌟😻✔ 剑指 Offer 34. 二叉树中和为某一值的路径【medium】
+
+[ref](https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
+
+二叉树、二叉树路径和
+
+```js
+// 时间复杂度：O(N^2)
+// 时间复杂度：O(N)
+var pathSum = function(root, target) {
+  if(!root) return []
+  const res = []
+  function dfs(node, path, sum) {
+    if(!node.left && !node.right) {
+      if(target === sum + node.val ) {
+        res.push([...path, node.val])
+      }
+      return
+    }
+    path.push(node.val)
+    node.left && dfs(node.left, path, sum + node.val)
+    node.right && dfs(node.right, path, sum + node.val)
+    path.pop()
+  }
+  dfs(root, [], 0)
+  return res
 };
 ```
 
@@ -12026,6 +12097,55 @@ var kthLargest = function(root, k) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer 55 - I. 二叉树的深度【easy】
+
+[ref](https://leetcode.cn/problems/er-cha-shu-de-shen-du-lcof/)
+
+二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var maxDepth = function(root) {
+  let max = 0
+  function dfs(node, h) {
+    if(!node) {
+      max = Math.max(max, h)
+      return
+    }
+    dfs(node.left, h + 1)
+    dfs(node.right, h + 1)
+  }
+  dfs(root, 0)
+  return max
+};
+```
+
+## 🌟😻✔ 剑指 Offer 55 - II. 平衡二叉树【easy】
+
+[ref](https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/)
+
+二叉树、平衡二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var isBalanced = function(root) {
+  let is = true
+  function dfs(node) {
+    if(!node) return 0
+    const lh = dfs(node.left)
+    const rh = dfs(node.right)
+    if(Math.abs(lh - rh) > 1) {
+      is = false
+    }
+    return Math.max(lh, rh) + 1
+  }
+  dfs(root)
+  return is
+};
+```
+
 ## ?? 🌟😻✔ 剑指 Offer 56 - I. 数组中数字出现的次数【medium】
 
 [ref](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
@@ -12087,6 +12207,31 @@ var singleNumber = function(nums) {
     res += (1 << i) * (dp[i] % 3)
   }
   return res
+};
+```
+
+## ✔ 剑指 Offer 57. 和为s的两个数字【easy】
+
+[ref](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/)
+
+双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var twoSum = function(nums, target) {
+  let l = 0, r = nums.length - 1
+  while(l < r) {
+    const s = nums[l] + nums[r]
+    if(s === target) {
+      break
+    } else if(s > target) {
+      r--
+    } else {
+      l++
+    }
+  }
+  return [nums[l], nums[r]]
 };
 ```
 
@@ -12467,6 +12612,39 @@ var maxProfit = function(prices) {
 };
 ```
 
+## ??🌟😻✔ 剑指 Offer 65. 不用加减乘除做加法【easy】
+
+[ref](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/)
+
+二进制、位运算
+
+参考
+
+- [面试题65. 不用加减乘除做加法（位运算，清晰图解）](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/)
+
+```js
+// 时间复杂度：O(1)
+// 空间复杂度：O(1)
+var add = function(a, b) {
+  while(b !== 0) {
+    const t = (a & b) << 1
+    a ^= b
+    b = t
+  }
+  return a
+};
+// a=3
+// 11
+// b=2
+// 10
+
+// a=100
+// b=1
+
+// a=0
+// b=101
+```
+
 ## 🌟😻✔ 剑指 Offer 66. 构建乘积数组【medium】
 
 [ref](https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/)
@@ -12490,6 +12668,53 @@ var constructArr = function(nums) {
   }
   return rp
 };
+```
+
+## 🌟😻✔ 剑指 Offer 68 - I. 二叉搜索树的最近公共祖先【easy】
+
+[ref](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/submissions/)
+
+二叉搜索树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var lowestCommonAncestor = function(root, p, q) {
+  while(true) {
+    if(root.val < p.val && root.val < q.val) {
+      root = root.right
+    } else if(root.val > p.val && root.val > q.val) {
+      root = root.left
+    } else {
+      return root
+    }
+  }
+};
+```
+
+## 🌟😻✔ 剑指 Offer 68 - II. 二叉树的最近公共祖先【easy】
+
+[ref](https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var lowestCommonAncestor = function(root, p, q) {
+  let target
+  function dfs(node) {
+    if(!node) return false
+    const isTarget = node === p || node === q
+    let lfind = dfs(node.left)
+    let rfind = dfs(node.right)
+    if(lfind && rfind || isTarget && (lfind || rfind)) {
+      target = node
+    }
+    return lfind || rfind || isTarget
+  }
+
+  dfs(root)
+  return target
+};  
 ```
 
 ## 🌟😻✔ 面试题 02.05 链表求和【medium】
