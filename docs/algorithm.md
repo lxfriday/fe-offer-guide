@@ -18,7 +18,19 @@
 
 # 刷题日记
 
-- 20220808
+- 20220809
+  - ?? [🌟【medium】剑指 Offer 67. 把字符串转换成整数](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/) 字符互转为整数
+  - ? [🌟【medium】剑指 Offer 64. 求1+2+…+n](https://leetcode.cn/problems/qiu-12n-lcof/) 求和、非常规求和
+  - [🌟【easy】剑指 Offer 27. 二叉树的镜像](https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/) 二叉树、二叉树镜像构造
+  - ??? [🌟【medium】剑指 Offer 14- II. 剪绳子 II](https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/) 整数拆分、取模
+  - ?? [🌟【medium】剑指 Offer 16. 数值的整数次方](https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/) 快速幂、规律题
+  - ?? [🌟【easy】剑指 Offer 52. 两个链表的第一个公共节点](https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/) 链表、链表公共节点
+  - ?? [🌟【easy】剑指 Offer 15. 二进制中1的个数](https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/) 二进制、二进制运算
+  - ?? [🌟【hard】233. 数字 1 的个数](https://leetcode.cn/problems/number-of-digit-one/) 规律、数学规律
+  - ?? [🌟【medium】剑指 Offer 44. 数字序列中某一位的数字](https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/) 规律、数学规律
+  - ?? [🌟【medium】剑指 Offer 20. 表示数值的字符串](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/) 规律、模拟
+
+- 20220808(9)
   - [🌟【medium】剑指 Offer 68 - II. 二叉树的最近公共祖先](https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/) 二叉树、二叉树的最近公共祖先
   - [🌟【easy】剑指 Offer 55 - I. 二叉树的深度](https://leetcode.cn/problems/er-cha-shu-de-shen-du-lcof/) 二叉树、二叉树的深度
   - [🌟【easy】剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/) 二叉搜索树
@@ -28,7 +40,6 @@
   - [🌟【medium】437. 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 二叉树、二叉树中的路径和
   - [【easy】剑指 Offer 57. 和为s的两个数字](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/) 双指针
   - ? [🌟【easy】剑指 Offer 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/) 二叉树、对称二叉树
-
 - 20220807(11)
   - [🌟【medium】剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
   - [🌟【medium】剑指 Offer 66. 构建乘积数组](https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/) 数组题
@@ -318,6 +329,7 @@
 - 🌟【medium】[剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
 - 🌟【medium】[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
 - 🌟【easy】[剑指 Offer 65. 不用加减乘除做加法](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 二进制、位运算、规律题
+- 🌟【easy】[剑指 Offer 15. 二进制中1的个数](https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/) 二进制、二进制运算
 
 ## 数字大小题
 
@@ -353,6 +365,7 @@
 - 🌟【medium】[22 括号生成](https://leetcode.cn/problems/generate-parentheses/) 回溯
 - 🌟【hard】[32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
 - 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
+- 🌟【medium】[剑指 Offer 67. 把字符串转换成整数](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/) 字符互转为整数
 
 回文串相关
 
@@ -400,6 +413,11 @@
 - 🌟【hard】[剑指 Offer 43. 1～n 整数中 1 出现的次数](https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/) 规律题
 - 🌟【easy】[剑指 Offer 62. 圆圈中最后剩下的数字](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/) 规律题、约瑟夫环、直接背结论
 - 🌟【medium】[剑指 Offer 60. n个骰子的点数](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/) 动态规划
+- ??? 🌟【medium】[剑指 Offer 14- II. 剪绳子 II](https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/) 整数拆分、取模
+- 🌟【medium】[剑指 Offer 16. 数值的整数次方](https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/) 快速幂、规律题
+- 🌟【medium】[剑指 Offer 64. 求1+2+…+n](https://leetcode.cn/problems/qiu-12n-lcof/) 求和、非常规求和
+- 🌟【medium】[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/) 规律、数学规律
+- 🌟【medium】[剑指 Offer 20. 表示数值的字符串](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/) 规律、模拟
 
 ## 栈
 
@@ -438,6 +456,7 @@
 - 🌟【easy】[234 回文链表](https://leetcode.cn/problems/palindrome-linked-list/) 快慢指针、链表
 - 【easy】[剑指 Offer 18. 删除链表的节点](https://leetcode.cn/problems/shan-chu-lian-biao-de-jie-dian-lcof/) 链表
 - 🌟【medium】[剑指 Offer 35. 复杂链表的复制](https://leetcode.cn/problems/fu-za-lian-biao-de-fu-zhi-lcof/) 链表
+- 🌟【easy】[剑指 Offer 52. 两个链表的第一个公共节点](https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/) 链表、链表公共节点
 
 ## 集合
 
@@ -485,6 +504,7 @@
 - 🌟【medium】[剑指 Offer 34. 二叉树中和为某一值的路径](https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/) 二叉树、二叉树路径和
 - 🌟【medium】[437. 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 二叉树、二叉树中的路径和
 - 🌟【easy】[剑指 Offer 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/) 二叉树、对称二叉树
+- 🌟【easy】[剑指 Offer 27. 二叉树的镜像](https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/) 二叉树、二叉树镜像构造
 
 ### 二叉搜索树
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
@@ -1928,7 +1948,7 @@ var reverse = function(x) {
 };
 ```
 
-## 🌟😻✔ 8 字符串转换整数 (atoi)【medium】
+## ?? 🌟😻✔ 8 字符串转换整数 (atoi)【medium】
 
 [ref](https://leetcode.cn/problems/string-to-integer-atoi/)
 
@@ -8349,7 +8369,21 @@ var countBits = function(n) {
 
 [ref](https://leetcode.cn/problems/integer-break/)
 
-动态规划
+动态规划、整数拆分
+
+关联 [剑指 Offer 14- I. 剪绳子](#🌟😻✔-剑指-offer-14-i-剪绳子【medium】)
+
+```js
+var cuttingRope = function(n) {
+  if(n <= 3) return n - 1
+  let res = 1
+  while(n > 4) {
+    res *= 3
+    n -= 3
+  }
+  return res * n
+};
+```
 
 ```js
 // 时间复杂度：O(N^2)
@@ -11132,9 +11166,35 @@ function sum(i, j) {
 
 [ref](https://leetcode.cn/problems/jian-sheng-zi-lcof/)
 
-动态规划
+动态规划、数学规律
 
 ```js
+var cuttingRope = function(n) {
+  if(n <= 3) return n - 1
+  let res = 1
+  while(n > 4) {
+    res *= 3
+    n -= 3
+  }
+  return res * n
+};
+```
+
+```js
+// 数学规律解法
+// 时间复杂度：O(1)
+// 时间复杂度：O(1)
+var cuttingRope = function(n) {
+  if(n <= 3) return n - 1
+  const a = Math.floor(n / 3), b = n % 3
+  if(b === 0) return 3 ** a
+  if(b === 1) return (3 ** (a - 1)) * 4
+  return (3 ** a) * 2
+};
+```
+
+```js
+// 动态规划思路
 // 时间复杂度：O(N^2)
 // 时间复杂度：O(N)
 var cuttingRope = function(n) {
@@ -11147,6 +11207,97 @@ var cuttingRope = function(n) {
   return dp[n]
 };
 ```
+
+## ???🌟😻✔ 剑指 Offer 14- II. 剪绳子 II【medium】
+
+[ref](https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/)
+
+数学规律
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var cuttingRope = function(n) {
+  const mod = 1000000007
+  if(n <= 3) return n - 1
+  let res = 1
+  while(n > 4) {
+    res = (res * 3) % mod
+    n -= 3
+  }
+  return (res * n) % mod
+};
+
+// 10 => 3 3 4 => 36
+// 9  => 3 3 3 => 27
+// 8  => 3 3 2 => 18
+// 7  => 3 4 => 12
+// 6  => 3 3 => 9
+// 5  => 3 2 => 6
+// 4  => 3 1 or 2 2 => 4
+// 3  => 2 1 => 2
+// 2  => 1 1 => 1
+
+```
+
+## ??🌟😻✔ 剑指 Offer 15. 二进制中1的个数【easy】
+
+[ref](https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/submissions/)
+
+二进制、二进制运算
+
+```js
+// 循环检查每一位上1的个数
+// 时间复杂度：O(K) k=32
+// 空间复杂度：O(1)
+var hammingWeight = function(n) {
+  let count = 0
+  for(let i=0;i<32;i++) {
+    if(n & (1 << i)) count++
+  }
+  return count
+};
+// 1 << 32 === 1
+```
+
+```js
+// 循环检查每一位上1的个数
+// 时间复杂度：O(logN) logN <= 32
+// 空间复杂度：O(1)
+var hammingWeight = function(n) {
+  let count = 0
+  // 每循环一次都会清理掉从右往左的第一个1
+  while(n) {
+    n &= n - 1
+    count++
+  }
+  return count
+};
+```
+
+## ??🌟😻✔ 剑指 Offer 16. 数值的整数次方【medium】
+
+[ref](https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)
+
+快速幂、规律题
+
+```js
+// 快速幂
+// 时间复杂度：O(logN)
+// 空间复杂度：O(logN)
+var myPow = function(x, n) {
+  function pow(x, n) {
+    if(n === 0) return 1
+    if(n === 1) return x
+    const y = pow(x, Math.floor(n / 2))
+    const res =  y * y * (n % 2 === 0 ? 1 : x)
+    return res
+  }
+  return n < 0? 1 / pow(x, -n): pow(x, n)
+};
+
+```
+
 
 ## ✔ 剑指 Offer 18. 删除链表的节点【easy】
 
@@ -11212,6 +11363,83 @@ var isMatch = function(s, p) {
   return dp[m][n]
 };
 
+```
+
+## ?? 🌟😻✔ 剑指 Offer 20. 表示数值的字符串【medium】
+
+[ref](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)
+
+模拟、规律
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isNumber = function(s) {
+  // 去除首尾空格，之后不要再让我看到空格了啊，看到反手就是false
+  s = s.trim().toLowerCase()
+  if(!s.length) return false
+  // 根据 e 直接拆分
+  const sSplit = s.split('e')
+  // 只有一个元素，那就不是科学计数法
+  if(sSplit.length === 1) {
+    return checkLeft(sSplit[0])
+  } else if(sSplit.length === 2) {
+    // 有两个元素，那可能是科学计数法
+    return checkLeft(sSplit[0]) && checkRight(sSplit[1])
+  }
+  // 反手 false
+  return false
+};
+
+// 检测e左侧部分
+function checkLeft(s) {
+  if(!s.length) return false
+  let i=0
+  let hasDot = false
+  // 去除首正负号，之后不要让我看到符号了啊
+  if(s[0] === '+' || s[0] === '-') {
+    s = s.slice(1)
+    // 好小子，难道只有符号没数字？
+    if(!s.length) return false
+  }
+  while(i<s.length) {
+    if(s[i] === '.') {
+      // 难不成有几个 '.'?
+      // 难不成s === '.'?
+      if(hasDot || s.length === 1) return false
+      hasDot = true
+      i++
+    // 我只要数字，别的我统统不要
+    } else if(s[i] !== ' ' && s[i] >= 0 && s[i] <= 9) {
+      i++
+    } else {
+      return false
+    }
+  }
+  return true
+}
+
+// 检测整数部分
+function checkRight(s) {
+  if(!s.length) return false
+  let i = 0
+  // 去除首正负号，之后不要让我看到符号了啊
+  if(s[0] === '+' || s[0] === '-') {
+    s = s.slice(1)
+    // 好小子，难道只有符号没数字？
+    if(!s.length) return false
+  }
+  while(i<s.length) {
+    // 思路清晰，我只要数字，别来其他幺蛾子
+    // ' ' == 0 这点要注意，得排除
+    if(s[i] !== ' ' && s[i] >= 0 && s[i] <= 9) {
+      i++
+    } else {
+      return false
+    }
+  }
+  return true
+}
 ```
 
 ## 😻✔ 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面【easy】
@@ -11308,6 +11536,33 @@ function isSub(A, B) {
   if(A.val !== B.val) return false
   return isSub(A.left, B.left) && isSub(A.right, B.right)
 }
+```
+
+## 🌟😻✔ 剑指 Offer 27. 二叉树的镜像【easy】
+
+[ref]()https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/
+
+二叉树、镜像二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var mirrorTree = function(root) {
+  if(!root) return null
+  function create(node1, node2) {
+    if(node1.left) {
+      node2.right = new TreeNode(node1.left.val)
+      create(node1.left, node2.right)
+    }
+    if(node1.right) {
+      node2.left = new TreeNode(node1.right.val)
+      create(node1.right, node2.left)
+    }
+  }
+  const newRoot = new TreeNode(root.val)
+  create(root, newRoot)
+  return newRoot
+};
 ```
 
 ## ?🌟😻✔ 剑指 Offer 28. 对称的二叉树【easy】
@@ -11842,6 +12097,36 @@ var countDigitOne = function(n) {
 // 0-1
 ```
 
+## ??🌟😻✔ 剑指 Offer 44. 数字序列中某一位的数字【medium】
+
+[ref](https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
+
+规律题、数学规律
+
+```js
+// 时间复杂度：O(logN)  logN 是目标数字 fullnum 的位数 
+// 空间复杂度：O(logN)
+var findNthDigit = function(n) {
+  n++
+  let count = 1
+  // 位数
+  let k = 1
+  while(count + k * 9 * 10 ** (k - 1) < n) {
+    count += k * 9 * 10 ** (k - 1)
+    k++
+  }
+  n -= count
+  // 对应位数的首个数字
+  const targetFullNum = 10 ** (k - 1) + Math.floor((n - 1) / k)
+  n -= Math.floor((n - 1) / k) * k
+  return targetFullNum.toString()[n - 1]
+};
+// 1 0-9 10 => 10
+// 2 10-99 2*9*10 => 180
+// 3 100-999 3*9*100 => 2700
+
+```
+
 ## ?🌟😻✔ 剑指 Offer 45 把数组排成最小的数【medium】
 
 [ref](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
@@ -11992,6 +12277,26 @@ var reversePairs = function(nums) {
 
   mergeSort(nums, 0, nums.length - 1)
   return total
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer 52. 两个链表的第一个公共节点【easy】
+
+[ref](https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
+
+链表、链表公共节点
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var getIntersectionNode = function(headA, headB) {
+  let pA = headA  
+  let pB = headB
+  while(pA !== pB) {
+    pA = pA ? pA.next : headB
+    pB = pB ? pB.next : headA
+  }
+  return pA
 };
 ```
 
@@ -12612,6 +12917,22 @@ var maxProfit = function(prices) {
 };
 ```
 
+## ? 🌟😻✔ 剑指 Offer 64. 求1+2+…+n【medium】
+
+[ref](https://leetcode.cn/problems/qiu-12n-lcof/)
+
+求和、非常规求和
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var sumNums = function(n) {
+  let res = n
+  n && (res += sumNums(n - 1))
+  return res 
+};
+```
+
 ## ??🌟😻✔ 剑指 Offer 65. 不用加减乘除做加法【easy】
 
 [ref](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/)
@@ -12668,6 +12989,46 @@ var constructArr = function(nums) {
   }
   return rp
 };
+```
+
+## ??🌟😻✔ 剑指 Offer 67. 把字符串转换成整数【medium】
+
+[ref](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/)
+
+字符串、字符串转换为整数
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var strToInt = function(str) {
+  const max = 2 ** 31 - 1
+  const min = -(2 ** 31)
+  while(str.length && str[0] === ' ') {
+    str = str.slice(1)
+  }
+  if(str[0] === '+' || str[0] === '-' || (str[0] >=0 && str[0] <= 9)) {
+    let neg = 1
+    let i=0
+    if(str[i] === '+') {
+      neg *= 1
+      i++
+    } else if(str[i] === '-') {
+      neg *= -1
+      i++
+    }
+    if(str[i] === '+' || str[i] === '-') return 0
+    let num = 0
+    while(str[i] !== ' ' && str[i] >=0 && str[i] <= 9) {
+      if((10 * num + neg * Number(str[i])) >= max) return max
+      if((10 * num + neg * Number(str[i])) <= min) return min
+      num = 10 * num + neg * Number(str[i])
+      i++
+    }
+    return num
+  }
+  return 0
+};
+
 ```
 
 ## 🌟😻✔ 剑指 Offer 68 - I. 二叉搜索树的最近公共祖先【easy】
