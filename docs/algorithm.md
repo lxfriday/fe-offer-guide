@@ -18,6 +18,14 @@
 
 # 刷题日记
 
+- 20220811(7)
+  - [🌟【easy】108. 将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/) 二叉搜索树、平衡二叉树
+  - ?? [🌟【hard】639. 解码方法 II](https://leetcode.cn/problems/decode-ways-ii/) 枚举、模拟、字符串
+  - ? [🌟【medium】116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/) 二叉树、规律题
+  - [🌟【easy】125. 验证回文串](https://leetcode.cn/problems/valid-palindrome/) 回文串
+  - ?? [🌟【medium】150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
+  - [🌟【easy】163. 缺失的区间](https://leetcode.cn/problems/missing-ranges/) 区间
+  - ? [🌟【easy】171. Excel 表列序号](https://leetcode.cn/problems/excel-sheet-column-number/) 进制转换
 - 20220810(11)
   - [🌟【medium】640. 求解方程](https://leetcode.cn/problems/solve-the-equation/) 模拟
   - [🌟【easy】350. 两个数组的交集 II](https://leetcode.cn/problems/intersection-of-two-arrays-ii/) 哈希表、map
@@ -381,6 +389,9 @@
 - 🌟【medium】[38. 外观数列](https://leetcode.cn/problems/count-and-say/) 字符串、模拟
 - 🌟【medium】[91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
 - 🌟【easy】[1417. 重新格式化字符串](https://leetcode.cn/problems/reformat-the-string/) 字符串题
+- 🌟【hard】[639. 解码方法 II](https://leetcode.cn/problems/decode-ways-ii/) 枚举、模拟、字符串
+- 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
+- 🌟【easy】[171. Excel 表列序号](https://leetcode.cn/problems/excel-sheet-column-number/) 进制转换
 
 回文串相关
 
@@ -389,6 +400,7 @@
 - 🌟【medium】[516 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)
 - 🌟【medium】[647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
 - 🌟【hard】[336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
+- 🌟【easy】[125. 验证回文串](https://leetcode.cn/problems/valid-palindrome/) 回文串
 
 ## 数组题 
 
@@ -414,6 +426,7 @@
 - 🌟【hard】[327 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) 归并排序
 - 🌟【easy】[剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 - 🌟【medium】[剑指 Offer 66. 构建乘积数组](https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/) 数组题
+- 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
 
 ## 模拟、规律
 
@@ -436,6 +449,8 @@
 - 🌟【medium】[640. 求解方程](https://leetcode.cn/problems/solve-the-equation/) 模拟
 - 🌟【hard】[149. 直线上最多的点数](https://leetcode.cn/problems/max-points-on-a-line/) 数学题、模拟
 - 🌟【medium】[38. 外观数列](https://leetcode.cn/problems/count-and-say/) 字符串、模拟
+- 🌟【hard】[639. 解码方法 II](https://leetcode.cn/problems/decode-ways-ii/) 枚举、模拟、字符串
+- 🌟【medium】[116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/) 二叉树、规律题
 
 ## 栈
 
@@ -445,6 +460,7 @@
 - 🌟【easy】[232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
 - 🌟【easy】[225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
 - 🌟【medium】[剑指 Offer 31. 栈的压入、弹出序列](https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/) 栈
+- 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
 
 ### 单调栈
 
@@ -526,6 +542,7 @@
 - 🌟【medium】[437. 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 二叉树、二叉树中的路径和
 - 🌟【easy】[剑指 Offer 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/) 二叉树、对称二叉树
 - 🌟【easy】[剑指 Offer 27. 二叉树的镜像](https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/) 二叉树、二叉树镜像构造
+- 🌟【medium】[116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/) 二叉树、规律题
 
 ### 二叉搜索树
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
@@ -535,6 +552,7 @@
 - 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 - 🌟【medium】[剑指 Offer 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 二叉搜索树、后序遍历
 - 🌟【easy】[剑指 Offer 54. 二叉搜索树的第k大节点](https://leetcode.cn/problems/fu-za-lian-biao-de-fu-zhi-lcof/) 二叉搜索树
+- 🌟【easy】[108. 将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/) 二叉搜索树、平衡二叉树
 
 ## 堆
 
@@ -4620,6 +4638,36 @@ var buildTree = function(preorder, inorder) {
 
 ```
 
+## 🌟😻✔ 108. 将有序数组转换为二叉搜索树【easy】
+
+[ref](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)
+
+二叉搜索树、平衡二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+// 时间复杂度：O(N)
+// 空间复杂度：O(logN)
+var sortedArrayToBST = function(nums) {
+  function toBST(l, r) {
+    if(l > r) return null
+    const mid = (l + r) >> 1
+    const node = new TreeNode(nums[mid])
+    node.left = toBST(l, mid - 1)
+    node.right = toBST(mid + 1, r)
+    return node
+  }
+  return toBST(0, nums.length - 1)
+};
+```
+
 ## 😻✔ 111 二叉树的最小深度【easy】
 
 [ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
@@ -4717,6 +4765,62 @@ var flatten = function(root) {
   } else {
     root.right = right
   }
+  return root
+};
+```
+
+## ?🌟😻✔ 116. 填充每个节点的下一个右侧节点指针【medium】
+
+[ref](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/)
+
+二叉树、规律题
+
+充分利用已经构建出来的 next 指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var connect = function(root) {
+  let left1 = root
+  while(left1) {
+    let head = left1
+    while(head && head.left) {
+      head.left.next = head.right
+      if(head.next) head.right.next = head.next.left
+      head = head.next
+    }
+    left1 = left1.left
+  }
+  return root
+};
+```
+
+```js
+/**
+ * // Definition for a Node.
+ * function Node(val, left, right, next) {
+ *    this.val = val === undefined ? null : val;
+ *    this.left = left === undefined ? null : left;
+ *    this.right = right === undefined ? null : right;
+ *    this.next = next === undefined ? null : next;
+ * };
+ */
+
+// 时间复杂度：O(N) N 节点个数
+// 时间复杂度：O(logN)
+var connect = function(root) {
+  function dfs(node1) {
+    if(!node1) return
+    if(node1.left) {
+      node1.left.next = node1.right
+      dfs(node1.left)
+    }
+    if(node1.right) {
+      node1.right.next = node1.next? node1.next.left : null
+      dfs(node1.right)
+    }
+  }
+  dfs(root)
   return root
 };
 ```
@@ -4989,6 +5093,38 @@ var maxPathSum = function(root) {
   return max
 };
 
+```
+
+## ✔ 125. 验证回文串【easy】
+
+[ref](https://leetcode.cn/problems/valid-palindrome/)
+
+回文串
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isPalindrome = function(s) {
+  s = s.toLowerCase()
+  let l = 0
+  let r = s.length - 1
+  while(l < r) {
+    while(l < r && !isValid(s[l])) {
+      l++
+    }
+    while(l < r && !isValid(s[r])) {
+      r--
+    }
+    if(s[l] !== s[r]) return false
+    l++
+    r--
+  }
+  return true
+};
+
+function isValid(c) {
+  return c !== ' ' && (c >= '0' && c <= '9' || c >= 'a' && c <= 'z')
+}
 ```
 
 ## ?🌟😻✔ 128 最长连续序列【medium】
@@ -5720,6 +5856,132 @@ var maxPoints = function(points) {
     }
   }
   return max
+};
+```
+
+## ??🌟😻✔ 150. 逆波兰表达式求值【medium】
+
+[ref](https://leetcode.cn/problems/evaluate-reverse-polish-notation/)
+
+栈、数组题、字符串、逆波兰表达式、逆波兰
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var evalRPN = function(tokens) {
+  const stack = []
+  for(let i=0;i<tokens.length;i++) {
+    const c = tokens[i]
+    if(c === '+' || c === '-' || c === '*' || c === '/') {
+      const n1 = stack.pop()
+      const n2 = stack.pop()
+      let res = 0
+      if(c === '+') res = n2 + n1
+      if(c === '-') res = n2 - n1
+      if(c === '*') res = n2 * n1
+      if(c === '/') res = parseInt(n2 / n1)
+      stack.push(res)
+    } else {
+      stack.push(+c)
+    }
+  }
+  return stack[0]
+};
+```
+
+## 🌟😻✔ 163. 缺失的区间【easy】
+
+[ref](https://leetcode.cn/problems/missing-ranges/)
+
+区间
+
+```js
+// 添加哨兵
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMissingRanges = function(nums, lower, upper) {
+  nums.unshift(lower - 1)
+  nums.push(upper + 1)
+  const res = []
+  for(let i=1;i<nums.length;i++) {
+    if(nums[i] - nums[i - 1] === 2) {
+      res.push(`${nums[i] - 1}`)
+    }
+    if(nums[i] - nums[i - 1] > 2) {
+      res.push(`${nums[i-1] + 1}->${nums[i] - 1}`)
+    }
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMissingRanges = function(nums, lower, upper) {
+  if(!nums.length) return [gen(lower, upper)]
+  const n = nums.length
+  const res = []
+  if(nums[0] > lower) {
+    res.push(gen(lower, nums[0] - 1))
+  }
+  let i = 1
+  while(i < n) {
+    while(i < n && nums[i] === nums[i - 1] + 1) i++
+    if(i < n) {
+      res.push(gen(nums[i - 1] + 1, nums[i] - 1))
+    }
+    i++
+  }
+  if(upper > nums[n - 1]) {
+    res.push(gen(nums[n - 1] + 1, upper))
+  }
+  return res
+};
+
+function gen(x, y) {
+  if(x === y) return `${x}`
+  return `${x}->${y}`
+}
+```
+
+## ?🌟😻✔ 171. Excel 表列序号【easy】
+
+[ref](https://leetcode.cn/problems/excel-sheet-column-number/submissions/)
+
+进制转换、类进制转换
+
+```js
+// 时间复杂度：O(N) N=columnTitle.length
+// 空间复杂度：O(1)
+var titleToNumber = function(columnTitle) {
+  let res = 0
+  for(let i=0;i<columnTitle.length;i++) {
+    const num = columnTitle[i].charCodeAt(0) - 'A'.charCodeAt(0) + 1
+    res = 26 * res + num 
+  }
+  return res
+};
+```
+
+
+常规思路
+```js
+var titleToNumber = function(columnTitle) {
+  const m = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:10,K:11,L:12,M:13,N:14,O:15,P:16,Q:17,R:18,S:19,T:20,U:21,V:22,W:23,X:24,Y:25,Z:26}
+  const len = columnTitle.length
+  let count = 0
+  let k = 1
+  while(k<len) {
+    count += 26 ** k
+    k++
+  }
+  for(let i=0;i<columnTitle.length;i++) {
+    const a = m[columnTitle[i]]
+    const l = len - i - 1
+    count += (a - 1) * (26 ** l)
+  }
+  return count + 1
 };
 ```
 
@@ -10497,6 +10759,67 @@ class MaxHeap {
   }
 }
 
+```
+
+## ??🌟😻✔ 639. 解码方法 II【hard】
+
+[ref](https://leetcode.cn/problems/decode-ways-ii/)
+
+枚举、模拟
+
+```js
+// 动态规划
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var numDecodings = function(s) {
+  // '0*'  '0'
+  if(s[0] === '0') return 0
+  const mod = 10**9 + 7
+  const n = s.length
+  const dp = new Array(n).fill(0)
+  if(s[0] === '*') {
+    dp[0] = 9
+  } else {
+    dp[0] = 1
+  }
+  for(let i = 1; i < n; i++) {
+    // 当前位是 0 的时候检测字符串是否合法
+    if(s[i] === '0' && s[i-1] !== '1' && s[i-1] !== '2' && s[i-1] !== '*') return 0
+    if(s[i] === '*') {
+      // * 不表示组合位的时候
+      dp[i] = dp[i-1] * 9 % mod
+      // * 和前面数字组合
+      if(s[i-1] === '*') {
+        dp[i] = (dp[i] + (i - 2 >= 0 ? dp[i - 2] : 1) * 15) % mod
+      } else {
+        if(s[i-1] === '1') {
+          dp[i] = (dp[i] + (i-2>=0? dp[i - 2]:1) * 9) % mod
+        } else if(s[i-1] === '2') {
+          dp[i] = (dp[i] + (i-2>=0? dp[i - 2]:1) * 6) % mod
+        }
+      }
+    } else {
+      // 当前位不和前面数字组合的时候
+      if(s[i] >= '1') {
+        dp[i] = dp[i-1]
+      }
+      // 和前面的数字组合的情况
+      if(s[i-1] === '*') {
+        if(s[i] >= '0' && s[i] <= '6') {
+          dp[i] = (dp[i] + (i-2 >= 0 ? dp[i-2] : 1) * 2) % mod
+        } else {
+          dp[i] = (dp[i] + (i-2 >= 0 ? dp[i-2] : 1) * 1) % mod
+        }
+      } else {
+        // s[i] s[i-1] 都不是 *，两位数字组合起来在 [1,0] 内的时候
+        if(s[i - 1] !== '0' && (s[i - 1] * 10 + s[i] * 1 <= 26)) {
+          dp[i] = (dp[i] + (i-2 >= 0 ? dp[i-2] : 1) * 1) % mod
+        }
+      }
+    }
+  }
+  return dp[n - 1]
+};
 ```
 
 ## 🌟😻✔ 640. 求解方程【medium】
