@@ -18,6 +18,18 @@
 
 # 刷题日记
 
+- 20220810(11)
+  - [🌟【medium】640. 求解方程](https://leetcode.cn/problems/solve-the-equation/) 模拟
+  - [🌟【easy】350. 两个数组的交集 II](https://leetcode.cn/problems/intersection-of-two-arrays-ii/) 哈希表、map
+  - ? [🌟【medium】138. 复制带随机指针的链表](https://leetcode.cn/problems/copy-list-with-random-pointer/) 链表、复制链表
+  - ?? [🌟【medium】395. 至少有 K 个重复字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-least-k-repeating-characters/) 分治法
+  - [【easy】242. 有效的字母异位词](https://leetcode.cn/problems/valid-anagram/) 哈希表
+  - [🌟【medium】130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/) 矩阵、深度优先搜索
+  - ?? [🌟【hard】149. 直线上最多的点数](https://leetcode.cn/problems/max-points-on-a-line/) 数学题、模拟
+  - [🌟【medium】38. 外观数列](https://leetcode.cn/problems/count-and-say/) 字符串、模拟
+  - ?? [🌟【medium】91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
+  - [🌟【easy】1417. 重新格式化字符串](https://leetcode.cn/problems/reformat-the-string/) 字符串题
+  - ? [🌟【medium】378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 - 20220809(10)
   - ?? [🌟【medium】剑指 Offer 67. 把字符串转换成整数](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/) 字符互转为整数
   - ? [🌟【medium】剑指 Offer 64. 求1+2+…+n](https://leetcode.cn/problems/qiu-12n-lcof/) 求和、非常规求和
@@ -365,6 +377,10 @@
 - 🌟【hard】[32 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/) 动态规划
 - 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
 - 🌟【medium】[剑指 Offer 67. 把字符串转换成整数](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/) 字符互转为整数
+- 🌟【medium】[640. 求解方程](https://leetcode.cn/problems/solve-the-equation/) 模拟
+- 🌟【medium】[38. 外观数列](https://leetcode.cn/problems/count-and-say/) 字符串、模拟
+- 🌟【medium】[91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
+- 🌟【easy】[1417. 重新格式化字符串](https://leetcode.cn/problems/reformat-the-string/) 字符串题
 
 回文串相关
 
@@ -417,6 +433,9 @@
 - 🌟【medium】[剑指 Offer 64. 求1+2+…+n](https://leetcode.cn/problems/qiu-12n-lcof/) 求和、非常规求和
 - 🌟【medium】[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/) 规律、数学规律
 - 🌟【medium】[剑指 Offer 20. 表示数值的字符串](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/) 规律、模拟
+- 🌟【medium】[640. 求解方程](https://leetcode.cn/problems/solve-the-equation/) 模拟
+- 🌟【hard】[149. 直线上最多的点数](https://leetcode.cn/problems/max-points-on-a-line/) 数学题、模拟
+- 🌟【medium】[38. 外观数列](https://leetcode.cn/problems/count-and-say/) 字符串、模拟
 
 ## 栈
 
@@ -476,6 +495,9 @@
 - 🌟【easy】[剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/) 双指针、滑动窗口
 - 【easy】[剑指 Offer 57. 和为s的两个数字](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/) 双指针
 
+## 矩阵、深度优先、广度优先
+- 🌟【medium】[130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/) 矩阵、深度优先搜索
+
 ## 树、深度优先、广度优先
 
 - 【easy】 [94 二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
@@ -521,6 +543,7 @@
 - 【easy】 [226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - 【easy】 [347 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 - 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
+- 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 
 ## 图、深度优先、广度优先
 
@@ -543,6 +566,8 @@
 
 - 【easy】[100 相同的树](https://leetcode.cn/problems/same-tree/)
 - 【easy】[226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+- ?? 🌟【medium】[395. 至少有 K 个重复字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-least-k-repeating-characters/) 分治法
+- 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 
 ## 动态规划
 
@@ -579,6 +604,7 @@
 - 🌟【hard】[312. 戳气球](https://leetcode.cn/problems/burst-balloons/) 开区间动态规划
 - 🌟【medium】[剑指 Offer 14- I. 剪绳子](https://leetcode.cn/problems/jian-sheng-zi-lcof/) 动态规划
 - 🌟【medium】[剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
+- 🌟【medium】[91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -625,6 +651,7 @@
 - 🌟【medium】[162 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
 - 🌟【easy】[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/) 二分搜索
 - 🌟【medium】[剑指 Offer 53 - I. 在排序数组中查找数字 I](https://leetcode.cn/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/) 二分搜索
+- 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 
 ## 排序算法的应用
 
@@ -2940,6 +2967,36 @@ var solveSudoku = function(board) {
 };
 ```
 
+## 🌟😻✔ 38. 外观数列【medium】
+
+[ref](https://leetcode.cn/problems/count-and-say/)
+
+字符串、模拟
+
+```js
+// 时间复杂度：O(N*M) M 为生成字符串的最大长度
+// 空间复杂度：O(1)
+var countAndSay = function(n) {
+  let numStr = '1'
+  n--
+  while(n > 0) {
+    let tStr = ''
+    let l=0
+    while(l < numStr.length) {
+      let r = l + 1
+      while(r < numStr.length && numStr[r] === numStr[l]) {
+        r++
+      }
+      tStr += (r-l) + numStr[l]
+      l=r
+    }
+    numStr = tStr
+    n--
+  }
+  return numStr
+};
+```
+
 ## ?🌟😻✔ 41 缺失的第一个正数【hard】
 
 [ref](https://leetcode.cn/problems/first-missing-positive/)
@@ -4178,6 +4235,91 @@ var subsetsWithDup = function(nums) {
 };
 ```
 
+## ?? 🌟😻✔ 91. 解码方法【medium】
+
+[ref](https://leetcode.cn/problems/decode-ways/)
+
+动态规划、模拟、字符串题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numDecodings = function(s) {
+  if(s[0] === '0') return 0
+  const n = s.length
+  let v1 = 0, v2 = 1
+  for(let i = 1; i < n; i++) {
+    if(s[i] === '0' && s[i - 1] !== '1' && s[i - 1] !== '2') return 0
+    const pv1 = v1, pv2 = v2
+    let nextV2 = 0
+    if(s[i] !== '0') {
+      nextV2 += pv2
+    }
+    if(s[i - 1] !== '0' && (s[i-1] * 10 + s[i] * 1 <= 26)) {
+      nextV2 += (i - 2 >= 0 ? pv1 : 1)
+    }
+    v1 = pv2
+    v2 = nextV2
+  }
+  return v2
+};
+
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var numDecodings = function(s) {
+  if(s[0] === '0') return 0
+  const n = s.length
+  const dp = new Array(n).fill(0)
+  dp[0]=1
+  for(let i = 1; i < n; i++) {
+    if(s[i] === '0' && s[i - 1] !== '1' && s[i - 1] !== '2') return 0
+    if(s[i] !== '0') {
+      dp[i] += dp[i - 1]
+    }
+    if(s[i - 1] !== '0' && (s[i-1] * 10 + s[i] * 1 <= 26)) {
+      dp[i] += (i - 2 >= 0 ? dp[i - 2] : 1)
+    }
+  }
+  return dp[n - 1]
+};
+```
+
+of
+
+```js
+var numDecodings = function(s) {
+  if(s[0] === '0') return 0
+  const n = s.length
+  const dp = new Array(n).fill(0)
+  dp[0]=1
+  for(let i = 1; i < n; i++) {
+    if(s[i] === '0') {
+      if(s[i - 1] === '1' || s[i - 1] === '2') {
+        dp[i] = (i - 2 >= 0 ? dp[i - 2] : 1)
+      } else {
+        return 0
+      }
+    }else if(s[i] > 6) {
+      if(s[i-1] === '1') {
+        dp[i] = dp[i - 1] + (i - 2 >= 0 ? dp[i - 2] : 1)
+      } else {
+        dp[i] = dp[i - 1]
+      }
+    } else {
+      if(s[i-1] === '1' || s[i-1] === '2') {
+        dp[i] = dp[i - 1] + (i - 2 >= 0 ? dp[i - 2] : 1)
+      } else {
+        dp[i] = dp[i - 1]
+      }
+    }
+  }
+  return dp[n - 1]
+};
+```
+
 ## 🌟😻✔ 93 复原 IP 地址【medium】
 
 [ref](https://leetcode.cn/problems/restore-ip-addresses/)
@@ -4879,6 +5021,44 @@ var longestConsecutive = function(nums) {
 };
 ```
 
+## 🌟😻✔ 130. 被围绕的区域【medium】
+
+[ref](https://leetcode.cn/problems/surrounded-regions/)
+
+矩阵、深度优先搜索
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var solve = function(board) {
+  const m = board.length, n = board[0].length
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(i === 0 || i === m - 1 || j === 0 || j === n - 1) {
+        find(i, j)
+      }
+    }
+  }
+  function find(i, j) {
+    if(i >= 0 && i < m && j >= 0 && j < n && !used[i][j] && board[i][j] === "O") {
+      used[i][j] = true
+      find(i - 1, j)
+      find(i + 1, j)
+      find(i, j - 1)
+      find(i, j + 1)
+    }
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(!used[i][j] && board[i][j] === "O") {
+        board[i][j] = 'X'
+      }
+    }
+  }
+};
+```
+
 ## ?🌟😻✔ 131 分割回文串【medium】
 
 [ref](https://leetcode.cn/problems/palindrome-partitioning/)
@@ -5116,6 +5296,88 @@ var singleNumber = function(nums) {
     res ^= nums[i]
   }
   return res
+};
+```
+
+## 🌟😻✔ 138. 复制带随机指针的链表【medium】
+
+[ref](https://leetcode.cn/problems/copy-list-with-random-pointer/)
+
+链表、复制链表
+
+```js
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var copyRandomList = function(head) {
+  let tHead = head
+  while(tHead) {
+    const node = new Node(tHead.val)
+    const next = tHead.next
+    tHead.next = node
+    node.next = next
+    tHead = next
+  }
+  tHead = head
+  while(tHead) {
+    const copyNode = tHead.next
+    const next = tHead.next.next
+    copyNode.random = tHead.random? tHead.random.next : null
+    tHead = next
+  }
+  tHead = head
+  const myHead = new Node()
+  let tMyHead = myHead
+  while(tHead) {
+    const copyNode = tHead.next
+    const next = tHead.next.next
+    tMyHead.next = copyNode
+    tMyHead = tMyHead.next
+    tHead.next = next
+    tHead = tHead.next
+  }
+  return myHead.next
+};
+```
+
+or
+
+```js
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var copyRandomList = function(head) {
+  if(!head) return null
+  const map = new Map()
+  function copy(node1) {
+    if(map.has(node1)) return map.get(node1)
+    const node = new Node(node1.val)
+    map.set(node1, node)
+    if(node1.next) {
+      node.next = copy(node1.next)
+    }
+    if(node1.random) {
+      node.random = copy(node1.random)
+    }
+    return node
+  }
+  return copy(head)
 };
 ```
 
@@ -5421,6 +5683,44 @@ function merge(list1, list2) {
   }
   return myHead.next
 }
+```
+
+## ??🌟😻✔ 149. 直线上最多的点数【hard】
+
+[ref](https://leetcode.cn/problems/max-points-on-a-line/)
+
+JS 中因为精度问题，使用哈希表会出现误差，导致统计错误，所以直接使用 3 次扫描
+
+数学题、模拟
+
+```js
+// 时间复杂度：O(N^3)
+// 空间复杂度：O(1)
+var maxPoints = function(points) {
+  if(points.length <= 2) return points.length
+  let max = 0
+  for(let i=0;i<points.length;i++) {
+    for(let j=i+1;j < points.length;j++) {
+      const [x1, y1] = points[i]
+      const [x2, y2] = points[j]
+      let count = 2
+      for(let k=j+1;k < points.length;k++) {
+        const [x3, y3] = points[k]
+        if(x1===x2) {
+          if(x2 === x3) count++
+        } else if(y1===y2) {
+          if(y2 === y3) count++
+        } else {
+          if((y3-y2) / (x3-x2) === (y2-y1) / (x2-x1)) {
+            count++
+          }
+        }
+      }
+      max = Math.max(max, count)
+    }
+  }
+  return max
+};
 ```
 
 ## ??🌟😻✔ 207 课程表【medium】
@@ -7103,6 +7403,29 @@ var canAttendMeetings = function(intervals) {
 };
 ```
 
+## ✔ 242. 有效的字母异位词【easy】
+
+[ref](https://leetcode.cn/problems/valid-anagram/)
+
+哈希表
+
+```js
+// 时间复杂度：O(M+N)
+// 空间复杂度：O(S) S 是字符集 S=26
+var isAnagram = function(s, t) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], map.has(s[i])? map.get(s[i]) + 1 : 1)
+  }
+  for(let i=0;i<t.length;i++) {
+    if(!map.has(t[i]) || map.get(t[i]) === 0) return false
+    map.set(t[i], map.get(t[i]) - 1)
+  }
+  return true
+};
+```
+
+
 ## ?🌟😻✔ 253 会议室 II【medium】
 
 [ref](https://leetcode.cn/problems/meeting-rooms-ii/)
@@ -8552,6 +8875,32 @@ var intersection = function(nums1, nums2) {
 };
 ```
 
+## 🌟😻✔ 350. 两个数组的交集 II【easy】
+
+[ref](https://leetcode.cn/problems/intersection-of-two-arrays-ii/)
+
+哈希表、map
+
+```js
+// 时间复杂度：O(M+N)
+// 空间复杂度：O(min(M, N))
+var intersect = function(nums1, nums2) {
+  if(nums1.length > nums2.length) return intersect(nums2, nums1)
+  const m1 = new Map()
+  for(let i=0;i<nums1.length;i++) {
+    m1.set(nums1[i], m1.has(nums1[i])? m1.get(nums1[i]) + 1:1)
+  }
+  const res = []
+  for(let i=0;i<nums2.length;i++) {
+    if(m1.get(nums2[i])) {
+      res.push(nums2[i])
+      m1.set(nums2[i], m1.get(nums2[i]) - 1)
+    }
+  }
+  return res
+};
+```
+
 ## ??🌟😻✔ 354 俄罗斯套娃信封问题【hard】
 
 [ref](https://leetcode.cn/problems/russian-doll-envelopes/)
@@ -8620,7 +8969,136 @@ var guessNumber = function(n) {
 };
 ```
 
+## ?🌟😻✔ 378. 有序矩阵中第 K 小的元素【medium】
 
+[ref](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/)
+
+分治法、归并排序、优先队列、小顶堆、二分搜索
+
+```js
+// 二分搜索
+// 时间复杂度：O(Nlog(r-l))
+// 空间复杂度：O(1)
+var kthSmallest = function(matrix, k) {
+  const n = matrix.length
+  function countAll(mid) {
+    let i = n - 1, j = 0
+    let count = 0
+    while(i >= 0 && j < n) {
+      if(mid >= matrix[i][j]) {
+        count += i + 1
+        j++
+      } else {
+        i--
+      }
+    }
+    return count >= k
+  }
+  let l = matrix[0][0]
+  let r = matrix[n - 1][n - 1]
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(countAll(mid)) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+```js
+// 归并思路
+// 时间复杂度：O(KN)
+// 空间复杂度：O(1)
+var kthSmallest = function(matrix, k) {
+  let t
+  while(k > 0) {
+    let minIndex = 0
+    let minVal = Number.MAX_SAFE_INTEGER
+    for(let i=0;i<matrix.length;i++) {
+      if(matrix[i].length && matrix[i][0] < minVal) {
+        minIndex = i
+        minVal = matrix[i][0]
+      }
+    }
+    t = matrix[minIndex].shift()
+    k--
+  }
+  return t
+};
+```
+
+小顶堆
+
+```js
+
+// 小顶堆、优先队列
+// 时间复杂度：O(KlogN + N)
+// 空间复杂度：O(N)
+var kthSmallest = function(matrix, k) {
+  const minHeap = new MinHeap()
+  for(let i=0;i<matrix.length;i++) {
+    minHeap.insert(matrix[i])
+  }
+  for(let i=1;i<=k;i++) {
+    const t = minHeap.pop()
+    const ret = t.shift()
+    if(t.length) minHeap.insert(t)
+    if(i===k) return ret
+  }
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.heap.length - 1)
+  }
+  pop(){
+    this.swap(0, this.heap.length - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  shiftUp(i){
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(parentIndex >= 0 && this.heap[i][0] < this.heap[parentIndex][0]) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i){
+    const leftIndex= 2 * i + 1
+    const rightIndex= 2 * i + 2
+    let minIndex = i
+    if(leftIndex < this.heap.length && this.heap[minIndex][0] > this.heap[leftIndex][0]) {
+      minIndex = leftIndex
+    }
+    if(rightIndex < this.heap.length && this.heap[minIndex][0] > this.heap[rightIndex][0]) {
+      minIndex = rightIndex
+    }
+    if(minIndex !== i) {
+      this.swap(i, minIndex)
+      this.shiftDown(minIndex)
+    }
+  }
+  swap(i,j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+}
+```
+
+二分搜索
+
+```js
+
+```
 
 ## ?🌟😻✔ 380 O(1) 时间插入、删除和获取随机元素【medium】
 
@@ -8766,6 +9244,41 @@ function searchEnd(s, i) {
     i++
   }
 }
+```
+
+## ??🌟😻✔ 395. 至少有 K 个重复字符的最长子串【medium】
+
+[ref](https://leetcode.cn/problems/longest-substring-with-at-least-k-repeating-characters/)
+
+分治法
+
+```js
+// 时间复杂度：O(N*W) W 是字符集
+// 空间复杂度：O(W^2)
+var longestSubstring = function(s, k) {
+  if(!s.length) return 0
+  const m = new Map()
+  let kindCount = 0
+  for(let i=0;i<s.length;i++) {
+    m.set(s[i], m.has(s[i])? m.get(s[i]) + 1 : 1)
+    if(m.get(s[i]) === 1) kindCount++
+    if(m.get(s[i]) === k) kindCount--
+  }
+  if(!kindCount) return s.length
+  let max = 0
+  let l = 0
+  for(let i=0;i<s.length;i++) {
+    if(m.get(s[i]) < k) {
+      max = Math.max(longestSubstring(s.slice(l, i), k), max)
+      l = i + 1
+    }
+    if(i === s.length - 1) {
+      max = Math.max(longestSubstring(s.slice(l, i + 1), k), max)
+    }
+  }
+  return max
+};
+
 ```
 
 ## ?🌟😻✔ 400 第 N 位数字【medium】
@@ -9986,6 +10499,60 @@ class MaxHeap {
 
 ```
 
+## 🌟😻✔ 640. 求解方程【medium】
+
+[ref](https://leetcode.cn/problems/solve-the-equation/)
+
+模拟
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var solveEquation = function(equation) {
+  const equationSplit = equation.split('=')
+  const [lxCal, lnumCal] = exact(equationSplit[0])
+  const [rxCal, rnumCal] = exact(equationSplit[1])
+  if(lxCal === rxCal) {
+    if(lnumCal === rnumCal) return 'Infinite solutions'
+    // 无解情况
+    if(lnumCal !== rnumCal) return 'No solution'
+  }
+  return 'x=' + (lnumCal - rnumCal) / (rxCal - lxCal)
+};
+function exact(str) {
+  let i = 0
+  // x 系数和
+  let xCal = 0
+  // 整数和
+  let numCal = 0
+  while(i < str.length) {
+    if(str[i] === 'x') {
+      if(i>0 && str[i-1] === '-') {
+        xCal--
+      } else {
+        xCal++
+      }
+      i++
+    } else if(str[i] >= 0 && str[i] <= 9) {
+      let j=i+1
+      while(j < str.length && str[j] >= 0 && str[j] <= 9) j++
+      let num = +str.slice(i, j)
+      if(i > 0 && str[i - 1] === '-') num = -num
+      if(str[j] === 'x') {
+        xCal += num
+        i=j + 1
+      } else {
+        numCal += num
+        i=j
+      }
+    } else {
+      i++
+    }
+  }
+  return [xCal, numCal]
+}
+```
+
 ## 🌟😻✔ 647 回文子串【medium】
 
 [ref](https://leetcode.cn/problems/palindromic-substrings/)
@@ -10864,6 +11431,42 @@ var numOfWays = function(n) {
 // nf0 = 3*f0 + 2*f1
 // nf1 = 2*f0 + 2*f1
 
+```
+
+## ✔ 1417. 重新格式化字符串【easy】
+
+[ref](https://leetcode.cn/problems/reformat-the-string/)
+
+字符串
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var reformat = function(s) {
+  let str1 = ''
+  let str2 = ''
+  let res = ''
+  for(let i=0;i<s.length;i++) {
+    if(s[i] >= 0 && s[i] <= 9) {
+      str1 += s[i]
+    } else {
+      str2 += s[i]
+    }
+  }
+  if(str1.length < str2.length) {
+    const t = str1
+    str1 = str2
+    str2 = t
+  }
+  if(str1.length - str2.length > 1) return ''
+  let i = 0, j = 0
+  while(i < str1.length) {
+    res += str1[i] + (str2[j]? str2[j] : '')
+    i++
+    j++
+  }
+  return res
+};
 ```
 
 ## ✔ 1446. 连续字符【easy】
