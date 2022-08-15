@@ -19,6 +19,18 @@
 # 刷题日记
 
 - 20220814(11)
+  - [🌟【medium】641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、双端队列
+  - ? [🌟【medium】725. 分隔链表](https://leetcode.cn/problems/split-linked-list-in-parts/) 链表
+  - ? [🌟【medium】280. 摆动排序](https://leetcode.cn/problems/wiggle-sort/) 摆动排序
+  - [🌟【medium】334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
+  - ?? [🌟【medium】300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/) 动态规划、二分搜索
+  - [🌟【easy】387. 字符串中的第一个唯一字符](https://leetcode.cn/problems/first-unique-character-in-a-string/) 哈希表
+  - [🌟【medium】341. 扁平化嵌套列表迭代器](https://leetcode.cn/problems/flatten-nested-list-iterator/) 递归、扁平化数组
+  - ? [🌟【medium】384. 打乱数组](https://leetcode.cn/problems/shuffle-an-array/) 洗牌算法
+  - [🌟【medium】289. 生命游戏](https://leetcode.cn/problems/game-of-life/) 矩阵、原地算法
+  - ? [🌟【hard】354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/) 递增子序列问题、二分搜索
+  - [🌟【medium】340. 至多包含 K 个不同字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-most-k-distinct-characters/) 滑动窗口、字符串
+- 20220814(11)
   - [🌟【easy】1422. 分割字符串的最大得分](https://leetcode.cn/problems/maximum-score-after-splitting-a-string/) 字符串
   - ?? [🌟【medium】166. 分数到小数](https://leetcode.cn/problems/fraction-to-recurring-decimal/) 哈希表、模拟运算
   - [🌟【medium】43. 字符串相乘](https://leetcode.cn/problems/multiply-strings/) 字符串
@@ -30,7 +42,6 @@
   - [🌟【medium】63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/) 动态规划
   - [🌟【hard】980. 不同路径 III](https://leetcode.cn/problems/unique-paths-iii/) 回溯法
   - ? [🌟【medium】328. 奇偶链表](https://leetcode.cn/problems/odd-even-linked-list/) 链表操作
-
 - 20220813(2)
   - ? [🌟【medium】769. 最多能完成排序的块](https://leetcode.cn/problems/max-chunks-to-make-sorted/)
   - ? [🌟【hard】768. 最多能完成排序的块 II](https://leetcode.cn/problems/max-chunks-to-make-sorted-ii/) 排序、哈希表、单调栈
@@ -457,6 +468,7 @@
 - 🌟【easy】[剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 - 🌟【medium】[剑指 Offer 66. 构建乘积数组](https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/) 数组题
 - 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
+- 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
 
 ## 模拟、规律
 
@@ -482,6 +494,7 @@
 - 🌟【hard】[639. 解码方法 II](https://leetcode.cn/problems/decode-ways-ii/) 枚举、模拟、字符串
 - 🌟【medium】[116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/) 二叉树、规律题
 - 🌟【medium】[172. 阶乘后的零](https://leetcode.cn/problems/factorial-trailing-zeroes/) 规律题
+- 🌟【medium】[384. 打乱数组](https://leetcode.cn/problems/shuffle-an-array/) 洗牌算法
 
 ### 模拟运算
   - 🌟【medium】[166. 分数到小数](https://leetcode.cn/problems/fraction-to-recurring-decimal/) 哈希表、模拟运算
@@ -551,6 +564,7 @@
 
 ## 矩阵、深度优先、广度优先
 - 🌟【medium】[130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/) 矩阵、深度优先搜索
+- 🌟【medium】[289. 生命游戏](https://leetcode.cn/problems/game-of-life/) 矩阵、原地算法
 
 ## 树、深度优先、广度优先
 
@@ -678,6 +692,7 @@
 - 【easy】 [455 分发饼干](https://leetcode.cn/problems/assign-cookies/)
 - 🌟【hard】 [135 分发糖果](https://leetcode.cn/problems/candy/)
 - 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
+- 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
 
 ## 回溯算法
 
@@ -711,6 +726,8 @@
 - 🌟【easy】[剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/) 二分搜索
 - 🌟【medium】[剑指 Offer 53 - I. 在排序数组中查找数字 I](https://leetcode.cn/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/) 二分搜索
 - 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
+- 🌟【medium】[300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/) 动态规划、二分搜索
+- 🌟【hard】[354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/) 递增子序列问题、二分搜索
 
 ## 排序算法的应用
 
@@ -8638,6 +8655,71 @@ var numSquares = function(n) {
 };
 ```
 
+## ?🌟😻✔ 280. 摆动排序【medium】
+
+[ref](https://leetcode.cn/problems/wiggle-sort/)
+
+摆动排序
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var wiggleSort = function(nums) {
+  let less = true
+  for(let i=0;i<nums.length;i++) {
+    if(less) {
+      if(nums[i] > nums[i + 1]) {
+        swap(nums, i, i + 1)
+      }
+    } else {
+      if(nums[i] < nums[i + 1]) {
+        swap(nums, i, i + 1)
+      }
+    }
+    less = !less
+  }
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+```
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var wiggleSort = function(nums) {
+  nums.sort((a, b) => a - b)
+  let l = 1
+  while(l + 1 < nums.length) {
+    const t = nums[l]
+    nums[l] = nums[l + 1]
+    nums[l + 1] = t
+    l += 2
+  }
+};
+```
+
+```js
+var wiggleSort = function(nums) {
+  const cpy = [...nums].sort((a, b) => a - b)
+  let l = 0, r = nums.length - 1
+  const res = [cpy[l++]]
+  while(l <= r) {
+    res.push(cpy[r--])
+    if(l <= r) {
+      res.push(cpy[l++])
+    }
+  }
+  for(let i=0;i<nums.length;i++) {
+    nums[i] = res[i]
+  }
+};
+```
+
+
 ## ✔ 283 移动零【easy】
 
 [ref](https://leetcode.cn/problems/move-zeroes/)
@@ -8693,6 +8775,71 @@ var findDuplicate = function(nums) {
 ```js
 var canWinNim = function(n) {
   return n % 4 === 0 ? false : true
+};
+```
+
+## 🌟😻✔ 289. 生命游戏【medium】
+
+[ref](https://leetcode.cn/problems/game-of-life/)
+
+矩阵、原地算法
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(1)
+var gameOfLife = function(board) {
+  const m = board.length
+  const n = board[0].length
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      calc(i, j)
+    }
+  }
+  function calc(i, j) {
+    const places = [
+      [-1, -1], 
+      [-1, 0], 
+      [-1, 1], 
+      [0, -1], 
+      [0, 1], 
+      [1, -1], 
+      [1, 0], 
+      [1, 1], 
+    ]
+    let alive = 0
+    for(let k=0;k<8;k++) {
+      const ii = i + places[k][0]
+      const jj = j + places[k][1]
+      if(ii < 0 || jj < 0 || ii >= m || jj >= n) continue
+      let status = board[ii][jj]
+      if(status === 1 || status === 4 || status === 5) {
+        alive++
+      }
+    }
+    if(board[i][j] === 0) {
+      if(alive === 3) {
+        // `0|1`
+        board[i][j] = 3
+      } else {
+        // `0|0`
+        board[i][j] = 2
+      }
+    } else {
+      if(alive < 2 || alive > 3) {
+        // `1|0`
+        board[i][j] = 4
+      } else {
+        // `1|1`
+        board[i][j] = 5
+      }
+    }
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      board[i][j] = (board[i][j] === 3 || board[i][j] === 5) ? 1: 0
+    }
+  }
+  return board
 };
 ```
 
@@ -8970,30 +9117,29 @@ dp[i] 代表长度为 i 的最长递增子序列的最后一个数的最小值
 
 ```js
 // 时间复杂度：O(NlogN)
-// 空间复杂度：O(N)
+// 时间复杂度：O(N)
 var lengthOfLIS = function(nums) {
-  const len = nums.length
+  const n = nums.length
   const dp = []
-  let count = 0
-  dp[count] = nums[0]
-  for(let i=1;i<len;i++) {
-    if(nums[i] > dp[count]) {
-      dp[++count] = nums[i]
+  dp[0] = nums[0]
+  let k = 0
+  for(let i=1;i<n;i++) {
+    if(nums[i] > dp[k]) {
+      dp[++k] = nums[i]
     } else {
-      let l = 0, r = count
-      while(l < r) {
+      let l = 0, r = k
+      while(l <= r) {
         const mid = Math.floor((l + r) / 2)
-        if(nums[i] > dp[mid]) {
+        if(dp[mid] < nums[i]) {
           l = mid + 1
         } else {
-          pos = mid
-          r = mid
+          r = mid - 1
         }
       }
       dp[l] = nums[i]
     }
   }
-  return count + 1
+  return dp.length
 };
 ```
 
@@ -9381,6 +9527,32 @@ var longestIncreasingPath = function(matrix) {
 
 ```
 
+## 🌟😻✔ 334. 递增的三元子序列【medium】
+
+[ref](https://leetcode.cn/problems/increasing-triplet-subsequence/)
+
+数组题、贪心
+
+```js
+// 贪心，你真贪
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var increasingTriplet = function(nums) {
+  if(nums.length < 3) return false
+  let lmin = nums[0]
+  let rmin = Number.MAX_SAFE_INTEGER
+  for(let i=1;i<nums.length;i++) {
+    if(nums[i] > rmin) return true
+    if(nums[i] > lmin) {
+      rmin = Math.min(rmin, nums[i])
+    } else {
+      lmin = Math.min(lmin, nums[i])
+    }
+  }
+  return false
+};
+```
+
 ## ??🌟😻✔ 336 回文对【hard】
 
 [ref](https://leetcode.cn/problems/palindrome-pairs/)
@@ -9469,6 +9641,89 @@ var countBits = function(n) {
   return res
 };
 
+```
+
+## 🌟😻✔ 340. 至多包含 K 个不同字符的最长子串【medium】
+
+[ref](https://leetcode.cn/problems/longest-substring-with-at-most-k-distinct-characters/)
+
+滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(N)
+var lengthOfLongestSubstringKDistinct = function(s, k) {
+  if(k === 0) return 0
+  const m = new Map()
+  let l = 0, r = 0
+  let max = 0
+  let diffCount = 0
+  while(r < s.length) {
+    m.set(s[r], (m.get(s[r]) || 0) + 1)
+    if(m.get(s[r]) === 1) {
+      diffCount++
+    }
+    while(l<=r && diffCount > k) {
+      m.set(s[l], m.get(s[l]) - 1)
+      if(m.get(s[l]) === 0) diffCount--
+      l++
+    }
+    max = Math.max(max, r - l + 1)
+    r++
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 341. 扁平化嵌套列表迭代器【medium】
+
+[ref](https://leetcode.cn/problems/flatten-nested-list-iterator/)
+
+递归、数组扁平化
+
+```js
+var NestedIterator = function(nestedList) {
+  function calc(list) {
+    let res = []
+    for(let i=0;i<list.length;i++) {
+      if(list[i]._integer !== null) {
+        res.push(list[i]._integer)
+      } else {
+        res = [...res, ...calc(list[i]._list)]
+      }
+    }
+    return res
+  }
+
+  this.list = calc(nestedList)
+  this.i = 0
+};
+NestedIterator.prototype.hasNext = function() {
+  return this.i < this.list.length
+};
+NestedIterator.prototype.next = function() {
+  return this.list[this.i++]
+};
+```
+
+```js
+var NestedIterator = function(nestedList) {
+  this.list = nestedList
+};
+NestedIterator.prototype.hasNext = function() {
+  while(this.list.length) {
+    if(this.list[0].isInteger()) {
+      return true
+    } else {
+      const h = this.list.shift() 
+      this.list = [...h.getList(), ...this.list]
+    }
+  }
+  return false
+};
+NestedIterator.prototype.next = function() {
+  return this.list.shift().getInteger()
+};
 ```
 
 ## 😻✔ 343 整数拆分【medium】
@@ -9952,6 +10207,40 @@ var canConstruct = function(ransomNote, magazine) {
 
 ## ?🌟😻✔ 386 字典序排数【medium】
 
+[ref](https://leetcode.cn/problems/shuffle-an-array/)
+
+洗牌算法
+
+```js
+var Solution = function(nums) {
+  this.original = nums
+  this.nums = [...nums]
+};
+
+Solution.prototype.reset = function() {
+  this.nums = [...this.original]
+  return this.nums
+};
+
+Solution.prototype.shuffle = function() {
+  const len = this.nums.length
+  for(let i=0;i<len;i++) {
+    const rand = Math.floor(Math.random() * (len - i)) + i
+    swap(this.nums, i, rand)
+  }
+  return this.nums
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+
+```
+
+## ?🌟😻✔ 386 字典序排数【medium】
+
 [ref](https://leetcode.cn/problems/lexicographical-numbers/)
 
 字典树、字典序
@@ -9976,6 +10265,27 @@ var lexicalOrder = function(n) {
   }
 
   return res
+};
+```
+
+## ✔ 387. 字符串中的第一个唯一字符【easy】
+
+[ref](https://leetcode.cn/problems/first-unique-character-in-a-string/)
+
+哈希表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var firstUniqChar = function(s) {
+  const m = new Map()
+  for(let i=0;i<s.length;i++) {
+    m.set(s[i], (m.get(s[i]) || 0) + 1)
+  }
+  for(let i=0;i<s.length;i++) {
+    if(m.get(s[i]) === 1) return i
+  }
+  return -1
 };
 ```
 
@@ -11415,6 +11725,215 @@ function exact(str) {
 }
 ```
 
+## 🌟😻✔ 641. 设计循环双端队列【medium】
+
+[ref](https://leetcode.cn/problems/design-circular-deque/)
+
+双端队列、队列
+
+数组实现
+
+```js
+/**
+ * @param {number} k
+ */
+var MyCircularDeque = function(k) {
+  this.size = k
+  this.q = []
+};
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.insertFront = function(value) {
+  if(this.q.length >= this.size) return false
+  this.q.unshift(value)
+  return true
+};
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.insertLast = function(value) {
+  if(this.q.length >= this.size) return false
+  this.q.push(value)
+  return true
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.deleteFront = function() {
+  if(!this.q.length) return false
+  this.q.shift()
+  return true
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.deleteLast = function() {
+  if(!this.q.length) return false
+  this.q.pop()
+  return true
+};
+
+/**
+ * @return {number}
+ */
+MyCircularDeque.prototype.getFront = function() {
+ if(!this.q.length) return -1
+  return this.q[0]
+};
+
+/**
+ * @return {number}
+ */
+MyCircularDeque.prototype.getRear = function() {
+ if(!this.q.length) return -1
+  return this.q[this.q.length - 1]
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.isEmpty = function() {
+  return this.q.length === 0
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.isFull = function() {
+  return this.q.length === this.size
+};
+```
+
+链表实现
+
+```js
+class Node {
+  constructor(val) {
+    this.val = val
+    this.prev = null
+    this.next = null
+  }
+}
+
+var MyCircularDeque = function(k) {
+  this.capacity = k
+  this.len = 0
+  this.head = new Node()
+  this.tail = new Node()
+};
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.insertFront = function(value) {
+  if(this.isFull()) return false
+  if(!this.len) {
+    this.head.next = new Node(value)
+    this.tail.next = this.head.next
+  } else {
+    const next = this.head.next
+    const node = new Node(value)
+    this.head.next = node
+    node.next = next
+    next.prev = node
+  }
+  this.len++
+  return true
+};
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.insertLast = function(value) {
+  if(this.isFull()) return false
+  if(!this.len) {
+    this.head.next = new Node(value)
+    this.tail.next = this.head.next
+  } else {
+    const node = new Node(value)
+    const tail = this.tail.next
+    node.prev = tail
+    tail.next = node
+    this.tail.next = node
+  }
+  this.len++
+  return true
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.deleteFront = function() {
+  if(this.isEmpty()) return false
+  if(this.len === 1) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    const node = this.head.next.next
+    this.head.next = node
+    node.prev = null
+  }
+  this.len--
+  return true
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.deleteLast = function() {
+  if(this.isEmpty()) return false
+  if(this.len === 1) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    const node = this.tail.next.prev
+    node.next = null
+    this.tail.next = node
+  }
+  this.len--
+  return true
+};
+
+/**
+ * @return {number}
+ */
+MyCircularDeque.prototype.getFront = function() {
+  if(this.isEmpty()) return -1
+  return this.head.next.val
+};
+
+/**
+ * @return {number}
+ */
+MyCircularDeque.prototype.getRear = function() {
+  if(this.isEmpty()) return -1
+  return this.tail.next.val
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.isEmpty = function() {
+  return this.len === 0
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularDeque.prototype.isFull = function() {
+  return this.len === this.capacity
+};
+```
+
 ## 🌟😻✔ 647 回文子串【medium】
 
 [ref](https://leetcode.cn/problems/palindromic-substrings/)
@@ -11774,35 +12293,47 @@ var maxProfit = function(prices, fee) {
 };
 ```
 
-## ?🌟😻✔ 763 划分字母区间【medium】
+## ?🌟😻✔ 725. 分隔链表【medium】
 
-[ref](https://leetcode.cn/problems/partition-labels/)
+[ref](https://leetcode.cn/problems/split-linked-list-in-parts/)
 
-字符串、区间、关联线段
+链表
 
 ```js
 // 时间复杂度：O(N)
-// 空间复杂度：O(N)
-var partitionLabels = function(s) {
-  const map = new Map()
-  for(let i=0;i<s.length;i++) {
-    map.set(s[i], i)
+// 空间复杂度：O(1)
+var splitListToParts = function(head, k) {
+  let total = 0
+  let tmpHead = head
+  while(tmpHead) {
+    total++
+    tmpHead=tmpHead.next
   }
-  const res = []
-  let endIndex = 0
-  let beginIndex = 0
-  for(let i=0;i<s.length;i++) {
-    const w = s[i]
-    endIndex = Math.max(map.get(w), endIndex)
-    if(i === endIndex) {
-      res.push(endIndex - beginIndex + 1)
-      beginIndex = i + 1
+  const min = Math.floor(total / k)
+  let extraCount = total % k
+  const res = new Array(k).fill(null)
+  let i = 0
+  while(total > 0) {
+    let count = 0
+    const myHead = new ListNode(0, head)
+    let tHead = myHead
+    while(count < min) {
+      tHead = tHead.next
+      count++
+      total--
     }
+    if(extraCount > 0) {
+      tHead = tHead.next
+      extraCount--
+      total--
+    }
+    head = tHead.next
+    tHead.next = null
+    res[i++] = myHead.next
   }
   return res
 };
 ```
-
 
 ## ?🌟😻✔ 739. 每日温度【medium】
 
@@ -11848,6 +12379,35 @@ var minCostClimbingStairs = function(cost) {
     dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2])
   }
   return Math.min(dp[len - 1], dp[len - 2])
+};
+```
+
+## ?🌟😻✔ 763 划分字母区间【medium】
+
+[ref](https://leetcode.cn/problems/partition-labels/)
+
+字符串、区间、关联线段
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var partitionLabels = function(s) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], i)
+  }
+  const res = []
+  let endIndex = 0
+  let beginIndex = 0
+  for(let i=0;i<s.length;i++) {
+    const w = s[i]
+    endIndex = Math.max(map.get(w), endIndex)
+    if(i === endIndex) {
+      res.push(endIndex - beginIndex + 1)
+      beginIndex = i + 1
+    }
+  }
+  return res
 };
 ```
 
