@@ -18,7 +18,16 @@
 
 # 刷题日记
 
-- 20220814(11)
+- 20220817()
+- 20220816(7)
+  - [🌟【easy】1656. 设计有序流](https://leetcode.cn/problems/design-an-ordered-stream/) 哈希表、数组
+  - [🌟【medium】371. 两整数之和](https://leetcode.cn/problems/sum-of-two-integers/) 位运算
+  - [🌟【medium】251. 展开二维向量](https://leetcode.cn/problems/flatten-2d-vector/)
+  - [🌟【easy】252. 会议室](https://leetcode.cn/problems/meeting-rooms/)
+  - ? [🌟【medium】253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
+  - ? [🌟【medium】285. 二叉搜索树中的中序后继](https://leetcode.cn/problems/inorder-successor-in-bst/) 二叉搜索树
+  - [🌟【easy】326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
+- 20220815(11)
   - [🌟【medium】641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、双端队列
   - ? [🌟【medium】725. 分隔链表](https://leetcode.cn/problems/split-linked-list-in-parts/) 链表
   - ? [🌟【medium】280. 摆动排序](https://leetcode.cn/problems/wiggle-sort/) 摆动排序
@@ -379,7 +388,7 @@
 - 模拟
 - trie、字典树
 
-## 二进制相关
+## 二进制、进制转换相关
 
 - 🌟【medium】[剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
 - 🌟【medium】[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
@@ -387,6 +396,7 @@
 - 🌟【easy】[剑指 Offer 15. 二进制中1的个数](https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/) 二进制、二进制运算
 - 🌟【easy】[191. 位1的个数](https://leetcode.cn/problems/number-of-1-bits/) 位运算
 - 🌟【easy】[190. 颠倒二进制位](https://leetcode.cn/problems/reverse-bits/) 位运算
+- 🌟【easy】[326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
 
 ## 数字大小题
 
@@ -518,6 +528,7 @@
 - 🌟【medium】[739 每日温度](https://leetcode.cn/problems/daily-temperatures/)
 - 🌟【medium】[剑指 Offer 59 - II. 队列的最大值](https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof/) 队列、栈、单调数组、双端队列
 - 🌟【hard】[768. 最多能完成排序的块 II](https://leetcode.cn/problems/max-chunks-to-make-sorted-ii/) 排序、哈希表、单调栈
+- 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
 
 ## 队列
 
@@ -605,6 +616,7 @@
 - 🌟【medium】[剑指 Offer 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 二叉搜索树、后序遍历
 - 🌟【easy】[剑指 Offer 54. 二叉搜索树的第k大节点](https://leetcode.cn/problems/fu-za-lian-biao-de-fu-zhi-lcof/) 二叉搜索树
 - 🌟【easy】[108. 将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/) 二叉搜索树、平衡二叉树
+- 🌟【medium】[285. 二叉搜索树中的中序后继](https://leetcode.cn/problems/inorder-successor-in-bst/) 二叉搜索树
 
 ## 堆
 
@@ -728,6 +740,7 @@
 - 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 - 🌟【medium】[300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/) 动态规划、二分搜索
 - 🌟【hard】[354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/) 递增子序列问题、二分搜索
+- 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
 
 ## 排序算法的应用
 
@@ -8196,9 +8209,80 @@ var isAnagram = function(s, t) {
 ```
 
 
+## 🌟😻✔ 251. 展开二维向量【medium】
+
+[ref](https://leetcode.cn/problems/flatten-2d-vector/)
+
+```js
+var Vector2D = function(vec) {
+  this.vec = vec
+  this.i = 0
+  this.j = 0
+};
+
+Vector2D.prototype.next = function() {
+  while(this.j >= this.vec[this.i].length) {
+    this.i++
+    this.j = 0
+  }
+  return this.vec[this.i][this.j++]
+};
+
+Vector2D.prototype.hasNext = function() {
+  while(this.i < this.vec.length && this.j >= this.vec[this.i].length) {
+    this.i++
+    this.j = 0
+  }
+  if(this.i < this.vec.length) {
+    return true
+  }
+  return false
+};
+ 
+```
+
 ## ?🌟😻✔ 253 会议室 II【medium】
 
 [ref](https://leetcode.cn/problems/meeting-rooms-ii/)
+
+二分搜索、排序、单调栈、上下车问题、重叠区间问题
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var minMeetingRooms = function(intervals) {
+  let s = new Set()
+  for(let i=0;i<intervals.length;i++) {
+    s.add(intervals[i][0])
+    s.add(intervals[i][1])
+  }
+  s = [...s].sort((a, b) => a - b)
+  intervals.sort((a, b) => a[0] - b[0])
+  let max = 0
+  const stack = []
+  let k = 0
+  for(let i of s) {
+    while(k < intervals.length && intervals[k][0] === i) {
+      const target = intervals[k++][1]
+      let l = 0, r = stack.length - 1
+      while(l <= r) {
+        const mid = Math.floor((l + r) / 2)
+        if(stack[mid] < target) {
+          l = mid + 1
+        } else {
+          r = mid - 1
+        }
+      }
+      stack.splice(l, 0, target)
+    }
+    while(stack.length && stack[0] <= i) {
+      stack.shift()
+    }
+    max = Math.max(max, stack.length)
+  }
+  return max
+};
+```
 
 ```js
 // 时间复杂度：O(NlogN)
@@ -8737,6 +8821,58 @@ var moveZeroes = function(nums) {
   while(realIndex<nums.length) {
     nums[realIndex++] = 0
   }
+};
+```
+
+## ?🌟😻✔ 287 寻找重复数【medium】
+
+[ref](https://leetcode.cn/problems/inorder-successor-in-bst/)
+
+二叉搜索树
+
+```js
+// 通用解法，不利用二叉搜索树的性质
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var inorderSuccessor = function(root, p) {
+  let res = null
+  let prev = null
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(prev === p) {
+      res = node
+    }
+    prev = node
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  return res
+};
+```
+
+```js
+// 利用二叉搜索树的性质，p 无右节点，则中序后继必然比p大且为p的祖先节点
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var inorderSuccessor = function(root, p) {
+  if(p.right) {
+    let node = p.right
+    while(node.left) {
+      node = node.left
+    }
+    return node
+  }
+  let node = root
+  let next = null
+  while(node) {
+    if(node.val > p.val) {
+      next = node
+      node = node.left
+    } else {
+      node = node.right
+    }
+  }
+  return next
 };
 ```
 
@@ -9379,6 +9515,24 @@ var maxSubArrayLen = function(nums, k) {
 };
 ```
 
+## 🌟😻✔ 326. 3 的幂【easy】
+
+[ref](https://leetcode.cn/problems/power-of-three/)
+
+进制转换
+
+```js
+// 时间复杂度：O(1)
+// 时间复杂度：O(1)
+var isPowerOfThree = function(n) {
+  const nStr = n.toString(3)
+  if(nStr[0] === '1') {
+    if(nStr.lenghth === 1 || Number(nStr.slice(1)) === 0) return true
+  }
+  return false
+};
+```
+
 ## ?🌟😻✔ 327. 区间和的个数【hard】
 
 [ref](https://leetcode.cn/problems/count-of-range-sum/)
@@ -9983,6 +10137,25 @@ var maxEnvelopes = function(envelopes) {
   return count + 1
 };
 
+```
+
+## 🌟😻✔ 371. 两整数之和【medium】
+
+[ref](https://leetcode.cn/problems/sum-of-two-integers/)
+
+位运算
+
+```js
+// 时间复杂度：O(log(max(a, b)))
+// 空间复杂度：O(1)
+var getSum = function(a, b) {
+  while(b!==0) {
+    const d = (a&b) << 1
+    a ^= b
+    b = d
+  }
+  return a
+};
 ```
 
 ## 😻✔ 374 猜数字大小【easy】
@@ -13112,6 +13285,29 @@ var maxPower = function(s) {
   }
   return max
 };
+```
+
+## ✔ 1656. 设计有序流【easy】
+
+[ref](https://leetcode.cn/problems/design-an-ordered-stream/)
+
+哈希表、数组
+
+```js
+var OrderedStream = function(n) {
+  this.i = 1
+  this.stream = []
+};
+
+OrderedStream.prototype.insert = function(idKey, value) {
+  this.stream[idKey] = value
+  const res = []
+  while(this.stream[this.i]) {
+    res.push(this.stream[this.i++])
+  }
+  return res
+};
+
 ```
 
 ## 🌟😻✔ 剑指 Offer 04. 二维数组中的查找【medium】
