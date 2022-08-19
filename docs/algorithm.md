@@ -18,6 +18,17 @@
 
 # 刷题日记
 
+- 20220819(10)
+  - ? [🌟【easy】1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
+  - ? [🌟【medium】435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/) 贪心
+  - [🌟【medium】413. 等差数列划分](https://leetcode.cn/problems/arithmetic-slices/) 动态规划
+  - [🌟【medium】513. 找树左下角的值](https://leetcode.cn/problems/find-bottom-left-tree-value/) 广度优先搜索、层序遍历
+  - [🌟【medium】280. 摆动排序](https://leetcode.cn/problems/wiggle-sort/) 摆动排序
+  - ? [🌟【medium】376. 摆动序列](https://leetcode.cn/problems/wiggle-subsequence/) 摆动排序、贪心
+  - ? [🌟【medium】324. 摆动排序 II](https://leetcode.cn/problems/wiggle-sort-ii/) 摆动排序
+  - ??? [🌟【medium】215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/) 快排、快速排序、快速选择、快排相关算法
+  - ? [🌟【medium】75. 颜色分类](https://leetcode.cn/problems/sort-colors/) 数组、双指针
+  - ? [🌟【medium】452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/) 贪心
 - 20220818(11)
   - ??? [🌟【hard】1224. 最大相等频率](https://leetcode.cn/problems/maximum-equal-frequency/) 哈希表、规律题
   - ? [🌟【medium】450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/) 二叉搜索树
@@ -504,6 +515,10 @@
 - 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
 - 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
 - 🌟【medium】[80. 删除有序数组中的重复项 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/) 数组原地操作
+- 🌟【medium】[280. 摆动排序](https://leetcode.cn/problems/wiggle-sort/) 摆动排序
+- 🌟【medium】[376. 摆动序列](https://leetcode.cn/problems/wiggle-subsequence/) 摆动排序、贪心
+- 🌟【medium】[324. 摆动排序 II](https://leetcode.cn/problems/wiggle-sort-ii/) 摆动排序
+- 🌟【medium】[75. 颜色分类](https://leetcode.cn/problems/sort-colors/) 数组、双指针
 
 ## 模拟、规律
 
@@ -533,9 +548,22 @@
 - ??? [🌟【hard】1224. 最大相等频率](https://leetcode.cn/problems/maximum-equal-frequency/) 哈希表、规律题
 
 ### 模拟运算
-  - 🌟【medium】[166. 分数到小数](https://leetcode.cn/problems/fraction-to-recurring-decimal/) 哈希表、模拟运算
-  - 🌟【easy】[剑指 Offer 65. 不用加减乘除做加法](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 二进制、位运算
-  - 🌟【medium】[43. 字符串相乘](https://leetcode.cn/problems/multiply-strings/) 字符串
+
+- 🌟【medium】[166. 分数到小数](https://leetcode.cn/problems/fraction-to-recurring-decimal/) 哈希表、模拟运算
+- 🌟【easy】[剑指 Offer 65. 不用加减乘除做加法](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/) 二进制、位运算
+- 🌟【medium】[43. 字符串相乘](https://leetcode.cn/problems/multiply-strings/) 字符串
+
+## 区间问题、上下车问题、差分
+
+- 🌟【medium】[435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/) 贪心
+- 🌟【medium】[1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings/) 差分、扫描线、区间问题
+- 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
+- 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
+
+### 扫描线
+
+- 🌟【medium】[1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings/) 差分、扫描线、区间问题
+- ??? 🌟【hard】[218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆
 
 ## 栈
 
@@ -643,6 +671,7 @@
 - 🌟【hard】[124. 二叉树中的最大路径和](https://leetcode.cn/problems/binary-tree-maximum-path-sum/) 二叉树
 - 🌟【medium】[988. 从叶结点开始的最小字符串](https://leetcode.cn/problems/smallest-string-starting-from-leaf/) 二叉树
 - 🌟【medium】[106. 从中序与后序遍历序列构造二叉树](https://leetcode.cn/problems/all-paths-from-source-to-target/) 二叉树、二叉树构建
+- 🌟【medium】[513. 找树左下角的值](https://leetcode.cn/problems/find-bottom-left-tree-value/) 广度优先搜索、层序遍历
 
 ### 二叉搜索树
 
@@ -731,6 +760,7 @@
 - 🌟【medium】[剑指 Offer 47. 礼物的最大价值](https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/) 动态规划
 - 🌟【medium】[91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
 - 🌟【medium】[120. 三角形最小路径和](https://leetcode.cn/problems/triangle/) 动态规划
+- 🌟【medium】[413. 等差数列划分](https://leetcode.cn/problems/arithmetic-slices/) 动态规划
 
 ### 动态规划 - 背包问题
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -739,7 +769,7 @@
 - 🌟【medium】[698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
 - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 
-## 贪心算法
+## 贪心思想
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
 
@@ -748,8 +778,10 @@
 - 🌟【hard】 [135 分发糖果](https://leetcode.cn/problems/candy/)
 - 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
 - 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
+- 🌟【medium】[435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/) 贪心
+- 🌟【medium】[452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/) 贪心
 
-## 回溯算法
+## 回溯思想
 
 回溯法（探索与回溯法）是一种选优搜索法，又称为试探法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。
 
@@ -785,6 +817,7 @@
 - 🌟【medium】[300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/) 动态规划、二分搜索
 - 🌟【hard】[354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/) 递增子序列问题、二分搜索
 - 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
+- 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
 
 ## 排序算法的应用
 
@@ -801,6 +834,11 @@
 前 K 大、前 K 小、单调队列
 
 - 🌟【medium】[347 前 K 个高频元素【medium】](https://leetcode.cn/problems/top-k-frequent-elements/)
+
+### 快排
+
+- ? 🌟【medium】[215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/) 快排、快速排序、快速选择、快排相关算法
+
 
 # 二进制
 
@@ -4067,6 +4105,39 @@ var minDistance = function(word1, word2) {
   }
   return dp[len1][len2]
 };
+```
+
+## ?🌟😻✔ 75. 颜色分类【medium】
+
+[ref](https://leetcode.cn/problems/sort-colors/)
+
+双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var sortColors = function(nums) {
+  let l = 0, r = nums.length - 1, i = 0
+  while(i <= r) {
+    if(nums[i] === 0) {
+      swap(nums, i, l)
+      i++
+      l++
+    } else if(nums[i] === 2) {
+      swap(nums, i, r)
+      r--
+    } else {
+      i++
+    }
+  }
+  return nums
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
 ```
 
 ## 😻✔ 76 最小覆盖子串【hard】
@@ -7695,11 +7766,50 @@ var rob = function(nums) {
 };
 ```
 
-## 🌟😻✔ 215 数组中的第K个最大元素【medium】
+## ???🌟😻✔ 215 数组中的第K个最大元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 
-堆、小顶堆、第K大、大顶堆
+堆、小顶堆、第K大、大顶堆、快排、快速选择、快速排序
+
+```js
+// 期望时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findKthLargest = function(nums, k) {
+  function partition(l, r) {
+    if(l === r) return l
+    const randomIdx = Math.floor(Math.random() * (r - l)) + l
+    swap(nums, l, randomIdx)
+    const pivot = nums[l]
+    let k = l + 1
+    for(let i=l + 1;i <= r; i++) {
+      if(nums[i] > pivot) {
+        swap(nums, i, k)
+        k++
+      }
+    }
+    swap(nums, k-1, l)
+    return k-1
+  }
+  let l = 0, r = nums.length - 1
+  while(true) {
+    const partitionIndex = partition(l, r)
+    if(partitionIndex === k - 1) {
+      return nums[partitionIndex]
+    } else if(partitionIndex > k - 1) {
+      r = partitionIndex - 1
+    } else {
+      l = partitionIndex + 1
+    }
+  }
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+```
 
 ```js
  // 小顶堆解法
@@ -10043,6 +10153,30 @@ var coinChange = function(coins, amount) {
 };
 ```
 
+## ?🌟😻✔ 324. 摆动排序 II【medium】
+
+[ref](https://leetcode.cn/problems/wiggle-sort-ii/)
+
+摆动排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 时间复杂度：O(logN)
+var wiggleSort = function(nums) {
+  const cpy = [...nums].sort((a, b) => a - b)
+  const n = nums.length
+  const mid = Math.floor((n - 1) / 2)
+  let i = mid
+  let j = n - 1
+  let isI = true
+  for(let k=0;k<nums.length;k++) {
+    nums[k] = isI ? cpy[i--] : cpy[j--]
+    isI = !isI
+  }
+  return nums
+};
+```
+
 ## ✔ 325 和等于 k 的最长子数组长度【medium】
 
 [ref](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/)
@@ -10737,6 +10871,37 @@ var guessNumber = function(n) {
 };
 ```
 
+## ?🌟😻✔ 376. 摆动序列【medium】
+
+[ref](https://leetcode.cn/problems/wiggle-subsequence/)
+
+贪心
+
+能构成峰谷就不放过
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var wiggleMaxLength = function(nums) {
+  if(nums.length < 2) return nums.length
+  const n = nums.length
+  let i = 1
+  while(i < n && nums[i] === nums[0]) {
+    i++
+  }
+  let isLess = nums[i] < nums[0]
+  let count = 1
+  while(i < n) {
+    if(isLess && nums[i] < nums[i-1] || !isLess && nums[i] > nums[i-1]) {
+      count++
+      isLess = !isLess
+    }
+    i++
+  }
+  return count
+};
+```
+
 ## ?🌟😻✔ 378. 有序矩阵中第 K 小的元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/)
@@ -11338,6 +11503,55 @@ var fizzBuzz = function(n) {
 
 ## 🌟😻✔ 415 字符串相加【easy】
 
+[ref](https://leetcode.cn/problems/arithmetic-slices/)
+
+动态规划
+
+```js
+// 动态规划
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numberOfArithmeticSlices = function(nums) {
+  if(nums.length < 3) return 0
+  const n = nums.length
+  let count = 0
+  let prev = 0
+  for(let i=2;i<n;i++) {
+    if(nums[i] - nums[i - 1] === nums[i - 1] - nums[i - 2]) {
+      prev = 1 + prev
+      count += prev
+    } else {
+      prev = 0
+    }
+  }
+  return count
+};
+
+```
+
+```js
+// 动态规划
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var numberOfArithmeticSlices = function(nums) {
+  if(nums.length < 3) return 0
+  const n = nums.length
+  const dp = new Array(n).fill(0)
+  let count = 0
+  for(let i=2;i<n;i++) {
+    if(nums[i] - nums[i - 1] === nums[i - 1] - nums[i - 2]) {
+      dp[i] = 1 + dp[i - 1]
+      count += dp[i]
+    }
+  }
+  return count
+};
+
+```
+
+
+## 🌟😻✔ 415 字符串相加【easy】
+
 [ref](https://leetcode.cn/problems/add-strings/)
 
 ```js
@@ -11502,6 +11716,33 @@ var characterReplacement = function(s, k) {
   return r - l
 };
 
+```
+
+## ?🌟😻✔ 435. 无重叠区间【medium】
+
+[ref](https://leetcode.cn/problems/non-overlapping-intervals/)
+
+贪心
+
+```js
+// 贪心，尽量删除对后续更可能有影响的区间
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var eraseOverlapIntervals = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0])
+  const n = intervals.length
+  let r = intervals[0][1]
+  let count = 0
+  for(let i=1;i<n;i++) {
+    if(intervals[i][0] >= r) {
+      r = intervals[i][1]
+    } else {
+      r = Math.min(r, intervals[i][1])
+      count++
+    }
+  }
+  return count
+};
 ```
 
 ## ?🌟😻✔ 437. 路径总和 III【medium】
@@ -11721,6 +11962,34 @@ var deleteNode = function(root, key) {
     root.left = deleteNode(root.left, key)
   }
   return root
+};
+```
+
+## ?🌟😻✔ 452. 用最少数量的箭引爆气球【medium】
+
+[ref](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/)
+
+贪心
+
+```js
+// 时间复杂度：O(NlogN)
+// 时间复杂度：O(logN)
+var findMinArrowShots = function(points) {
+  points.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+  const n = points.length
+  let i = 1
+  let count = 1
+  let max = points[0][1]
+  while(i < n) {
+    if(points[i][0] <= max) {
+      max = Math.min(points[i][1], max)
+    } else {
+      count++
+      max = points[i][1]
+    }
+    i++
+  }
+  return count
 };
 ```
 
@@ -11964,6 +12233,31 @@ var nextGreaterElements = function(nums) {
     stack.push(i)
   }
   return res
+};
+```
+
+## 🌟😻✔ 516 最长回文子序列【medium】
+
+[ref](https://leetcode.cn/problems/find-bottom-left-tree-value/comments/)
+
+层序遍历、广度优先搜索
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var findBottomLeftValue = function(root) {
+  let q = [root]
+  let prev
+  while(q.length) {
+    const len = q.length
+    for(let i=0;i<len;i++) {
+      const node = q.shift()
+      prev = node
+      if(node.right) q.push(node.right)
+      if(node.left) q.push(node.left)
+    }
+  }
+  return prev.val
 };
 ```
 
@@ -14273,6 +14567,84 @@ var maxPower = function(s) {
   }
   return max
 };
+```
+
+## 🌟😻✔1450. 在既定时间做作业的学生人数【easy】
+
+[ref](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/)
+
+区间、区间权重累加、差分、二分搜索
+
+```js
+// 暴力
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var busyStudent = function(startTime, endTime, queryTime) {
+  let count = 0
+  for(let i=0;i<startTime.length;i++) {
+    if(startTime[i] <= queryTime && queryTime <= endTime[i]) count++
+  }
+  return count
+};
+```
+
+```js
+// 差分、区间权重累加
+// 时间复杂度：O(N+queryTime)
+// 空间复杂度：O(queryTime)
+var busyStudent = function(startTime, endTime, queryTime) {
+  const arr = new Array(queryTime).fill(0)
+  const n = startTime.length
+  for(let i=0;i<n;i++) {
+    if(startTime[i] - 1 < queryTime) {
+      arr[startTime[i] - 1] += 1
+    }
+    if(endTime[i] < queryTime) {
+      arr[endTime[i]] -= 1
+    }
+  }
+  for(let i=1;i<arr.length;i++) {
+    arr[i] += arr[i - 1]
+  }
+  return arr[queryTime - 1]
+};
+```
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var busyStudent = function(startTime, endTime, queryTime) {
+  startTime.sort((a, b) => a - b)
+  endTime.sort((a, b) => a - b)
+  const startCount = binarySearch(startTime, queryTime, true)
+  const endCount = binarySearch(endTime, queryTime, false)
+  return startCount - endCount
+};
+
+function binarySearch(nums, target, isStart) {
+  let l = 0, r = nums.length
+  if(isStart) {
+    while(l < r) {
+      const mid = Math.floor((l + r) / 2)
+      if(nums[mid] > target) {
+        r = mid
+      } else {
+        l = mid + 1
+      }
+    }
+    return l
+  } else {
+    while(l <= r) {
+      const mid = Math.floor((l + r) / 2)
+      if(nums[mid] < target) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    }
+    return l
+  }
+}
 ```
 
 ## ✔ 1656. 设计有序流【easy】
