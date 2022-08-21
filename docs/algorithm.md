@@ -18,7 +18,21 @@
 
 # 刷题日记
 
-- 20220820()
+- 20220821(13)
+  - [🌟【easy】1455. 检查单词是否为句中其他单词的前缀](https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/) 
+  - ? [🌟【medium】665. 非递减数列](https://leetcode.cn/problems/non-decreasing-array/) 贪心
+  - [🌟【medium】701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/) 二叉搜索树
+  - [🌟【easy】700. 二叉搜索树中的搜索](https://leetcode.cn/problems/search-in-a-binary-search-tree/) 二叉搜索树
+  - ? [🌟【medium】752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock/) 广度优先搜索
+  - ? [🌟【medium】322. 零钱兑换](https://leetcode.cn/problems/coin-change/) 动态规划
+  - ?? [🌟【medium】518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-2/) 动态规划、背包问题
+  - [🌟【medium】264. 丑数 II](https://leetcode.cn/problems/ugly-number-ii/) 动态规划
+  - [🌟【medium】313. 超级丑数](https://leetcode.cn/problems/super-ugly-number/) 动态规划
+  - [🌟【medium】204. 计数质数](https://leetcode.cn/problems/count-primes/) 动态规划
+  - ? [🌟【medium】852. 山脉数组的峰顶索引](https://leetcode.cn/problems/count-primes/) 二分搜索
+  - [🌟【medium】162. 寻找峰值](https://leetcode.cn/problems/find-peak-element/) 二分搜索
+  - ?? [🌟【medium】983. 最低票价](https://leetcode.cn/problems/minimum-cost-for-tickets/) 动态规划
+- 20220820(10)
   - [🌟【medium】654. 最大二叉树](https://leetcode.cn/problems/maximum-binary-tree/) 二叉树、二叉树构建
   - ? [🌟【medium】998. 最大二叉树 II](https://leetcode.cn/problems/maximum-binary-tree-ii/) 二叉树、二叉树构建
   - ? [🌟【medium】451. 根据字符出现频率排序](https://leetcode.cn/problems/sort-characters-by-frequency/) 桶排序、桶排序衍生算法
@@ -29,7 +43,6 @@
   - ?? [🌟【medium】面试题 01.07. 旋转矩阵](https://leetcode.cn/problems/rotate-matrix-lcci/) 矩阵、原地旋转矩阵
   - [🌟【easy】303. 区域和检索 - 数组不可变](https://leetcode.cn/problems/range-sum-query-immutable/) 前缀数组
   - ? [🌟【medium】304. 二维区域和检索 - 矩阵不可变](https://leetcode.cn/problems/range-sum-query-2d-immutable/) 前缀数组、二维前缀数组
-
 - 20220819(10)
   - ? [🌟【easy】1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
   - ? [🌟【medium】435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/) 贪心
@@ -705,6 +718,7 @@
 - 🌟【easy】[108. 将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/) 二叉搜索树、平衡二叉树
 - 🌟【medium】[285. 二叉搜索树中的中序后继](https://leetcode.cn/problems/inorder-successor-in-bst/) 二叉搜索树
 - 🌟【medium】[450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/) 二叉搜索树
+- 🌟【medium】[701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/) 二叉搜索树
 
 ## 堆
 
@@ -728,6 +742,7 @@
 - ??? 🌟【hard】[269. 火星词典](https://leetcode.cn/problems/alien-dictionary/) 拓扑排序、深度优先搜索
 - 🌟【medium】[797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/) 图、深度有优先搜索 时间复杂度分析比较麻烦
 - 🌟【medium】[785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/) 图、深度优先搜索、广度优先搜索
+- 🌟【medium】[752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock/) 广度优先搜索
 
 ## 搜索、排序
 
@@ -782,13 +797,16 @@
 - 🌟【medium】[91. 解码方法](https://leetcode.cn/problems/decode-ways/) 动态规划、模拟、字符串题
 - 🌟【medium】[120. 三角形最小路径和](https://leetcode.cn/problems/triangle/) 动态规划
 - 🌟【medium】[413. 等差数列划分](https://leetcode.cn/problems/arithmetic-slices/) 动态规划
+- 🌟【medium】[983. 最低票价](https://leetcode.cn/problems/minimum-cost-for-tickets/) 动态规划
 
 ### 动态规划 - 背包问题
+
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
 - 🌟【medium】[322 零钱兑换](https://leetcode.cn/problems/coin-change/) 【01背包】
 - 🌟【medium】[416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
 - 🌟【medium】[698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
 - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
+- 🌟【medium】[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-2/) 动态规划、背包问题
 
 ## 贪心思想
 
@@ -801,6 +819,7 @@
 - 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
 - 🌟【medium】[435. 无重叠区间](https://leetcode.cn/problems/non-overlapping-intervals/) 贪心
 - 🌟【medium】[452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/) 贪心
+- 🌟【medium】[665. 非递减数列](https://leetcode.cn/problems/non-decreasing-array/) 贪心
 
 ## 回溯思想
 
@@ -839,6 +858,7 @@
 - 🌟【hard】[354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes/) 递增子序列问题、二分搜索
 - 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
 - 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
+- 🌟【medium】[852. 山脉数组的峰顶索引](https://leetcode.cn/problems/count-primes/) 二分搜索
 
 ## 排序算法的应用
 
@@ -12479,7 +12499,7 @@ var nextGreaterElements = function(nums) {
 };
 ```
 
-## 🌟😻✔ 516 最长回文子序列【medium】
+## 🌟😻✔ 513. 找树左下角的值【medium】
 
 [ref](https://leetcode.cn/problems/find-bottom-left-tree-value/comments/)
 
@@ -12527,6 +12547,29 @@ var longestPalindromeSubseq = function(s) {
     }
   }
   return dp[0][len-1]
+};
+```
+
+## ??🌟😻✔ 518. 零钱兑换 II【medium】
+
+[ref](https://leetcode.cn/problems/coin-change-2/)
+
+背包问题、动态规划
+
+```js
+// 时间复杂度：O(N*M)
+// 空间复杂度：O(M)
+var change = function(amount, coins) {
+  const dp = new Array(amount + 1).fill(0)
+  dp[0] = 1
+  for(let j=0;j<coins.length;j++) {
+    for(let i=1;i<=amount;i++) {
+      if(i >= coins[j]) {
+        dp[i] += dp[i - coins[j]]
+      }
+    }
+  }
+  return dp[amount]
 };
 ```
 
@@ -13425,7 +13468,7 @@ var findDuplicateSubtrees = function(root) {
 };
 ```
 
-## 🌟😻✔ 652 寻找重复的子树【medium】
+## 🌟😻✔ 654. 最大二叉树【medium】
 
 [ref](https://leetcode.cn/problems/maximum-binary-tree/)
 
@@ -13452,6 +13495,38 @@ var constructMaximumBinaryTree = function(nums) {
 };
 ```
 
+## ?🌟😻✔ 665. 非递减数列【medium】
+
+[ref](https://leetcode.cn/problems/non-decreasing-array/)
+
+贪心
+
+```js
+// 贪心，尽可能让不符合情况的 nums[i] 比较小
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var checkPossibility = function(nums) {
+  const n = nums.length
+  let errCnt = 0
+  for(let i = 1; i < n; i++) {
+    if(nums[i] < nums[i - 1]) {
+      if(errCnt === 1) return false
+      errCnt++
+      // nums[0] 出现比较大的数，直接把 nums[0] 变小
+      if(i - 2 < 0) nums[i - 1] = nums[i]
+      else if(nums[i - 2] <= nums[i]) {
+        // i-2(不变)  i-1(变小)  i(不变)
+        nums[i - 1] = nums[i - 2]
+      } else {
+        // i前面的没法改，只能改i
+        nums[i] = nums[i - 1]
+      }
+    }
+  }
+  return true
+};
+
+```
 
 ## 😻✔ 695 岛屿的最大面积【medium】
 
@@ -13541,6 +13616,82 @@ var canPartitionKSubsets = function(nums, k) {
     return false
   }
   return dfs(k, 0, 0)
+};
+```
+
+## 🌟😻✔ 700. 二叉搜索树中的搜索【easy】
+
+[ref](https://leetcode.cn/problems/search-in-a-binary-search-tree/)
+
+二叉搜索树
+
+```js
+// 迭代版
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var searchBST = function(root, val) {
+  while(root) {
+    if(root.val === val) return root
+    else if(root.val < val) root = root.right
+    else root = root.left
+  } 
+  return null
+};
+```
+
+```js
+// 递归版
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var searchBST = function(root, val) {
+  if(!root) return null
+  if(root.val === val) return root
+  else if(root.val < val) return searchBST(root.right, val)
+  else return searchBST(root.left, val)
+};
+```
+
+
+## 🌟😻✔ 701. 二叉搜索树中的插入操作【medium】
+
+[ref](https://leetcode.cn/problems/insert-into-a-binary-search-tree/)
+
+二叉搜索树
+
+```js
+// 迭代
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var insertIntoBST = function(root, val) {
+  if(!root) return new TreeNode(val)
+  let node = root
+  let prev
+  while(node) {
+    prev = node
+    if(node.val > val) {
+      node = node.left
+    } else {
+      node = node.right
+    }
+  }
+  if(prev.val < val) prev.right = new TreeNode(val)
+  else prev.left = new TreeNode(val)
+  return root
+};
+```
+
+```js
+// 递归
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var insertIntoBST = function(root, val) {
+  if(!root) return new TreeNode(val)
+  if(root.val > val) {
+    root.left = insertIntoBST(root.left, val)
+  } else {
+    root.right = insertIntoBST(root.right, val)
+  }
+  return root
 };
 ```
 
@@ -13841,6 +13992,57 @@ var minCostClimbingStairs = function(cost) {
 };
 ```
 
+## ?🌟😻✔ 752. 打开转盘锁【medium】
+
+[ref](https://leetcode.cn/problems/open-the-lock/)
+
+广度优先搜索
+
+题解：
+
+- [【云影同学】BFS 代码简洁，思路清晰，操作稳健](https://leetcode.cn/problems/open-the-lock/solution/-by-lxfriday-xyad/)
+
+```js
+var openLock = function(deadends, target) {
+  // 没开始就结束了，脱裤子放屁
+  if(target === '0000') return 0
+  const deadendsSet = new Set(deadends)
+  // 开始不了，今天电梯坏了不用出门上班
+  if(deadendsSet.has('0000')) return -1
+  const used = new Set(['0000'])
+  // 要开始了，存储初始态 0000，当前层级为 0
+  let q = [['0000', 0]]
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      // 取出关联搜索到的转盘状态，
+      const [numsStr, level] = q[i]
+      // 如果取出的就是target，那直接 good bye 不玩了
+      if(numsStr === target) return level
+      // 取出的不是 target，我还得扩散查找
+      for(let j=0;j<4;j++) {
+        // 直接某一位加1或者减1得到 当前锁盘的上、下两种可能转法
+        const s1 = numsStr.slice(0, j) + ((Number(numsStr[j]) + 1) % 10) + numsStr.slice(j + 1)
+        const s2 = numsStr.slice(0, j) + ((Number(numsStr[j]) + 9) % 10) + numsStr.slice(j + 1)
+        // 如果不在死锁集合中且也没有入过队，则可以加入下一轮
+        if(!used.has(s1) && !deadendsSet.has(s1)) {
+          used.add(s1)
+          tq.push([s1, level + 1])
+        }
+        if(!used.has(s2) && !deadendsSet.has(s2)) {
+          used.add(s2)
+          tq.push([s2, level + 1])
+        }
+      }
+    }
+    // 当前层的扫描结束，俺没有找到结果，把下一轮轮盘的搜索状态传给q，继续开始下一轮
+    // 如果没了，则认为没找到，返回-1
+    q = tq
+  }
+  return -1
+};
+```
+
 ## ?🌟😻✔ 763 划分字母区间【medium】
 
 [ref](https://leetcode.cn/problems/partition-labels/)
@@ -14129,6 +14331,46 @@ var numBusesToDestination = function(routes, source, target) {
 
 ```
 
+## ?🌟😻✔ 852. 山脉数组的峰顶索引【medium】
+
+[ref](https://leetcode.cn/problems/peak-index-in-a-mountain-array/)
+
+二分搜索、二分法
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var peakIndexInMountainArray = function(arr) {
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(arr[mid] > arr[mid + 1]) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return r
+};
+```
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var peakIndexInMountainArray = function(arr) {
+  let l = 0, r = arr.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(mid - 1 < 0 || arr[mid] > arr[mid - 1]) {
+      l = mid + 1
+    } else {
+      r = mid - 1
+    }
+  }
+  return r
+};
+```
+
 ## ?🌟😻✔ 862 和至少为 K 的最短子数组【hard】
 
 [ref](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
@@ -14329,6 +14571,29 @@ var uniquePathsIII = function(grid) {
     }
   }
   return res
+};
+```
+
+## ??🌟😻✔ 983. 最低票价【medium】
+
+[ref](https://leetcode.cn/problems/minimum-cost-for-tickets/)
+
+```js
+// 时间复杂度：O(M) M=最后的那一天  days[days.length - 1]
+// 空间复杂度：O(M+N)
+var mincostTickets = function(days, costs) {
+  const daysSet = new Set(days)
+  const m = days[days.length - 1]
+  const dp = new Array(m + 1)
+  const [a, b, c] = costs
+  dp[0] = 0
+  for(let i=1;i<=m;i++) {
+    const x = daysSet.has(i) ? (a + dp[i - 1]) : dp[i - 1]
+    const y = (i > 7 ? dp[i - 7]: 0) + b
+    const z = (i > 30 ? dp[i - 30]: 0) + c
+    dp[i] = Math.min(x, y, z)
+  }
+  return dp[m]
 };
 ```
 
@@ -15006,6 +15271,29 @@ function binarySearch(nums, target, isStart) {
     return l
   }
 }
+```
+
+## 🌟😻✔1455. 检查单词是否为句中其他单词的前缀【easy】
+
+[ref](https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/)
+
+```js
+// 时间复杂度：O(N*M)
+// 空间复杂度：O(N)
+var isPrefixOfWord = function(sentence, searchWord) {
+  const words = sentence.split(' ')
+  for(let i=0;i<words.length;i++) {
+    if(words[i].length < searchWord.length) continue
+    let j = 0
+    while(j < searchWord.length && words[i][j] === searchWord[j]) {
+      j++
+    }
+    if(j === searchWord.length) {
+      return i + 1
+    }
+  }
+  return -1
+};
 ```
 
 ## ✔ 1656. 设计有序流【easy】
