@@ -18,6 +18,18 @@
 
 # 刷题日记
 
+- 20220822(11)
+  - [🌟【medium】655. 输出二叉树](https://leetcode.cn/problems/print-binary-tree/) 二叉树
+  - [🌟【medium】109. 有序链表转换二叉搜索树](https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/) 二叉搜索树
+  - [🌟【medium】429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal/) 树、N叉树
+  - [🌟【easy】589. N 叉树的前序遍历](https://leetcode.cn/problems/n-ary-tree-preorder-traversal/) 树、N叉树
+  - ? [🌟【medium】498. 对角线遍历](https://leetcode.cn/problems/diagonal-traverse/) 规律、模拟
+  - ? [🌟【medium】147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/) 链表、插入排序、排序
+  - [🌟【medium】708. 循环有序列表的插入](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list/) 链表
+  - [🌟【medium】1094. 拼车](https://leetcode.cn/problems/car-pooling/) 上下车问题、差分
+  - [🌟【medium】542. 01 矩阵](https://leetcode.cn/problems/01-matrix/) 广度优先搜索、多起点问题
+  - ? [🌟【medium】260. 只出现一次的数字 III](https://leetcode.cn/problems/single-number-iii/) 位运算
+  - ?? [🌟【medium】137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
 - 20220821(13)
   - [🌟【easy】1455. 检查单词是否为句中其他单词的前缀](https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/) 
   - ? [🌟【medium】665. 非递减数列](https://leetcode.cn/problems/non-decreasing-array/) 贪心
@@ -457,6 +469,7 @@
 - 🌟【easy】[191. 位1的个数](https://leetcode.cn/problems/number-of-1-bits/) 位运算
 - 🌟【easy】[190. 颠倒二进制位](https://leetcode.cn/problems/reverse-bits/) 位运算
 - 🌟【easy】[326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
+- ?? 🌟【medium】[137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
 
 ## 数字大小题
 
@@ -546,6 +559,7 @@
 - 🌟【medium】[376. 摆动序列](https://leetcode.cn/problems/wiggle-subsequence/) 摆动排序、贪心
 - 🌟【medium】[324. 摆动排序 II](https://leetcode.cn/problems/wiggle-sort-ii/) 摆动排序
 - 🌟【medium】[75. 颜色分类](https://leetcode.cn/problems/sort-colors/) 数组、双指针
+- 🌟【medium】[1094. 拼车](https://leetcode.cn/problems/car-pooling/) 上下车问题、差分
 
 ## 模拟、规律
 
@@ -586,6 +600,7 @@
 - 🌟【medium】[1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings/) 差分、扫描线、区间问题
 - 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
 - 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
+- 🌟【medium】[1094. 拼车](https://leetcode.cn/problems/car-pooling/) 上下车问题、差分
 
 ### 扫描线
 
@@ -636,6 +651,8 @@
 - 🌟【easy】[剑指 Offer 52. 两个链表的第一个公共节点](https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/) 链表、链表公共节点
 - 🌟【medium】[328. 奇偶链表](https://leetcode.cn/problems/odd-even-linked-list/) 链表操作
 - 🌟【medium】[86. 分隔链表](https://leetcode.cn/problems/partition-list/) 链表
+- 🌟【medium】[147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/) 链表、插入排序、排序
+- 🌟【medium】[708. 循环有序列表的插入](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list/) 链表
 
 ## 集合
 
@@ -662,9 +679,9 @@
 - 🌟【medium】[289. 生命游戏](https://leetcode.cn/problems/game-of-life/) 矩阵、原地算法
 - 🌟【medium】[994. 腐烂的橘子](https://leetcode.cn/problems/rotting-oranges/) 广度优先搜索
 - 🌟【medium】[286. 墙与门](https://leetcode.cn/problems/walls-and-gates/) 广度优先搜索、多源广度优先搜索
-- 🌟【medium】[547. 省份数量](https://leetcode.cn/problems/number-of-provinces/) 深度优先、广度优先
 - 🌟【medium】[面试题 01.07. 旋转矩阵](https://leetcode.cn/problems/rotate-matrix-lcci/) 矩阵、原地旋转矩阵
 - 🌟【medium】[304. 二维区域和检索 - 矩阵不可变](https://leetcode.cn/problems/range-sum-query-2d-immutable/) 矩阵、前缀数组、二维前缀数组
+- 🌟【medium】[542. 01 矩阵](https://leetcode.cn/problems/01-matrix/) 广度优先搜索、多起点问题
 
 ## 树、深度优先、广度优先
 
@@ -705,6 +722,9 @@
 - 🌟【medium】[654. 最大二叉树](https://leetcode.cn/problems/maximum-binary-tree/) 二叉树、二叉树构建
 - 🌟【medium】[998. 最大二叉树 II](https://leetcode.cn/problems/maximum-binary-tree-ii/) 二叉树、二叉树构建
 - 🌟【medium】[117. 填充每个节点的下一个右侧节点指针 II](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii/) 二叉树
+- 🌟【medium】[655. 输出二叉树](https://leetcode.cn/problems/print-binary-tree/) 二叉树
+- 🌟【medium】[429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal/) 树、N叉树
+- 🌟【easy】[589. N 叉树的前序遍历](https://leetcode.cn/problems/n-ary-tree-preorder-traversal/) 树、N叉树
 
 ### 二叉搜索树
 
@@ -719,6 +739,7 @@
 - 🌟【medium】[285. 二叉搜索树中的中序后继](https://leetcode.cn/problems/inorder-successor-in-bst/) 二叉搜索树
 - 🌟【medium】[450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/) 二叉搜索树
 - 🌟【medium】[701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/) 二叉搜索树
+- 🌟【medium】[109. 有序链表转换二叉搜索树](https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/) 二叉搜索树
 
 ## 堆
 
@@ -743,6 +764,7 @@
 - 🌟【medium】[797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/) 图、深度有优先搜索 时间复杂度分析比较麻烦
 - 🌟【medium】[785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/) 图、深度优先搜索、广度优先搜索
 - 🌟【medium】[752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock/) 广度优先搜索
+- 🌟【medium】[547. 省份数量](https://leetcode.cn/problems/number-of-provinces/) 深度优先、广度优先
 
 ## 搜索、排序
 
@@ -884,6 +906,10 @@
 
 - ? 🌟【medium】[451. 根据字符出现频率排序](https://leetcode.cn/problems/sort-characters-by-frequency/) 桶排序、桶排序衍生算法
 - ? 🌟【medium】[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/) 堆排序、排序、桶排序
+
+### 插入排序
+
+- 🌟【medium】[147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/) 链表、插入排序、排序
 
 
 # 二进制
@@ -5106,6 +5132,66 @@ var sortedArrayToBST = function(nums) {
 };
 ```
 
+## 🌟😻✔ 109. 有序链表转换二叉搜索树【medium】
+
+[ref](https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/)
+
+二叉搜索树
+
+```js
+// 利用二叉搜索树的中序遍历特性和二叉搜索树特性
+// 二叉搜索树的中序遍历结果对应的就是链表的数字
+// 时间复杂度：O(N)
+// 空间复杂度：O(logN)
+var sortedListToBST = function(head) {
+  let len = 0
+  let thead = head
+  while(thead) {
+    len++
+    thead = thead.next
+  }
+  function buildBST(l, r) {
+    if(l > r) return null
+    const mid = Math.floor((l + r) / 2)
+    const leftNode = buildBST(l, mid - 1)
+    const node = new TreeNode(head.val)
+    head = head.next
+    const rightNode = buildBST(mid + 1, r)
+    node.left = leftNode
+    node.right = rightNode
+    return node
+  }
+  return buildBST(0, len - 1)
+};
+```
+
+```js
+// 快慢指针
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var sortedListToBST = function(head) {
+  if(!head) return null
+  const myHead = new TreeNode()
+  myHead.next = head
+  let slow = myHead, fast = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  if(slow === fast) {
+    return new TreeNode(slow.next.val)
+  } else {
+    const root = new TreeNode(slow.next.val)
+    const head2 = slow.next.next
+    slow.next = null
+    root.left = sortedListToBST(head)
+    root.right = sortedListToBST(head2)
+    return root
+  }
+};
+```
+
+
 ## 😻✔ 111 二叉树的最小深度【easy】
 
 [ref](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
@@ -6219,6 +6305,30 @@ var singleNumber = function(nums) {
 };
 ```
 
+## ??🌟😻✔ 137. 只出现一次的数字 II【medium】
+
+[ref](https://leetcode.cn/problems/single-number-ii/)
+
+位运算
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var singleNumber = function(nums) {
+  let res = 0
+  for(let i=0;i<32;i++) {
+    let sum = 0
+    for(let num of nums) {
+      sum += ((num >> i) & 1)
+    }
+    if(sum % 3) {
+      res |= (1 << i)
+    }
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 138. 复制带随机指针的链表【medium】
 
 [ref](https://leetcode.cn/problems/copy-list-with-random-pointer/)
@@ -6584,6 +6694,29 @@ LRUCache.prototype.put = function(key, value) {
 LRUCache.prototype.moveToEnd = function(key, value) {
   this.cache.delete(key)
   this.cache.set(key, value)
+};
+```
+
+## ?🌟😻✔ 147. 对链表进行插入排序【medium】
+
+[ref](https://leetcode.cn/problems/insertion-sort-list/submissions/)
+
+链表
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var insertionSortList = function(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const node = head
+    head = head.next
+    let tHead = myHead
+    while(tHead.next && tHead.next.val <= node.val) tHead = tHead.next
+    node.next = tHead.next
+    tHead.next = node
+  }
+  return myHead.next
 };
 ```
 
@@ -9064,6 +9197,36 @@ var threeSumSmaller = function(nums, target) {
     }
   }
   return res
+};
+```
+
+## ?🌟😻✔ 260. 只出现一次的数字 III【medium】
+
+[ref](https://leetcode.cn/problems/single-number-iii/)
+
+位运算
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var singleNumber = function(nums) {
+  let s = 0
+  for(let i=0;i<nums.length;i++) {
+    s ^= nums[i]
+  }
+  let k = 1
+  while((k & s) === 0) {
+    k <<= 1
+  }
+  let a = 0, b = 0
+  for(let i=0;i<nums.length;i++) {
+    if((k & nums[i]) === 0) {
+      a ^= nums[i]
+    } else {
+      b ^= nums[i]
+    }
+  }
+  return [a, b]
 };
 ```
 
@@ -11920,6 +12083,38 @@ var characterReplacement = function(s, k) {
 
 ```
 
+## 🌟😻✔ 429. N 叉树的层序遍历【medium】
+
+[ref](https://leetcode.cn/problems/n-ary-tree-level-order-traversal/)
+
+树、N叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var levelOrder = function(root) {
+  if(!root) return []
+  let q = [root]
+  const res = []
+  while(q.length) {
+    const tq = []
+    const levelRes = []
+    for(let i=0;i<q.length;i++) {
+      const {val, children} = q[i]
+      levelRes.push(val)
+      if(children) {
+        for(let j=0;j<children.length;j++) {
+          tq.push(children[j])
+        }
+      }
+    }
+    q = tq
+    res.push(levelRes)
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 435. 无重叠区间【medium】
 
 [ref](https://leetcode.cn/problems/non-overlapping-intervals/)
@@ -12475,6 +12670,96 @@ var nextGreaterElement = function(nums1, nums2) {
 };
 ```
 
+## ?🌟😻✔ 498. 对角线遍历【medium】
+
+[ref](https://leetcode.cn/problems/diagonal-traverse/)
+
+规律
+
+题解
+- [【云影同学】递归或者迭代（双解），思路清晰，操作稳健](https://leetcode.cn/problems/diagonal-traverse/solution/by-lxfriday-85vq/)
+
+```js
+// 普通迭代
+// 时间复杂度：O(MN)
+// 空间复杂度：O(1)
+var findDiagonalOrder = function(mat) {
+  const m = mat.length, n = mat[0].length
+  const res = []
+  let i = 0, j = 0
+  let isToRight = true
+  while(true) {
+    res.push(mat[i][j])
+    if(res.length === m * n) return res
+    if(isToRight) {
+      if(j + 1 >= n) {
+        i++
+        isToRight = false
+      } else if(i - 1 < 0) {
+        j++
+        isToRight = false
+      } else {
+        i--
+        j++
+      }
+    } else {
+      if(i + 1 >= m) {
+        j++
+        isToRight = true
+      } else if(j - 1 < 0) {
+        i++
+        isToRight = true
+      } else {
+        i++
+        j--
+      }
+    }
+  }
+};
+
+```
+
+```js
+// 递归查找
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var findDiagonalOrder = function(mat) {
+  const m = mat.length, n = mat[0].length
+  const res = []
+  function findRight(i, j) {
+    res.push(mat[i][j])
+    if(res.length === m * n) return
+    const nextI = i - 1
+    const nextJ = j + 1
+    if(nextJ >= n) {
+      findLeft(i + 1, j)
+    } else if(nextI < 0) {
+      findLeft(i, j + 1)
+    } else {
+      findRight(nextI, nextJ)
+    }
+  }
+
+  function findLeft(i, j) {
+    res.push(mat[i][j])
+    if(res.length === m * n) return
+    const nextI = i + 1
+    const nextJ = j - 1
+    if(nextI >= m) {
+      findRight(i, j + 1)
+    } else if(nextJ < 0) {
+      findRight(i + 1, j)
+    } else {
+      findLeft(nextI, nextJ)
+    }
+  }
+
+  findRight(0, 0)
+  return res
+};
+
+```
+
 ## ?🌟😻✔ 503. 下一个更大元素 II【medium】
 
 [ref](https://leetcode.cn/problems/next-greater-element-ii/)
@@ -12628,6 +12913,57 @@ var singleNonDuplicate = function(nums) {
 
 ```
 
+
+## ? 🌟😻✔ 542. 01 矩阵【medium】
+
+[ref](https://leetcode.cn/problems/01-matrix/)
+
+广度优先搜索、多起点问题
+
+题解
+
+-[【云影同学】BFS 多源广度优先](https://leetcode.cn/problems/01-matrix/solution/by-lxfriday-syx9/)
+
+```js
+// 广度优先搜索，多起点问题（0）
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var updateMatrix = function(mat) {
+  const m = mat.length, n = mat[0].length
+  const res = new Array(m).fill(false).map(_ => new Array(n).fill(0))
+  const used = new Array(m).fill(false).map(_ => new Array(n).fill(false))
+  let q = []
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(mat[i][j] === 0) {
+        q.push([i, j, 0])
+        used[i][j] = true
+      }
+    }
+  }
+  const sides = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  while(q.length) {
+    const len = q.length
+    const tq = []
+    for(let i=0;i<len;i++) {
+      const [targetI, targetJ, level] = q[i]
+      for(let j=0;j<4;j++) {
+        const ii = targetI + sides[j][0]
+        const jj = targetJ + sides[j][1]
+        if(ii >= 0 && ii < m && jj >= 0 && jj < n && !used[ii][jj]) {
+          used[ii][jj] = true
+          res[ii][jj] = level + 1
+          tq.push([ii, jj, level + 1])
+        }
+      }
+    }
+    q = tq
+  }
+  return res
+};
+
+
+```
 
 ## 🌟😻✔ 543 二叉树的直径【easy】
 
@@ -12961,6 +13297,31 @@ var findUnsortedSubarray = function(nums) {
     }
   }
   return has ? r - l + 1 : 0
+};
+```
+
+## 🌟😻✔ 589. N 叉树的前序遍历【easy】
+
+[ref](https://leetcode.cn/problems/n-ary-tree-preorder-traversal/)
+
+N叉树
+
+```js
+// 时间复杂度：O(M) M=N叉树节点个数
+// 空间复杂度：O(M)
+var preorder = function(root) {
+  if(!root) return []
+  const res = []
+  const stack = [root]
+  while(stack.length) {
+    const node = stack.pop()
+    const {val, children} = node
+    res.push(val)
+    for(let i=children.length - 1;i>=0;i--) {
+      stack.push(children[i])
+    }
+  }
+  return res
 };
 ```
 
@@ -13495,6 +13856,51 @@ var constructMaximumBinaryTree = function(nums) {
 };
 ```
 
+## 🌟😻✔ 655. 输出二叉树【medium】
+
+[ref](https://leetcode.cn/problems/print-binary-tree/)
+
+二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var printTree = function(root) {
+  let height = 0, m, n
+  function dfs(node, h) {
+    if(!node.left && !node.right) {
+      height = Math.max(h, height)
+    }
+    node.left && dfs(node.left, h + 1)
+    node.right && dfs(node.right, h + 1)
+  }
+  dfs(root, 0)
+  m = height + 1
+  n = 2 ** (height + 1) - 1
+  const res = new Array(m).fill('').map(_ => new Array(n).fill(''))
+
+  function create(node, i, j) {
+    if(node.left) {
+      const leftI = i + 1
+      const leftJ = j - 2 ** (height - i - 1)
+      res[leftI][leftJ] = String(node.left.val)
+      create(node.left, leftI, leftJ)
+    }
+    if(node.right) {
+      const rightI = i + 1
+      const rightJ = j + 2 ** (height - i - 1)
+      res[rightI][rightJ] = String(node.right.val)
+      create(node.right, rightI, rightJ)
+    }
+  }
+  const jMid = Math.floor(n / 2)
+  res[0][jMid] = String(root.val)
+
+  create(root, 0, jMid)
+  return res
+};
+```
+
 ## ?🌟😻✔ 665. 非递减数列【medium】
 
 [ref](https://leetcode.cn/problems/non-decreasing-array/)
@@ -13838,6 +14244,44 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
     }
   }
 };
+```
+
+## 🌟😻✔ 708. 循环有序列表的插入【medium】
+
+[ref](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list/)
+
+链表、循环链表
+
+```js
+var insert = function(head, insertVal) {
+  const node = new Node(insertVal)
+  if(!head) {
+    node.next = node
+    return node
+  }
+  let hasGoneRound = false
+  let tHead = head
+  while(true) {
+    if(tHead.val <= insertVal && insertVal <= tHead.next.val) {
+      node.next = tHead.next
+      tHead.next = node
+      return head
+    } else {
+      if(tHead.next === head) hasGoneRound = true
+      if(hasGoneRound) {
+        if(
+          tHead.val >= tHead.next.val
+        ) {
+          node.next = tHead.next
+          tHead.next = node
+          return head
+        }
+      }
+      tHead = tHead.next
+    }
+  }
+};
+
 ```
 
 ## ?🌟😻✔ 713 乘积小于 K 的子数组【medium】
@@ -14749,6 +15193,58 @@ var insertIntoMaxTree = function(root, val) {
     return node
   }
   return create(0, nums.length - 1)
+};
+```
+
+## 🌟😻✔ 1094. 拼车【medium】
+
+[ref](https://leetcode.cn/problems/car-pooling/)
+
+上下车问题、差分
+
+题解
+- [【云影同学】差分或者排序+双队列](https://leetcode.cn/problems/car-pooling/solution/by-lxfriday-wc6m/)
+
+```js
+// 时间复杂度：O(N + M) N=trips.length
+// 空间复杂度：O(M) M=最远位置
+var carPooling = function(trips, capacity) {
+  const arr = new Array(1001).fill(0)
+  for(let trip of trips) {
+    const [peoCnt, from, to] = trip
+    arr[from] += peoCnt
+    arr[to] -= peoCnt
+  }
+  for(let i=0;i<1001;i++) {
+    arr[i] += i - 1 >=0 ? arr[i - 1] : 0
+    if(arr[i] > capacity) return false
+  }
+  return true
+};
+```
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var carPooling = function(trips, capacity) {
+  const n = trips.length
+  const q1 = [], q2 = []
+  for(let i=0;i<n;i++) {
+    q1.push([trips[i][1], trips[i][0]])
+    q2.push([trips[i][2], trips[i][0]])
+  }
+  q1.sort((a, b) => a[0] - b[0])
+  q2.sort((a, b) => a[0] - b[0])
+  let sum = 0
+  while(q1.length && q2.length) {
+    if(q1[0][0] < q2[0][0]) {
+      sum += q1.shift()[1]
+      if(sum > capacity) return false
+    } else {
+      sum -= q2.shift()[1]
+    }
+  }
+  return true
 };
 ```
 
