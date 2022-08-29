@@ -2,6 +2,13 @@
   完成度 <span class="finished-info">500 / 500 -> 100%<span>
 </div>
 
+# lack
+
+## 滚动哈希
+
+- [算法合集：滚动哈希——干脆叫前缀和得了](https://blog.csdn.net/mlgseminent/article/details/120583944)
+  - [187. 重复的DNA序列](https://leetcode.cn/problems/repeated-dna-sequences/)
+
 # ✔ 算法知名仓库
 
 - [【微软】宫水三叶](https://github.com/SharingSource/LogicStack-LeetCode)
@@ -18,7 +25,53 @@
 
 # 刷题日记
 
-- 20220822(11)
+- 20220828(11)
+  - [🌟【medium】187. 重复的DNA序列](https://leetcode.cn/problems/repeated-dna-sequences/) 哈希表
+  - ? [🌟【medium】784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/) 排列组合、回溯
+  - [🌟【medium】78. 子集](https://leetcode.cn/problems/subsets/) 回溯、子集
+  - [🌟【medium】1087. 花括号展开](https://leetcode.cn/problems/brace-expansion/) 回溯、排列
+  - ??? [🌟【hard】793. 阶乘函数后 K 个零](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/) 阶乘、二分搜索
+  - [🌟【medium】641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、循环队列、双端队列、循环双端队列
+  - [🌟【medium】150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 逆波兰表达式、栈
+  - ? [🌟【medium】299. 猜数字游戏](https://leetcode.cn/problems/bulls-and-cows/) 数组、哈希表、字符串
+  - ? [🌟【medium】173. 二叉搜索树迭代器](https://leetcode.cn/problems/binary-search-tree-iterator/) 迭代器、二叉搜索树
+  - [🌟【medium】251. 展开二维向量](https://leetcode.cn/problems/flatten-2d-vector/) 迭代器、向量
+  - [🌟【medium】341. 扁平化嵌套列表迭代器](https://leetcode.cn/problems/flatten-nested-list-iterator/) 迭代器、向量
+- 20220827(2)
+  - ? [🌟【medium】662. 二叉树最大宽度](https://leetcode.cn/problems/maximum-width-of-binary-tree/) 二叉树、广度优先搜索
+  - ? [🌟【medium】875. 爱吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas/) 二分搜索
+- 20220826(7)
+  - ? [🌟【medium】357. 统计各位数字都不同的数字个数](https://leetcode.cn/problems/count-numbers-with-unique-digits/) 排列组合、数学问题
+  - [🌟【medium】1052. 爱生气的书店老板](https://leetcode.cn/problems/grumpy-bookstore-owner/) 前缀树组
+  - ? [🌟【medium】718. 最长重复子数组](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/) 动态规划
+  - [🌟【medium】209. 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/) 双指针
+  - ?? [🌟【medium】474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/) 动态规划、背包问题
+  - ? [🌟【medium】面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
+  - ? [🌟【medium】740. 删除并获得点数](https://leetcode.cn/problems/delete-and-earn/) 动态规划
+- 20220825(6)
+  - ? [🌟【medium】658. 找到 K 个最接近的元素](https://leetcode.cn/problems/find-k-closest-elements/) 二分搜索
+  - ? [🌟【medium】241. 为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses/) 递归、字符串、DFS
+  - [🌟【medium】524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
+  - [🌟【medium】720. 词典中最长的单词](https://leetcode.cn/problems/longest-word-in-dictionary/) 哈希表
+  - ? [🌟【medium】622. 设计循环队列](https://leetcode.cn/problems/design-circular-queue/) 队列、循环队列
+  - [【easy】1464. 数组中两元素的最大乘积](https://leetcode.cn/problems/maximum-product-of-two-elements-in-an-array/) 常规题
+- 20220824(7)
+  - [🌟【easy】1460. 通过翻转子数组使两个数组相等](https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-sub-arrays/) 数组、桶排序、哈希表
+  - [【easy】485. 最大连续 1 的个数](https://leetcode.cn/problems/max-consecutive-ones/) 常规题
+  - ? [🌟【medium】487. 最大连续1的个数 II](https://leetcode.cn/problems/max-consecutive-ones-ii/) 双指针、滑动窗口
+  - ? [🌟【medium】1004. 最大连续1的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii/) 双指针、滑动窗口
+  - [🌟【medium】442. 数组中重复的数据](https://leetcode.cn/problems/find-all-duplicates-in-an-array/) 数组题
+  - ? [🌟【medium】95. 不同的二叉搜索树 II](https://leetcode.cn/problems/unique-binary-search-trees-ii/) 二叉搜索树
+  - ? [🌟【medium】96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/) 二叉搜索树
+- 20220823(7)
+  - ??? [🌟【hard】782. 变为棋盘](https://leetcode.cn/problems/transform-to-chessboard/) 矩阵、模拟
+  - ? [🌟【medium】287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number/) 循环链表，二分搜索
+  - ? [🌟【medium】142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/) 循环链表
+  - [🌟【medium】515. 在每个树行中找最大值](https://leetcode.cn/problems/find-largest-value-in-each-tree-row/) 二叉树
+  - ? [🌟【medium】633. 平方数之和](https://leetcode.cn/problems/sum-of-square-numbers/) 二分搜索、规律
+  - [【easy】367. 有效的完全平方数](https://leetcode.cn/problems/valid-perfect-square/) 规律、数学、平方
+  - ? [🌟【medium】692. 前K个高频单词](https://leetcode.cn/problems/top-k-frequent-words/) 优先队列、堆、小顶堆、前k个问题
+- 20220822(12)
   - [🌟【medium】655. 输出二叉树](https://leetcode.cn/problems/print-binary-tree/) 二叉树
   - [🌟【medium】109. 有序链表转换二叉搜索树](https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/) 二叉搜索树
   - [🌟【medium】429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal/) 树、N叉树
@@ -30,6 +83,7 @@
   - [🌟【medium】542. 01 矩阵](https://leetcode.cn/problems/01-matrix/) 广度优先搜索、多起点问题
   - ? [🌟【medium】260. 只出现一次的数字 III](https://leetcode.cn/problems/single-number-iii/) 位运算
   - ?? [🌟【medium】137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
+  - [🌟【easy】136. 只出现一次的数字](https://leetcode.cn/problems/single-number/) 位运算
 - 20220821(13)
   - [🌟【easy】1455. 检查单词是否为句中其他单词的前缀](https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/) 
   - ? [🌟【medium】665. 非递减数列](https://leetcode.cn/problems/non-decreasing-array/) 贪心
@@ -100,7 +154,7 @@
   - ? [🌟【medium】285. 二叉搜索树中的中序后继](https://leetcode.cn/problems/inorder-successor-in-bst/) 二叉搜索树
   - [🌟【easy】326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
 - 20220815(11)
-  - [🌟【medium】641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、双端队列
+  - [🌟【medium】641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、循环队列、双端队列、循环双端队列
   - ? [🌟【medium】725. 分隔链表](https://leetcode.cn/problems/split-linked-list-in-parts/) 链表
   - ? [🌟【medium】280. 摆动排序](https://leetcode.cn/problems/wiggle-sort/) 摆动排序
   - [🌟【medium】334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 数组题、贪心
@@ -471,15 +525,20 @@
 - 🌟【easy】[326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
 - ?? 🌟【medium】[137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
 
-## 数字大小题
+## 数字大小、数字、数学、数学规律
 
 - 🌟【medium】[179 最大数](https://leetcode.cn/problems/largest-number/)
 - 🌟【medium】[剑指 Offer 45 把数组排成最小的数](https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
+- 🌟【medium】[633. 平方数之和](https://leetcode.cn/problems/sum-of-square-numbers/) 二分搜索、规律
+- 【easy】[367. 有效的完全平方数](https://leetcode.cn/problems/valid-perfect-square/) 规律、数学、平方
+- 🌟【medium】[357. 统计各位数字都不同的数字个数](https://leetcode.cn/problems/count-numbers-with-unique-digits/) 排列组合、数学问题
 
 ## 前缀、前缀数组
+
 - 🌟【medium】[437 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 前缀和
 - 🌟【easy】[303. 区域和检索 - 数组不可变](https://leetcode.cn/problems/range-sum-query-immutable/) 前缀数组
 - 🌟【medium】[304. 二维区域和检索 - 矩阵不可变](https://leetcode.cn/problems/range-sum-query-2d-immutable/) 前缀数组、二维前缀数组
+- 🌟【medium】[1052. 爱生气的书店老板](https://leetcode.cn/problems/grumpy-bookstore-owner/) 前缀树组
 
 ## trie、字典树
 
@@ -518,6 +577,9 @@
 - 🌟【easy】[171. Excel 表列序号](https://leetcode.cn/problems/excel-sheet-column-number/) 进制转换
 - 🌟【easy】[1422. 分割字符串的最大得分](https://leetcode.cn/problems/maximum-score-after-splitting-a-string/) 字符串
 - 🌟【medium】[43. 字符串相乘](https://leetcode.cn/problems/multiply-strings/) 字符串
+- 🌟【medium】[241. 为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses/) 递归、字符串、DFS
+- 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
+- ? 🌟【medium】[299. 猜数字游戏](https://leetcode.cn/problems/bulls-and-cows/) 数组、哈希表、字符串
 
 回文串相关
 
@@ -560,6 +622,10 @@
 - 🌟【medium】[324. 摆动排序 II](https://leetcode.cn/problems/wiggle-sort-ii/) 摆动排序
 - 🌟【medium】[75. 颜色分类](https://leetcode.cn/problems/sort-colors/) 数组、双指针
 - 🌟【medium】[1094. 拼车](https://leetcode.cn/problems/car-pooling/) 上下车问题、差分
+- 🌟【medium】[287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number/) 循环链表，二分搜索
+- 🌟【easy】[1460. 通过翻转子数组使两个数组相等](https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-sub-arrays/) 数组、桶排序、哈希表
+- 🌟【medium】[442. 数组中重复的数据](https://leetcode.cn/problems/find-all-duplicates-in-an-array/) 数组题
+- ? 🌟【medium】[299. 猜数字游戏](https://leetcode.cn/problems/bulls-and-cows/) 数组、哈希表、字符串
 
 ## 模拟、规律
 
@@ -586,7 +652,9 @@
 - 🌟【medium】[116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/) 二叉树、规律题
 - 🌟【medium】[172. 阶乘后的零](https://leetcode.cn/problems/factorial-trailing-zeroes/) 规律题
 - 🌟【medium】[384. 打乱数组](https://leetcode.cn/problems/shuffle-an-array/) 洗牌算法
-- ??? [🌟【hard】1224. 最大相等频率](https://leetcode.cn/problems/maximum-equal-frequency/) 哈希表、规律题
+- ??? 🌟【hard】[1224. 最大相等频率](https://leetcode.cn/problems/maximum-equal-frequency/) 哈希表、规律题
+- ??? 🌟【hard】[782. 变为棋盘](https://leetcode.cn/problems/transform-to-chessboard/) 矩阵、模拟
+- 🌟【medium】[633. 平方数之和](https://leetcode.cn/problems/sum-of-square-numbers/) 二分搜索、规律
 
 ### 模拟运算
 
@@ -631,6 +699,8 @@
 
 - 🌟【easy】[232 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
 - 🌟【easy】[225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
+- ? 🌟【medium】[622. 设计循环队列](https://leetcode.cn/problems/design-circular-queue/) 队列、循环队列
+- 🌟【medium】[641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、循环队列、双端队列、循环双端队列
 
 ## 链表
 
@@ -653,6 +723,7 @@
 - 🌟【medium】[86. 分隔链表](https://leetcode.cn/problems/partition-list/) 链表
 - 🌟【medium】[147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/) 链表、插入排序、排序
 - 🌟【medium】[708. 循环有序列表的插入](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list/) 链表
+- 🌟【medium】[142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/) 循环链表
 
 ## 集合
 
@@ -672,6 +743,10 @@
 - 🌟【easy】[557 反转字符串中的单词 III](https://leetcode.cn/problems/reverse-words-in-a-string-iii/) 双指针、字符串
 - 🌟【easy】[剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/) 双指针、滑动窗口
 - 【easy】[剑指 Offer 57. 和为s的两个数字](https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/) 双指针
+- 🌟【medium】[487. 最大连续1的个数 II](https://leetcode.cn/problems/max-consecutive-ones/) 双指针、滑动窗口
+- 🌟【medium】[1004. 最大连续1的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii/) 双指针、滑动窗口
+- 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
+
 
 ## 矩阵、深度优先、广度优先
 
@@ -725,12 +800,14 @@
 - 🌟【medium】[655. 输出二叉树](https://leetcode.cn/problems/print-binary-tree/) 二叉树
 - 🌟【medium】[429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal/) 树、N叉树
 - 🌟【easy】[589. N 叉树的前序遍历](https://leetcode.cn/problems/n-ary-tree-preorder-traversal/) 树、N叉树
+- 🌟【medium】[241. 为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses/) 递归、字符串、DFS
+- ? 🌟【medium】[662. 二叉树最大宽度](https://leetcode.cn/problems/maximum-width-of-binary-tree/) 二叉树、广度优先搜索
 
 ### 二叉搜索树
 
 - 🌟【medium】[538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/) 二叉树、二叉搜索树、累加树
 - 🌟【medium】[230 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/) 二叉搜索树
-- [🌟【easy】235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
+- 🌟【easy】[235 二叉搜索树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) 二叉树、二叉搜索树
 - 🌟【medium】[剑指 Offer 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/) 二叉搜索树、双向链表、链表
 - 🌟【medium】 [96 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 - 🌟【medium】[剑指 Offer 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/) 二叉搜索树、后序遍历
@@ -740,6 +817,9 @@
 - 🌟【medium】[450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/) 二叉搜索树
 - 🌟【medium】[701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/) 二叉搜索树
 - 🌟【medium】[109. 有序链表转换二叉搜索树](https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/) 二叉搜索树
+- 🌟【medium】[95. 不同的二叉搜索树 II](https://leetcode.cn/problems/unique-binary-search-trees-ii/) 二叉搜索树
+- 🌟【medium】[96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/) 二叉搜索树
+- ? 🌟【medium】[173. 二叉搜索树迭代器](https://leetcode.cn/problems/binary-search-tree-iterator/) 迭代器、二叉搜索树
 
 ## 堆
 
@@ -750,6 +830,8 @@
 - 🌟【hard】[630 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 贪心、优先队列、堆
 - 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
 - ??? 🌟【hard】[218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆
+- 🌟【medium】[692. 前K个高频单词](https://leetcode.cn/problems/top-k-frequent-words/) 优先队列、堆、小顶堆、前k个问题
+- ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
 
 ## 图、深度优先、广度优先
 
@@ -820,6 +902,8 @@
 - 🌟【medium】[120. 三角形最小路径和](https://leetcode.cn/problems/triangle/) 动态规划
 - 🌟【medium】[413. 等差数列划分](https://leetcode.cn/problems/arithmetic-slices/) 动态规划
 - 🌟【medium】[983. 最低票价](https://leetcode.cn/problems/minimum-cost-for-tickets/) 动态规划
+- ? 🌟【medium】[718. 最长重复子数组](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/) 动态规划
+- ? 🌟【medium】[740. 删除并获得点数](https://leetcode.cn/problems/delete-and-earn/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -829,6 +913,7 @@
 - 🌟【medium】[698 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
 - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 - 🌟【medium】[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-2/) 动态规划、背包问题
+- ?? 🌟【medium】[474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/) 动态规划、背包问题
 
 ## 贪心思想
 
@@ -860,6 +945,8 @@
 - 🌟【hard】[212. 单词搜索 II](https://leetcode.cn/problems/word-search-ii/) 字典树、回溯
 - 🌟【hard】[980. 不同路径 III](https://leetcode.cn/problems/unique-paths-iii/) 回溯法
 - 🌟【medium】[216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/) 回溯
+- ? 🌟【medium】[784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/) 排列组合、回溯
+- 🌟【medium】[1087. 花括号展开](https://leetcode.cn/problems/brace-expansion/) 回溯、排列
 
 ## 二分查找、二分搜索
 
@@ -881,6 +968,12 @@
 - 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
 - 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
 - 🌟【medium】[852. 山脉数组的峰顶索引](https://leetcode.cn/problems/count-primes/) 二分搜索
+- 🌟【medium】[287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number/) 循环链表，二分搜索
+- 🌟【medium】[633. 平方数之和](https://leetcode.cn/problems/sum-of-square-numbers/) 二分搜索、规律
+- 【easy】[367. 有效的完全平方数](https://leetcode.cn/problems/valid-perfect-square/) 规律、数学、平方
+- 🌟【medium】[658. 找到 K 个最接近的元素](https://leetcode.cn/problems/find-k-closest-elements/) 二分搜索
+- ? 🌟【medium】[875. 爱吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas/) 二分搜索
+- ??? 🌟【hard】[793. 阶乘函数后 K 个零](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/) 阶乘、二分搜索
 
 ## 排序算法的应用
 
@@ -901,6 +994,7 @@
 ### 快排
 
 - ? 🌟【medium】[215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/) 快排、快速排序、快速选择、快排相关算法
+- ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
 
 ### 桶排序
 
@@ -4802,11 +4896,64 @@ var inorderTraversal = function (root) {
 }1
 ```
 
-## 🌟😻✔ 96 不同的二叉搜索树【medium】
+## ?🌟😻✔ 95. 不同的二叉搜索树 II【medium】
+
+[ref](https://leetcode.cn/problems/unique-binary-search-trees-ii/)
+
+二叉搜索树
+
+```js
+var generateTrees = function(n) {
+  function createTrees(min, max) {
+    const allTrees = []
+    if(min > max) {
+      allTrees.push(null)
+      return allTrees
+    }
+    for(let i=min;i<=max;i++) {
+      const leftTrees = createTrees(min, i - 1)
+      const rightTrees = createTrees(i + 1, max)
+      for(let left of leftTrees) {
+        for(let right of rightTrees) {
+          const node = new TreeNode(i)
+          node.left = left
+          node.right = right
+          allTrees.push(node)
+        }
+      }
+    }
+    return allTrees
+  }
+  return createTrees(1, n)
+};
+```
+
+
+## ?🌟😻✔ 96 不同的二叉搜索树【medium】
 
 [ref](https://leetcode.cn/problems/unique-binary-search-trees/)
 
-动态规划
+模拟、动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var numTrees = function(n) {
+  const m = new Map([[0, 1], [1, 1]])
+  function createTree(min, max) {
+    if(m.has(max - min + 1)) return m.get(max - min + 1)
+    let sum = 0
+    for(let i=min;i<=max;i++) {
+      const leftSum = createTree(min, i - 1)
+      const rightSum = createTree(i + 1, max)
+      sum += leftSum * rightSum
+    }
+    m.set(max - min + 1, sum)
+    return sum
+  }
+  return createTree(1, n)
+};
+```
 
 ```js
 // 时间复杂度：O(N^2)
@@ -4872,6 +5019,46 @@ var isValidBST = function(root) {
 };
 
 ```
+
+## ?🌟😻✔ 99. 恢复二叉搜索树【medium】
+
+[ref](https://leetcode.cn/problems/recover-binary-search-tree/)
+
+二叉搜索树、二叉树
+
+题解
+- [ref](https://leetcode.cn/problems/recover-binary-search-tree/solution/dai-ma-jian-ji-by-lxfriday-qsvi/)
+
+```js
+// 时间复杂度：O(N) 会走一遍所有节点
+// 空间复杂度：O(N) 递归消耗
+var recoverTree = function(root) {
+  let errNode1, errNode2
+  let prevNode
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(prevNode) {
+      if(prevNode.val > node.val) {
+        if(!errNode1) {
+          errNode1 = prevNode
+          errNode2 = node
+        } else {
+          errNode2 = node
+        }
+      }
+    }
+    prevNode = node
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  // 两个错误节点交换值
+  const t = errNode1.val
+  errNode1.val = errNode2.val
+  errNode2.val = t
+  return root
+};
+```
+
 
 ## 😻✔ 100 相同的树【easy】
 
@@ -6994,6 +7181,56 @@ var titleToNumber = function(columnTitle) {
 };
 ```
 
+## ?🌟😻✔ 173. 二叉搜索树迭代器【medium】
+
+[ref](https://leetcode.cn/problems/binary-search-tree-iterator/)
+
+二叉搜索树、二叉树、迭代器
+
+```js
+// 利用中序遍历特性
+var BSTIterator = function(root) {
+  this.curr = root
+  this.stack = []
+};
+
+BSTIterator.prototype.next = function() {
+  while(this.curr) {
+    this.stack.push(this.curr)
+    this.curr = this.curr.left
+  }
+  this.curr = this.stack.pop()
+  const ret = this.curr.val
+  this.curr = this.curr.right
+  return ret
+};
+
+BSTIterator.prototype.hasNext = function() {
+  return !!this.curr || !!this.stack.length
+};
+```
+
+```js
+var BSTIterator = function(root) {
+  this.values = []
+  function dfs(node, arr) {
+    node.left && dfs(node.left, arr)
+    arr.push(node.val)
+    node.right && dfs(node.right, arr)
+  }
+  dfs(root, this.values)
+  this.i = 0
+};
+
+BSTIterator.prototype.next = function() {
+  return this.values[this.i++]
+};
+
+BSTIterator.prototype.hasNext = function() {
+  return this.i < this.values.length
+};
+```
+
 ## ??🌟😻✔ 207 课程表【medium】
 
 [ref](https://leetcode.cn/problems/course-schedule/)
@@ -7360,6 +7597,29 @@ var reverseWords = function(s) {
 
   return s
 };
+```
+
+## 🌟😻✔ 187. 重复的DNA序列【medium】
+
+[ref](https://leetcode.cn/problems/repeated-dna-sequences/)
+
+```js
+// 时间复杂度：O(N*C) C=10
+// 空间复杂度：O(N)
+var findRepeatedDnaSequences = function(s) {
+  const res = new Set()
+  const set = new Set()
+  for(let i=9;i<s.length;i++) {
+    const str = s.slice(i - 9,i + 1)
+    if(set.has(str)) {
+      res.add(str)
+    } else {
+      set.add(str)
+    }
+  }
+  return [...res]
+};
+
 ```
 
 ## ??🌟😻✔ 188 买卖股票的最佳时机 IV【hard】
@@ -8984,6 +9244,39 @@ var searchMatrix = function(matrix, target) {
 };
 ```
 
+## ?🌟😻✔ 241. 为运算表达式设计优先级【medium】
+
+[ref](https://leetcode.cn/problems/different-ways-to-add-parentheses/)
+
+递归、字符串
+
+```js
+var diffWaysToCompute = function(expression) {
+  const n = expression.length
+  const res = []
+  for(let i=0;i<n;i++) {
+    if(expression[i] >= '0' && expression[i] <= '9') continue
+    const leftValues = diffWaysToCompute(expression.slice(0, i))
+    const rightValues = diffWaysToCompute(expression.slice(i + 1))
+    for(let lv of leftValues) {
+      for(let rv of rightValues) {
+        if(expression[i] === '+') {
+          res.push(lv + rv)
+        } else if(expression[i] === '-') {
+          res.push(lv - rv)
+        } else {
+          res.push(lv * rv)
+        }
+      }
+    }
+  }
+  if(!res.length) {
+    res.push(Number(expression))
+  }
+  return res
+};
+```
+
 ## ✔ 252 会议室【easy】
 
 [ref](https://leetcode.cn/problems/meeting-rooms/)
@@ -9778,7 +10071,7 @@ function wallsAndGates(rooms: number[][]): void {
 };
 ```
 
-## ?🌟😻✔ 287 寻找重复数【medium】
+## ?🌟😻✔ 285. 二叉搜索树中的中序后继【medium】
 
 [ref](https://leetcode.cn/problems/inorder-successor-in-bst/)
 
@@ -9834,10 +10127,31 @@ var inorderSuccessor = function(root, p) {
 
 [ref](https://leetcode.cn/problems/find-the-duplicate-number/)
 
-双指针、快慢指针、环链表
+双指针、快慢指针、环链表、二分搜索
 
 参考
 - [142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(1)
+var findDuplicate = function(nums) {
+  let l = 1, r = nums.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    let count = 0
+    for(let num of nums) {
+      count += (num <= mid ? 1 : 0)
+    }
+    if(mid < count) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return r
+};
+```
 
 ```js
 // 时间复杂度：O(N)
@@ -10132,6 +10446,63 @@ var longestConsecutive = function(root) {
   dfs(root, undefined, 0)
   return max
 };
+```
+
+## ?🌟😻✔ 299. 猜数字游戏【medium】
+
+[ref](https://leetcode.cn/problems/bulls-and-cows/)
+
+哈希表、数字、字符串
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(M) M= 10
+var getHint = function(secret, guess) {
+  let A = 0, B = 0
+  const nums = new Array(10).fill(0)
+  for(let i=0;i<secret.length;i++) {
+    if(secret[i] === guess[i]) {
+      A++
+    } else {
+      if(nums[guess[i]] > 0) {
+        B++
+      }
+      nums[guess[i]]--
+      if(nums[secret[i]] < 0) {
+        B++
+      }
+      nums[secret[i]]++
+    }
+  }
+  return `${A}A${B}B`
+};
+```
+
+```js
+// 两次扫描，常规解法
+// 时间复杂度：O(N)
+// 时间复杂度：O(M) M= secret有多少个不同数字
+var getHint = function(secret, guess) {
+  let A = 0, B = 0
+  const m = new Map()
+  for(let i=0;i<secret.length;i++) {
+    if(secret[i] === guess[i]) {
+      A++
+    } else {
+      m.set(secret[i], (m.get(secret[i]) || 0) + 1)
+    }
+  }
+  for(let i=0;i<secret.length;i++) {
+    if(secret[i] !== guess[i]) {
+      if(m.get(guess[i]) > 0) {
+        B++
+        m.set(guess[i], m.get(guess[i]) - 1)
+      }
+    }
+  }
+  return `${A}A${B}B`
+};
+
 ```
 
 ## ??🌟😻✔ 300 最长递增子序列【medium】
@@ -11192,6 +11563,64 @@ var maxEnvelopes = function(envelopes) {
   return count + 1
 };
 
+```
+
+## ?🌟😻✔ 357. 统计各位数字都不同的数字个数【medium】
+
+[ref](https://leetcode.cn/problems/count-numbers-with-unique-digits/)
+
+排列组合、数学问题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var countNumbersWithUniqueDigits = function(n) {
+  let res = 1
+  let curr = 1
+  for(let i=1;i<=n;i++) {
+    res += 9 * curr
+    curr *= 10 - i
+  }
+  return res
+};
+```
+
+## ✔ 367. 有效的完全平方数【easy】
+
+[ref](https://leetcode.cn/problems/valid-perfect-square/)
+
+数学、规律、平方、二分搜索
+
+```js
+// 二分搜索
+// 时间复杂度：O(log(num))
+// 空间复杂度：O(1)
+var isPerfectSquare = function(num) {
+  let l = 1, r = num
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    const s = mid * mid
+    if(s === num) {
+      return true
+    } else if(s > num){
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  return false
+};
+```
+
+```js
+// 时间复杂度：O(sqrt(num))
+// 空间复杂度：O(1)
+var isPerfectSquare = function(num) {
+  for(let i=1;i*i<=num;i++) {
+    if(i*i === num) return true
+  }
+  return false
+};
 ```
 
 ## 🌟😻✔ 371. 两整数之和【medium】
@@ -12263,6 +12692,46 @@ function getCount(s, n) {
 }
 ```
 
+## 🌟😻✔ 442. 数组中重复的数据【medium】
+
+[ref](https://leetcode.cn/problems/find-all-duplicates-in-an-array/)
+
+数组
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findDuplicates = function(nums,k = 2) {
+  const n = nums.length
+  let l = 0
+  const res = []
+  const n1 = n + 1
+  while(l < nums.length) {
+    if(nums[l] < n + 1) {
+     while(nums[l] < n + 1) {
+       const nextIndex = nums[l] - 1
+       if(nums[nextIndex] < n + 1) {
+         nums[l] = nums[nextIndex]
+         nums[nextIndex] = n1 + 1
+       } else {
+         nums[l] = n1
+         nums[nextIndex] ++
+       }
+     }
+    }
+    l++
+  }
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] - n1 === k) {
+      res.push(i + 1)
+    }
+  }
+  return res
+};
+
+```
+
+
 ## ?🌟😻✔ 445 两数相加 II【medium】
 
 [ref](https://leetcode.cn/problems/add-two-numbers-ii/)
@@ -12530,6 +12999,33 @@ var hammingDistance = function(x, y) {
 
 ```
 
+## ??🌟😻✔ 474. 一和零【medium】
+
+[ref](https://leetcode.cn/problems/ones-and-zeroes/)
+
+动态规划、背包问题
+
+```js
+// 时间复杂度：O(MN) K=strs.length W=平均 str[i].length
+// 空间复杂度：O(MN)
+var findMaxForm = function(strs, m, n) {
+  const dp = new Array(m + 1).fill(0).map(_ => new Array(n + 1).fill(0))
+  for(let str of strs) {
+    let c0 = 0, c1 = 0
+    for(let c of str) {
+      if(c === '0') c0++
+      else c1++
+    }
+    for(let i=m;i>=c0;i--) {
+      for(let j=n;j>=c1;j--) {
+        dp[i][j] = Math.max(dp[i][j], 1 + dp[i - c0][j - c1])
+      }
+    }
+  }
+  return dp[m][n]
+};
+```
+
 ## ?🌟😻✔ 475 供暖器【medium】
 
 [ref](https://leetcode.cn/problems/heaters/)
@@ -12570,6 +13066,60 @@ function binarySearch(heaters, target) {
   }
   return l
 }
+```
+
+## ✔ 485. 最大连续 1 的个数【easy】
+
+[ref](https://leetcode.cn/problems/max-consecutive-ones/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMaxConsecutiveOnes = function(nums) {
+  let i = 0
+  let max = 0
+  while(i<nums.length) {
+    let count = 0
+    while(i<nums.length && nums[i] === 1) {
+      count++
+      i++
+    }
+    max = Math.max(max, count)
+    i++
+  }
+  return max
+};
+```
+
+## ?🌟😻✔ 487. 最大连续1的个数 II【medium】
+
+[ref](https://leetcode.cn/problems/max-consecutive-ones-ii/)
+
+双指针、滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMaxConsecutiveOnes = function(nums) {
+  let l = 0, r = 0
+  let max = 0
+  let k = 1
+  while(r < nums.length) {
+    if(nums[r] === 1) {
+      max = Math.max(max, r - l + 1)
+    } else {
+      if(k === 1) {
+        k--
+        max = Math.max(max, r - l + 1)
+      } else {
+        while(l <= r && nums[l] !==0) l++
+        l++
+      }
+    }
+    r++
+  }
+  return max
+};
 ```
 
 ## ?🌟😻✔ 493. 翻转对【hard】
@@ -12809,6 +13359,55 @@ var findBottomLeftValue = function(root) {
 };
 ```
 
+## 🌟😻✔ 515. 在每个树行中找最大值【medium】
+
+[ref](https://leetcode.cn/problems/find-largest-value-in-each-tree-row/)
+
+深度优先搜索、广度优先搜索
+
+```js
+ // 时间复杂度：O(N)
+ // 空间复杂度：O(N)
+var largestValues = function(root) {
+  if(!root) return []
+  const res = []
+  function dfs(node, ind) {
+    if(res[ind] === undefined) {
+      res[ind] = node.val
+    } else {
+      res[ind] = Math.max(node.val, res[ind])
+    }
+    node.left && dfs(node.left, ind + 1)
+    node.right && dfs(node.right, ind + 1)
+  }
+  dfs(root, 0)
+  return res
+};
+```
+
+```js
+// BFS
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var largestValues = function(root) {
+  if(!root) return []
+  let q = [root]
+  const res = []
+  while(q.length) {
+    const tq = []
+    let max = Number.MIN_SAFE_INTEGER
+    for(let i=0;i<q.length;i++) {
+      max = Math.max(max, q[i].val)
+      q[i].left && tq.push(q[i].left)
+      q[i].right && tq.push(q[i].right)
+    }
+    q = tq
+    res.push(max)
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 516 最长回文子序列【medium】
 
 [ref](https://leetcode.cn/problems/longest-palindromic-subsequence/)
@@ -12857,6 +13456,43 @@ var change = function(amount, coins) {
   return dp[amount]
 };
 ```
+
+## 🌟😻✔ 524. 通过删除字母匹配到字典里最长单词【medium】
+
+[ref](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/)
+
+双指针、字符串
+
+```js
+// 时间复杂度：O(d*(M+N)) d=dictionary.length M=s.length N=平均 dictionary[i].length
+// 空间复杂度：O(1)
+var findLongestWord = function(s, dictionary) {
+  const n = dictionary.length
+  let res = ''
+  for(let i=0;i<n;i++) {
+    const word = dictionary[i]
+    if(word.length > s.length) continue
+    let lword = 0, ls = 0
+    while(lword < word.length && ls < s.length) {
+      if(s[ls] === word[lword]) {
+        lword++
+      }
+      ls++
+    }
+    if(lword === word.length) {
+      if(
+        !res.length
+        || word.length > res.length
+        || (word.length ===  res.length && word < res)
+      ) {
+        res = word
+      }
+    } 
+  }
+  return res
+};
+```
+
 
 ## ??🌟😻✔ 538 把二叉搜索树转换为累加树【medium】
 
@@ -13373,6 +14009,75 @@ var leastInterval = function(tasks, n) {
 
 ```
 
+## ?🌟😻✔ 622. 设计循环队列【medium】
+
+[ref](https://leetcode.cn/problems/design-circular-queue/)
+
+队列、循环队列
+
+```js
+var MyCircularQueue = function(k) {
+  this.capacity = k
+  this.q = new Array(k)
+  this.i = 0
+  this.j = -1
+  this.count = 0
+};
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.enQueue = function(value) {
+  if(this.isFull()) return false
+  this.j = (this.j + 1) % this.capacity
+  this.q[this.j] = value
+  this.count++
+  return true
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.deQueue = function() {
+  if(this.isEmpty()) return false
+  this.i = (this.i + 1) % this.capacity
+  this.count--
+  return true
+};
+
+/**
+ * @return {number}
+ */
+MyCircularQueue.prototype.Front = function() {
+  if(this.isEmpty()) return -1
+  return this.q[this.i]
+};
+
+/**
+ * @return {number}
+ */
+MyCircularQueue.prototype.Rear = function() {
+  if(this.isEmpty()) return -1
+  return this.q[this.j]
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isEmpty = function() {
+  return this.count === 0
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isFull = function() {
+  return this.count === this.capacity
+};
+
+```
+
 ## ??🌟😻✔ 630 课程表 III【hard】
 
 [ref](https://leetcode.cn/problems/course-schedule-iii/)
@@ -13443,6 +14148,64 @@ class MaxHeap {
   }
 }
 
+```
+
+## ?🌟😻✔ 633. 平方数之和【medium】
+
+[ref](https://leetcode.cn/problems/sum-of-square-numbers/)
+
+二分搜索、数学规律
+
+```js
+// 时间复杂度：O(sqrt(c))
+// 空间复杂度：O(1)
+var judgeSquareSum = function(c) {
+  for(let i=0;i * i <= c;i++) {
+    if(Math.floor(Math.sqrt(c - i * i)) ** 2 + i **2 === c) return true
+  }
+  return false
+};
+```
+
+```js
+// 时间复杂度：O(sqrt(c))
+// 空间复杂度：O(1)
+var judgeSquareSum = function(c) {
+  let a = 0
+  let b = Math.floor(Math.sqrt(c))
+  while(a <= b) {
+    if(a*a+b*b<c) {
+      a++
+    } else if(a*a+b*b > c) {
+      b--
+    } else {
+      return true
+    }
+  }
+  return false
+};
+```
+
+```js
+// 二分，效率低
+var judgeSquareSum = function(c) {
+  for(let i=0;i * i <= c;i++) {
+    const target = c - i * i
+    let l = 0, r = target
+    while(l <= r) {
+      const mid = Math.floor((l + r) / 2)
+      const s = mid * mid
+      if(s === target) {
+        return true
+      } else if(s > target) {
+        r = mid - 1
+      } else {
+        l = mid + 1
+      }
+    }
+  }
+  return false
+};
 ```
 
 ## ??🌟😻✔ 639. 解码方法 II【hard】
@@ -13564,210 +14327,58 @@ function exact(str) {
 
 [ref](https://leetcode.cn/problems/design-circular-deque/)
 
-双端队列、队列
-
-数组实现
+队列、循环队列、双端队列、循环双端队列
 
 ```js
-/**
- * @param {number} k
- */
-var MyCircularDeque = function(k) {
-  this.size = k
-  this.q = []
-};
-
-/** 
- * @param {number} value
- * @return {boolean}
- */
-MyCircularDeque.prototype.insertFront = function(value) {
-  if(this.q.length >= this.size) return false
-  this.q.unshift(value)
-  return true
-};
-
-/** 
- * @param {number} value
- * @return {boolean}
- */
-MyCircularDeque.prototype.insertLast = function(value) {
-  if(this.q.length >= this.size) return false
-  this.q.push(value)
-  return true
-};
-
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.deleteFront = function() {
-  if(!this.q.length) return false
-  this.q.shift()
-  return true
-};
-
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.deleteLast = function() {
-  if(!this.q.length) return false
-  this.q.pop()
-  return true
-};
-
-/**
- * @return {number}
- */
-MyCircularDeque.prototype.getFront = function() {
- if(!this.q.length) return -1
-  return this.q[0]
-};
-
-/**
- * @return {number}
- */
-MyCircularDeque.prototype.getRear = function() {
- if(!this.q.length) return -1
-  return this.q[this.q.length - 1]
-};
-
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.isEmpty = function() {
-  return this.q.length === 0
-};
-
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.isFull = function() {
-  return this.q.length === this.size
-};
-```
-
-链表实现
-
-```js
-class Node {
-  constructor(val) {
-    this.val = val
-    this.prev = null
-    this.next = null
-  }
-}
-
 var MyCircularDeque = function(k) {
   this.capacity = k
-  this.len = 0
-  this.head = new Node()
-  this.tail = new Node()
+  this.count = 0
+  this.i = 0
+  this.j = k-1
+  this.q = []
 };
-
-/** 
- * @param {number} value
- * @return {boolean}
- */
 MyCircularDeque.prototype.insertFront = function(value) {
   if(this.isFull()) return false
-  if(!this.len) {
-    this.head.next = new Node(value)
-    this.tail.next = this.head.next
-  } else {
-    const next = this.head.next
-    const node = new Node(value)
-    this.head.next = node
-    node.next = next
-    next.prev = node
-  }
-  this.len++
+  this.i = (this.i - 1 + this.capacity) % this.capacity
+  this.q[this.i] = value
+  this.count++
   return true
 };
-
-/** 
- * @param {number} value
- * @return {boolean}
- */
 MyCircularDeque.prototype.insertLast = function(value) {
   if(this.isFull()) return false
-  if(!this.len) {
-    this.head.next = new Node(value)
-    this.tail.next = this.head.next
-  } else {
-    const node = new Node(value)
-    const tail = this.tail.next
-    node.prev = tail
-    tail.next = node
-    this.tail.next = node
-  }
-  this.len++
+  this.j = (this.j + 1) % this.capacity
+  this.q[this.j] = value
+  this.count++
   return true
 };
-
-/**
- * @return {boolean}
- */
 MyCircularDeque.prototype.deleteFront = function() {
   if(this.isEmpty()) return false
-  if(this.len === 1) {
-    this.head.next = null
-    this.tail.next = null
-  } else {
-    const node = this.head.next.next
-    this.head.next = node
-    node.prev = null
-  }
-  this.len--
+  this.i = (this.i + 1) % this.capacity
+  this.count--
   return true
 };
-
-/**
- * @return {boolean}
- */
 MyCircularDeque.prototype.deleteLast = function() {
   if(this.isEmpty()) return false
-  if(this.len === 1) {
-    this.head.next = null
-    this.tail.next = null
-  } else {
-    const node = this.tail.next.prev
-    node.next = null
-    this.tail.next = node
-  }
-  this.len--
+  this.j = (this.j - 1 + this.capacity) % this.capacity
+  this.count--
   return true
 };
-
-/**
- * @return {number}
- */
 MyCircularDeque.prototype.getFront = function() {
   if(this.isEmpty()) return -1
-  return this.head.next.val
+  return this.q[this.i]
 };
-
-/**
- * @return {number}
- */
 MyCircularDeque.prototype.getRear = function() {
   if(this.isEmpty()) return -1
-  return this.tail.next.val
+  return this.q[this.j]
 };
-
-/**
- * @return {boolean}
- */
 MyCircularDeque.prototype.isEmpty = function() {
-  return this.len === 0
+  return this.count === 0
+};
+MyCircularDeque.prototype.isFull = function() {
+  return this.count === this.capacity
 };
 
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.isFull = function() {
-  return this.len === this.capacity
-};
-```
+````
 
 ## 🌟😻✔ 647 回文子串【medium】
 
@@ -13901,6 +14512,105 @@ var printTree = function(root) {
 };
 ```
 
+## 🌟😻✔ 658. 找到 K 个最接近的元素【medium】
+
+[ref](https://leetcode.cn/problems/find-k-closest-elements/)
+
+二分搜索、数组题
+
+```js
+// 时间复杂度：O(logN+K)
+// 空间复杂度：O(1)
+var findClosestElements = function(arr, k, x) {
+  const n = arr.length
+  let l = 0, r = n - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(arr[mid] >= x) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  const res = []
+  l = r - 1
+  while(true) {
+    if(res.length === k) return res
+    if(l < 0) {
+      res.push(arr[r++])
+    } else if(r >= n) {
+      res.unshift(arr[l--])
+    } else if(Math.abs(arr[l] - x) <= Math.abs(arr[r] - x)) {
+      res.unshift(arr[l--])
+    } else {
+      res.push(arr[r++])
+    }
+  }
+};
+
+```
+
+```js
+// 常规搜索最近距离
+// 时间复杂度：O(N+K)
+// 空间复杂度：O(1)
+var findClosestElements = function(arr, k, x) {
+  let minInd = 0
+  for(let i=0;i<arr.length;i++) {
+    if(Math.abs(arr[i] - x) < Math.abs(arr[minInd] - x)) {
+      minInd = i
+    }
+  }
+  const res = [arr[minInd]]
+  let l = minInd - 1, r = minInd + 1
+  while(true) {
+    if(res.length === k) return res
+    if(l < 0) {
+      res.push(arr[r++])
+    } else if(r >= arr.length) {
+      res.unshift(arr[l--])
+    } else if(Math.abs(arr[l] - x) <= Math.abs(arr[r] - x)) {
+      res.unshift(arr[l--])
+    } else {
+      res.push(arr[r++])
+    }
+  }
+};
+
+```
+
+## ?🌟😻✔ 662. 二叉树最大宽度【medium】
+
+[ref](https://leetcode.cn/problems/maximum-width-of-binary-tree/)
+
+二叉树、广度优先搜索
+
+题解
+
+- [【云影同学】常规BFS+位置标记+位置偏移](https://leetcode.cn/problems/maximum-width-of-binary-tree/solution/by-lxfriday-6h0f/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var widthOfBinaryTree = function(root) {
+  let q = [[root, 1]]
+  let max = 1
+  while(q.length) {
+    const tq = []
+    max = Math.max(max, q[q.length - 1][1]-q[0][1]+1)
+    // 偏移量
+    const dis = q[0][1] - 1
+    for(let i=0;i<q.length;i++) {
+      const [node, k] = q[i]
+      node.left && tq.push([node.left, 2 * (k-dis) - 1])
+      node.right && tq.push([node.right, 2 * (k-dis)])
+    }
+    q = tq
+  }
+  return max
+};
+```
+
 ## ?🌟😻✔ 665. 非递减数列【medium】
 
 [ref](https://leetcode.cn/problems/non-decreasing-array/)
@@ -13932,6 +14642,122 @@ var checkPossibility = function(nums) {
   return true
 };
 
+```
+
+## ?🌟😻✔ 692. 前K个高频单词【medium】
+
+[ref](https://leetcode.cn/problems/top-k-frequent-words/)
+
+优先队列、堆、小顶堆、前k个问题
+
+```js
+// 时间复杂度：O(NlogK)
+// 空间复杂度：O(N)
+var topKFrequent = function(words, k) {
+  const m = new Map()
+  const minHeap = new MinHeap()
+  for(let word of words) {
+    m.set(word, (m.get(word) || 0) + 1)
+  }
+  for(let [word, count] of m.entries()) {
+    minHeap.insert({word, count})
+    if(minHeap.size() > k) minHeap.pop()
+  }
+  const res = []
+  while(minHeap.size()) {
+    res.unshift(minHeap.pop().word)
+  }
+  return res
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  size() {
+    return this.heap.length
+  }
+  insert(obj) {
+    this.heap.push(obj)
+    this.shiftUp(this.size() - 1)
+  }
+  pop() {
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  shiftUp(i) {
+    const parentIndex = Math.floor((i - 1) / 2)
+    if(parentIndex >= 0 && (
+      this.heap[i].count < this.heap[parentIndex].count
+      || this.heap[i].count === this.heap[parentIndex].count && this.heap[i].word > this.heap[parentIndex].word
+    )) {
+      this.swap(i, parentIndex)
+      this.shiftUp(parentIndex)
+    }
+  }
+  shiftDown(i) {
+    const lIndex = 2 * i + 1, rIndex = 2 * i + 2
+    let minI = i
+    if(lIndex < this.size() && (
+      this.heap[lIndex].count < this.heap[minI].count
+      || this.heap[lIndex].count === this.heap[minI].count && this.heap[lIndex].word > this.heap[minI].word
+    )) {
+      minI = lIndex
+    }
+    if(rIndex < this.size() && (
+      this.heap[rIndex].count < this.heap[minI].count
+      || this.heap[rIndex].count === this.heap[minI].count && this.heap[rIndex].word > this.heap[minI].word
+    )) {
+      minI = rIndex
+    }
+    if(minI !== i) {
+      this.swap(i, minI)
+      this.shiftDown(minI)
+    }
+  }
+}
+```
+
+```js
+// 桶排序解法
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var topKFrequent = function(words, k) {
+  const m = new Map()
+  let max = Number.MIN_SAFE_INTEGER
+  for(let word of words) {
+    m.set(word, (m.get(word) || 0) + 1)
+    max = Math.max(max, m.get(word))
+  }
+  const bucket = new Array(max)
+  for(let [word, count] of m.entries()) {
+    if(!bucket[count]) {
+      bucket[count] = []
+    }
+    let i = bucket[count].length - 1
+    while(i >= 0 && bucket[count][i] > word) {
+      bucket[count][i + 1] = bucket[count][i]
+      i--
+    }
+    bucket[count][i + 1] = word
+  }
+  const res = []
+  for(let i = max;i >= 1;i--) {
+    if(bucket[i]) {
+      for(let j=0;j<bucket[i].length;j++) {
+        res.push(bucket[i][j])
+        if(res.length === k) return res
+      }
+    }
+  }
+};
 ```
 
 ## 😻✔ 695 岛屿的最大面积【medium】
@@ -14347,6 +15173,57 @@ var maxProfit = function(prices, fee) {
 };
 ```
 
+## 🌟😻✔ 718. 最长重复子数组【medium】
+
+[ref](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var findLength = function(nums1, nums2) {
+  const m = nums1.length, n = nums2.length
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  let max = 0
+  for(let i=0;i<nums1.length;i++) {
+    for(let j=0;j<nums2.length;j++) {
+      if(nums1[i] === nums2[j]) {
+        dp[i][j] = 1 + ((i >= 1 && j >= 1)? dp[i-1][j-1]:0)
+        max = Math.max(dp[i][j], max)
+      }
+    }
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 720. 词典中最长的单词【medium】
+
+[ref](https://leetcode.cn/problems/longest-word-in-dictionary/)
+
+哈希表
+
+```js
+var longestWord = function(words) {
+  const s = new Set([...words])
+  let res = ''
+  for(let word of s) {
+    let has = true
+    for(let i=word.length - 1;i>=1;i--) {
+      if(!s.has(word.slice(0, i))) {
+        has = false
+      }
+    }
+    if(has) {
+      if(res.length < word.length || (res.length === word.length && word < res))
+      res = word
+    }
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 725. 分隔链表【medium】
 
 [ref](https://leetcode.cn/problems/split-linked-list-in-parts/)
@@ -14414,6 +15291,56 @@ var dailyTemperatures = function(temperatures) {
     s.push(i)
   }
   return res
+};
+```
+
+## ?🌟😻✔ 740. 删除并获得点数【medium】
+
+[ref](https://leetcode.cn/problems/delete-and-earn/)
+
+动态规划
+
+转换为打家劫舍问题
+
+```js
+// 时间复杂度：O(N+M) M = len
+// 空间复杂度：O(M)
+var deleteAndEarn = function(nums) {
+  const len = 10**4 + 1
+  const arr = new Array(len).fill(0)
+  const dp = new Array(len).fill(0)
+  for(let i=0;i<nums.length;i++) {
+    arr[nums[i]] += nums[i]
+  }
+  dp[1] = arr[1]
+  for(let i=2;i<len;i++) {
+    dp[i] = Math.max(arr[i] + dp[i - 2], dp[i - 1])
+  }
+  return dp[len - 1]
+};
+```
+
+```js
+var deleteAndEarn = function(nums) {
+  const map = new Map()
+  for(let i=0;i<nums.length;i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + 1)
+  }
+  nums = [...map].map(_ => _[0]).sort((a, b) => a - b)
+  const dp = new Array(nums.length).fill(0).map(_ => 0)
+  dp[0] = nums[0] * map.get(nums[0])
+  for(let i=1;i<nums.length;i++) {
+    const num = nums[i]
+    const a =  dp[i - 1]
+    let b
+    if(nums[i] === nums[i - 1] + 1) {
+      b = (i - 2 >=0 ? dp[i - 2]:0)  + num * map.get(num)
+    } else {
+      b = dp[i - 1] + num * map.get(num)
+    }
+    dp[i] = Math.max(a, b)
+  }
+  return dp[nums.length - 1]
 };
 ```
 
@@ -14595,6 +15522,192 @@ var maxChunksToSorted = function(arr) {
 };
 ```
 
+## ???🌟😻✔ 782. 变为棋盘【hard】
+
+[ref](https://leetcode.cn/problems/transform-to-chessboard/)
+
+矩阵、模拟、规律题
+
+题解
+
+- [【云影同学】强规律题，反推+模拟，双百](https://leetcode.cn/problems/transform-to-chessboard/solution/by-lxfriday-7miv/)
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var movesToChessboard = function(board) {
+  const n = board.length
+  const rowSet = new Set()
+  const colSet = new Set()
+  const rowSum = new Array(n).fill(0)
+  const colSum = new Array(n).fill(0)
+  for(let i=0;i<n;i++) {
+    let s = ''
+    for(let j=0;j<n;j++) {
+      s += board[i][j]
+      rowSum[i] += board[i][j]
+    }
+    rowSet.add(s)
+    if(
+      n % 2===0 && rowSum[i] !== n / 2
+      || n % 2 ===1 && rowSum[i] !== Math.floor(n / 2) && rowSum[i] !== Math.floor(n / 2) + 1
+    ) {
+      return -1
+    }
+  }
+  for(let j=0;j<n;j++) {
+    let s = ''
+    for(let i=0;i<n;i++) {
+      s += board[i][j]
+      colSum[j] += board[i][j]
+    }
+    colSet.add(s)
+    if(
+      n % 2===0 && colSum[j] !== n / 2
+      || n % 2 ===1 && colSum[j] !== Math.floor(n / 2) && colSum[j] !== Math.floor(n / 2) + 1
+    ) {
+      return -1
+    }
+  }
+  if(colSet.size !== 2 || rowSet.size !== 2) return -1
+  let rowZeroFirst = false
+  let colZeroFirst = false
+  if(n % 2 === 1) {
+    if(rowSum[0] === Math.floor(n / 2)) rowZeroFirst = true
+    if(colSum[0] === Math.floor(n / 2)) colZeroFirst = true
+  }
+  const sum1 = n % 2 === 0
+    ? Math.min(findSwap(board, true, true), findSwap(board, false, true))
+    : findSwap(board, rowZeroFirst, true)
+  const sum2 = n % 2 === 0
+    ? Math.min(findSwap(board, true, false), findSwap(board, false, false))
+    :findSwap(board, colZeroFirst, false)
+  return sum1 + sum2
+};
+
+function findSwap(board, zeroFirst, isRow) {
+  const n = board.length
+  let count = 0
+  let isZero = zeroFirst
+  let borrowCount = 0
+  for(let i=0;i<n;i++) {
+    const ii = isRow ? 0 : i
+    const jj = isRow ? i : 0
+    if(board[ii][jj] === 0 && !isZero) {
+      if(borrowCount > 0) {
+        borrowCount--
+      } else {
+        count++
+        borrowCount++
+      }
+    } else if(board[ii][jj] === 1 && isZero) {
+      if(borrowCount > 0) {
+        borrowCount--
+      } else {
+        count++
+        borrowCount++
+      }
+    }
+    isZero = !isZero
+  }
+  return count
+}
+// 0 1 1 0
+// 0 1 1 0
+// 1 0 0 1
+// 1 0 0 1
+
+// ------------
+// 1,1,1,0,0,1,0,0
+// 0,0,0,1,1,0,1,1
+// 1,1,1,0,0,1,0,0
+// 0,0,0,1,1,0,1,1
+// 0,0,0,1,1,0,1,1
+// 0,0,0,1,1,0,1,1
+// 1,1,1,0,0,1,0,0
+// 1,1,1,0,0,1,0,0
+// ------------
+// 0,0,1,0,1,1
+// 1,1,0,1,0,0
+// 1,1,0,1,0,0
+// 0,0,1,0,1,1
+// 1,1,0,1,0,0
+// 0,0,1,0,1,1
+// -------------
+// 1,1,1,0
+// 1,1,1,0
+// 0,0,0,1
+// 0,0,0,1
+// -------------
+// 0,0,1,1
+// 1,1,0,0
+// 0,1,0,1
+// 1,0,1,0
+// -------------
+// 1,0,0
+// 0,1,1
+// 1,0,0
+// -------------
+// 1,1,0
+// 0,0,1
+// 0,0,1
+
+// 0,0,1
+// 1,1,0
+// 0,0,1
+
+// 0,1,0
+// 1,0,1
+// 0,1,0
+// ---------------
+// 0 1 1 0
+// 0 1 1 0
+// 1 0 0 1
+// 1 0 0 1
+
+// 0 1 1 0
+// 1 0 0 1
+// 0 1 1 0
+// 1 0 0 1
+
+// 0 1 0 1
+// 1 0 1 0
+// 0 1 0 1
+// 1 0 1 0
+```
+
+## ?🌟😻✔ 784. 字母大小写全排列【medium】
+
+[ref](https://leetcode.cn/problems/letter-case-permutation/)
+
+排列组合、回溯
+
+```js
+// 时间复杂度：O(N*2^N) N=s.length
+// 空间复杂度：O(N)
+var letterCasePermutation = function(s) {
+  const n = s.length
+  const res = []
+  function backtracking(i, path) {
+    if(i >= n) {
+      res.push(path.join(''))
+      return
+    }
+    if(path[i] >= '0' && path[i] <= '9') {
+      backtracking(i + 1, path)
+    } else {
+      path[i] = path[i].toLowerCase()
+      backtracking(i + 1, path)
+      path[i] = path[i].toUpperCase()
+      backtracking(i + 1, path)
+    }
+  }
+
+  backtracking(0, s.split(''))
+  return res
+};
+```
+
 ## ?🌟😻✔ 785. 判断二分图【medium】
 
 [ref](https://leetcode.cn/problems/is-graph-bipartite/)
@@ -14639,6 +15752,48 @@ var isBipartite = function(graph) {
   }
   return true
 };
+```
+
+## ???🌟😻✔ 793. 阶乘函数后 K 个零【hard】
+
+[ref](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/)
+
+二分搜索、阶乘尾部0、阶乘
+
+题解
+
+- [面试官，这道题我想不出来，不要offer行不行](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/solution/by-lxfriday-u8m3/)
+
+```js
+// 时间复杂度：O((logK)^2)
+// 空间复杂度：O(1)
+var preimageSizeFZF = function(k) {
+  return f(k + 1) - f(k)
+};
+
+function f(k) {
+  let l = 0, r = 5 * k
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    const count = getZeroCount(mid)
+    if(count < k) {
+      l = mid + 1
+    } else {
+      r = mid
+    }
+  }
+  return r
+}
+
+// 时间复杂度：O(logN)
+function getZeroCount(n) {
+  let res = 0
+  while(n !== 0) {
+    n = Math.floor(n / 5)
+    res += n
+  }
+  return res
+}
 ```
 
 ## 🌟✔ 796. 旋转字符串【easy】
@@ -14886,7 +16041,42 @@ var shortestSubarray = function(nums, k) {
 };
 ```
 
-## ✔ ??🌟😻✔ 879 盈利计划【hard】
+## ?🌟😻✔ 875. 爱吃香蕉的珂珂【medium】
+
+[ref](https://leetcode.cn/problems/koko-eating-bananas/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(NlogM) M=max(piles)
+// 空间复杂度：O(1)
+var minEatingSpeed = function(piles, h) {
+  let low = 1, high = 1
+  for(const pile of piles) {
+    high = Math.max(high, pile)
+  }
+  while(low < high) {
+    const mid = Math.floor((low + high) / 2)
+    const time = getTime(mid, piles)
+    if(time <= h) {
+      high = mid
+    } else {
+      low = mid + 1
+    }
+  }
+  return high
+};
+
+function getTime(speed, piles) {
+  let time = 0
+  for(const pile of piles) {
+    time += Math.ceil(pile / speed)
+  }
+  return time
+}
+```
+
+## ??🌟😻✔ 879 盈利计划【hard】
 
 [ref](https://leetcode.cn/problems/profitable-schemes/)
 
@@ -15194,6 +16384,113 @@ var insertIntoMaxTree = function(root, val) {
   }
   return create(0, nums.length - 1)
 };
+```
+
+## ?🌟😻✔ 1004. 最大连续1的个数 III【medium】
+
+[ref](https://leetcode.cn/problems/max-consecutive-ones-iii/)
+
+双指针、滑动窗口
+
+```js
+var longestOnes = function(nums, k) {
+  let l = 0, r = 0
+  let max = 0
+  while(r < nums.length) {
+    if(nums[r] === 1) {
+      max = Math.max(max, r - l + 1)
+    } else {
+      if(k > 0) {
+        k--
+        max = Math.max(max, r - l + 1)
+      } else {
+        while(l < r && nums[l] !== 0) l++
+        l++
+      }
+    }
+    r++
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 1052. 爱生气的书店老板【medium】
+
+[ref](https://leetcode.cn/problems/grumpy-bookstore-owner/)
+
+前缀树组
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var maxSatisfied = function(customers, grumpy, minutes) {
+  const n = customers.length
+  const peoplePre = []
+  const noCool = []
+  let max = 0
+  for(let i=0;i<n;i++) {
+    peoplePre[i] = customers[i] + (i > 0? peoplePre[i - 1] : 0)
+    noCool[i] = (i > 0? noCool[i - 1] : 0) + (grumpy[i] === 0 ? customers[i]: 0)
+  }
+  for(let i=0;i<n;i++) {
+    const buffCount = peoplePre[i + minutes - 1 >= n? n - 1 : i + minutes - 1] - (i - 1 >= 0 ? peoplePre[i - 1] : 0)
+    const normalCount = (i-1>=0? noCool[i-1] :0) + noCool[n - 1] - noCool[i + minutes - 1 >= n ? n-1 : i + minutes - 1]
+    max = Math.max(max, buffCount + normalCount)
+  }
+
+  return max
+};
+```
+
+## 🌟😻✔ 1087. 花括号展开【medium】
+
+[ref](https://leetcode.cn/problems/brace-expansion/)
+
+回溯
+
+```js
+var expand = function(s) {
+  const arr = []
+  let i = 0
+
+  while(i < s.length) {
+    if(s[i] === '{') {
+      i++
+      const tmp = []
+      while(s[i] !== '}') {
+        if(s[i] !== ',') {
+          tmp.push(s[i])
+        }
+        i++
+      }
+      arr.push(tmp.sort((a, b) => a < b ? -1 : 1))
+    } else {
+      arr.push(s[i])
+    }
+    i++
+  }
+  const res = []
+  function backTracking(i, path) {
+    if(i === arr.length) {
+      res.push(path.join(''))
+      return
+    }
+    if(typeof path[i] === 'string') {
+      backTracking(i + 1, path)
+    } else {
+      const chars = path[i]
+      for(let j=0;j<chars.length;j++) {
+        path[i] = chars[j]
+        backTracking(i + 1, path)
+      }
+      path[i] = chars
+    }
+  }
+
+  backTracking(0, arr)
+  return res
+};
+
 ```
 
 ## 🌟😻✔ 1094. 拼车【medium】
@@ -15789,6 +17086,107 @@ var isPrefixOfWord = function(sentence, searchWord) {
     }
   }
   return -1
+};
+```
+
+## 🌟😻✔1460. 通过翻转子数组使两个数组相等【easy】
+
+[ref](https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-sub-arrays/submissions/)
+
+排序、数组、哈希表
+
+题解
+
+- [【云影同学】三种解法，哈希表+桶排序+普通交换](https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-sub-arrays/solution/by-lxfriday-95ev/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var canBeEqual = function(target, arr) {
+  const mtarget = new Map(), marr = new Map()
+  for(let i=0; i < target.length; i++) {
+    mtarget.set(target[i], (mtarget.get(target[i]) || 0) + 1)
+  }
+  for(let i=0; i < arr.length; i++) {
+    marr.set(arr[i], (marr.get(arr[i]) || 0) + 1)
+  }
+  for(let [num, count] of mtarget.entries()) {
+    if(marr.get(num) !== count) return false
+  }
+  return true
+};
+```
+
+```js
+// 时间复杂度：O(M + N) N=target.length M=max(...target)
+// 空间复杂度：O(M)
+var canBeEqual = function(target, arr) {
+  const targetBucket = []
+  for(let i=0; i < target.length; i++) {
+    targetBucket[target[i]] = (targetBucket[target[i]] || 0) + 1
+  }
+  for(let i=0; i < arr.length; i++) {
+    if(targetBucket[arr[i]] === undefined) {
+      return false
+    } else {
+      targetBucket[arr[i]]--
+    }
+  }
+  for(let i=0;i<targetBucket.length;i++) {
+    if(targetBucket[i] !== undefined &&  targetBucket[i] !== 0) return false 
+  }
+  return true
+};
+```
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var canBeEqual = function(target, arr) {
+  for(let i=0; i < target.length; i++) {
+    const rI = find(arr, i, target[i])
+    if(rI < i) return false
+    swap(arr, i, rI)
+  }
+  return true
+};
+
+function find(arr,start,t) {
+  while(start < arr.length) {
+    if(arr[start] === t) return start
+    start++
+  }
+  return -1
+}
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+## ✔1464. 数组中两元素的最大乘积【easy】
+
+[ref](https://leetcode.cn/problems/maximum-product-of-two-elements-in-an-array/)
+
+常规题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxProduct = function(nums) {
+  let max1 = Math.min(nums[0], nums[1])
+  let max2 = Math.max(nums[0], nums[1])
+  for(let i=2;i<nums.length;i++) {
+    if(nums[i] > max2) {
+      max1 = max2
+      max2 = nums[i]
+    } else {
+      max1 = Math.max(nums[i], max1)
+    }
+  }
+  return (max1 - 1) * (max2 - 1)
 };
 ```
 
@@ -18090,4 +19488,51 @@ var addTwoNumbers = function(l1, l2) {
   }
   return head.next
 };
+```
+
+## ?🌟😻✔ 面试题 17.14. 最小K个数【medium】
+
+[ref](https://leetcode.cn/problems/smallest-k-lcci/)
+
+堆、优先队列、快速选择、前k个问题
+
+```js
+// 快选思想
+// 期望时间复杂度：O(N)
+// 空间时间复杂度：O(1)
+var smallestK = function(arr, k) {
+  if(!k) return []
+  let l = 0, r = arr.length - 1
+  while(true) {
+    const partInd = partition(l, r)
+    if(partInd + 1 === k) return arr.slice(0, partInd + 1)
+    else if(partInd + 1 > k) {
+      r = partInd - 1
+    } else {
+      l = partInd + 1
+    }
+  }
+  function partition(l, r) {
+    if(l === r) return l
+    const randI = l + Math.floor(Math.random() * (r - l + 1))
+    swap(arr, l, randI)
+    const pivot = arr[l]
+    let j = l + 1
+    for(let i=l + 1;i<=r;i++) {
+      if(arr[i] < pivot) {
+        swap(arr, i, j)
+        j++
+      }
+    }
+    swap(arr, j-1, l)
+    return j-1
+  }
+};
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+
 ```
