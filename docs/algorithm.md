@@ -25,6 +25,18 @@
 
 # 刷题日记
 
+- 20220829(11)
+  - [【easy】1470. 重新排列数组](https://leetcode.cn/problems/shuffle-the-array/) 数组
+  - [🌟【medium】284. 顶端迭代器](https://leetcode.cn/problems/peeking-iterator/) 迭代器
+  - [🌟【medium】281. 锯齿迭代器](https://leetcode.cn/problems/zigzag-iterator/) 迭代器
+  - ?? [🌟【medium】684. 冗余连接](https://leetcode.cn/problems/redundant-connection/) 并查集、图
+  - [🌟【medium】547. 省份数量](https://leetcode.cn/problems/number-of-provinces/) 深度优先、广度优先、图
+  - ? [🌟【medium】721. 账户合并](https://leetcode.cn/problems/accounts-merge/) 深度优先、广度优先、图
+  - [🌟【easy】734. 句子相似性](https://leetcode.cn/problems/sentence-similarity/) 哈希表、集合
+  - [🌟【medium】737. 句子相似性 II](https://leetcode.cn/problems/sentence-similarity-ii/) 图、广度优先搜索
+  - [🌟【medium】200. 岛屿数量](https://leetcode.cn/problems/number-of-islands/) 矩阵、深度优先搜索
+  - [🌟【medium】130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/) 矩阵、深度优先搜索
+  - [🌟【medium】323. 无向图中连通分量的数目](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/) 图、广度优先搜索、并查集
 - 20220828(11)
   - [🌟【medium】187. 重复的DNA序列](https://leetcode.cn/problems/repeated-dna-sequences/) 哈希表
   - ? [🌟【medium】784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/) 排列组合、回溯
@@ -847,6 +859,13 @@
 - 🌟【medium】[785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/) 图、深度优先搜索、广度优先搜索
 - 🌟【medium】[752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock/) 广度优先搜索
 - 🌟【medium】[547. 省份数量](https://leetcode.cn/problems/number-of-provinces/) 深度优先、广度优先
+- ? 🌟【medium】[721. 账户合并](https://leetcode.cn/problems/accounts-merge/) 深度优先、广度优先、图
+- 🌟【medium】[737. 句子相似性 II](https://leetcode.cn/problems/sentence-similarity-ii/) 图、广度优先搜索
+- 🌟【medium】[323. 无向图中连通分量的数目](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/) 图、广度优先搜索、并查集
+
+### 并查集
+
+- ?? 🌟【medium】[684. 冗余连接](https://leetcode.cn/problems/redundant-connection/) 并查集、图
 
 ## 搜索、排序
 
@@ -10016,6 +10035,76 @@ var wiggleSort = function(nums) {
 ```
 
 
+## ?🌟😻✔ 281. 锯齿迭代器【medium】
+
+[ref](https://leetcode.cn/problems/zigzag-iterator/)
+
+迭代器
+
+题解
+
+- [ref](https://leetcode.cn/problems/zigzag-iterator/solution/by-lxfriday-z65p/)
+
+```js
+var ZigzagIterator = function ZigzagIterator(v1, v2) {
+  this.vec = [v1, v2]
+  this.i = 0
+};
+ZigzagIterator.prototype.hasNext = function hasNext() {
+  if(this.vec[this.i].length) {
+    return true
+  } else {
+    while(this.vec.length && !this.vec[this.i].length) {
+      this.vec.splice(this.i, 1)
+      if(this.vec.length === 0) return false
+      this.i = this.i % this.vec.length
+    }
+    if(!this.vec.length) return false
+    return true
+  }
+};
+ZigzagIterator.prototype.next = function next() {
+  const ret = this.vec[this.i].shift()
+  this.i = (this.i + 1) % this.vec.length
+  return ret
+};
+```
+
+拓展版本
+
+```js
+// const karr = [
+//   [1, 2, 3, 4, 5, 6, 7, 8],
+//   [10, 20, 30, 40, 50, 60, 70],
+//   [100, 200, 300, 400, 500],
+//   [1000, 2000, 3000, 4000, 5000, 6000],
+//   [10000, 20000, 30000],
+// ]
+
+var ZigzagIterator = function ZigzagIterator(v1, v2) {
+  this.vec = [v1, v2]
+  this.i = 0
+};
+ZigzagIterator.prototype.hasNext = function hasNext() {
+  if(this.vec[this.i].length) {
+    return true
+  } else {
+    while(this.vec.length && !this.vec[this.i].length) {
+      this.vec.splice(this.i, 1)
+      if(this.vec.length === 0) return false
+      this.i = this.i % this.vec.length
+    }
+    return true
+  }
+};
+ZigzagIterator.prototype.next = function next() {
+  const ret = this.vec[this.i].shift()
+  this.i = (this.i + 1) % this.vec.length
+  return ret
+};
+
+```
+
 ## ✔ 283 移动零【easy】
 
 [ref](https://leetcode.cn/problems/move-zeroes/)
@@ -10036,39 +10125,35 @@ var moveZeroes = function(nums) {
 };
 ```
 
-## ?🌟😻✔ 286. 墙与门【medium】
+## 🌟😻✔ 284. 顶端迭代器【medium】
 
-[ref](https://leetcode.cn/problems/walls-and-gates/)
+[ref](https://leetcode.cn/problems/peeking-iterator/)
 
-广度优先搜索、多源广度优先搜索
+迭代器
 
-```ts
-function wallsAndGates(rooms: number[][]): void {
-  const INF = 2147483647
-  const m = rooms.length
-  const n = rooms[0].length
-  let q: Array<[number, number, number]> = []
-  for(let i=0;i<m;i++) {
-    for(let j=0;j<n;j++) {
-      if(rooms[i][j] === 0) q.push([i, j, 0])
-    }
-  }
-  const dots = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-  while(q.length) {
-    const len = q.length
-    const newQ : Array<[number, number, number]> = []
-    for(let k=0;k<len;k++) {
-      const [i, j, depth] = q[k]
-      for(let kk=0;kk<dots.length;kk++) {
-        const ii = i + dots[kk][0], jj = j + dots[kk][1]
-        if(ii < 0 || jj < 0 || ii >= m || jj >= n || rooms[ii][jj] !== INF) continue
-        rooms[ii][jj] = depth + 1
-        newQ.push([ii, jj, depth + 1])
-      }
-    }
-    q = newQ
+```js
+var PeekingIterator = function(iterator) {
+   this.iterator = iterator
+   this.tmp = undefined
+};
+PeekingIterator.prototype.peek = function() {
+  if(this.tmp !== undefined) return this.tmp
+  this.tmp = this.iterator.next()
+  return this.tmp
+};
+PeekingIterator.prototype.next = function() {
+  if(this.tmp !== undefined) {
+    const ret = this.tmp
+    this.tmp = undefined
+    return ret
+  } else {
+    return this.iterator.next()
   }
 };
+PeekingIterator.prototype.hasNext = function() {
+  return this.tmp !== undefined || this.iterator.hasNext()
+};
+
 ```
 
 ## ?🌟😻✔ 285. 二叉搜索树中的中序后继【medium】
@@ -10122,6 +10207,42 @@ var inorderSuccessor = function(root, p) {
   return next
 };
 ```
+
+## ?🌟😻✔ 286. 墙与门【medium】
+
+[ref](https://leetcode.cn/problems/walls-and-gates/)
+
+广度优先搜索、多源广度优先搜索
+
+```ts
+function wallsAndGates(rooms: number[][]): void {
+  const INF = 2147483647
+  const m = rooms.length
+  const n = rooms[0].length
+  let q: Array<[number, number, number]> = []
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(rooms[i][j] === 0) q.push([i, j, 0])
+    }
+  }
+  const dots = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  while(q.length) {
+    const len = q.length
+    const newQ : Array<[number, number, number]> = []
+    for(let k=0;k<len;k++) {
+      const [i, j, depth] = q[k]
+      for(let kk=0;kk<dots.length;kk++) {
+        const ii = i + dots[kk][0], jj = j + dots[kk][1]
+        if(ii < 0 || jj < 0 || ii >= m || jj >= n || rooms[ii][jj] !== INF) continue
+        rooms[ii][jj] = depth + 1
+        newQ.push([ii, jj, depth + 1])
+      }
+    }
+    q = newQ
+  }
+};
+```
+
 
 ## ??🌟😻✔ 287 寻找重复数【medium】
 
@@ -10858,6 +10979,81 @@ var coinChange = function(coins, amount) {
   }
   return dp[amount] > amount? -1 : dp[amount]
 };
+```
+
+## 🌟😻✔ 323. 无向图中连通分量的数目【medium】
+
+[ref](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/comments/)
+
+图、广度优先搜索、并查集
+
+```js
+var countComponents = function(n, edges) {
+  const map = new Map()
+  const edgeSet = new Set()
+  for(let i=0;i<edges.length;i++) {
+    const edge = edges[i]
+    edgeSet.add(edge[0])
+    edgeSet.add(edge[1])
+    if(map.has(edge[0])) {
+      map.get(edge[0]).push(edge[1])
+    } else {
+      map.set(edge[0], [edge[1]])
+    }
+    if(map.has(edge[1])) {
+      map.get(edge[1]).push(edge[0])
+    } else {
+      map.set(edge[1], [edge[0]])
+    }
+  }
+  let count = 0
+  const used = new Set()
+  for(let dot of edgeSet) {
+    if(used.has(dot)) continue
+    used.add(dot)
+    count++
+    let q = [dot]
+    while(q.length) {
+      const tq = []
+      for(let i=0;i<q.length;i++) {
+        const relas = map.get(q[i])
+        for(let j=0;j<relas.length;j++) {
+          if(!used.has(relas[j])) {
+            used.add(relas[j])
+            tq.push(relas[j])
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return count + n - edgeSet.size
+};
+```
+
+并查集实现
+
+```js
+var countComponents = function(n, edges) {
+  const parent = new Array(n).fill(0).map((v, i) => i)
+  for(let edge of edges) {
+    union(parent, edge[0], edge[1])
+  }
+  let count = 0
+  for(let i=0;i<n;i++) {
+    if(parent[i] === i) count++
+  }
+  return count
+};
+function find(parent, i) {
+  if(parent[i] !== i) {
+    return find(parent, parent[i])
+  }
+  return parent[i]
+}
+function union(parent, i, j) {
+  parent[find(parent, i)] = find(parent, j)
+}
 ```
 
 ## ?🌟😻✔ 324. 摆动排序 II【medium】
@@ -13663,6 +13859,46 @@ function findCircleNum(isConnected) {
 };
 ````
 
+```js
+var findCircleNum = function(isConnected) {
+  const n = isConnected.length
+  const parent = new Array(n).fill(0).map((v, i) => [])
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(i !== j && isConnected[i][j] === 1) {
+        parent[i].push(j)
+      }
+    }
+  }
+  const used = new Set()
+  let count = 0
+  for(let i=0;i<n;i++) {
+    if(used.has(i)) continue
+    used.add(i)
+    count++
+    let q = [i]
+    while(q.length) {
+      const len = q.length
+      const tq = []
+      for(let j=0;j<len;j++) {
+        const curr = q[j]
+        for(let k=0;k<parent[curr].length;k++) {
+          const next = parent[curr][k]
+          if(!used.has(next)) {
+            tq.push(next)
+            used.add(next)
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return count
+};
+
+
+```
+
 ```typescript
 // 广度优先搜索
 function findCircleNum(isConnected: number[][]): number {
@@ -14644,6 +14880,45 @@ var checkPossibility = function(nums) {
 
 ```
 
+## ??🌟😻✔ 684. 冗余连接【medium】
+
+[ref](https://leetcode.cn/problems/redundant-connection/solution/)
+
+并查集、图
+
+```js
+// 时间复杂度：O(NlogN)
+// 时间复杂度：O(N)
+var findRedundantConnection = function(edges) {
+  const n = edges.length
+  const parent = new Array(n + 1).fill(0).map((v, i) => i)
+  console.log(parent)
+  for(let i=0;i<n;i++) {
+    const edge = edges[i]
+    const node1 = edge[0], node2 = edge[1]
+    if(find(parent, node1) !== find(parent, node2)) {
+      union(parent, node1, node2)
+    } else {
+      return edge
+    }
+    console.log(node1, node2, parent)
+  }
+  return [0]
+};
+
+function union(parent, index1, index2) {
+  parent[find(parent, index1)] = find(parent, index2)
+}
+
+function find(parent, index) {
+  if(parent[index] !== index) {
+    parent[index] = find(parent, parent[index])
+    // return find(parent, parent[index])
+  }
+  return parent[index]
+}
+```
+
 ## ?🌟😻✔ 692. 前K个高频单词【medium】
 
 [ref](https://leetcode.cn/problems/top-k-frequent-words/)
@@ -15224,6 +15499,72 @@ var longestWord = function(words) {
 };
 ```
 
+## ?🌟😻✔ 721. 账户合并【medium】
+
+[ref](https://leetcode.cn/problems/accounts-merge/)
+
+图、广度优先搜索
+
+题解
+
+- [哈希表+集合+广度优先搜索，利用到图的朴素解法。 面试官：要offer不要，我：怕了](https://leetcode.cn/problems/accounts-merge/)
+
+```js
+var accountsMerge = function(accounts) {
+  const emailMap = new Map()
+  const n = accounts.length
+  const indexRelations = new Array(n).fill(0).map(_ => new Set())
+  for(let i=0;i<n;i++) {
+    const account = accounts[i]
+    for(let j=1;j<account.length;j++) {
+      if(emailMap.has(account[j])) {
+        emailMap.get(account[j]).push(i)
+      } else {
+        emailMap.set(account[j], [i])
+      }
+    }
+  }
+  for(let indexes of emailMap.values()) {
+    for(let index1 of indexes) {
+      for(let index2 of indexes) {
+        if(index1 !== index2) {
+          indexRelations[index1].add(index2)
+        }
+      }
+    }
+  }
+  const res = []
+  const used = new Set()
+  for(let i=0;i<n;i++) {
+    if(used.has(i)) continue
+    used.add(i)
+    const accounti = accounts[i]
+    const name = accounti[0]
+    const emails = new Set()
+    let q = [i]
+    while(q.length) {
+      const len = q.length
+      const tq = []
+      for(let j=0;j<len;j++) {
+        const nexti = q[j]
+        for(let k=1;k<accounts[nexti].length;k++) {
+          emails.add(accounts[nexti][k])
+        }
+        for(let relaIdx of indexRelations[nexti]) {
+          if(!used.has(relaIdx)) {
+            used.add(relaIdx)
+            tq.push(relaIdx)
+          }
+        }
+      }
+      q = tq
+    }
+    res.push([name, ...Array.from(emails).sort((a, b) => a < b ? -1 : 1)])
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 725. 分隔链表【medium】
 
 [ref](https://leetcode.cn/problems/split-linked-list-in-parts/)
@@ -15263,6 +15604,91 @@ var splitListToParts = function(head, k) {
     res[i++] = myHead.next
   }
   return res
+};
+```
+
+## ?🌟😻✔ 734. 句子相似性【easy】
+
+[ref](https://leetcode.cn/problems/sentence-similarity/)
+
+集合、哈希表
+
+```js
+// 时间复杂度：O(M+N) M=similarPairs.length N=sentence1.length
+// 空间复杂度：O(M)
+var areSentencesSimilar = function(sentence1, sentence2, similarPairs) {
+  if(sentence1.length !== sentence2.length) return false
+  const similarPairsSet = new Set()
+  for(let [word1, word2] of similarPairs) {
+    similarPairsSet.add(`${word1}#${word2}`)
+  }
+  for(let i=0;i<sentence1.length;i++) {
+    const word1 = sentence1[i], word2 = sentence2[i]
+    if(!(
+      word1 === word2
+      || similarPairsSet.has(`${word1}#${word2}`)
+      || similarPairsSet.has(`${word2}#${word1}`)
+    ))
+    return false
+  }
+  return true
+};
+```
+
+## 🌟😻✔ 737. 句子相似性 II【medium】
+
+[ref](https://leetcode.cn/problems/sentence-similarity-ii/)
+
+图、广度优先搜索
+
+题解
+
+- [【云影同学】建图+广度优先搜索](https://leetcode.cn/problems/sentence-similarity-ii/solution/by-lxfriday-fno4/)
+
+```js
+var areSentencesSimilarTwo = function(sentence1, sentence2, similarPairs) {
+  if(sentence1.length !== sentence2.length) return false
+  // 建双向图
+  const similarPairsMap = new Map()
+  for(let [word1, word2] of similarPairs) {
+    if(similarPairsMap.has(word1)) {
+      similarPairsMap.get(word1).add(word2)
+    } else {
+      similarPairsMap.set(word1, new Set([word2]))
+    }
+    if(similarPairsMap.has(word2)) {
+      similarPairsMap.get(word2).add(word1)
+    } else {
+      similarPairsMap.set(word2, new Set([word1]))
+    }
+  }
+  // 广度优先逐层查找，找到即返回
+  function find(word1, word2) {
+    let q = [word1]
+    const used = new Set([word1])
+    while(q.length) {
+      const len = q.length
+      const tq = []
+      for(let i=0;i<len;i++) {
+        const word = q[i]
+        if(similarPairsMap.has(word)) {
+          for(let simiWord of similarPairsMap.get(word)) {
+            if(simiWord === word2) return true
+            if(!used.has(simiWord)) {
+              used.add(simiWord)
+              tq.push(simiWord)
+            }
+          }
+        }
+      }
+      q = tq
+    }
+  }
+
+  for(let i=0;i<sentence1.length;i++) {
+    if(!(sentence1[i] === sentence2[i] || find(sentence1[i], sentence2[i]))) return false
+  }
+  return true
 };
 ```
 
@@ -17211,6 +17637,44 @@ OrderedStream.prototype.insert = function(idKey, value) {
   return res
 };
 
+```
+
+## ✔1470. 重新排列数组【easy】
+
+[ref](https://leetcode.cn/problems/shuffle-the-array/)
+
+数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var shuffle = function(nums, n) {
+  const res = []
+  let i = 0
+  let ind = 0
+  while(i < n) {
+    res[ind++] = nums[i]
+    res[ind++] = nums[i + n]
+    i++
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var shuffle = function(nums, n) {
+  const x = nums.slice(0, n)
+  const y = nums.slice(n)
+  const res = []
+  let i = 0
+  while(i < x.length) {
+    res.push(x[i])
+    res.push(y[i++])
+  }
+  return res
+};
 ```
 
 ## ?🌟😻✔ 1979. 找出数组的最大公约数【easy】
