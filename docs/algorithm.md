@@ -25,6 +25,22 @@
 
 # 刷题日记
 
+- 20220905()
+  - [🌟【medium】31. 下一个排列](https://leetcode.cn/problems/next-permutation/) 双指针
+  - [🌟【easy】266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
+  - [🌟【medium】267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
+
+- 20220904(10)
+  - [【easy】1582. 二进制矩阵中的特殊位置](https://leetcode.cn/problems/special-positions-in-a-binary-matrix/) 矩阵
+  - [🌟【medium】77. 组合](https://leetcode.cn/problems/combinations/) 回溯法、排列组合
+  - ? [🌟【medium】39. 组合总和](https://leetcode.cn/problems/combination-sum/) 回溯法、排列组合
+  - ? [🌟【medium】40. 组合总和 II](https://leetcode.cn/problems/combination-sum-ii/) 回溯法、排列组合
+  - [🌟【medium】216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/) 回溯法、排列组合
+  - ?? [🌟【medium】377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/) 动态规划、排列组合、背包问题
+  - [🌟【medium】17. 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/) 回溯法
+  - ? [🌟【easy】401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
+  - ? [🌟【medium】254. 因子的组合](https://leetcode.cn/problems/factor-combinations/) 回溯法、排列组合
+  - [🌟【medium】46. 全排列](https://leetcode.cn/problems/permutations/) 回溯法、排列组合
 - 20220903(8)
   - [🌟【medium】646. 最长数对链](https://leetcode.cn/problems/maximum-length-of-pair-chain/) 贪心、区间问题
   - ? [🌟【medium】491. 递增子序列](https://leetcode.cn/problems/increasing-subsequences/) 数组题、排列组合
@@ -634,6 +650,7 @@
 - 🌟【medium】[241. 为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses/) 递归、字符串、DFS
 - 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
 - ? 🌟【medium】[299. 猜数字游戏](https://leetcode.cn/problems/bulls-and-cows/) 数组、哈希表、字符串
+- 🌟【easy】[266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
 
 回文串相关
 
@@ -643,6 +660,8 @@
 - 🌟【medium】[647 回文子串](https://leetcode.cn/problems/palindromic-substrings/)
 - 🌟【hard】[336 回文对](https://leetcode.cn/problems/palindrome-pairs/)
 - 🌟【easy】[125. 验证回文串](https://leetcode.cn/problems/valid-palindrome/) 回文串
+- 🌟【easy】[266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
+- 🌟【medium】[267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
 
 ## 数组题 
 
@@ -690,6 +709,14 @@
 - 🌟【medium】 [47 全排列 II](https://leetcode.cn/problems/permutations-ii/)
 - 🌟【medium】 [78 子集](https://leetcode.cn/problems/subsets/)
 - ? 🌟【medium】[491. 递增子序列](https://leetcode.cn/problems/increasing-subsequences/) 数组题、排列组合
+- [🌟【medium】77. 组合](https://leetcode.cn/problems/combinations/) 回溯法、排列组合
+- ? [🌟【medium】39. 组合总和](https://leetcode.cn/problems/combination-sum/) 回溯法、排列组合
+- ? [🌟【medium】40. 组合总和 II](https://leetcode.cn/problems/combination-sum-ii/) 回溯法、排列组合
+- [🌟【medium】216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/) 回溯法、排列组合
+- ?? [🌟【medium】377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/) 动态规划、排列组合、背包问题
+- [🌟【medium】17. 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/) 回溯法
+- ? [🌟【easy】401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
+- ? [🌟【medium】254. 因子的组合](https://leetcode.cn/problems/factor-combinations/) 回溯法、排列组合
 
 ## 模拟、规律
 
@@ -719,6 +746,7 @@
 - ??? 🌟【hard】[1224. 最大相等频率](https://leetcode.cn/problems/maximum-equal-frequency/) 哈希表、规律题
 - ??? 🌟【hard】[782. 变为棋盘](https://leetcode.cn/problems/transform-to-chessboard/) 矩阵、模拟
 - 🌟【medium】[633. 平方数之和](https://leetcode.cn/problems/sum-of-square-numbers/) 二分搜索、规律
+- ? 🌟【easy】[401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
 
 ### 模拟运算
 
@@ -991,6 +1019,7 @@
 - ? 🌟【medium】[334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) 贪心、动态规划、二分搜索
 - ? 🌟【medium】[583. 两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/) 字符串、动态规划
 - ? 🌟【medium】[712. 两个字符串的最小ASCII删除和](https://leetcode.cn/problems/minimum-ascii-delete-sum-for-two-strings/) 动态规划、公共子序列、字符串
+- ?? 🌟【medium】[377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/) 动态规划、排列组合
 
 ### 动态规划 - 背包问题
 
@@ -1035,6 +1064,11 @@
 - 🌟【medium】[216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/) 回溯
 - ? 🌟【medium】[784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/) 排列组合、回溯
 - 🌟【medium】[1087. 花括号展开](https://leetcode.cn/problems/brace-expansion/) 回溯、排列
+- 🌟【medium】[77. 组合](https://leetcode.cn/problems/combinations/) 回溯法、排列组合
+- ? 🌟【medium】[39. 组合总和](https://leetcode.cn/problems/combination-sum/) 回溯法、排列组合
+- ? 🌟【easy】[401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
+- ? 🌟【medium】[254. 因子的组合](https://leetcode.cn/problems/factor-combinations/) 回溯法、排列组合
+- 🌟【medium】[267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
 
 ## 二分查找、二分搜索
 
@@ -2668,7 +2702,7 @@ var threeSumClosest = function(nums, target) {
 };
 ```
 
-## ✔ 17. 电话号码的字母组合【medium】
+## 🌟😻✔ 17. 电话号码的字母组合【medium】
 
 [ref](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
 
@@ -3440,6 +3474,65 @@ var countAndSay = function(n) {
 };
 ```
 
+## ?🌟😻✔ 39. 组合总和【medium】
+
+[ref](https://leetcode.cn/problems/combination-sum/)
+
+回溯法、排列组合
+
+```js
+var combinationSum = function(candidates, target) {
+  const res = []
+  function walk(path, sum, startIndex) {
+    if(sum === target) {
+      res.push([...path])
+    }
+    for(let i=startIndex;i<candidates.length;i++) {
+      if(sum + candidates[i] <= target) {
+        path.push(candidates[i])
+        walk(path, sum + candidates[i], i)
+        path.pop()
+      }
+    }
+  }
+  walk([], 0, 0)
+  return res
+};
+```
+
+## ?🌟😻✔ 40. 组合总和 II【medium】
+
+[ref](https://leetcode.cn/problems/combination-sum-ii/)
+
+回溯法、排列组合
+
+```js
+var combinationSum2 = function(candidates, target) {
+  const res = []
+  candidates.sort((a, b) => a - b)
+  const used = new Array(candidates.length).fill(false)
+  function walk(path, sum, startIndex) {
+    if(sum === target) {
+      res.push([...path])
+      return
+    }
+    for(let i=startIndex;i<candidates.length;i++) {
+      if(i - 1 >= startIndex && !used[i - 1] && candidates[i] === candidates[i - 1]) continue
+      if(sum + candidates[i] <= target) {
+        path.push(candidates[i])
+        used[i] = true
+        walk(path, sum + candidates[i], i + 1)
+        path.pop()
+        used[i] = false
+      }
+    }
+  }
+  walk([], 0, 0)
+  return res
+};
+
+```
+
 ## ?🌟😻✔ 41 缺失的第一个正数【hard】
 
 [ref](https://leetcode.cn/problems/first-missing-positive/)
@@ -3831,6 +3924,35 @@ var permute = function(nums) {
 
 排列组合、回溯法、递归
 
+无排序
+
+```js
+var permuteUnique = function(nums) {
+  const n = nums.length
+  const res = []
+  const used = new Array(n).fill(false)
+  function walk(path) {
+    if(path.length === n) {
+      res.push([...path])
+      return
+    }
+    const levelUsed = new Set()
+    for(let i=0;i<n;i++) {
+      if(levelUsed.has(nums[i]) || used[i]) continue
+      levelUsed.add(nums[i])
+      used[i] = true
+      path.push(nums[i])
+      walk(path)
+      used[i] = false
+      path.pop()
+    }
+  }
+  walk([])
+  return res
+};
+```
+
+排序
 ```js
 // 时间复杂度：O(n*n!)
 // 空间复杂度：O(n)
@@ -8636,25 +8758,25 @@ function swap(arr, i, j) {
 回溯
 
 ```js
-// 空间复杂度：O(K)
 var combinationSum3 = function(k, n) {
   const res = []
-  function walk(path, sum, count, start) {
-    if(count === k) {
+  function walk(path, sum, startIndex) {
+    if(path.length === k) {
       if(sum === n) {
         res.push([...path])
       }
-      return 
+      return
     }
-    for(let i=start;i<=9;i++) {
+    
+    for(let i = startIndex;i<=9;i++) {
       if(sum + i <= n) {
         path.push(i)
-        walk(path, sum + i, count + 1, i + 1)
+        walk(path, sum + i, i + 1)
         path.pop()
       }
     }
   }
-  walk([], 0, 0, 1)
+  walk([], 0, 1)
   return res
 };
 ```
@@ -9595,6 +9717,35 @@ var minMeetingRooms = function(intervals) {
 };
 ```
 
+## ?🌟😻✔ 254. 因子的组合【medium】
+
+[ref](https://leetcode.cn/problems/factor-combinations/)
+
+回溯法
+
+```js
+var getFactors = function(n) {
+  const res = []
+
+  function walk(path, k, start) {
+    if(path.length > 0) {
+      res.push([...path, k])
+    }
+    for(let i=2;i * i<=k;i++) {
+      if(k % i === 0) {
+        path.push(i)
+        walk(path, k / i, i)
+        path.pop()
+      }
+    }
+  }
+  walk([], n, 2)
+
+  return res
+};
+
+```
+
 ## 🌟😻✔ 256 粉刷房子【medium】
 
 [ref](https://leetcode.cn/problems/paint-house/)
@@ -9891,6 +10042,74 @@ var minCostII = function(costs) {
     }
   }
   return Math.min(...dp[n-1])
+};
+
+```
+
+## 🌟😻✔ 266. 回文排列【easy】
+
+[ref](https://leetcode.cn/problems/palindrome-permutation/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var canPermutePalindrome = function(s) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], (map.get(s[i]) || 0) + 1)
+  }
+  let singleCount = 0
+  for(const count of map.values()) {
+    if(count % 2 === 1) {
+      singleCount ++
+    }
+  }
+  return singleCount <= 1
+};
+```
+
+## 🌟😻✔ 267. 回文排列 II【medium】
+
+[ref](https://leetcode.cn/problems/palindrome-permutation-ii/)
+
+回溯法
+
+题解
+
+- [ref](https://leetcode.cn/problems/palindrome-permutation-ii/solution/by-lxfriday-6w11/)
+
+```js
+var generatePalindromes = function(s) {
+  const map = new Map()
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], (map.get(s[i]) || 0) + 1)
+  }
+  let singleChar = ''
+  for(const [c, count] of map.entries()) {
+    if(count % 2 === 1) {
+      if(singleChar !== '') return []
+      singleChar = c
+    }
+  }
+  if(singleChar !== '') {
+    map.set(singleChar, map.get(singleChar) - 1)
+  }
+  // 回溯法拼接回文串
+  const res = []
+  function walk(path) {
+    if(path.length === s.length) {
+      res.push(path)
+      return
+    }
+    for(const [c, count] of map.entries()) {
+      if(count < 2) continue
+      map.set(c, map.get(c) - 2)
+      walk(`${c}${path}${c}`)
+      map.set(c, map.get(c) + 2)
+    }
+  }
+  walk(singleChar)
+  return res
 };
 
 ```
@@ -12128,6 +12347,31 @@ var wiggleMaxLength = function(nums) {
 };
 ```
 
+## ??🌟😻✔ 377. 组合总和 Ⅳ【medium】
+
+[ref](https://leetcode.cn/problems/combination-sum-iv/)
+
+动态规划、排列组合、背包问题
+
+```js
+// 时间复杂度：O(NT)
+// 空间复杂度：O(T)
+var combinationSum4 = function (nums, target) {
+  const n = nums.length, t = target
+  const dp = new Array(t + 1).fill(0)
+  dp[0] = 1
+  for(let i=1;i<=t;i++) {
+    for(let j=0;j<n;j++) {
+      if(i >= nums[j]) {
+        dp[i] += dp[i - nums[j]]
+      }
+    }
+  }
+  return dp[t]
+};
+
+```
+
 ## ?🌟😻✔ 378. 有序矩阵中第 K 小的元素【medium】
 
 [ref](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/)
@@ -12515,6 +12759,64 @@ var findNthDigit = function(n) {
   const targetNum = 10 ** (k - 1) + Math.floor((n - 1) / k)
   const targetIndex = (n - 1) % k
   return Math.floor(targetNum / 10 ** (k - targetIndex - 1)) % 10
+};
+```
+
+## ?🌟😻✔ 401. 二进制手表【easy】
+
+[ref]()
+
+回溯法、枚举
+
+题解
+
+- [【云影同学】回溯法，你猜我什么用回溯](https://leetcode.cn/problems/binary-watch/solution/yun-ying-tong-xue-hui-su-fa-by-lxfriday-dcc4/)
+
+
+```js
+var readBinaryWatch = function(turnedOn) {
+  let res = []
+  function walk(path, k, startIndex) {
+    if(k === 0) {
+      res.push(`${path[0]}:${String(path[1]).length === 1? '0' + path[1] : path[1]}`)
+      return
+    }
+    for(let i = startIndex;i<=9;i++) {
+      let h = 0, m = 0
+      if(i <= 3) {
+        h = 2 ** i
+      } else {
+        m = 2 ** (i - 4)
+      }
+      if(h + path[0] >= 12 || m + path[1] >= 60) continue
+      path[0] += h
+      path[1] += m
+      walk(path, k - 1, i + 1)
+      path[0] -= h
+      path[1] -= m
+    }
+  }
+  walk([0, 0], turnedOn, 0)
+  return res
+};
+```
+
+枚举
+
+```js
+// 枚举
+var readBinaryWatch = function(turnedOn) {
+const res = []
+ for(let h=0;h<12;h++) {
+   for(let m=0;m<60;m++) {
+     const hCount = h.toString(2).replace(/0/g, '').length
+     const mCount = m.toString(2).replace(/0/g, '').length
+     if(hCount + mCount === turnedOn) {
+       res.push(`${h}:${String(m).length === 1 ? `0` + m : m}`)
+     }
+   }
+ }
+ return res
 };
 ```
 
@@ -18701,6 +19003,37 @@ var finalPrices = function(prices) {
     q.push(i)
   }
   return prices
+};
+```
+
+## ✔ 1582. 二进制矩阵中的特殊位置【easy】
+
+[ref](https://leetcode.cn/problems/special-positions-in-a-binary-matrix/)
+
+矩阵
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(M+N)
+var numSpecial = function(mat) {
+  const m = mat.length, n = mat[0].length
+  const rows = new Array(m).fill(0)
+  const cols = new Array(n).fill(0)
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(mat[i][j] === 1) {
+        rows[i]++
+        cols[j]++
+      }
+    }
+  }
+  let count = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(mat[i][j] === 1 && rows[i] === 1 && cols[j] === 1) count++
+    }
+  }
+  return count
 };
 ```
 
