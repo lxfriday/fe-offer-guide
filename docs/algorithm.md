@@ -24,11 +24,37 @@
 
 - [LeetCode平台值得做的题目分类列表与参考难度](https://zhuanlan.zhihu.com/p/453897447)
 
+## 经典题
+
+- ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
+- ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
+
 # 刷题日记
 
-- 20220908()
+- 20220911(6)
+  - [🌟【medium】931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/) 动态规划、滚动数组
+  - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
+  - ? [🌟【medium】650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
+  - ? [🌟【medium】991. 坏了的计算器](https://leetcode.cn/problems/broken-calculator/) 贪心
+  - ? [🌟【medium】735. 行星碰撞](https://leetcode.cn/problems/asteroid-collision/) 栈
+  - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
+- 20220910(6)
+  - ? [🌟【medium】669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/) 二叉搜索树、深度优先搜索
+  - ?? [🌟【medium】97. 交错字符串](https://leetcode.cn/problems/interleaving-string/) 动态规划
+  - [🌟【medium】990. 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/) 并查集
+  - [🌟【medium】781. 森林中的兔子](https://leetcode.cn/problems/rabbits-in-forest/) 贪心
+  - [🌟【medium】904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 双指针、滑动窗口
+  - [🌟【medium】814. 二叉树剪枝](https://leetcode.cn/problems/binary-tree-pruning/) 二叉树、二叉树减枝
+- 20220909(4)
+  - ? [🌟【medium】210. 课程表 II](https://leetcode.cn/problems/course-schedule-ii/) 图、拓扑
+  - ? [🌟【hard】630. 课程表 III](https://leetcode.cn/problems/course-schedule-iii/) 优先队列、大顶堆、排序
+  - ? [🌟【medium】261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
+  - ? [🌟【medium】973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
+- 20220908(4)
   - ? [🌟【medium】667. 优美的排列 II](https://leetcode.cn/problems/beautiful-arrangement-ii/) 规律、模拟
-
+  - ? [🌟【hard】60. 排列序列](https://leetcode.cn/problems/permutation-sequence/) 回溯法、排列组合、规律题
+  - ? [🌟【medium】207. 课程表](https://leetcode.cn/problems/course-schedule/) 图、拓扑
+  - [【easy】1598. 文件夹操作日志搜集器](https://leetcode.cn/problems/crawler-log-folder/) 常规题
 - 20220907(7)
   - ? [🌟【hard】60. 排列序列](https://leetcode.cn/problems/permutation-sequence/) 回溯法、排列组合、规律题
   - ? [🌟【hard】440. 字典序的第K小数字](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order/) 字典树
@@ -771,6 +797,7 @@
 - ? 🌟【easy】[401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
 - ? 🌟【medium】[453. 最小操作次数使数组元素相等](https://leetcode.cn/problems/minimum-moves-to-equal-array-elements/) 模拟、规律题
 - ? 🌟【medium】[667. 优美的排列 II](https://leetcode.cn/problems/beautiful-arrangement-ii/) 规律、模拟
+- ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
 
 ### 模拟运算
 
@@ -801,6 +828,7 @@
 - 🌟【medium】[剑指 Offer 31. 栈的压入、弹出序列](https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/) 栈
 - 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
 - 🌟【medium】[946. 验证栈序列](https://leetcode.cn/problems/validate-stack-sequences/) 栈
+- ? 🌟【medium】[735. 行星碰撞](https://leetcode.cn/problems/asteroid-collision/) 栈
 
 ### 单调栈
 
@@ -868,6 +896,7 @@
 - 🌟【medium】[487. 最大连续1的个数 II](https://leetcode.cn/problems/max-consecutive-ones/) 双指针、滑动窗口
 - 🌟【medium】[1004. 最大连续1的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii/) 双指针、滑动窗口
 - 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
+- 🌟【medium】[904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 双指针、滑动窗口
 
 ## 树、深度优先、广度优先
 
@@ -915,6 +944,7 @@
 - ? 🌟【medium】[662. 二叉树最大宽度](https://leetcode.cn/problems/maximum-width-of-binary-tree/) 二叉树、广度优先搜索
 - 🌟【medium】[687. 最长同值路径](https://leetcode.cn/problems/longest-univalue-path/) 二叉树、深度优先搜索
 - ? 🌟【medium】[430. 扁平化多级双向链表](https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list/) 链表、双向链表
+- 🌟【medium】[814. 二叉树剪枝](https://leetcode.cn/problems/binary-tree-pruning/) 二叉树、二叉树减枝
 
 ### 树的序列化
 
@@ -942,6 +972,7 @@
 - 🌟【medium】[95. 不同的二叉搜索树 II](https://leetcode.cn/problems/unique-binary-search-trees-ii/) 二叉搜索树
 - 🌟【medium】[96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/) 二叉搜索树
 - ? 🌟【medium】[173. 二叉搜索树迭代器](https://leetcode.cn/problems/binary-search-tree-iterator/) 迭代器、二叉搜索树
+- ? 🌟【medium】[669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/) 二叉搜索树、深度优先搜索
 
 ## 堆
 
@@ -954,6 +985,7 @@
 - ??? 🌟【hard】[218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆
 - 🌟【medium】[692. 前K个高频单词](https://leetcode.cn/problems/top-k-frequent-words/) 优先队列、堆、小顶堆、前k个问题
 - ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
+- ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
 
 ### 矩阵、深度优先、广度优先
 - [🌟【medium】1034. 边界着色](https://leetcode.cn/problems/coloring-a-border/) 矩阵、深度优先搜索、广度优先搜索
@@ -983,12 +1015,14 @@
 - ? 🌟【medium】[721. 账户合并](https://leetcode.cn/problems/accounts-merge/) 深度优先、广度优先、图
 - 🌟【medium】[737. 句子相似性 II](https://leetcode.cn/problems/sentence-similarity-ii/) 图、广度优先搜索
 - 🌟【medium】[323. 无向图中连通分量的数目](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/) 图、广度优先搜索、并查集
+- ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
 
 ### 并查集
 
 - ?? 🌟【medium】[684. 冗余连接](https://leetcode.cn/problems/redundant-connection/) 并查集、图、树、拓扑
 - ??? 🌟【hard】[685. 冗余连接 II](https://leetcode.cn/problems/redundant-connection-ii/) 并查集、广度优先搜索、图、树、拓扑
-
+- ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
+- 🌟【medium】[990. 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/) 并查集
 ## 搜索、排序
 
 - 【easy】 [374 猜数字大小](https://leetcode.cn/problems/guess-number-higher-or-lower/)
@@ -1003,6 +1037,7 @@
 - 【easy】[226 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
 - ?? 🌟【medium】[395. 至少有 K 个重复字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-least-k-repeating-characters/) 分治法
 - 🌟【medium】[378. 有序矩阵中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/) 分治法、归并排序、优先队列、小顶堆、二分搜索
+- ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
 
 ## 动态规划
 
@@ -1049,6 +1084,9 @@
 - ? 🌟【medium】[583. 两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/) 字符串、动态规划
 - ? 🌟【medium】[712. 两个字符串的最小ASCII删除和](https://leetcode.cn/problems/minimum-ascii-delete-sum-for-two-strings/) 动态规划、公共子序列、字符串
 - ?? 🌟【medium】[377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/) 动态规划、排列组合
+- ?? 🌟【medium】[97. 交错字符串](https://leetcode.cn/problems/interleaving-string/) 动态规划
+- 🌟【medium】[931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/) 动态规划、滚动数组
+- ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -1073,6 +1111,8 @@
 - 🌟【medium】[452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/) 贪心
 - 🌟【medium】[665. 非递减数列](https://leetcode.cn/problems/non-decreasing-array/) 贪心
 - 🌟【medium】[646. 最长数对链](https://leetcode.cn/problems/maximum-length-of-pair-chain/) 贪心、区间问题
+- 🌟【medium】[781. 森林中的兔子](https://leetcode.cn/problems/rabbits-in-forest/) 贪心
+- ? 🌟【medium】[991. 坏了的计算器](https://leetcode.cn/problems/broken-calculator/) 贪心
 
 ## 回溯思想
 
@@ -1150,8 +1190,11 @@
 
 ### 快排
 
+前k个问题、快速选择
+
 - ? 🌟【medium】[215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/) 快排、快速排序、快速选择、快排相关算法
 - ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
+- ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
 
 ### 桶排序
 
@@ -5261,6 +5304,67 @@ var numTrees = function(n) {
 };
 ```
 
+## ??🌟😻✔ 97. 交错字符串【medium】
+
+[ref](https://leetcode.cn/problems/interleaving-string/)
+
+字符串、动态规划
+
+比较好理解的题解
+
+- [动态规划 逐行解释 python3](https://leetcode.cn/problems/interleaving-string/solution/dong-tai-gui-hua-zhu-xing-jie-shi-python3-by-zhu-3/)
+
+```js
+// 时间复杂度：O(MN) M=s1.length N=s2.length
+// 空间复杂度：O(N)
+var isInterleave = function(s1, s2, s3) {
+  const s1Len = s1.length, s2Len = s2.length
+  if(s1Len + s2Len !== s3.length) return false
+  let dp = new Array(s2Len + 1).fill(false)
+  for(let i=0;i<=s1Len;i++) {
+    let ndp = []
+    for(let j=0;j<=s2Len;j++) {
+      if(i === 0) {
+        ndp[j] = s2.slice(0, j) === s3.slice(0, j)
+      } else if(j === 0) {
+        ndp[j] = s1.slice(0, i) === s3.slice(0, i)
+      } else {
+        ndp[j] = (dp[j] && s1[i - 1] === s3[i + j - 1]) || (ndp[j - 1] && s2[j - 1] === s3[i + j - 1])
+      }
+    }
+    dp = ndp
+  }
+  return dp[s2Len]
+};
+```
+
+```js
+// 时间复杂度：O(MN) M=s1.length N=s2.length
+// 空间复杂度：O(MN)
+var isInterleave = function(s1, s2, s3) {
+  const s1Len = s1.length, s2Len = s2.length
+  if(s1Len + s2Len !== s3.length) return false
+  const dp = new Array(s1Len + 1).fill(0).map(_ => new Array(s2Len + 1).fill(false))
+  dp[0][0] = true
+  for(let i=1;i<=s1Len;i++) {
+    if(s1[i - 1] === s3[i - 1] && dp[i-1][0]) dp[i][0] = true
+    else break
+  }
+  for(let j=1;j<=s2Len;j++) {
+    if(s2[j - 1] === s3[j - 1] && dp[0][j - 1]) dp[0][j] = true
+    else break
+  }
+  for(let i=1;i<=s1Len;i++) {
+    for(let j=1;j<=s2Len;j++) {
+      dp[i][j] = (dp[i - 1][j] && s1[i - 1] === s3[i + j - 1]) || (dp[i][j - 1] && s2[j - 1] === s3[i + j - 1])
+    }
+  }
+
+  return dp[s1Len][s2Len]
+};
+
+```
+
 ## ?🌟😻✔ 98. 验证二叉搜索树【medium】
 
 [ref](https://leetcode.cn/problems/validate-binary-search-tree/submissions/)
@@ -7334,241 +7438,6 @@ var evalRPN = function(tokens) {
 };
 ```
 
-## 🌟😻✔ 163. 缺失的区间【easy】
-
-[ref](https://leetcode.cn/problems/missing-ranges/)
-
-区间
-
-```js
-// 添加哨兵
-// 时间复杂度：O(N)
-// 空间复杂度：O(1)
-var findMissingRanges = function(nums, lower, upper) {
-  nums.unshift(lower - 1)
-  nums.push(upper + 1)
-  const res = []
-  for(let i=1;i<nums.length;i++) {
-    if(nums[i] - nums[i - 1] === 2) {
-      res.push(`${nums[i] - 1}`)
-    }
-    if(nums[i] - nums[i - 1] > 2) {
-      res.push(`${nums[i-1] + 1}->${nums[i] - 1}`)
-    }
-  }
-  return res
-};
-```
-
-```js
-// 时间复杂度：O(N)
-// 空间复杂度：O(1)
-var findMissingRanges = function(nums, lower, upper) {
-  if(!nums.length) return [gen(lower, upper)]
-  const n = nums.length
-  const res = []
-  if(nums[0] > lower) {
-    res.push(gen(lower, nums[0] - 1))
-  }
-  let i = 1
-  while(i < n) {
-    while(i < n && nums[i] === nums[i - 1] + 1) i++
-    if(i < n) {
-      res.push(gen(nums[i - 1] + 1, nums[i] - 1))
-    }
-    i++
-  }
-  if(upper > nums[n - 1]) {
-    res.push(gen(nums[n - 1] + 1, upper))
-  }
-  return res
-};
-
-function gen(x, y) {
-  if(x === y) return `${x}`
-  return `${x}->${y}`
-}
-```
-
-## ??🌟😻✔ 166. 分数到小数【medium】
-
-[ref](https://leetcode.cn/problems/fraction-to-recurring-decimal/)
-
-哈希表、模拟运算
-
-```js
-// 时间复杂度：O(l) l 是答案字符串的长度
-// 空间复杂度：O(l)
-var fractionToDecimal = function(numerator, denominator) {
-  if(numerator % denominator === 0) return String(numerator / denominator)
-  let pres = []
-  if(numerator * denominator < 0) pres.push('-')
-  numerator = Math.abs(numerator)
-  denominator = Math.abs(denominator)
-
-  pres.push(Math.floor(numerator / denominator))
-  numerator = numerator % denominator
-  pres.push('.')
-  const map = new Map()
-
-  while(numerator !== 0) {
-    numerator *= 10
-    if(map.has(numerator)) {
-      pres.splice(map.get(numerator), 0, '(')
-      pres.push(')')
-      break
-    } else {
-      map.set(numerator, pres.length)
-      if(numerator >= denominator) {
-        pres.push(Math.floor(numerator / denominator))
-        numerator = numerator % denominator
-      } else {
-        pres.push('0')
-      }
-    }
-  }
-  return pres.join('')
-};
-```
-
-## ?🌟😻✔ 171. Excel 表列序号【easy】
-
-[ref](https://leetcode.cn/problems/excel-sheet-column-number/submissions/)
-
-进制转换、类进制转换
-
-```js
-// 时间复杂度：O(N) N=columnTitle.length
-// 空间复杂度：O(1)
-var titleToNumber = function(columnTitle) {
-  let res = 0
-  for(let i=0;i<columnTitle.length;i++) {
-    const num = columnTitle[i].charCodeAt(0) - 'A'.charCodeAt(0) + 1
-    res = 26 * res + num 
-  }
-  return res
-};
-```
-
-
-常规思路
-```js
-var titleToNumber = function(columnTitle) {
-  const m = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:10,K:11,L:12,M:13,N:14,O:15,P:16,Q:17,R:18,S:19,T:20,U:21,V:22,W:23,X:24,Y:25,Z:26}
-  const len = columnTitle.length
-  let count = 0
-  let k = 1
-  while(k<len) {
-    count += 26 ** k
-    k++
-  }
-  for(let i=0;i<columnTitle.length;i++) {
-    const a = m[columnTitle[i]]
-    const l = len - i - 1
-    count += (a - 1) * (26 ** l)
-  }
-  return count + 1
-};
-```
-
-## ?🌟😻✔ 173. 二叉搜索树迭代器【medium】
-
-[ref](https://leetcode.cn/problems/binary-search-tree-iterator/)
-
-二叉搜索树、二叉树、迭代器
-
-```js
-// 利用中序遍历特性
-var BSTIterator = function(root) {
-  this.curr = root
-  this.stack = []
-};
-
-BSTIterator.prototype.next = function() {
-  while(this.curr) {
-    this.stack.push(this.curr)
-    this.curr = this.curr.left
-  }
-  this.curr = this.stack.pop()
-  const ret = this.curr.val
-  this.curr = this.curr.right
-  return ret
-};
-
-BSTIterator.prototype.hasNext = function() {
-  return !!this.curr || !!this.stack.length
-};
-```
-
-```js
-var BSTIterator = function(root) {
-  this.values = []
-  function dfs(node, arr) {
-    node.left && dfs(node.left, arr)
-    arr.push(node.val)
-    node.right && dfs(node.right, arr)
-  }
-  dfs(root, this.values)
-  this.i = 0
-};
-
-BSTIterator.prototype.next = function() {
-  return this.values[this.i++]
-};
-
-BSTIterator.prototype.hasNext = function() {
-  return this.i < this.values.length
-};
-```
-
-## ??🌟😻✔ 207 课程表【medium】
-
-[ref](https://leetcode.cn/problems/course-schedule/)
-
-图、拓扑
-
-```js
-// 其中 N 为课程数，M 为先修课程的要求数
-// 时间复杂度：O(M + N)
-// 空间复杂度：O(M + N)
-var canFinish = function(numCourses, prerequisites) {
-  const n = prerequisites.length
-  const pre = new Array(numCourses).fill(0)
-  const aft = new Map()
-  let count = 0
-  for(let i=0;i<n;i++) {
-    const target = prerequisites[i]
-    pre[target[0]]++
-    if(aft.has(target[1])) {
-      aft.get(target[1]).push(target[0])
-    } else {
-      aft.set(target[1], [target[0]])
-    }
-  }
-  let q = []
-  for(let i=0;i<pre.length;i++) {
-    if(pre[i] === 0) q.push(i)
-  }
-
-  while(q.length) {
-    const target = q.shift()
-    count ++
-    const next = aft.get(target)
-
-    if(next && next.length > 0) {
-      for(let i=0;i<next.length;i++) {
-        pre[next[i]]--
-        if(pre[next[i]] === 0) {
-          q.push(next[i])
-        }
-      }
-    }
-  }
-  return count === numCourses
-};
-
-```
-
 ## 🌟😻✔ 151. 颠倒字符串中的单词【medium】
 
 [ref](https://leetcode.cn/problems/reverse-words-in-a-string/)
@@ -7738,6 +7607,63 @@ var findPeakElement = function(nums) {
 };
 ```
 
+## 🌟😻✔ 163. 缺失的区间【easy】
+
+[ref](https://leetcode.cn/problems/missing-ranges/)
+
+区间
+
+```js
+// 添加哨兵
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMissingRanges = function(nums, lower, upper) {
+  nums.unshift(lower - 1)
+  nums.push(upper + 1)
+  const res = []
+  for(let i=1;i<nums.length;i++) {
+    if(nums[i] - nums[i - 1] === 2) {
+      res.push(`${nums[i] - 1}`)
+    }
+    if(nums[i] - nums[i - 1] > 2) {
+      res.push(`${nums[i-1] + 1}->${nums[i] - 1}`)
+    }
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMissingRanges = function(nums, lower, upper) {
+  if(!nums.length) return [gen(lower, upper)]
+  const n = nums.length
+  const res = []
+  if(nums[0] > lower) {
+    res.push(gen(lower, nums[0] - 1))
+  }
+  let i = 1
+  while(i < n) {
+    while(i < n && nums[i] === nums[i - 1] + 1) i++
+    if(i < n) {
+      res.push(gen(nums[i - 1] + 1, nums[i] - 1))
+    }
+    i++
+  }
+  if(upper > nums[n - 1]) {
+    res.push(gen(nums[n - 1] + 1, upper))
+  }
+  return res
+};
+
+function gen(x, y) {
+  if(x === y) return `${x}`
+  return `${x}->${y}`
+}
+```
+
+
 ## ✔ 165 比较版本号【medium】
 
 [ref](https://leetcode.cn/problems/compare-version-numbers/)
@@ -7760,6 +7686,48 @@ var compareVersion = function(version1, version2) {
   return 0
 };
 
+```
+
+
+## ??🌟😻✔ 166. 分数到小数【medium】
+
+[ref](https://leetcode.cn/problems/fraction-to-recurring-decimal/)
+
+哈希表、模拟运算
+
+```js
+// 时间复杂度：O(l) l 是答案字符串的长度
+// 空间复杂度：O(l)
+var fractionToDecimal = function(numerator, denominator) {
+  if(numerator % denominator === 0) return String(numerator / denominator)
+  let pres = []
+  if(numerator * denominator < 0) pres.push('-')
+  numerator = Math.abs(numerator)
+  denominator = Math.abs(denominator)
+
+  pres.push(Math.floor(numerator / denominator))
+  numerator = numerator % denominator
+  pres.push('.')
+  const map = new Map()
+
+  while(numerator !== 0) {
+    numerator *= 10
+    if(map.has(numerator)) {
+      pres.splice(map.get(numerator), 0, '(')
+      pres.push(')')
+      break
+    } else {
+      map.set(numerator, pres.length)
+      if(numerator >= denominator) {
+        pres.push(Math.floor(numerator / denominator))
+        numerator = numerator % denominator
+      } else {
+        pres.push('0')
+      }
+    }
+  }
+  return pres.join('')
+};
 ```
 
 ## ✔ 167 两数之和 II - 输入有序数组【medium】
@@ -7824,6 +7792,98 @@ var majorityElement = function(nums) {
   }
 };
 ```
+
+
+## ?🌟😻✔ 171. Excel 表列序号【easy】
+
+[ref](https://leetcode.cn/problems/excel-sheet-column-number/submissions/)
+
+进制转换、类进制转换
+
+```js
+// 时间复杂度：O(N) N=columnTitle.length
+// 空间复杂度：O(1)
+var titleToNumber = function(columnTitle) {
+  let res = 0
+  for(let i=0;i<columnTitle.length;i++) {
+    const num = columnTitle[i].charCodeAt(0) - 'A'.charCodeAt(0) + 1
+    res = 26 * res + num 
+  }
+  return res
+};
+```
+
+
+常规思路
+```js
+var titleToNumber = function(columnTitle) {
+  const m = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:10,K:11,L:12,M:13,N:14,O:15,P:16,Q:17,R:18,S:19,T:20,U:21,V:22,W:23,X:24,Y:25,Z:26}
+  const len = columnTitle.length
+  let count = 0
+  let k = 1
+  while(k<len) {
+    count += 26 ** k
+    k++
+  }
+  for(let i=0;i<columnTitle.length;i++) {
+    const a = m[columnTitle[i]]
+    const l = len - i - 1
+    count += (a - 1) * (26 ** l)
+  }
+  return count + 1
+};
+```
+
+## ?🌟😻✔ 173. 二叉搜索树迭代器【medium】
+
+[ref](https://leetcode.cn/problems/binary-search-tree-iterator/)
+
+二叉搜索树、二叉树、迭代器
+
+```js
+// 利用中序遍历特性
+var BSTIterator = function(root) {
+  this.curr = root
+  this.stack = []
+};
+
+BSTIterator.prototype.next = function() {
+  while(this.curr) {
+    this.stack.push(this.curr)
+    this.curr = this.curr.left
+  }
+  this.curr = this.stack.pop()
+  const ret = this.curr.val
+  this.curr = this.curr.right
+  return ret
+};
+
+BSTIterator.prototype.hasNext = function() {
+  return !!this.curr || !!this.stack.length
+};
+```
+
+```js
+var BSTIterator = function(root) {
+  this.values = []
+  function dfs(node, arr) {
+    node.left && dfs(node.left, arr)
+    arr.push(node.val)
+    node.right && dfs(node.right, arr)
+  }
+  dfs(root, this.values)
+  this.i = 0
+};
+
+BSTIterator.prototype.next = function() {
+  return this.values[this.i++]
+};
+
+BSTIterator.prototype.hasNext = function() {
+  return this.i < this.values.length
+};
+```
+
 
 ## ?🌟😻✔ 172. 阶乘后的零【medium】
 
@@ -8271,6 +8331,55 @@ var reverseList = function (head) {
     t.next.next = prev
   }
   return t.next
+```
+
+## ?🌟😻✔ 207. 课程表【medium】
+
+[ref](https://leetcode.cn/problems/course-schedule/)
+
+图、拓扑
+
+```js
+var canFinish = function(numCourses, prerequisites) {
+  const indegree = new Array(numCourses).fill(0)
+  const nextMap = new Map()
+  for(const prerequisite of prerequisites) {
+    indegree[prerequisite[0]]++
+    if(nextMap.has(prerequisite[1])) {
+      nextMap.get(prerequisite[1]).push(prerequisite[0])
+    } else {
+      nextMap.set(prerequisite[1], [prerequisite[0]])
+    }
+  }
+  let q = []
+  let cnt = 0
+  for(let i=0;i<numCourses;i++) {
+    if(indegree[i] === 0) {
+      q.push(i)
+      cnt++
+    }
+  }
+
+  while(q.length) {
+    const len = q.length
+    const tq = []
+    for(let i=0;i<len;i++) {
+      if(nextMap.has(q[i])) {
+        const next = nextMap.get(q[i])
+        for(let j = 0; j < next.length; j++) {
+          indegree[next[j]]--
+          if(indegree[next[j]] === 0) {
+            tq.push(next[j])
+            cnt++
+          }
+        }
+      }
+    }
+    q = tq
+  }
+
+  return cnt === numCourses
+};
 ```
 
 ## ??🌟😻✔ 208 实现 Trie (前缀树)【medium】
@@ -9925,6 +10034,100 @@ var singleNumber = function(nums) {
   return [a, b]
 };
 ```
+
+## ?🌟😻✔ 261. 以图判树【medium】
+
+[ref](https://leetcode.cn/problems/graph-valid-tree/)
+
+并查集、广度优先搜索
+
+题解
+
+- [【云影同学】并查集、广度优先搜索BFS 双解](https://leetcode.cn/problems/graph-valid-tree/solution/by-lxfriday-h59q/)
+
+```js
+// 并查集
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var validTree = function(n, edges) {
+  const parent = new Array(n).fill(0).map((v, i) => i)
+  for(let i=0;i<edges.length;i++) {
+    const edge = edges[i]
+    if(find(parent, edge[0]) !== find(parent, edge[1])) {
+      union(parent, edge[0], edge[1])
+    } else {
+      return false
+    }
+  }
+  let targetSet = new Set()
+  const used = new Set()
+  for(let i=0;i<n;i++) {
+    if(used.has(i)) continue
+    let j = i
+    while(parent[j] !== j) {
+      used.add(j)
+      j = parent[j]
+    }
+    used.add(j)
+    targetSet.add(j)
+  }
+  return targetSet.size === 1
+};
+
+function find(parent, index) {
+  if(parent[index] !== index) {
+    parent[index] = find(parent, parent[index])
+  }
+  return parent[index]
+}
+
+function union(parent, index1, index2) {
+  parent[find(parent, index1)] = find(parent, index2)
+}
+```
+
+
+```js
+// BFS
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var validTree = function(n, edges) {
+  const connectionMap = new Map()
+  for(let i=0;i<edges.length;i++) {
+    const edge = edges[i]
+    if(connectionMap.has(edge[0])) {
+      connectionMap.get(edge[0]).add(edge[1])
+    } else {
+      connectionMap.set(edge[0], new Set([edge[1]]))
+    }
+    if(connectionMap.has(edge[1])) {
+      connectionMap.get(edge[1]).add(edge[0])
+    } else {
+      connectionMap.set(edge[1], new Set([edge[0]]))
+    }
+  }
+  let q = new Set([0])
+  const used = new Set([0])
+  let lenEdges = edges.length
+  while(q.size) {
+    const tq = new Set()
+    for(let qi of q) {
+      const nexts = connectionMap.get(qi)
+      if(nexts) {
+        for(let next of nexts) {
+          if(used.has(next)) continue
+          used.add(next)
+          tq.add(next)
+          lenEdges--
+        }
+      }
+    }
+    q = tq
+  }
+  return lenEdges === 0 && used.size === n
+};
+````
+
 
 ## ✔ 263 丑数【easy】
 
@@ -15765,6 +15968,61 @@ var countSubstrings = function(s) {
 };
 ```
 
+## ?🌟😻✔ 650. 只有两个键的键盘【medium】
+
+[ref](https://leetcode.cn/problems/2-keys-keyboard/)
+
+动态规划、数学规律
+
+```js
+var minSteps = function(n) {
+  let res = 0
+  for(let i=2;i * i<=n;i++) {
+    while(n % i === 0) {
+      res += i
+      n /= i
+    }
+  }
+  if(n !== 1) res += n
+  return res
+};
+
+```
+
+```js
+// 时间复杂度：O(N*sqrt(N))
+// 空间复杂度：O(N)
+var minSteps = function(n) {
+  const dp = new Array(n + 1).fill(Number.MAX_SAFE_INTEGER)
+  dp[1] = 0
+  for(let i=2;i<=n;i++) {
+    for(let j=1;j*j<=i;j++) {
+      if(i % j === 0) {
+        dp[i] = Math.min(dp[i], dp[j] + (i / j))
+        dp[i] = Math.min(dp[i], dp[i / j] + j)
+      }
+    }
+  }
+  return dp[n]
+};
+
+//1 A
+//2 AA 2
+//3 AAA 3
+//4 AAAA 4
+//5 AAAAA 5
+//6 AAAAAA 5
+//7 AAAAAAA 7
+//8 AAAAAAAA 6
+//9 AAAAAAAAA 6
+//10 AAAAAAAAA 7
+//11 AAAAAAAAA 11
+//12 AAAAAAAAA 7
+//30 AAAAAAAAA 11
+
+
+```
+
 ## 🌟😻✔ 652 寻找重复的子树【medium】
 
 [ref](https://leetcode.cn/problems/find-duplicate-subtrees/)
@@ -16026,6 +16284,65 @@ var constructArray = function(n, k) {
 // 1 2 6 3 5 4 [4] 4>3>2>1
 // 1 6 2 5 3 4 [5] 5>4>3>2>1
 
+```
+
+## ?🌟😻✔ 669. 修剪二叉搜索树【medium】
+
+[ref](https://leetcode.cn/problems/trim-a-binary-search-tree/)
+
+二叉搜索树、DFS、深度优先搜索
+
+题解
+
+- [【云影同学】递归、迭代双解法](https://leetcode.cn/problems/trim-a-binary-search-tree/solution/yun-ying-tong-xue-by-lxfriday-p3iu/)
+
+```js
+// 递归
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var trimBST = function(root, low, high) {
+  if(!root) return null
+  if(root.val < low) {
+    return trimBST(root.right, low, high)
+  } else if(root.val > high) {
+    return trimBST(root.left, low, high)
+  } else {
+    root.left = trimBST(root.left, low, high)
+    root.right = trimBST(root.right, low, high)
+    return root
+  }
+};
+```
+
+```js
+// 迭代
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var trimBST = function(root, low, high) {
+  while(root) {
+    if(root.val < low) root = root.right
+    else if(root.val > high) root = root.left
+    else break
+  }
+  if(!root) return null
+  let rt = root
+  while(root.left) {
+    if(root.left.val < low) {
+      root.left = root.left.right
+    } else {
+      root = root.left
+    }
+  }
+  root = rt
+  while(root.right) {
+    if(root.right.val > high) {
+      root.right = root.right.left
+    } else {
+      root = root.right
+    }
+  }
+  return rt
+};
 ```
 
 ## ??🌟😻✔ 684. 冗余连接【medium】
@@ -17089,6 +17406,64 @@ var areSentencesSimilar = function(sentence1, sentence2, similarPairs) {
 };
 ```
 
+## ?🌟😻✔ 735. 行星碰撞【medium】
+
+[ref](https://leetcode.cn/problems/asteroid-collision/)
+
+栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var asteroidCollision = function(asteroids) {
+  const stack = []
+  for(let i=0;i<asteroids.length;i++) {
+    const aster = asteroids[i]
+    if(aster === 0) continue
+    let shouldPush = true
+    while(stack.length && stack[stack.length - 1] > 0 && aster < 0) {
+      if(stack[stack.length - 1] + aster < 0) {
+        stack.pop()
+      } else if(stack[stack.length - 1] + aster === 0) {
+        stack.pop()
+        shouldPush = false
+        break
+      } else {
+        shouldPush = false
+        break
+      }
+    }
+    if(shouldPush) stack.push(aster)
+  }
+  return stack
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var asteroidCollision = function(asteroids) {
+  const stack = []
+  for(let i=0;i<asteroids.length;i++) {
+    const aster = asteroids[i]
+    if(aster === 0) continue
+    if(!stack.length || aster > 0 || stack[stack.length - 1] < 0) {
+      stack.push(aster)
+    } else {
+      while(stack.length && stack[stack.length - 1] > 0 && stack[stack.length - 1] + aster < 0) {
+        stack.pop()
+      }
+      if(!stack.length || stack[stack.length - 1] < 0) {
+        stack.push(aster)
+      } else if(stack[stack.length - 1] + aster === 0) {
+        stack.pop()
+      }
+    }
+  }
+  return stack 
+};
+```
+
 ## 🌟😻✔ 737. 句子相似性 II【medium】
 
 [ref](https://leetcode.cn/problems/sentence-similarity-ii/)
@@ -17249,6 +17624,82 @@ var deleteAndEarn = function(nums) {
     dp[i] = Math.max(a, b)
   }
   return dp[nums.length - 1]
+};
+```
+
+## ???🌟😻✔ 743. 网络延迟时间【medium】
+
+[ref](https://leetcode.cn/problems/network-delay-time/)
+
+最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
+
+优秀题解
+
+- [【宫水三叶】涵盖所有的「存图方式」与「最短路算法（详尽注释）」](https://leetcode.cn/problems/network-delay-time/solution/gong-shui-san-xie-yi-ti-wu-jie-wu-chong-oghpz/)
+
+```js
+// Floyd 算法
+// 可以将问题分解，先找出最短的距离，然后在考虑如何找出对应的行进路线。
+// 如何找出最短路径呢，这里还是用到动态规划的知识，对于任何一个城市而言，i到j的最短距离不外乎存在经过i与j之间的k和不经过k两种可能，所以可以令k=1，2，3，...，n(n是城市的数目)
+// 在检查d(ij)与d(ik)+d(kj)的值；在此d(ik)与d(kj)分别是目前为止所知道的i到k与k到j的最短距离，因此d(ik)+d(kj)就是i到j经过k的最短距离。
+// 所以，若有d(ij)>d(ik)+d(kj)，就表示从i出发经过k再到j的距离要比原来的i到j距离短，自然把i到j的d(ij)重写为d(ik)+d(kj)，每当一个k查完了，d(ij)就是目前的i到j的最短距离。重复这一过程，最后当查完所有的k时，d(ij)里面存放的就是i到j之间的最短距离了。
+var networkDelayTime = function(times, n, k) {
+  const graph = new Array(n + 1).fill(0).map(_ => new Array(n + 1).fill(Number.MAX_SAFE_INTEGER))
+  for(let i=1;i<=n;i++) graph[i][i] = 0
+  for(let e of times) graph[e[0]][e[1]] = e[2]
+  for(let kk=1;kk<=n;kk++) {
+    for(let i=1;i<=n;i++) {
+      for(let j=1;j<=n;j++) {
+        graph[i][j] = Math.min(graph[i][j], graph[i][kk] + graph[kk][j])
+      }
+    }
+  }
+  let res = 0
+  for(let i=1;i<=n;i++) {
+    if(graph[k][i] === Number.MAX_SAFE_INTEGER) return -1
+    res = Math.max(res, graph[k][i])
+  }
+  return res
+};
+```
+
+```js
+// 朴素DFS
+var networkDelayTime = function(times, n, k) {
+  if(k === n && k === 1) return 0
+  const connectMap = new Map()
+  for(let i=0;i<times.length; i++) {
+    const [p1, p2, t] = times[i]
+    if(connectMap.has(p1)) {
+      connectMap.get(p1).push([p2, t])
+    } else {
+      connectMap.set(p1, [[p2, t]])
+    }
+  }
+  if(!connectMap.has(k)) return -1
+  const used = new Set()
+  const timeArr = new Array(n + 1).fill(Number.MAX_SAFE_INTEGER)
+  timeArr[0] = 0
+  const dots = new Set()
+  function dfs(source, timeUsed) {
+    dots.add(source)
+    if(timeUsed < timeArr[source]) {
+      timeArr[source] = timeUsed
+      if(connectMap.has(source)) {
+        const nexts = connectMap.get(source)
+        for(let i=0;i<nexts.length;i++) {
+          const [next, timeNeed] = nexts[i]
+          if(used.has(next)) continue
+          used.add(next)
+          dfs(next, timeUsed + timeNeed)
+          used.delete(next)
+        }
+      }
+    }
+  }
+
+  dfs(k, 0)
+  return dots.size === n ? Math.max(...timeArr) : -1
 };
 ```
 
@@ -17427,6 +17878,27 @@ var maxChunksToSorted = function(arr) {
     }
   }
   return count
+};
+```
+
+## 🌟😻✔ 781. 森林中的兔子【medium】
+
+[ref](https://leetcode.cn/problems/rabbits-in-forest/)
+
+贪心
+
+```js
+// 时间复杂度：O(N) N=answers.length
+// 空间复杂度：O(M) M=1001
+var numRabbits = function(answers) {
+  const arr = new Array(1001).fill(0)
+  let cnt = 0
+  for(let i = 0; i < answers.length; i++) {
+    arr[answers[i] + 1]++
+    if(arr[answers[i] + 1] === 1) cnt += answers[i] + 1
+    if(arr[answers[i] + 1] === answers[i] + 1) arr[answers[i] + 1] = 0
+  }
+  return cnt
 };
 ```
 
@@ -17763,6 +18235,28 @@ var allPathsSourceTarget = function(graph) {
 };
 ```
 
+## 🌟😻✔ 814. 二叉树剪枝【hard】
+
+[ref](https://leetcode.cn/problems/binary-tree-pruning/)
+
+二叉树、二叉树减枝
+
+```js
+var pruneTree = function(root) {
+  function dfs(node) {
+    if(node.left && !dfs(node.left)) {
+      node.left = null   
+    }
+    if(node.right && !dfs(node.right)) {
+      node.right = null
+    }
+    if(!node.left && !node.right && node.val === 0) return null
+    return node
+  }
+  return dfs(root)
+};
+```
+
 ## ??🌟😻✔ 815 公交路线【hard】
 
 [ref](https://leetcode.cn/problems/bus-routes/)
@@ -17926,6 +18420,88 @@ var peakIndexInMountainArray = function(arr) {
 };
 ```
 
+## ???🌟😻✔ 857. 雇佣 K 名工人的最低成本【hard】
+
+[ref](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/)
+
+优先队列、大顶堆、堆
+
+题解：
+
+- [【云影同学】从资本家的角度来考虑贪心问题，优先队列解法](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/solution/by-lxfriday-bp0m/)
+
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var mincostToHireWorkers = function(quality, wage, k) {
+  const n = quality.length, wqArr = []
+  const maxHeap = new MaxHeap()
+  for(let i=0;i<n;i++) {
+    // 生成资质比数组，附带对应的数组下标
+    wqArr[i] = [wage[i] / quality[i], i]
+  }
+  // 按资质比从小到大排序，资质比越小的员工资本家获利越多，资本家所需要支出的月总工资支出也会越少嘛
+  wqArr.sort((a, b) => a[0] - b[0])
+  let qTotal = 0
+  let res = Number.MAX_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    const [wq, ind] = wqArr[i], q = quality[ind]
+    qTotal += q
+    maxHeap.insert(q)
+    if(maxHeap.size() > k) (qTotal -= maxHeap.pop())
+    if(maxHeap.size() === k) res = Math.min(res, qTotal * wq)
+  }
+  return res
+};
+
+
+class MaxHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.size() - 1)
+  }
+  pop(){
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  swap(i, j){
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  size(){
+    return this.heap.length
+  }
+  shiftUp(i){
+    const pI = Math.floor((i - 1) / 2)
+    if(pI >= 0 && this.heap[pI] < this.heap[i]) {
+      this.swap(i, pI)
+      this.shiftUp(pI)
+    }
+  }
+  shiftDown(i){
+    const lI = 2 * i + 1, rI = 2 * i + 2
+    let maxI = i
+    if(lI < this.size() && this.heap[lI] > this.heap[maxI]) {
+      maxI = lI
+    }
+    if(rI < this.size() && this.heap[rI] > this.heap[maxI]) {
+      maxI = rI
+    }
+    if(maxI !== i) {
+      this.swap(i, maxI)
+      this.shiftDown(maxI)
+    }
+  }
+}
+```
+
 ## ?🌟😻✔ 862 和至少为 K 的最短子数组【hard】
 
 [ref](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/)
@@ -18071,6 +18647,41 @@ var profitableSchemes = function(n, minProfit, group, profit) {
 
 ```
 
+## 🌟😻✔ 904. 水果成篮【medium】
+
+[ref](https://leetcode.cn/problems/fruit-into-baskets/)
+
+双指针、滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(M) M 最大为2 
+var totalFruit = function(fruits) {
+  const map = new Map(), n = fruits.length
+  let max = 0
+  let l = 0, r = 0
+  let cnt = 0
+  while(r < n) {
+    if(!map.has(fruits[r])) {
+      while(map.size === 2) {
+        map.set(fruits[l], map.get(fruits[l]) - 1)
+        if(map.get(fruits[l]) === 0) {
+          map.delete(fruits[l])
+        }
+        l++
+        cnt--
+      }
+    }
+    map.set(fruits[r], (map.get(fruits[r]) || 0) + 1)
+    cnt++
+    max = Math.max(max, cnt)
+    r++
+  }
+  return max
+};
+```
+
+
 ## ?🌟😻✔ 907. 子数组的最小值之和【medium】
 
 [ref](https://leetcode.cn/problems/sum-of-subarray-minimums/)
@@ -18116,6 +18727,40 @@ var sumSubarrayMins = function(arr) {
   return res 
 };
 
+```
+
+## 🌟😻✔ 931. 下降路径最小和【medium】
+
+[ref](https://leetcode.cn/problems/minimum-falling-path-sum/)
+
+动态规划、滚动数组
+
+```js
+// 时间复杂度：O(N^2)
+// 时间复杂度：O(N)
+var minFallingPathSum = function(matrix) {
+  const n = matrix.length
+  let dp = new Array(n).fill(0)
+  let res = Number.MAX_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    const tdp = []
+    for(let j=0;j<n;j++) {
+      if(i === 0) tdp[j] = matrix[0][j]
+      else {
+        tdp[j] = Math.min(
+          j - 1 >= 0 ?dp[j - 1] : Number.MAX_SAFE_INTEGER, 
+          dp[j], 
+          j + 1 < n ? dp[j + 1] :Number.MAX_SAFE_INTEGER, 
+        ) + matrix[i][j]
+      }
+      if(i === n - 1) {
+        res = Math.min(res, tdp[j])
+      }
+    }
+    dp = tdp
+  }
+  return res
+};
 ```
 
 ## ✔ 933 最近的请求次数【easy】
@@ -18164,6 +18809,54 @@ var validateStackSequences = function(pushed, popped) {
   }
   return stack.length === 0
 };
+```
+
+## ?🌟😻✔ 973. 最接近原点的 K 个点【medium】
+
+[ref](https://leetcode.cn/problems/k-closest-points-to-origin/)
+
+优先队列、快速选择、分治法、堆、前K个问题
+
+```js
+// 期望时间复杂度：O(N)
+// 空间复杂度：O(N)
+var kClosest = function(points, k) {
+  const arr = []
+  for(let i=0;i<points.length;i++) {
+    const [x, y] = points[i]
+    arr[i] = [x, y, x * x + y * y]
+  }
+  let l = 0, r = points.length - 1
+  while(true) {
+    const ind = partition(arr, l, r)
+    if(ind === k - 1) {
+      return arr.slice(0, k).map(_ => [_[0], _[1]])
+    } else if(ind > k - 1) {
+      r = ind - 1
+    } else {
+      l = ind + 1
+    }
+  }
+};
+
+function partition(arr, l, r) {
+  const target = arr[l][2]
+  let k = l + 1
+  for(let i = k; i<= r; i++) {
+    if(arr[i][2] <= target) {
+      swap(arr, k, i)
+      k++
+    }
+  }
+  swap(arr, k - 1, l)
+  return k - 1
+}
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
 ```
 
 ## 🌟✔ 977 有序数组的平方【easy】
@@ -18283,6 +18976,80 @@ var smallestFromLeaf = function(root) {
   dfs(root, '')
   return res
 };
+```
+
+## 🌟😻✔ 990. 等式方程的可满足性【medium】
+
+[ref](https://leetcode.cn/problems/satisfiability-of-equality-equations/)
+
+并查集
+
+题解
+
+- [【云影同学】并查集+两轮扫描](https://leetcode.cn/problems/satisfiability-of-equality-equations/solution/yun-ying-tong-xue-by-lxfriday-vy5u/)
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(K) K = 26
+var equationsPossible = function(equations) {
+  const parent = new Array(26).fill(0).map((v, i) => i)
+  for(let i=0;i<equations.length;i++) {
+    if(equations[i][1] + equations[i][2] === '==') {
+      union(parent, getCode(equations[i], 0), getCode(equations[i], 3))
+    }
+  }
+  for(let i=0;i<equations.length;i++) {
+    if(
+      equations[i][1] + equations[i][2] === '!='
+      && find(parent, getCode(equations[i], 0)) === find(parent, getCode(equations[i], 3))
+    ) {
+      return false
+    }
+  }
+  return true
+};
+
+function getCode(str, i) {
+  return str.charCodeAt(i) - 'a'.charCodeAt(0)
+}
+
+function union(parent, ind1, ind2) {
+  parent[find(parent, ind1)] = find(parent, ind2)
+}
+
+function find(parent, ind) {
+  if(parent[ind] !== ind) return find(parent, parent[ind])
+  return parent[ind]
+}
+```
+
+## ?🌟😻✔ 991. 坏了的计算器【medium】
+
+[ref](https://leetcode.cn/problems/broken-calculator/)
+
+贪心
+
+优秀题解
+
+- [贪心算法及其证明](https://leetcode.cn/problems/broken-calculator/solution/tan-xin-suan-fa-ji-qi-zheng-ming-by-lenn123/)
+
+```js
+// 时间复杂度：O(logY)
+// 空间复杂度：O(1)
+var brokenCalc = function(X, Y) {
+  let res = 0
+  while(X < Y) {
+    res++
+    if(Y % 2) {
+      Y++
+    } else {
+      Y /= 2
+    }
+  }
+  res += X - Y
+  return res
+};
+
 ```
 
 ## ?🌟😻✔ 994. 腐烂的橘子【medium】
@@ -19531,6 +20298,29 @@ var reorderSpaces = function(text) {
   if(words.length === 1) return words[0] + (new Array(spaceLen).fill(' ').join(''))
   const avaSpace = Math.floor(spaceLen / (words.length - 1))
   return words.join(new Array(avaSpace).fill(' ').join('')) + new Array(spaceLen %  (words.length - 1)).fill(' ').join('')
+};
+```
+
+## ✔ 1598. 文件夹操作日志搜集器【easy】
+
+[ref](https://leetcode.cn/problems/crawler-log-folder/)
+
+常规题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minOperations = function(logs) {
+  let res = 0
+  for(let i=0;i<logs.length;i++) {
+    const log = logs[i]
+    if(log === '../') {
+      res = Math.max(res - 1, 0)
+    } else if(log !== './') {
+      res++
+    }
+  }
+  return res
 };
 ```
 
