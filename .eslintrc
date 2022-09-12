@@ -20,6 +20,8 @@
     "no-extra-semi": 0,
     "no-plusplus": 0,
     "no-unused-vars": 1,
-    "prefer-const": 1
+    "prefer-const": 1,
+    "no-restricted-syntax": 0,
+    "no-continue": 0
   }
 }

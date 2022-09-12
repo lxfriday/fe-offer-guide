@@ -27,10 +27,20 @@
 ## 经典题
 
 - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
+- 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
 
 # 刷题日记
 
+- 20220911(8)
+  - [🌟【easy】1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
+  - ?? [🌟【medium】399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
+  - [🌟【medium】1104. 二叉树寻路](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/) 二叉树
+  - ?? [🌟【medium】523. 连续的子数组和](https://leetcode.cn/problems/continuous-subarray-sum/) 前缀和、同余定理
+  - ? [🌟【medium】713. 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/) 滑动窗口
+  - [🌟【easy】724. 寻找数组的中心下标](https://leetcode.cn/problems/find-pivot-index/) 数组
+  - ? [🌟【medium】974. 和可被 K 整除的子数组](https://leetcode.cn/problems/subarray-sums-divisible-by-k/) 前缀、前缀和、前缀树组
+  - [🌟【medium】560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) 前缀和
 - 20220911(6)
   - [🌟【medium】931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/) 动态规划、滚动数组
   - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
@@ -648,12 +658,15 @@
 - 【easy】[367. 有效的完全平方数](https://leetcode.cn/problems/valid-perfect-square/) 规律、数学、平方
 - 🌟【medium】[357. 统计各位数字都不同的数字个数](https://leetcode.cn/problems/count-numbers-with-unique-digits/) 排列组合、数学问题
 
-## 前缀、前缀数组
+## 前缀、前缀和、前缀和数组
 
 - 🌟【medium】[437 路径总和 III](https://leetcode.cn/problems/path-sum-iii/) 前缀和
 - 🌟【easy】[303. 区域和检索 - 数组不可变](https://leetcode.cn/problems/range-sum-query-immutable/) 前缀数组
 - 🌟【medium】[304. 二维区域和检索 - 矩阵不可变](https://leetcode.cn/problems/range-sum-query-2d-immutable/) 前缀数组、二维前缀数组
 - 🌟【medium】[1052. 爱生气的书店老板](https://leetcode.cn/problems/grumpy-bookstore-owner/) 前缀树组
+- ?? 🌟【medium】[523. 连续的子数组和](https://leetcode.cn/problems/continuous-subarray-sum/) 前缀和、同余定理
+- ? 🌟【medium】[974. 和可被 K 整除的子数组](https://leetcode.cn/problems/subarray-sums-divisible-by-k/) 前缀、前缀和、前缀树组
+- 🌟【medium】[560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) 前缀和
 
 ## trie、字典树
 
@@ -945,6 +958,7 @@
 - 🌟【medium】[687. 最长同值路径](https://leetcode.cn/problems/longest-univalue-path/) 二叉树、深度优先搜索
 - ? 🌟【medium】[430. 扁平化多级双向链表](https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list/) 链表、双向链表
 - 🌟【medium】[814. 二叉树剪枝](https://leetcode.cn/problems/binary-tree-pruning/) 二叉树、二叉树减枝
+- 🌟【medium】[1104. 二叉树寻路](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/) 二叉树
 
 ### 树的序列化
 
@@ -1196,10 +1210,11 @@
 - ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
 - ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
 
-### 桶排序
+### 桶排序、计数排序
 
 - ? 🌟【medium】[451. 根据字符出现频率排序](https://leetcode.cn/problems/sort-characters-by-frequency/) 桶排序、桶排序衍生算法
 - ? 🌟【medium】[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/) 堆排序、排序、桶排序
+- 🌟【easy】[1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
 
 ### 插入排序
 
@@ -13058,6 +13073,57 @@ var longestSubstring = function(s, k) {
 
 ```
 
+## ??🌟😻✔ 399. 除法求值【medium】
+
+[ref](https://leetcode.cn/problems/evaluate-division/)
+
+Floyd 算法
+
+```js
+var calcEquation = function(equations, values, queries) {
+  const gridMap = new Map()
+
+  function gridMapSet(c1, c2, v) {
+    if(gridMap.has(c1)) {
+      gridMap.get(c1).set(c2, v)
+    } else {
+      gridMap.set(c1, new Map([[c2, v]]))
+    }
+  }
+  const chars = new Set()
+  for(let i=0;i<equations.length;i++) {
+    const [c1, c2] = equations[i]
+    chars.add(c1)
+    chars.add(c2)
+    gridMapSet(c1, c1, 1)
+    gridMapSet(c2, c2, 1)
+    gridMapSet(c1, c2, values[i])
+    gridMapSet(c2, c1, 1 / values[i])
+  }
+  for(let c0 of chars) {
+    for(let c1 of chars) {
+      for(let c2 of chars) {
+        if(c1 === c2 || gridMap.get(c1).has(c2)) continue
+        if(gridMap.get(c1).has(c0) && gridMap.get(c0).has(c2)) {
+          gridMap.get(c1).set(c2, gridMap.get(c1).get(c0) * gridMap.get(c0).get(c2))
+        }
+      }
+    }
+  }
+  const res = []
+  for(let i=0;i<queries.length;i++) {
+    const [c1, c2] = queries[i]
+    if(gridMap.has(c1) && gridMap.get(c1).has(c2)) {
+      res.push(gridMap.get(c1).get(c2))
+    } else {
+      res.push(-1)
+    }
+  }
+  return res
+};
+
+```
+
 ## ?🌟😻✔ 400 第 N 位数字【medium】
 
 [ref](https://leetcode.cn/problems/nth-digit/)
@@ -14813,6 +14879,37 @@ var change = function(amount, coins) {
     }
   }
   return dp[amount]
+};
+```
+
+## ?? 🌟😻✔ 523. 连续的子数组和【medium】
+
+[ref](https://leetcode.cn/problems/continuous-subarray-sum/)
+
+前缀和、同余定理
+
+```js
+// 同余：当前缀和 pfx[i] - pfx[j] 是 k 的倍数的时候，pfx[i] 和 pfx[j] 的余数必定相同
+// 只需要存储扫描到的前缀和，判断当前前缀和对 k 的余数在 哈希表中是否存在就可以得出结果
+// 哈希表初始化的时候带上 [0, -1] 是为了处理从下标0开始到某个下标刚好前缀和为 k 的情况
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var checkSubarraySum = function(nums, k) {
+  if(nums.length < 2) return false
+  let sum = 0
+  const m  = new Map([[0, -1]])
+  for(let i=0;i<nums.length;i++) {
+    sum = (nums[i] + sum) % k
+    if(m.has(sum)) {
+      const prevIndex = m.get(sum)
+      if(i - prevIndex >= 2) {
+        return true
+      }
+    } else {
+      m.set(sum, i)
+    }
+  }
+  return false
 };
 ```
 
@@ -17336,6 +17433,31 @@ var accountsMerge = function(accounts) {
 };
 ```
 
+## 🌟😻✔ 724. 寻找数组的中心下标【easy】
+
+[ref](https://leetcode.cn/problems/find-pivot-index/)
+
+数组
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pivotIndex = function(nums) {
+  const calArr = [], n = nums.length
+  let sum = 0
+  for(let i = n - 1;i >= 0; i--) {
+    calArr[i] = sum
+    sum += nums[i]
+  }
+  sum = 0
+  for(let i = 0;i < n; i++) {
+    if(sum === calArr[i]) return i
+    sum += nums[i]
+  }
+  return -1
+};
+```
+
 ## ?🌟😻✔ 725. 分隔链表【medium】
 
 [ref](https://leetcode.cn/problems/split-linked-list-in-parts/)
@@ -18859,6 +18981,30 @@ function swap(arr, i, j) {
 }
 ```
 
+## ?🌟😻✔ 974. 和可被 K 整除的子数组【medium】
+
+[ref](https://leetcode.cn/problems/subarray-sums-divisible-by-k/)
+
+前缀、前缀和、前缀数组
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var subarraysDivByK = function(nums, k) {
+  const n = nums.length, map = new Map([[0, 1]])
+  let sum = 0
+  let cnt = 0
+  for(let i=0;i<n;i++) {
+    sum = ((nums[i] + sum) % k + k) % k
+    if(map.has(sum)) {
+      cnt += map.get(sum)
+    }
+    map.set(sum, (map.get(sum) || 0) + 1)
+  }
+  return cnt
+};
+```
+
 ## 🌟✔ 977 有序数组的平方【easy】
 
 [ref](https://leetcode.cn/problems/squares-of-a-sorted-array/)
@@ -19477,6 +19623,41 @@ var distributeCandies = function(candies, num_people) {
 };
 ```
 
+## 🌟😻✔ 1104. 二叉树寻路【medium】
+
+[ref](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/)
+
+二叉树
+
+```js
+// 时间复杂度：O(logN) N=label
+// 空间复杂度：O(1)
+var pathInZigZagTree = function(label) {
+  const res = []
+  let h = 1
+  while(2 ** h - 1 < label) {
+    h++
+  }
+  while(h > 0) {
+    res.unshift(label)
+    const upLevelMin = 2 ** (h - 2)
+    const upLevelMax = 2 ** (h - 1) - 1
+
+    const levelMin = 2 ** (h - 1)
+    const levelMax = 2 ** h - 1
+
+    let upLeftBigger = (h - 1) % 2 === 0
+    let leftBigger = h % 2 === 0
+    
+    const levelInd = leftBigger ? (levelMax - label) : (label - levelMin)
+    const upLevelInd = Math.floor(levelInd / 2)
+    label = upLeftBigger ? (upLevelMax - upLevelInd) : (upLevelMin + upLevelInd)
+    h--
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 1109. 航班预订统计【medium】
 
 [ref](https://leetcode.cn/problems/corporate-flight-bookings/)
@@ -19610,6 +19791,63 @@ var isMajorityElement = function(nums, target) {
   return r - l + 1 > len / 2
 };
 
+```
+
+## 🌟😻✔ 1208. 尽可能使字符串相等【medium】
+
+[ref](https://leetcode.cn/problems/get-equal-substrings-within-budget/)
+
+双指针、滑动窗口
+
+```js
+// 动态滑动窗口
+// 时间复杂度：O(N) N=s.length
+// 空间复杂度：O(1)
+var equalSubstring = function(s, t, maxCost) {
+  let res = 0
+  const n = s.length
+  let l = 0, r = 0
+  let totalCost = 0
+  while(r < n) {
+    const cost = getCodeDis(s, t, r)
+    totalCost += cost
+    while(totalCost > maxCost) {
+      totalCost -= getCodeDis(s, t, l)
+      l++
+    }
+    res = Math.max(res, r - l + 1)
+    r++
+  }
+  return res
+};
+function getCodeDis(s, t, i) {
+  return Math.abs(s.charCodeAt(i) - t.charCodeAt(i))
+}
+```
+
+```js
+// 单增滑动窗口
+// 时间复杂度：O(N) N=s.length
+// 空间复杂度：O(1)
+var equalSubstring = function(s, t, maxCost) {
+  const n = s.length
+  let l = 0, r = 0
+  let totalCost = 0
+  while(r < n) {
+    const cost = getCodeDis(s, t, r)
+    totalCost += cost
+    if(totalCost > maxCost) {
+      totalCost -= getCodeDis(s, t, l)
+      l++
+    }
+    r++
+  }
+  return r - l
+};
+
+function getCodeDis(s, t, i) {
+  return Math.abs(s.charCodeAt(i) - t.charCodeAt(i))
+}
 ```
 
 ## ???🌟😻✔ 1224. 最大相等频率【hard】
@@ -20321,6 +20559,46 @@ var minOperations = function(logs) {
     }
   }
   return res
+};
+```
+
+## 🌟😻✔ 1608. 特殊数组的特征值【easy】
+
+[ref](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/)
+
+计数排序、桶排序、排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var specialArray = function(nums) {
+  const n = nums.length
+  nums.sort((a, b) => a - b)
+  for(let i = n - 1; i >= 0; i--) {
+    if(i > 0 && nums[i] === nums[i - 1]) continue
+    if(i === 0 && n - i <= nums[i]) return n - i
+    if(n - i <= nums[i] && n - i > nums[i - 1]) return n - i
+  }
+  return -1
+};
+```
+
+```js
+// 计数排序
+// 时间复杂度：O(M) M=1001
+// 空间复杂度：O(M)
+var specialArray = function(nums) {
+  const n = nums.length
+  const bucket = new Array(1001).fill(0)
+  for(let i=0;i<n;i++) {
+    bucket[nums[i]]++
+  }
+  let cnt = 0
+  for(let i=1000;i>=0;i--) {
+    cnt += bucket[i]
+    if(cnt === i) return i
+  }
+  return -1
 };
 ```
 
