@@ -32,6 +32,17 @@
 
 # 刷题日记
 
+- 20220912(10)
+  - [🌟【medium】670. 最大交换](https://leetcode.cn/problems/maximum-swap/) 规律、模拟
+  - [🌟【medium】152. 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/) 动态规划
+  - [🌟【medium】325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
+  - ? [🌟【medium】53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/) 数组、子数组
+  - [🌟【medium】978. 最长湍流子数组](https://leetcode.cn/problems/longest-turbulent-subarray/) 数组、子数组
+  - [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) Floyd 算法、最短路径、最短路问题
+  - ? [🌟【medium】648. 单词替换](https://leetcode.cn/problems/replace-words/) 字典树
+  - ? [🌟【medium】208. 实现 Trie (前缀树)](https://leetcode.cn/problems/replace-words/) 字典树、前缀树
+  - ? [🌟【medium】211. 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树、前缀树
+  - ? [🌟【medium】676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
 - 20220911(8)
   - [🌟【easy】1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
   - ?? [🌟【medium】399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
@@ -667,6 +678,7 @@
 - ?? 🌟【medium】[523. 连续的子数组和](https://leetcode.cn/problems/continuous-subarray-sum/) 前缀和、同余定理
 - ? 🌟【medium】[974. 和可被 K 整除的子数组](https://leetcode.cn/problems/subarray-sums-divisible-by-k/) 前缀、前缀和、前缀树组
 - 🌟【medium】[560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) 前缀和
+- 🌟【medium】[325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
 
 ## trie、字典树
 
@@ -681,6 +693,8 @@
 - 🌟【medium】[208 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/) 前缀树、字典树、trie
 - 🌟【medium】[211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树
 - 🌟【hard】[212. 单词搜索 II](https://leetcode.cn/problems/word-search-ii/) 字典树、回溯
+- ? 🌟【medium】[648. 单词替换](https://leetcode.cn/problems/replace-words/) 字典树
+- ? 🌟【medium】[676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
 
 ## 字符串题
 
@@ -762,6 +776,7 @@
 - 🌟【medium】[443. 压缩字符串](https://leetcode.cn/problems/string-compression/) 数组、字符串、数组原地操作
 - ? 🌟【medium】[738. 单调递增的数字](https://leetcode.cn/problems/monotone-increasing-digits/) 强规律题、数组、字符串
 - ? 🌟【easy】[169. 多数元素](https://leetcode.cn/problems/majority-element/) 摩尔投票法
+- 🌟【medium】[978. 最长湍流子数组](https://leetcode.cn/problems/longest-turbulent-subarray/) 数组、子数组
 
 ### 排列组合
 
@@ -811,6 +826,7 @@
 - ? 🌟【medium】[453. 最小操作次数使数组元素相等](https://leetcode.cn/problems/minimum-moves-to-equal-array-elements/) 模拟、规律题
 - ? 🌟【medium】[667. 优美的排列 II](https://leetcode.cn/problems/beautiful-arrangement-ii/) 规律、模拟
 - ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
+- 🌟【medium】[670. 最大交换](https://leetcode.cn/problems/maximum-swap/) 规律、模拟
 
 ### 模拟运算
 
@@ -1067,7 +1083,7 @@
 - 【medium】 [198 打家劫舍](https://leetcode.cn/problems/house-robber/)
 - 【medium】 [309 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 - 【hard】 [42 接雨水](https://leetcode.cn/problems/trapping-rain-water/)
-- 🌟【easy】 [53 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
+- 🌟【medium】 [53 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
 - 🌟【medium】 [300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
 - 🌟【hard】 [72 编辑距离](https://leetcode.cn/problems/edit-distance/)
 - 🌟【hard】 [10 正则表达式匹配](https://leetcode.cn/problems/regular-expression-matching/)
@@ -4211,7 +4227,7 @@ var solveNQueens = function(n) {
 };
 ```
 
-## 🌟😻✔ 53 最大子数组和【easy】
+## 🌟😻✔ 53 最大子数组和【medium】
 
 [ref](https://leetcode.cn/problems/maximum-subarray/)
 
@@ -8561,6 +8577,49 @@ var findOrder = function(numCourses, prerequisites) {
 字典树
 
 ![时空复杂度](http://qiniu1.lxfriday.xyz/feoffer/1659318737209_acbeaa0b-3502-4808-92de-623f0224d55a.png)
+
+```js
+var WordDictionary = function() {
+  this.tree = new TreeNode()
+};
+WordDictionary.prototype.addWord = function(word) {
+  let node = this.tree
+  for(let i=0;i<word.length;i++) {
+    if(!node.children[word[i]]) {
+      node.children[word[i]] = new TreeNode()
+    }
+    node = node.children[word[i]]
+    if(i === word.length - 1) node.isEnd = true
+  }
+};
+WordDictionary.prototype.search = function(word) {
+  return search(this.tree, word, 0)
+};
+function search(node, word, i) {
+  if(i >= word.length) return node.isEnd
+  if(word[i] === '.') {
+    const keys = Object.keys(node.children)
+    if(!keys.length) return false
+    for(let j=0;j<keys.length;j++) {
+      if(search(node.children[keys[j]], word, i + 1)) return true
+    }
+    return false
+  } else {
+    if(node.children[word[i]]) {
+      return search(node.children[word[i]], word, i + 1)
+    } else {
+      return false
+    }
+  }
+}
+
+class TreeNode {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
+  }
+}
+```
 
 ```js
 var WordDictionary = function() {
@@ -16065,6 +16124,64 @@ var countSubstrings = function(s) {
 };
 ```
 
+## ?🌟😻✔ 648. 单词替换【medium】
+
+[ref](https://leetcode.cn/problems/replace-words/)
+
+字典树
+
+```js
+var replaceWords = function(dictionary, sentence) {
+  const tree = buildTree(dictionary)
+  const words = sentence.split(' ')
+  for(let i=0;i<words.length;i++) {
+    words[i] = replace(tree, words[i])
+  }
+  return words.join(' ')
+};
+
+function replace(node, word) {
+  let wordEndInd = -1
+  for(let i=0;i<word.length;i++) {
+    if(node[word[i]]) {
+      node = node[word[i]]
+      if(node.isEnd) {
+        wordEndInd = i
+        break
+      }
+    } else {
+      break
+    }
+  }
+  if(wordEndInd >= 0) return word.slice(0, wordEndInd + 1)
+  return word
+}
+
+function buildTree(dict) {
+  const tree = {}
+  for(let i=0;i<dict.length;i++) {
+    const root = dict[i]
+    addRoot(tree, root)
+  }
+  return tree
+}
+
+function addRoot(node, root) {
+  for(let i=0;i<root.length;i++) {
+    if(!node[root[i]]) {
+      node[root[i]] = {
+        isEnd: false
+      }
+    }
+    node = node[root[i]]
+    if(i === root.length - 1) {
+      node.isEnd = true
+    }
+  }
+}
+
+```
+
 ## ?🌟😻✔ 650. 只有两个键的键盘【medium】
 
 [ref](https://leetcode.cn/problems/2-keys-keyboard/)
@@ -16440,6 +16557,85 @@ var trimBST = function(root, low, high) {
   }
   return rt
 };
+```
+
+## 🌟😻✔ 670. 最大交换【medium】
+
+[ref](https://leetcode.cn/problems/maximum-swap/)
+
+规律、模拟
+
+```js
+// 时间复杂度：O(lognum)
+// 空间复杂度：O(lognum)
+var maximumSwap = function(num) {
+  const strArr = num.toString().split(''), n = strArr.length
+  const maxArr = []
+  let maxI = n - 1
+  for(let i = n - 1;i>=0;i--) {
+    if(strArr[i] > strArr[maxI]) maxI = i
+    maxArr[i] = maxI
+  }
+  for(let i = 0;i<n;i++) {
+    if(strArr[i] < strArr[maxArr[i]]) {
+      const t = strArr[i]
+      strArr[i] = strArr[maxArr[i]]
+      strArr[maxArr[i]] = t
+      return Number(strArr.join(''))
+    }
+  }
+  return num
+};
+```
+
+## ?🌟😻✔ 676. 实现一个魔法字典【medium】
+
+[ref](https://leetcode.cn/problems/implement-magic-dictionary/)
+
+字典树、前缀树
+
+```js
+var MagicDictionary = function() {
+  this.tree = new TreeNode()
+};
+MagicDictionary.prototype.buildDict = function(dictionary) {
+  for(let i=0;i<dictionary.length;i++) {
+    const word = dictionary[i]
+    let node = this.tree
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]]) {
+        node.children[word[j]] = new TreeNode()
+      }
+      node = node.children[word[j]]
+      if(j === word.length - 1) node.isEnd = true
+    }
+  }
+};
+MagicDictionary.prototype.search = function(searchWord) {
+  function search(node, cnt, i) {
+    if(i === searchWord.length) {
+      if(cnt === 1 && node.isEnd) return true
+      return false
+    }
+    if(node.children[searchWord[i]] && search(node.children[searchWord[i]], cnt, i + 1)) return true
+    if(cnt === 0) {
+      const keys = Object.keys(node.children)
+      for(let j=0;j<keys.length;j++) {
+        if(keys[j] === searchWord[i]) continue
+        if(search(node.children[keys[j]], 1, i + 1)) return true
+      }
+      return false
+    }
+    return false
+  }
+  return search(this.tree, 0, 0)
+};
+class TreeNode {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
+  }
+}
 ```
 
 ## ??🌟😻✔ 684. 冗余连接【medium】
@@ -19026,6 +19222,40 @@ var sortedSquares = function(nums) {
     }
   }
   return res
+};
+```
+
+## 🌟😻✔ 978. 最长湍流子数组【medium】
+
+[ref](https://leetcode.cn/problems/longest-turbulent-subarray/)
+
+数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxTurbulenceSize = function(arr) {
+  let l = 0, r = 1, max = 1
+  const n = arr.length
+  while(r < n) {
+    if(arr[r] === arr[r - 1]) {
+      l = r
+    } else if(arr[r] > arr[r - 1]) {
+      if(r - 2 < l || arr[r - 1] < arr[r - 2]) {
+        max = Math.max(max, r - l + 1)
+      } else {
+        l = r - 1
+      }
+    } else {
+      if(r - 2 < l || arr[r - 1] > arr[r - 2]) {
+        max = Math.max(max, r - l + 1)
+      } else {
+        l = r - 1
+      }
+    }
+    r++
+  }
+  return max
 };
 ```
 
