@@ -32,7 +32,30 @@
 
 # 刷题日记
 
-- 20220912(10)
+- 20220916(8)
+  - ??? [🌟【hard】850. 矩形面积 II](https://leetcode.cn/problems/rectangle-area-ii/) 扫描线
+  - ? [🌟【medium】223. 矩形面积](https://leetcode.cn/problems/rectangle-area/) 扫描线
+  - ??? [🌟【hard】218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆、扫描线
+  - ? [🌟【easy】836. 矩形重叠](https://leetcode.cn/problems/rectangle-overlap/) 规律、模拟、反推
+  - [🌟【medium】712. 两个字符串的最小ASCII删除和](https://leetcode.cn/problems/minimum-ascii-delete-sum-for-two-strings/) 动态规划
+  - [🌟【medium】300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/) 单调栈
+  - [🌟【hard】72. 编辑距离](https://leetcode.cn/problems/edit-distance/) 动态规划
+  - [🌟【easy】1624. 两个相同字符之间的最长子字符串](https://leetcode.cn/problems/largest-substring-between-two-equal-characters/) 双指针
+- 20220915(5)
+  - ? [🌟【medium】672. 灯泡开关 Ⅱ](https://leetcode.cn/problems/bulb-switcher-ii/) 模拟、规律
+  - ? [🌟【medium】319. 灯泡开关](https://leetcode.cn/problems/bulb-switcher/) 模拟、规律
+  - ? [🌟【medium】161. 相隔为 1 的编辑距离](https://leetcode.cn/problems/one-edit-distance/) 双指针、动态规划
+  - ? [🌟【medium】1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/) 动态规划
+  - ? [🌟【medium】583. 两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/) 动态规划
+- 20220914(7)
+  - [🌟【easy】1619. 删除某些元素后的数组均值](https://leetcode.cn/problems/mean-of-array-after-removing-some-elements/) 常规题
+  - ? [🌟【medium】676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
+  - ? [🌟【medium】720. 词典中最长的单词](https://leetcode.cn/problems/longest-word-in-dictionary/) 字典树、前缀树
+  - [🌟【medium】841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/) 图、深度优先搜索、广度优先搜索
+  - ?? [🌟【hard】745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search/) 字典树、前缀树、后缀树
+  - ?[🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路
+  - ?[🌟【hard】269. 火星词典](https://leetcode.cn/problems/alien-dictionary/) 图、深度优先搜索、广度优先搜索
+- 20220913(10)
   - [🌟【medium】670. 最大交换](https://leetcode.cn/problems/maximum-swap/) 规律、模拟
   - [🌟【medium】152. 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/) 动态规划
   - [🌟【medium】325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
@@ -43,7 +66,7 @@
   - ? [🌟【medium】208. 实现 Trie (前缀树)](https://leetcode.cn/problems/replace-words/) 字典树、前缀树
   - ? [🌟【medium】211. 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/) 字典树、前缀树
   - ? [🌟【medium】676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
-- 20220911(8)
+- 20220912(8)
   - [🌟【easy】1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
   - ?? [🌟【medium】399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
   - [🌟【medium】1104. 二叉树寻路](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/) 二叉树
@@ -695,6 +718,8 @@
 - 🌟【hard】[212. 单词搜索 II](https://leetcode.cn/problems/word-search-ii/) 字典树、回溯
 - ? 🌟【medium】[648. 单词替换](https://leetcode.cn/problems/replace-words/) 字典树
 - ? 🌟【medium】[676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
+- ? 🌟【medium】[720. 词典中最长的单词](https://leetcode.cn/problems/longest-word-in-dictionary/) 字典树、前缀树
+- ?? 🌟【hard】[745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search/) 字典树、前缀树、后缀树
 
 ## 字符串题
 
@@ -827,6 +852,8 @@
 - ? 🌟【medium】[667. 优美的排列 II](https://leetcode.cn/problems/beautiful-arrangement-ii/) 规律、模拟
 - ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
 - 🌟【medium】[670. 最大交换](https://leetcode.cn/problems/maximum-swap/) 规律、模拟
+- ? 🌟【medium】[672. 灯泡开关 Ⅱ](https://leetcode.cn/problems/bulb-switcher-ii/) 模拟、规律
+- ? 🌟【easy】[836. 矩形重叠](https://leetcode.cn/problems/rectangle-overlap/) 规律、模拟、反推
 
 ### 模拟运算
 
@@ -845,7 +872,8 @@
 ### 扫描线
 
 - 🌟【medium】[1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings/) 差分、扫描线、区间问题
-- ??? 🌟【hard】[218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆
+- ??? 🌟【hard】[218. 天际线问题](https://leetcode.cn/problems/the-skyline-problem/) 排序、优先队列、大顶堆、扫描线
+- ??? 🌟【hard】[850. 矩形面积 II](https://leetcode.cn/problems/rectangle-area-ii/) 扫描线
 
 ## 栈
 
@@ -926,6 +954,7 @@
 - 🌟【medium】[1004. 最大连续1的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii/) 双指针、滑动窗口
 - 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
 - 🌟【medium】[904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 双指针、滑动窗口
+- ? 🌟【medium】[161. 相隔为 1 的编辑距离](https://leetcode.cn/problems/one-edit-distance/) 双指针、动态规划
 
 ## 树、深度优先、广度优先
 
@@ -1046,6 +1075,7 @@
 - 🌟【medium】[737. 句子相似性 II](https://leetcode.cn/problems/sentence-similarity-ii/) 图、广度优先搜索
 - 🌟【medium】[323. 无向图中连通分量的数目](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/) 图、广度优先搜索、并查集
 - ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
+- 🌟【medium】[841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/) 图、深度优先搜索、广度优先搜索
 
 ### 并查集
 
@@ -1117,6 +1147,8 @@
 - ?? 🌟【medium】[97. 交错字符串](https://leetcode.cn/problems/interleaving-string/) 动态规划
 - 🌟【medium】[931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/) 动态规划、滚动数组
 - ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
+- ? 🌟【medium】[161. 相隔为 1 的编辑距离](https://leetcode.cn/problems/one-edit-distance/) 双指针、动态规划
+- ? 🌟【medium】[1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -7614,6 +7646,89 @@ var getIntersectionNode = function(headA, headB) {
 };
 ```
 
+## ?🌟😻✔ 161. 相隔为 1 的编辑距离【medium】
+
+[ref](https://leetcode.cn/problems/one-edit-distance/)
+
+双指针、动态规划
+
+题解
+
+- [【云影同学】双指针或者动态规划](https://leetcode.cn/problems/one-edit-distance/solution/shuang-zhi-zhen-huo-zhe-dong-tai-gui-hua-ttv8/)
+
+```js
+// 双指针
+// 时间复杂度：O(min(M, N))
+// 空间复杂度：O(1)
+var isOneEditDistance = function(s, t) {
+  const m = s.length, n = t.length
+  let si = 0, ti = 0
+  let op = 0
+  if(m === n) {
+    op = 0
+  } else if(m > n) {
+    op = 1
+  } else {
+    op = 2
+  }
+  let errCnt = 0
+  while(si < m && ti < n) {
+    if(s[si] === t[ti]) {
+      si++
+      ti++
+    } else {
+      if(errCnt > 0) return false
+      errCnt ++
+      if(op === 0) {
+        si++
+        ti++
+      } else if(op === 1) {
+        si++
+      } else {
+        ti++
+      }
+    }
+  }
+  if(
+    si === m && ti === n && errCnt === 1
+    || si === m - 1 && ti === n && errCnt === 0
+    || si === m && ti === n - 1 && errCnt === 0
+    ) return true
+  return false
+};
+```
+
+```js
+// 滚动数组版动态规划
+// 时间复杂度：O(MN)
+// 空间复杂度：O(N)
+var isOneEditDistance = function(s, t) {
+  if(!s.length && !t.length) return false
+  if(Math.abs(s.length - t.length) > 1) return false
+  if(t.length === 0) return s.length === 1
+  if(s.length === 0) return t.length === 1
+  const m = s.length, n = t.length
+  let dp = new Array(n + 1).fill(0)
+  for(let j=1;j<=n;j++) {
+    dp[j] = j
+  }
+  for(let i=1;i<=m;i++) {
+    const tdp = []
+    for(let j=0;j<=n;j++) {
+      if(j === 0) {
+        tdp[j] = i
+      } else if(s[i - 1] === t[j - 1]) {
+        tdp[j] = dp[j - 1]
+      } else {
+        tdp[j] = Math.min(tdp[j - 1], dp[j], dp[j - 1]) + 1
+      }
+    }
+    dp = tdp
+  }
+  return dp[n] === 1
+};
+```
+
 ## ?🌟😻✔ 162 寻找峰值【medium】
 
 [ref](https://leetcode.cn/problems/find-peak-element/)
@@ -9196,6 +9311,50 @@ var maximalSquare = function(matrix) {
   return max * max
 };
 ````
+
+## ?🌟😻✔ 223. 矩形面积【medium】
+
+[ref](https://leetcode.cn/problems/rectangle-area/)
+
+扫描线
+
+```js
+var computeArea = function(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
+  const xArr = []
+  const rects = [
+    [ax1, ay1, ax2, ay2],
+    [bx1, by1, bx2, by2]
+  ]
+  for(let i=0;i<rects.length;i++) {
+    xArr.push(rects[i][0])
+    xArr.push(rects[i][2])
+  }
+  xArr.sort((a, b) => a - b)
+  let s = 0
+  for(let i=1;i<xArr.length;i++) {
+    const a = xArr[i - 1], b = xArr[i], xLen = b - a
+    if(xLen === 0) continue
+    const lines = []
+    for(let rect of rects) {
+      if(rect[0] <= a && rect[2] >= b) lines.push([rect[1], rect[3]])
+    }
+    lines.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+    let max = Number.MIN_SAFE_INTEGER
+    let hSum = 0
+    for(let i=0;i<lines.length;i++) {
+      if(lines[i][0] >= max) {
+        hSum += lines[i][1] - lines[i][0]
+        max = lines[i][1]
+      } else if(lines[i][1] > max) {
+        hSum += lines[i][1] - max
+        max = lines[i][1]
+      }
+    }
+    s += hSum * xLen
+  }
+  return s
+};
+```
 
 ## ?🌟😻✔ 224 基本计算器【hard】
 
@@ -11801,6 +11960,18 @@ var removeDuplicateLetters = function(s) {
   return stack.join('')
 };
 
+```
+
+## ?🌟😻✔ 319. 灯泡开关【medium】
+
+[ref](https://leetcode.cn/problems/bulb-switcher/)
+
+规律、模拟
+
+```js
+var bulbSwitch = function(n) {
+  return Math.floor(Math.sqrt(n))
+};
 ```
 
 ## ?🌟😻✔ 322 零钱兑换【medium】
@@ -16588,6 +16759,25 @@ var maximumSwap = function(num) {
 };
 ```
 
+## ?🌟😻✔ 672. 灯泡开关 Ⅱ【medium】
+
+[ref](https://leetcode.cn/problems/bulb-switcher-ii/)
+
+规律、模拟
+
+```js
+var flipLights = function(n, k) {
+  if(k === 0) return 1
+  if(n === 1) return 2
+  if(n === 2) return k===1?3:4
+  else {
+    if(k === 1) return 4
+    if(k === 2) return 7
+    return 8
+  }
+};
+```
+
 ## ?🌟😻✔ 676. 实现一个魔法字典【medium】
 
 [ref](https://leetcode.cn/problems/implement-magic-dictionary/)
@@ -17545,6 +17735,50 @@ var findLength = function(nums1, nums2) {
 
 ```js
 var longestWord = function(words) {
+  const root = buildTree(words)
+  let res = ''
+  for(let i=0;i<words.length;i++) {
+    const word = words[i]
+    let node = root
+    let canUse = true
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]] || !node.children[word[j]].end) {
+        canUse = false
+        break
+      }
+      node = node.children[word[j]]
+    }
+    if(canUse) {
+      if(word.length > res.length || word.length === res.length && word < res) res = word
+    }
+  }
+  return res
+};
+
+function buildTree(words) {
+  const root = new TreeNode()
+  for(let i=0;i<words.length;i++) {
+    const word = words[i]
+    let node = root
+    for(let j = 0; j < word.length; j++) {
+      if(!node.children[word[j]]) node.children[word[j]] = new TreeNode()
+      node = node.children[word[j]]
+      if(j === word.length - 1) node.end = true
+    }
+  }
+  return root
+}
+
+class TreeNode {
+  constructor() {
+    this.end = false
+    this.children = {}
+  }
+}
+```
+
+```js
+var longestWord = function(words) {
   const s = new Set([...words])
   let res = ''
   for(let word of s) {
@@ -18019,6 +18253,74 @@ var networkDelayTime = function(times, n, k) {
   dfs(k, 0)
   return dots.size === n ? Math.max(...timeArr) : -1
 };
+```
+
+## ??🌟😻✔ 745. 前缀和后缀搜索【hard】
+
+[ref](https://leetcode.cn/problems/prefix-and-suffix-search/)
+
+字典树、前缀树、后缀树
+
+```js
+var WordFilter = function(words) {
+  this.bfPfxRoot = new TreeNode()
+  this.aftPfxRoot = new TreeNode()
+  for(let i=0;i<words.length;i++) {
+    let bfNode = this.bfPfxRoot
+    let aftNode = this.aftPfxRoot
+    const word = words[i]
+    for(let j=0;j<word.length;j++) {
+      if(!bfNode.children[word[j]]) bfNode.children[word[j]] = new TreeNode()
+      bfNode = bfNode.children[word[j]]
+      bfNode.idx.push(i)
+    }
+    for(let j=word.length - 1;j>=0;j--) {
+      if(!aftNode.children[word[j]]) aftNode.children[word[j]] = new TreeNode()
+      aftNode = aftNode.children[word[j]]
+      aftNode.idx.push(i)
+    }
+  }
+};
+WordFilter.prototype.f = function(pref, suff) {
+  let bfNode = this.bfPfxRoot
+  let aftNode = this.aftPfxRoot
+  let bfPfxIdxes = [], aftPfxIdxes = []
+  for(let i=0;i<pref.length;i++) {
+    if(bfNode.children[pref[i]]) {
+      bfNode = bfNode.children[pref[i]]
+      if(i === pref.length - 1) bfPfxIdxes = bfNode.idx
+    } else {
+      break
+    }
+  }
+  for(let i=suff.length - 1;i >= 0; i--) {
+    if(aftNode.children[suff[i]]) {
+      aftNode = aftNode.children[suff[i]]
+      if(i === 0) aftPfxIdxes = aftNode.idx
+    } else {
+      break
+    }
+  }
+  let bfi = bfPfxIdxes.length - 1, afti = aftPfxIdxes.length - 1
+  while(bfi >=0 && afti >= 0) {
+    if(bfPfxIdxes[bfi] === aftPfxIdxes[afti]) {
+      return bfPfxIdxes[bfi]
+    } else if(bfPfxIdxes[bfi] > aftPfxIdxes[afti]) {
+      bfi--
+    } else {
+      afti--
+    }
+  }
+  return -1
+};
+
+class TreeNode {
+  constructor() {
+    this.idx = []
+    this.end = false
+    this.children = {}
+  }
+}
 ```
 
 ## ✔ 746 使用最小花费爬楼梯【easy】
@@ -18695,6 +18997,114 @@ var uniqueLetterString = function(s) {
   let res = 0
   for(let i=0;i<n;i++) res += (i - l[i]) * (r[i] - i)
   return res
+};
+```
+
+## ? 🌟😻✔ 836. 矩形重叠【easy】
+
+[ref](https://leetcode.cn/problems/rectangle-overlap/)
+
+规律、模拟、反推
+
+```js
+var isRectangleOverlap = function(rec1, rec2) {
+  return !(
+    rec1[0] >= rec2[2] || rec2[0] >= rec1[2] || rec1[1] >= rec2[3] || rec2[1] >= rec1[3]
+  )
+};
+```
+
+## 🌟😻✔ 841. 钥匙和房间【medium】
+
+[ref](https://leetcode.cn/problems/keys-and-rooms/)
+
+深度优先搜索
+
+```js
+// 时间复杂度：O(N+M)
+// 空间复杂度：O(N)
+var canVisitAllRooms = function(rooms) {
+  const n = rooms.length
+  const used = new Set()
+  function dfs(roomId) {
+    if(used.has(roomId)) return
+    used.add(roomId)
+    for(let i=0;i<rooms[roomId].length;i++) {
+      dfs(rooms[roomId][i])
+    }
+  }
+  dfs(0)
+  return used.size === n
+};
+
+```
+
+```js
+// 时间复杂度：O(N+M)
+// 空间复杂度：O(N)
+var canVisitAllRooms = function(rooms) {
+  const n = rooms.length
+  const used = new Set([0])
+  let q = [0]
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      for(let j=0;j<rooms[q[i]].length;j++) {
+        const roomId = rooms[q[i]][j]
+        if(!used.has(roomId)) {
+          used.add(roomId)
+          tq.push(roomId)
+        }
+      }
+    }
+    q = tq
+  }
+  return used.size === n
+};
+```
+
+## ???🌟😻✔ 850. 矩形面积 II【hard】
+
+[ref](https://leetcode.cn/problems/rectangle-area-ii/)
+
+扫描线
+
+```js
+var rectangleArea = function(rectangles) {
+  const mod = BigInt(10 ** 9 + 7)
+  const xArr = []
+  for(let i=0;i<rectangles.length;i++) {
+    const [x1, y1, x2, y2] = rectangles[i]
+    xArr.push(x1)
+    xArr.push(x2)
+  }
+  xArr.sort((a, b) => a - b)
+  let s = 0n
+  for(let i=1;i<xArr.length;i++) {
+    const a = xArr[i - 1], b = xArr[i], xLen = b - a
+    if(xLen === 0) continue
+    const lines = []
+    for(let rect of rectangles) {
+      if(rect[0] <= a && rect[2] >= b) lines.push([rect[1], rect[3]])
+    }
+    lines.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+    let hSum = 0
+    let max =-1
+    for(let j=0;j<lines.length;j++) {
+      if(lines[j][0] >= max) {
+        hSum += lines[j][1] - lines[j][0]
+        max = lines[j][1]
+        min = lines[j][0]
+      } else if(lines[j][1] > max) {
+        hSum += lines[j][1] - max
+        max = lines[j][1]
+      }
+    }
+    const newS = BigInt(xLen) * BigInt(hSum)
+    s += newS
+    s = s % mod
+  }
+  return s
 };
 ```
 
@@ -19696,6 +20106,32 @@ var colorBorder = function(grid, row, col, color) {
 };
 ```
 
+
+## ?🌟😻✔ 1035. 不相交的线【medium】
+
+[ref](https://leetcode.cn/problems/uncrossed-lines/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var maxUncrossedLines = function(nums1, nums2) {
+  const m = nums1.length, n = nums2.length
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(nums1[i] === nums2[j]) {
+        dp[i][j] = 1 + (i -1>=0 && j-1 >=0 ? dp[i - 1][j - 1] : 0)
+      } else {
+        dp[i][j] = Math.max((i - 1 >= 0? dp[i - 1][j] : 0), (j - 1>=0 ?dp[i][j - 1]:0))
+      }
+    }
+  }
+  return dp[m-1][n-1]
+};
+
+```
 
 ## 🌟😻✔ 1052. 爱生气的书店老板【medium】
 
@@ -20829,6 +21265,44 @@ var specialArray = function(nums) {
     if(cnt === i) return i
   }
   return -1
+};
+```
+
+## ✔ 1619. 删除某些元素后的数组均值【easy】
+
+[ref](https://leetcode.cn/problems/mean-of-array-after-removing-some-elements/)
+
+常规模拟
+
+```js
+var trimMean = function(arr) {
+  const n = arr.length, deleteCount = n / 20
+  arr.sort((a, b) => a - b)
+  let sum = 0
+  for(let i=deleteCount;i<n - deleteCount;i++)  {
+    sum += arr[i]
+  }
+  return sum / (n - 2 * deleteCount)
+};
+```
+
+## ✔ 1624. 两个相同字符之间的最长子字符串【easy】
+
+[ref](https://leetcode.cn/problems/largest-substring-between-two-equal-characters/)
+
+双指针
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var maxLengthBetweenEqualCharacters = function(s) {
+  let max = -1
+  for(let i=0;i<s.length;i++) {
+    let j = s.length - 1
+    while(j > i && s[j] !== s[i]) j--
+    max = Math.max(max, j - i - 1)
+  }
+  return max
 };
 ```
 
