@@ -29,9 +29,27 @@
 - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
 - 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
+- ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
 
 # 刷题日记
 
+- 20220918(8)
+  - [🌟【medium】剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
+  - [🌟【medium】剑指 Offer II 009. 乘积小于 K 的子数组](https://leetcode.cn/problems/ZVAVXX/) 双指针、滑动窗口
+  - [🌟【medium】剑指 Offer II 010. 和为 k 的子数组](https://leetcode.cn/problems/QTMn0o/) 前缀和
+  - ??? [🌟【hard】827. 最大人工岛](https://leetcode.cn/problems/making-a-large-island/) 矩阵、深度优先搜索
+  - ? [🌟【hard】41. 缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/) 数组题、数组原地操作
+  - ? [🌟【medium】剑指 Offer II 011. 0 和 1 个数相同的子数组](https://leetcode.cn/problems/A1NYOS/) 前缀和
+  - [🌟【medium】剑指 Offer II 013. 二维子矩阵的和](https://leetcode.cn/problems/O4NDxx/) 前缀和
+  - ?? [🌟【medium】剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口、哈希表
+- 20220917(7)
+  - [🌟【medium】146. LRU 缓存](https://leetcode.cn/problems/lru-cache/) 数据结构实现
+  - ??? [🌟【hard】460. LFU 缓存](https://leetcode.cn/problems/lfu-cache/) 数据结构实现
+  - [🌟【medium】150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 逆波兰式
+  - ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
+  - ? [🌟【medium】剑指 Offer II 004. 只出现一次的数字](https://leetcode.cn/problems/WGki4K/) 位运算
+  - ? [🌟【medium】剑指 Offer II 005. 单词长度的最大乘积](https://leetcode.cn/problems/aseY1I/) 位运算
+  - ?? [🌟【medium】剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode.cn/problems/1fGaJU/) 排序、双指针
 - 20220916(8)
   - ??? [🌟【hard】850. 矩形面积 II](https://leetcode.cn/problems/rectangle-area-ii/) 扫描线
   - ? [🌟【medium】223. 矩形面积](https://leetcode.cn/problems/rectangle-area/) 扫描线
@@ -683,6 +701,7 @@
 - 🌟【easy】[190. 颠倒二进制位](https://leetcode.cn/problems/reverse-bits/) 位运算
 - 🌟【easy】[326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
 - ?? 🌟【medium】[137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
+- ? 🌟【medium】[剑指 Offer II 005. 单词长度的最大乘积](https://leetcode.cn/problems/aseY1I/) 位运算
 
 ## 数字大小、数字、数学、数学规律
 
@@ -702,6 +721,7 @@
 - ? 🌟【medium】[974. 和可被 K 整除的子数组](https://leetcode.cn/problems/subarray-sums-divisible-by-k/) 前缀、前缀和、前缀树组
 - 🌟【medium】[560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) 前缀和
 - 🌟【medium】[325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
+- ? 🌟【medium】[剑指 Offer II 011. 0 和 1 个数相同的子数组](https://leetcode.cn/problems/A1NYOS/) 前缀和
 
 ## trie、字典树
 
@@ -955,6 +975,9 @@
 - 🌟【medium】[524. 通过删除字母匹配到字典里最长单词](https://leetcode.cn/problems/longest-word-in-dictionary-through-deleting/) 双指针、字符串
 - 🌟【medium】[904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 双指针、滑动窗口
 - ? 🌟【medium】[161. 相隔为 1 的编辑距离](https://leetcode.cn/problems/one-edit-distance/) 双指针、动态规划
+- ?? 🌟【medium】[剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode.cn/problems/1fGaJU/) 排序、双指针
+- 🌟【medium】[剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
+- ?? 🌟【medium】[剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口、哈希表
 
 ## 树、深度优先、广度优先
 
@@ -1059,6 +1082,7 @@
 - 🌟【medium】[542. 01 矩阵](https://leetcode.cn/problems/01-matrix/) 广度优先搜索、多起点问题
 - ? 🌟【medium】[694. 不同岛屿的数量](https://leetcode.cn/problems/number-of-distinct-islands/) 矩阵、深度优先搜索、哈希表、集合
 - ??? 🌟【hard】[711. 不同岛屿的数量 II](https://leetcode.cn/problems/number-of-distinct-islands-ii/) 深度优先搜索、哈希表、排序、集合
+- ??? 🌟【hard】[827. 最大人工岛](https://leetcode.cn/problems/making-a-large-island/) 矩阵、深度优先搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1965,112 +1989,160 @@ ref
 使用 ES6 Map 实现
 
 ```javascript
-class LRUCache {
-  constructor(capacity) {
-    this.capacity = capacity
-    this.cache = new Map()
+var LRUCache = function(capacity) {
+  this.cache = new Map()
+  this.capacity = capacity
+};
+
+LRUCache.prototype.get = function(key) {
+  if(!this.cache.has(key)) return -1
+  const ret = this.cache.get(key)
+  this.put(key, ret)
+  return ret
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if(this.cache.has(key)) {
+    this.cache.delete(key)
+  } else if(this.cache.size === this.capacity) {
+    this.cache.delete(this.cache.keys().next().value)
   }
-  put(k, v) {
-    if (this.cache.has(k)) this.cache.delete(k)
-    else if (this.cache.size >= this.capacity)
-      this.cache.delete(this.cache.keys().next().value)
-    this.cache.set(k, v)
-  }
-  get(k) {
-    const v = this.cache.get(k)
-    if (v === undefined) return -1
-    else this.moveToEnd(k, v)
-    return v
-  }
-  moveToEnd(k, v) {
-    this.cache.delete(k)
-    this.cache.set(k, v)
-  }
-}
+  this.cache.set(key, value)
+};
 ```
 
 双向链表实现
 
 ```javascript
-class LinkedListNode {
-  constructor(k, v, prev, next) {
-    this.key = k
-    this.value = v
-    // 前向节点
-    this.prev = prev
-    // 后向节点
-    this.next = next
-  }
-}
+var LRUCache = function(capacity) {
+  this.capacity = capacity
+  this.head = new ListNode()
+  this.tail = new ListNode()
+  this.maps = {}
+  this.cnt = 0
+};
 
-class LRUCache {
-  constructor(capacity) {
-    // 容量
-    this.capacity = capacity
-    this.cache = {}
-    // 实际存储的容量
-    this.size = 0
-    // 哨兵头结点
-    this.head = new LinkedListNode()
-    // 哨兵尾结点
-    this.tail = new LinkedListNode()
+LRUCache.prototype.get = function(key) {
+  if(this.maps[key] === undefined) return -1
+  const ret = this.maps[key].value
+  this.delete(this.maps[key])
+  this.add(new ListNode(key, ret))
+  return ret
+};
 
-    this.head.next = this.tail
-    this.tail.prev = this.head
-  }
-
-  // 删除节点
-  removeNode(node) {
-    const prev = node.prev
-    const next = node.next
-
-    prev.next = next
-    next.prev = prev
-  }
-
-  // 新增一个节点
-  addNode(node) {
-    node.prev = this.head
-    node.next = this.head.next
-    this.head.next.prev = node
-    this.head.next = node
-  }
-  // 删除尾结点
-  popTail() {
-    const res = this.tail.prev
-    this.removeNode(res)
-    return res
-  }
-
-  put(k, v) {
-    const node = this.cache[k]
-    if (!node) {
-      const n = new LinkedListNode(k, v)
-      this.cache[k] = n
-      this.addNode(n)
-      if (this.size >= this.capacity) {
-        const deleteNode = this.popTail()
-        delete this.cache[deleteNode.key]
-      } else {
-        this.size += 1
-      }
+LRUCache.prototype.delete = function(node) {
+  delete this.maps[node.key]
+  this.cnt--
+  if(this.cnt === 0) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    if(node === this.head.next) {
+      this.head.next = node.next
+      node.next.prev = null
+    } else if(node === this.tail.next) {
+      this.tail.next = node.prev
+      node.prev.next = null
     } else {
-      this.removeNode(node)
-      node.value = v
-      this.addNode(node)
+      node.prev.next = node.next
+      node.next.prev = node.prev
     }
   }
+};
 
-  get(k) {
-    const node = this.cache[k]
-    if (!node) return -1
-    else {
-      this.removeNode(node)
-      this.addNode(node)
-      return node.value
-    }
+LRUCache.prototype.add = function(node) {
+  this.maps[node.key] = node
+  this.cnt++
+  if(this.cnt === 1) {
+    this.head.next = node
+    this.tail.next = node
+  } else {
+    node.prev = this.tail.next
+    this.tail.next.next = node
+    this.tail.next = node
+  }
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if(this.maps[key]) {
+    this.delete(this.maps[key])
+  } else if(this.cnt === this.capacity) {
+    this.delete(this.head.next)
+  }
+  this.add(new ListNode(key, value))
+};
+
+class ListNode {
+  constructor(key, value) {
+    this.key = key
+    this.value = value
+    this.prev = null
+    this.next = null
   }
 }
+
+```
+
+## LFU 缓存(最不经常使用 LFU)
+
+- [460. LFU 缓存](https://leetcode.cn/problems/lfu-cache/)
+
+```js
+var LFUCache = function(capacity) {
+  this.capacity = capacity
+  this.kvs = new Map()
+  this.min = -1
+  // key-times
+  this.timesMap = new Map()
+  // time-keys(set)
+  this.timeKeysMap = new Map()
+};
+LFUCache.prototype.get = function(key) {
+  if(this.kvs.has(key)) {
+    const ret = this.kvs.get(key)
+    this.updateTimes(key, ret)
+    return ret
+  }
+  return -1
+};
+
+LFUCache.prototype.updateTimes = function(key, value) {
+  const times = this.timesMap.get(key)
+  this.timesMap.set(key, times + 1)
+  this.timeKeysMap.get(times).delete(key)
+  if(this.timeKeysMap.get(times).size === 0 && times === 1) {
+    this.min = 2
+  }
+  const set = this.timeKeysMap.get(times + 1) || new Set()
+  set.add(key)
+  this.timeKeysMap.set(times + 1, set)
+};
+
+LFUCache.prototype.delete = function() {
+  const keysSet = this.timeKeysMap.get(this.min)
+  const key = keysSet.keys().next().value
+  this.kvs.delete(key)
+  this.timesMap.delete(key)
+  keysSet.delete(key)
+};
+
+LFUCache.prototype.put = function(key, value) {
+  if(this.capacity === 0) return
+  if(this.kvs.has(key)) {
+    this.kvs.set(key, value)
+    this.updateTimes(key, value)
+  } else {
+    if(this.kvs.size === this.capacity) {
+      this.delete()
+    }
+    this.kvs.set(key, value)
+    this.min = 1
+    this.timesMap.set(key, 1)
+    const set = this.timeKeysMap.get(1) || new Set()
+    set.add(key)
+    this.timeKeysMap.set(1, set)
+  }
+};
 ```
 
 ## 😻✔ 斐波拉契数列 
@@ -7301,6 +7373,101 @@ var reorderList = function(head) {
 ## 😻✔ 146 LRU 缓存【medium】
 
 [ref](https://leetcode.cn/problems/lru-cache/)
+
+```js
+var LRUCache = function(capacity) {
+  this.capacity = capacity
+  this.head = new ListNode()
+  this.tail = new ListNode()
+  this.maps = {}
+  this.cnt = 0
+};
+
+LRUCache.prototype.get = function(key) {
+  if(this.maps[key] === undefined) return -1
+  const ret = this.maps[key].value
+  this.delete(this.maps[key])
+  this.add(new ListNode(key, ret))
+  return ret
+};
+
+LRUCache.prototype.delete = function(node) {
+  delete this.maps[node.key]
+  this.cnt--
+  if(this.cnt === 0) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    if(node === this.head.next) {
+      this.head.next = node.next
+      node.next.prev = null
+    } else if(node === this.tail.next) {
+      this.tail.next = node.prev
+      node.prev.next = null
+    } else {
+      node.prev.next = node.next
+      node.next.prev = node.prev
+    }
+  }
+};
+
+LRUCache.prototype.add = function(node) {
+  this.maps[node.key] = node
+  node.prev = null
+  node.next = null
+  this.cnt++
+  if(this.cnt === 1) {
+    this.head.next = node
+    this.tail.next = node
+  } else {
+    node.prev = this.tail.next
+    this.tail.next.next = node
+    this.tail.next = node
+  }
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if(this.maps[key]) {
+    this.maps[key].val = value
+    this.delete(this.maps[key])
+  } else if(this.cnt === this.capacity) {
+    this.delete(this.head.next)
+  }
+  this.add(new ListNode(key, value))
+};
+
+class ListNode {
+  constructor(key, value) {
+    this.key = key
+    this.value = value
+    this.prev = null
+    this.next = null
+  }
+}
+```
+
+```js
+var LRUCache = function(capacity) {
+  this.cache = new Map()
+  this.capacity = capacity
+};
+
+LRUCache.prototype.get = function(key) {
+  if(!this.cache.has(key)) return -1
+  const ret = this.cache.get(key)
+  this.put(key, ret)
+  return ret
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if(this.cache.has(key)) {
+    this.cache.delete(key)
+  } else if(this.cache.size === this.capacity) {
+    this.cache.delete(this.cache.keys().next().value)
+  }
+  this.cache.set(key, value)
+};
+```
 
 ```js
 var LRUCache = function(capacity) {
@@ -14565,6 +14732,70 @@ var findContentChildren = function(g, s) {
 };
 ```
 
+## ???🌟😻✔ 461 汉明距离【easy】
+
+[ref](https://leetcode.cn/problems/lfu-cache/)
+
+设计
+
+```js
+var LFUCache = function(capacity) {
+  this.capacity = capacity
+  this.kvs = new Map()
+  this.min = -1
+  // key-times
+  this.timesMap = new Map()
+  // time-keys(set)
+  this.timeKeysMap = new Map()
+};
+LFUCache.prototype.get = function(key) {
+  if(this.kvs.has(key)) {
+    const ret = this.kvs.get(key)
+    this.updateTimes(key, ret)
+    return ret
+  }
+  return -1
+};
+
+LFUCache.prototype.updateTimes = function(key, value) {
+  const times = this.timesMap.get(key)
+  this.timesMap.set(key, times + 1)
+  this.timeKeysMap.get(times).delete(key)
+  if(this.timeKeysMap.get(times).size === 0 && times === 1) {
+    this.min = 2
+  }
+  const set = this.timeKeysMap.get(times + 1) || new Set()
+  set.add(key)
+  this.timeKeysMap.set(times + 1, set)
+};
+
+LFUCache.prototype.delete = function() {
+  const keysSet = this.timeKeysMap.get(this.min)
+  const key = keysSet.keys().next().value
+  this.kvs.delete(key)
+  this.timesMap.delete(key)
+  keysSet.delete(key)
+};
+
+LFUCache.prototype.put = function(key, value) {
+  if(this.capacity === 0) return
+  if(this.kvs.has(key)) {
+    this.kvs.set(key, value)
+    this.updateTimes(key, value)
+  } else {
+    if(this.kvs.size === this.capacity) {
+      this.delete()
+    }
+    this.kvs.set(key, value)
+    this.min = 1
+    this.timesMap.set(key, 1)
+    const set = this.timeKeysMap.get(1) || new Set()
+    set.add(key)
+    this.timeKeysMap.set(1, set)
+  }
+};
+```
+
 ## ?🌟😻✔ 461 汉明距离【easy】
 
 [ref](https://leetcode.cn/problems/hamming-distance/)
@@ -18950,6 +19181,71 @@ var numBusesToDestination = function(routes, source, target) {
   return -1
 };
 
+```
+
+## ???🌟😻✔ 827. 最大人工岛【hard】
+
+[ref](https://leetcode.cn/problems/making-a-large-island/)
+
+矩阵、深度优先搜索
+
+题解
+
+- [云影同学】一种比较骚的常规解法](https://leetcode.cn/problems/making-a-large-island/solution/yi-chong-bi-jiao-sao-de-jie-fa-by-lxfrid-bfco/)
+
+```js
+var largestIsland = function(grid) {
+  const n = grid.length
+  let max = 0
+  const used = new Array(n).fill(false).map(_ => new Array(n).fill(false))
+  let isLandId = 0
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1 && !used[i][j]) {
+        const s = getS(i, j)
+        setS(i, j, s, isLandId++)
+      }
+    }
+  }
+  let reversed = false
+  const directs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 0) {
+        reversed = true
+        const set = new Set()
+        let s = 1
+        for(let k=0;k<4;k++) {
+          const ii = directs[k][0] + i, jj = directs[k][1] + j
+          if(ii>=0 && ii<n && jj>=0 && jj<n&& typeof grid[ii][jj] !== 'number' && !set.has(grid[ii][jj].id)) {
+            set.add(grid[ii][jj].id)
+            s += grid[ii][jj].s
+          }
+        }
+        max = Math.max(max, s)
+      }
+    }
+  }
+
+  function getS(i, j) {
+    if(i < 0 || i >= n || j < 0 || j >= n || used[i][j] || grid[i][j] === 0) return 0
+    let s = 1
+    used[i][j] = true
+    s += getS(i + 1, j) + getS(i - 1, j) + getS(i, j + 1) + getS(i, j - 1)
+    return s
+  }
+
+  function setS(i, j, s, id) {
+    if(i < 0 || i >= n || j < 0 || j >= n || typeof grid[i][j] !== 'number' || grid[i][j] === 0) return
+    grid[i][j] = {s, id}
+    setS(i + 1, j, s, id)
+    setS(i - 1, j, s, id)
+    setS(i, j + 1, s, id)
+    setS(i, j - 1, s, id)
+  }
+
+  return reversed ? max : n * n
+};
 ```
 
 ## ???🌟😻✔ 828. 统计子串中的唯一字符【hard】
@@ -23718,4 +24014,286 @@ function swap(arr, i, j) {
   arr[j] = t
 }
 
+```
+
+## ?🌟😻✔ 剑指 Offer II 004. 只出现一次的数字 【medium】
+
+[ref](https://leetcode.cn/problems/WGki4K/)
+
+位运算
+
+```js
+var singleNumber = function(nums) {
+  let ret = 0
+  for(let i=0;i<32;i++) {
+    let total = 0
+    for(let j=0;j<nums.length;j++) {
+      total += ((nums[j] >> i) & 1)
+    }
+    if(total % 3 !== 0) {
+      ret |= (1 << i)
+    }
+  }
+
+  return ret
+};
+```
+
+```js
+var singleNumber = function(nums) {
+  const binaryArr = new Array(32).fill(0)
+  for(let i=0;i<nums.length;i++) {
+    const num = nums[i]
+    for(let i=0;i<32;i++) {
+      binaryArr[i] += ((num >> i) & 1)
+    }
+  }
+  console.log(binaryArr)
+  let ret = 0
+  for(let i=0;i<32;i++) {
+    ret += (binaryArr[i] % 3) * (1 << i)
+  }
+  return ret
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 005. 单词长度的最大乘积【medium】
+
+[ref](https://leetcode.cn/problems/aseY1I/)
+
+位运算
+
+```js
+// 时间复杂度：O(L+N^2) L=words所有字符数之和 N=words.length
+// 空间复杂度：O(N)
+var maxProduct = function(words) {
+  const n = words.length
+  const binaWords = []
+  for(let i=0;i<n;i++) {
+    let num = 0
+    for(let j=0;j<words[i].length;j++) {
+      num |= (1 << (words[i].charCodeAt(j) - 'a'.charCodeAt(0)))
+    }
+    binaWords.push(num)
+  }
+  let max = 0
+  for(let i=0;i<n;i++) {
+    for(let j=i + 1;j<n;j++) {
+      if((binaWords[i] & binaWords[j]) === 0) {
+        max = Math.max(max, words[i].length * words[j].length)
+      }
+    }
+  }
+  return max
+}
+
+```
+
+## ??🌟😻✔ 剑指 Offer II 007. 数组中和为 0 的三个数【medium】
+
+[ref](https://leetcode.cn/problems/1fGaJU/)
+
+排序、双指针
+
+```js
+// 时间复杂度：O(N^2)
+// 时间复杂度：O(logN)
+var threeSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  const n = nums.length
+  const res = []
+  for(let i=0;i<n - 2;i++) {
+    let l = i + 1, r = n - 1
+    if(nums[i] > 0) break
+    if(i-1>=0 &&nums[i] === nums[i - 1]) continue
+    while(l < r) {
+      const sum = nums[i] + nums[l] + nums[r]
+      if(sum === 0) {
+        res.push([nums[i], nums[l], nums[r]])
+        l++
+        while(l < r && nums[l] === nums[l-1]) l++
+      } else if(sum > 0) {
+        r--
+      } else {
+        l++
+      }
+    }
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 008. 和大于等于 target 的最短子数组【medium】
+
+[ref](https://leetcode.cn/problems/2VG8Kg/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minSubArrayLen = function(target, nums) {
+  const n = nums.length
+  let l = 0, r = 0
+  let min = Number.MAX_SAFE_INTEGER
+  let sum = 0
+  while(r < n) {
+    sum += nums[r]
+    while(sum - nums[l] >= target) {
+      sum -= nums[l]
+      l++
+    }
+    if(sum >= target) min = Math.min(min, r - l + 1)
+    r++
+  }
+  return min === Number.MAX_SAFE_INTEGER ? 0 : min
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 009. 乘积小于 K 的子数组【medium】
+
+[ref](https://leetcode.cn/problems/ZVAVXX/)
+
+双指针
+
+```js
+// 双指针
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var numSubarrayProductLessThanK = function(nums, k) {
+  if(k === 0 || k === 1) return 0
+  const n = nums.length
+  let cnt = 0, mul = 1, l = 0, r = 0
+  while(r < n) {
+    mul *= nums[r]
+    while(mul >= k) mul /= nums[l++]
+    cnt += r - l + 1
+    r++
+  }
+  return cnt
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 010. 和为 k 的子数组【medium】
+
+[ref](https://leetcode.cn/problems/QTMn0o/)
+
+前缀和
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var subarraySum = function(nums, k) {
+  const n = nums.length, map = new Map([[0, 1]])
+  let sum = 0, cnt = 0
+  for(let i=0;i<n;i++) {
+    sum += nums[i]
+    if(map.has(sum - k)) {
+      cnt += map.get(sum - k)
+    }
+    map.set(sum, (map.get(sum) || 0) + 1)
+  }
+  return cnt
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 011. 0 和 1 个数相同的子数组【medium】
+
+[ref](https://leetcode.cn/problems/A1NYOS/)
+
+前缀和
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var findMaxLength = function(nums) {
+  const n = nums.length
+  for(let i=0;i<n;i++) {
+    if(nums[i] === 0) nums[i] = -1
+  }
+  const map = new Map([[0, -1]])
+  let max = 0
+  let sum = 0
+  for(let i=0;i<n;i++) {
+    sum += nums[i]
+    if(map.has(sum)) {
+      max = Math.max(max, i - map.get(sum))
+    } else {
+      map.set(sum, i)
+    }
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 013. 二维子矩阵的和【medium】
+
+[ref](https://leetcode.cn/problems/O4NDxx/)
+
+前缀和
+
+```js
+// 时间复杂度：O(MN) M=matrix.length, N=matrix[0].length
+// 空间复杂度：O(1)
+var NumMatrix = function(matrix) {
+  for(let i=0;i<matrix.length;i++) {
+    for(let j=0;j<matrix[0].length;j++) {
+      matrix[i][j] += 
+        (i-1 >=0 ? matrix[i-1][j]:0)
+        +
+        (j-1>=0?matrix[i][j - 1]:0)
+        -
+        ((i - 1 >= 0 && j - 1 >=0) ? matrix[i - 1][j - 1] : 0)
+    }
+  }
+  this.matrix = matrix
+};
+
+// 时间复杂度：O(1)
+// 空间复杂度：O(1)
+NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
+  const ma = this.matrix
+  return ma[row2][col2]
+         -
+         (col1 - 1>= 0 ? ma[row2][col1 - 1] : 0)
+         -
+         (row1 - 1 >=0 ? ma[row1 - 1][col2] : 0)
+         +
+         (row1 - 1 >= 0 && col1 - 1 >= 0 ? ma[row1 - 1][col1 - 1] : 0)
+};
+
+```
+
+## ??🌟😻✔ 剑指 Offer II 014. 字符串中的变位词【medium】
+
+[ref](https://leetcode.cn/problems/MPnaiL/)
+
+哈希表、滑动窗口
+
+```js
+// 时间复杂度：O(M+N) M=s1.length N=s2.length
+// 空间复杂度：O(e) e 最大为 26
+var checkInclusion = function(s1, s2) {
+  const map = new Map()
+  let diffCnt = 0
+  for(let i=0;i<s1.length;i++) {
+    map.set(s1[i], (map.get(s1[i]) || 0) + 1)
+    if(map.get(s1[i]) === 1) diffCnt++
+  }
+  let l=0, r = 0
+  while(r < s2.length) {
+    map.set(s2[r], (map.get(s2[r]) || 0) - 1)
+    if(map.get(s2[r]) === 0) diffCnt--
+    if(map.get(s2[r]) === -1) diffCnt++
+    if(diffCnt === 0) return true
+    while(map.get(s2[r]) < 0) {
+      map.set(s2[l], map.get(s2[l]) + 1)
+      if(map.get(s2[l]) === 0) diffCnt--
+      if(map.get(s2[l]) === 1) diffCnt++
+      if(diffCnt === 0) return true
+      l++
+    }
+    r++
+  }
+  return false
+};
 ```
