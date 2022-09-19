@@ -33,6 +33,12 @@
 
 # 刷题日记
 
+- 20220919()
+  - [🌟【easy】1636. 按照频率将数组升序排序](https://leetcode.cn/problems/sort-array-by-increasing-frequency/) 排序
+  - [🌟【medium】剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口
+  - ? [🌟【medium】剑指 Offer II 015. 字符串中的所有变位词](https://leetcode.cn/problems/VabMRr/) 滑动窗口
+  - [🌟【medium】剑指 Offer II 016. 不含重复字符的最长子字符串](https://leetcode.cn/problems/wtcaE1/) 滑动窗口
+  - [🌟【medium】剑指 Offer II 020. 回文子字符串的个数](https://leetcode.cn/problems/a7VOhD/?favorite=e8X3pBZi) 回文串、动态规划
 - 20220918(8)
   - [🌟【medium】剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
   - [🌟【medium】剑指 Offer II 009. 乘积小于 K 的子数组](https://leetcode.cn/problems/ZVAVXX/) 双指针、滑动窗口
@@ -978,6 +984,7 @@
 - ?? 🌟【medium】[剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode.cn/problems/1fGaJU/) 排序、双指针
 - 🌟【medium】[剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
 - ?? 🌟【medium】[剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口、哈希表
+- ?? 🌟【medium】[剑指 Offer II 015. 字符串中的所有变位词](https://leetcode.cn/problems/VabMRr/) 滑动窗口
 
 ## 树、深度优先、广度优先
 
@@ -21602,6 +21609,32 @@ var maxLengthBetweenEqualCharacters = function(s) {
 };
 ```
 
+## ✔ 1636. 按照频率将数组升序排序【easy】
+
+[ref](https://leetcode.cn/problems/sort-array-by-increasing-frequency/)
+
+排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var frequencySort = function(nums) {
+  const cntMap = new Map()
+  for(let i=0;i<nums.length;i++) {
+    cntMap.set(nums[i], (cntMap.get(nums[i]) || 0) + 1)
+  }
+  const cntArr = Array.from(cntMap)
+  cntArr.sort((a, b) => a[1] - b[1] || b[0] - a[0])
+  const res = []
+  for(let i=0;i<cntArr.length;i++) {
+    for(let j=0;j<cntArr[i][1];j++) {
+      res.push(cntArr[i][0])
+    }
+  }
+  return res
+};
+```
+
 ## ✔ 1656. 设计有序流【easy】
 
 [ref](https://leetcode.cn/problems/design-an-ordered-stream/)
@@ -24296,4 +24329,121 @@ var checkInclusion = function(s1, s2) {
   }
   return false
 };
+```
+
+## ?🌟😻✔ 剑指 Offer II 015. 字符串中的所有变位词【medium】
+
+[ref](https://leetcode.cn/problems/VabMRr/)
+
+滑动窗口
+
+```js
+// 时间复杂度：O(M+N) M=s.length N=p.length
+// 空间复杂度：O(e) e 最大为26
+var findAnagrams = function(s, p) {
+  const map = new Map()
+  let diffCnt = 0
+  for(let i=0;i<p.length;i++) {
+    map.set(p[i], (map.get(p[i]) || 0) + 1)
+    if(map.get(p[i]) === 1) diffCnt++
+  }
+  const res = []
+  let l = 0, r = 0
+  while(r < s.length) {
+    map.set(s[r], (map.get(s[r]) || 0) - 1)
+    if(map.get(s[r]) === 0) diffCnt--
+    if(map.get(s[r]) === -1) diffCnt++
+    if(diffCnt === 0) res.push(l)
+    while(map.get(s[r]) < 0) {
+      map.set(s[l], map.get(s[l]) + 1)
+      if(map.get(s[l]) === 0) diffCnt--
+      if(map.get(s[l]) === 1) diffCnt++
+      l++
+      if(diffCnt === 0) res.push(l)
+    }
+    r++
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 016. 不含重复字符的最长子字符串【medium】
+
+[ref](https://leetcode.cn/problems/wtcaE1/)
+
+滑动窗口
+
+```js
+// 滑动窗口
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var lengthOfLongestSubstring = function(s) {
+  const map = new Map()
+  let l = 0, r = 0
+  let max = 0
+  while(r < s.length) {
+    map.set(s[r], (map.get(s[r]) || 0) + 1)
+    while(map.get(s[r]) > 1) {
+      map.set(s[l], map.get(s[l]) - 1)
+      l++
+    }
+    max = Math.max(max, r - l + 1)
+    r++
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 020. 回文子字符串的个数【medium】
+
+[ref]()
+
+```js
+// 动态规划
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var countSubstrings = function(s) {
+  const n = s.length, dp = new Array(n).fill(0).map(_ => new Array(n).fill(true))
+  let cnt = 0
+  for(let i=n-1;i>=0;i--) {
+    for(let j=i;j<n;j++) {
+      if(s[i] === s[j] && (
+        i === j
+        || i + 1 === j
+        || dp[i + 1][j - 1])
+      ) {
+        dp[i][j] = true
+        cnt++
+      } else {
+        dp[i][j] = false
+      }
+    }
+  }
+  return cnt
+};
+```
+
+```js
+// 普通解法
+var countSubstrings = function(s) {
+  let cnt = 0
+  for(let i=0;i<s.length;i++) {
+    let k = 0
+    while(i - k >=0 && i + k < s.length && is(s, i - k, i + k)) k++
+    cnt += k
+    if(i + 1 < s.length && s[i] === s[i + 1]) {
+      k = 0
+      while(i - k >=0 && i + 1 + k < s.length && is(s, i - k, i + 1 + k)) k++
+      cnt+= k
+    }
+  }
+  return cnt
+};
+
+function is(s, l, r) {
+  while(l < r) {
+    if(s[l++] !== s[r--]) return false
+  }
+  return true
+}
 ```
