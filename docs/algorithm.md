@@ -33,12 +33,15 @@
 
 # 刷题日记
 
-- 20220919()
+- 20220919(8)
   - [🌟【easy】1636. 按照频率将数组升序排序](https://leetcode.cn/problems/sort-array-by-increasing-frequency/) 排序
   - [🌟【medium】剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口
   - ? [🌟【medium】剑指 Offer II 015. 字符串中的所有变位词](https://leetcode.cn/problems/VabMRr/) 滑动窗口
   - [🌟【medium】剑指 Offer II 016. 不含重复字符的最长子字符串](https://leetcode.cn/problems/wtcaE1/) 滑动窗口
   - [🌟【medium】剑指 Offer II 020. 回文子字符串的个数](https://leetcode.cn/problems/a7VOhD/?favorite=e8X3pBZi) 回文串、动态规划
+  - [🌟【medium】剑指 Offer II 021. 删除链表的倒数第 n 个结点回文子字符串的个数](https://leetcode.cn/problems/SLwz0R/) 链表
+  - ? [🌟【medium】剑指 Offer II 022. 链表中环的入口节点](https://leetcode.cn/problems/c32eOV/) 链表、环形链表
+  - [🌟【medium】剑指 Offer II 025. 链表中的两数相加](https://leetcode.cn/problems/lMSNwu/) 链表
 - 20220918(8)
   - [🌟【medium】剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
   - [🌟【medium】剑指 Offer II 009. 乘积小于 K 的子数组](https://leetcode.cn/problems/ZVAVXX/) 双指针、滑动窗口
@@ -24396,7 +24399,9 @@ var lengthOfLongestSubstring = function(s) {
 
 ## 🌟😻✔ 剑指 Offer II 020. 回文子字符串的个数【medium】
 
-[ref]()
+[ref](https://leetcode.cn/problems/a7VOhD/?favorite=e8X3pBZi)
+
+动态规划
 
 ```js
 // 动态规划
@@ -24446,4 +24451,109 @@ function is(s, l, r) {
   }
   return true
 }
+```
+
+## 🌟😻✔ 剑指 Offer II 021. 删除链表的倒数第 n 个结点【medium】
+
+[ref](https://leetcode.cn/problems/SLwz0R/?favorite=e8X3pBZi)
+
+链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var removeNthFromEnd = function(head, n) {
+  const myHead = new ListNode()
+  myHead.next = head
+  let tHead = myHead
+  while(n>0) {
+    tHead = tHead.next
+    n--
+  }
+  let tHead2 = myHead
+  while(tHead.next) {
+    tHead = tHead.next
+    tHead2 = tHead2.next
+  }
+  tHead2.next = tHead2.next.next
+  return myHead.next
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 022. 链表中环的入口节点【medium】
+
+[ref](https://leetcode.cn/problems/c32eOV/)
+
+链表、环形链表
+
+```js
+// a +b+ n(b+c) = 2(a+b)
+// a = nb+nc-b = c - c + nb + nc - b = c + (n-1)(b+c)
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var detectCycle = function(head) {
+  const myHead = new ListNode()
+  myHead.next = head
+  let fast = myHead, slow = myHead
+  while(fast.next && fast.next.next) {
+    fast = fast.next.next
+    slow = slow.next
+    if(fast === slow) {
+      fast = myHead
+      while(fast !== slow) {
+        fast=fast.next
+        slow=slow.next
+      }
+      return fast
+    }
+  }
+  return null
+};
+```
+
+```js
+// 哈希表
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var detectCycle = function(head) {
+  const set = new Set()
+  while(head) {
+    if(set.has(head)) return head
+    set.add(head)
+    head = head.next
+  }
+  return null
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 025. 链表中的两数相加【medium】
+
+[ref](https://leetcode.cn/problems/lMSNwu/)
+
+链表
+
+```js
+var addTwoNumbers = function(l1, l2) {
+  const num1Arr = [], num2Arr = []
+  while(l1) {
+    num1Arr.push(l1.val)
+    l1 = l1.next
+  }
+  while(l2) {
+    num2Arr.push(l2.val)
+    l2 = l2.next
+  }
+  const myHead = new ListNode()
+  let add = 0
+  while(num1Arr.length || num2Arr.length || add > 0) {
+    let a = num1Arr.length > 0 ? num1Arr.pop() : 0
+    let b = num2Arr.length > 0 ? num2Arr.pop() : 0
+    const sum = add + a + b
+    add = Math.floor(sum / 10)
+    const next = myHead.next
+    myHead.next = new ListNode(sum % 10)
+    myHead.next.next = next 
+  }
+  return myHead.next
+};
 ```
