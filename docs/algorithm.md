@@ -33,6 +33,27 @@
 
 # 刷题日记
 
+- 20220921(10)
+  - [🌟【easy】1640. 能否连接形成数组](https://leetcode.cn/problems/check-array-formation-through-concatenation/) 哈希表
+  - ? [🌟【hard】460. LFU 缓存](https://leetcode.cn/problems/lfu-cache/) 设计题、LFU
+  - [🌟【medium】剑指 Offer II 033. 变位词组](https://leetcode.cn/problems/sfvd7V/) 排序、哈希表
+  - [🌟【medium】剑指 Offer II 035. 最小时间差](https://leetcode.cn/problems/569nqc/) 排序
+  - [🌟【medium】剑指 Offer II 036. 后缀表达式](https://leetcode.cn/problems/8Zf90G/) 逆波兰、栈
+  - [🌟【medium】剑指 Offer II 037. 小行星碰撞](https://leetcode.cn/problems/XagZNi/) 栈
+  - [🌟【medium】剑指 Offer II 038. 每日温度](https://leetcode.cn/problems/iIQa4I/) 单调栈
+  - ?? [🌟【medium】剑指 Offer II 043. 往完全二叉树添加节点](https://leetcode.cn/problems/NaqhDT/) 队列
+  - [🌟【medium】剑指 Offer II 044. 二叉树每层的最大值](https://leetcode.cn/problems/hPov7L/) 二叉树、广度优先搜索
+  - [🌟【medium】剑指 Offer II 045. 二叉树最底层最左边的值](https://leetcode.cn/problems/LwUNpT/) 二叉树、广度优先搜索
+- 20220921(5)
+  - ??? [🌟【hard】854. 相似度为 K 的字符串](https://leetcode.cn/problems/k-similar-strings/) 深度优先搜素、广度优先搜索
+  - [🌟【medium】752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock/) 广度优先搜索
+  - [🌟【medium】剑指 Offer II 029. 排序的循环链表](https://leetcode.cn/problems/4ueAj6/) 环形链表、链表
+  - [🌟【medium】剑指 Offer II 030. 插入、删除和随机访问都是 O(1) 的容器](https://leetcode.cn/problems/FortPu/) 设计题、哈希表
+  - [🌟【medium】剑指 Offer II 031. 最近最少使用缓存](https://leetcode.cn/problems/OrIXps/) 设计题、LRU
+- 20220920(3)
+  - ?? [🌟【medium】698. 划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/) 回溯法
+  - [🌟【medium】剑指 Offer II 028. 展平多级双向链表](https://leetcode.cn/problems/Qv1Da2/) 深度优先搜索
+  - [🌟【medium】剑指 Offer II 026. 重排链表](https://leetcode.cn/problems/LGjMqU/) 链表
 - 20220919(8)
   - [🌟【easy】1636. 按照频率将数组升序排序](https://leetcode.cn/problems/sort-array-by-increasing-frequency/) 排序
   - [🌟【medium】剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口
@@ -936,6 +957,7 @@
 - 🌟【easy】[225 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
 - ? 🌟【medium】[622. 设计循环队列](https://leetcode.cn/problems/design-circular-queue/) 队列、循环队列
 - 🌟【medium】[641. 设计循环双端队列](https://leetcode.cn/problems/design-circular-deque/) 队列、循环队列、双端队列、循环双端队列
+- ?? 🌟【medium】[剑指 Offer II 043. 往完全二叉树添加节点](https://leetcode.cn/problems/NaqhDT/) 队列
 
 ## 链表
 
@@ -17455,8 +17477,64 @@ var maxAreaOfIsland = function(grid) {
 
 - ?? [🌟【medium】 416 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/) 背包问题
 
+我的题解
+
+- [【云影同学】一个常规回溯解法，不用排序、dp](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/solution/-by-lxfriday-flp0/)
+
 
 回溯
+
+```js
+var canPartitionKSubsets = function(nums, k) {
+  const n = nums.length
+  let sum = 0
+  let max = Number.MIN_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    sum += nums[i]
+    max = Math.max(max, nums[i])
+  }
+  const target = sum / k
+  if(target !== Math.floor(target) || max > target) return false
+  let can = false
+  const used = new Array(n).fill(false)
+  function dfs(sum, cnt, startInd) {
+    // 有k-1个target了，则剩下的数之和也为 target
+    // k*target=(k-1)*target + x
+    if(cnt === k - 1) {
+      can = true
+      return
+    }
+    if(sum === 0) {
+      for(let i=0;i<n;i++) {
+        if(!used[i] && nums[i] <= target) {
+          used[i] = true
+          if(sum + nums[i] === target) {
+            dfs(0, cnt + 1, i + 1)
+          } else {
+            dfs(nums[i], cnt, i + 1)
+          }
+          used[i] = false
+          break
+        }
+      }
+    } else {
+      for(let i=startInd;i<n;i++) {
+        if(!used[i] && nums[i] + sum <= target) {
+          used[i] = true
+          if(sum + nums[i] === target) {
+            dfs(0, cnt + 1, i + 1)
+          } else {
+            dfs(sum + nums[i], cnt, i + 1)
+          }
+          used[i] = false
+        }
+      }
+    }
+  }
+  dfs(0, 0, 0)
+  return can
+};
+```
 
 ```js
 var canPartitionKSubsets = function(nums, k) {
@@ -18595,6 +18673,39 @@ var minCostClimbingStairs = function(cost) {
 
 ```js
 var openLock = function(deadends, target) {
+  const deadendsSet = new Set(deadends)
+  if(deadendsSet.has('0000')) return -1
+  let q = ['0000']
+  const used = new Set(['0000'])
+  let cnt = 0
+  while(q.length) {
+    const len = q.length
+    const tq = []
+    for(let i=0;i<len;i++) {
+      const curr = q[i]
+      if(curr === target) return cnt
+      for(let j=0;j<4;j++) {
+        const s1 = curr.slice(0, j) + ((Number(curr[j]) + 1) % 10) + curr.slice(j + 1)
+        const s2 = curr.slice(0, j) + ((Number(curr[j]) - 1 + 10) % 10) + curr.slice(j + 1)
+        if(!deadendsSet.has(s1) && !used.has(s1)) {
+          used.add(s1)
+          tq.push(s1)
+        }
+        if(!deadendsSet.has(s2) && !used.has(s2)) {
+          used.add(s2)
+          tq.push(s2)
+        }
+      }
+    }
+    q = tq
+    cnt++
+  }
+  return -1
+};
+```
+
+```js
+var openLock = function(deadends, target) {
   // 没开始就结束了，脱裤子放屁
   if(target === '0000') return 0
   const deadendsSet = new Set(deadends)
@@ -19452,6 +19563,98 @@ var peakIndexInMountainArray = function(arr) {
   }
   return r
 };
+```
+
+## ???🌟😻✔ 854. 相似度为 K 的字符串【hard】
+
+[ref](https://leetcode.cn/problems/k-similar-strings/)
+
+深度优先搜索、广度优先搜索
+
+最核心的一个规则：s1、s2 同下标处的字母相同时，则不替换（操作）该字符
+
+```js
+// 深度优先搜索
+var kSimilarity = function(s1, s2) {
+  const s1Arr = [], s2Arr = []
+  for(let i=0;i<s1.length;i++) {
+    if(s1[i] !==s2[i]) {
+      s1Arr.push(s1[i])
+      s2Arr.push(s2[i])
+    }
+  }
+  if(!s1Arr.length) return 0
+  let min = s1Arr.length - 1
+  function dfs(startInd, cnt) {
+    if(cnt >= min) return
+    while(startInd < s1Arr.length && s1Arr[startInd] === s2Arr[startInd]) startInd++
+    if(startInd === s1Arr.length) {
+      min = Math.min(min, cnt)
+      return
+    }
+    if(cnt + minSwap(startInd, s1Arr, s2Arr) >= min) return 
+    for(let i=startInd + 1;i<s1Arr.length;i++) {
+      if(s1Arr[i] === s2Arr[startInd]) {
+        swap(s1Arr, i, startInd)
+        dfs(startInd + 1, cnt + 1)
+        swap(s1Arr, i, startInd)
+      }
+    }
+  }
+  dfs(0, 0)
+  return min
+};
+
+function minSwap(startInd, s1, s2) {
+  let cnt = 0
+  for(let i=startInd;i<s1.length;i++) {
+    if(s1[i] !== s2[i]) cnt++
+  }
+  return Math.floor((cnt + 1) / 2)
+}
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+```js
+// 广度优先搜索
+var kSimilarity = function(s1, s2) {
+  let q = [[s1, 0]]
+  let used = new Set([s1])
+  let cnt = 0
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      let [s, ind] = q[i]
+      if(s === s2) return cnt
+      while(s[ind] === s2[ind]) ind++
+      for(let j=ind + 1;j<s.length;j++) {
+        if(s[j] === s2[j]) continue
+        if(s[j] === s2[ind]) {
+          const newStr = swap(s, ind, j)
+          if(!used.has(newStr)) {
+            used.add(newStr)
+            tq.push([newStr, ind + 1])
+          }
+        }
+      }
+    }
+    cnt++
+    q = tq
+  }
+};
+
+function swap(str, i, j) {
+  const arr = str.split('')
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+  return arr.join('')
+}
 ```
 
 ## ???🌟😻✔ 857. 雇佣 K 名工人的最低成本【hard】
@@ -21635,6 +21838,32 @@ var frequencySort = function(nums) {
     }
   }
   return res
+};
+```
+
+## ✔ 1640. 能否连接形成数组【easy】
+
+[ref](https://leetcode.cn/problems/check-array-formation-through-concatenation/)
+
+哈希表
+
+```js
+var canFormArray = function(arr, pieces) {
+  let i = 0
+  const map = new Map()
+  for(let piece of pieces) {
+    map.set(piece[0], piece)
+  }
+  while(i < arr.length) {
+    const start = arr[i] 
+    if(!map.has(start)) return false
+    const nums = map.get(start)
+    let j =0
+    while(j < nums.length) {
+      if(arr[i++] !== nums[j++]) return false
+    }
+  }
+  return true
 };
 ```
 
@@ -24557,3 +24786,428 @@ var addTwoNumbers = function(l1, l2) {
   return myHead.next
 };
 ```
+
+
+## 🌟😻✔ 剑指 Offer II 026. 重排链表【medium】
+
+[ref](https://leetcode.cn/problems/LGjMqU/)
+
+链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var reorderList = function(head) {
+  const myHead = new ListNode(0, head)
+  let slow = myHead, fast = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  if(slow === fast) return head
+  let head1 = head
+  head2 = slow.next
+  slow.next = null
+  head2 = reverse(head2)
+  const myHead2 = new ListNode()
+  let tHead = myHead2
+  while(head1 && head2) {
+    tHead.next = head1
+    head1 = head1.next
+    tHead.next.next = head2
+    head2 = head2.next
+    tHead = tHead.next.next
+  }
+  if(head1) {
+    tHead.next = head1
+  }
+  if(head2) {
+    tHead.next = head2
+  }
+  return myHead2.next
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const next = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = next
+  }
+  return myHead.next
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 028. 展平多级双向链表【medium】
+
+[ref](https://leetcode.cn/problems/Qv1Da2/)
+
+深度优先搜索、链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var flatten = function(head) {
+  if(!head) return null
+  const myHead = new Node()
+  let tHead = myHead
+  function dfs(node) {
+    const next = node.next, child = node.child
+    tHead.next = node
+    node.prev = tHead
+    tHead = tHead.next
+    node.child = null
+    child && dfs(child) 
+    next && dfs(next) 
+  }
+  dfs(head)
+  myHead.next.prev = null
+  return myHead.next
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 029. 排序的循环链表【medium】
+
+[ref](https://leetcode.cn/problems/4ueAj6/)
+
+链表、环形链表
+
+```js
+var insert = function(head, insertVal) {
+  if(!head) {
+    const node = new Node(insertVal)
+    node.next = node
+    return node
+  }
+  let tHead = head
+  let canInsert = false
+  do {
+    if(tHead.val <= insertVal && insertVal <= tHead.next.val) {
+      canInsert = true
+      break
+    } else {
+      tHead = tHead.next
+    }
+  } while(tHead !== head)
+  if(canInsert) {
+    tHead.next = new Node(insertVal, tHead.next)
+  } else {
+    let maxNode = new Node(Number.MIN_SAFE_INTEGER)
+    tHead = head
+    do {
+      if(tHead.val >= maxNode.val) {
+        maxNode = tHead
+      }
+      tHead = tHead.next
+    } while(tHead !== head)
+    maxNode.next = new Node(insertVal, maxNode.next)
+  }
+  return head
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 030. 插入、删除和随机访问都是 O(1) 的容器【medium】
+
+[ref](https://leetcode.cn/problems/FortPu/)
+
+哈希表、设计
+
+```js
+var RandomizedSet = function() {
+  this.map = new Map()
+  this.arr = []
+};
+RandomizedSet.prototype.insert = function(val) {
+  if(this.map.has(val)) return false
+  this.arr.push(val)
+  this.map.set(val, this.arr.length - 1)
+  return true
+};
+RandomizedSet.prototype.remove = function(val) {
+  if(!this.map.has(val)) return false
+  const ind = this.map.get(val)
+  this.arr[ind] = this.arr[this.arr.length - 1]
+  this.map.set(this.arr[ind], ind)
+  this.map.delete(val)
+  this.arr.pop()
+  return true
+};
+RandomizedSet.prototype.getRandom = function() {
+  const len = this.arr.length
+  return this.arr[Math.floor(Math.random() * len)]
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 030. 插入、删除和随机访问都是 O(1) 的容器【medium】
+
+[ref](https://leetcode.cn/problems/OrIXps/)
+
+设计题、LRU
+
+```js
+var LRUCache = function(capacity) {
+  this.capacity = capacity
+  this.cache = new Map()
+};
+LRUCache.prototype.get = function(key) {
+  if(!this.cache.has(key)) return -1
+  const ret = this.cache.get(key)
+  this.put(key, ret)
+  return ret
+};
+LRUCache.prototype.put = function(key, value) {
+  if(this.cache.has(key)) {
+    this.cache.delete(key)
+  } else {
+    if(this.cache.size === this.capacity) {
+      this.cache.delete(this.cache.keys().next().value)
+    }
+  }
+  this.cache.set(key, value)
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 033. 变位词组【medium】
+
+[ref](https://leetcode.cn/problems/sfvd7V/)
+
+排序、哈希表
+
+```js
+var groupAnagrams = function(strs) {
+  const map = new Map()
+  for(let str of strs) {
+    const nstr = str.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('')
+    if(map.has(nstr)) {
+      map.get(nstr).push(str)
+    } else {
+      map.set(nstr, [str])
+    }
+  }
+  return Array.from(map.values())
+};
+```
+
+```js
+var groupAnagrams = function(strs) {
+  const map = new Map()
+  for(let i=0;i<strs.length;i++) {
+    const arr = new Array(26).fill(0)
+    for(let j=0;j<strs[i].length;j++) {
+      arr[strs[i].charCodeAt(j) - 'a'.charCodeAt(0)]++
+    }
+    let s = ''
+    for(let j=0;j<26;j++) {
+      s += `${j}-${arr[j]},`
+    }
+    if(map.has(s)) {
+      map.get(s).push(strs[i])
+    } else {
+      map.set(s, [strs[i]])
+    }
+  }
+  return Array.from(map.values())
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 035. 最小时间差【medium】
+
+[ref](https://leetcode.cn/problems/569nqc/)
+
+排序
+
+```js
+var findMinDifference = function(timePoints) {
+  const dayMinuts = 24 * 60
+  const n = timePoints.length
+  for(let i=0;i<n;i++) {
+    const tSplit = timePoints[i].split(':')
+    timePoints[i] = Number(tSplit[0]) * 60 + Number(tSplit[1])
+  }
+  timePoints.sort((a, b) => a - b)
+  timePoints.push(timePoints[0] + dayMinuts)
+  let min = Number.MAX_SAFE_INTEGER
+  for(let i=1;i<n+1;i++) {
+    min = Math.min(min, timePoints[i] - timePoints[i-1])
+  }
+  return min
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 035. 最小时间差【medium】
+
+[ref](https://leetcode.cn/problems/8Zf90G/)
+
+栈
+
+```js
+var evalRPN = function(tokens) {
+  const stack = []
+  for(let i=0;i<tokens.length;i++) {
+    if(isNum(tokens[i])) {
+      stack.push(Number(tokens[i]))
+    } else {
+      const num2 = stack.pop(), num1 = stack.pop()
+      let res
+      if(tokens[i] === '+') res = num1 + num2
+      else if(tokens[i] === '-') res = num1 - num2
+      else if(tokens[i] === '*') res = num1 * num2
+      else {
+        res = num1 / num2 > 0 ? Math.floor(num1 / num2) : Math.ceil(num1 / num2)
+      }
+      stack.push(res)
+    }
+  }
+  return stack.pop()
+};
+
+function isNum(token) {
+  return !(token === '+' || token === '-' || token === '*' || token === '/')
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 037. 小行星碰撞【medium】
+
+[ref](https://leetcode.cn/problems/XagZNi/)
+
+栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var asteroidCollision = function(asteroids) {
+  const stack = []
+  for(let i=0;i<asteroids.length;i++) {
+    const curr = asteroids[i]
+    if(!stack.length || curr > 0 || curr < 0 && stack[stack.length - 1] < 0) {
+      stack.push(curr)
+    } else {
+      while(stack.length && stack[stack.length - 1] > 0 && stack[stack.length - 1] + curr < 0) {
+        stack.pop()
+      }
+      if(!stack.length || stack[stack.length -1] < 0) {
+        stack.push(curr)
+      } else if(stack[stack.length - 1] + curr === 0) {
+        stack.pop()
+      }
+    }
+  }
+  return stack
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 038. 每日温度【medium】
+
+[ref](https://leetcode.cn/problems/iIQa4I/)
+
+单调栈
+
+```js
+// 单调栈
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var dailyTemperatures = function(temperatures) {
+  const stack = [], n = temperatures.length, res = new Array(n).fill(0)
+  for(let i=0;i<temperatures.length;i++) {
+    const tmp = temperatures[i]
+    while(stack.length && temperatures[stack[stack.length - 1]] < tmp) {
+      const ind = stack.pop()
+      res[ind] = i - ind
+    }
+    stack.push(i)
+  }
+  return res
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer II 043. 往完全二叉树添加节点【medium】
+
+[ref](https://leetcode.cn/problems/NaqhDT/)
+
+设计题、队列
+
+```js
+var CBTInserter = function(root) {
+  this.q = []
+  this.root = root
+  let q = [root]
+  while(q.length) {
+    const node = q.shift()
+    if(node.left) q.push(node.left)
+    if(node.right) q.push(node.right)
+    if(!node.left || !node.right) this.q.push(node)
+  }
+};
+CBTInserter.prototype.insert = function(v) {
+  const topNode = this.q[0]
+  const newNode = new TreeNode(v)
+  if(!topNode.left) topNode.left = newNode
+  else if(!topNode.right) topNode.right = newNode
+  this.q.push(newNode)
+  if(topNode.left && topNode.right) this.q.shift()
+  return topNode.val
+};
+
+CBTInserter.prototype.get_root = function() {
+  return this.root
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 044. 二叉树每层的最大值【medium】
+
+[ref](https://leetcode.cn/problems/hPov7L/)
+
+二叉树、广度优先搜索
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var largestValues = function(root) {
+  if(!root) return []
+  const res = []
+  let q = [root]
+  while(q.length) {
+    let max = Number.MIN_SAFE_INTEGER
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const node = q[i]
+      max = Math.max(max, node.val)
+      node.left && tq.push(node.left)
+      node.right && tq.push(node.right)
+    }
+    res.push(max)
+    q = tq
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 044. 二叉树每层的最大值【medium】
+
+[ref](https://leetcode.cn/problems/LwUNpT/)
+
+二叉树、广度优先搜索、深度优先搜索
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var findBottomLeftValue = function(root) {
+  let res
+  let q = [root]
+  while(q.length) {
+    res = q[0].val
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const node = q[i]
+      node.left && tq.push(node.left)
+      node.right && tq.push(node.right)
+    }
+    q = tq
+  }
+  return res
+};
+```
+
