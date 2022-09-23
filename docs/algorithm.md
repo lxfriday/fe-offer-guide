@@ -33,7 +33,18 @@
 
 # 刷题日记
 
-- 20220921(10)
+- 20220923(10)
+  - [🌟【medium】707. 设计链表](https://leetcode.cn/problems/design-linked-list/) 设计题、链表
+  - [🌟【medium】剑指 Offer II 046. 二叉树的右侧视图](https://leetcode.cn/problems/WNC0Lk/) 二叉树、深度优先搜索、广度优先搜素
+  - [🌟【medium】剑指 Offer II 047. 二叉树剪枝](https://leetcode.cn/problems/pOCWxh/) 二叉树、深度优先搜索、广度优先搜素
+  - [🌟【medium】剑指 Offer II 049. 从根节点到叶节点的路径数字之和](https://leetcode.cn/problems/3Etpl5/) 二叉树、深度优先搜索、广度优先搜素
+  - [🌟【medium】剑指 Offer II 050. 向下的路径节点之和](https://leetcode.cn/problems/6eUYwP/) 二叉树、深度优先搜索、前缀和
+  - [🌟【medium】剑指 Offer II 053. 二叉搜索树中的中序后继](https://leetcode.cn/problems/P5rCT8/) 二叉搜索树、中序遍历
+  - ? [🌟【medium】剑指 Offer II 054. 所有大于等于节点的值之和](https://leetcode.cn/problems/w6cpku/) 二叉搜索树、反向中序遍历
+  - ? [🌟【medium】剑指 Offer II 055. 二叉搜索树迭代器](https://leetcode.cn/problems/kTOapQ/) 二叉树、迭代器
+  - [🌟【easy】1652. 拆炸弹](https://leetcode.cn/problems/defuse-the-bomb/) 数组题
+  - ??? [🌟【medium】剑指 Offer II 057. 值和下标之差都在给定的范围内](https://leetcode.cn/problems/7WqeDu/) 桶排序、滑动窗口
+- 20220922(10)
   - [🌟【easy】1640. 能否连接形成数组](https://leetcode.cn/problems/check-array-formation-through-concatenation/) 哈希表
   - ? [🌟【hard】460. LFU 缓存](https://leetcode.cn/problems/lfu-cache/) 设计题、LFU
   - [🌟【medium】剑指 Offer II 033. 变位词组](https://leetcode.cn/problems/sfvd7V/) 排序、哈希表
@@ -852,6 +863,7 @@
 - ? 🌟【medium】[738. 单调递增的数字](https://leetcode.cn/problems/monotone-increasing-digits/) 强规律题、数组、字符串
 - ? 🌟【easy】[169. 多数元素](https://leetcode.cn/problems/majority-element/) 摩尔投票法
 - 🌟【medium】[978. 最长湍流子数组](https://leetcode.cn/problems/longest-turbulent-subarray/) 数组、子数组
+- 🌟【easy】[1652. 拆炸弹](https://leetcode.cn/problems/defuse-the-bomb/) 数组题
 
 ### 排列组合
 
@@ -1010,6 +1022,7 @@
 - 🌟【medium】[剑指 Offer II 008. 和大于等于 target 的最短子数组](https://leetcode.cn/problems/2VG8Kg/) 双指针、滑动窗口
 - ?? 🌟【medium】[剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口、哈希表
 - ?? 🌟【medium】[剑指 Offer II 015. 字符串中的所有变位词](https://leetcode.cn/problems/VabMRr/) 滑动窗口
+- ??? 🌟【medium】[剑指 Offer II 057. 值和下标之差都在给定的范围内](https://leetcode.cn/problems/7WqeDu/) 桶排序、滑动窗口
 
 ## 树、深度优先、广度优先
 
@@ -1319,6 +1332,7 @@
 - ? 🌟【medium】[451. 根据字符出现频率排序](https://leetcode.cn/problems/sort-characters-by-frequency/) 桶排序、桶排序衍生算法
 - ? 🌟【medium】[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/) 堆排序、排序、桶排序
 - 🌟【easy】[1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
+- ??? 🌟【medium】[剑指 Offer II 057. 值和下标之差都在给定的范围内](https://leetcode.cn/problems/7WqeDu/) 桶排序、滑动窗口
 
 ### 插入排序
 
@@ -17794,6 +17808,99 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
 };
 ```
 
+```js
+var MyLinkedList = function() {
+  this.head = new ListNode()
+  this.tail = new ListNode()
+  this.size = 0
+};
+MyLinkedList.prototype.get = function(index) {
+  if(index < 0 || index >= this.size) return -1
+  let head = this.head
+  while(head) {
+    head = head.next
+    if(index===0) return head.val
+    index--
+  }
+};
+MyLinkedList.prototype.addAtHead = function(val) {
+  const node = new ListNode(val)
+  if(this.size === 0) {
+    this.tail.next = node
+  } else {
+    const next = this.head.next
+    next.prev = node
+    node.next = next
+  }
+  this.head.next = node
+  this.size++
+};
+MyLinkedList.prototype.addAtTail = function(val) {
+  const node = new ListNode(val)
+  if(this.size === 0) {
+    this.head.next = node
+  } else {
+    this.tail.next.next = node
+    node.prev = this.tail.next
+  }
+  this.tail.next = node
+  this.size++
+};
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+  if(index <= 0) {
+    this.addAtHead(val)
+  } else if(index > 0 && index < this.size) {
+    let i=0, head = this.head.next
+    while(i<index) {
+      head = head.next
+      i++
+    }
+    const node = new ListNode(val)
+    const next = head, prev = head.prev
+    prev.next = node
+    node.prev = prev
+    node.next = next
+    next.prev = node
+    this.size++
+  } else if(index === this.size) {
+    this.addAtTail(val)
+  }
+};
+MyLinkedList.prototype.deleteAtIndex = function(index) {
+  if(this.size === 0 || index < 0 || index >= this.size) return
+  if(this.size === 1) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    if(index === 0) {
+      this.head.next = this.head.next.next
+      this.head.next.prev = null
+    } else if(index === this.size - 1) {
+      this.tail.next = this.tail.next.prev
+      this.tail.next.next = null
+    } else {
+      let i=0, head = this.head.next
+      while(i<index) {
+        head = head.next
+        i++
+      }
+      const next = head.next, prev = head.prev
+      prev.next = next
+      next.prev = prev
+    }
+  }
+  this.size--
+};
+
+class ListNode {
+  constructor(val, prev = null, next = null) {
+    this.val = val
+    this.prev = prev
+    this.next = next
+  }
+}
+```
+
 ## 🌟😻✔ 708. 循环有序列表的插入【medium】
 
 [ref](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list/)
@@ -21867,6 +21974,33 @@ var canFormArray = function(arr, pieces) {
 };
 ```
 
+## 🌟✔ 1652. 拆炸弹【easy】
+
+[ref](https://leetcode.cn/problems/defuse-the-bomb/)
+
+数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var decrypt = function(code, k) {
+  const arr = [...code, ...code], n = code.length
+  let sum = 0
+  let l = k >= 0 ? 1 : n + k
+  let r = k>=0 ? k : n - 1
+  for(let i = l; i <= r;i++) {
+    sum += arr[i]
+  }
+  for(let i = 0; i < n;i++) {
+    code[i] = sum
+    sum += arr[++r] - arr[l++]
+  }
+  return code
+};
+
+
+````
+
 ## ✔ 1656. 设计有序流【easy】
 
 [ref](https://leetcode.cn/problems/design-an-ordered-stream/)
@@ -25211,3 +25345,268 @@ var findBottomLeftValue = function(root) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 046. 二叉树的右侧视图【medium】
+
+[ref](https://leetcode.cn/problems/WNC0Lk/)
+
+二叉树、广度优先搜索、深度优先搜索
+  
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rightSideView = function(root) {
+  const res = []
+  if(!root) return res
+  let q = [root]
+  while(q.length) {
+    const tq = []
+    res.push(q[q.length - 1].val)
+    for(let i=0;i<q.length;i++) {
+      const node = q[i]
+      node.left && tq.push(node.left)
+      node.right && tq.push(node.right)
+    }
+    q = tq
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rightSideView = function(root) {
+  const res = []
+  if(!root) return res
+  function dfs(node, depth) {
+    res[depth] = node.val
+    node.left && dfs(node.left, depth + 1)
+    node.right && dfs(node.right, depth + 1)
+  }
+  dfs(root, 0)
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 047. 二叉树剪枝【medium】
+
+[ref](https://leetcode.cn/problems/pOCWxh/)
+
+二叉树、深度优先搜索
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pruneTree = function(root) {
+  function dfs(node) {
+    if(!node) return true
+    let lRes = dfs(node.left)
+    let rRes = dfs(node.right)
+    if(lRes) node.left = null
+    if(rRes) node.right = null
+    if(lRes && rRes && node.val === 0) return true
+    return false
+  }
+  const allZero = dfs(root)
+  if(allZero) return null
+  return root
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 049. 从根节点到叶节点的路径数字之和【medium】
+
+[ref](https://leetcode.cn/problems/3Etpl5/)
+
+二叉树
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var sumNumbers = function(root) {
+  let sum = 0
+  function dfs(node, s) {
+    s = s * 10  + node.val
+    if(!node.left && !node.right) {
+      sum += s
+    }
+    node.left && dfs(node.left, s)
+    node.right && dfs(node.right, s)
+  }
+  dfs(root, 0)
+  return sum
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 050. 向下的路径节点之和【medium】
+
+[ref](https://leetcode.cn/problems/6eUYwP/)
+
+前缀和、二叉树、深度优先搜素
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pathSum = function(root, targetSum) {
+  if(!root) return 0
+  const map = new Map([[0, 1]])
+  let cnt = 0
+  function dfs(node, sum) {
+    sum += node.val
+    if(map.has(sum - targetSum)) {
+      cnt += map.get(sum - targetSum)
+    }
+    map.set(sum, (map.get(sum) || 0 ) + 1)
+    node.left && dfs(node.left, sum)
+    node.right && dfs(node.right, sum)
+    map.set(sum, (map.get(sum) || 0 ) - 1)
+  }
+  dfs(root, 0)
+  return cnt
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 053. 二叉搜索树中的中序后继【medium】
+
+[ref](https://leetcode.cn/problems/P5rCT8/)
+
+二叉搜索树、中序遍历
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var inorderSuccessor = function(root, p) {
+  let res = null
+  let shouldBeNext = false
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(shouldBeNext) {
+      res = node
+      shouldBeNext = false
+    }
+    if(p === node) shouldBeNext = true
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  return res
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 054. 所有大于等于节点的值之和【medium】
+
+[ref](https://leetcode.cn/problems/w6cpku/)
+
+利用中序遍历的反向，二叉搜索树中序遍历会从小到大走一遍树中的节点，中序遍历的反向则会从大到小走一遍二叉搜索树的所有节点，用sum记录前面遍历到的大值，到node的时候sum就是值比node.val 大的节点值之和
+
+```js
+// 中序遍历的反向
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var convertBST = function(root) {
+  if(!root) return null
+  let sum = 0
+  function dfs(node, bigger) {
+    node.right && dfs(node.right)
+    sum += node.val
+    node.val = sum
+    node.left && dfs(node.left)
+  }
+  dfs(root, 0)
+  return root
+};
+```
+
+```js
+// 递归函数 dfs 返回的是该节点及其子节点的数值和
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var convertBST = function(root) {
+  if(!root) return null
+  function dfs(node, bigger) {
+    if(!node) return 0
+    const rValue = dfs(node.right, bigger)
+    const nodeValue = node.val
+    node.val = nodeValue + rValue + bigger
+    const lValue = dfs(node.left, node.val)
+    return lValue + nodeValue + rValue
+  }
+  dfs(root, 0)
+  return root
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 055. 二叉搜索树迭代器【medium】
+
+[ref](https://leetcode.cn/problems/kTOapQ/)
+
+二叉树、迭代器
+
+```js
+var BSTIterator = function(root) {
+  this.i = 0
+  this.arr = []
+  const that = this
+  function dfs(node) {
+    node.left && dfs(node.left)
+    that.arr.push(node.val)
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+};
+BSTIterator.prototype.next = function() {
+  return this.arr[this.i++]
+};
+BSTIterator.prototype.hasNext = function() {
+  return this.i < this.arr.length
+};
+```
+
+```js
+var BSTIterator = function(root) {
+  this.curr = root
+  this.arr = []
+};
+BSTIterator.prototype.next = function() {
+  while(this.curr) {
+    this.arr.push(this.curr)
+    this.curr = this.curr.left
+  }
+  this.curr = this.arr.pop()
+  const ret = this.curr.val
+  this.curr =  this.curr.right
+  return ret
+};
+BSTIterator.prototype.hasNext = function() {
+  return this.curr || this.arr.length
+};
+```
+
+## ???🌟😻✔ 剑指 Offer II 057. 值和下标之差都在给定的范围内【medium】
+
+[ref](https://leetcode.cn/problems/7WqeDu/) 
+
+桶排序、滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 时间复杂度：O(min(N, K))
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+  const map = new Map()
+  for(let i=0;i<nums.length;i++) {
+    const val = nums[i]
+    const id = getId(val, t + 1)
+    if(map.has(id)) return true
+    if(map.has(id - 1) && val - map.get(id - 1) <= t) return true
+    if(map.has(id + 1) && map.get(id + 1) - val <= t) return true
+    map.set(id, val)
+    if(i - k >= 0) {
+      map.delete(getId(nums[i - k], t + 1))
+    }
+  }
+  return false
+};
+
+function getId(val, size) {
+  return Math.floor(val / size)
+}
+```
