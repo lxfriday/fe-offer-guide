@@ -33,6 +33,19 @@
 
 # 刷题日记
 
+- 20220925()
+  - ? [🌟【medium】788. 旋转数字](https://leetcode.cn/problems/rotated-digits/) 模拟
+
+- 20220924(9)
+  - ? [🌟【medium】剑指 Offer II 058. 日程表](https://leetcode.cn/problems/fi9suh/?favorite=e8X3pBZi) 二分搜索
+  - [🌟【medium】剑指 Offer II 060. 出现频率最高的 k 个数字](https://leetcode.cn/problems/g5c51o/) 快速选择
+  - ?? [🌟【medium】剑指 Offer II 061. 和最小的 k 个数对](https://leetcode.cn/problems/qn8gGX/) 优先队列
+  - [🌟【medium】剑指 Offer II 062. 实现前缀树](https://leetcode.cn/problems/QC3q1f/) 字典树
+  - [🌟【medium】剑指 Offer II 063. 替换单词](https://leetcode.cn/problems/UhWRSj/) 字典树
+  - [🌟【medium】剑指 Offer II 064. 神奇的字典](https://leetcode.cn/problems/US1pGT/) 字典树
+  - [🌟【medium】剑指 Offer II 065. 最短的单词编码](https://leetcode.cn/problems/iSwD2y/) 字典树
+  - [🌟【medium】剑指 Offer II 066. 单词之和](https://leetcode.cn/problems/z1R5dt/) 字典树、前缀树
+  - [🌟【medium】剑指 Offer II 070. 排序数组中只出现一次的数字](https://leetcode.cn/problems/skFtm2/) 二分搜索
 - 20220923(10)
   - [🌟【medium】707. 设计链表](https://leetcode.cn/problems/design-linked-list/) 设计题、链表
   - [🌟【medium】剑指 Offer II 046. 二叉树的右侧视图](https://leetcode.cn/problems/WNC0Lk/) 二叉树、深度优先搜索、广度优先搜素
@@ -781,6 +794,7 @@
 - ? 🌟【medium】[676. 实现一个魔法字典](https://leetcode.cn/problems/implement-magic-dictionary/) 字典树、前缀树
 - ? 🌟【medium】[720. 词典中最长的单词](https://leetcode.cn/problems/longest-word-in-dictionary/) 字典树、前缀树
 - ?? 🌟【hard】[745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search/) 字典树、前缀树、后缀树
+- 🌟【medium】[剑指 Offer II 065. 最短的单词编码](https://leetcode.cn/problems/iSwD2y/) 字典树
 
 ## 字符串题
 
@@ -1101,7 +1115,7 @@
 - ? 🌟【medium】[173. 二叉搜索树迭代器](https://leetcode.cn/problems/binary-search-tree-iterator/) 迭代器、二叉搜索树
 - ? 🌟【medium】[669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/) 二叉搜索树、深度优先搜索
 
-## 堆
+## 堆、小顶堆、大顶堆、优先队列
 
 - 【hard】 [23 合并K个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
 - 🌟【medium】 [215 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
@@ -1113,6 +1127,7 @@
 - 🌟【medium】[692. 前K个高频单词](https://leetcode.cn/problems/top-k-frequent-words/) 优先队列、堆、小顶堆、前k个问题
 - ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
 - ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
+- ?? 🌟【medium】[剑指 Offer II 061. 和最小的 k 个数对](https://leetcode.cn/problems/qn8gGX/) 优先队列
 
 ### 矩阵、深度优先、广度优先
 - [🌟【medium】1034. 边界着色](https://leetcode.cn/problems/coloring-a-border/) 矩阵、深度优先搜索、广度优先搜索
@@ -19213,6 +19228,36 @@ var isBipartite = function(graph) {
 };
 ```
 
+## ?🌟😻✔ 788. 旋转数字【medium】
+
+[ref](https://leetcode.cn/problems/rotated-digits/)
+
+模拟
+
+```js
+var rotatedDigits = function(n) {
+  const diffSet = new Set(['2', '5', '6', '9'])
+  const errSet = new Set(['3', '4', '7'])
+  let cnt = 0
+  for(let i=1;i<=n;i++) {
+    const str = i.toString()
+    let diffNumCnt = 0
+    let hasErrNum = false
+    for(let j=0;j<str.length;j++) {
+      if(errSet.has(str[j])) {
+        hasErrNum = true
+        break
+      }
+      if(diffSet.has(str[j])) {
+        diffNumCnt++
+      }
+    }
+    if(!hasErrNum && diffNumCnt > 0) cnt++
+  }
+  return cnt
+};
+```
+
 ## ???🌟😻✔ 793. 阶乘函数后 K 个零【hard】
 
 [ref](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/)
@@ -25609,4 +25654,562 @@ var containsNearbyAlmostDuplicate = function(nums, k, t) {
 function getId(val, size) {
   return Math.floor(val / size)
 }
+```
+
+## ?🌟😻✔ 剑指 Offer II 058. 日程表【medium】
+
+[ref](https://leetcode.cn/problems/fi9suh/)
+
+二分搜索
+
+```js
+var MyCalendar = function() {
+  this.arr = []
+};
+MyCalendar.prototype.book = function(start, end) {
+  let l = 0, r = this.arr.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    const [s, e] = this.arr[mid]
+    if(start >= e) {
+      l = mid + 1
+    } else if(end <= s) {
+      r = mid - 1
+    } else {
+      return false
+    }
+  }
+  this.arr.splice(l, 0, [start, end])
+  return true
+};
+
+```
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var MyCalendar = function() {
+  this.arr = []
+};
+MyCalendar.prototype.book = function(start, end) {
+  if(!this.arr.length) {
+    this.arr.push([start, end])
+    return true
+  } else if(end <= this.arr[0][0]) {
+    this.arr.unshift([start, end])
+    return true
+  } else if(start >= this.arr[this.arr.length - 1][1]) {
+    this.arr.push([start, end])
+    return true
+  } else if(this.arr.length === 1) {
+    return false
+  } else {
+    for(let i=0;i<this.arr.length - 1;i++) {
+      const [s, e] = this.arr[i]
+      const [nexts, nexte] = this.arr[i + 1]
+      if(start >= e && end <= nexts) {
+        this.arr.splice(i + 1, 0, [start, end])
+        return true
+      }
+    }
+    return false
+  }
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 060. 出现频率最高的 k 个数字【medium】
+
+[ref](https://leetcode.cn/problems/g5c51o/)
+
+快速选择
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var topKFrequent = function(nums, k) {
+  const map = new Map()
+  for(let num of nums) {
+    map.set(num, (map.get(num) || 0) + 1)
+  }
+  const arr = Array.from(map)
+  let l = 0, r = arr.length - 1
+  while(true) {
+    const ind = partition(arr, l, r)
+    if(ind === k - 1) break
+    else if(ind < k - 1) {
+      l = ind + 1
+    } else {
+      r = ind - 1
+    }
+  }
+  return arr.slice(0, k).map(_ => _[0])
+};
+
+function partition(arr, l, r) {
+  const target = arr[l]
+  let j = l + 1
+  for(let i=j;i<=r;i++) {
+    if(arr[i][1] > target[1]) {
+      swap(arr, j, i)
+      j++
+    }
+  }
+  swap(arr, l, j - 1)
+  return j - 1
+}
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+```JS
+// 时间复杂度：O(NlogK)
+// 空间复杂度：O(N)
+var topKFrequent = function(nums, k) {
+  const map = new Map()
+  for(let num of nums) {
+    map.set(num, (map.get(num) || 0) + 1)
+  }
+  const arr = Array.from(map)
+  const heap = new MinHeap()
+  for(let i=0;i<arr.length;i++) {
+    heap.insert(arr[i])
+    if(heap.size() > k) heap.pop()
+  }
+  return heap.heap.map(_ => _[0])
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(data) {
+    this.heap.push(data)
+    this.shiftUp(this.size() - 1)
+  }
+  pop() {
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  size() {
+    return this.heap.length
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  shiftUp(i) {
+    const parentIdx = Math.floor((i-1) / 2)
+    if(parentIdx >= 0 && this.heap[i][1] < this.heap[parentIdx][1]) {
+      this.swap(i, parentIdx)
+      this.shiftUp(parentIdx)
+    }
+  }
+  shiftDown(i) {
+    const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2
+    let minIdx = i
+    if(leftIdx < this.size() && this.heap[leftIdx][1] < this.heap[minIdx][1]) {
+      minIdx = leftIdx
+    }
+    if(rightIdx < this.size() && this.heap[rightIdx][1] < this.heap[minIdx][1]) {
+      minIdx = rightIdx
+    }
+    if(minIdx !== i) {
+      this.swap(i, minIdx)
+      this.shiftDown(minIdx)
+    }
+  }
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 061. 和最小的 k 个数对【medium】
+
+[ref](https://leetcode.cn/problems/qn8gGX/)
+
+优先队列
+
+```js
+var kSmallestPairs = function(nums1, nums2, k) {
+  class MinHeap {
+    constructor() {
+      this.heap = []
+    }
+    size(){
+      return this.heap.length
+    }
+    insert(data){
+      this.heap.push(data)
+      this.shiftUp(this.size() - 1)
+    }
+    pop(){
+      this.swap(0, this.size() - 1)
+      const ret = this.heap.pop()
+      this.shiftDown(0)
+      return ret
+    }
+    swap(i, j) {
+      const t = this.heap[i]
+      this.heap[i] = this.heap[j]
+      this.heap[j] = t
+    }
+    sum(i) {
+      return nums1[this.heap[i][0]] + nums2[this.heap[i][1]]
+    }
+    shiftUp(i) {
+      const parentIdx = Math.floor((i - 1) / 2)
+      if(parentIdx >=0 && this.sum(i) < this.sum(parentIdx)) {
+        this.swap(i, parentIdx)
+        this.shiftUp(parentIdx)
+      }
+    }
+    shiftDown(i) {
+      const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2
+      let minIdx = i
+      if(leftIdx < this.size() && this.sum(leftIdx) < this.sum(minIdx)) {
+        minIdx = leftIdx
+      }
+      if(rightIdx < this.size() && this.sum(rightIdx) < this.sum(minIdx)) {
+        minIdx = rightIdx
+      }
+      if(minIdx !== i) {
+        this.swap(i, minIdx)
+        this.shiftDown(minIdx)
+      }
+    }
+  }
+  const minHeap = new MinHeap()
+  const m = nums1.length, n = nums2.length
+  for(let i=0;i<Math.min(m, k);i++) {
+    minHeap.insert([i, 0])
+  }
+  const res = []
+  while(k > 0 && minHeap.size()) {
+    const top  = minHeap.pop()
+    res.push([nums1[top[0]], nums2[top[1]]])
+    if(top[1] + 1 < n) {
+      minHeap.insert([top[0], top[1] + 1])
+    }
+    k--
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 062. 实现前缀树【medium】
+
+[ref](https://leetcode.cn/problems/QC3q1f/)
+
+字典树
+
+```js
+var Trie = function() {
+  this.root = new Node()
+};
+Trie.prototype.insert = function(word) {
+  let node = this.root
+  for(let i=0;i<word.length;i++) {
+    if(!node.children[word[i]]) node.children[word[i]] = new Node()
+    node = node.children[word[i]]
+    if(i === word.length - 1) node.isEnd = true
+  }
+};
+Trie.prototype.search = function(word) {
+  let node = this.root
+  for(let i=0;i<word.length;i++) {
+    if(!node.children[word[i]]) return false
+    node = node.children[word[i]]
+    if(i === word.length - 1) return node.isEnd
+  }
+};
+Trie.prototype.startsWith = function(prefix) {
+  let node = this.root
+  for(let i=0;i<prefix.length;i++) {
+    if(!node.children[prefix[i]]) return false
+    node = node.children[prefix[i]]
+  }
+  return true
+};
+
+class Node {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
+  }
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 063. 替换单词【medium】
+
+[ref](https://leetcode.cn/problems/UhWRSj/)
+
+字典树
+
+```js
+var replaceWords = function(dictionary, sentence) {
+  const root = buildTree(dictionary)
+  const words = sentence.split(' ')
+  for(let i=0;i<words.length;i++) {
+    words[i] = replace(root, words[i])
+  }
+  return words.join(' ')
+};
+
+function replace(root, word) {
+  let node = root
+  for(let i=0;i<word.length;i++) {
+    if(node.children[word[i]]) {
+      node = node.children[word[i]]
+    } else {
+      return word
+    }
+    if(node.isEnd) return word.slice(0, i + 1)
+  }
+  return word
+}
+
+function buildTree(dictionary) {
+  const root = new Node()
+  for(let i=0;i<dictionary.length;i++) {
+    const word = dictionary[i]
+    let node = root
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]]) node.children[word[j]] = new Node()
+      node = node.children[word[j]]
+      if(j === word.length - 1) node.isEnd = true
+    }
+  }
+  return root
+}
+
+class Node {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
+  }
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 064. 神奇的字典【medium】
+
+[ref](https://leetcode.cn/problems/US1pGT/)
+
+字典树
+
+```js
+var MagicDictionary = function() {
+  this.root = new Node()
+};
+MagicDictionary.prototype.buildDict = function(dictionary) {
+  for(let i=0;i<dictionary.length;i++) {
+    const word = dictionary[i]
+    let node = this.root
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]]) node.children[word[j]] = new Node()
+      node = node.children[word[j]]
+      if(j === word.length - 1) node.isEnd = true
+    }
+  }
+};
+
+MagicDictionary.prototype.search = function(searchWord) {
+  function search(node, ind, changed) {
+    if(ind === searchWord.length) {
+      if(changed) return node.isEnd
+      return false
+    }
+    if(node.children[searchWord[ind]] && search(node.children[searchWord[ind]], ind + 1, changed)) return true 
+    if(!changed) {
+      const keys = Object.keys(node.children)
+      for(let i=0;i<keys.length;i++) {
+        if(searchWord[ind] === keys[i]) continue
+        if(search(node.children[keys[i]], ind + 1, true)) return true
+      }
+      return false
+    }
+    return false
+  }
+  return search(this.root, 0, false)
+};
+
+class Node {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
+  }
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 065. 最短的单词编码【medium】
+
+[ref](https://leetcode.cn/problems/iSwD2y/)
+
+字典树
+
+```js
+var minimumLengthEncoding = function(words) {
+  const set = new Set(words)
+  for(let word of words) {
+    for(let i=1;i<word.length;i++) {
+      set.delete(word.slice(i))
+    }
+  }
+  let res = 0
+  for(let word of set) {
+    res += word.length + 1
+  }
+  return res
+};
+```
+
+```js
+var minimumLengthEncoding = function(words) {
+  words = words.map(_ => _.split('').reverse().join(''))
+  let res = 0
+  const root = new Node()
+  for(let i=0;i<words.length;i++) {
+    const word = words[i]
+    let node = root
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]]) node.children[word[j]] = new Node()
+      node = node.children[word[j]]
+    }
+  }
+  function walk(node, len) {
+    const keys = Object.keys(node.children)
+    if(!keys.length) {
+      res += len + 1
+    }
+    for(let i=0;i<keys.length;i++) {
+      walk(node.children[keys[i]], len + 1)
+    }
+  }
+  walk(root, 0)
+  return res
+};
+
+class Node {
+  constructor() {
+    this.children = {}
+  }
+}
+
+````
+
+```js
+// 排序+字典树
+var minimumLengthEncoding = function(words) {
+  words = words.map(_ => _.split('').reverse().join(''))
+  words.sort((a, b) => b.length - a.length)
+  let res = 0
+  const root = new Node()
+  for(let i=0;i<words.length;i++) {
+    const word = words[i]
+    let node = root
+    let shouldAdd = false
+    for(let j=0;j<word.length;j++) {
+      if(!node.children[word[j]]) {
+        node.children[word[j]] = new Node()
+        shouldAdd = true
+      }
+      node = node.children[word[j]]
+    }
+    if(shouldAdd) res += 1 + word.length
+  }
+  return res
+};
+
+class Node {
+  constructor() {
+    this.children = {}
+  }
+}
+
+```
+
+## 🌟😻✔ 剑指 Offer II 066. 单词之和【medium】
+
+[ref](https://leetcode.cn/problems/z1R5dt/)
+
+字典树、前缀树
+
+```js
+var MapSum = function() {
+  this.root = new Node()
+};
+MapSum.prototype.insert = function(key, val) {
+  let node = this.root
+  for(let i=0;i<key.length;i++) {
+    if(!node.children[key[i]]) node.children[key[i]] = new Node()
+    node = node.children[key[i]]
+    if(i === key.length - 1) {
+      node.isEnd = true
+      node.val = val
+    }
+  }
+};
+MapSum.prototype.sum = function(prefix) {
+  let node = this.root
+  for(let i=0;i<prefix.length;i++) {
+    if(!node.children[prefix[i]]) return 0
+    node = node.children[prefix[i]]
+  }
+  let sum = 0
+  function walk(node) {
+    if(node.isEnd) sum += node.val
+    const keys = Object.keys(node.children)
+    for(let i=0;i<keys.length;i++) {
+      walk(node.children[keys[i]])
+    }
+  }
+  walk(node)
+  return sum
+};
+
+class Node {
+  constructor() {
+    this.isEnd = false
+    this.val = 0
+    this.children = {}
+  }
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 070. 排序数组中只出现一次的数字【medium】
+
+[ref](https://leetcode.cn/problems/skFtm2/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var singleNonDuplicate = function(nums) {
+  const n = nums.length
+  let l = 0, r = nums.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(mid - 1 >= 0 && nums[mid - 1] === nums[mid]) {
+      if(mid % 2 === 1) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    } else if(mid + 1 < n && nums[mid + 1] === nums[mid]) {
+      if(mid % 2 === 0) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    } else {
+      return nums[mid]
+    }
+  }
+};
 ```
