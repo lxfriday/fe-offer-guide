@@ -33,9 +33,24 @@
 
 # 刷题日记
 
-- 20220925()
+- 20220926(10)
+  - ? [🌟【medium】剑指 Offer II 077. 链表排序](https://leetcode.cn/problems/7WHec2/) 归并排序、分治法
+  - [🌟【medium】剑指 Offer II 079. 所有子集](https://leetcode.cn/problems/TVdhkn/) 回溯法
+  - [🌟【medium】剑指 Offer II 080. 含有 k 个元素的组合](https://leetcode.cn/problems/uUsW3B/) 回溯法
+  - [🌟【medium】剑指 Offer II 081. 允许重复选择元素的组合](https://leetcode.cn/problems/Ygoe9J/) 回溯法
+  - [🌟【medium】剑指 Offer II 082. 含有重复元素集合的组合](https://leetcode.cn/problems/4sjJUc/) 回溯法
+  - [🌟【medium】剑指 Offer II 083. 没有重复元素集合的全排列](https://leetcode.cn/problems/VvJkup/) 回溯法
+  - [🌟【medium】剑指 Offer II 084. 含有重复元素集合的全排列](https://leetcode.cn/problems/7p8L0Z/) 回溯法
+  - ? [🌟【medium】剑指 Offer II 085. 生成匹配的括号](https://leetcode.cn/problems/IDBivT/) 回溯法
+  - ? [🌟【medium】剑指 Offer II 086. 分割回文子字符串](https://leetcode.cn/problems/M99OJA/) 回溯法、动态规划、回文串
+  - [🌟【hard】面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
+- 20220925(6)
   - ? [🌟【medium】788. 旋转数字](https://leetcode.cn/problems/rotated-digits/) 模拟
-
+  - ??? [🌟【medium】剑指 Offer II 067. 最大的异或](https://leetcode.cn/problems/ms70jA/) 字典树、贪心
+  - ? [🌟【medium】剑指 Offer II 071. 按权重生成随机数](https://leetcode.cn/problems/cuyjEf/) 二分搜索
+  - ? [🌟【medium】剑指 Offer II 073. 狒狒吃香蕉](https://leetcode.cn/problems/nZZqjQ/) 二分搜索
+  - [🌟【medium】剑指 Offer II 074. 合并区间](https://leetcode.cn/problems/SsGoHC/) 区间合并问题
+  - [🌟【medium】剑指 Offer II 076. 数组中的第 k 大的数字](https://leetcode.cn/problems/xx4gT2/?favorite=e8X3pBZi) 快速选择
 - 20220924(9)
   - ? [🌟【medium】剑指 Offer II 058. 日程表](https://leetcode.cn/problems/fi9suh/?favorite=e8X3pBZi) 二分搜索
   - [🌟【medium】剑指 Offer II 060. 出现频率最高的 k 个数字](https://leetcode.cn/problems/g5c51o/) 快速选择
@@ -795,6 +810,7 @@
 - ? 🌟【medium】[720. 词典中最长的单词](https://leetcode.cn/problems/longest-word-in-dictionary/) 字典树、前缀树
 - ?? 🌟【hard】[745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search/) 字典树、前缀树、后缀树
 - 🌟【medium】[剑指 Offer II 065. 最短的单词编码](https://leetcode.cn/problems/iSwD2y/) 字典树
+- ??? 🌟【medium】[剑指 Offer II 067. 最大的异或](https://leetcode.cn/problems/ms70jA/) 字典树、贪心
 
 ## 字符串题
 
@@ -930,6 +946,7 @@
 - 🌟【medium】[670. 最大交换](https://leetcode.cn/problems/maximum-swap/) 规律、模拟
 - ? 🌟【medium】[672. 灯泡开关 Ⅱ](https://leetcode.cn/problems/bulb-switcher-ii/) 模拟、规律
 - ? 🌟【easy】[836. 矩形重叠](https://leetcode.cn/problems/rectangle-overlap/) 规律、模拟、反推
+- 🌟【hard】[面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
 
 ### 模拟运算
 
@@ -24460,6 +24477,44 @@ function swap(arr, i, j) {
 
 ```
 
+## ?🌟😻✔ 面试题 17.19. 消失的两个数字【hard】
+
+[ref](https://leetcode.cn/problems/missing-two-lcci/)
+
+常规模拟题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var missingTwo = function(nums) {
+  const n = nums.length + 2
+  let n1 = false, n2 = false
+  for(let i=0;i<nums.length;i++) {
+    while(nums[i] !== i + 1 && nums[i] !== n && nums[i] !== n - 1) {
+      swap(nums, i, nums[i] - 1)
+    }
+    if(nums[i] === n) {
+      n1 = true
+    } else if(nums[i] === n - 1) {
+      n2 = true
+    }
+  }
+  const res = []
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] !== i + 1) res.push(i + 1)
+  }
+  if(!n1) res.push(n)
+  if(!n2) res.push(n - 1)
+  return res
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+```
+
 ## ?🌟😻✔ 剑指 Offer II 004. 只出现一次的数字 【medium】
 
 [ref](https://leetcode.cn/problems/WGki4K/)
@@ -26212,4 +26267,451 @@ var singleNonDuplicate = function(nums) {
     }
   }
 };
+```
+
+## ??? 🌟😻✔ 剑指 Offer II 067. 最大的异或【medium】
+
+[ref](https://leetcode.cn/problems/ms70jA/)
+
+字典树
+
+```js
+var findMaximumXOR = function (nums) {
+  const root = []
+  let max = Number.MIN_SAFE_INTEGER
+  for (let num of nums) {
+    add(root, num)
+    max = Math.max(max, num ^ getVal(root, num))
+  }
+  return max
+}
+
+function getVal(node, num) {
+  let ret = 0
+  for (let i = 30; i >= 0; i--) {
+    const j = (num >> i) & 1
+    const target = 1 - j
+    if (node[target]) {
+      node = node[target]
+      ret |= target << i
+    } else {
+      ret |= j << i
+      node = node[j]
+    }
+  }
+  return ret
+}
+
+function add(node, num) {
+  for (let i = 30; i >= 0; i--) {
+    const n = (num >> i) & 1
+    if (!node[n]) node[n] = []
+    node = node[n]
+  }
+}
+```
+
+## ? 🌟😻✔ 剑指 Offer II 071. 按权重生成随机数【medium】
+
+[ref](https://leetcode.cn/problems/cuyjEf/)
+
+二分搜索
+
+```js
+var Solution = function(w) {
+  this.arr = []
+  let sum = 0
+  for(let i=0;i<w.length;i++) {
+    sum += w[i]
+    this.arr.push(sum)
+  }
+  this.min = 1
+  this.max = sum
+};
+Solution.prototype.pickIndex = function() {
+  const target = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min, arr = this.arr
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(arr[mid] >= target) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+## ? 🌟😻✔ 剑指 Offer II 073. 狒狒吃香蕉【medium】
+
+[ref](https://leetcode.cn/problems/nZZqjQ/)
+
+二分搜索
+
+```js
+var minEatingSpeed = function(piles, h) {
+  const n = piles.length
+  let max = Number.MIN_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    max = Math.max(piles[i], max)
+  }
+  let l = 1, r = max
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(getCost(piles, mid) <= h) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+
+function getCost(piles, speed) {
+  let cost = 0
+  for(let i=0;i<piles.length;i++) {
+    cost += Math.ceil(piles[i] / speed)
+  }
+  return cost
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 074. 合并区间【medium】
+
+[ref](https://leetcode.cn/problems/SsGoHC/)
+
+区间问题
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var merge = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+  let stack = []
+  for(let i=0;i<intervals.length;i++) {
+    const interval = intervals[i]
+    if(!stack.length) stack.push(interval)
+    else {
+      const end = stack[stack.length - 1]
+      if(end[1] < interval[0]) {
+        stack.push(interval)
+      } else {
+        stack.pop()
+        stack.push([end[0], Math.max(end[1], interval[1])])
+      }
+    }
+  }
+  return stack
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 076. 数组中的第 k 大的数字【medium】
+
+[ref](https://leetcode.cn/problems/xx4gT2/?favorite=e8X3pBZi)
+
+快速选择
+
+```js
+var findKthLargest = function(nums, k) {
+  let l = 0, r = nums.length - 1
+  while(true) {
+    const ind = partition(nums, l, r)
+    if(ind === k-1) return nums[ind]
+    else if(ind > k-1) {
+      r = ind - 1
+    } else {
+      l = ind + 1
+    }
+  }
+};
+
+function partition(nums, l, r) {
+  const target = nums[l]
+  let j = l + 1
+  for(let i=j;i<=r;i++) {
+    if(nums[i] >= target) {
+      swap(nums, j, i)
+      j++
+    }
+  }
+  swap(nums, j - 1, l)
+  return j - 1
+}
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 077. 链表排序【medium】
+
+[ref](https://leetcode.cn/problems/7WHec2/)
+
+分治法、归并排序
+
+```js
+var sortList = function(head) {
+  const myHead = new ListNode(0, head)
+  let fast = myHead, slow  = myHead
+  while(fast.next && fast.next.next) {
+    fast = fast.next.next
+    slow = slow.next
+  }
+  if(slow === fast) return head
+  const next = slow.next
+  slow.next = null
+  return merge(sortList(head), sortList(next))
+};
+
+function merge(head1, head2) {
+  const myHead = new ListNode()
+  let tHead = myHead
+  while(head1 && head2) {
+    if(head1.val < head2.val) {
+      tHead.next = head1
+      head1 = head1.next
+    } else {
+      tHead.next = head2
+      head2 = head2.next
+    }
+    tHead = tHead.next
+  }
+  if(head1) {
+    tHead.next = head1
+  }
+  if(head2) {
+    tHead.next = head2
+  }
+  return myHead.next
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 079. 所有子集【medium】
+
+[ref](https://leetcode.cn/problems/TVdhkn/)
+
+回溯法
+
+```js
+var subsets = function(nums) {
+  const res = []
+  function walk(path, ind) {
+    res.push([...path])
+    for(let i=ind;i<nums.length;i++) {
+      path.push(nums[i])
+      walk(path, i + 1)
+      path.pop()
+    }
+  }
+  walk([], 0)
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 080. 含有 k 个元素的组合【medium】
+
+[ref](https://leetcode.cn/problems/uUsW3B/)
+
+回溯法、集合问题
+
+```js
+var combine = function(n, k) {
+  const res = []
+  function walk(path, start) {
+    if(path.length === k) {
+      res.push([...path])
+      return
+    }
+    for(let i=start;i<=n;i++) {
+      path.push(i)
+      walk(path, i + 1)
+      path.pop()
+    }
+  }
+  walk([], 1)
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 081. 允许重复选择元素的组合【medium】
+
+[ref](https://leetcode.cn/problems/Ygoe9J/)
+
+回溯法
+
+```js
+var combinationSum = function(candidates, target) {
+  const res = []
+  function walk(path, sum, start) {
+    if(sum === target) {
+      res.push([...path])
+      return
+    }
+    for(let i=start;i<candidates.length;i++) {
+      if(sum + candidates[i] <= target) {
+        path.push(candidates[i])
+        walk(path, sum + candidates[i], i)
+        path.pop()
+      }
+    }
+  }
+  walk([], 0, 0)
+  return res
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 082. 含有重复元素集合的组合【medium】
+
+[ref](https://leetcode.cn/problems/4sjJUc/)
+
+回溯法
+
+```js
+var combinationSum2 = function(candidates, target) {
+  candidates.sort((a, b) => a - b)
+  const res = [], n = candidates.length
+  const used = new Array(n).fill(false)
+  function walk(path, sum, startIdx) {
+    if(sum === target) {
+      res.push([...path])
+      return
+    }
+    for(let i=startIdx;i<=n;i++) {
+      if(i-1>=0 && !used[i - 1] && candidates[i] === candidates[i-1]) continue
+      if(!used[i] && candidates[i] + sum <= target) {
+        path.push(candidates[i])
+        used[i] = true
+        walk(path, sum + candidates[i], i + 1)
+        used[i] = false
+        path.pop()
+      }
+    }
+  }
+  walk([], 0, 0)
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 083. 没有重复元素集合的全排列【medium】
+
+[ref](https://leetcode.cn/problems/VvJkup/)
+
+回溯法
+
+```js
+var permute = function(nums) {
+  const res = [], n = nums.length
+  const used = new Array(n).fill(false)
+  function walk(path) {
+    if(path.length === n) {
+      res.push([...path])
+      return
+    }
+    for(let i=0;i<n;i++) {
+      if(!used[i]) {
+        path.push(nums[i])
+        used[i] = true
+        walk(path)
+        path.pop()
+        used[i] = false
+      }
+    }
+  }
+  walk([])
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 084. 含有重复元素集合的全排列【medium】
+
+[ref](https://leetcode.cn/problems/7p8L0Z/)
+
+回溯法
+
+```js
+var permuteUnique = function(nums) {
+  nums.sort((a, b) => a - b)
+  const n = nums.length, res = []
+  const used = new Array(n).fill(false)
+  function walk(path) {
+    if(path.length === n) {
+      res.push([...path])
+      return
+    }
+    for(let i=0;i<n;i++) {
+      if(used[i] || i-1>=0 && !used[i-1] && nums[i] === nums[i - 1]) continue 
+      used[i] = true
+      path.push(nums[i])
+      walk(path)
+      path.pop()
+      used[i] = false
+    }
+  }
+  walk([])
+  return res
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 085. 生成匹配的括号【medium】
+
+[ref](https://leetcode.cn/problems/IDBivT/)
+
+回溯法
+
+```js
+var generateParenthesis = function(n) {
+  const res = []
+  function walk(str, lCnt, rCnt) {
+    if(lCnt === n && rCnt === n) {
+      res.push(str)
+      return
+    }
+    if(lCnt < n) {
+      walk(str + '(', lCnt + 1, rCnt)
+    }
+    if(rCnt < lCnt) {
+      walk(str + ')', lCnt, rCnt + 1)
+    }
+  }
+  walk('', 0, 0)
+  return res
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 086. 分割回文子字符串【medium】
+
+[ref](https://leetcode.cn/problems/M99OJA/)
+
+回文串、动态规划、回溯法
+
+```js
+var partition = function(s) {
+  const n = s.length, dp = new Array(n).fill(false).map(_ => new Array(n).fill(true))
+  for(let i=n-2;i>=0;i--) {
+    for(let j=i+1;j<n;j++) {
+      dp[i][j] = s[i] === s[j] && dp[i+1][j-1]
+    }
+  }
+  const res = []
+  function walk(path, startInd) {
+    if(startInd>=n) {
+      res.push([...path])
+      return
+    }
+    for(let i=startInd;i<n;i++) {
+      if(dp[startInd][i]) {
+        path.push(s.slice(startInd, i + 1))
+        walk(path, i + 1)
+        path.pop()
+      }
+    }
+  }
+  walk([], 0)
+  return res
+};
+
 ```
