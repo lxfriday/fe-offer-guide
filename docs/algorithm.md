@@ -33,7 +33,7 @@
 
 # 刷题日记
 
-- 20220926(10)
+- 20220926(11)
   - ? [🌟【medium】剑指 Offer II 077. 链表排序](https://leetcode.cn/problems/7WHec2/) 归并排序、分治法
   - [🌟【medium】剑指 Offer II 079. 所有子集](https://leetcode.cn/problems/TVdhkn/) 回溯法
   - [🌟【medium】剑指 Offer II 080. 含有 k 个元素的组合](https://leetcode.cn/problems/uUsW3B/) 回溯法
@@ -44,6 +44,7 @@
   - ? [🌟【medium】剑指 Offer II 085. 生成匹配的括号](https://leetcode.cn/problems/IDBivT/) 回溯法
   - ? [🌟【medium】剑指 Offer II 086. 分割回文子字符串](https://leetcode.cn/problems/M99OJA/) 回溯法、动态规划、回文串
   - [🌟【hard】面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
+  - ? [🌟【medium】剑指 Offer II 087. 复原 IP ](https://leetcode.cn/problems/0on3uN/) 回溯法
 - 20220925(6)
   - ? [🌟【medium】788. 旋转数字](https://leetcode.cn/problems/rotated-digits/) 模拟
   - ??? [🌟【medium】剑指 Offer II 067. 最大的异或](https://leetcode.cn/problems/ms70jA/) 字典树、贪心
@@ -26714,4 +26715,36 @@ var partition = function(s) {
   return res
 };
 
+```
+
+## ? 🌟😻✔ 剑指 Offer II 087. 复原 IP 【medium】
+
+[ref](https://leetcode.cn/problems/0on3uN/)
+
+回溯法
+
+```js
+var restoreIpAddresses = function(s) {
+  const res = [], n = s.length
+  function walk(path, ind, k) {
+    if(k === 1) {
+      if(ind < n && isValid(s.slice(ind))) res.push(path.join('.') + '.' + s.slice(ind))
+      return
+    }
+    for(let i=ind;i<Math.min(n, ind + 3);i++) {
+      if(isValid(s.slice(ind, i + 1))) {
+        path.push(s.slice(ind, i + 1))
+        walk(path, i + 1, k - 1)
+        path.pop()
+      }
+    }
+  }
+  walk([], 0, 4)
+  return res
+};
+function isValid(str) {
+  if(str === '0') return true
+  if(str[0] === '0') return false
+  return 255 >= Number(str) && Number(str) >= 0
+}
 ```
