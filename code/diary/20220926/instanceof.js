@@ -1,0 +1,1 @@
+function myInstanceOf(A, B) {}

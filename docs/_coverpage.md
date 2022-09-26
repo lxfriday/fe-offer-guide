@@ -4,4 +4,5 @@
 
 [开始收割](#javascript)
 [数据结构与算法](/algorithm)
+[日志](/diary)
 [小技巧](/secret-skills)
