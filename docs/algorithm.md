@@ -33,6 +33,17 @@
 
 # 刷题日记
 
+- 20220927(10)
+  - [🌟【easy】面试题 01.02. 判定是否互为字符重排](https://leetcode.cn/problems/check-permutation-lcci/) 哈希表
+  - [🌟【medium】剑指 Offer II 089. 房屋偷盗](https://leetcode.cn/problems/Gu0c2T/) 动态规划
+  - [🌟【medium】剑指 Offer II 090. 环形房屋偷盗](https://leetcode.cn/problems/PzWKhm/) 动态规划
+  - [🌟【medium】剑指 Offer II 091. 粉刷房子](https://leetcode.cn/problems/JEj789/) 动态规划
+  - [🌟【medium】剑指 Offer II 092. 翻转字符](https://leetcode.cn/problems/cyJERH/) 动态规划
+  - ?? [🌟【medium】剑指 Offer II 093. 最长斐波那契数列](https://leetcode.cn/problems/Q91FMA/) 动态规划
+  - ? [🌟【medium】剑指 Offer II 095. 最长公共子序列](https://leetcode.cn/problems/qJnOS7/) 动态规划
+  - [🌟【medium】剑指 Offer II 098. 路径的数目](https://leetcode.cn/problems/2AoeFn/) 动态规划
+  - [🌟【medium】剑指 Offer II 096. 字符串交织](https://leetcode.cn/problems/IY6buf/) 动态规划
+  - [🌟【medium】剑指 Offer II 099. 最小路径之和](https://leetcode.cn/problems/0i0mDW/) 动态规划
 - 20220926(11)
   - ? [🌟【medium】剑指 Offer II 077. 链表排序](https://leetcode.cn/problems/7WHec2/) 归并排序、分治法
   - [🌟【medium】剑指 Offer II 079. 所有子集](https://leetcode.cn/problems/TVdhkn/) 回溯法
@@ -1251,6 +1262,8 @@
 - ? 🌟【medium】[650. 只有两个键的键盘](https://leetcode.cn/problems/2-keys-keyboard/) 动态规划
 - ? 🌟【medium】[161. 相隔为 1 的编辑距离](https://leetcode.cn/problems/one-edit-distance/) 双指针、动态规划
 - ? 🌟【medium】[1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/) 动态规划
+- ?? 🌟【medium】[剑指 Offer II 093. 最长斐波那契数列](https://leetcode.cn/problems/Q91FMA/) 动态规划
+- 🌟【medium】[64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -4667,6 +4680,37 @@ var uniquePathsWithObstacles = function(grid) {
     }
   }
   return dp[m-1][n-1]
+};
+```
+
+## 😻✔ 64. 最小路径和【hard】
+
+[ref](https://leetcode.cn/problems/minimum-path-sum/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(N)
+var minPathSum = function(grid) {
+  const m = grid.length, n = grid[0].length
+  let dp = new Array(n).fill(Number.MAX_SAFE_INTEGER)
+  dp[0] = grid[0][0]
+  for(let j=1;j<n;j++) {
+    dp[j] = grid[0][j] + dp[j-1]
+  }
+  for(let i=1;i<m;i++) {
+    const tdp = []
+    for(let j=0;j<n;j++) {
+      if(j === 0) {
+        tdp.push(dp[0] + grid[i][j])
+      } else {
+        tdp.push(grid[i][j] + Math.min(dp[j], tdp[j-1]))
+      }
+    }
+    dp = tdp
+  }
+  return dp[n-1]
 };
 ```
 
@@ -24377,6 +24421,33 @@ var lowestCommonAncestor = function(root, p, q) {
 };  
 ```
 
+## 🌟😻✔ 面试题 01.02. 判定是否互为字符重排【easy】
+
+[ref](https://leetcode.cn/problems/check-permutation-lcci/)
+
+哈希表
+
+```js
+// 时间复杂度：O(M+N) M=s1.length, N=s2.length
+// 空间复杂度：O(K) K 是s1中不同字符的个数，K 最大为 M
+var CheckPermutation = function(s1, s2) {
+  const m = new Map()
+  let diffCnt = 0
+  for(let i=0;i<s1.length;i++) {
+    m.set(s1[i], (m.get(s1[i]) || 0) + 1)
+    if(m.get(s1[i]) === 1) {
+      diffCnt++
+    }
+  }
+  for(let i=0;i<s2.length;i++) {
+    if(!m.has(s2[i]) || m.get(s2[i]) === 0) return false
+    m.set(s2[i], m.get(s2[i]) - 1)
+    if(m.get(s2[i]) === 0) diffCnt--
+  }
+  return diffCnt === 0
+};
+```
+
 ## ??🌟😻✔ 面试题 01.07. 旋转矩阵【medium】
 
 [ref](https://leetcode.cn/problems/rotate-matrix-lcci/)
@@ -26747,4 +26818,335 @@ function isValid(str) {
   if(str[0] === '0') return false
   return 255 >= Number(str) && Number(str) >= 0
 }
+```
+
+## 🌟😻✔ 剑指 Offer II 089. 房屋偷盗【medium】
+
+[ref](https://leetcode.cn/problems/Gu0c2T/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rob = function(nums) {
+  const n = nums.length, dp = new Array(n).fill(0)
+  dp[0] = nums[0]
+  for(let i=1;i<n;i++) {
+    dp[i] = Math.max(dp[i-1], nums[i] + (i-2>=0?dp[i-2]:0))
+  }
+  return dp[n-1]
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 090. 环形房屋偷盗【medium】
+
+[ref](https://leetcode.cn/problems/PzWKhm/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var rob = function(nums) {
+  const n = nums.length, dp1 = new Array(n-1).fill(0), dp2 = new Array(n-1).fill(0)
+  if(n === 1) return nums[0]
+  dp1[0] = nums[0], dp2[0] = nums[1]
+  for(let i=1;i<n-1;i++) {
+    dp1[i] = Math.max(dp1[i-1], nums[i] + (i-2>=0 ?dp1[i-2] : 0))
+  }
+  for(let i=2;i<n;i++) {
+    dp2[i-1] = Math.max(dp2[i-2], nums[i] + (i-3>=0 ?dp2[i-3] : 0))
+  }
+  return Math.max(dp1[n-2], dp2[n-2])
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 091. 粉刷房子【medium】
+
+[ref](https://leetcode.cn/problems/JEj789/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minCost = function(costs) {
+  let a = costs[0][0], b = costs[0][1], c = costs[0][2]
+  for(let i=1;i<costs.length;i++) {
+    let pa = a, pb = b, pc = c
+    a = costs[i][0] + Math.min(pb, pc)
+    b = costs[i][1] + Math.min(pa, pc)
+    c = costs[i][2] + Math.min(pa, pb)
+  }
+  return Math.min(a, b, c)
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 092. 翻转字符【medium】
+
+[ref](https://leetcode.cn/problems/cyJERH/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var minFlipsMonoIncr = function(s) {
+  const n = s.length, dp = new Array(n).fill(0).map(_ => new Array(2).fill(Number.MAX_SAFE_INTEGER))
+  if(s[0] === '0') {
+    dp[0][0] = 0
+    dp[0][1] = 1
+  } else {
+    dp[0][0] = 1
+    dp[0][1] = 0
+  }
+  for(let i=1;i<n;i++) {
+    if(s[i] === '0') {
+      dp[i][0] = dp[i-1][0]
+      dp[i][1] = 1 + Math.min(dp[i-1][0], dp[i-1][1])
+    } else {
+      dp[i][0] = 1 + dp[i-1][0]
+      dp[i][1] = Math.min(dp[i-1][0], dp[i-1][1])
+    }
+  }
+  return Math.min(...dp[n - 1])
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minFlipsMonoIncr = function(s) {
+  const n = s.length
+  let a = Number.MAX_SAFE_INTEGER, b = Number.MAX_SAFE_INTEGER
+  if(s[0] === '0') {
+    a = 0
+    b = 1
+  } else {
+    a = 1
+    b = 0
+  }
+  for(let i=1;i<n;i++) {
+    let pa = a, pb = b
+    if(s[i] === '0') {
+      a = pa
+      b = 1 + Math.min(pa, pb)
+    } else {
+      a = 1 + pa
+      b = Math.min(pa, pb)
+    }
+  }
+  return Math.min(a, b)
+};
+```
+
+## ??🌟😻✔ 剑指 Offer II 093. 最长斐波那契数列【medium】
+
+[ref](https://leetcode.cn/problems/Q91FMA/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var lenLongestFibSubseq = function(arr) {
+  const n = arr.length, map = new Map()
+  let max = 0
+  for(let i=0;i<n;i++) {
+    map.set(arr[i], i)
+  }
+  const dp = new Array(n).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<n;i++) {
+    for(let k=i+2;k<n;k++) {
+      const j = map.get(arr[k] - arr[i]) || -1
+      if(j > i && j < k) {
+        dp[j][k] = dp[i][j] + 1
+        max = Math.max(max, dp[j][k])
+      }
+    }
+  }
+  return max === 0 ? 0 : max + 2
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 095. 最长公共子序列【medium】
+
+[ref](https://leetcode.cn/problems/qJnOS7/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var longestCommonSubsequence = function(text1, text2) {
+  const m = text1.length, n = text2.length, dp = new Array(m + 1).fill(0).map(_ => new Array(n + 1).fill(0))
+  
+  for(let i=1;i<=m;i++) {
+    for(let j=1;j<=n;j++) {
+      if(text1[i-1] === text2[j-1]) {
+        dp[i][j] = 1 + dp[i-1][j-1]
+      } else {
+        dp[i][j] = Math.max(dp[i-1][j], dp[i][j - 1])
+      }
+    }
+  }
+
+  return dp[m][n]
+};
+```
+
+```js
+//优化版
+// 时间复杂度：O(MN)
+// 空间复杂度：O(N)
+var longestCommonSubsequence = function(text1, text2) {
+  const m = text1.length, n = text2.length
+  let dp = new Array(n + 1).fill(0)
+  
+  for(let i=1;i<=m;i++) {
+    const tdp = []
+    for(let j=0;j<=n;j++) {
+      if(i === 0 || j === 0) {
+        tdp.push(0)
+      } else if(text1[i-1] === text2[j-1]) {
+        tdp.push(1 + dp[j-1])
+      } else {
+        tdp.push(Math.max(dp[j], tdp[j - 1]))
+      }
+    }
+    dp = tdp
+  }
+
+  return dp[n]
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 096. 字符串交织【medium】
+
+[ref](https://leetcode.cn/problems/IY6buf/?favorite=e8X3pBZi)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var isInterleave = function(s1, s2, s3) {
+  const m = s1.length, n = s2.length
+  if(m + n !== s3.length) return false
+  const dp = new Array(m + 1).fill(false).map(_ => new Array(n + 1).fill(true))
+  dp[0][0] = true
+  for(let i=1;i<=m;i++) {
+    dp[i][0] = s1[i-1] === s3[i-1] && dp[i - 1][0]
+  }
+  for(let j=1;j<=n;j++) {
+    dp[0][j] = s2[j-1] === s3[j-1] && dp[0][j - 1]
+  }
+  for(let i=1;i<=m;i++) {
+    for(let j=1;j<=n;j++) {
+      dp[i][j] = 
+        s1[i-1] === s3[i + j - 1] && dp[i-1][j] || 
+        s2[j-1] === s3[i + j - 1] && dp[i][j-1] || false
+    }
+  }
+  return dp[m][n]
+}; 
+```
+
+## 🌟😻✔ 剑指 Offer II 098. 路径的数目【medium】
+
+[ref](https://leetcode.cn/problems/2AoeFn)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var uniquePaths = function(m, n) {
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<m;i++) {
+    dp[i][0] = 1
+  }
+  for(let j=0;j<n;j++) {
+    dp[0][j] = 1
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      dp[i][j] = dp[i-1][j] + dp[i][j - 1]
+    }
+  }
+  return dp[m-1][n-1]
+};
+```
+
+滚动数组优化
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(N)
+var uniquePaths = function(m, n) {
+  let dp = new Array(n).fill(1)
+  for(let i=1;i<m;i++) {
+    const tdp = [1]
+    for(let j=1;j<n;j++) {
+      tdp.push(dp[j] + tdp[j - 1])
+    }
+    dp = tdp
+  }
+  return dp[n-1]
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 099. 最小路径之和【medium】
+
+[ref](https://leetcode.cn/problems/0i0mDW/comments/)
+
+动态规划
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var minPathSum = function(grid) {
+  const m = grid.length, n = grid[0].length, dp = new Array(m).fill(0).map(_ => new Array(n).fill(Number.MAX_SAFE_INTEGER))
+  dp[0][0] = grid[0][0]
+  for(let i=1;i<m;i++) {
+    dp[i][0] = grid[i][0] + dp[i-1][0]
+  }
+  for(let j=1;j<n;j++) {
+    dp[0][j] = grid[0][j] + dp[0][j-1]
+  }
+  for(let i=1;i<m;i++) {
+    for(let j=1;j<n;j++) {
+      dp[i][j] = grid[i][j] + Math.min(dp[i-1][j], dp[i][j-1])
+    }
+  }
+  return dp[m-1][n-1]
+};
+```
+
+滚动数组优化
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(N)
+var minPathSum = function(grid) {
+  const m = grid.length, n = grid[0].length
+  let dp = new Array(n).fill(Number.MAX_SAFE_INTEGER)
+  dp[0] = grid[0][0]
+  for(let j=1;j<n;j++) {
+    dp[j] = grid[0][j] + dp[j-1]
+  }
+  for(let i=1;i<m;i++) {
+    const tdp = []
+    for(let j=0;j<n;j++) {
+      if(j === 0) {
+        tdp.push(dp[0] + grid[i][j])
+      } else {
+        tdp.push(grid[i][j] + Math.min(dp[j], tdp[j-1]))
+      }
+    }
+    dp = tdp
+  }
+  return dp[n-1]
+};
 ```
