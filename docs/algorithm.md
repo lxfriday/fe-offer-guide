@@ -33,6 +33,17 @@
 
 # 刷题日记
 
+- 20220928()
+  - [🌟【medium】面试题 17.09. 第 k 个数](https://leetcode.cn/problems/get-kth-magic-number-lcci/) 动态规划
+  - [🌟【medium】剑指 Offer II 100. 三角形中最小路径之和](https://leetcode.cn/problems/IlPe0q/) 动态规划
+  - ?? [🌟【medium】剑指 Offer II 102. 加减的目标值](https://leetcode.cn/problems/YaVDxD/) 动态规划、回溯法、01背包、背包问题
+  - ?? [🌟【medium】剑指 Offer II 103. 最少的硬币数目](https://leetcode.cn/problems/gaM7Ch/) 动态规划、背包问题、无序背包
+  - ?? [🌟【medium】剑指 Offer II 104. 排列的数目](https://leetcode.cn/problems/D0F0SV/) 动态规划、背包问题、有序背包
+  - [🌟【medium】剑指 Offer II 105. 岛屿的最大面积](https://leetcode.cn/problems/ZL6zAn/) 矩阵、深度优先搜索、广度优先搜索
+  - ? [🌟【medium】剑指 Offer II 106. 二分图](https://leetcode.cn/problems/vEAB3K/) 图、深度优先搜索、广度优先搜索
+  - [🌟【medium】剑指 Offer II 107. 矩阵中的距离](https://leetcode.cn/problems/2bCMpM/) 广度优先搜索、多源广度优先
+  - [🌟【medium】剑指 Offer II 109. 开密码锁](https://leetcode.cn/problems/zlDJc7/) 广度优先搜索
+  - [🌟【medium】剑指 Offer II 110. 所有路径](https://leetcode.cn/problems/bP4bmD/) 回溯法
 - 20220927(10)
   - [🌟【easy】面试题 01.02. 判定是否互为字符重排](https://leetcode.cn/problems/check-permutation-lcci/) 哈希表
   - [🌟【medium】剑指 Offer II 089. 房屋偷盗](https://leetcode.cn/problems/Gu0c2T/) 动态规划
@@ -1274,7 +1285,9 @@
 - 🌟【medium】[279 完全平方数](https://leetcode.cn/problems/perfect-squares/)
 - 🌟【medium】[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-2/) 动态规划、背包问题
 - ?? 🌟【medium】[474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/) 动态规划、背包问题
-
+- ?? 🌟【medium】[剑指 Offer II 102. 加减的目标值](https://leetcode.cn/problems/YaVDxD/) 动态规划、回溯法、01背包、背包问题
+- ?? [🌟【medium】剑指 Offer II 103. 最少的硬币数目](https://leetcode.cn/problems/gaM7Ch/) 动态规划、背包问题
+- ?? [🌟【medium】剑指 Offer II 104. 排列的数目](https://leetcode.cn/problems/D0F0SV/) 动态规划、背包问题、有序背包
 ## 贪心思想
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
@@ -15183,11 +15196,29 @@ var reversePairs = function(nums) {
 
 ```
 
-## 🌟😻✔ 494 目标和【medium】
+## ?? 🌟😻✔ 494 目标和【medium】
 
 [ref](https://leetcode.cn/problems/target-sum/)
 
-动态规划、回溯
+动态规划、回溯、背包问题、01背包
+
+```js
+var findTargetSumWays = function(nums, target) {
+  let sum = 0
+  for(const num of nums) sum += num
+  const neg = (sum - target) / 2
+  if(neg !== Math.floor(neg) || neg < 0) return 0
+  const dp = new Array(neg + 1).fill(0)
+  dp[0] = 1
+  for(const num of nums) {
+    for(let j=neg;j>=num;j--) {
+      dp[j] += dp[j-num]
+    }
+  }
+  return dp[neg]
+};
+
+```
 
 ```js
 // 时间复杂度：O(2**N)
@@ -24502,6 +24533,36 @@ var addTwoNumbers = function(l1, l2) {
 };
 ```
 
+## 🌟😻✔ 面试题 17.09. 第 k 个数【medium】
+
+[ref](https://leetcode.cn/problems/get-kth-magic-number-lcci/)
+
+动态规划
+
+```js
+// 动态规划
+// 时间复杂度：O(K)
+// 空间复杂度：O(K)
+var getKthMagicNumber = function(k) {
+  const dp = new Array(k + 1).fill(1)
+  let i3 = 1, i5 = 1, i7 = 1
+  for(let i=2;i<=k;i++) {
+    const min = Math.min(dp[i3] * 3, dp[i5] * 5, dp[i7] * 7)
+    if(min === dp[i3] * 3) {
+      i3++
+    }
+    if(min === dp[i5] * 5) {
+      i5++
+    }
+    if(min === dp[i7] * 7) {
+      i7++
+    }
+    dp[i] = min
+  }
+  return dp[k]
+};
+```
+
 ## ?🌟😻✔ 面试题 17.14. 最小K个数【medium】
 
 [ref](https://leetcode.cn/problems/smallest-k-lcci/)
@@ -27148,5 +27209,358 @@ var minPathSum = function(grid) {
     dp = tdp
   }
   return dp[n-1]
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 100. 三角形中最小路径之和【medium】
+
+[ref](https://leetcode.cn/problems/IlPe0q/)
+
+动态规划
+
+```js
+// 时间复杂度：O(K) K=triangle中所有的元素个数
+// 空间复杂度：O(M) M=max(triangle[i])
+var minimumTotal = function(triangle) {
+  let dp = [triangle[0][0]]
+  for(let i=1;i<triangle.length;i++) {
+    const tdp = []
+    for(let j=0; j < triangle[i].length; j++) {
+      if(j === 0) {
+        tdp.push(triangle[i][j] + dp[j])
+      } else if(j === triangle[i].length - 1) {
+        tdp.push(triangle[i][j] + dp[j-1])
+      } else {
+        tdp.push(triangle[i][j] + Math.min(dp[j], dp[j - 1]))
+      }
+    }
+    dp = tdp
+  }
+  return Math.min(...dp)
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer II 102. 加减的目标值【medium】
+
+[ref](https://leetcode.cn/problems/YaVDxD/)
+
+动态规划、回溯法、背包问题、01背包
+
+有序背包
+
+```js
+var findTargetSumWays = function(nums, target) {
+  let sum = 0
+  for(const num of nums) sum += num
+  const neg = (sum - target) / 2
+  if(neg !== Math.floor(neg) || neg < 0) return 0
+  const dp = new Array(neg + 1).fill(0)
+  dp[0] = 1
+  for(const num of nums) {
+    for(let j=neg;j>=num;j--) {
+      dp[j] += dp[j - num]
+    }
+  }
+  return dp[neg]
+};
+```
+
+```js
+// 回溯
+// 时间仅仅击败 6%
+var findTargetSumWays = function(nums, target) {
+  const n = nums.length
+  let cnt = 0
+  function walk(sum, ind) {
+    if(ind === n) {
+      if(sum === target) cnt++
+      return
+    }
+    walk(sum + nums[ind], ind + 1)
+    walk(sum - nums[ind], ind + 1)
+  }
+  walk(0, 0)
+  return cnt
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer II 103. 最少的硬币数目【medium】
+
+[ref](https://leetcode.cn/problems/gaM7Ch/)
+
+无序背包、背包问题、动态规划
+
+```js
+// coins 放在外层是因为要把某个 coin 能达到的所有情况全部扫描出来
+// 上一个coin所有的case都扫描出来之后，再用后面coin继续扫描
+// 用后面的coin的时候就不需要前面的coin参与了，达到去重效果
+var coinChange = function(coins, amount) {
+  const dp = new Array(amount + 1).fill(Number.MAX_SAFE_INTEGER)
+  dp[0] = 0
+  for(let coin of coins) {
+    for(let i=coin;i<=amount;i++) {
+      dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+    }
+  }
+  return dp[amount] === Number.MAX_SAFE_INTEGER ? -1 : dp[amount]
+};
+```
+
+## ?? 🌟😻✔ 剑指 Offer II 104. 排列的数目【medium】
+
+[ref](https://leetcode.cn/problems/D0F0SV/)
+
+动态规划、有序背包、背包问题
+
+```js
+// 排列，有顺序，所以对于 dp[i]，其可能为 nums 中的任何 num
+var combinationSum4 = function(nums, target) {
+  const dp = new Array(target + 1).fill(0)
+  dp[0] = 1
+  for(let i=0;i<=target;i++) {
+    for(const num of nums) {
+      if(i >= num) {
+        dp[i] += dp[i - num]
+      }
+    }
+  }
+  return dp[target]
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 105. 岛屿的最大面积【medium】
+
+[ref](https://leetcode.cn/problems/ZL6zAn/)
+
+矩阵、深度优先搜索
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(1)
+var maxAreaOfIsland = function(grid) {
+  const m = grid.length, n = grid[0].length
+  function walk(i, j) {
+    if(i < 0 || i>=m || j < 0 || j>=n || grid[i][j] === 0) return 0
+    grid[i][j] = 0
+    let sum = 1
+    sum += walk(i + 1, j) + walk(i - 1, j) + walk(i, j + 1) + walk(i, j - 1)
+    return sum
+  }
+  let max = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1) {
+        max = Math.max(max, walk(i, j))
+      }
+    }
+  }
+  return max
+};
+```
+
+```js
+// BFS
+var maxAreaOfIsland = function(grid) {
+  const m = grid.length, n = grid[0].length
+  const directs = [[-1, 0], [1, 0], [0, 1], [0, -1]]
+  function walk(i, j) {
+    grid[i][j] = 0
+    let q = [[i, j]]
+    let sum = 1
+    while(q.length) {
+      const tq = []
+      for(let i=0;i<q.length;i++) {
+        const [x, y] = q[i]
+        for(let j=0;j<4;j++) {
+          const xx = x + directs[j][0], yy = y + directs[j][1]
+          if(xx < 0 || xx >=m || yy < 0 || yy >= n || grid[xx][yy] === 0) continue
+          grid[xx][yy] = 0
+          tq.push([xx, yy])
+          sum += 1
+        }
+      }
+      q = tq
+    }
+    return sum
+  }
+  let max = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1) {
+        max = Math.max(max, walk(i, j))
+      }
+    }
+  }
+  return max
+};
+```
+
+## ? 🌟😻✔ 剑指 Offer II 105. 岛屿的最大面积【medium】
+
+[ref](https://leetcode.cn/problems/vEAB3K/)
+
+图、二分图、深度优先搜索、广度优先搜索
+
+```js
+// BFS 染色法
+// 碰到没有染色的节点，就把当前节点染色为1，然后BFS找连接的节点
+// 相邻节点染色相反，如果碰到已经染过色的节点，则判断其已经染过的色和应该染的色是否相同
+// 不同则返回false，表示无法分成二分图
+var isBipartite = function(graph) {
+  const n = graph.length
+  const colors = new Array(n).fill(0)
+  for(let i=0;i<n;i++) {
+    if(colors[i] > 0) continue
+    let q = [[i, 1]]
+    colors[i] = 1
+    while(q.length) {
+      const tq = []
+      for(let j=0;j<q.length;j++) {
+        const [target, pos] = q[j]
+        for(let k=0;k<graph[target].length;k++) {
+          const next = graph[target][k]
+          const nextPos = pos === 1? 2 : 1
+          if(!colors[next]) {
+            colors[next] = nextPos
+            tq.push([next, nextPos])
+          } else {
+            if(nextPos !== colors[next]) return false
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return true
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 107. 矩阵中的距离【medium】
+
+[ref](https://leetcode.cn/problems/2bCMpM/)
+
+广度优先搜索、多源广度优先
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var updateMatrix = function(mat) {
+  const m = mat.length, n = mat[0].length
+  let q = []
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(mat[i][j] === 0) {
+        q.push([i, j, 0])
+        mat[i][j] = '0'
+      }
+    }
+  }
+  const directs = [[-1, 0], [1, 0], [0, 1], [0, -1]]
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const [x, y, dis] = q[i]
+      for(let j=0;j<4;j++) {
+        const xx = x + directs[j][0], yy = y + directs[j][1]
+        if(xx < 0 || xx >= m || yy < 0 || yy >= n || mat[xx][yy] !== 1) continue
+        mat[xx][yy] = `${dis + 1}`
+        tq.push([xx, yy, dis + 1])
+      }
+    }
+    q = tq
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      mat[i][j] = Number(mat[i][j])
+    }
+  }
+  return mat
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 109. 开密码锁【medium】
+
+[ref](https://leetcode.cn/problems/zlDJc7/)
+
+广度优先搜索
+
+```js
+var openLock = function(deadends, target) {
+  const deadendsSet = new Set(deadends)
+  if(deadendsSet.has('0000')) return -1
+  let q = [['0000', 0]]
+  const used = new Set('0000')
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const [s, cnt] = q[i]
+      if(s === target) return cnt
+      for(let i=0;i<4;i++) {
+        const nextS1 = s.slice(0, i) + ((Number(s[i]) + 1) % 10) + s.slice(i + 1)
+        const nextS2 = s.slice(0, i) + ((Number(s[i]) - 1 + 10) % 10) + s.slice(i + 1)
+        if(!used.has(nextS1) && !deadendsSet.has(nextS1)) {
+          used.add(nextS1)
+          tq.push([nextS1, cnt + 1])
+        }
+        if(!used.has(nextS2) && !deadendsSet.has(nextS2)) {
+          used.add(nextS2)
+          tq.push([nextS2, cnt + 1])
+        }
+      }
+    }
+    q = tq
+  }
+  return -1
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 110. 所有路径【medium】
+
+[ref](https://leetcode.cn/problems/bP4bmD/)
+
+回溯法
+
+```js
+var allPathsSourceTarget = function(graph) {
+  const res = [], n = graph.length
+  function walk(path, ind) {
+    if(ind === n - 1) {
+      res.push([...path])
+      return
+    }
+    for(let i=0;i<graph[ind].length;i++) {
+      const next = graph[ind][i]
+      path.push(next)
+      walk(path, next)
+      path.pop()
+    }
+  }
+  walk([0], 0)
+
+  return res
+};
+```
+
+```js
+// Floyd 求路径数量
+var allPathsSourceTarget = function(graph) {
+  const n = graph.length, dp = new Array(n).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=0;i<n;i++) {
+    for(let k=0;k<graph[i].length;k++) {
+      const j = graph[i][k]
+      dp[i][j] = 1
+    }
+  }
+  for(let k=0;k<n;k++) {
+    for(let i=0;i<n;i++) {
+      for(let j=0;j<n;j++) {
+        if(i !== j && i !== k && k !== j) {
+          dp[i][j] += dp[i][k] * dp[k][j]
+        }
+      }
+    }
+  }
+  console.log(dp[0][n-1])
 };
 ```
