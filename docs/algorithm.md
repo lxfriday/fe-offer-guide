@@ -33,7 +33,18 @@
 
 # 刷题日记
 
-- 20220928()
+- 20220929()
+  - [🌟【easy】面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
+  - [🌟【meidum】剑指 Offer II 111. 计算除法](https://leetcode.cn/problems/vlzXQL/) Floyd 算法
+  - ?[🌟【meidum】剑指 Offer II 113. 课程顺序](https://leetcode.cn/problems/QA2IGt/) 拓扑排序、广度优先搜索
+  - ?[🌟【meidum】剑指 Offer II 115. 重建序列](https://leetcode.cn/problems/ur2n8P/) 拓扑排序、广度优先搜索
+  - ?[🌟【meidum】剑指 Offer II 116. 省份数量](https://leetcode.cn/problems/bLyHh0/) 图、深度优先搜索
+  - ?[🌟【meidum】剑指 Offer II 118. 多余的边](https://leetcode.cn/problems/7LpjUW/) 并查集
+  - ?[🌟【meidum】剑指 Offer II 119. 最长连续序列](https://leetcode.cn/problems/WhsWhI/) 哈希表
+  - [🌟【meidum】面试题 01.08. 零矩阵](https://leetcode.cn/problems/zero-matrix-lcci/) 哈希表、矩阵
+  - [🌟【easy】剑指 Offer II 002. 二进制加法](https://leetcode.cn/problems/JFETK5/) 字符串运算
+  - [🌟【easy】剑指 Offer II 003. 前 n 个数字二进制中 1 的个数](https://leetcode.cn/problems/w3tCBm/) 二进制
+- 20220928(11)
   - [🌟【medium】面试题 17.09. 第 k 个数](https://leetcode.cn/problems/get-kth-magic-number-lcci/) 动态规划
   - [🌟【medium】剑指 Offer II 100. 三角形中最小路径之和](https://leetcode.cn/problems/IlPe0q/) 动态规划
   - ?? [🌟【medium】剑指 Offer II 102. 加减的目标值](https://leetcode.cn/problems/YaVDxD/) 动态规划、回溯法、01背包、背包问题
@@ -44,6 +55,7 @@
   - [🌟【medium】剑指 Offer II 107. 矩阵中的距离](https://leetcode.cn/problems/2bCMpM/) 广度优先搜索、多源广度优先
   - [🌟【medium】剑指 Offer II 109. 开密码锁](https://leetcode.cn/problems/zlDJc7/) 广度优先搜索
   - [🌟【medium】剑指 Offer II 110. 所有路径](https://leetcode.cn/problems/bP4bmD/) 回溯法
+  - [🌟【medium】11. 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/) 贪心、双指针
 - 20220927(10)
   - [🌟【easy】面试题 01.02. 判定是否互为字符重排](https://leetcode.cn/problems/check-permutation-lcci/) 哈希表
   - [🌟【medium】剑指 Offer II 089. 房屋偷盗](https://leetcode.cn/problems/Gu0c2T/) 动态规划
@@ -864,6 +876,7 @@
 - 🌟【easy】[266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
 - ??? 🌟【hard】[828. 统计子串中的唯一字符](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string/) 字符串、哈希表
 - 🌟【easy】[1592. 重新排列单词间的空格](https://leetcode.cn/problems/rearrange-spaces-between-words/) 字符串、双指针
+- 🌟【easy】[面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
 
 回文串相关
 
@@ -24507,6 +24520,48 @@ var rotate = function(matrix) {
 // x=n - 1 - j,   y=i
 ```
 
+## 🌟😻✔ 面试题 01.08. 零矩阵【medium】
+
+[ref](https://leetcode.cn/problems/zero-matrix-lcci/)
+
+矩阵、哈希表、集合
+
+```js
+// 时间复杂度：O(M*N)
+// 空间复杂度：O(M+N)
+var setZeroes = function(matrix) {
+  const rowS = new Set(), colS = new Set(), m = matrix.length, n = matrix[0].length
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(matrix[i][j] === 0) {
+        rowS.add(i)
+        colS.add(j)
+      }
+    }
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(rowS.has(i) || colS.has(j)) {
+        matrix[i][j] = 0
+      }
+    }
+  }
+  return matrix
+};
+```
+
+## 🌟😻✔ 面试题 01.09. 字符串轮转【easy】
+
+[ref](https://leetcode.cn/problems/string-rotation-lcci/)
+
+字符串题、字符串旋转
+
+```js
+var isFlipedString = function(s1, s2) {
+  return (s1 + s1).indexOf(s2) !== -1 && s1.length === s2.length
+};
+```
+
 ## 🌟😻✔ 面试题 02.05 链表求和【medium】
 
 [ref](https://leetcode.cn/problems/sum-lists-lcci/)
@@ -24646,6 +24701,31 @@ function swap(nums, i, j) {
   nums[i] = nums[j]
   nums[j] = t
 }
+```
+
+## 🌟😻✔ 剑指 Offer II 002. 二进制加法【medium】
+
+[ref](https://leetcode.cn/problems/JFETK5/)
+
+二进制运算
+
+```js
+// 时间复杂度：O(max(M, N))
+// 空间复杂度：O(1)
+var addBinary = function(a, b) {
+  let res = '', add = 0, i = a.length - 1, j = b.length - 1
+  while(i >= 0 || j >= 0) {
+    const sum = add + Number(i >= 0 ? a[i] : 0) + Number(j >= 0 ? b[j] : 0)
+    res = (sum % 2) + res
+    add = Math.floor(sum / 2)
+    i--
+    j--
+  }
+  if(add > 0) {
+    res = 1 + res
+  }
+  return res
+};
 ```
 
 ## ?🌟😻✔ 剑指 Offer II 004. 只出现一次的数字 【medium】
@@ -27562,5 +27642,270 @@ var allPathsSourceTarget = function(graph) {
     }
   }
   console.log(dp[0][n-1])
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 111. 计算除法【medium】
+
+[ref](https://leetcode.cn/problems/vlzXQL/)
+
+Floyd 算法
+
+```js
+var calcEquation = function(equations, values, queries) {
+  const idMap = new Map()
+  let id = 0
+  for(let equation of equations) {
+    const [c1, c2] = equation
+    if(!idMap.has(c1)) {
+      idMap.set(c1, id++)
+    }
+    if(!idMap.has(c2)) {
+      idMap.set(c2, id++)
+    }
+  }
+  const dp = new Array(id).fill(0).map(_ => new Array(id).fill(-1))
+  for(let i=0;i<equations.length;i++) {
+    const [c1, c2] = equations[i], v = values[i]
+    const id1 = idMap.get(c1), id2 = idMap.get(c2)
+    dp[id1][id2] = v
+    dp[id2][id1] = 1 / v
+    dp[id1][id1] = 1
+    dp[id2][id2] = 1
+  }
+  for(let k of idMap.values()) {
+    for(let i of idMap.values()) {
+      for(let j of idMap.values()) {
+        if(dp[i][k] !== -1 && dp[k][j] !== -1) {
+          dp[i][j] = dp[i][k] * dp[k][j]
+        }
+      }
+    }
+  }
+  const res = []
+  for(const query of queries) {
+    const [c1, c2] = query
+    if(idMap.has(c1) && idMap.has(c2)) {
+      res.push(dp[idMap.get(c1)][idMap.get(c2)])
+    } else {
+      res.push(-1)
+    }
+  }
+  return res
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 113. 课程顺序【medium】
+
+[ref](https://leetcode.cn/problems/QA2IGt/)
+
+拓扑排序、广度优先搜索
+
+```js
+var findOrder = function(numCourses, prerequisites) {
+  const courseMap = new Map()
+  const indegree = new Array(numCourses).fill(0)
+  for(let prerequisite of prerequisites) {
+    const [a, b] = prerequisite
+    indegree[a]++
+    if(!courseMap.has(b)) {
+      courseMap.set(b, [])
+    }
+    courseMap.get(b).push(a)
+  }
+  let q = []
+  for(let i=0;i<numCourses;i++) {
+    if(indegree[i] === 0) q.push(i)
+  }
+  const res = []
+  while(q.length) {
+    const tq = []
+    for(let i = 0; i < q.length; i++) {
+      const curr = q[i]
+      res.push(curr)
+      const nexts = courseMap.get(curr)
+      if(nexts) {
+        for(let j=0;j<nexts.length;j++) {
+          const next = nexts[j]
+          indegree[next]--
+          if(indegree[next] === 0) {
+            tq.push(next)
+          }
+        }
+      }
+    }
+    q = tq
+  }
+  
+  return res.length === numCourses ? res : []
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 115. 重建序列【medium】
+
+[ref](https://leetcode.cn/problems/ur2n8P/)
+
+拓扑排序、广度优先搜索
+
+```js
+var sequenceReconstruction = function(nums, sequences) {
+  const n = nums.length, indegree = new Array(n).fill(0)
+  const nextMap = new Map()
+  for(let sequence of sequences) {
+    for(let i=0;i<sequence.length - 1;i++) {
+      const a = sequence[i], b = sequence[i + 1]
+      if(!nextMap.has(a)) {
+        nextMap.set(a, new Set())
+      }
+      if(!nextMap.get(a).has(b)) {
+        nextMap.get(a).add(b)
+        indegree[b - 1]++
+      }
+    }
+  }
+  let q = []
+  for(let i=0;i<n;i++) {
+    if(indegree[i] === 0) q.push(i + 1)
+  }
+  let k = 0
+  while(q.length) {
+    if(q.length > 1) return false
+    const curr = q.shift()
+    if(nums[k++] !== curr) return false
+    const nexts = nextMap.get(curr)
+    if(nexts) {
+      for(let next of nexts) {
+        indegree[next-1]--
+        if(indegree[next-1] === 0) {
+          q.push(next)
+        }
+      }
+    }
+  }
+  return k === nums.length
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 116. 省份数量【medium】
+
+[ref](https://leetcode.cn/problems/bLyHh0/)
+
+深度优先搜索、图
+
+```js
+var findCircleNum = function(isConnected) {
+  const n = isConnected.length
+  const used = new Array(n).fill(false)
+  let cnt = 0
+  function walk(i) {
+    for(let j=0;j<n;j++) {
+      if(!used[j] && isConnected[i][j] === 1) {
+        used[j] = true
+        walk(j)
+      }
+    }
+  }
+  for(let i=0;i<n;i++) {
+    if(used[i]) continue
+    used[i] = true
+    cnt++
+    walk(i)
+  }
+  return cnt
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 118. 多余的边【medium】
+
+[ref](https://leetcode.cn/problems/7LpjUW/)
+
+并查集
+
+```js
+var findRedundantConnection = function(edges) {
+  const n = edges.length, parent = new Array(n).fill(0).map((v, i) => i)
+  for(const edge of edges) {
+    const [idx1, idx2] = edge
+    if(find(parent, idx1) !== find(parent, idx2)) {
+      union(parent, idx1, idx2)
+    } else {
+      return edge
+    }
+  }
+};
+function union(parent, idx1, idx2) {
+  parent[find(parent, idx1)] = find(parent, idx2)
+}
+function find(parent, idx) {
+  if(parent[idx]!==idx) {
+    parent[idx] = find(parent, parent[idx])
+  }
+  return parent[idx]
+}
+```
+
+## ?🌟😻✔ 剑指 Offer II 118. 多余的边【medium】
+
+[ref](https://leetcode.cn/problems/WhsWhI/)
+
+哈希表
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var longestConsecutive = function(nums) {
+  nums = [...new Set(nums)].sort((a, b) => a - b)
+  let max = 0, minIdx = 0
+  for(let i=1;i<nums.length;i++) {
+    if(nums[i] !== nums[i - 1] + 1) {
+      max = Math.max(max, i - minIdx)
+      minIdx = i
+    }
+  }
+  max = Math.max(max, nums.length - minIdx)
+  return max
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var longestConsecutive = function(nums) {
+  const numsSet = new Set(nums)
+  let max = 0
+  for(let i=0;i<nums.length;i++) {
+    let num = nums[i]
+    if(!numsSet.has(num - 1)) {
+      let cnt = 0
+      while(numsSet.has(num)) {
+        numsSet.delete(num)
+        cnt++
+        num++
+      }
+      max = Math.max(max, cnt)
+    }
+  }
+  return max
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 003. 前 n 个数字二进制中 1 的个数【easy】
+
+[ref](https://leetcode.cn/problems/w3tCBm/)
+
+二进制运算
+
+```js
+var countBits = function(n) {
+  const res = []
+  for(let i=0;i<=n;i++) {
+    let j = i, cnt = 0
+    while(j) {
+      cnt += (j & 1)
+      j >>= 1
+    }
+    res.push(cnt)
+  }
+  return res
 };
 ```
