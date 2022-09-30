@@ -33,7 +33,19 @@
 
 # 刷题日记
 
-- 20220929()
+- 20220930()
+  - [🌟【easy】剑指 Offer II 006. 排序数组中两个数字之和](https://leetcode.cn/problems/kLl5u1/) 哈希表、双指针
+  - [🌟【easy】剑指 Offer II 012. 左右两边子数组的和相等](https://leetcode.cn/problems/tvdfij/) 常规数组题
+  - [🌟【easy】剑指 Offer II 018. 有效的回文](https://leetcode.cn/problems/XltzEq/) 回文串
+  - [🌟【easy】剑指 Offer II 019. 最多删除一个字符得到回文](https://leetcode.cn/problems/RQku0D/) 双指针
+  - [🌟【easy】剑指 Offer II 023. 两个链表的第一个重合节点](https://leetcode.cn/problems/3u1WK4/) 链表
+  - [🌟【easy】剑指 Offer II 024. 反转链表](https://leetcode.cn/problems/UHnkqh/) 链表
+  - ? [🌟【easy】剑指 Offer II 027. 回文链表](https://leetcode.cn/problems/aMhZSa/) 链表、回文链表
+  - [🌟【easy】剑指 Offer II 032. 有效的变位词](https://leetcode.cn/problems/dKk3P7/) 哈希表
+  - ? [🌟【easy】剑指 Offer II 034. 外星语言是否排序](https://leetcode.cn/problems/lwyVBB/) 哈希表
+  - [🌟【easy】1694. 重新格式化电话号码](https://leetcode.cn/problems/reformat-phone-number/) 模拟
+
+- 20220929(10)
   - [🌟【easy】面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
   - [🌟【meidum】剑指 Offer II 111. 计算除法](https://leetcode.cn/problems/vlzXQL/) Floyd 算法
   - ?[🌟【meidum】剑指 Offer II 113. 课程顺序](https://leetcode.cn/problems/QA2IGt/) 拓扑排序、广度优先搜索
@@ -983,6 +995,7 @@
 - ? 🌟【medium】[672. 灯泡开关 Ⅱ](https://leetcode.cn/problems/bulb-switcher-ii/) 模拟、规律
 - ? 🌟【easy】[836. 矩形重叠](https://leetcode.cn/problems/rectangle-overlap/) 规律、模拟、反推
 - 🌟【hard】[面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
+- 🌟【easy】[1694. 重新格式化电话号码](https://leetcode.cn/problems/reformat-phone-number/) 模拟
 
 ### 模拟运算
 
@@ -22174,6 +22187,47 @@ OrderedStream.prototype.insert = function(idKey, value) {
 };
 ```
 
+## 🌟😻✔ 1694. 重新格式化电话号码【easy】
+
+[ref](https://leetcode.cn/problems/reformat-phone-number/)
+
+模拟
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var reformatNumber = function(number) {
+  let nums = ''
+  for(const num of number) {
+    if(num !== ' ' && num >= '0' && num <= '9') nums += num
+  }
+  let res = ''
+  let i = 0
+  while(i < nums.length) {
+    const resLen = nums.length - i
+    if(resLen <= 4) {
+      if(resLen === 4) {
+        res += nums.slice(i, i + 2) + '-'
+        i += 2
+        res += nums.slice(i, i + 2)
+        i += 2
+      } else if(resLen === 3) {
+        res += nums.slice(i, i + 3)
+        i += 3
+      } else {
+        res += nums.slice(i, i + 2)
+        i += 2
+      } 
+    } else {
+      res += nums.slice(i, i + 3) + '-'
+      i += 3
+    }
+  }
+
+  return res
+};
+```
+
 ## ?🌟😻✔ 1979. 找出数组的最大公约数【easy】
 
 [ref](https://leetcode.cn/problems/find-greatest-common-divisor-of-array/)
@@ -24728,6 +24782,37 @@ var addBinary = function(a, b) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 003. 前 n 个数字二进制中 1 的个数【easy】
+
+[ref](https://leetcode.cn/problems/w3tCBm/)
+
+二进制运算
+
+```js
+var countBits = function(n) {
+  const dp = new Array(n + 1).fill(0)
+  for(let i=1;i<=n;i++) {
+    dp[i] = dp[i >> 1] + (i & 1)
+  }
+  return dp
+};
+```
+
+```js
+var countBits = function(n) {
+  const res = []
+  for(let i=0;i<=n;i++) {
+    let j = i, cnt = 0
+    while(j) {
+      cnt += (j & 1)
+      j >>= 1
+    }
+    res.push(cnt)
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 剑指 Offer II 004. 只出现一次的数字 【medium】
 
 [ref](https://leetcode.cn/problems/WGki4K/)
@@ -24799,6 +24884,43 @@ var maxProduct = function(words) {
   return max
 }
 
+```
+
+## 🌟😻✔ 剑指 Offer II 006. 排序数组中两个数字之和【easy】
+
+[ref](https://leetcode.cn/problems/kLl5u1/)
+
+哈希表、双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var twoSum = function(numbers, target) {
+  let l = 0, r = numbers.length - 1
+  while(l < r) {
+    if(numbers[l] + numbers[r] === target) {
+      return [l, r]
+    } else if(numbers[l] + numbers[r] < target) {
+      l++
+    } else {
+      r--
+    }
+  }
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var twoSum = function(numbers, target) {
+  const map = new Map()
+  for(let i = 0;i<numbers.length;i++) {
+    if(map.has(target - numbers[i])) {
+      return [map.get(target - numbers[i]), i]
+    }
+    map.set(numbers[i], i)
+  }
+};
 ```
 
 ## ??🌟😻✔ 剑指 Offer II 007. 数组中和为 0 的三个数【medium】
@@ -24934,6 +25056,28 @@ var findMaxLength = function(nums) {
     }
   }
   return max
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 012. 左右两边子数组的和相等【easy】
+
+[ref](https://leetcode.cn/problems/tvdfij/)
+
+常规数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var pivotIndex = function(nums) {
+  let  n = nums.length, rSum = 0
+  for(let i=n - 1; i >= 0; i--) rSum += nums[i]
+  let lSum = 0
+  for(let i=0; i < n; i++) {
+    rSum -= nums[i]
+    if(lSum === rSum) return i
+    lSum += nums[i]
+  }
+  return -1
 };
 ```
 
@@ -25073,6 +25217,61 @@ var lengthOfLongestSubstring = function(s) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 018. 有效的回文【easy】
+
+[ref](https://leetcode.cn/problems/XltzEq/)
+
+回文串
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var isPalindrome = function(s) {
+  const sArr = []
+  for(let i=0;i<s.length;i++) {
+    const slower = s[i].toLowerCase()
+    if(slower !== ' ' && (slower >= '0' && slower <= '9' || slower >= 'a' && slower <= 'z')) sArr.push(slower)
+  }
+  let l = 0, r = sArr.length - 1
+  while(l < r) {
+    if(sArr[l++] !== sArr[r--]) return false
+  }
+  return true
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 019. 最多删除一个字符得到回文【easy】
+
+[ref](https://leetcode.cn/problems/RQku0D/)
+
+双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var validPalindrome = function(s) {
+  const n = s.length
+  let l = 0, r = n - 1
+  while(l < r) {
+    if(s[l] === s[r]) {
+      l++
+      r--
+    } else{
+      return isPalindrome(s, l + 1, r) || isPalindrome(s, l, r - 1)
+    }
+  }
+  return true
+};
+
+function isPalindrome(s, l, r) {
+  while(l < r) {
+    if(s[l++] !== s[r--]) return false
+  }
+  return true
+}
+
+```
+
 ## 🌟😻✔ 剑指 Offer II 020. 回文子字符串的个数【medium】
 
 [ref](https://leetcode.cn/problems/a7VOhD/?favorite=e8X3pBZi)
@@ -25201,6 +25400,44 @@ var detectCycle = function(head) {
   return null
 };
 ```
+## 🌟😻✔ 剑指 Offer II 023. 两个链表的第一个重合节点【easy】
+
+[ref](https://leetcode.cn/problems/3u1WK4/)
+
+链表
+
+```js
+var getIntersectionNode = function(headA, headB) {
+  let pa = headA, pb = headB
+  while(pa && pb) {
+    if(pa === pb) return pa
+    if(!pa.next && !pb.next) return null
+    pa = pa.next ? pa.next : headB
+    pb = pb.next ? pb.next : headA
+  }
+  return null
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 024. 反转链表【easy】
+
+[ref](https://leetcode.cn/problems/UHnkqh/)
+
+链表
+
+```js
+var reverseList = function(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const next = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = next
+  }
+  return myHead.next
+};
+
+```
 
 ## 🌟😻✔ 剑指 Offer II 025. 链表中的两数相加【medium】
 
@@ -25284,6 +25521,64 @@ function reverse(head) {
   }
   return myHead.next
 }
+```
+
+## ?🌟😻✔ 剑指 Offer II 027. 回文链表【easy】
+
+[ref](https://leetcode.cn/problems/aMhZSa/)
+
+链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isPalindrome = function(head) {
+  const myHead = new ListNode(0, head)
+  let fast = myHead, slow = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+  }
+  if(slow === fast) return true
+  fast = slow.next
+  slow.next = null
+  fast = reverse(fast)
+  slow = head
+  while(slow && fast) {
+    if(slow.val !== fast.val) return false
+    slow = slow.next
+    fast = fast.next
+  }
+  return true
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  while(head) {
+    const next = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = next
+  }
+  return myHead.next
+}
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isPalindrome = function(head) {
+  let str = ''
+  while(head) {
+    str += head.val
+    head = head.next
+  }
+  let l = 0, r = str.length - 1
+  while(l < r) {
+    if(str[l++] !== str[r--]) return false
+  }
+  return true
+};
 ```
 
 ## 🌟😻✔ 剑指 Offer II 028. 展平多级双向链表【medium】
@@ -25417,6 +25712,30 @@ LRUCache.prototype.put = function(key, value) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 032. 有效的变位词【medium】
+
+[ref](https://leetcode.cn/problems/dKk3P7/)
+
+哈希表
+
+```js
+var isAnagram = function(s, t) {
+  if(s.length !== t.length || s === t) return false
+  const map = new Map()
+  let cnt = 0
+  for(let i=0;i<s.length;i++) {
+    map.set(s[i], (map.get(s[i]) || 0) + 1)
+    if(map.get(s[i]) === 1) cnt++
+  }
+  for(let i=0;i<t.length;i++) {
+    if(!map.has(t[i]) || map.get(t[i]) === 0) return false
+    map.set(t[i], map.get(t[i]) - 1)
+    if(map.get(t[i]) === 0) cnt--
+  }
+  return cnt === 0
+};
+```
+
 ## 🌟😻✔ 剑指 Offer II 033. 变位词组【medium】
 
 [ref](https://leetcode.cn/problems/sfvd7V/)
@@ -25457,6 +25776,34 @@ var groupAnagrams = function(strs) {
     }
   }
   return Array.from(map.values())
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 034. 外星语言是否排序【easy】
+
+[ref](https://leetcode.cn/problems/lwyVBB/)
+
+哈希表
+
+```js
+var isAlienSorted = function(words, order) {
+  const orderMap = new Map()
+  for(let i=0;i<order.length;i++) {
+    orderMap.set(order[i], i)
+  }
+  const n = words.length
+  for(let i=0;i<n;i++) {
+    if(i + 1 < n) {
+      let k = 0
+      while(k < words[i].length && k < words[i + 1].length && words[i][k] === words[i + 1][k]) {
+        k++
+      }
+      if(k === words[i].length) continue
+      if(k === words[i + 1].length) return false
+      if(orderMap.get(words[i][k]) > orderMap.get(words[i + 1][k])) return false
+    }
+  }
+  return true
 };
 ```
 
@@ -27889,23 +28236,3 @@ var longestConsecutive = function(nums) {
 };
 ```
 
-## 🌟😻✔ 剑指 Offer II 003. 前 n 个数字二进制中 1 的个数【easy】
-
-[ref](https://leetcode.cn/problems/w3tCBm/)
-
-二进制运算
-
-```js
-var countBits = function(n) {
-  const res = []
-  for(let i=0;i<=n;i++) {
-    let j = i, cnt = 0
-    while(j) {
-      cnt += (j & 1)
-      j >>= 1
-    }
-    res.push(cnt)
-  }
-  return res
-};
-```
