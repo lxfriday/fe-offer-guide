@@ -33,7 +33,19 @@
 
 # 刷题日记
 
-- 20220930()
+- 20221001(11)
+  - [🌟【easy】剑指 Offer II 041. 滑动窗口的平均值](https://leetcode.cn/problems/qIsx9U/) 滑动窗口
+  - [🌟【easy】剑指 Offer II 042. 最近请求次数](https://leetcode.cn/problems/H8086Q/) 双端队列、二分搜索
+  - [🌟【easy】剑指 Offer II 052. 展平二叉搜索树](https://leetcode.cn/problems/NYBBNL/) 二叉搜索树、中序遍历
+  - [🌟【easy】剑指 Offer II 056. 二叉搜索树中两个节点之和](https://leetcode.cn/problems/opLdQZ/) 二叉搜索树、中序遍历
+  - [🌟【easy】剑指 Offer II 059. 数据流的第 K 大数值](https://leetcode.cn/problems/jBjn9C/) 优先队列
+  - [🌟【easy】剑指 Offer II 068. 查找插入位置](https://leetcode.cn/problems/N6YdxV/) 二分搜索
+  - [🌟【easy】剑指 Offer II 069. 山峰数组的顶部](https://leetcode.cn/problems/B1IidL/) 二分搜索
+  - [🌟【easy】剑指 Offer II 072. 求平方根](https://leetcode.cn/problems/jJ0w9p/) 二分搜索
+  - ? [🌟【easy】剑指 Offer II 075. 数组相对排序](https://leetcode.cn/problems/0H97ZC/) 排序
+  - [🌟【easy】剑指 Offer II 088. 爬楼梯的最少成本](https://leetcode.cn/problems/GzCJIP/) 动态规划
+  - ? [🌟【easy】剑指 Offer II 101. 分割等和子集](https://leetcode.cn/problems/NUPfPr/) 动态规划、01背包、背包问题
+- 20220930(10)
   - [🌟【easy】剑指 Offer II 006. 排序数组中两个数字之和](https://leetcode.cn/problems/kLl5u1/) 哈希表、双指针
   - [🌟【easy】剑指 Offer II 012. 左右两边子数组的和相等](https://leetcode.cn/problems/tvdfij/) 常规数组题
   - [🌟【easy】剑指 Offer II 018. 有效的回文](https://leetcode.cn/problems/XltzEq/) 回文串
@@ -44,7 +56,6 @@
   - [🌟【easy】剑指 Offer II 032. 有效的变位词](https://leetcode.cn/problems/dKk3P7/) 哈希表
   - ? [🌟【easy】剑指 Offer II 034. 外星语言是否排序](https://leetcode.cn/problems/lwyVBB/) 哈希表
   - [🌟【easy】1694. 重新格式化电话号码](https://leetcode.cn/problems/reformat-phone-number/) 模拟
-
 - 20220929(10)
   - [🌟【easy】面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
   - [🌟【meidum】剑指 Offer II 111. 计算除法](https://leetcode.cn/problems/vlzXQL/) Floyd 算法
@@ -1314,6 +1325,8 @@
 - ?? 🌟【medium】[剑指 Offer II 102. 加减的目标值](https://leetcode.cn/problems/YaVDxD/) 动态规划、回溯法、01背包、背包问题
 - ?? [🌟【medium】剑指 Offer II 103. 最少的硬币数目](https://leetcode.cn/problems/gaM7Ch/) 动态规划、背包问题
 - ?? [🌟【medium】剑指 Offer II 104. 排列的数目](https://leetcode.cn/problems/D0F0SV/) 动态规划、背包问题、有序背包
+- ? 🌟【easy】[剑指 Offer II 101. 分割等和子集](https://leetcode.cn/problems/NUPfPr/) 动态规划、01背包、背包问题
+
 ## 贪心思想
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
@@ -1422,6 +1435,7 @@
 ### 插入排序
 
 - 🌟【medium】[147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/) 链表、插入排序、排序
+- ? 🌟【easy】[剑指 Offer II 075. 数组相对排序](https://leetcode.cn/problems/0H97ZC/) 排序
 
 
 # 二进制
@@ -25831,7 +25845,7 @@ var findMinDifference = function(timePoints) {
 };
 ```
 
-## 🌟😻✔ 剑指 Offer II 035. 最小时间差【medium】
+## 🌟😻✔ 剑指 Offer II 036. 后缀表达式【medium】
 
 [ref](https://leetcode.cn/problems/8Zf90G/)
 
@@ -25917,6 +25931,57 @@ var dailyTemperatures = function(temperatures) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 041. 滑动窗口的平均值【easy】
+
+[ref](https://leetcode.cn/problems/qIsx9U/)
+
+滑动窗口
+
+```js
+var MovingAverage = function(size) {
+  this.window = []
+  this.sum = 0
+  this.size = size
+};
+MovingAverage.prototype.next = function(val) {
+  this.sum += val
+  this.window.push(val)
+  if(this.window.length > this.size) {
+    this.sum -= this.window.shift()
+  }
+  return this.sum / this.window.length
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 042. 最近请求次数【medium】
+
+[ref](https://leetcode.cn/problems/H8086Q/)
+
+二分搜索、双端队列
+
+```js
+var RecentCounter = function() {
+  this.pings = []
+  this.l = 0
+};
+RecentCounter.prototype.ping = function(t) {
+  this.pings.push(t)
+  let l = this.l, r = this.pings.length
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(t - this.pings[mid] <= 3000) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  this.l = l
+  return this.pings.length - l
+};
+
+```
+
 ## ?? 🌟😻✔ 剑指 Offer II 043. 往完全二叉树添加节点【medium】
 
 [ref](https://leetcode.cn/problems/NaqhDT/)
@@ -25979,7 +26044,7 @@ var largestValues = function(root) {
 };
 ```
 
-## 🌟😻✔ 剑指 Offer II 044. 二叉树每层的最大值【medium】
+## 🌟😻✔ 剑指 Offer II 045. 二叉树最底层最左边的值【medium】
 
 [ref](https://leetcode.cn/problems/LwUNpT/)
 
@@ -26126,6 +26191,34 @@ var pathSum = function(root, targetSum) {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 052. 展平二叉搜索树【easy】
+
+[ref](https://leetcode.cn/problems/NYBBNL/)
+
+二叉搜索树、中序遍历
+
+```js
+var increasingBST = function(root) {
+  let head = null
+  let tHead = null
+  function dfs(node) {
+    const left = node.left, right = node.right
+    node.left = null
+    node.right = null
+    left && dfs(left)
+    if(!head) head = node
+    if(!tHead) tHead = node
+    else {
+      tHead.right = node
+      tHead = tHead.right
+    }
+    right && dfs(right)
+  }
+  dfs(root)
+  return head
+};
+```
+
 ## 🌟😻✔ 剑指 Offer II 053. 二叉搜索树中的中序后继【medium】
 
 [ref](https://leetcode.cn/problems/P5rCT8/)
@@ -26241,6 +26334,27 @@ BSTIterator.prototype.hasNext = function() {
 };
 ```
 
+## 🌟😻✔ 剑指 Offer II 056. 二叉搜索树中两个节点之和【medium】
+
+[ref](https://leetcode.cn/problems/opLdQZ/)
+
+二叉搜索树、中序遍历
+
+```js
+var findTarget = function(root, k) {
+  let can = false
+  const set = new Set()
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(set.has(k - node.val)) can = true
+    set.add(node.val)
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  return can
+};
+```
+
 ## ???🌟😻✔ 剑指 Offer II 057. 值和下标之差都在给定的范围内【medium】
 
 [ref](https://leetcode.cn/problems/7WqeDu/) 
@@ -26330,6 +26444,80 @@ MyCalendar.prototype.book = function(start, end) {
     return false
   }
 };
+
+```
+
+## 🌟😻✔ 剑指 Offer II 059. 数据流的第 K 大数值【medium】
+
+[ref](https://leetcode.cn/problems/jBjn9C/)
+
+优先队列
+
+```js
+var KthLargest = function(k, nums) {
+  this.minHeap = new MinHeap()
+  this.capacity = k
+  for(let num of nums) {
+    this.minHeap.insert(num)
+    if(this.minHeap.size() > k) {
+      this.minHeap.pop()
+    }
+  }
+};
+
+KthLargest.prototype.add = function(val) {
+  this.minHeap.insert(val)
+  if(this.minHeap.size() > this.capacity) this.minHeap.pop()
+  return this.minHeap.peek()
+};
+
+class MinHeap {
+  constructor() {
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.size() - 1)
+  }
+  pop(){
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  peek() {
+    return this.heap[0]
+  }
+  swap(i, j){
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  shiftUp(i){
+    const parentIdx = Math.floor((i - 1) / 2)
+    if(parentIdx >= 0 && this.heap[i] < this.heap[parentIdx]) {
+      this.swap(i, parentIdx)
+      this.shiftUp(parentIdx)
+    }
+  }
+  shiftDown(i){
+    const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2
+    let minIdx = i
+    if(leftIdx < this.size() && this.heap[leftIdx] < this.heap[minIdx]) {
+      minIdx = leftIdx
+    }
+    if(rightIdx < this.size() && this.heap[rightIdx] < this.heap[minIdx]) {
+      minIdx = rightIdx
+    }
+    if(minIdx !== i) {
+      this.swap(i, minIdx)
+      this.shiftDown(minIdx)
+    }
+  }
+  size(){
+    return this.heap.length
+  }
+}
 
 ```
 
@@ -26796,39 +26984,6 @@ class Node {
 }
 ```
 
-## 🌟😻✔ 剑指 Offer II 070. 排序数组中只出现一次的数字【medium】
-
-[ref](https://leetcode.cn/problems/skFtm2/)
-
-二分搜索
-
-```js
-// 时间复杂度：O(logN)
-// 空间复杂度：O(1)
-var singleNonDuplicate = function(nums) {
-  const n = nums.length
-  let l = 0, r = nums.length - 1
-  while(l <= r) {
-    const mid = Math.floor((l + r) / 2)
-    if(mid - 1 >= 0 && nums[mid - 1] === nums[mid]) {
-      if(mid % 2 === 1) {
-        l = mid + 1
-      } else {
-        r = mid - 1
-      }
-    } else if(mid + 1 < n && nums[mid + 1] === nums[mid]) {
-      if(mid % 2 === 0) {
-        l = mid + 1
-      } else {
-        r = mid - 1
-      }
-    } else {
-      return nums[mid]
-    }
-  }
-};
-```
-
 ## ??? 🌟😻✔ 剑指 Offer II 067. 最大的异或【medium】
 
 [ref](https://leetcode.cn/problems/ms70jA/)
@@ -26871,6 +27026,101 @@ function add(node, num) {
 }
 ```
 
+## 🌟😻✔ 剑指 Offer II 068. 查找插入位置【easy】
+
+[ref](https://leetcode.cn/problems/N6YdxV/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var searchInsert = function(nums, target) {
+  if(target > nums[nums.length - 1]) return nums.length
+  let l = 0, r = nums.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] >= target) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+```js
+var searchInsert = function(nums, target) {
+  let l = 0, r = nums.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] === target) {
+      return mid
+    } else if(nums[mid] > target) {
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 069. 山峰数组的顶部【easy】
+
+[ref](https://leetcode.cn/problems/B1IidL/)
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var peakIndexInMountainArray = function(arr) {
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    const mid = (l + r) >> 1
+    if(arr[mid] > arr[mid + 1]) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 070. 排序数组中只出现一次的数字【medium】
+
+[ref](https://leetcode.cn/problems/skFtm2/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var singleNonDuplicate = function(nums) {
+  const n = nums.length
+  let l = 0, r = nums.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(mid - 1 >= 0 && nums[mid - 1] === nums[mid]) {
+      if(mid % 2 === 1) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    } else if(mid + 1 < n && nums[mid + 1] === nums[mid]) {
+      if(mid % 2 === 0) {
+        l = mid + 1
+      } else {
+        r = mid - 1
+      }
+    } else {
+      return nums[mid]
+    }
+  }
+};
+```
+
 ## ? 🌟😻✔ 剑指 Offer II 071. 按权重生成随机数【medium】
 
 [ref](https://leetcode.cn/problems/cuyjEf/)
@@ -26897,6 +27147,29 @@ Solution.prototype.pickIndex = function() {
       r = mid
     } else {
       l = mid + 1
+    }
+  }
+  return l
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 072. 求平方根【easy】
+
+[ref](https://leetcode.cn/problems/jJ0w9p/)
+
+二分搜索
+
+```js
+var mySqrt = function(x) {
+  let l = 0, r = x
+  while(l < r) {
+    const mid = Math.ceil((l + r) / 2)
+    const s = mid * mid
+    if(s === x) return mid
+    else if(s > x) {
+      r = mid - 1
+    } else {
+      l = mid
     }
   }
   return l
@@ -26964,6 +27237,39 @@ var merge = function(intervals) {
   }
   return stack
 };
+```
+
+## ? 🌟😻✔ 剑指 Offer II 075. 数组相对排序【easy】
+
+[ref](https://leetcode.cn/problems/0H97ZC/)
+
+排序
+
+```js
+var relativeSortArray = function(arr1, arr2) {
+  const s2 = new Set(arr2)
+  const m1 = new Map()
+  const tailArr = []
+  for(let i=0;i<arr1.length;i++) {
+    if(s2.has(arr1[i])) m1.set(arr1[i], (m1.get(arr1[i]) || 0) + 1)
+    else {
+      let j = tailArr.length - 1
+      while(j >= 0 && tailArr[j] > arr1[i]) {
+        tailArr[j+1] = tailArr[j]
+        j--
+      }
+      tailArr[j + 1] = arr1[i]
+    }
+  }
+  const res = []
+  for(let i=0;i<arr2.length;i++) {
+    for(let j=0;j<m1.get(arr2[i]);j++) {
+      res.push(arr2[i])
+    }
+  }
+  return [...res, ...tailArr]
+};
+
 ```
 
 ## 🌟😻✔ 剑指 Offer II 076. 数组中的第 k 大的数字【medium】
@@ -27306,6 +27612,27 @@ function isValid(str) {
   if(str[0] === '0') return false
   return 255 >= Number(str) && Number(str) >= 0
 }
+```
+
+## 🌟😻✔ 剑指 Offer II 088. 爬楼梯的最少成本【easy】
+
+[ref](https://leetcode.cn/problems/GzCJIP/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var minCostClimbingStairs = function(cost) {
+  const n = cost.length
+  let a = 0, b = 0
+  for(let i=2;i<n;i++) {
+    let pa = a, pb = b
+    a = pb
+    b = Math.min(pa + cost[i-2], pb + cost[i-1])
+  }
+  return Math.min(a + cost[n-2], b + cost[n-1])
+};
 ```
 
 ## 🌟😻✔ 剑指 Offer II 089. 房屋偷盗【medium】
@@ -27664,6 +27991,36 @@ var minimumTotal = function(triangle) {
     dp = tdp
   }
   return Math.min(...dp)
+};
+```
+
+## ?🌟😻✔ 剑指 Offer II 101. 分割等和子集【easy】
+
+[ref](https://leetcode.cn/problems/NUPfPr/)
+
+背包问题、01背包、动态规划
+
+```js
+// 时间复杂度：O(N*target)
+// 空间复杂度：O(target)
+var canPartition = function(nums) {
+  let sum = 0, max = Number.MIN_SAFE_INTEGER
+  for(const num of nums) {
+    sum += num
+    max = Math.max(max, num)
+  }
+  const target = sum / 2
+  if(target !== Math.floor(target) || max > target) return false
+  const dp = new Array(target + 1).fill(false)
+  dp[0] = true
+  for(let i=0;i<nums.length;i++) {
+    for(let j=target; j >= 0; j--) {
+      if(j - nums[i] >= 0) {
+        dp[j] |= dp[j - nums[i]]
+      }
+    }
+  }
+  return dp[target]
 };
 ```
 
