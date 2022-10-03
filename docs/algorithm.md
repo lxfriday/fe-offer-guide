@@ -33,7 +33,28 @@
 
 # 刷题日记
 
-- 20221001(11)
+- 20221003(11)
+  - [🌟【medium】面试题 04.06. 后继者](https://leetcode.cn/problems/successor-lcci/) 中继后续
+  - [🌟【medium】面试题 04.08. 首个共同祖先](https://leetcode.cn/problems/first-common-ancestor-lcci/) 二叉树
+  - [🌟【easy】1784. 检查二进制字符串字段](https://leetcode.cn/problems/check-if-binary-string-has-at-most-one-segment-of-ones/) 简单模拟
+  - [🌟【medium】面试题 04.10. 检查子树](https://leetcode.cn/problems/check-subtree-lcci/) 二叉树
+  - [🌟【medium】面试题 04.12. 求和路径](https://leetcode.cn/problems/paths-with-sum-lcci/?favorite=xb9lfcwi) 二叉树、前缀和
+  - [🌟【medium】面试题 05.02. 二进制数转字符串](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi) 二进制
+  - [🌟【medium】面试题 08.02. 迷路的机器人](https://leetcode.cn/problems/robot-in-a-grid-lcci/) 深度优先搜索
+  - [🌟【medium】面试题 08.04. 幂集](https://leetcode.cn/problems/power-set-lcci/) 深度优先搜索、回溯法、子集
+  - [🌟【medium】面试题 08.05. 递归乘法](https://leetcode.cn/problems/recursive-mulitply-lcci/) 模拟运算
+  - [🌟【medium】面试题 08.07. 无重复字符串的排列组合](https://leetcode.cn/problems/permutation-i-lcci/) 回溯法、排列
+  - [🌟【medium】面试题 08.08. 有重复字符串的排列组合](https://leetcode.cn/problems/permutation-ii-lcci/) 回溯法、排列
+- 20221002(8)
+  - ?? [🌟【medium】777. 在LR字符串中交换相邻字符](https://leetcode.cn/problems/swap-adjacent-in-lr-string/) 双指针
+  - [🌟【medium】面试题 02.04. 分割链表](https://leetcode.cn/problems/partition-list-lcci/) 链表
+  - [🌟【medium】面试题 02.08. 环路检测](https://leetcode.cn/problems/linked-list-cycle-lcci/) 链表、环形链表
+  - ? [🌟【medium】面试题 03.03. 堆盘子](https://leetcode.cn/problems/stack-of-plates-lcci/) 栈
+  - ? [🌟【medium】面试题 03.05. 栈排序](https://leetcode.cn/problems/sort-of-stacks-lcci/) 栈
+  - [🌟【medium】面试题 04.01. 节点间通路](https://leetcode.cn/problems/route-between-nodes-lcci/) 广度优先搜索
+  - [🌟【medium】面试题 04.03. 特定深度节点链表](https://leetcode.cn/problems/list-of-depth-lcci/) 广度优先搜索
+  - [🌟【medium】面试题 04.05. 合法二叉搜索树](https://leetcode.cn/problems/legal-binary-search-tree-lcci/) 二叉搜索树
+- 20221001(12)
   - [🌟【easy】剑指 Offer II 041. 滑动窗口的平均值](https://leetcode.cn/problems/qIsx9U/) 滑动窗口
   - [🌟【easy】剑指 Offer II 042. 最近请求次数](https://leetcode.cn/problems/H8086Q/) 双端队列、二分搜索
   - [🌟【easy】剑指 Offer II 052. 展平二叉搜索树](https://leetcode.cn/problems/NYBBNL/) 二叉搜索树、中序遍历
@@ -45,6 +66,7 @@
   - ? [🌟【easy】剑指 Offer II 075. 数组相对排序](https://leetcode.cn/problems/0H97ZC/) 排序
   - [🌟【easy】剑指 Offer II 088. 爬楼梯的最少成本](https://leetcode.cn/problems/GzCJIP/) 动态规划
   - ? [🌟【easy】剑指 Offer II 101. 分割等和子集](https://leetcode.cn/problems/NUPfPr/) 动态规划、01背包、背包问题
+  - ?? [🌟【hard】剑指 Offer II 017. 含有所有字符的最短字符串](https://leetcode.cn/problems/M1oyTv/) 滑动窗口
 - 20220930(10)
   - [🌟【easy】剑指 Offer II 006. 排序数组中两个数字之和](https://leetcode.cn/problems/kLl5u1/) 哈希表、双指针
   - [🌟【easy】剑指 Offer II 012. 左右两边子数组的和相等](https://leetcode.cn/problems/tvdfij/) 常规数组题
@@ -829,6 +851,7 @@
 - 🌟【easy】[326. 3 的幂](https://leetcode.cn/problems/power-of-three/) 进制转换
 - ?? 🌟【medium】[137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
 - ? 🌟【medium】[剑指 Offer II 005. 单词长度的最大乘积](https://leetcode.cn/problems/aseY1I/) 位运算
+- 🌟【medium】[面试题 05.02. 二进制数转字符串](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi) 二进制
 
 ## 数字大小、数字、数学、数学规律
 
@@ -1039,7 +1062,8 @@
 - 🌟【medium】[150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/) 栈、数组题、字符串、逆波兰表达式、逆波兰
 - 🌟【medium】[946. 验证栈序列](https://leetcode.cn/problems/validate-stack-sequences/) 栈
 - ? 🌟【medium】[735. 行星碰撞](https://leetcode.cn/problems/asteroid-collision/) 栈
-
+- ?🌟【medium】[面试题 03.03. 堆盘子](https://leetcode.cn/problems/stack-of-plates-lcci/) 栈
+- ?🌟【medium】[面试题 03.05. 栈排序](https://leetcode.cn/problems/sort-of-stacks-lcci/) 栈
 ### 单调栈
 
 - 🌟【hard】[84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
@@ -1114,6 +1138,7 @@
 - ?? 🌟【medium】[剑指 Offer II 014. 字符串中的变位词](https://leetcode.cn/problems/MPnaiL/) 滑动窗口、哈希表
 - ?? 🌟【medium】[剑指 Offer II 015. 字符串中的所有变位词](https://leetcode.cn/problems/VabMRr/) 滑动窗口
 - ??? 🌟【medium】[剑指 Offer II 057. 值和下标之差都在给定的范围内](https://leetcode.cn/problems/7WqeDu/) 桶排序、滑动窗口
+- ?? 🌟【medium】[777. 在LR字符串中交换相邻字符](https://leetcode.cn/problems/swap-adjacent-in-lr-string/) 双指针
 
 ## 树、深度优先、广度优先
 
@@ -19108,6 +19133,30 @@ var maxChunksToSorted = function(arr) {
 };
 ```
 
+## ??🌟😻✔ 777. 在LR字符串中交换相邻字符【medium】
+
+[ref](https://leetcode.cn/problems/swap-adjacent-in-lr-string/)
+
+双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var canTransform = function(start, end) {
+  const n = start.length
+  let i = 0, j = 0
+  while(i < n || j < n) {
+    while(start[i] === 'X') i++
+    while(end[j] === 'X') j++
+    if(start[i] !== end[j]) return false
+    if(end[j] === 'L' && i < j) return false
+    if(end[j] === 'R' && i > j) return false
+    i++, j++
+  }
+  return true
+};
+```
+
 ## 🌟😻✔ 781. 森林中的兔子【medium】
 
 [ref](https://leetcode.cn/problems/rabbits-in-forest/)
@@ -22242,6 +22291,30 @@ var reformatNumber = function(number) {
 };
 ```
 
+## 🌟😻✔ 1784. 检查二进制字符串字段【easy】
+
+[ref](https://leetcode.cn/problems/check-if-binary-string-has-at-most-one-segment-of-ones/)
+
+简单模拟
+
+```js
+// 时间复杂度：O(N)
+var checkOnesSegment = function(s) {
+  let i = 0
+  let cnt = 0
+  while(i < s.length) {
+    if(s[i] === '1') {
+      if(i - 1 < 0 || s[i - 1] === '0') {
+        cnt++
+        if(cnt > 1) return false
+      }
+    }
+    i++
+  }
+  return true
+};
+```
+
 ## ?🌟😻✔ 1979. 找出数组的最大公约数【easy】
 
 [ref](https://leetcode.cn/problems/find-greatest-common-divisor-of-array/)
@@ -24630,6 +24703,35 @@ var isFlipedString = function(s1, s2) {
 };
 ```
 
+## 🌟😻✔ 面试题 02.04. 分割链表【medium】
+
+[ref](https://leetcode.cn/problems/partition-list-lcci/)
+
+链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var partition = function(head, x) {
+  const myHead1 = new ListNode(0), myHead2 = new ListNode(0)
+  let th1 = myHead1, th2 = myHead2
+  while(head) {
+    if(head.val < x) {
+      th1.next = head
+      th1 = th1.next
+    } else {
+      th2.next = head
+      th2 = th2.next
+    }
+    head = head.next
+  }
+  th2.next = null
+  th1.next = myHead2.next
+  return myHead1.next
+};
+
+```
+
 ## 🌟😻✔ 面试题 02.05 链表求和【medium】
 
 [ref](https://leetcode.cn/problems/sum-lists-lcci/)
@@ -24653,6 +24755,449 @@ var addTwoNumbers = function(l1, l2) {
     tHead.next = new ListNode(add)
   }
   return head.next
+};
+```
+
+## 🌟😻✔ 面试题 02.08. 环路检测【medium】
+
+[ref](https://leetcode.cn/problems/linked-list-cycle-lcci/)
+
+链表、环形链表
+
+```js
+var detectCycle = function(head) {
+  const myHead = new ListNode()
+  myHead.next = head
+  let slow = myHead, fast = myHead
+  while(fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
+    if(slow === fast) {
+      fast = myHead
+      while(fast !== slow) {
+        slow = slow.next
+        fast = fast.next
+      }
+      return slow
+    }
+  }
+  return null
+};
+
+// a + n(b + c) = 2 (a + b)
+// nb + nc - 2b = a
+// (n - 1)b + nc - c + c = a
+// (n - 1)b + (n - 1)c + c = a
+// (n-1)(b + c) + c = a
+```
+
+## 🌟😻✔ 面试题 03.03. 堆盘子【medium】
+
+[ref](https://leetcode.cn/problems/stack-of-plates-lcci/)
+
+栈
+
+```js
+var StackOfPlates = function(cap) {
+  this.cap = cap
+  this.stacks = []
+};
+StackOfPlates.prototype.push = function(val) {
+  if(!this.stacks.length || this.stacks[this.stacks.length - 1].length === this.cap) {
+    this.stacks.push([val])
+  } else {
+    this.stacks[this.stacks.length - 1].push(val)
+  }
+};
+StackOfPlates.prototype.pop = function() {
+  if(!this.stacks.length || this.cap === 0) return -1
+  const ret = this.stacks[this.stacks.length - 1].pop()
+  if(!this.stacks[this.stacks.length - 1].length) this.stacks.pop()
+  return ret
+};
+StackOfPlates.prototype.popAt = function(index) {
+  if(!this.stacks[index] || this.cap === 0) return -1
+  const ret = this.stacks[index].pop()
+  if(!this.stacks[index].length) this.stacks.splice(index, 1)
+  return ret
+};
+
+```
+
+## ?🌟😻✔ 面试题 03.05. 栈排序【medium】
+
+[ref](https://leetcode.cn/problems/sort-of-stacks-lcci/)
+
+栈
+
+```js
+var SortedStack = function() {
+  this.stack = []
+  this.tmpStack = []
+};
+SortedStack.prototype.push = function(val) {
+  while(this.stack.length && this.stack[this.stack.length - 1] < val) {
+    this.tmpStack.push(this.stack.pop())
+  }
+  this.tmpStack.push(val)
+  while(this.tmpStack.length) {
+    this.stack.push(this.tmpStack.pop())
+  }
+};
+SortedStack.prototype.pop = function() {
+  return this.stack.pop()
+};
+SortedStack.prototype.peek = function() {
+  if(this.isEmpty()) return -1
+  return this.stack[this.stack.length - 1]
+};
+SortedStack.prototype.isEmpty = function() {
+  return this.stack.length === 0
+};
+
+```
+
+## 🌟😻✔ 面试题 04.01. 节点间通路【medium】
+
+[ref](https://leetcode.cn/problems/route-between-nodes-lcci/)
+
+广度优先搜索
+
+```js
+var findWhetherExistsPath = function(n, graph, start, target) {
+  const map = new Map()
+  for(let i=0;i<graph.length;i++) {
+    const [x, y] = graph[i]
+    if(x === y) continue
+    if(!map.has(x)) map.set(x, new Set())
+    map.get(x).add(y)
+  }
+  if(!map.has(start)) return false
+  let q = [start]
+  let used = new Set([start])
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      if(q[i] === target) return true
+      const nexts = map.get(q[i])
+      if(nexts) {
+        for(let next of nexts) {
+          if(!used.has(next)) {
+            used.add(next)
+            tq.push(next)
+          }
+        }
+      }
+    }
+    q = tq
+  }
+  return false
+};
+```
+
+## 🌟😻✔ 面试题 04.03. 特定深度节点链表【medium】
+
+[ref](https://leetcode.cn/problems/list-of-depth-lcci/)
+
+广度优先搜索
+
+```js
+var listOfDepth = function(tree) {
+  if(!tree) return []
+  let q = [tree]
+  const res = []
+  while(q.length) {
+    const tq = []
+    const myHead = new ListNode()
+    let tHead = myHead
+    for(let i=0;i<q.length;i++) {
+      const node = q[i]
+      tHead.next = new ListNode(node.val)
+      tHead = tHead.next
+      node.left && tq.push(node.left)
+      node.right && tq.push(node.right)
+    }
+    q = tq
+    res.push(myHead.next)
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 04.05. 合法二叉搜索树【medium】
+
+[ref](https://leetcode.cn/problems/legal-binary-search-tree-lcci/)
+
+二叉搜索树
+
+```js
+var isValidBST = function(root) {
+  if(!root) return true
+  let isBST = true, prev
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(prev !== undefined && node.val <= prev) isBST = false
+    prev = node.val
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  return isBST
+};
+```
+
+## 🌟😻✔ 面试题 04.06. 后继者【medium】
+
+[ref](https://leetcode.cn/problems/successor-lcci/)
+
+中继后续、二叉搜索树
+
+```js
+var inorderSuccessor = function(root, p) {
+  if(!root) return null
+  if(root.val <= p.val) return inorderSuccessor(root.right, p)
+  const ans = inorderSuccessor(root.left, p)
+  return ans === null ? root: ans
+};
+```
+
+```js
+var inorderSuccessor = function(root, p) {
+  if(!root) return null
+  let prev, res = null
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(prev === p) {
+      res = node
+    }
+    prev = node
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 04.08. 首个共同祖先【medium】
+
+[ref](https://leetcode.cn/problems/first-common-ancestor-lcci/)
+
+二叉树
+
+```js
+var lowestCommonAncestor = function(root, p, q) {
+  let res
+  function dfs(node) {
+    if(!node) return 0
+    let sum = (node === p || node === q) ? 1 : 0
+    sum += dfs(node.left)
+    sum += dfs(node.right)
+    if(sum === 2 && !res) {
+      res = node
+    }
+    return sum
+  }
+  dfs(root)
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 04.10. 检查子树【medium】
+
+[ref](https://leetcode.cn/problems/check-subtree-lcci/)
+
+二叉树
+
+```js
+var checkSubTree = function(t1, t2) {
+  if(!t1 && !t2) return true
+  if(!t1 && t2 || t1 && !t2) return false
+  if(t1.val === t2.val && check(t1.left, t2.left) && check(t1.right, t2.right)) return true  
+  else return checkSubTree(t1.left, t2) || checkSubTree(t1.right, t2)
+};
+
+function check(node1, node2) {
+  if(!node1 && !node2) return true
+  if(node1 && !node2 || !node1 && node2) return false
+  return node1.val === node2.val && check(node1.left, node2.left) && check(node1.right, node2.right)
+}
+```
+
+## 🌟😻✔ 面试题 04.12. 求和路径【medium】
+
+[ref](https://leetcode.cn/problems/paths-with-sum-lcci/?favorite=xb9lfcwi)
+
+二叉树、前缀和
+
+```js
+var pathSum = function(root, sum) {
+  const map = new Map([[0, 1]])
+  let cnt = 0, s = 0
+  function dfs(node) {
+    if(!node) return
+    s += node.val
+    if(map.has(s - sum)) {
+      cnt += map.get(s - sum)
+    }
+    map.set(s, (map.get(s) || 0) + 1)
+    dfs(node.left)
+    dfs(node.right)
+    map.set(s, map.get(s) - 1)
+    s -= node.val
+  }
+  dfs(root)
+  return cnt
+};
+```
+
+## 🌟😻✔ 面试题 05.02. 二进制数转字符串【medium】
+
+[ref](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi)
+
+二进制
+
+```js
+var printBin = function(num) {
+  let res = '0.'
+  while(num !== 0) {
+    if(res.length >= 35) return 'ERROR'
+    num *= 2
+    if(num >= 1) {
+      res += 1
+      num -= 1
+    } else {
+      res += 0
+    }
+  }
+  return res
+};
+// 0.625
+// 0.25  0.1
+// 0.5  0.10
+// 0  0.101
+```
+
+## 🌟😻✔ 面试题 08.02. 迷路的机器人【medium】
+
+[ref](https://leetcode.cn/problems/robot-in-a-grid-lcci/)
+
+深度优先搜索
+
+```js
+var pathWithObstacles = function(grid) {
+  const m = grid.length, n = grid[0].length, used = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  let res = []
+  function walk(i, j, path) {
+    if(i >= m || j >= n || grid[i][j] === 1 || used[i][j]) return
+    used[i][j] = true
+    if(i === m - 1 && j === n - 1) {
+      res = [...path, [i, j]]
+      return
+    }
+    path.push([i, j])
+    walk(i + 1, j, path)
+    walk(i, j + 1, path)
+    path.pop()
+  }
+  walk(0, 0, [])
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 08.04. 幂集【medium】
+
+[ref](https://leetcode.cn/problems/power-set-lcci/)
+
+深度优先搜索、子集问题、回溯法
+
+```js
+var subsets = function(nums) {
+  const res = [], n = nums.length
+  function dfs(path, idx) {
+    res.push([...path])
+    for(let i=idx;i<n;i++) {
+      path.push(nums[i])
+      dfs(path, i + 1)
+      path.pop()
+    }
+  }
+  dfs([], 0)
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 08.05. 递归乘法【medium】
+
+[ref](https://leetcode.cn/problems/recursive-mulitply-lcci/)
+
+模拟运算
+
+```js
+var multiply = function(A, B) {
+  if(A === 0 || B === 0) return 0
+  if(A < B) {
+    return multiply(B, A)
+  }
+  return A + multiply(A, B - 1)
+};
+
+```
+
+## 🌟😻✔ 面试题 08.07. 无重复字符串的排列组合【medium】
+
+[ref](https://leetcode.cn/problems/permutation-i-lcci/)
+
+回溯、排列
+
+```js
+var permutation = function(S) {
+  const n = S.length, used = new Array(n).fill(false)
+  const res = []
+  function dfs(path) {
+    if(path.length === n) {
+      res.push(path.join(''))
+      return
+    }
+    for(let i=0;i<n;i++) {
+      if(used[i]) continue
+      used[i] = true
+      path.push(S[i])
+      dfs(path)
+      path.pop()
+      used[i] = false
+    }
+  }
+  dfs([])
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 08.08. 有重复字符串的排列组合【medium】
+
+[ref](https://leetcode.cn/problems/permutation-ii-lcci/)
+
+回溯法、深度优先搜索
+
+```js
+var permutation = function(S) {
+  const res = [], n = S.length, used = new Array(n).fill(false)
+  function dfs(path) {
+    if(path.length === n) {
+      res.push(path.join(''))
+      return
+    }
+    const layerUsed = new Set()
+    for(let i=0;i<n;i++) {
+      if(layerUsed.has(S[i]) || used[i]) continue
+      layerUsed.add(S[i])
+      path.push(S[i])
+      used[i] = true
+      dfs(path)
+      used[i] = false
+      path.pop()
+    }
+  }
+  dfs([])
+  return res
 };
 ```
 
@@ -25229,6 +25774,44 @@ var lengthOfLongestSubstring = function(s) {
   }
   return max
 };
+```
+## ?? 🌟😻✔ 剑指 Offer II 017. 含有所有字符的最短字符串【hard】
+
+[ref](https://leetcode.cn/problems/M1oyTv/)
+
+滑动窗口
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(W) W最大为26
+var minWindow = function(s, t) {
+  const tMap = new Map()
+  let diffCnt = 0
+  for(let c of t) {
+    tMap.set(c, (tMap.get(c) || 0) + 1)
+    if(tMap.get(c) === 1) diffCnt++
+  }
+  let l = 0, r = 0
+  let res = ''
+  while(r < s.length) {
+    if(tMap.has(s[r])) {
+      tMap.set(s[r], (tMap.get(s[r]) || 0) - 1)
+      if(tMap.get(s[r]) === 0) diffCnt--
+      if(diffCnt === 0 && (res === '' || res.length > r - l + 1)) res = s.slice(l, r + 1)
+      while(diffCnt === 0) {
+        if(tMap.has(s[l])) {
+          tMap.set(s[l], tMap.get(s[l]) + 1)
+          if(tMap.get(s[l]) === 1) diffCnt++
+        }
+        l++
+        if(diffCnt === 0 && (res === '' || res.length > r - l + 1)) res = s.slice(l, r + 1)
+      }
+    }
+    r++
+  }
+  return res
+};
+
 ```
 
 ## 🌟😻✔ 剑指 Offer II 018. 有效的回文【easy】
