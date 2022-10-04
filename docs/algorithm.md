@@ -33,6 +33,19 @@
 
 # 刷题日记
 
+- 20221004(12)
+  - [🌟【medium】921. 使括号有效的最少添加](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/) 栈
+  - [🌟【medium】面试题 08.09. 括号](https://leetcode.cn/problems/bracket-lcci/) 回溯法、深度优先搜索
+  - [🌟【medium】面试题 08.11. 硬币](https://leetcode.cn/problems/coin-lcci/) 动态规划、背包问题、完全背包
+  - ?[🌟【medium】面试题 08.14. 布尔运算](https://leetcode.cn/problems/boolean-evaluation-lcci/) 枚举、模拟、DFS、递归
+  - [🌟【medium】面试题 10.02. 变位词组](https://leetcode.cn/problems/group-anagrams-lcci/) 哈希表
+  - ??[🌟【medium】面试题 10.03. 搜索旋转数组](https://leetcode.cn/problems/search-rotate-array-lcci/) 二分搜索
+  - [🌟【medium】面试题 10.09. 排序矩阵查找](https://leetcode.cn/problems/sorted-matrix-search-lcci/) 矩阵搜索
+  - [🌟【medium】面试题 10.10. 数字流的秩](https://leetcode.cn/problems/rank-from-stream-lcci/) 二分搜索
+  - [🌟【medium】面试题 10.11. 峰与谷](https://leetcode.cn/problems/peaks-and-valleys-lcci/) 模拟
+  - ? [🌟【medium】面试题 16.01. 交换数字](https://leetcode.cn/problems/swap-numbers-lcci/) 二进制、位运算
+  - [🌟【medium】面试题 16.02. 单词频率](https://leetcode.cn/problems/words-frequency-lcci/) 字典树、哈希表
+  - ??[🌟【hard】剑指 Offer II 039. 直方图最大矩形面积](https://leetcode.cn/problems/0ynMMM/) 单调栈
 - 20221003(11)
   - [🌟【medium】面试题 04.06. 后继者](https://leetcode.cn/problems/successor-lcci/) 中继后续
   - [🌟【medium】面试题 04.08. 首个共同祖先](https://leetcode.cn/problems/first-common-ancestor-lcci/) 二叉树
@@ -840,7 +853,7 @@
 - 模拟
 - trie、字典树
 
-## 二进制、进制转换相关
+## 二进制、进制转换相关、位运算
 
 - 🌟【medium】[剑指 Offer 56 - I. 数组中数字出现的次数](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/) 二进制、与或非、位运算
 - 🌟【medium】[剑指 Offer 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/) 二进制、位运算、规律题
@@ -852,6 +865,7 @@
 - ?? 🌟【medium】[137. 只出现一次的数字 II](https://leetcode.cn/problems/single-number-ii/) 位运算
 - ? 🌟【medium】[剑指 Offer II 005. 单词长度的最大乘积](https://leetcode.cn/problems/aseY1I/) 位运算
 - 🌟【medium】[面试题 05.02. 二进制数转字符串](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi) 二进制
+- ? 🌟【medium】[面试题 16.01. 交换数字](https://leetcode.cn/problems/swap-numbers-lcci/) 二进制、位运算
 
 ## 数字大小、数字、数学、数学规律
 
@@ -1030,6 +1044,7 @@
 - ? 🌟【easy】[836. 矩形重叠](https://leetcode.cn/problems/rectangle-overlap/) 规律、模拟、反推
 - 🌟【hard】[面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
 - 🌟【easy】[1694. 重新格式化电话号码](https://leetcode.cn/problems/reformat-phone-number/) 模拟
+- ?🌟【medium】[面试题 08.14. 布尔运算](https://leetcode.cn/problems/boolean-evaluation-lcci/) 枚举、模拟、DFS、递归
 
 ### 模拟运算
 
@@ -1064,6 +1079,8 @@
 - ? 🌟【medium】[735. 行星碰撞](https://leetcode.cn/problems/asteroid-collision/) 栈
 - ?🌟【medium】[面试题 03.03. 堆盘子](https://leetcode.cn/problems/stack-of-plates-lcci/) 栈
 - ?🌟【medium】[面试题 03.05. 栈排序](https://leetcode.cn/problems/sort-of-stacks-lcci/) 栈
+- 🌟【medium】[921. 使括号有效的最少添加](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/) 栈
+
 ### 单调栈
 
 - 🌟【hard】[84 柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/) 
@@ -1351,6 +1368,7 @@
 - ?? [🌟【medium】剑指 Offer II 103. 最少的硬币数目](https://leetcode.cn/problems/gaM7Ch/) 动态规划、背包问题
 - ?? [🌟【medium】剑指 Offer II 104. 排列的数目](https://leetcode.cn/problems/D0F0SV/) 动态规划、背包问题、有序背包
 - ? 🌟【easy】[剑指 Offer II 101. 分割等和子集](https://leetcode.cn/problems/NUPfPr/) 动态规划、01背包、背包问题
+- 🌟【medium】[面试题 08.11. 硬币](https://leetcode.cn/problems/coin-lcci/) 动态规划、背包问题、完全背包
 
 ## 贪心思想
 
@@ -1425,6 +1443,7 @@
 - 🌟【medium】[1011. 在 D 天内送达包裹的能力](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/) 二分搜索
 - ? 🌟【medium】[875. 爱吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas/) 二分搜索
 - 🌟【hard】[1231. 分享巧克力](https://leetcode.cn/problems/divide-chocolate/) 二分搜索
+- 🌟【medium】[面试题 10.03. 搜索旋转数组](https://leetcode.cn/problems/search-rotate-array-lcci/) 二分搜索
 
 ## 排序算法的应用
 
@@ -20300,6 +20319,33 @@ var sumSubarrayMins = function(arr) {
 
 ```
 
+## 🌟😻✔ 921. 使括号有效的最少添加【medium】
+
+[ref](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/)
+
+栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var minAddToMakeValid = function(s) {
+  const stack = []
+  for(let i=0;i<s.length;i++) {
+    if(s[i] === '(') {
+      stack.push(s[i])
+    } else {
+      if(stack.length && stack[stack.length - 1] === '(') {
+        stack.pop()
+      } else {
+        stack.push(')')
+      }
+    }
+  }
+  return stack.length
+};
+
+```
+
 ## 🌟😻✔ 931. 下降路径最小和【medium】
 
 [ref](https://leetcode.cn/problems/minimum-falling-path-sum/)
@@ -25201,6 +25247,354 @@ var permutation = function(S) {
 };
 ```
 
+## 🌟😻✔ 面试题 08.09. 括号【medium】
+
+[ref](https://leetcode.cn/problems/bracket-lcci/)
+
+回溯法、深度优先搜索
+
+```js
+var generateParenthesis = function(n) {
+  const res = []
+  function walk(path, lCnt, rCnt) {
+    if(lCnt === n && rCnt === n) {
+      res.push(path)
+      return
+    }
+    if(lCnt < n) {
+      walk(path + '(', lCnt + 1, rCnt)
+    }
+    if(rCnt < lCnt) {
+      walk(path + ')', lCnt, rCnt + 1)
+    }
+  }
+  walk('', 0, 0)
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 08.11. 硬币【medium】
+
+[ref](https://leetcode.cn/problems/coin-lcci/)
+
+动态规划、背包问题、完全背包
+
+```js
+var waysToChange = function(n) {
+  const mod = 1000000007, dp = new Array(n + 1).fill(0), coins = [1, 5, 10, 25]
+  dp[0] = 1
+  for(let coin of coins) {
+    for(let i=1;i<=n;i++) {
+      if(i >= coin) {
+        dp[i] = (dp[i] + dp[i - coin]) % mod
+      }
+    }
+  }
+  return dp[n]
+};
+```
+
+## ?🌟😻✔ 面试题 08.14. 布尔运算【medium】
+
+[ref](https://leetcode.cn/problems/boolean-evaluation-lcci/)
+
+枚举、模拟、DFS、递归
+
+```js
+var countEval = function(s, result) {
+  const map = new Map()
+  function count(str) {
+    if(map.has(str)) return map.get(str)
+    if(str.length === 1) {
+      map.set(str, new Map([[Number(str[0]), 1]]))
+      return map.get(str)
+    }
+    const calRes = new Map()
+    for(let i=0;i<str.length;i++) {
+      if(isOp(str[i])) {
+        const op = str[i]
+        const left = count(str.slice(0, i)), right = count(str.slice(i + 1))
+        for(let [lv, lCnt] of left.entries()) {
+          for(let [rv, rCnt] of right.entries()) {
+            let cal
+            if(op === '&') cal = lv & rv
+            else if(op === '|') cal = lv | rv
+            else cal = lv ^ rv
+            calRes.set(cal, (calRes.get(cal) || 0) + lCnt * rCnt)
+          }
+        }
+      }
+    }
+    map.set(str, calRes)
+    return calRes
+  }
+  count(s)
+  return map.get(s).get(result) ? map.get(s).get(result) : 0
+};
+
+function isOp(c) {
+  return c === '&' || c === '|'|| c === '^'
+}
+```
+
+## 🌟😻✔ 面试题 10.02. 变位词组【medium】
+
+[ref](https://leetcode.cn/problems/group-anagrams-lcci/)
+
+哈希表
+
+对字符串按字符code排序
+
+```js
+var groupAnagrams = function(strs) {
+  const map = new Map()
+  for(let str of strs) {
+    const str2 = str.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('')
+    if(!map.has(str2)) map.set(str2, [])
+    map.get(str2).push(str)
+  }
+  return Array.from(map.values())
+}; 
+```
+
+笨办法，做数量统计然后编码
+
+```js
+var groupAnagrams = function(strs) {
+  const map = new Map()
+  for(let str of strs) {
+    const arr = new Array(26).fill(0)
+    for(let i=0; i<str.length; i++) {
+      arr[str.charCodeAt(i) - 'a'.charCodeAt(0)]++
+    }
+    let s = ''
+    for(let i=0;i<26;i++) {
+      s += `${i}:${arr[i]} `
+    }
+    if(!map.has(s)) map.set(s, [])
+    map.get(s).push(str)
+  }
+  return Array.from(map.values())
+}; 
+```
+
+## ??🌟😻✔ 面试题 10.03. 搜索旋转数组【medium】
+
+[ref](https://leetcode.cn/problems/search-rotate-array-lcci/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN) 最差会退化到 O(N)
+// 空间复杂度：O(1)
+var search = function(arr, target) {
+  let l = 0, r = arr.length - 1
+  if(arr[l] === target) return l
+  while(arr[l] === arr[0]) l++
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(arr[mid] > arr[0]) {
+      if(arr[mid] >= target && target > arr[0]) {
+        r = mid
+      } else {
+        l = mid + 1
+      }
+    } else {
+      if(arr[mid] < target && target < arr[0]) {
+        l = mid + 1
+      } else {
+        r = mid
+      }
+    }
+  }
+  return arr[l] === target ? l : -1
+};
+```
+
+```js
+var search = function(arr, target) {
+  let l = 0, r = arr.length - 1, n = arr.length
+  if(arr[0] === target) return 0
+  while(l <= r && arr[r] === arr[0]) r--
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(target > arr[0]) {
+      if(arr[mid] < target && arr[mid] >= arr[0]) {
+        l = mid + 1
+      } else {
+        r = mid
+      }
+    } else {
+      if(arr[mid] >= target && arr[mid] < arr[n - 1]) {
+        r = mid
+      } else {
+        l = mid + 1
+      }
+    }
+  }
+  return arr[l] === target ? l : -1
+};
+```
+
+## 🌟😻✔ 面试题 10.09. 排序矩阵查找【medium】
+
+[ref](https://leetcode.cn/problems/sorted-matrix-search-lcci/)
+
+矩阵搜索
+
+```js
+// 时间复杂度：O(M+N)
+// 空间复杂度：O(1)
+var searchMatrix = function(matrix, target) {
+  if(!matrix.length) return false
+  const m = matrix.length, n = matrix[0].length
+  let i = 0, j = n - 1
+  while(i < m && j >= 0) {
+    if(matrix[i][j] === target) return true
+    else if(matrix[i][j] < target) i++
+    else j--
+  }
+  return false
+};
+```
+
+## 🌟😻✔ 面试题 10.10. 数字流的秩【medium】
+
+[ref](https://leetcode.cn/problems/rank-from-stream-lcci/)
+
+二分搜索
+
+```js
+var StreamRank = function() {
+  this.arr = []
+};
+StreamRank.prototype.track = function(x) {
+  const ind = this.search(x)
+  this.arr.splice(ind, 0, x)
+};
+// 第一个大于X的数对应的下标
+StreamRank.prototype.search = function(x) {
+  if(!this.arr.length) return 0
+  if(x >= this.arr[this.arr.length - 1]) return this.arr.length
+  let l = 0, r = this.arr.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(this.arr[mid] > x) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return r
+};
+StreamRank.prototype.getRankOfNumber = function(x) {
+  return this.search(x)
+};
+
+```
+
+## 🌟😻✔ 面试题 10.11. 峰与谷【medium】
+
+[ref](https://leetcode.cn/problems/peaks-and-valleys-lcci/)
+
+摆动数组、常规模拟
+
+```js
+var wiggleSort = function(nums) {
+  const n = nums.length
+  let top = true
+  for(let i=0;i<n - 1;i++) {
+    if(top && nums[i] < nums[i + 1] || !top && nums[i] > nums[i + 1]) {
+      swap(nums, i, i + 1)
+    }
+    top = !top
+  }
+};
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
+```
+
+## ?🌟😻✔ 面试题 16.01. 交换数字【medium】
+
+[ref](https://leetcode.cn/problems/swap-numbers-lcci/)
+
+二进制、位运算
+
+```js
+var swapNumbers = function(numbers) {
+  numbers[0] = numbers[0] + numbers[1]
+  numbers[1] = numbers[0] - numbers[1]
+  numbers[0] = numbers[0] - numbers[1]
+  return numbers
+};
+```
+
+```js
+var swapNumbers = function(numbers) {
+  numbers[0] = numbers[0] ^ numbers[1]
+  numbers[1] = numbers[0] ^ numbers[1]
+  numbers[0] = numbers[0] ^ numbers[1]
+  return numbers
+};
+```
+
+## 🌟😻✔ 面试题 16.02. 单词频率【medium】
+
+[ref](https://leetcode.cn/problems/words-frequency-lcci/)
+
+哈希表、字典树
+
+```js
+var WordsFrequency = function(book) {
+  this.tree = new Node()
+  for(let i=0;i<book.length;i++) {
+    let node = this.tree
+    const word = book[i]
+    for(let j=0; j < word.length; j++) {
+      if(!node.chl[word[j]]) node.chl[word[j]] = new Node()
+      node = node.chl[word[j]]
+      if(j === word.length - 1) {
+        node.cnt++
+      }
+    }
+  }
+};
+WordsFrequency.prototype.get = function(word) {
+  let node = this.tree
+  let cnt = 0
+  for(let i=0;i<word.length;i++) {
+    if(!node.chl[word[i]]) break
+    node = node.chl[word[i]]
+    if(i === word.length - 1) {
+      cnt = node.cnt
+    }
+  }
+  return cnt
+};
+
+class Node {
+  constructor() {
+    this.cnt = 0
+    this.chl = {}
+  }
+}
+```
+
+```js
+var WordsFrequency = function(book) {
+  this.m  = new Map()
+  for(let word of book) {
+    this.m.set(word, (this.m.get(word) || 0) + 1)
+  }
+};
+WordsFrequency.prototype.get = function(word) {
+  return this.m.get(word) || 0
+};
+```
+
 ## 🌟😻✔ 面试题 17.09. 第 k 个数【medium】
 
 [ref](https://leetcode.cn/problems/get-kth-magic-number-lcci/)
@@ -26511,6 +26905,32 @@ var dailyTemperatures = function(temperatures) {
     stack.push(i)
   }
   return res
+};
+```
+
+## ??🌟😻✔ 剑指 Offer II 039. 直方图最大矩形面积【easy】
+
+[ref](https://leetcode.cn/problems/0ynMMM/)
+
+单调栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var largestRectangleArea = function(heights) {
+  heights.unshift(0)
+  heights.push(0)
+  const stack = [], n = heights.length
+  let max = 0
+  for(let i=0;i<n;i++) {
+    while(stack.length && heights[stack[stack.length - 1]] > heights[i]) {
+      const h = heights[stack.pop()]
+      const prevIdx = stack[stack.length - 1]
+      max = Math.max(max, (i - prevIdx - 1) * h)
+    }
+    stack.push(i)
+  }
+  return max
 };
 ```
 
