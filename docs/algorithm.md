@@ -33,6 +33,18 @@
 
 # 刷题日记
 
+- 20221005(11)
+  - [🌟【medium】811. 子域名访问计数](https://leetcode.cn/problems/subdomain-visit-count/) 哈希表
+  - [🌟【medium】面试题 16.04. 井字游戏](https://leetcode.cn/problems/tic-tac-toe-lcci/) 模拟
+  - [🌟【medium】面试题 16.06. 最小差](https://leetcode.cn/problems/smallest-difference-lcci/) 二分搜索
+  - ?[🌟【medium】面试题 16.10. 生存人数](https://leetcode.cn/problems/living-people-lcci/) 差分
+  - ?[🌟【medium】面试题 16.13. 平分正方形](https://leetcode.cn/problems/bisect-squares-lcci/) 模拟
+  - ?[🌟【medium】面试题 16.14. 最佳直线](https://leetcode.cn/problems/best-line-lcci/) 模拟、暴力查找
+  - ??[🌟【medium】面试题 16.16. 部分排序](https://leetcode.cn/problems/sub-sort-lcci/) 单调栈
+  - [🌟【medium】面试题 16.19. 水域大小](https://leetcode.cn/problems/pond-sizes-lcci/) DFS、深度优先搜索
+  - [🌟【medium】面试题 16.20. T9键盘](https://leetcode.cn/problems/t9-lcci/) 哈希表
+  - ? [🌟【hard】剑指 Offer II 040. 矩阵中最大的矩形](https://leetcode.cn/problems/PLYXKQ/) 单调栈
+  - ?? [🌟【hard】剑指 Offer II 048. 序列化与反序列化二叉树](https://leetcode.cn/problems/h54YBf/) 二叉树、二叉树序列化
 - 20221004(12)
   - [🌟【medium】921. 使括号有效的最少添加](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/) 栈
   - [🌟【medium】面试题 08.09. 括号](https://leetcode.cn/problems/bracket-lcci/) 回溯法、深度优先搜索
@@ -1045,6 +1057,8 @@
 - 🌟【hard】[面试题 17.19. 消失的两个数字](https://leetcode.cn/problems/missing-two-lcci/) 模拟题
 - 🌟【easy】[1694. 重新格式化电话号码](https://leetcode.cn/problems/reformat-phone-number/) 模拟
 - ?🌟【medium】[面试题 08.14. 布尔运算](https://leetcode.cn/problems/boolean-evaluation-lcci/) 枚举、模拟、DFS、递归
+- ?🌟【medium】[面试题 16.13. 平分正方形](https://leetcode.cn/problems/bisect-squares-lcci/) 模拟
+- ?🌟【medium】[面试题 16.14. 最佳直线](https://leetcode.cn/problems/best-line-lcci/) 模拟、暴力查找
 
 ### 模拟运算
 
@@ -1094,6 +1108,7 @@
 - ?🌟【medium】[907. 子数组的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums/) 数组、单调栈
 - ?🌟【medium】[2104. 子数组范围和](https://leetcode.cn/problems/sum-of-subarray-ranges/) 数组、单调栈
 - ? 🌟【medium】[316. 去除重复字母](https://leetcode.cn/problems/remove-duplicate-letters/) 单调栈
+- ??🌟【medium】[面试题 16.16. 部分排序](https://leetcode.cn/problems/sub-sort-lcci/) 单调栈
 
 ## 队列
 
@@ -1262,6 +1277,7 @@
 - ? 🌟【medium】[694. 不同岛屿的数量](https://leetcode.cn/problems/number-of-distinct-islands/) 矩阵、深度优先搜索、哈希表、集合
 - ??? 🌟【hard】[711. 不同岛屿的数量 II](https://leetcode.cn/problems/number-of-distinct-islands-ii/) 深度优先搜索、哈希表、排序、集合
 - ??? 🌟【hard】[827. 最大人工岛](https://leetcode.cn/problems/making-a-large-island/) 矩阵、深度优先搜索
+- 🌟【medium】[面试题 16.19. 水域大小](https://leetcode.cn/problems/pond-sizes-lcci/) DFS、深度优先搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1444,6 +1460,7 @@
 - ? 🌟【medium】[875. 爱吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas/) 二分搜索
 - 🌟【hard】[1231. 分享巧克力](https://leetcode.cn/problems/divide-chocolate/) 二分搜索
 - 🌟【medium】[面试题 10.03. 搜索旋转数组](https://leetcode.cn/problems/search-rotate-array-lcci/) 二分搜索
+- 🌟【medium】[面试题 16.06. 最小差](https://leetcode.cn/problems/smallest-difference-lcci/) 二分搜索
 
 ## 排序算法的应用
 
@@ -19560,7 +19577,35 @@ var allPathsSourceTarget = function(graph) {
 };
 ```
 
-## 🌟😻✔ 814. 二叉树剪枝【hard】
+## 🌟😻✔ 811. 子域名访问计数【medium】
+
+[ref](https://leetcode.cn/problems/subdomain-visit-count/)
+
+哈希表
+
+```js
+var subdomainVisits = function(cpdomains) {
+  const map = new Map(), n = cpdomains.length
+  for(let i = 0;i < n; i++) {
+    const [cnt, domain] = cpdomains[i].split(' ')
+    const ds = domain.split('.')
+    const subs = [ds[ds.length - 1], `${ds[ds.length - 2]}.${ds[ds.length - 1]}`]
+    if(ds.length === 3) {
+      subs.push(ds.join('.'))
+    }
+    for(let c of subs) {
+      map.set(c, (map.get(c) || 0) + Number(cnt))
+    }
+  }
+  const res = []
+  for(const [domain, cnt] of map.entries()) {
+    res.push(`${cnt} ${domain}`)
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 814. 二叉树剪枝【medium】
 
 [ref](https://leetcode.cn/problems/binary-tree-pruning/)
 
@@ -25595,6 +25640,294 @@ WordsFrequency.prototype.get = function(word) {
 };
 ```
 
+## 🌟😻✔ 面试题 16.04. 井字游戏【medium】
+
+[ref](https://leetcode.cn/problems/tic-tac-toe-lcci/)
+
+模拟
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(1)
+var tictactoe = function(board) {
+  const n = board.length
+  let xWinStr = '', oWinStr = ''
+  for(let i=0;i<n;i++) {
+    xWinStr += 'X'
+    oWinStr += 'O'
+  }
+  for(let i=0;i<n;i++) {
+    if(board[i] === xWinStr) return 'X' 
+    else if(board[i] === oWinStr) return 'O'
+  }
+  for(let j=0;j<n;j++) {
+    let str = ''
+    for(let i=0;i<n;i++) str += board[i][j]
+    if(str === xWinStr) return 'X'
+    else if(str === oWinStr) return 'O'
+  }
+  let lStr = '', rStr = ''
+  for(let i=0;i<n;i++) {
+    lStr += board[i][i]
+    rStr += board[i][n - 1 - i]
+  }
+  if(lStr === xWinStr || rStr === xWinStr) return 'X'
+  else if(lStr === oWinStr || rStr === oWinStr) return 'O'
+
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(board[i][j] === ' ') return 'Pending'
+    }
+  }
+  return 'Draw'
+};
+```
+
+## 🌟😻✔ 面试题 16.06. 最小差【medium】
+
+[ref](https://leetcode.cn/problems/smallest-difference-lcci/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var smallestDifference = function(a, b) {
+  a = a.sort((x, y) => x - y)
+  let min = Number.MAX_SAFE_INTEGER
+  for(let num of b) {
+    min = Math.min(min, Math.abs(search(a, num) - num))
+  }
+  return min
+};
+function search(arr, target) {
+  let l = 0, r = arr.length - 1
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    if(arr[mid] === target) return target
+    else if(arr[mid] > target) {
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  if(r < 0) return arr[l]
+  else if(l >= arr.length) return arr[r]
+  else {
+    if(Math.abs(arr[l] - target) < Math.abs(arr[r] - target)) {
+      return arr[l]
+    } else {
+      return arr[r]
+    }
+  }
+}
+```
+
+## ?🌟😻✔ 面试题 16.10. 生存人数【medium】
+
+[ref](https://leetcode.cn/problems/living-people-lcci/)
+
+差分数组、差分
+
+```js
+// 时间复杂度：O(N+W) W = 101
+// 空间复杂度：O(W)
+var maxAliveYear = function(birth, death) {
+  const arr = new Array(101).fill(0), n = birth.length
+  for(i=0;i<n;i++) {
+    arr[birth[i] - 1900] += 1
+    if(death[i] - 1899 <= 100) {
+      arr[death[i] - 1899] -= 1
+    }
+  }
+  let max = 0, s = 0
+  for(let i=0;i<101;i++) {
+    s += arr[i]
+    arr[i] = s
+    max = Math.max(max, s)
+  }
+  for(let i=0;i<101;i++) {
+    if(arr[i] === max) return i + 1900
+  }
+};
+```
+
+## ?🌟😻✔ 面试题 16.13. 平分正方形【medium】
+
+[ref](https://leetcode.cn/problems/bisect-squares-lcci/)
+
+模拟
+
+题解
+
+- [云影同学】时间复杂度超100%，难度不大，侮辱性极强](https://leetcode.cn/problems/bisect-squares-lcci/solution/by-lxfriday-ulws/)
+
+```js
+var cutSquares = function(square1, square2) {
+  const center1 = [square1[0] + square1[2] / 2, square1[1] + square1[2] / 2]
+  const center2 = [square2[0] + square2[2] / 2, square2[1] + square2[2] / 2]
+  const x1l = square1[0], x1r = square1[0] + square1[2], y1d = square1[1], y1u = square1[1] + square1[2]
+  const x2l = square2[0], x2r = square2[0] + square2[2], y2d = square2[1], y2u = square2[1] + square2[2]
+  if(center1[0] === center2[0]) {
+    return [center1[0], Math.min(y1d, y2d), center1[0], Math.max(y1u, y2u)]
+  }
+  if(center1[1] === center2[1]) {
+    return [Math.min(x1l, x2l), center1[1], Math.max(x1r, x2r), center1[1]]
+  }
+  // a 斜率 b 常数
+  const a = (center2[1] - center1[1]) / (center2[0] - center1[0]), b = center2[1] - a * center2[0]
+  const y1lt = a * x1l + b, y1rt = a * x1r + b, x1dt = (y1d - b) / a, x1ut = (y1u - b) / a
+  const y2lt = a * x2l + b, y2rt = a * x2r + b, x2dt = (y2d - b) / a, x2ut = (y2u - b) / a
+  const points = []
+  // 算交叉点
+  if(y1d <= y1lt && y1lt <= y1u) points.push([x1l, y1lt])
+  if(y1d <= y1rt && y1rt <= y1u) points.push([x1r, y1rt])
+  if(x1l <= x1dt && x1dt <= x1r) points.push([x1dt, y1d])
+  if(x1l <= x1ut && x1ut <= x1r) points.push([x1ut, y1u])
+  if(y2d <= y2lt && y2lt <= y2u) points.push([x2l, y2lt])
+  if(y2d <= y2rt && y2rt <= y2u) points.push([x2r, y2rt])
+  if(x2l <= x2dt && x2dt <= x2r) points.push([x2dt, y2d])
+  if(x2l <= x2ut && x2ut <= x2r) points.push([x2ut, y2u])
+  points.sort((arr1, arr2) => arr1[0] - arr2[0] || arr1[1] - arr2[1])
+  return [...points[0], ...points[points.length - 1]]
+};
+
+// y = ax+b
+// x = (y - b) / a
+```
+
+## ?🌟😻✔ 面试题 16.14. 最佳直线【medium】
+
+[ref](https://leetcode.cn/problems/best-line-lcci/)
+
+模拟、暴力
+
+```js
+var bestLine = function(points) {
+  const n = points.length, arr = new Array(n).fill(1), SArr = new Array(n)
+  let max = 1
+  for(let i=0; i < n; i++) {
+    const [x1, y1] = points[i]
+    for(let j=i + 1; j < n; j++) {
+      const [x2, y2] = points[j]
+      let cnt = 2, S = [i, j]
+      for(let k=j + 1; k < n; k++) {
+        const [x3, y3] = points[k]
+        if(x1 === x2 || x2 === x3 || x1 === x3) {
+          if(x1 === x2 && x2 === x3) {
+            cnt++
+          }
+        } else {
+          if((y3 - y2) / (x3 - x2) === (y2 - y1) / (x2 - x1)) {
+            cnt++
+          }
+        }
+      }
+      if(cnt > arr[i]) {
+        SArr[i] = S
+        arr[i] = cnt
+      }
+    }
+    max = Math.max(max, arr[i])
+  }
+  const preRes = []
+  for(let i=0;i<n;i++) {
+    if(arr[i] === max) preRes.push(SArr[i])
+  }
+  preRes.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+  return preRes[0]
+};
+```
+
+## ??🌟😻✔ 面试题 16.16. 部分排序【medium】
+
+[ref](https://leetcode.cn/problems/sub-sort-lcci/)
+
+单调栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var subSort = function(array) {
+  const n = array.length, stack = []
+  if(n < 2) return [-1, -1]
+  let l = n, r = -1, deleteMax = Number.MIN_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    while(stack.length && array[stack[stack.length - 1]] > array[i]) {
+      const idx = stack.pop()
+      l = Math.min(l, idx)
+      deleteMax = Math.max(deleteMax, array[idx])
+    }
+    if(array[i] >= deleteMax) {
+      stack.push(i)
+    } else {
+      r = i
+    }
+  }
+  return stack.length === n ? [-1, -1] : [l, r]
+};
+```
+
+## 🌟😻✔ 面试题 16.19. 水域大小【medium】
+
+[ref](https://leetcode.cn/problems/pond-sizes-lcci/)
+
+矩阵、深度优先搜索、DFS
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var pondSizes = function(land) {
+  const m = land.length, n = land[0].length
+  const res = []
+  const directs = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(land[i][j] === 0) {
+        res.push(walk(i, j))
+      }
+    }
+  }
+  function walk(i, j) {
+    if(i < 0 || i >= m || j < 0 || j >= n || land[i][j] !== 0) return 0
+    land[i][j] = 1
+    let sum = 1
+    for(let k =0;k<8;k++) {
+      sum += walk(i + directs[k][0], j + directs[k][1])
+    }
+    return sum
+  }
+
+  return res.sort((a, b) => a - b)
+};
+```
+
+## 🌟😻✔ 面试题 16.20. T9键盘【medium】
+
+[ref](https://leetcode.cn/problems/t9-lcci/)
+
+哈希表
+
+```js
+// 时间复杂度：O(W) W=所有单词的长度总和
+// 时间复杂度：O(1) 不算结果数组和匹配对象 numsMap，空间是O(1)
+var getValidT9Words = function(num, words) {
+  const res = [], n = words.length
+  const numsMap = {a: '2',b: '2',c: '2',d: '3',e: '3',f: '3',g: '4',h: '4',i: '4',j: '5',k: '5',l: '5',m: '6',n: '6',o: '6',p: '7',q: '7',r: '7',s: '7',t: '8',u: '8',v: '8',w: '9',x: '9',y: '9',z: '9'}
+  for(let i=0;i<n;i++) {
+    let shouldAdd = true
+    for(let j=0;j<words[i].length;j++) {
+      if(numsMap[words[i][j]] !== num[j]) {
+        shouldAdd = false
+        break
+      }
+    }
+    if(shouldAdd) res.push(words[i])
+  }  
+  return res
+};
+```
+
 ## 🌟😻✔ 面试题 17.09. 第 k 个数【medium】
 
 [ref](https://leetcode.cn/problems/get-kth-magic-number-lcci/)
@@ -26934,6 +27267,44 @@ var largestRectangleArea = function(heights) {
 };
 ```
 
+## ? 🌟😻✔ 剑指 Offer II 040. 矩阵中最大的矩形【hard】
+
+[ref](https://leetcode.cn/problems/PLYXKQ/?favorite=e8X3pBZi)
+
+单调栈
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var maximalRectangle = function(matrix) {
+  if(!matrix.length) return 0 
+  for(let i=0;i<matrix.length;i++) {
+    matrix[i] = 0 + matrix[i] + 0
+  }
+  const m = matrix.length, n = matrix[0].length, dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+  let max = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(matrix[i][j] === '1') {
+        dp[i][j] = 1 + (i-1 >= 0 ? dp[i-1][j] : 0)
+      }
+    }
+  }
+  for(let i=0;i<m;i++) {
+    const stack = []
+    for(let j=0;j<n;j++) {
+      while(stack.length && dp[i][stack[stack.length - 1]] > dp[i][j]) {
+        const idx = stack.pop()
+        const l = stack[stack.length - 1]
+        max = Math.max(max, dp[i][idx] * (j - l - 1))
+      }
+      stack.push(j)
+    }
+  }
+  return max
+};
+```
+
 ## 🌟😻✔ 剑指 Offer II 041. 滑动窗口的平均值【easy】
 
 [ref](https://leetcode.cn/problems/qIsx9U/)
@@ -27138,6 +27509,87 @@ var pruneTree = function(root) {
   const allZero = dfs(root)
   if(allZero) return null
   return root
+};
+
+```
+
+## 🌟😻✔ 剑指 Offer II 049. 从根节点到叶节点的路径数字之和【medium】
+
+[ref](https://leetcode.cn/problems/h54YBf/)
+
+二叉树、二叉树序列化
+
+```js
+var serialize = function(root) {
+  let res = ''
+  function serializer(node) {
+    if(!node) {
+      res += 'null#'
+      return
+    }
+    res += `${node.val}#`
+    serializer(node.left)
+    serializer(node.right)
+  }
+  serializer(root)
+  return res
+};
+var deserialize = function(data) {
+  let arr = data.split('#'), i = 0
+  function deserializer() {
+    if(arr[i] === 'null') {
+      i++
+      return null
+    }
+    const node = new TreeNode(+arr[i++])
+    node.left = deserializer()
+    node.right = deserializer()
+    return node
+  }
+  return deserializer()
+};
+
+```
+
+```js
+var serialize = function(root) {
+  let res = ''
+  function serializer(node) {
+    if(!node) {
+      res += '[]'
+      return
+    }
+    res += '['
+    res += `${node.val}`
+    serializer(node.left)
+    serializer(node.right)
+    res += ']'
+  }
+  serializer(root)
+  return res
+};
+var deserialize = function(data) {
+  let i = 0
+  function deserializer() {
+    if(data[i] === '[') i++
+    if(data[i] === ']') {
+      i++
+      return null
+    }
+    let sign = 1
+    if(data[i] === '-') {
+      sign = -1
+      i++
+    }
+    let num = 0
+    while(data[i] >= '0' && data[i] <= '9') num = 10 * num + Number(data[i++])
+    const node = new TreeNode(sign * num)
+    node.left = deserializer()
+    node.right = deserializer()
+    i++
+    return node
+  }
+  return deserializer()
 };
 
 ```
