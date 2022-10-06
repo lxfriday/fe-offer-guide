@@ -33,6 +33,18 @@
 
 # 刷题日记
 
+- 20221006(11)
+  - [🌟【medium】面试题 16.21. 交换和](https://leetcode.cn/problems/sum-swap-lcci/) 模拟
+  - [🌟【medium】面试题 16.24. 数对和](https://leetcode.cn/problems/pairs-with-sum-lcci/) 哈希表、数组
+  - ?[🌟【medium】面试题 16.25. LRU 缓存](https://leetcode.cn/problems/lru-cache-lcci/) LRU、设计题
+  - ?[🌟【medium】面试题 16.26. 计算器](https://leetcode.cn/problems/calculator-lcci/) 模拟、计算器
+  - ?[🌟【medium】面试题 17.05.  字母与数字](https://leetcode.cn/problems/find-longest-subarray-lcci/) 前缀和
+  - ?[🌟【medium】面试题 17.07. 婴儿名字](https://leetcode.cn/problems/baby-names-lcci/) 图、广度优先搜索
+  - ?[🌟【medium】面试题 17.08. 马戏团人塔](https://leetcode.cn/problems/circus-tower-lcci/) 二分搜索、俄罗斯套娃问题
+  - ?[🌟【medium】面试题 17.11. 单词距离](https://leetcode.cn/problems/find-closest-lcci/) 模拟
+  - ??[🌟【medium】面试题 17.13. 恢复空格](https://leetcode.cn/problems/re-space-lcci/) 动态规划、背包问题、完全背包
+  - ??[🌟【medium】面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
+  - ???[🌟【medium】927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
 - 20221005(11)
   - [🌟【medium】811. 子域名访问计数](https://leetcode.cn/problems/subdomain-visit-count/) 哈希表
   - [🌟【medium】面试题 16.04. 井字游戏](https://leetcode.cn/problems/tic-tac-toe-lcci/) 模拟
@@ -898,6 +910,7 @@
 - 🌟【medium】[560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) 前缀和
 - 🌟【medium】[325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
 - ? 🌟【medium】[剑指 Offer II 011. 0 和 1 个数相同的子数组](https://leetcode.cn/problems/A1NYOS/) 前缀和
+- ?🌟【medium】[面试题 17.05.  字母与数字](https://leetcode.cn/problems/find-longest-subarray-lcci/) 前缀和
 
 ## trie、字典树
 
@@ -1002,6 +1015,8 @@
 - ? 🌟【easy】[169. 多数元素](https://leetcode.cn/problems/majority-element/) 摩尔投票法
 - 🌟【medium】[978. 最长湍流子数组](https://leetcode.cn/problems/longest-turbulent-subarray/) 数组、子数组
 - 🌟【easy】[1652. 拆炸弹](https://leetcode.cn/problems/defuse-the-bomb/) 数组题
+- 🌟【medium】[面试题 16.24. 数对和](https://leetcode.cn/problems/pairs-with-sum-lcci/) 哈希表、数组
+- ??🌟【medium】[面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
 
 ### 排列组合
 
@@ -1059,6 +1074,8 @@
 - ?🌟【medium】[面试题 08.14. 布尔运算](https://leetcode.cn/problems/boolean-evaluation-lcci/) 枚举、模拟、DFS、递归
 - ?🌟【medium】[面试题 16.13. 平分正方形](https://leetcode.cn/problems/bisect-squares-lcci/) 模拟
 - ?🌟【medium】[面试题 16.14. 最佳直线](https://leetcode.cn/problems/best-line-lcci/) 模拟、暴力查找
+- ?🌟【medium】[面试题 17.11. 单词距离](https://leetcode.cn/problems/find-closest-lcci/) 模拟
+- ???🌟【medium】[927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
 
 ### 模拟运算
 
@@ -1295,6 +1312,7 @@
 - 🌟【medium】[323. 无向图中连通分量的数目](https://leetcode.cn/problems/number-of-connected-components-in-an-undirected-graph/) 图、广度优先搜索、并查集
 - ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
 - 🌟【medium】[841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/) 图、深度优先搜索、广度优先搜索
+- ?🌟【medium】[面试题 17.07. 婴儿名字](https://leetcode.cn/problems/baby-names-lcci/) 图、广度优先搜索
 
 ### 并查集
 
@@ -1385,6 +1403,7 @@
 - ?? [🌟【medium】剑指 Offer II 104. 排列的数目](https://leetcode.cn/problems/D0F0SV/) 动态规划、背包问题、有序背包
 - ? 🌟【easy】[剑指 Offer II 101. 分割等和子集](https://leetcode.cn/problems/NUPfPr/) 动态规划、01背包、背包问题
 - 🌟【medium】[面试题 08.11. 硬币](https://leetcode.cn/problems/coin-lcci/) 动态规划、背包问题、完全背包
+- ??🌟【medium】[面试题 17.13. 恢复空格](https://leetcode.cn/problems/re-space-lcci/) 动态规划、背包问题、完全背包
 
 ## 贪心思想
 
@@ -1461,6 +1480,7 @@
 - 🌟【hard】[1231. 分享巧克力](https://leetcode.cn/problems/divide-chocolate/) 二分搜索
 - 🌟【medium】[面试题 10.03. 搜索旋转数组](https://leetcode.cn/problems/search-rotate-array-lcci/) 二分搜索
 - 🌟【medium】[面试题 16.06. 最小差](https://leetcode.cn/problems/smallest-difference-lcci/) 二分搜索
+- ?🌟【medium】[面试题 17.08. 马戏团人塔](https://leetcode.cn/problems/circus-tower-lcci/) 二分搜索、俄罗斯套娃问题
 
 ## 排序算法的应用
 
@@ -20391,6 +20411,55 @@ var minAddToMakeValid = function(s) {
 
 ```
 
+## ???🌟😻✔ 927. 三等分【medium】
+
+[ref](https://leetcode.cn/problems/three-equal-parts/)
+
+模拟
+
+找数字的关键在于第三段，第三段由于1的个数已经确定，所以第三段的首个1的位置是确定的，这样第三段是什么二进制排列就完全确定。
+
+再依据第三段的二进制排列，从前两段的首个1开始比对，如果1、0的排列完全和第三段一致，且前两段的下标没有越到其它段上去，则扫描终止时，前两段的指针就是隔断的结束的地方
+
+```js
+var threeEqualParts = function(arr) {
+  let oneCnt = 0
+  for(const num of arr) if(num === 1) oneCnt++
+  if(oneCnt % 3 !== 0) return [-1, -1]
+  if(oneCnt === 0) return [0, 2]
+  const oneAverage = oneCnt / 3
+  let i = 0, iCnt = 0, j = arr.length - 1, jCnt = 0
+  while(true) {
+    if(arr[i] === 1) iCnt++
+    if(iCnt === oneAverage) break
+    i++
+  }
+  while(true) {
+    if(arr[j] === 1) jCnt++
+    if(jCnt === oneAverage) break
+    j--
+  }
+  let a = 0, b = i + 1, c = j
+  while(arr[a] !== 1) a++
+  while(arr[b] !== 1) b++
+  const aMax = b - 1, bMax = c -1
+  while(true) {
+    if(c === arr.length) break
+    if(a > aMax || b > bMax) {
+      return [-1, -1]
+    }
+    if(arr[a] ===  arr[b] && arr[b] === arr[c]) {
+      a++, b++, c++
+    } else {
+      return [-1, -1]
+    }
+  }
+  a--, b--
+  return [a, b + 1]
+};
+
+```
+
 ## 🌟😻✔ 931. 下降路径最小和【medium】
 
 [ref](https://leetcode.cn/problems/minimum-falling-path-sum/)
@@ -25928,6 +25997,340 @@ var getValidT9Words = function(num, words) {
 };
 ```
 
+## 🌟😻✔ 面试题 16.21. 交换和【medium】
+
+[ref](https://leetcode.cn/problems/sum-swap-lcci/)
+
+模拟
+
+```js
+// 时间复杂度：O(M+N) M=array1.length N=array2.length
+// 空间复杂度：O(M)
+var findSwapValues = function(array1, array2) {
+  let sum1 = 0, sum2 = 0
+  for(const num of array1) sum1 += num
+  for(const num of array2) sum2 += num
+  const target = (sum1 + sum2) / 2
+  if(target !== Math.floor(target)) return []
+  const set = new Set(array1)
+  for(let num of array2) {
+    if(set.has(target - (sum2 - num))) return [target - (sum2 - num), num]
+  }
+  return []
+};
+```
+
+## 🌟😻✔ 面试题 16.24. 数对和【medium】
+
+[ref](https://leetcode.cn/problems/pairs-with-sum-lcci/)
+
+数组、哈希表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var pairSums = function(nums, target) {
+  const res = [], map = new Map()
+  for(let num of nums) {
+    if(map.has(target - num) && map.get(target - num) > 0) {
+      map.set(target - num, map.get(target - num) - 1)
+      res.push([num, target - num])
+    } else {
+      map.set(num, (map.get(num) || 0) + 1)
+    }
+  }
+  return res
+};
+```
+
+## ?🌟😻✔ 面试题 16.25. LRU 缓存【medium】
+
+[ref](https://leetcode.cn/problems/lru-cache-lcci/)
+
+设计题
+
+```js
+var LRUCache = function(capacity) {
+  this.map = new Map()
+  this.capacity = capacity
+};
+LRUCache.prototype.get = function(key) {
+  if(!this.map.has(key)) return -1
+  const ret = this.map.get(key)
+  this.put(key, ret)
+  return ret
+};
+LRUCache.prototype.put = function(key, value) {
+  if(this.map.has(key)) {
+    this.map.delete(key)
+  } else {
+    if(this.map.size === this.capacity) {
+      this.map.delete(this.map.keys().next().value)
+    }
+  }
+  this.map.set(key, value)
+};
+```
+
+双向链表
+```js
+var LRUCache = function(capacity) {
+  this.head = new Node()
+  this.tail = new Node()
+  this.capacity = capacity
+  this.size = 0
+  this.map = {}
+};
+
+LRUCache.prototype.get = function(key) {
+  if(!this.map[key]) return -1
+  const ret = this.map[key].val
+  this.put(key, ret)
+  return ret
+};
+
+LRUCache.prototype.delete = function(key) {
+  const node = this.map[key]
+  delete this.map[key]
+  if(this.size === 1) {
+    this.head.next = null
+    this.tail.next = null
+  } else {
+    const prev = node.prev, next = node.next
+    if(prev && next) {
+      prev.next = next
+      next.prev = prev
+    } else if(prev) {
+      prev.next = null
+      this.tail.next = prev
+    } else {
+      next.prev = null
+      this.head.next = next
+    }
+  }
+  this.size--
+};
+
+LRUCache.prototype.add = function(key, value) {
+  const node = new Node(key, value)
+  this.map[key] = node
+  if(this.size === 0) {
+    this.head.next = node
+    this.tail.next = node
+  } else {
+    this.tail.next.next = node
+    node.prev = this.tail.next
+    this.tail.next = node
+  }
+  this.size++
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if(this.map[key]) {
+    this.delete(key)
+  } else {
+    if(this.size === this.capacity) {
+      this.delete(this.head.next.key)
+    }
+  }
+  this.add(key, value)
+};
+
+
+class Node {
+  constructor(key, val) {
+    this.key = key
+    this.val = val
+    this.prev = null
+    this.next = null
+  }
+}
+```
+
+## ?🌟😻✔ 面试题 16.26. 计算器【medium】
+
+[ref](https://leetcode.cn/problems/calculator-lcci/)
+
+模拟、计算器
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var calculate = function(s) {
+  let res = 0
+  let i=0
+  let sign = '+', tmp = 0
+  while(i < s.length) {
+    if(s[i] !== ' ') {
+      if(s[i] === '+') {
+        res += tmp
+        tmp = 0
+        sign = '+'
+        i++
+      } else if(s[i] === '-') {
+        res += tmp
+        tmp = 0
+        sign = '-'
+        i++
+      } else if(s[i] === '*') {
+        sign = '*'
+        i++
+      } else if(s[i] === '/') {
+        sign = '/'
+        i++
+      } else {
+        let num = 0
+        while(s[i] !== ' ' && s[i] >= '0' && s[i] <= '9') num = 10 * num + Number(s[i++])
+        if(sign === '+') {
+          tmp = num
+        } else if(sign === '-') {
+          tmp = -num
+        } else if(sign === '*') {
+          tmp *= num
+        } else {
+          tmp = (tmp / num > 0) ? Math.floor(tmp / num) : Math.ceil(tmp / num)
+        }
+      }
+    } else {
+      i++
+    }
+  }
+  res += tmp
+  return res
+};
+```
+
+## ?🌟😻✔ 面试题 17.05.  字母与数字【medium】
+
+[ref](https://leetcode.cn/problems/find-longest-subarray-lcci/)
+
+前缀和
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var findLongestSubarray = function(array) {
+  const n = array.length, map = new Map([[0, -1]])
+  let len = 0, sum = 0, idxs = []
+  for(let i=0;i<n;i++) {
+    sum += array[i][0] >= '0' && array[i][0] <= '9' ? 1 : -1
+    if(map.has(sum)) {
+      if(i - map.get(sum) > len) {
+        len = i - map.get(sum)
+        idxs = [map.get(sum) + 1, i + 1]
+      }
+    } else {
+      map.set(sum, i)
+    }
+  }
+  return len === 0 ? [] : array.slice(idxs[0], idxs[1])
+};
+```
+
+## ?🌟😻✔ 面试题 17.07. 婴儿名字【medium】
+
+[ref](https://leetcode.cn/problems/baby-names-lcci/)
+
+图、广度优先搜索
+
+```js
+var trulyMostPopular = function(names, synonyms) {
+  const connectionMap = new Map()
+  for(const synonym of synonyms) {
+    const [name1, name2] = synonym.slice(1, synonym.length - 1).split(',')
+    if(!connectionMap.has(name1)) connectionMap.set(name1, new Set())
+    if(!connectionMap.has(name2)) connectionMap.set(name2, new Set())
+    connectionMap.get(name1).add(name2)
+    connectionMap.get(name2).add(name1)
+  }
+  const used = new Set()
+  const sameNameMap = new Map()
+  for(const name of connectionMap.keys()) {
+    if(used.has(name)) continue
+    used.add(name)
+    let q = [name]
+    const arr = []
+    while(q.length) {
+      const tq = []
+      for(let i=0;i<q.length;i++) {
+        const currName = q[i]
+        arr.push(currName)
+        const nexts = connectionMap.get(currName)
+        for(let next of nexts) {
+          if(!used.has(next)) {
+            used.add(next)
+            tq.push(next)
+          }
+        }
+      }
+      q = tq
+    }
+    arr.sort((a, b) => {
+      if(a < b) return -1
+      else if(a < b) return 1
+      return 0
+    })
+    const target = arr[0]
+    for(let e of arr) {
+      sameNameMap.set(e, target)
+    }
+  }
+  const resMap = new Map()
+  for(let str of names) {
+    let name = '', cnt = 0, i = 0
+    while(str[i] !== '(') name += str[i++]
+    cnt = Number(str.slice(i + 1, str.length - 1))
+    const realName = getRealName(name)
+    resMap.set(realName, (resMap.get(realName) || 0) + cnt)
+  }
+
+  function getRealName(s) {
+    return sameNameMap.has(s) ? sameNameMap.get(s) : s
+  }
+  return Array.from(resMap).map(_ => {
+    return `${_[0]}(${_[1]})`
+  })
+};
+```
+
+## ?🌟😻✔ 面试题 17.08. 马戏团人塔【medium】
+
+[ref](https://leetcode.cn/problems/circus-tower-lcci/)
+
+俄罗斯套娃问题、二分搜索
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(N)
+var bestSeqAtIndex = function(height, weight) {
+  const arr = [], n = height.length
+  for(let i=0;i<height.length;i++) {
+    arr.push([height[i], weight[i]])
+  }
+  arr.sort((a, b) => a[0] - b[0] || b[1] - a[1])
+  const dp = []
+  let k = -1
+  for(let i=0;i<n;i++) {
+    const w = arr[i][1]
+    if(!dp.length || dp[k] < w) {
+      dp[++k] = w
+    } else {
+      let l = 0, r = k
+      while(l < r) {
+        const mid = Math.floor((l + r) / 2)
+        if(dp[mid] >= w) {
+          r = mid
+        } else {
+          l = mid + 1
+        }
+      }
+      dp[l] = w
+    }
+  }
+  return k + 1
+};
+```
+
 ## 🌟😻✔ 面试题 17.09. 第 k 个数【medium】
 
 [ref](https://leetcode.cn/problems/get-kth-magic-number-lcci/)
@@ -25955,6 +26358,52 @@ var getKthMagicNumber = function(k) {
     dp[i] = min
   }
   return dp[k]
+};
+```
+
+## ?🌟😻✔ 面试题 17.11. 单词距离【medium】
+
+[ref](https://leetcode.cn/problems/find-closest-lcci/)
+
+模拟
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findClosest = function(words, word1, word2) {
+  const n = words.length
+  let idx1 = Number.MIN_SAFE_INTEGER, idx2 = Number.MIN_SAFE_INTEGER
+  let min = Number.MAX_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    if(words[i] === word1) idx1 = i
+    else if(words[i] === word2) idx2 = i
+    if(idx1 !== Number.MIN_SAFE_INTEGER && idx2 !== Number.MIN_SAFE_INTEGER) {
+      min = Math.min(min, Math.abs(idx1 - idx2))
+    }
+  }
+  return min
+};
+```
+
+## ??🌟😻✔ 面试题 17.13. 恢复空格【medium】
+
+[ref](https://leetcode.cn/problems/re-space-lcci/)
+
+动态规划、背包问题、完全背包
+
+```js
+var respace = function(dictionary, sentence) {
+  const n = sentence.length, dp = new Array(n + 1).fill(0)
+  for(let i = 1;i <= sentence.length; i++) {
+    for(let word of dictionary) {
+      if(i >= word.length && word === sentence.slice(i - word.length, i)) {
+        dp[i] = Math.max(dp[i], dp[i - word.length] + word.length)
+      } else {
+        dp[i] = Math.max(dp[i], dp[i - 1])
+      }
+    }    
+  }
+  return n - dp[n]
 };
 ```
 
@@ -26002,6 +26451,41 @@ function swap(arr, i, j) {
   arr[i] = arr[j]
   arr[j] = t
 }
+
+```
+
+## ??🌟😻✔ 面试题 17.15. 最长单词【medium】
+
+[ref](https://leetcode.cn/problems/longest-word-lcci/)
+
+递归、哈希表、数组
+
+```js
+var longestWord = function(words) {
+  const wordsSet = new Set(words)
+  words.sort((a, b) => {
+    if(a.length === b.length) {
+      if(a < b) return -1
+      else if(a > b) return 1
+      return 0
+    } else {
+      return b.length - a.length
+    }
+  })
+  function search(word, idx) {
+    if(idx === word.length) return true
+    for(let i=idx;i<word.length;i++) {
+      // 排除自己匹配自己
+      if(idx === 0 && i === word.length - 1) continue
+      if(wordsSet.has(word.slice(idx, i + 1)) && search(word, i + 1)) return true
+    }
+    return false
+  }
+  for(let i=0;i<words.length;i++) {
+    if(search(words[i], 0)) return words[i]
+  }
+  return ''
+};
 
 ```
 
