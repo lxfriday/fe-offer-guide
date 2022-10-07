@@ -33,6 +33,23 @@
 
 # 刷题日记
 
+- 20221007(16)
+  - [🌟【easy】1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum/) 数组题
+  - ?[🌟【medium】面试题 17.17. 多次搜索](https://leetcode.cn/problems/multi-search-lcci/) 字典树
+  - [🌟【medium】面试题 17.18. 最短超串](https://leetcode.cn/problems/shortest-supersequence-lcci/) 滑动窗口
+  - ?[🌟【medium】面试题 17.22. 单词转换](https://leetcode.cn/problems/word-transformer-lcci/) 图、深度优先搜索
+  - ?[🌟【medium】面试题 17.23. 最大黑方阵](https://leetcode.cn/problems/max-black-square-lcci/) 矩阵
+  - [🌟【easy】面试题 01.03. URL化](https://leetcode.cn/problems/string-to-url-lcci/) 字符串
+  - [🌟【easy】面试题 01.04. 回文排列](https://leetcode.cn/problems/palindrome-permutation-lcci/) 哈希表
+  - [🌟【easy】面试题 01.06. 字符串压缩](https://leetcode.cn/problems/compress-string-lcci/) 字符串
+  - [🌟【easy】面试题 02.01. 移除重复节点](https://leetcode.cn/problems/remove-duplicate-node-lcci/) 链表
+  - [🌟【easy】面试题 02.02. 返回倒数第 k 个节点](https://leetcode.cn/problems/kth-node-from-end-of-list-lcci/) 链表
+  - [🌟【easy】面试题 02.03. 删除中间节点](https://leetcode.cn/problems/delete-middle-node-lcci/) 链表
+  - [🌟【easy】面试题 02.06. 回文链表](https://leetcode.cn/problems/palindrome-linked-list-lcci/) 链表、反转链表
+  - ? [🌟【easy】面试题 02.07. 链表相交](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/) 链表、相交链表
+  - [🌟【easy】面试题 03.01. 三合一](https://leetcode.cn/problems/three-in-one-lcci/) 设计题
+  - [🌟【hard】剑指 Offer II 051. 节点之和最大的路径](https://leetcode.cn/problems/jC7MId/) 二叉树
+  - [🌟【hard】剑指 Offer II 078. 合并排序链表](https://leetcode.cn/problems/vvXgSW/) 归并排序、链表
 - 20221006(11)
   - [🌟【medium】面试题 16.21. 交换和](https://leetcode.cn/problems/sum-swap-lcci/) 模拟
   - [🌟【medium】面试题 16.24. 数对和](https://leetcode.cn/problems/pairs-with-sum-lcci/) 哈希表、数组
@@ -931,6 +948,7 @@
 - ?? 🌟【hard】[745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search/) 字典树、前缀树、后缀树
 - 🌟【medium】[剑指 Offer II 065. 最短的单词编码](https://leetcode.cn/problems/iSwD2y/) 字典树
 - ??? 🌟【medium】[剑指 Offer II 067. 最大的异或](https://leetcode.cn/problems/ms70jA/) 字典树、贪心
+- ?🌟【medium】[面试题 17.17. 多次搜索](https://leetcode.cn/problems/multi-search-lcci/) 字典树
 
 ## 字符串题
 
@@ -1017,6 +1035,7 @@
 - 🌟【easy】[1652. 拆炸弹](https://leetcode.cn/problems/defuse-the-bomb/) 数组题
 - 🌟【medium】[面试题 16.24. 数对和](https://leetcode.cn/problems/pairs-with-sum-lcci/) 哈希表、数组
 - ??🌟【medium】[面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
+- 🌟【easy】[1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum/) 数组题
 
 ### 排列组合
 
@@ -1295,6 +1314,7 @@
 - ??? 🌟【hard】[711. 不同岛屿的数量 II](https://leetcode.cn/problems/number-of-distinct-islands-ii/) 深度优先搜索、哈希表、排序、集合
 - ??? 🌟【hard】[827. 最大人工岛](https://leetcode.cn/problems/making-a-large-island/) 矩阵、深度优先搜索
 - 🌟【medium】[面试题 16.19. 水域大小](https://leetcode.cn/problems/pond-sizes-lcci/) DFS、深度优先搜索
+- ?🌟【medium】[面试题 17.23. 最大黑方阵](https://leetcode.cn/problems/max-black-square-lcci/) 矩阵
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1313,6 +1333,7 @@
 - ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
 - 🌟【medium】[841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/) 图、深度优先搜索、广度优先搜索
 - ?🌟【medium】[面试题 17.07. 婴儿名字](https://leetcode.cn/problems/baby-names-lcci/) 图、广度优先搜索
+- ?🌟【medium】[面试题 17.22. 单词转换](https://leetcode.cn/problems/word-transformer-lcci/) 图、深度优先搜索
 
 ### 并查集
 
@@ -22475,6 +22496,32 @@ var checkOnesSegment = function(s) {
 };
 ```
 
+## 🌟😻✔ 1800. 最大升序子数组和【easy】
+
+[ref](https://leetcode.cn/problems/maximum-ascending-subarray-sum/)
+
+数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxAscendingSum = function(nums) {
+  const n = nums.length
+  let max = nums[0]
+  let r = 0, sum = 0
+  while(r < n) {
+    if(r === 0 || nums[r] > nums[r - 1]) {
+      sum += nums[r]
+    } else {
+      sum = nums[r]
+    }
+    max = Math.max(max, sum)
+    r++
+  }
+  return max
+};
+```
+
 ## ?🌟😻✔ 1979. 找出数组的最大公约数【easy】
 
 [ref](https://leetcode.cn/problems/find-greatest-common-divisor-of-array/)
@@ -24793,6 +24840,62 @@ var CheckPermutation = function(s1, s2) {
 };
 ```
 
+## 🌟😻✔ 面试题 01.03. URL化【easy】
+
+[ref](https://leetcode.cn/problems/string-to-url-lcci/)
+
+字符串
+
+```js
+var replaceSpaces = function(S, length) {
+  let res = ''
+  for(let i=0;i<length;i++) {
+    if(S[i] === ' ') res += '%20'
+    else res += S[i]
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 面试题 01.04. 回文排列【easy】
+
+[ref](https://leetcode.cn/problems/palindrome-permutation-lcci/)
+
+哈希表
+
+```js
+var canPermutePalindrome = function(s) {
+  const map = new Map()
+  for(const c of s) map.set(c, (map.get(c) || 0) + 1)
+  let singleCnt = 0
+  for(const cnt of map.values()) {
+    if(cnt % 2 === 1) {
+      singleCnt++
+    }
+  }
+  return singleCnt <= 1
+};
+```
+
+## 🌟😻✔ 面试题 01.06. 字符串压缩【easy】
+
+[ref](https://leetcode.cn/problems/compress-string-lcci/)
+
+字符串
+
+```js
+var compressString = function(S) {
+  const n = S.length
+  let res = '', i = 0
+  while(i < n) {
+    let cnt = 0, target = S[i]
+    while(i < n && S[i] === target) i++, cnt++
+    res += `${target}${cnt}`
+  }
+  return res.length >= n ? S : res
+};
+```
+
 ## ??🌟😻✔ 面试题 01.07. 旋转矩阵【medium】
 
 [ref](https://leetcode.cn/problems/rotate-matrix-lcci/)
@@ -24863,6 +24966,69 @@ var isFlipedString = function(s1, s2) {
 };
 ```
 
+## 🌟😻✔ 面试题 02.01. 移除重复节点【easy】
+
+[ref](https://leetcode.cn/problems/remove-duplicate-node-lcci/)
+
+链表
+
+```js
+var removeDuplicateNodes = function(head) {
+  const set = new Set(), myHead = new ListNode()
+  myHead.next = head
+  let tHead = myHead
+  while(tHead.next) {
+    if(set.has(tHead.next.val)) {
+      tHead.next = tHead.next.next
+    } else {
+      set.add(tHead.next.val)
+      tHead = tHead.next
+    }
+  }
+  return myHead.next
+};
+```
+
+## 🌟😻✔ 面试题 02.02. 返回倒数第 k 个节点【easy】
+
+[ref](https://leetcode.cn/problems/kth-node-from-end-of-list-lcci/)
+
+链表
+
+```js
+var kthToLast = function(head, k) {
+  let tHead = head, cnt = 1
+  while(cnt < k) {
+    tHead = tHead.next
+    cnt++
+  }
+  let tHead2 = head
+  while(tHead.next) {
+    tHead = tHead.next
+    tHead2 = tHead2.next
+  }
+  return tHead2.val
+};
+```
+
+## 🌟😻✔ 面试题 02.03. 删除中间节点【easy】
+
+[ref](https://leetcode.cn/problems/delete-middle-node-lcci/)
+
+链表
+
+```js
+var deleteNode = function(node) {
+  let prev = null
+  while(node.next) {
+    node.val = node.next.val
+    prev = node
+    node = node.next
+  }
+  prev.next = null
+};
+```
+
 ## 🌟😻✔ 面试题 02.04. 分割链表【medium】
 
 [ref](https://leetcode.cn/problems/partition-list-lcci/)
@@ -24918,6 +25084,66 @@ var addTwoNumbers = function(l1, l2) {
 };
 ```
 
+## 🌟😻✔ 面试题 02.06. 回文链表【easy】
+
+[ref](https://leetcode.cn/problems/palindrome-linked-list-lcci/)
+
+链表
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var isPalindrome = function(head) {
+  const myHead = new ListNode()
+  myHead.next = head
+  let fast = myHead, slow  = myHead
+  while(fast.next && fast.next.next) {
+    fast = fast.next.next
+    slow = slow.next
+  }
+  if(slow === fast) return true
+  let head1 = head, head2 = slow.next
+  slow.next = null, head2 = reverse(head2)
+  while(head1) {
+    if(head1.val !== head2.val) return false
+    head1 = head1.next
+    head2 = head2.next
+  }
+  return true
+};
+
+function reverse(head) {
+  const myHead = new ListNode()
+  
+  while(head) {
+    const next = myHead.next
+    myHead.next = head
+    head = head.next
+    myHead.next.next = next
+  }
+  return myHead.next
+}
+```
+
+## ?🌟😻✔ 面试题 02.07. 链表相交【easy】
+
+[ref](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/)
+
+链表、相交链表
+
+```js
+var getIntersectionNode = function(headA, headB) {
+  let pA = headA, pB = headB
+  while(pA && pB) {
+    if(pA === pB) return pA
+    if(!pA.next && !pB.next) return null
+    pA = pA.next ? pA.next : headB
+    pB = pB.next ? pB.next : headA
+  }
+  return null
+};
+```
+
 ## 🌟😻✔ 面试题 02.08. 环路检测【medium】
 
 [ref](https://leetcode.cn/problems/linked-list-cycle-lcci/)
@@ -24949,6 +25175,40 @@ var detectCycle = function(head) {
 // (n - 1)b + nc - c + c = a
 // (n - 1)b + (n - 1)c + c = a
 // (n-1)(b + c) + c = a
+```
+
+## 🌟😻✔ 面试题 03.01. 三合一【easy】
+
+[ref](https://leetcode.cn/problems/three-in-one-lcci/)
+
+设计题
+
+```js
+
+var TripleInOne = function(stackSize) {
+  this.stackSize = stackSize
+  this.stack = []
+  this.idxes = [0, 1, 2]
+};
+TripleInOne.prototype.push = function(stackNum, value) {
+  if(this.idxes[stackNum] <= (this.stackSize - 1) * 3 + stackNum) {
+    this.stack[this.idxes[stackNum]] = value
+    this.idxes[stackNum] += 3  
+  }
+};
+TripleInOne.prototype.pop = function(stackNum) {
+  if(this.idxes[stackNum] === stackNum) return -1
+  this.idxes[stackNum] -= 3
+  return this.stack[this.idxes[stackNum]]
+};
+TripleInOne.prototype.peek = function(stackNum) {
+  if(this.idxes[stackNum] === stackNum) return -1
+  return this.stack[this.idxes[stackNum] - 3]
+};
+
+TripleInOne.prototype.isEmpty = function(stackNum) {
+  return this.idxes[stackNum] === stackNum
+};
 ```
 
 ## 🌟😻✔ 面试题 03.03. 堆盘子【medium】
@@ -26489,6 +26749,115 @@ var longestWord = function(words) {
 
 ```
 
+## ?🌟😻✔ 面试题 17.17. 多次搜索【medium】
+
+[ref](https://leetcode.cn/problems/multi-search-lcci/)
+
+字典树
+
+```js
+var multiSearch = function(big, smalls) {
+  const m = big.length,n =smalls.length, res = new Array(n).fill(0).map(_ => [])
+  const root = buildTree(smalls)
+  for(let i=0;i<m;i++) {
+    let node = root
+    let j = i
+    while(j < m && node.chl[big[j]]) {
+      node = node.chl[big[j]]
+      j++
+      if(node.e) {
+        res[node.idx].push(i)
+      }
+    }
+  }
+  return res
+};
+
+function buildTree(arr) {
+  const root = new Node()
+  for(let i=0;i<arr.length;i++) {
+    const word = arr[i]
+    let node = root
+    for(let j=0;j<word.length;j++) {
+      if(!node.chl[word[j]]) node.chl[word[j]] = new Node()
+      node = node.chl[word[j]]
+      if(j === word.length - 1) {
+        node.e = true
+        node.idx = i
+      }
+    }
+  }
+  return root
+}
+
+class Node {
+  constructor() {
+    this.e = false
+    this.idx = 0
+    this.chl = {}
+  }
+}
+```
+
+哈希表暴力解法
+
+```js
+var multiSearch = function(big, smalls) {
+  const m = big.length, n = smalls.length, map = new Map(), res = new Array(n).fill(0).map(_ => [])
+  for(let i=0;i<n;i++) {
+    map.set(smalls[i], i)
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=i;j<m;j++) {
+      const target = big.slice(i, j + 1)
+      if(map.has(target)) {
+        res[map.get(target)].push(i)
+      }
+    }
+  }
+  return res
+};
+````
+
+## 🌟😻✔ 面试题 17.18. 最短超串【medium】
+
+[ref](https://leetcode.cn/problems/shortest-supersequence-lcci/)
+
+滑动窗口
+
+```js
+var shortestSeq = function(big, small) {
+  const m = big.length, map = new Map()
+  let diffCnt = small.length
+  for(const num of small) {
+    map.set(num, 1)
+  }
+  let l = 0, r = 0
+  let min = Number.MAX_SAFE_INTEGER, res = []
+  while(r < m) {
+    if(map.has(big[r])) {
+      map.set(big[r], map.get(big[r]) - 1)
+      if(map.get(big[r]) === 0) diffCnt--
+      if(diffCnt === 0 && r - l + 1 < min) {
+        min = r - l + 1
+        res = [l, r]
+      }
+      while(diffCnt === 0) {
+        map.set(big[l], map.get(big[l]) + 1)
+        if(map.get(big[l]) === 1) diffCnt++
+        l++
+        if(diffCnt === 0 && r - l + 1 < min) {
+          min = r - l + 1
+          res = [l, r]
+        }
+      }
+    }
+    r++
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 面试题 17.19. 消失的两个数字【hard】
 
 [ref](https://leetcode.cn/problems/missing-two-lcci/)
@@ -26525,6 +26894,103 @@ function swap(nums, i, j) {
   nums[i] = nums[j]
   nums[j] = t
 }
+```
+
+## ?🌟😻✔ 面试题 17.22. 单词转换【medium】
+
+[ref](https://leetcode.cn/problems/word-transformer-lcci/)
+
+图、深度优先搜索、广度优先搜索
+
+```js
+var findLadders = function(beginWord, endWord, wordList) {
+  wordList.push(beginWord)
+  const wordListSet = new Set(wordList), used = new Set(), connectionMap = new Map()
+  if(!wordListSet.has(endWord)) return []
+  let res = []
+
+  for(const word of wordList) {
+    const relas = new Set()
+    for(let i=0; i< word.length;i++) {
+      for(let j=0;j<26;j++) {
+        const target = word.slice(0, i) + String.fromCharCode('a'.charCodeAt(0) + j) + word.slice(i + 1)
+        if(target !== word && wordListSet.has(target)) {
+          relas.add(target)
+        }
+      }
+    }
+    connectionMap.set(word, relas)
+  }
+  used.add(beginWord)
+  function walk(curr, path) {
+    if(curr === endWord) {
+      res = [...path]
+      return
+    }
+    const nexts = connectionMap.get(curr)
+    if(nexts) {
+      for(const next of nexts) {
+        if(used.has(next)) continue
+        used.add(next)
+        path.push(next)
+        walk(next, path)
+        path.pop()
+      }
+    }
+  }
+  walk(beginWord, [beginWord])
+  return res
+};
+```
+
+## ? 🌟😻✔ 面试题 17.23. 最大黑方阵【medium】
+
+[ref](https://leetcode.cn/problems/max-black-square-lcci/)
+
+矩阵
+
+```js
+var findSquare = function(matrix) {
+  const n = matrix.length
+  const downDp = new Array(n).fill(0).map(_ => new Array(n).fill(0)), rDp = new Array(n).fill(0).map(_ => new Array(n).fill(0))
+  for(let i=n-1;i>=0;i--) {
+    for(let j=0;j<n;j++) {
+      if(matrix[i][j] === 0) {
+        downDp[i][j] = (i + 1 < n ? downDp[i + 1][j] : 0) + 1
+      }
+    }
+  }
+  for(let i=0;i<n;i++) {
+    for(let j=n-1;j>=0;j--) {
+      if(matrix[i][j] === 0) {
+        rDp[i][j] = (j + 1 < n ? rDp[i][j + 1] : 0) + 1
+      }
+    }
+  }
+  let cMax = 0, x, y
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(matrix[i][j] === 0) {
+        let zMin = Math.min(downDp[i][j], rDp[i][j])
+        let k = 1, len = 1
+        while(k <= zMin && i + k - 1 < n && j + k - 1 < n){
+          if(rDp[i + k - 1][j] >= k && downDp[i][j + k - 1] >= k) {
+            len = k
+          }
+          k++
+        }
+        if(cMax < len) {
+          cMax = len
+          x = i, y = j
+        }
+      }
+    }
+  }
+  // console.log(downDp)
+  // console.log(rDp)
+  return cMax === 0? [] : [x, y, cMax]
+};
+
 ```
 
 ## 🌟😻✔ 剑指 Offer II 002. 二进制加法【medium】
@@ -27997,6 +28463,89 @@ var pruneTree = function(root) {
 
 ```
 
+## ??🌟😻✔ 剑指 Offer II 048. 序列化与反序列化二叉树【hard】
+
+[ref](https://leetcode.cn/problems/h54YBf/?favorite=e8X3pBZi)
+
+设计题、二叉树、序列化
+
+```js
+var serialize = function(root) {
+  let res = ''
+  function serializer(node) {
+    if(!node) {
+      res += 'null#'
+      return
+    }
+    res += `${node.val}#`
+    serializer(node.left)
+    serializer(node.right)
+  }
+  serializer(root)
+  return res
+};
+var deserialize = function(data) {
+  let arr = data.split('#'), i = 0
+  console.log(arr)
+  function deserializer() {
+    if(arr[i] === 'null') {
+      i++
+      return null
+    }
+    const node = new TreeNode(+arr[i++])
+    const left = deserializer()
+    const right = deserializer()
+    node.left = left
+    node.right = right
+    return node
+  }
+  return deserializer()
+};
+```
+
+```js
+var serialize = function(root) {
+  let res = ''
+  function serializer(node) {
+    if(!node) {
+      res += '[]'
+      return
+    }
+    res += '['
+    res += `${node.val}`
+    serializer(node.left)
+    serializer(node.right)
+    res += ']'
+  }
+  serializer(root)
+  return res
+};
+var deserialize = function(data) {
+  let i = 0
+  function deserializer() {
+    if(data[i] === '[') i++
+    if(data[i] === ']') {
+      i++
+      return null
+    }
+    let sign = 1
+    if(data[i] === '-') {
+      sign = -1
+      i++
+    }
+    let num = 0
+    while(data[i] >= '0' && data[i] <= '9') num = 10 * num + Number(data[i++])
+    const node = new TreeNode(sign * num)
+    node.left = deserializer()
+    node.right = deserializer()
+    i++
+    return node
+  }
+  return deserializer()
+};
+
+```
+
 ## 🌟😻✔ 剑指 Offer II 049. 从根节点到叶节点的路径数字之和【medium】
 
 [ref](https://leetcode.cn/problems/h54YBf/)
@@ -28127,6 +28676,33 @@ var pathSum = function(root, targetSum) {
   }
   dfs(root, 0)
   return cnt
+};
+```
+
+## 🌟😻✔ 剑指 Offer II 051. 节点之和最大的路径【hard】
+
+[ref](https://leetcode.cn/problems/jC7MId/)
+
+二叉树
+
+```js
+var maxPathSum = function(root) {
+  let max = Number.MIN_SAFE_INTEGER
+  function dfs(node) {
+    if(!node) return 0
+    const leftMax = dfs(node.left)
+    const rightMax = dfs(node.right)
+    max = Math.max(
+      max,
+      node.val,
+      node.val + leftMax,
+      node.val + rightMax,
+      node.val + rightMax + leftMax,
+    )
+    return Math.max(node.val, node.val + leftMax, node.val + rightMax)
+  }
+  dfs(root)
+  return max
 };
 ```
 
@@ -29270,6 +29846,47 @@ var sortList = function(head) {
   slow.next = null
   return merge(sortList(head), sortList(next))
 };
+
+function merge(head1, head2) {
+  const myHead = new ListNode()
+  let tHead = myHead
+  while(head1 && head2) {
+    if(head1.val < head2.val) {
+      tHead.next = head1
+      head1 = head1.next
+    } else {
+      tHead.next = head2
+      head2 = head2.next
+    }
+    tHead = tHead.next
+  }
+  if(head1) {
+    tHead.next = head1
+  }
+  if(head2) {
+    tHead.next = head2
+  }
+  return myHead.next
+}
+```
+
+## 🌟😻✔ 剑指 Offer II 078. 合并排序链表【hard】
+
+[ref](https://leetcode.cn/problems/vvXgSW/)
+
+归并排序
+
+```js
+var mergeKLists = function(lists) {
+  if(!lists.length) return null
+  function mergeSort(arr, l, r) {
+    if(l === r) return arr[l]
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(arr, l, mid), mergeSort(arr, mid + 1, r))
+  }
+  return mergeSort(lists, 0, lists.length - 1)
+};
+
 
 function merge(head1, head2) {
   const myHead = new ListNode()
