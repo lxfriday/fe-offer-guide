@@ -33,6 +33,20 @@
 
 # 刷题日记
 
+- 20221009(13)
+  - [🌟【medium】856. 括号的分数](https://leetcode.cn/problems/score-of-parentheses/) 递归、栈
+  - [🌟【easy】面试题 16.05. 阶乘尾数](https://leetcode.cn/problems/factorial-zeros-lcci/) 模拟
+  - [🌟【easy】面试题 16.11. 跳水板](https://leetcode.cn/problems/diving-board-lcci/) 模拟
+  - [🌟【easy】面试题 16.15. 珠玑妙算](https://leetcode.cn/problems/master-mind-lcci/) 模拟
+  - [🌟【easy】面试题 16.17. 连续数列](https://leetcode.cn/problems/contiguous-sequence-lcci/) 动态规划、数组题
+  - [🌟【easy】面试题 17.01. 不用加号的加法](https://leetcode.cn/problems/add-without-plus-lcci/) 二进制、位运算
+  - [🌟【easy】面试题 17.04. 消失的数字](https://leetcode.cn/problems/missing-number-lcci/) 数组原地操作
+  - ?[🌟【easy】面试题 17.10. 主要元素](https://leetcode.cn/problems/find-majority-element-lcci/) 摩尔排序
+  - [🌟【easy】面试题 17.12. BiNode](https://leetcode.cn/problems/binode-lcci/) 二叉搜索树
+  - [🌟【easy】面试题 17.16. 按摩师](https://leetcode.cn/problems/the-masseuse-lcci/) 动态规划
+  - [🌟【hard】剑指 Offer II 108. 单词演变](https://leetcode.cn/problems/om3reC/) 图、广度优先搜索
+  - ? [🌟【hard】剑指 Offer II 112. 最长递增路径](https://leetcode.cn/problems/fpTFWP/) 图、广度优先搜索、深度优先搜索、记忆化搜索
+  - ?? [🌟【hard】剑指 Offer II 114. 外星文字典](https://leetcode.cn/problems/Jf1JuT/) 图、拓扑排序、广度优先搜索
 - 20221008(16)
   - [🌟【medium】870. 优势洗牌](https://leetcode.cn/problems/advantage-shuffle/) 数组题、排序
   - [🌟【easy】面试题 03.02. 栈的最小值](https://leetcode.cn/problems/min-stack-lcci/) 设计题、栈
@@ -928,6 +942,7 @@
 - ??🌟【easy】[面试题 05.03. 翻转数位](https://leetcode.cn/problems/reverse-bits-lcci/) 二进制、位运算
 - ?🌟【easy】[面试题 05.06. 整数转换](https://leetcode.cn/problems/convert-integer-lcci/) 二进制、位运算
 - ?🌟【easy】[面试题 05.07. 配对交换](https://leetcode.cn/problems/exchange-lcci/) 二进制、位运算
+- 🌟【easy】[面试题 17.01. 不用加号的加法](https://leetcode.cn/problems/add-without-plus-lcci/) 二进制、位运算
 
 ## 数字大小、数字、数学、数学规律
 
@@ -1058,6 +1073,8 @@
 - ??🌟【medium】[面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
 - 🌟【easy】[1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum/) 数组题
 - 🌟【medium】[870. 优势洗牌](https://leetcode.cn/problems/advantage-shuffle/) 数组题、排序
+- 🌟【easy】[面试题 17.04. 消失的数字](https://leetcode.cn/problems/missing-number-lcci/) 数组原地操作
+- ?🌟【easy】[面试题 17.10. 主要元素 消失的数字](https://leetcode.cn/problems/find-majority-element-lcci/) 摩尔排序
 
 ### 排列组合
 
@@ -1154,6 +1171,7 @@
 - 🌟【medium】[921. 使括号有效的最少添加](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/) 栈
 - 🌟【easy】[面试题 03.02. 栈的最小值](https://leetcode.cn/problems/min-stack-lcci/) 设计题、栈
 - ??🌟【easy】[面试题 08.06. 汉诺塔问题](https://leetcode.cn/problems/hanota-lcci/) 栈、递归
+- 🌟【medium】[856. 括号的分数](https://leetcode.cn/problems/score-of-parentheses/) 递归、栈
 
 ### 单调栈
 
@@ -1308,6 +1326,7 @@
 - 🌟【medium】[96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/) 二叉搜索树
 - ? 🌟【medium】[173. 二叉搜索树迭代器](https://leetcode.cn/problems/binary-search-tree-iterator/) 迭代器、二叉搜索树
 - ? 🌟【medium】[669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/) 二叉搜索树、深度优先搜索
+- 🌟【easy】[面试题 17.12. BiNode](https://leetcode.cn/problems/binode-lcci/) 二叉搜索树
 
 ## 堆、小顶堆、大顶堆、优先队列
 
@@ -1339,6 +1358,7 @@
 - ??? 🌟【hard】[827. 最大人工岛](https://leetcode.cn/problems/making-a-large-island/) 矩阵、深度优先搜索
 - 🌟【medium】[面试题 16.19. 水域大小](https://leetcode.cn/problems/pond-sizes-lcci/) DFS、深度优先搜索
 - ?🌟【medium】[面试题 17.23. 最大黑方阵](https://leetcode.cn/problems/max-black-square-lcci/) 矩阵
+- ? 🌟【hard】[剑指 Offer II 112. 最长递增路径](https://leetcode.cn/problems/fpTFWP/) 图、广度优先搜索、深度优先搜索、记忆化搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1358,6 +1378,7 @@
 - 🌟【medium】[841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/) 图、深度优先搜索、广度优先搜索
 - ?🌟【medium】[面试题 17.07. 婴儿名字](https://leetcode.cn/problems/baby-names-lcci/) 图、广度优先搜索
 - ?🌟【medium】[面试题 17.22. 单词转换](https://leetcode.cn/problems/word-transformer-lcci/) 图、深度优先搜索
+- 🌟【hard】[剑指 Offer II 108. 单词演变](https://leetcode.cn/problems/om3reC/) 图、广度优先搜索
 
 ### 并查集
 
@@ -20131,6 +20152,50 @@ function swap(str, i, j) {
 }
 ```
 
+## 🌟😻✔ 856. 括号的分数【medium】
+
+[ref](https://leetcode.cn/problems/score-of-parentheses/)
+
+递归、栈
+
+```js
+var scoreOfParentheses = function(s) {
+  const stack = [0]
+  for(let c of s) {
+    if(c === '(') stack.push(0)
+    else {
+      const curr = stack.pop()
+      stack.push(stack.pop() + Math.max(1, 2 * curr))
+    }
+  }
+  return stack.pop()
+};
+```
+
+```js
+var scoreOfParentheses = function(s) {
+  return calc(s, 0, s.length - 1)
+};
+function calc(s, l, r) {
+  if(l > r) return 0
+  let sum = 0, lCnt = 0, rCnt = 0, i = l
+  while(i<=r) {
+    if(s[i] === '(') lCnt++
+    else rCnt++
+    if(lCnt === rCnt) break
+    i++
+  }
+  if(i === l + 1) {
+    sum += 1
+    sum += calc(s, i + 1, r)
+  } else {
+    sum += 2 * calc(s, l + 1, i - 1)
+    sum += calc(s, i + 1, r)
+  }
+  return sum
+}
+```
+
 ## ???🌟😻✔ 857. 雇佣 K 名工人的最低成本【hard】
 
 [ref](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/)
@@ -26446,6 +26511,23 @@ var tictactoe = function(board) {
 };
 ```
 
+## 🌟😻✔ 面试题 16.05. 阶乘尾数【easy】
+
+[ref](https://leetcode.cn/problems/factorial-zeros-lcci/)
+
+模拟
+
+```js
+var trailingZeroes = function(n) {
+  let cnt = 0
+  while(n) {
+    n = Math.floor(n / 5)
+    cnt += n
+  }
+  return cnt
+};
+```
+
 ## 🌟😻✔ 面试题 16.06. 最小差【medium】
 
 [ref](https://leetcode.cn/problems/smallest-difference-lcci/)
@@ -26512,6 +26594,24 @@ var maxAliveYear = function(birth, death) {
   for(let i=0;i<101;i++) {
     if(arr[i] === max) return i + 1900
   }
+};
+```
+
+## 🌟😻✔ 面试题 16.11. 跳水板【easy】
+
+[ref](https://leetcode.cn/problems/diving-board-lcci/)
+
+模拟
+
+```js
+var divingBoard = function(shorter, longer, k) {
+  if(k === 0) return []
+  if(shorter === longer) return [k*longer]
+  const res = []
+  for(let i=0;i<=k;i++) {
+    res.push(longer * i + shorter * (k-i))
+  }
+  return res
 };
 ```
 
@@ -26602,6 +26702,35 @@ var bestLine = function(points) {
 };
 ```
 
+## 🌟😻✔ 面试题 16.15. 珠玑妙算【easy】
+
+[ref](https://leetcode.cn/problems/master-mind-lcci/)
+
+模拟
+
+```js
+var masterMind = function(solution, guess) {
+  let yesCnt = 0, fackCnt = 0, m1 = new Map(), m2 = new Map()
+  for(let i=0;i<4;i++) {
+    if(solution[i] === guess[i]) {
+      yesCnt++
+    } else {
+      m1.set(solution[i], (m1.get(solution[i]) || 0) + 1)
+      m2.set(guess[i], (m2.get(guess[i]) || 0) + 1)
+    }
+  }
+  for(const [c, cnt] of m2.entries()) {
+    for(let i=0;i<cnt;i++) {
+      if(m1.get(c) > 0) {
+        m1.set(c, m1.get(c) - 1)
+        fackCnt++
+      }
+    }
+  }
+  return [yesCnt, fackCnt]
+};
+```
+
 ## ??🌟😻✔ 面试题 16.16. 部分排序【medium】
 
 [ref](https://leetcode.cn/problems/sub-sort-lcci/)
@@ -26628,6 +26757,26 @@ var subSort = function(array) {
     }
   }
   return stack.length === n ? [-1, -1] : [l, r]
+};
+```
+
+## 🌟😻✔ 面试题 16.17. 连续数列【easy】
+
+[ref](https://leetcode.cn/problems/contiguous-sequence-lcci/)
+
+动态规划、数组题
+
+```js
+var maxSubArray = function(nums) {
+  const n = nums.length
+  let i = 1, max = nums[0], prevSum = nums[0]
+  while(i < n) {
+    if(prevSum < 0) prevSum = 0
+    prevSum += nums[i]
+    max = Math.max(max, prevSum)
+    i++
+  }
+  return max
 };
 ```
 
@@ -26894,6 +27043,53 @@ var calculate = function(s) {
 };
 ```
 
+## 🌟😻✔ 面试题 17.01. 不用加号的加法【easy】
+
+[ref](https://leetcode.cn/problems/add-without-plus-lcci/)
+
+二进制、位运算
+
+```js
+var add = function(a, b) {
+  while(a) {
+    let pa = a
+    a = a & b
+    a <<= 1
+    b = pa ^ b
+  }
+  return b
+};
+```
+
+## 🌟😻✔ 面试题 17.04. 消失的数字【easy】
+
+[ref](https://leetcode.cn/problems/missing-number-lcci/)
+
+数组原地操作
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var missingNumber = function(nums) {
+  const n = nums.length
+  for(let i=0;i<n;i++) {
+    while(nums[i] !== i && nums[i] < n) {
+      swap(nums, i, nums[i])
+    }
+  }
+  for(let i=0;i<n;i++) {
+    if(nums[i] !== i) return i
+  }
+  return n
+};
+
+function swap(nums, i, j) {
+  const t = nums[i]
+  nums[i] = nums[j]
+  nums[j] = t
+}
+```
+
 ## ?🌟😻✔ 面试题 17.05.  字母与数字【medium】
 
 [ref](https://leetcode.cn/problems/find-longest-subarray-lcci/)
@@ -27055,6 +27251,36 @@ var getKthMagicNumber = function(k) {
 };
 ```
 
+## ?🌟😻✔ 面试题 17.10. 主要元素【easy】
+
+[ref](https://leetcode.cn/problems/find-majority-element-lcci/)
+
+摩尔排序
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var majorityElement = function(nums) {
+  let num = nums[0], cnt = 1, i = 1
+  while(i < nums.length) {
+    if(nums[i] === num) cnt++
+    else if(cnt === 0) {
+      num = nums[i]
+      cnt++
+    } else {
+      cnt--
+    }
+    i++
+  }
+  cnt = 0
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] === num) cnt++
+  }
+  return cnt > nums.length / 2 ? num : -1
+};
+
+```
+
 ## ?🌟😻✔ 面试题 17.11. 单词距离【medium】
 
 [ref](https://leetcode.cn/problems/find-closest-lcci/)
@@ -27076,6 +27302,33 @@ var findClosest = function(words, word1, word2) {
     }
   }
   return min
+};
+```
+
+## 🌟😻✔ 面试题 17.12. BiNode【easy】
+
+[ref](https://leetcode.cn/problems/binode-lcci/)
+
+二叉树、二叉搜索树
+
+```js
+var convertBiNode = function(root) {
+  let head = null, prev = null
+  function dfs(node) {
+    if(!node) return
+    const left = node.left
+    const right = node.right
+    node.left = null
+    dfs(left)
+    if(!head) head = node
+    if(prev) {
+      prev.right = node
+    }
+    prev = node
+    dfs(right)
+  }
+  dfs(root)
+  return head
 };
 ```
 
@@ -27180,7 +27433,29 @@ var longestWord = function(words) {
   }
   return ''
 };
+```
 
+## 🌟😻✔ 面试题 17.16. 按摩师【easy】
+
+[ref](https://leetcode.cn/problems/the-masseuse-lcci/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var massage = function(nums) {
+  if(nums.length === 0) return 0
+  if(nums.length <= 2) return Math.max(...nums)
+  const n = nums.length
+  let a = nums[0], b = Math.max(nums[0], nums[1])
+  for(let i=2;i<n;i++) {
+    let pa = a, pb = b
+    b = Math.max(nums[i] + pa, pb)
+    a = pb
+  }
+  return b
+};
 ```
 
 ## ?🌟😻✔ 面试题 17.17. 多次搜索【medium】
@@ -31169,7 +31444,7 @@ var maxAreaOfIsland = function(grid) {
 };
 ```
 
-## ? 🌟😻✔ 剑指 Offer II 105. 岛屿的最大面积【medium】
+## ? 🌟😻✔ 剑指 Offer II 106. 二分图【medium】
 
 [ref](https://leetcode.cn/problems/vEAB3K/)
 
@@ -31251,6 +31526,50 @@ var updateMatrix = function(mat) {
   return mat
 };
 
+```
+
+## 🌟😻✔ 剑指 Offer II 108. 单词演变【hard】
+
+[ref](https://leetcode.cn/problems/om3reC/)
+
+图、广度优先搜索、深度优先搜索
+
+```js
+var ladderLength = function(beginWord, endWord, wordList) {
+  const wordListSet = new Set(wordList)
+  if(!wordListSet.has(endWord)) return 0
+  wordListSet.add(beginWord)
+  const connectMap = new Map()
+  for(let word of wordListSet) {
+    const s = new Set()
+    for(let i=0;i<word.length;i++) {
+      for(let j=0;j<26;j++) {
+        const target = word.slice(0, i) + String.fromCharCode('a'.charCodeAt(0) + j) + word.slice(i + 1)
+        if(wordListSet.has(target)) {
+          s.add(target)
+        }
+      }
+    }
+    connectMap.set(word, s)
+  }
+  let q = [[beginWord, 1]]
+  const used = new Set([beginWord])
+  while(q.length) {
+    const tq = []
+    for(let [word, depth] of q) {
+      if(word === endWord) return depth
+      const nexts = connectMap.get(word)
+      for(let next of nexts) {
+        if(!used.has(next)) {
+          used.add(next)
+          tq.push([next, depth + 1])
+        }
+      }
+    }
+    q = tq
+  }
+  return 0
+};
 ```
 
 ## 🌟😻✔ 剑指 Offer II 109. 开密码锁【medium】
@@ -31389,6 +31708,68 @@ var calcEquation = function(equations, values, queries) {
 };
 ```
 
+## ?🌟😻✔ 剑指 Offer II 112. 最长递增路径【hard】
+
+[ref](https://leetcode.cn/problems/fpTFWP/)
+
+图、广度优先搜索、深度优先搜索、记忆化搜索
+
+```js
+
+var longestIncreasingPath = function(matrix) {
+  const m = matrix.length, n = matrix[0].length, dp = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+
+  function walk(i, j) {
+    if(dp[i][j]) return dp[i][j]
+    let depth = 0
+
+    if(i-1>=0 && matrix[i-1][j] > matrix[i][j]) {
+      depth = Math.max(depth, walk(i - 1, j))
+    }
+    if(i+1<m && matrix[i+1][j] > matrix[i][j]) {
+      depth = Math.max(depth, walk(i + 1, j))
+    }
+    if(j-1>=0 && matrix[i][j-1] > matrix[i][j]) {
+      depth = Math.max(depth, walk(i, j - 1))
+    }
+    if(j+1<n && matrix[i][j + 1] > matrix[i][j]) {
+      depth = Math.max(depth, walk(i, j + 1))
+    }
+    const ret = depth + 1
+    dp[i][j] = ret
+    return ret
+  }
+  let q = []
+  let max = Number.MIN_SAFE_INTEGER, maxIdxes = []
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(!dp[i][j]) {
+        walk(i, j)
+      }
+      if(dp[i][j] > max) {
+        max = Math.max(max, dp[i][j])
+        q = [[i, j, max]]
+      }
+    }
+  }
+  const res = []
+  const directs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  while(q.length) {
+    const [x, y, depth] = q.shift()
+    res.push([x, y])
+    for(let i=0;i<4;i++) {
+      const xx = x + directs[i][0], yy = y + directs[i][1]
+      if(xx >= 0 && xx < m && yy >= 0 && yy < n && dp[xx][yy] === depth - 1) {
+        q.push([xx, yy, depth - 1])
+        break
+      }
+    }
+  }
+  console.log(res)
+  return res.length
+};
+```
+
 ## ?🌟😻✔ 剑指 Offer II 113. 课程顺序【medium】
 
 [ref](https://leetcode.cn/problems/QA2IGt/)
@@ -31433,6 +31814,83 @@ var findOrder = function(numCourses, prerequisites) {
   
   return res.length === numCourses ? res : []
 };
+```
+
+## ??🌟😻✔ 剑指 Offer II 114. 外星文字典【hard】
+
+[ref](https://leetcode.cn/problems/Jf1JuT/)
+
+图、拓扑排序、广度优先搜索
+
+```js
+var alienOrder = function(words) {
+  const connectionMap = new Map(), n = words.length, chars = new Set()
+  let isValid = true
+  function walk(l, r, idx) {
+    let i = l
+    while(i <= r) {
+      if(idx >= words[i].length) {
+        i++
+        continue
+      }
+      chars.add(words[i][idx])
+      let j = i
+      while(j + 1 <= r) {
+        if(words[j][idx] === words[j + 1][idx]) {
+          j++
+        } else {
+          if(idx >= words[j + 1].length) isValid = false
+          break
+        }
+      }
+      if(j + 1 <= r) {
+        walk(i, j, idx + 1)
+        if(!connectionMap.has(words[j][idx])) {
+          connectionMap.set(words[j][idx], new Set())
+        }
+        connectionMap.get(words[j][idx]).add(words[j + 1][idx])
+      } else {
+        walk(i, r, idx + 1)
+      }
+      i = j + 1
+    }
+  }
+  walk(0, n - 1, 0)
+  if(!isValid) return ''
+  const latterMap = new Map()
+  for(const c of chars) {
+    let q = [c]
+    const used = new Set()
+    while(q.length) {
+      const tq = []
+      for(let i=0;i<q.length;i++) {
+        const curr = q[i]
+        const nexts = connectionMap.get(curr)
+        if(nexts) {
+          for(const next of nexts) {
+            if(next === c) isValid = false
+            if(!used.has(next)) {
+              used.add(next)
+              tq.push(next)
+            }
+          }
+        }
+      }
+      q = tq
+    }
+    latterMap.set(c, used.size)
+  }
+  const res = Array.from(latterMap).sort((a, b) => {
+    if(b[1] !== a[1]) return b[1] - a[1]
+    else {
+      if(a[0] < b[0]) return -1
+      if(a[0] > b[0]) return 1
+      return 0
+    }
+  }).map(_ => _[0]).join('')
+  return isValid ? res : ''
+};
+
 ```
 
 ## ?🌟😻✔ 剑指 Offer II 115. 重建序列【medium】
