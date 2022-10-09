@@ -33,6 +33,23 @@
 
 # 刷题日记
 
+- 20221008(16)
+  - [🌟【medium】870. 优势洗牌](https://leetcode.cn/problems/advantage-shuffle/) 数组题、排序
+  - [🌟【easy】面试题 03.02. 栈的最小值](https://leetcode.cn/problems/min-stack-lcci/) 设计题、栈
+  - [🌟【easy】面试题 03.04. 化栈为队](https://leetcode.cn/problems/implement-queue-using-stacks-lcci/) 设计题、栈
+  - [🌟【easy】面试题 03.06. 动物收容所](https://leetcode.cn/problems/animal-shelter-lcci/) 设计题、队列
+  - [🌟【easy】面试题 04.02. 最小高度树](https://leetcode.cn/problems/minimum-height-tree-lcci/) 二叉树、二叉搜索树
+  - [🌟【easy】面试题 04.04. 检查平衡性](https://leetcode.cn/problems/check-balance-lcci/) 二叉树
+  - ?[🌟【easy】面试题 05.01. 插入](https://leetcode.cn/problems/insert-into-bits-lcci/) 二进制、位运算
+  - ??[🌟【easy】面试题 05.03. 翻转数位](https://leetcode.cn/problems/reverse-bits-lcci/) 二进制、位运算
+  - ?[🌟【easy】面试题 05.06. 整数转换](https://leetcode.cn/problems/convert-integer-lcci/) 二进制、位运算
+  - ?[🌟【easy】面试题 05.07. 配对交换](https://leetcode.cn/problems/exchange-lcci/) 二进制、位运算
+  - [🌟【easy】面试题 08.01. 三步问题](https://leetcode.cn/problems/three-steps-problem-lcci/) 动态规划
+  - [🌟【easy】面试题 08.03. 魔术索引](https://leetcode.cn/problems/magic-index-lcci/) 数组题
+  - ??[🌟【easy】面试题 08.06. 汉诺塔问题](https://leetcode.cn/problems/hanota-lcci/) 栈、递归
+  - [🌟【easy】面试题 08.10. 颜色填充](https://leetcode.cn/problems/color-fill-lcci/) 矩阵
+  - [🌟【easy】面试题 10.01. 合并排序的数组](https://leetcode.cn/problems/sorted-merge-lcci/) 归并排除、原地排序
+  - ?[🌟【easy】面试题 10.05. 稀疏数组搜索](https://leetcode.cn/problems/sparse-array-search-lcci/) 二分搜索、稀疏数组
 - 20221007(16)
   - [🌟【easy】1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum/) 数组题
   - ?[🌟【medium】面试题 17.17. 多次搜索](https://leetcode.cn/problems/multi-search-lcci/) 字典树
@@ -61,7 +78,7 @@
   - ?[🌟【medium】面试题 17.11. 单词距离](https://leetcode.cn/problems/find-closest-lcci/) 模拟
   - ??[🌟【medium】面试题 17.13. 恢复空格](https://leetcode.cn/problems/re-space-lcci/) 动态规划、背包问题、完全背包
   - ??[🌟【medium】面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
-  - ???[🌟【medium】927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
+  - ???[🌟【hard】927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
 - 20221005(11)
   - [🌟【medium】811. 子域名访问计数](https://leetcode.cn/problems/subdomain-visit-count/) 哈希表
   - [🌟【medium】面试题 16.04. 井字游戏](https://leetcode.cn/problems/tic-tac-toe-lcci/) 模拟
@@ -907,6 +924,10 @@
 - ? 🌟【medium】[剑指 Offer II 005. 单词长度的最大乘积](https://leetcode.cn/problems/aseY1I/) 位运算
 - 🌟【medium】[面试题 05.02. 二进制数转字符串](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi) 二进制
 - ? 🌟【medium】[面试题 16.01. 交换数字](https://leetcode.cn/problems/swap-numbers-lcci/) 二进制、位运算
+- ?🌟【easy】[面试题 05.01. 插入](https://leetcode.cn/problems/insert-into-bits-lcci/) 二进制、位运算
+- ??🌟【easy】[面试题 05.03. 翻转数位](https://leetcode.cn/problems/reverse-bits-lcci/) 二进制、位运算
+- ?🌟【easy】[面试题 05.06. 整数转换](https://leetcode.cn/problems/convert-integer-lcci/) 二进制、位运算
+- ?🌟【easy】[面试题 05.07. 配对交换](https://leetcode.cn/problems/exchange-lcci/) 二进制、位运算
 
 ## 数字大小、数字、数学、数学规律
 
@@ -1036,6 +1057,7 @@
 - 🌟【medium】[面试题 16.24. 数对和](https://leetcode.cn/problems/pairs-with-sum-lcci/) 哈希表、数组
 - ??🌟【medium】[面试题 17.15. 最长单词](https://leetcode.cn/problems/longest-word-lcci/) 递归、哈希表、数组
 - 🌟【easy】[1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum/) 数组题
+- 🌟【medium】[870. 优势洗牌](https://leetcode.cn/problems/advantage-shuffle/) 数组题、排序
 
 ### 排列组合
 
@@ -1130,6 +1152,8 @@
 - ?🌟【medium】[面试题 03.03. 堆盘子](https://leetcode.cn/problems/stack-of-plates-lcci/) 栈
 - ?🌟【medium】[面试题 03.05. 栈排序](https://leetcode.cn/problems/sort-of-stacks-lcci/) 栈
 - 🌟【medium】[921. 使括号有效的最少添加](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/) 栈
+- 🌟【easy】[面试题 03.02. 栈的最小值](https://leetcode.cn/problems/min-stack-lcci/) 设计题、栈
+- ??🌟【easy】[面试题 08.06. 汉诺塔问题](https://leetcode.cn/problems/hanota-lcci/) 栈、递归
 
 ### 单调栈
 
@@ -1502,6 +1526,7 @@
 - 🌟【medium】[面试题 10.03. 搜索旋转数组](https://leetcode.cn/problems/search-rotate-array-lcci/) 二分搜索
 - 🌟【medium】[面试题 16.06. 最小差](https://leetcode.cn/problems/smallest-difference-lcci/) 二分搜索
 - ?🌟【medium】[面试题 17.08. 马戏团人塔](https://leetcode.cn/problems/circus-tower-lcci/) 二分搜索、俄罗斯套娃问题
+- ?🌟【easy】[面试题 10.05. 稀疏数组搜索](https://leetcode.cn/problems/sparse-array-search-lcci/) 二分搜索、稀疏数组
 
 ## 排序算法的应用
 
@@ -15081,6 +15106,16 @@ LFUCache.prototype.put = function(key, value) {
 模拟、推断、规律
 
 ```js
+var convertInteger = function(x, y) {
+  let num = ((x ^ y) >>> 0).toString(2), cnt = 0
+  for(let i=0;i<32;i++) {
+    if(num[i] === '1') cnt++
+  }
+  return cnt
+};
+```
+
+```js
 var hammingDistance = function(x, y) {
   let res = 0
   while(x !== y) {
@@ -20249,6 +20284,41 @@ var shortestSubarray = function(nums, k) {
 };
 ```
 
+## 🌟😻✔ 870. 优势洗牌【medium】
+
+[ref](https://leetcode.cn/problems/advantage-shuffle/)
+
+数组题、排序
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN) 不算返回的res数组
+var advantageCount = function(nums1, nums2) {
+  const n = nums2.length
+  nums1.sort((a, b) => a - b)
+  for(let j=0;j<n;j++) {
+    nums2[j] = {idx:j, v:nums2[j]}
+  }
+  nums2.sort((a, b) => a.v - b.v)
+  const res = new Array(n)
+  const tmp = []
+  let i = 0, j = 0
+  while(i < n) {
+    if(nums1[i] > nums2[j].v) {
+      res[nums2[j].idx] = nums1[i]
+      j++
+    } else {
+      tmp.push(nums1[i])
+    }
+    i++
+  }
+  for(let i=0;i<n;i++) {
+    if(res[i] === undefined) res[i] = tmp.pop()
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 875. 爱吃香蕉的珂珂【medium】
 
 [ref](https://leetcode.cn/problems/koko-eating-bananas/)
@@ -25211,6 +25281,37 @@ TripleInOne.prototype.isEmpty = function(stackNum) {
 };
 ```
 
+## 🌟😻✔ 面试题 03.02. 栈的最小值【easy】
+
+[ref](https://leetcode.cn/problems/min-stack-lcci/)
+
+设计题、栈
+
+```js
+var MinStack = function() {
+  this.stack = []
+  this.min = []
+};
+MinStack.prototype.push = function(x) {
+  this.stack.push(x)
+  if(!this.min.length || this.min[this.min.length - 1] >= x) {
+    this.min.push(x)
+  } else {
+    this.min.push(this.min[this.min.length - 1])
+  }
+};
+MinStack.prototype.pop = function() {
+  this.min.pop()
+  return this.stack.pop()
+};
+MinStack.prototype.top = function() {
+  return this.stack[this.stack.length - 1]
+};
+MinStack.prototype.getMin = function() {
+  return this.min[this.min.length - 1]
+};
+```
+
 ## 🌟😻✔ 面试题 03.03. 堆盘子【medium】
 
 [ref](https://leetcode.cn/problems/stack-of-plates-lcci/)
@@ -25244,6 +25345,40 @@ StackOfPlates.prototype.popAt = function(index) {
 
 ```
 
+## 🌟😻✔ 面试题 03.04. 化栈为队【easy】
+
+[ref](https://leetcode.cn/problems/implement-queue-using-stacks-lcci/)
+
+设计题、栈
+
+```js
+var MyQueue = function() {
+  this.stack = []
+  this.tmpStack = []
+};
+MyQueue.prototype.push = function(x) {
+  while(this.stack.length) {
+    this.tmpStack.push(this.stack.pop())
+  }
+  this.tmpStack.push(x)
+};
+MyQueue.prototype.pop = function() {
+  while(this.tmpStack.length) {
+    this.stack.push(this.tmpStack.pop())
+  }
+  return this.stack.pop()
+};
+MyQueue.prototype.peek = function() {
+  while(this.tmpStack.length) {
+    this.stack.push(this.tmpStack.pop())
+  }
+  return this.stack[this.stack.length - 1]
+};
+MyQueue.prototype.empty = function() {
+  return this.stack.length === 0 && this.tmpStack.length === 0
+};
+```
+
 ## ?🌟😻✔ 面试题 03.05. 栈排序【medium】
 
 [ref](https://leetcode.cn/problems/sort-of-stacks-lcci/)
@@ -25275,6 +25410,39 @@ SortedStack.prototype.isEmpty = function() {
   return this.stack.length === 0
 };
 
+```
+
+## 🌟😻✔ 面试题 03.06. 动物收容所【medium】
+
+[ref](https://leetcode.cn/problems/animal-shelter-lcci/)
+
+队列、设计题
+
+```js
+var AnimalShelf = function() {
+  this.q = [[], []]
+};
+AnimalShelf.prototype.enqueue = function(animal) {
+  this.q[animal[1]].push(animal[0])
+};
+AnimalShelf.prototype.dequeueAny = function() {
+  if(!this.q[1].length && !this.q[0].length) return [-1, -1]
+  else if(this.q[0].length && !this.q[1].length) return [this.q[0].shift(), 0]
+  else if(!this.q[0].length && this.q[1].length) return [this.q[1].shift(), 1]
+  else if(this.q[0][0] < this.q[1][0]) {
+    return [this.q[0].shift(), 0]
+  } else {
+    return [this.q[1].shift(), 1]
+  }
+};
+AnimalShelf.prototype.dequeueDog = function() {
+  if(!this.q[1].length) return [-1, -1]
+  return [this.q[1].shift(), 1]
+};
+AnimalShelf.prototype.dequeueCat = function() {
+  if(!this.q[0].length) return [-1, -1]
+  return [this.q[0].shift(), 0]
+};
 ```
 
 ## 🌟😻✔ 面试题 04.01. 节点间通路【medium】
@@ -25315,6 +25483,27 @@ var findWhetherExistsPath = function(n, graph, start, target) {
 };
 ```
 
+## 🌟😻✔ 面试题 04.02. 最小高度树【easy】
+
+[ref](https://leetcode.cn/problems/minimum-height-tree-lcci/)
+
+二叉树、二叉搜索树
+
+```js
+var sortedArrayToBST = function(nums) {
+  function create(l, r) {
+    if(l > r) return null
+    if(l === r) return new TreeNode(nums[l])
+    const mid = Math.floor((l+r) / 2)
+    const node = new TreeNode(nums[mid])
+    node.left = create(l, mid - 1)
+    node.right = create(mid + 1, r)
+    return node
+  }
+  return create(0, nums.length - 1)
+};
+```
+
 ## 🌟😻✔ 面试题 04.03. 特定深度节点链表【medium】
 
 [ref](https://leetcode.cn/problems/list-of-depth-lcci/)
@@ -25341,6 +25530,27 @@ var listOfDepth = function(tree) {
     res.push(myHead.next)
   }
   return res
+};
+```
+
+## 🌟😻✔ 面试题 04.04. 检查平衡性【easy】
+
+[ref](https://leetcode.cn/problems/check-balance-lcci/)
+
+二叉树
+
+```js
+var isBalanced = function(root) {
+  let is = true
+  function dfs(node) {
+    if(!node) return 0
+    const lDepth = dfs(node.left)
+    const rDepth = dfs(node.right)
+    if(Math.abs(lDepth - rDepth) > 1) is = false
+    return Math.max(lDepth, rDepth) + 1
+  }
+  dfs(root)
+  return is
 };
 ```
 
@@ -25469,6 +25679,28 @@ var pathSum = function(root, sum) {
 };
 ```
 
+## ? 🌟😻✔ 面试题 05.01. 插入【medium】
+
+[ref](https://leetcode.cn/problems/insert-into-bits-lcci/)
+
+二进制、位运算
+
+```js
+var insertBits = function(N, M, i, j) {
+  let res = 0
+  for(let k=0;k<32;k++) {
+    let v
+    if(k >= i && k <= j) {
+      v = ((M >> (k - i)) & 1)
+    } else {
+      v = ((N >> k) & 1)
+    }
+    res |= (v << k)
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 面试题 05.02. 二进制数转字符串【medium】
 
 [ref](https://leetcode.cn/problems/bianry-number-to-string-lcci/?favorite=xb9lfcwi)
@@ -25496,6 +25728,90 @@ var printBin = function(num) {
 // 0  0.101
 ```
 
+## 🌟😻✔ 面试题 05.03. 翻转数位【easy】
+
+[ref](https://leetcode.cn/problems/reverse-bits-lcci/)
+
+二进制、位运算
+
+```js
+// >> 和 >>> 的区别：https://zhidao.baidu.com/question/1495631221535712979.html
+var reverseBits = function(num) {
+  num = (num >>> 0).toString(2)
+  num = new Array(32 - num.length).fill('0').join('') + num
+  let max = 0, l = 0, r = 0, zeroCnt = 0
+  while(r < 32) {
+    if(num[r] === '0') {
+      zeroCnt++
+    }
+    while(zeroCnt > 1) {
+      if(num[l] === '0') zeroCnt--
+      l++
+    }
+    max = Math.max(max, r - l + 1)
+    r++
+  }
+  return max
+};
+```
+
+## ?🌟😻✔ 面试题 05.06. 整数转换【easy】
+
+[ref](https://leetcode.cn/problems/convert-integer-lcci/)
+
+二进制、位运算
+
+```js
+var convertInteger = function(A, B) {
+  A = (A >>> 0).toString(2)
+  B = (B >>> 0).toString(2)
+  A = new Array(32 - A.length).fill(0).join('') + A
+  B = new Array(32 - B.length).fill(0).join('') + B
+  let cnt = 0
+  for(let i=0;i<32;i++) {
+    if(A[i] !== B[i]) cnt++
+  }
+  return cnt
+};
+```
+
+## 🌟😻✔ 面试题 05.07. 配对交换【easy】
+
+[ref](https://leetcode.cn/problems/exchange-lcci/)
+
+二进制、位运算
+
+```js
+var exchangeBits = function(num) {
+  let a = 0b10101010101010101010101010101010, b = 0b01010101010101010101010101010101
+  a &= num, b &= num
+  a >>= 1
+  b <<= 1
+  return (a | b)
+};
+```
+
+## 🌟😻✔ 面试题 08.01. 三步问题【easy】
+
+[ref](https://leetcode.cn/problems/three-steps-problem-lcci/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var waysToStep = function(n) {
+  const mod = 1000000007
+  const dp = new Array(n + 1).fill(1)
+  dp[2] = 2
+  dp[3] = 4
+  for(let i=4;i<=n;i++) {
+    dp[i] = ((dp[i-1] + dp[i-2]) % mod + dp[i-3]) % mod
+  }
+  return dp[n]
+};
+```
+
 ## 🌟😻✔ 面试题 08.02. 迷路的机器人【medium】
 
 [ref](https://leetcode.cn/problems/robot-in-a-grid-lcci/)
@@ -25520,6 +25836,24 @@ var pathWithObstacles = function(grid) {
   }
   walk(0, 0, [])
   return res
+};
+```
+
+## 🌟😻✔ 面试题 08.03. 魔术索引【easy】
+
+[ref](https://leetcode.cn/problems/magic-index-lcci/)
+
+数组题
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findMagicIndex = function(nums) {
+  for(let i=0;i<nums.length;i++) {
+    if(i === nums[i]) return i
+    if(nums[i] > i) i = nums[i] - 1
+  }
+  return -1
 };
 ```
 
@@ -25560,6 +25894,28 @@ var multiply = function(A, B) {
   return A + multiply(A, B - 1)
 };
 
+```
+
+## ??🌟😻✔ 面试题 08.06. 汉诺塔问题【easy】
+
+[ref](https://leetcode.cn/problems/hanota-lcci/)
+
+栈、递归
+
+```js
+var hanota = function(A, B, C) {
+  moveA2C(A, B, C, A.length)
+};
+function moveA2C(A, B, C, len) {
+  console.log(A, B, C)
+  if(len === 1) {
+    C.push(A.pop())
+    return
+  }
+  moveA2C(A, C, B, len-1)
+  moveA2C(A, B, C, 1)
+  moveA2C(B, A, C, len - 1)
+}
 ```
 
 ## 🌟😻✔ 面试题 08.07. 无重复字符串的排列组合【medium】
@@ -25647,6 +26003,31 @@ var generateParenthesis = function(n) {
 };
 ```
 
+## 🌟😻✔ 面试题 08.10. 颜色填充【easy】
+
+[ref](https://leetcode.cn/problems/color-fill-lcci/)
+
+矩阵
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var floodFill = function(image, sr, sc, newColor) {
+  const m = image.length, n = image[0].length, target = image[sr][sc]
+  if(target === newColor) return image
+  function walk(i, j) {
+    if(i >= m || i < 0 || j >= n || j < 0 || image[i][j] !== target) return
+    image[i][j] = newColor
+    walk(i - 1, j)
+    walk(i + 1, j)
+    walk(i, j - 1)
+    walk(i, j + 1)
+  }
+  walk(sr, sc)
+  return image
+};
+```
+
 ## 🌟😻✔ 面试题 08.11. 硬币【medium】
 
 [ref](https://leetcode.cn/problems/coin-lcci/)
@@ -25709,6 +26090,32 @@ var countEval = function(s, result) {
 function isOp(c) {
   return c === '&' || c === '|'|| c === '^'
 }
+```
+
+## 🌟😻✔ 面试题 10.01. 合并排序的数组【easy】
+
+[ref](https://leetcode.cn/problems/sorted-merge-lcci/)
+
+归并排序、原地排序
+
+```js
+var merge = function(A, m, B, n) {
+  let k = m + n - 1
+  m--, n--
+  while(m >= 0 && n >= 0) {
+    if(A[m] > B[n]) {
+      A[k--] = A[m--]
+    } else {
+      A[k--] = B[n--]
+    }
+  }
+  while(m >= 0) {
+    A[k--] = A[m--]
+  }
+  while(n >= 0) {
+    A[k--] = B[n--]
+  }
+};
 ```
 
 ## 🌟😻✔ 面试题 10.02. 变位词组【medium】
@@ -25807,6 +26214,33 @@ var search = function(arr, target) {
     }
   }
   return arr[l] === target ? l : -1
+};
+```
+
+## 🌟😻✔ 面试题 10.05. 稀疏数组搜索【easy】
+
+[ref](https://leetcode.cn/problems/sparse-array-search-lcci/)
+
+二分搜索、稀疏数组
+
+```js
+var findString = function(words, s) {
+  let l = 0, r = words.length
+  while(l <= r) {
+    const mid = Math.floor((l + r) / 2)
+    let tMid = mid
+    while(tMid >= l && words[tMid] === '') tMid--
+    if(tMid < l) l = mid + 1
+    else {
+      if(words[tMid] === s) return tMid
+      else if(words[tMid] < s) {
+        l = mid + 1
+      } else {
+        r = tMid - 1
+      }
+    }
+  }
+  return -1
 };
 ```
 
