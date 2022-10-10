@@ -30,9 +30,19 @@
 - 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
 - ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
+- ??[🌟【medium】470. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/) 概率、随机数
 
 # 刷题日记
 
+- 20221010(8)
+  - ??[🌟【medium】678. 有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/) 栈
+  - ??[🌟【medium】470. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/) 概率、随机数
+  - ??[🌟【medium】222. 完全二叉树的节点个数](https://leetcode.cn/problems/count-complete-tree-nodes/) 二叉树、二分搜索
+  - ??[🌟【medium】881. 救生艇](https://leetcode.cn/problems/boats-to-save-people/) 贪心
+  - ??[🌟【medium】593. 有效的正方形](https://leetcode.cn/problems/valid-square/) 模拟、哈希表
+  - ??[🌟【medium】1024. 视频拼接](https://leetcode.cn/problems/video-stitching/) 贪心、数组、排序
+  - ??[🌟【medium】611. 有效三角形的个数](https://leetcode.cn/problems/valid-triangle-number/) 二分搜索、排序
+  - ???[🌟【hard】801. 使序列递增的最小交换次数](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/) 动态规划
 - 20221009(13)
   - [🌟【medium】856. 括号的分数](https://leetcode.cn/problems/score-of-parentheses/) 递归、栈
   - [🌟【easy】面试题 16.05. 阶乘尾数](https://leetcode.cn/problems/factorial-zeros-lcci/) 模拟
@@ -1134,6 +1144,7 @@
 - ?🌟【medium】[面试题 16.14. 最佳直线](https://leetcode.cn/problems/best-line-lcci/) 模拟、暴力查找
 - ?🌟【medium】[面试题 17.11. 单词距离](https://leetcode.cn/problems/find-closest-lcci/) 模拟
 - ???🌟【medium】[927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
+- ??🌟【medium】[593. 有效的正方形](https://leetcode.cn/problems/valid-square/) 模拟、哈希表
 
 ### 模拟运算
 
@@ -1172,6 +1183,7 @@
 - 🌟【easy】[面试题 03.02. 栈的最小值](https://leetcode.cn/problems/min-stack-lcci/) 设计题、栈
 - ??🌟【easy】[面试题 08.06. 汉诺塔问题](https://leetcode.cn/problems/hanota-lcci/) 栈、递归
 - 🌟【medium】[856. 括号的分数](https://leetcode.cn/problems/score-of-parentheses/) 递归、栈
+- ??🌟【medium】[678. 有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/) 栈
 
 ### 单调栈
 
@@ -1454,6 +1466,7 @@
 - ? 🌟【medium】[1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/) 动态规划
 - ?? 🌟【medium】[剑指 Offer II 093. 最长斐波那契数列](https://leetcode.cn/problems/Q91FMA/) 动态规划
 - 🌟【medium】[64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/) 动态规划
+- ???🌟【hard】[801. 使序列递增的最小交换次数](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -1486,6 +1499,7 @@
 - 🌟【medium】[646. 最长数对链](https://leetcode.cn/problems/maximum-length-of-pair-chain/) 贪心、区间问题
 - 🌟【medium】[781. 森林中的兔子](https://leetcode.cn/problems/rabbits-in-forest/) 贪心
 - ? 🌟【medium】[991. 坏了的计算器](https://leetcode.cn/problems/broken-calculator/) 贪心
+- ??🌟【medium】[881. 救生艇](https://leetcode.cn/problems/boats-to-save-people/) 贪心
 
 ## 回溯思想
 
@@ -1548,6 +1562,9 @@
 - 🌟【medium】[面试题 16.06. 最小差](https://leetcode.cn/problems/smallest-difference-lcci/) 二分搜索
 - ?🌟【medium】[面试题 17.08. 马戏团人塔](https://leetcode.cn/problems/circus-tower-lcci/) 二分搜索、俄罗斯套娃问题
 - ?🌟【easy】[面试题 10.05. 稀疏数组搜索](https://leetcode.cn/problems/sparse-array-search-lcci/) 二分搜索、稀疏数组
+- ??🌟【medium】[222. 完全二叉树的节点个数](https://leetcode.cn/problems/count-complete-tree-nodes/) 二叉树、二分搜索
+- ??🌟【medium】[611. 有效三角形的个数](https://leetcode.cn/problems/valid-triangle-number/) 二分搜索、排序
+
 
 ## 排序算法的应用
 
@@ -9803,6 +9820,51 @@ var maximalSquare = function(matrix) {
 };
 ````
 
+## ??🌟😻✔ 222. 完全二叉树的节点个数【medium】
+
+[ref](https://leetcode.cn/problems/count-complete-tree-nodes/)
+
+二叉树、二分搜索
+
+```js
+var countNodes = function(root) {
+  if(!root) return 0
+  let h = 0, node0 = root
+  while(node0) {
+    h++
+    node0 = node0.left
+  }
+  let l = 2 ** (h - 1), r = 2 ** h - 1
+  while(l < r) {
+    const mid = Math.ceil((l + r) / 2)
+    if(exist(mid)) {
+      l = mid
+    } else {
+      r = mid - 1
+    }
+  }
+  return l
+
+  function exist(target) {
+    if(target === 1) return !!root
+    let node = root, k = h
+    while(k >= 2) {
+      const bits = 1 << (k - 2)
+      const w = target & bits
+      if(w > 0) node = node.right
+      else node = node.left
+      k--
+    }
+    return !!node
+  }
+};
+
+  //           1                                            1
+  //     2          3                           10                     11
+  //  4    5     6     7                   100        101        110         111
+  // 8 9 10 11 12 13 14 15              1000 1001 1010  1011  1100 1101   1110  1111 
+```
+
 ## ?🌟😻✔ 223. 矩形面积【medium】
 
 [ref](https://leetcode.cn/problems/rectangle-area/)
@@ -15187,6 +15249,34 @@ var islandPerimeter = function(grid) {
 };
 ```
 
+## ??🌟😻✔ 470. 用 Rand7() 实现 Rand10()【medium】
+
+[ref](https://leetcode.cn/problems/implement-rand10-using-rand7/)
+
+```js
+var rand10 = function() {
+  let res 
+  while(true) {
+    res = 7 * (rand7() - 1) + rand7()
+    if(res <= 40) break
+  }
+  return res % 10 + 1
+};
+```
+
+```js
+var rand10 = function() {
+  let a = rand7(), b = rand7()
+  while(a === 7) {
+    a = rand7()
+  }
+  while(b > 5) {
+    b = rand7()
+  }
+  return (a & 1 ? 0 : 5) + b
+};
+```
+
 ## ??🌟😻✔ 474. 一和零【medium】
 
 [ref](https://leetcode.cn/problems/ones-and-zeroes/)
@@ -16378,6 +16468,30 @@ var preorder = function(root) {
 };
 ```
 
+## ??🌟😻✔ 593. 有效的正方形【medium】
+
+[ref](https://leetcode.cn/problems/valid-square/)
+
+哈希表、模拟
+
+存储所有点之间的距离，没有为0的距离而且只有两种距离，斜线和边线
+
+```js
+var validSquare = function(p1, p2, p3, p4) {
+  const set = new Set()
+  set.add((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+  set.add((p2[0] - p3[0]) ** 2 + (p2[1] - p3[1]) ** 2)
+  set.add((p3[0] - p4[0]) ** 2 + (p3[1] - p4[1]) ** 2)
+  set.add((p1[0] - p3[0]) ** 2 + (p1[1] - p3[1]) ** 2)
+  set.add((p1[0] - p4[0]) ** 2 + (p1[1] - p4[1]) ** 2)
+  set.add((p2[0] - p4[0]) ** 2 + (p2[1] - p4[1]) ** 2)
+  if(set.has(0)) return false
+  if(set.size !== 2) return false
+  const min = Math.min(...set), max = Math.max(...set)
+  return max === 2 * min
+};
+```
+
 ## 🌟😻✔ 606. 根据二叉树创建字符串【easy】
 
 [ref](https://leetcode.cn/problems/construct-string-from-binary-tree/)
@@ -16404,6 +16518,66 @@ var tree2str = function(root) {
   return res
 };
 ```
+
+## ??🌟😻✔ 611. 有效三角形的个数【medium】
+
+[ref](https://leetcode.cn/problems/valid-triangle-number/)
+
+二分搜索、排序、双指针
+
+```js
+var triangleNumber = function(nums) {
+  const n = nums.length
+  nums.sort((a, b) => a - b)
+  let cnt = 0
+  for(let i=0; i < n - 2;i++) {
+    let k = i + 1
+    for(let j = i + 1;j<n-1;j++) {
+      while(k + 1 < n && nums[k + 1] < nums[i] + nums[j]) {
+        k++
+      }
+      cnt += Math.max(k-j, 0)
+    }
+  }
+  return cnt
+};
+```
+
+```js
+var triangleNumber = function(nums) {
+  nums.sort((a, b) => a - b)
+  const n = nums.length
+  let cnt = 0
+  for(let i=0;i<n-2;i++) {
+    const a = nums[i]
+    for(let j=i + 1;j<n-1;j++) {
+      const b = nums[j]
+      let targetMax = a + b - 1
+      if(targetMax < nums[j + 1]) continue
+      const r = binarySearch(nums, j + 1, n - 1, targetMax)
+      cnt += r - j
+    }
+  }
+  return cnt
+};
+
+function binarySearch(nums, l, r, target) {
+  while(l < r) {
+    const mid = Math.ceil((l + r) / 2)
+    if(nums[mid] <= target) {
+      l = mid
+    } else {
+      r = mid - 1
+    }
+  }
+  return l
+}
+// a, b, x
+// a + b > x
+// a + x > b => x > b - a
+// b + x > a => x > a - b
+```
+
 
 ## 🌟😻✔ 617 合并二叉树【easy】
 
@@ -17409,6 +17583,38 @@ class TreeNode {
     this.children = {}
   }
 }
+```
+
+## ??🌟😻✔ 678. 有效的括号字符串【medium】
+
+[ref](https://leetcode.cn/problems/valid-parenthesis-string/)
+
+栈
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var checkValidString = function(s) {
+  const lStack = [], starStack = []
+  for(let i=0;i<s.length;i++) {
+    if(s[i] === '(') {
+      lStack.push(i)
+    } else if(s[i] === ')') {
+      if(lStack.length) lStack.pop()
+      else if(starStack.length) starStack.pop()
+      else return false
+    } else {
+      starStack.push(i)
+    }
+  }
+  while(lStack.length) {
+    while(starStack.length && starStack[0] < lStack[0]) starStack.shift()
+    if(!starStack.length) return false
+    lStack.shift()
+    starStack.shift()
+  }
+  return lStack.length === 0
+};
 ```
 
 ## ??🌟😻✔ 684. 冗余连接【medium】
@@ -19674,6 +19880,33 @@ var allPathsSourceTarget = function(graph) {
 };
 ```
 
+## ???🌟😻✔ 801. 使序列递增的最小交换次数【hard】
+
+[ref](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/)
+
+动态规划
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var minSwap = function(nums1, nums2) {
+  const n = nums1.length, dp = new Array(n).fill(0).map(_ => new Array(2).fill(Number.MAX_SAFE_INTEGER))
+  dp[0][0] = 0
+  dp[0][1] = 1
+  for(let i=1; i< n;i++) {
+    if(nums1[i] > nums1[i-1] && nums2[i] > nums2[i-1]) {
+      dp[i][0] = dp[i-1][0]
+      dp[i][1] = dp[i-1][1] + 1
+    }
+    if(nums1[i] > nums2[i-1] && nums2[i] > nums1[i-1]) {
+      dp[i][0] = Math.min(dp[i-1][1], dp[i][0])
+      dp[i][1] = Math.min(dp[i-1][0] + 1, dp[i][1])
+    }
+  }
+  return Math.min(...dp[n - 1])
+};
+```
+
 ## 🌟😻✔ 811. 子域名访问计数【medium】
 
 [ref](https://leetcode.cn/problems/subdomain-visit-count/)
@@ -20458,6 +20691,31 @@ var profitableSchemes = function(n, minProfit, group, profit) {
 
 ```
 
+## ??🌟😻✔ 881. 救生艇【medium】
+
+[ref](https://leetcode.cn/problems/boats-to-save-people/)
+
+贪心
+
+```js
+// 时间复杂度：O(NlogN)
+// 空间复杂度：O(logN)
+var numRescueBoats = function(people, limit) {
+  people.sort((a, b) => a - b)
+  let cnt = 0
+  let l = 0, r = people.length -1
+  while(l <= r) {
+    if(l < r && people[r] + people[l] <= limit) {
+      l++
+    }
+    cnt++
+    r--
+  }
+  return cnt
+};
+
+```
+
 ## 🌟😻✔ 904. 水果成篮【medium】
 
 [ref](https://leetcode.cn/problems/fruit-into-baskets/)
@@ -21217,6 +21475,47 @@ var shipWithinDays = function(weights, days) {
     if(d + 1 > days) return false
     return true
   }
+};
+```
+
+## ??🌟😻✔ 1024. 视频拼接【medium】
+
+[ref](https://leetcode.cn/problems/video-stitching/)
+
+贪心、排序
+
+```js
+var videoStitching = function(clips, time) {
+  clips.sort((a, b) => a[0] - b[0] || b[1] - a[1])
+  if(clips[0][0] !== 0) return -1
+  const filterClips = [clips[0]]
+  let max = clips[0][1]
+  for(const clip of clips) {
+    if(clip[0] > max) return -1
+    if(clip[1] > max) {
+      filterClips.push(clip)
+      max = clip[1]
+    }
+    if(clip[1] >= time) break
+  }
+  if(max < time) return -1
+  const res = []
+  for(const clip of filterClips) {
+    while(res.length && res[res.length - 1][0] >= clip[0]) {
+      res.pop()
+    }
+    if(!res.length) {
+      res.push(clip)
+    } else {
+      res.push([res[res.length - 1][1], clip[1]])
+    }
+    if(res[res.length - 1][1] >= time) {
+      res.push([res.pop()[0], time])
+      break
+    }
+  }
+  console.log(res)
+  return res.length
 };
 ```
 
