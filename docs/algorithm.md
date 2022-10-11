@@ -34,6 +34,13 @@
 
 # 刷题日记
 
+- 20221011(6)
+  - [🌟【easy】1790. 仅执行一次字符串交换能否使两个字符串相等](https://leetcode.cn/problems/check-if-one-string-swap-can-make-strings-equal/) 数组题、模拟
+  - ?[🌟【medium】986. 区间列表的交集](https://leetcode.cn/problems/interval-list-intersections/) 区间问题、区间交集
+  - ?? [🌟【medium】673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/) 动态规划、递增子序列
+  - ? [🌟【medium】945. 使数组唯一的最小增量](https://leetcode.cn/problems/minimum-increment-to-make-array-unique/) 排序、数组题
+  - ?? [🌟【medium】792. 匹配子序列的单词数](https://leetcode.cn/problems/number-of-matching-subsequences/) 二分搜索、哈希表
+  - ??? [🌟【hard】115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
 - 20221010(8)
   - ??[🌟【medium】678. 有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/) 栈
   - ??[🌟【medium】470. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/) 概率、随机数
@@ -1085,6 +1092,7 @@
 - 🌟【medium】[870. 优势洗牌](https://leetcode.cn/problems/advantage-shuffle/) 数组题、排序
 - 🌟【easy】[面试题 17.04. 消失的数字](https://leetcode.cn/problems/missing-number-lcci/) 数组原地操作
 - ?🌟【easy】[面试题 17.10. 主要元素 消失的数字](https://leetcode.cn/problems/find-majority-element-lcci/) 摩尔排序
+- ?? 🌟【medium】[945. 使数组唯一的最小增量](https://leetcode.cn/problems/minimum-increment-to-make-array-unique/) 排序、数组题
 
 ### 排列组合
 
@@ -1467,6 +1475,8 @@
 - ?? 🌟【medium】[剑指 Offer II 093. 最长斐波那契数列](https://leetcode.cn/problems/Q91FMA/) 动态规划
 - 🌟【medium】[64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/) 动态规划
 - ???🌟【hard】[801. 使序列递增的最小交换次数](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/) 动态规划
+- ?? 🌟【medium】[673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/) 动态规划、递增子序列
+- ??? 🌟【hard】[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -1564,7 +1574,7 @@
 - ?🌟【easy】[面试题 10.05. 稀疏数组搜索](https://leetcode.cn/problems/sparse-array-search-lcci/) 二分搜索、稀疏数组
 - ??🌟【medium】[222. 完全二叉树的节点个数](https://leetcode.cn/problems/count-complete-tree-nodes/) 二叉树、二分搜索
 - ??🌟【medium】[611. 有效三角形的个数](https://leetcode.cn/problems/valid-triangle-number/) 二分搜索、排序
-
+- ?? 🌟【medium】[792. 匹配子序列的单词数](https://leetcode.cn/problems/number-of-matching-subsequences/) 二分搜索、哈希表
 
 ## 排序算法的应用
 
@@ -6347,6 +6357,29 @@ var flatten = function(root) {
     root.right = right
   }
   return root
+};
+```
+
+## ???🌟😻✔ 115. 不同的子序列【hard】
+
+[ref](https://leetcode.cn/problems/distinct-subsequences/)
+
+动态规划
+
+```js
+var numDistinct = function(s, t) {
+  const m = s.length, n = t.length, dp = new Array(m + 1).fill(0).map(_ => new Array(n + 1).fill(0))
+  dp[0][0] = 1
+  for(let i=1;i<=m;i++) dp[i][0] = 1
+  for(let i=1; i <= m; i++) {
+    for(let j=1; j <= Math.min(i, n); j++) {
+      dp[i][j] = dp[i-1][j]
+      if(s[i-1] === t[j - 1]) {
+        dp[i][j] += dp[i-1][j-1]
+      }
+    }
+  }
+  return dp[m][n]
 };
 ```
 
@@ -17535,6 +17568,53 @@ var flipLights = function(n, k) {
 };
 ```
 
+## ??🌟😻✔ 673. 最长递增子序列的个数【medium】
+
+[ref](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/)
+
+动态规划、递增子序列
+
+```js
+var findNumberOfLIS = function(nums) {
+  const n = nums.length, dp = [], cntArr = new Array(n).fill(0).map(_ => [])
+  let k = -1
+  for(let i = 0;i < n; i++) {
+    let idx
+    if(k<0 || dp[k] < nums[i]) {
+      dp[++k] = nums[i]
+      idx = k
+    } else {
+      let l = 0, r = k
+      while(l < r) {
+        const mid = Math.floor((l + r) / 2)
+        if(dp[mid] >= nums[i]) {
+          r = mid
+        } else {
+          l = mid + 1
+        }
+      }
+      dp[l] = nums[i]
+      idx = l
+    }
+    if(idx === 0) {
+      cntArr[idx].push([nums[i], 1])
+    } else {
+      const cntData = cntArr[idx-1]
+      let sum = 0
+      for(const [num, cnt] of cntData) {
+        if(num < nums[i]) sum += cnt
+      }
+      cntArr[idx].push([nums[i], sum])
+    }
+  }
+  let ret = 0
+  for(const [num, cnt] of cntArr[k]) {
+    ret += cnt
+  }
+  return ret
+}
+```
+
 ## ?🌟😻✔ 676. 实现一个魔法字典【medium】
 
 [ref](https://leetcode.cn/problems/implement-magic-dictionary/)
@@ -19779,6 +19859,72 @@ var rotatedDigits = function(n) {
 };
 ```
 
+## ??🌟😻✔ 792. 匹配子序列的单词数【medium】
+
+[ref](https://leetcode.cn/problems/number-of-matching-subsequences/)
+
+二分搜索、哈希表
+
+题解
+
+- [【云影同学】二分搜索思路](https://leetcode.cn/problems/number-of-matching-subsequences/solution/-by-lxfriday-ek1b/)
+
+```js
+var numMatchingSubseq = function(s, words) {
+  const posMap = new Map()
+  let cnt = 0
+  for(let i=0;i<s.length;i++) {
+    if(!posMap.has(s[i])) posMap.set(s[i], [])
+    posMap.get(s[i]).push(i)
+  }
+  for(const word of words) {
+    let shouwldAdd = false
+    let idx = -1
+    for(let i=0;i<word.length;i++) {
+      if(!posMap.has(word[i])) break
+      const idxes = posMap.get(word[i])
+      if(idxes[idxes.length - 1] <= idx) break
+      idx = binarSearch(idxes, idx)
+      if(i === word.length - 1) shouwldAdd = true
+    }
+    if(shouwldAdd) {
+      cnt++
+    }
+  }
+  return cnt
+};
+function binarSearch(nums, target) {
+  let l = 0, r = nums.length - 1
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(nums[mid] > target) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return nums[l]
+}
+```
+
+
+```js
+var numMatchingSubseq = function(s, words) {
+  let cnt = 0
+  for(const word of words) {
+    let i = 0, j = 0
+    while(i < s.length && j < word.length) {
+      if(s[i] === word[j]) {
+        j++
+      }
+      i++
+    }
+    if(j === word.length) cnt++
+  }
+  return cnt
+};
+```
+
 ## ???🌟😻✔ 793. 阶乘函数后 K 个零【hard】
 
 [ref](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/)
@@ -20933,6 +21079,52 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
+## ?🌟😻✔ 945. 使数组唯一的最小增量【medium】
+
+[ref](https://leetcode.cn/problems/minimum-increment-to-make-array-unique/)
+
+排序、数组题
+
+```js
+var minIncrementForUnique = function(nums) {
+  const n = nums.length
+  nums.sort((a, b) => a - b)
+  let res = 0
+  let i=0, prevMax = nums[0] - 1
+  while(i < n) {
+    if(nums[i] <= prevMax) {
+      res += prevMax + 1 - nums[i]
+      prevMax++
+    } else {
+      prevMax = nums[i]
+    }
+    i++
+  }
+  return res
+};
+```
+
+```js
+var minIncrementForUnique = function(nums) {
+  const n = nums.length
+  const cntArr = []
+  for(let i=0;i<n;i++) {
+    cntArr[nums[i]] = (cntArr[nums[i]] || 0) + 1
+  }
+  let max = cntArr.length, res = 0
+  for(let i=0;i<max;i++) {
+    if(cntArr[i]) {
+      res += cntArr[i] - 1
+      cntArr[i + 1] = (cntArr[i + 1] || 0) + cntArr[i] - 1
+    }
+  }
+  if(cntArr[max]) {
+    res += cntArr[max] * (cntArr[max] - 1) / 2
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 946. 验证栈序列【medium】
 
 [ref](https://leetcode.cn/problems/validate-stack-sequences/)
@@ -21149,6 +21341,66 @@ var mincostTickets = function(days, costs) {
     dp[i] = Math.min(x, y, z)
   }
   return dp[m]
+};
+```
+
+## 🌟😻✔ 986. 区间列表的交集【medium】
+
+[ref](https://leetcode.cn/problems/interval-list-intersections/)
+
+区间问题、区间交集
+
+
+```js
+var intervalIntersection = function(firstList, secondList) {
+  let i = 0, j = 0
+  const res = []
+  while(i < firstList.length && j < secondList.length) {
+    const first = firstList[i], second = secondList[j]
+    if(first[1] < second[0]) {
+      i++
+    } else if(second[1] < first[0]) {
+      j++
+    } else if(first[1] <= second[1]) {
+      const target = [Math.max(first[0], second[0]), first[1]]
+      res.push(target)
+      i++
+    } else {
+      const target = [Math.max(first[0], second[0]), second[1]]
+      res.push(target)
+      j++
+    }
+  }
+  return res
+};
+```
+
+```js
+var intervalIntersection = function(firstList, secondList) {
+  const res = []
+  while(firstList.length && secondList.length) {
+    const first = firstList.shift(), second = secondList.shift()
+    if(first[1] < second[0]) {
+      secondList.unshift(second)
+    } else if(second[1] < first[0]) {
+      firstList.unshift(first)
+    } else if(first[1] <= second[1]) {
+      const target = [Math.max(first[0], second[0]), first[1]]
+      res.push(target)
+      const next = [first[1] + 1, second[1]]
+      if(next[0] <= next[1]) {
+        secondList.unshift(next)
+      }
+    } else {
+      const target = [Math.max(first[0], second[0]), second[1]]
+      res.push(target)
+      const next = [second[1] + 1, first[1]]
+      if(next[0] <= next[1]) {
+        firstList.unshift(next)
+      }
+    }
+  }
+  return res
 };
 ```
 
@@ -22927,6 +23179,26 @@ var checkOnesSegment = function(s) {
     i++
   }
   return true
+};
+```
+
+## 🌟😻✔ 1790. 仅执行一次字符串交换能否使两个字符串相等【easy】
+
+[ref](https://leetcode.cn/problems/check-if-one-string-swap-can-make-strings-equal/)
+
+数组题、模拟
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var areAlmostEqual = function(s1, s2) {
+  const arr = []
+  for(let i=0;i<s1.length;i++) {
+    if(s1[i] !== s2[i]) arr.push(i)
+    if(arr.length > 2) return false
+  }
+  if(!arr.length) return true
+  return s1[arr[0]] === s2[arr[1]] && s2[arr[0]] === s1[arr[1]]
 };
 ```
 
