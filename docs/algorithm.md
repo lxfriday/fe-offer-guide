@@ -27,13 +27,25 @@
 ## 经典题
 
 - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
-- 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
-- ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
-- ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
+
+## 后续回顾
 - ??[🌟【medium】470. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/) 概率、随机数
+- ??? 🌟【hard】[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
+- ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
+- 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
+- ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
 
 # 刷题日记
 
+- 20221012(8)
+  - [🌟【medium】817. 链表组件](https://leetcode.cn/problems/linked-list-components/) 链表
+  - ?[🌟【medium】1020. 飞地的数量](https://leetcode.cn/problems/number-of-enclaves/) 矩阵、广度优先搜索
+  - [🌟【medium】807. 保持城市天际线](https://leetcode.cn/problems/max-increase-to-keep-city-skyline/) 矩阵、模拟
+  - ?? [🌟【medium】1190. 反转每对括号间的子串](https://leetcode.cn/problems/reverse-substrings-between-each-pair-of-parentheses/) 栈、括号问题
+  - ?? [🌟【medium】863. 二叉树中所有距离为 K 的结点](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/) 二叉树、图、广度优先搜索、深度优先搜索
+  - [🌟【medium】433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/) 广度优先搜索、BFS、DFS
+  - ?[🌟【medium】468. 验证IP地址](https://leetcode.cn/problems/validate-ip-address/) 字符串题
+  - ?[🌟【medium】532. 数组中的 k-diff 数对](https://leetcode.cn/problems/k-diff-pairs-in-an-array/) 哈希表
 - 20221011(6)
   - [🌟【easy】1790. 仅执行一次字符串交换能否使两个字符串相等](https://leetcode.cn/problems/check-if-one-string-swap-can-make-strings-equal/) 数组题、模拟
   - ?[🌟【medium】986. 区间列表的交集](https://leetcode.cn/problems/interval-list-intersections/) 区间问题、区间交集
@@ -1033,6 +1045,7 @@
 - ??? 🌟【hard】[828. 统计子串中的唯一字符](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string/) 字符串、哈希表
 - 🌟【easy】[1592. 重新排列单词间的空格](https://leetcode.cn/problems/rearrange-spaces-between-words/) 字符串、双指针
 - 🌟【easy】[面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
+- ?🌟【medium】[468. 验证IP地址](https://leetcode.cn/problems/validate-ip-address/) 字符串题
 
 回文串相关
 
@@ -1192,6 +1205,7 @@
 - ??🌟【easy】[面试题 08.06. 汉诺塔问题](https://leetcode.cn/problems/hanota-lcci/) 栈、递归
 - 🌟【medium】[856. 括号的分数](https://leetcode.cn/problems/score-of-parentheses/) 递归、栈
 - ??🌟【medium】[678. 有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/) 栈
+- ?? [🌟【medium】1190. 反转每对括号间的子串](https://leetcode.cn/problems/reverse-substrings-between-each-pair-of-parentheses/) 栈、括号问题
 
 ### 单调栈
 
@@ -1318,6 +1332,7 @@
 - ? 🌟【medium】[430. 扁平化多级双向链表](https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list/) 链表、双向链表
 - 🌟【medium】[814. 二叉树剪枝](https://leetcode.cn/problems/binary-tree-pruning/) 二叉树、二叉树减枝
 - 🌟【medium】[1104. 二叉树寻路](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/) 二叉树
+- ?? 🌟【medium】[863. 二叉树中所有距离为 K 的结点](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/) 二叉树、图、广度优先搜索、深度优先搜索
 
 ### 树的序列化
 
@@ -1379,6 +1394,7 @@
 - 🌟【medium】[面试题 16.19. 水域大小](https://leetcode.cn/problems/pond-sizes-lcci/) DFS、深度优先搜索
 - ?🌟【medium】[面试题 17.23. 最大黑方阵](https://leetcode.cn/problems/max-black-square-lcci/) 矩阵
 - ? 🌟【hard】[剑指 Offer II 112. 最长递增路径](https://leetcode.cn/problems/fpTFWP/) 图、广度优先搜索、深度优先搜索、记忆化搜索
+- ?🌟【medium】[1020. 飞地的数量](https://leetcode.cn/problems/number-of-enclaves/) 矩阵、广度优先搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1399,6 +1415,7 @@
 - ?🌟【medium】[面试题 17.07. 婴儿名字](https://leetcode.cn/problems/baby-names-lcci/) 图、广度优先搜索
 - ?🌟【medium】[面试题 17.22. 单词转换](https://leetcode.cn/problems/word-transformer-lcci/) 图、深度优先搜索
 - 🌟【hard】[剑指 Offer II 108. 单词演变](https://leetcode.cn/problems/om3reC/) 图、广度优先搜索
+- 🌟【medium】[433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/) 广度优先搜索、BFS、DFS
 
 ### 并查集
 
@@ -15282,6 +15299,57 @@ var islandPerimeter = function(grid) {
 };
 ```
 
+## ?🌟😻✔ 468. 验证IP地址【medium】
+
+[ref](https://leetcode.cn/problems/validate-ip-address/)
+
+字符串题
+
+```js
+var validIPAddress = function(queryIP) {
+  let v4 = false, v6 = false
+  for(const c of queryIP) {
+    if(c === '.') v4 = true
+    else if(c === ':') v6 = true
+  }
+  if((v4 && v6) || (!v4 && !v6)) return 'Neither'
+  if(v4) return validateIPv4(queryIP) ? 'IPv4' : 'Neither'
+  return validateIPv6(queryIP) ? 'IPv6' : 'Neither'
+};
+
+function validateIPv4(queryIP) {
+  const ipSplit = queryIP.split('.')
+  if(ipSplit.length !== 4) return false
+  for(let str of ipSplit) {
+    if(
+      str.length < 1 ||
+      str.length > 1 && str[0] === '0'
+    ) return false
+    let num = 0
+    for(let i=0;i<str.length;i++) {
+      if(str[i] !== ' ' && str[i] >= '0' && str[i] <= '9') num = 10* num + Number(str[i])
+      else return false
+    }
+    if(num > 255) return false
+  }
+  return true
+}
+
+const v6PartSet = new Set('0123456789abcdefABCDEF'.split(''))
+
+function validateIPv6(queryIP) {
+  const ipSplit = queryIP.split(':')
+  if(ipSplit.length !== 8) return false
+  for(let str of ipSplit) {
+    if(str.length < 1 || str.length > 4) return false
+    for(const c of str) {
+      if(!v6PartSet.has(c)) return false
+    }
+  }
+  return true
+}
+```
+
 ## ??🌟😻✔ 470. 用 Rand7() 实现 Rand10()【medium】
 
 [ref](https://leetcode.cn/problems/implement-rand10-using-rand7/)
@@ -15926,6 +15994,31 @@ var countArrangement = function(n) {
 // 1 2 3
 // 3 2 1
 // 2 1 3
+```
+
+## ?🌟😻✔ 532. 数组中的 k-diff 数对【medium】
+
+[ref](https://leetcode.cn/problems/k-diff-pairs-in-an-array/)
+
+哈希表
+
+```js
+var findPairs = function(nums, k) {
+  const numsMap = new Map()
+  let cnt = 0
+  for(let num of nums) numsMap.set(num, (numsMap.get(num) || 0) + 1)
+  for(const num of nums) {
+    if(numsMap.get(num) <= 0) continue 
+    if(k !== 0) {
+      if(numsMap.get(k + num) > 0) cnt++
+      if(numsMap.get(num - k) > 0) cnt++
+    } else {
+      if(numsMap.get(num) > 1) cnt++
+    }
+    numsMap.set(num, 0)
+  }
+  return cnt
+};
 ```
 
 ## ?🌟😻✔ 536. 从字符串生成二叉树【medium】
@@ -19531,6 +19624,20 @@ var maxChunksToSorted = function(arr) {
 // 空间复杂度：O(1)
 var maxChunksToSorted = function(arr) {
   const n = arr.length
+  let cnt = 0, max = -1
+  for(let i=0;i<n;i++) {
+    max = Math.max(max, arr[i])
+    if(i === max) cnt++
+  }
+  return cnt
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var maxChunksToSorted = function(arr) {
+  const n = arr.length
   let i1 = 0, l2 = 0, r2 = 0
   let min1 = arr[i1], max1 = arr[i1]
   let count = 0
@@ -20053,6 +20160,33 @@ var minSwap = function(nums1, nums2) {
 };
 ```
 
+## 🌟😻✔ 807. 保持城市天际线【medium】
+
+[ref](https://leetcode.cn/problems/max-increase-to-keep-city-skyline/)
+
+矩阵、模拟
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N)
+var maxIncreaseKeepingSkyline = function(grid) {
+  const n = grid.length, rowMax = new Array(n).fill(0), colMax = new Array(n).fill(0)
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      rowMax[i] = Math.max(rowMax[i], grid[i][j])
+      colMax[j] = Math.max(colMax[j], grid[i][j])
+    }
+  }
+  let cnt = 0
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      cnt += Math.min(rowMax[i], colMax[j]) - grid[i][j]
+    }
+  }
+  return cnt
+};
+```
+
 ## 🌟😻✔ 811. 子域名访问计数【medium】
 
 [ref](https://leetcode.cn/problems/subdomain-visit-count/)
@@ -20176,6 +20310,33 @@ var numBusesToDestination = function(routes, source, target) {
   return -1
 };
 
+```
+
+## 🌟😻✔ 817. 链表组件【medium】
+
+[ref](https://leetcode.cn/problems/linked-list-components/)
+
+链表
+
+```js
+// 时间复杂度：O(N) N=head.length
+// 空间复杂度：O(M) M = nums.length
+var numComponents = function(head, nums) {
+  const numsSet = new Set(nums)
+  let cnt = 0, hasPrev = false
+  while(head) {
+    if(numsSet.has(head.val)) {
+      if(!hasPrev) {
+        hasPrev = true
+        cnt++
+      }
+    } else {
+      hasPrev = false
+    }
+    head = head.next
+  }
+  return cnt
+};
 ```
 
 ## ???🌟😻✔ 827. 最大人工岛【hard】
@@ -20725,6 +20886,91 @@ var shortestSubarray = function(nums, k) {
   }
 
   return min === Number.MAX_SAFE_INTEGER ? -1 : min
+};
+```
+
+## ??🌟😻✔ 863. 二叉树中所有距离为 K 的结点【medium】
+
+[ref](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/)
+
+二叉树、图、深度优先搜索、广度优先搜索
+
+```js
+var distanceK = function(root, target, k) {
+  function rewrite(node) {
+    if(node.left) {
+      node.left.parent = node
+      rewrite(node.left)
+    }
+    if(node.right) {
+      node.right.parent = node
+      rewrite(node.right)
+    }
+  }
+  rewrite(root)
+  const res = [], used = new Set()
+  used.add(target)
+  function walk(node, dis) {
+    if(dis === k) {
+      res.push(node.val)
+      return
+    }
+    if(node.left && !used.has(node.left)) {
+      used.add(node.left)
+      walk(node.left, dis +1)
+    }
+    if(node.right && !used.has(node.right)) {
+      used.add(node.right)
+      walk(node.right, dis +1)
+    }
+    if(node.parent && !used.has(node.parent)) {
+      used.add(node.parent)
+      walk(node.parent, dis +1)
+    }
+  }
+  walk(target, 0)
+  return res
+};
+```
+
+```js
+var distanceK = function(root, target, k) {
+  function rewrite(node) {
+    if(node.left) {
+      node.left.parent = node
+      rewrite(node.left)
+    }
+    if(node.right) {
+      node.right.parent = node
+      rewrite(node.right)
+    }
+  }
+  rewrite(root)
+  const res = [], used = new Set([target])
+  let q = [[target, 0]]
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const [node, depth] = q[i]
+      if(depth === k) res.push(node.val)
+      if(depth < k) {
+        if(node.left && !used.has(node.left)) {
+          used.add(node.left)
+          tq.push([node.left, depth + 1])
+        }
+        if(node.right && !used.has(node.right)) {
+          used.add(node.right)
+          tq.push([node.right, depth + 1])
+        }
+        if(node.parent && !used.has(node.parent)) {
+          used.add(node.parent)
+          tq.push([node.parent, depth + 1])
+        }
+      }
+    }
+    q = tq
+  }
+  return res
 };
 ```
 
@@ -21730,6 +21976,47 @@ var shipWithinDays = function(weights, days) {
 };
 ```
 
+## ?🌟😻✔ 1020. 飞地的数量【medium】
+
+[ref](https://leetcode.cn/problems/number-of-enclaves/)
+
+矩阵、广度优先搜索、深度优先搜索
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(1)
+var numEnclaves = function(grid) {
+  const m = grid.length, n = grid[0].length
+  let q = [], cnt = 0, sum = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1) sum++
+      if((i === 0 || j === 0 || i === m-1 || j === n - 1) && grid[i][j] === 1) {
+        q.push([i, j])
+        grid[i][j] = 0
+      }
+    }
+  }
+  const directs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+  while(q.length) {
+    let tq = []
+    for(let i=0;i<q.length;i++) {
+      const [x, y] = q[i]
+      cnt++
+      for(let j=0;j<4;j++) {
+        const xx = x + directs[j][0], yy = y + directs[j][1]
+        if(xx >=0 && xx < m && yy >=0 && yy < n && grid[xx][yy] === 1) {
+          grid[xx][yy] = 0
+          tq.push([xx, yy])
+        }
+      }
+    }
+    q = tq
+  }
+  return sum - cnt
+};
+```
+
 ## ??🌟😻✔ 1024. 视频拼接【medium】
 
 [ref](https://leetcode.cn/problems/video-stitching/)
@@ -22167,6 +22454,56 @@ var isMajorityElement = function(nums, target) {
   return r - l + 1 > len / 2
 };
 
+```
+
+## ??🌟😻✔ 1190. 反转每对括号间的子串【medium】
+
+[ref](https://leetcode.cn/problems/reverse-substrings-between-each-pair-of-parentheses/)
+
+栈、括号问题
+
+```js
+var reverseParentheses = function(s) {
+  const stack = [], n = s.length
+  let i=0, depth = 0
+  while(i < n) {
+    if(s[i] === '(') {
+      depth++
+    } else if(s[i] === ')') {
+      depth--
+      let str = ''
+      while(stack.length && stack[stack.length - 1][1] > depth) {
+        const top = stack.pop()
+        if(top[1] % 2 === 1) {
+          str = str + top[0]
+        } else {
+          str = top[0] + str
+        }
+      }
+      stack.push([str, depth])
+    } else {
+      let str = ''
+      while(i < n && s[i] !== '(' && s[i] !== ')') {
+        str += s[i]
+        i++
+      }
+      if(depth % 2 !== 0) {
+        stack.push([reverse(str), depth])
+      } else {
+        stack.push([str, depth])
+      }
+      i--
+    }
+    i++
+  }
+  return stack.map(_ => _[0]).join('')
+};
+
+function reverse(str) {
+  let res = ''
+  for(let i=str.length - 1;i>=0;i--) res += str[i]
+  return res
+}
 ```
 
 ## 🌟😻✔ 1208. 尽可能使字符串相等【medium】
