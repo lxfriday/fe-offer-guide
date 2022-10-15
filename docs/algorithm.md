@@ -34,9 +34,25 @@
 - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
 - 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
-
+- ???[🌟【hard】940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
 # 刷题日记
 
+- 20221014(15)
+  - [【medium】1441. 用栈操作构建数组](https://leetcode.cn/problems/build-an-array-with-stack-operations/) 模拟、栈
+  - [【easy】1365. 有多少小于当前数字的数字](https://leetcode.cn/problems/how-many-numbers-are-smaller-than-the-current-number/) 哈希表、桶排序
+  - [【easy】520. 检测大写字母](https://leetcode.cn/problems/detect-capital/) 字符串
+  - [【easy】1342. 将数字变成 0 的操作次数](https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/) 数字
+  - ?[🌟【easy】572. 另一棵树的子树](https://leetcode.cn/problems/subtree-of-another-tree/) 二叉树
+  - ?[🌟【easy】495. 提莫攻击](https://leetcode.cn/problems/teemo-attacking/) 数组、区间问题
+  - [🌟【easy】566. 重塑矩阵](https://leetcode.cn/problems/reshape-the-matrix/) 矩阵
+  - [🌟【easy】674. 最长连续递增序列](https://leetcode.cn/problems/longest-continuous-increasing-subsequence/) 数组、序列、递增序列
+  - [🌟【easy】860. 柠檬水找零](https://leetcode.cn/problems/lemonade-change/) 贪心
+  - [🌟【easy】1431. 拥有最多糖果的孩子](https://leetcode.cn/problems/kids-with-the-greatest-number-of-candies/) 模拟
+  - [🌟【medium】1706. 球会落何处](https://leetcode.cn/problems/where-will-the-ball-fall/) 模拟
+  - [🌟【medium】845. 数组中的最长山脉](https://leetcode.cn/problems/longest-mountain-in-array/) 模拟、数组题#
+  - ???[🌟【hard】940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
+  - ???[🌟【hard】剑指 Offer II 094. 最少回文分割](https://leetcode.cn/problems/omKAoA/) 动态规划、回文串
+  - ?[🌟【hard】剑指 Offer II 117. 相似的字符串](https://leetcode.cn/problems/H6lPxb/) 图、广度优先搜索
 - 20221014(22)
   - [【easy】203. 移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/) 链表
   - [【easy】876. 链表的中间结点](https://leetcode.cn/problems/middle-of-the-linked-list/) 链表、快慢指针、双指针
@@ -1088,6 +1104,7 @@
 - 🌟【easy】[125. 验证回文串](https://leetcode.cn/problems/valid-palindrome/) 回文串
 - 🌟【easy】[266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
 - 🌟【medium】[267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
+- ???🌟【hard】[剑指 Offer II 094. 最少回文分割](https://leetcode.cn/problems/omKAoA/) 动态规划、回文串
 
 ## 数组题 
 
@@ -1138,6 +1155,8 @@
 - ?🌟【easy】[面试题 17.10. 主要元素 消失的数字](https://leetcode.cn/problems/find-majority-element-lcci/) 摩尔排序
 - ?? 🌟【medium】[945. 使数组唯一的最小增量](https://leetcode.cn/problems/minimum-increment-to-make-array-unique/) 排序、数组题
 - 🌟【easy】[414. 第三大的数](https://leetcode.cn/problems/third-maximum-number/) 数组题
+- ?🌟【easy】[495. 提莫攻击](https://leetcode.cn/problems/teemo-attacking/) 数组、区间问题
+- 🌟【medium】[845. 数组中的最长山脉](https://leetcode.cn/problems/longest-mountain-in-array/) 模拟、数组题#
 
 ### 排列组合
 
@@ -1368,6 +1387,7 @@
 - 🌟【medium】[814. 二叉树剪枝](https://leetcode.cn/problems/binary-tree-pruning/) 二叉树、二叉树减枝
 - 🌟【medium】[1104. 二叉树寻路](https://leetcode.cn/problems/path-in-zigzag-labelled-binary-tree/) 二叉树
 - ?? 🌟【medium】[863. 二叉树中所有距离为 K 的结点](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/) 二叉树、图、广度优先搜索、深度优先搜索
+- ?🌟【easy】[572. 另一棵树的子树](https://leetcode.cn/problems/subtree-of-another-tree/) 二叉树
 
 ### 树的序列化
 
@@ -1452,6 +1472,7 @@
 - ?🌟【medium】[面试题 17.22. 单词转换](https://leetcode.cn/problems/word-transformer-lcci/) 图、深度优先搜索
 - 🌟【hard】[剑指 Offer II 108. 单词演变](https://leetcode.cn/problems/om3reC/) 图、广度优先搜索
 - 🌟【medium】[433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/) 广度优先搜索、BFS、DFS
+- ?🌟【hard】[剑指 Offer II 117. 相似的字符串](https://leetcode.cn/problems/H6lPxb/) 图、广度优先搜索
 
 ### 并查集
 
@@ -1530,6 +1551,7 @@
 - ???🌟【hard】[801. 使序列递增的最小交换次数](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/) 动态规划
 - ?? 🌟【medium】[673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/) 动态规划、递增子序列
 - ??? 🌟【hard】[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
+- ???🌟【hard】[940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
 
 ### 动态规划 - 背包问题
 
@@ -16059,6 +16081,27 @@ var findTargetSumWays = function(nums, target) {
 };
 ```
 
+## 🌟😻✔ 495. 提莫攻击【easy】
+
+[ref](https://leetcode.cn/problems/teemo-attacking/)
+
+数组、区间问题
+
+```js
+var findPoisonedDuration = function(timeSeries, duration) {
+  let max = -1, res = 0
+  for(const time of timeSeries) {
+    if(time > max) {
+      res += duration
+    } else {
+      res += Math.max(time + duration - 1 - max, 0)
+    }
+    max = Math.max(time + duration - 1, max)
+  }
+  return res
+};
+```
+
 ## ✔ 496. 下一个更大元素 I【easy】
 
 [ref](https://leetcode.cn/problems/next-greater-element-i/)
@@ -16315,6 +16358,23 @@ var change = function(amount, coins) {
     }
   }
   return dp[amount]
+};
+```
+
+## ✔ 520. 检测大写字母【easy】
+
+[ref](https://leetcode.cn/problems/detect-capital/)
+
+字符串
+
+```js
+var detectCapitalUse = function(word) {
+  let cnt = 0
+  for(const c of word) {
+    if(c === c.toUpperCase()) cnt++
+  }
+  if(cnt === word.length || cnt === 0) return true
+  return cnt === 1 && word[0] === word[0].toUpperCase()
 };
 ```
 
@@ -16835,6 +16895,25 @@ var subarraySum = function(nums, k) {
 };
 ```
 
+## 😻✔ 566. 重塑矩阵【easy】
+
+[ref](https://leetcode.cn/problems/reshape-the-matrix/)
+
+矩阵
+
+```js
+var matrixReshape = function(mat, r, c) {
+  const m = mat.length, n = mat[0].length
+  if(m * n !== r * c) return mat
+  const res = new Array(r).fill(0).map(_ => new Array(c))
+  for(let i=0;i<m*n;i++) {
+    res[Math.floor(i / c)][i % c] = mat[Math.floor(i / n)][i % n]
+  }
+  return res
+};
+
+```
+
 ## 😻✔ 567 字符串的排列【medium】
 
 [ref](https://leetcode.cn/problems/permutation-in-string/)
@@ -16884,6 +16963,24 @@ var checkInclusion = function(s1, s2) {
   }
   return false
 };
+```
+
+## ?🌟😻✔ 572. 另一棵树的子树【easy】
+
+[ref](https://leetcode.cn/problems/subtree-of-another-tree/)
+
+二叉树
+
+```js
+var isSubtree = function(root, subRoot) {
+  if(!root) return false
+  return is(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)
+};
+function is(node1, node2) {
+  if(!node1 && !node2) return true
+  if(!node1 || !node2) return false
+  return node1.val === node2.val && is(node1.left, node2.left) && is(node1.right, node2.right)
+}
 ```
 
 ## ✔ 575 分糖果【easy】
@@ -18187,6 +18284,48 @@ var findNumberOfLIS = function(nums) {
   }
   return ret
 }
+```
+
+## 🌟😻✔ 674. 最长连续递增序列【easy】
+
+[ref](https://leetcode.cn/problems/longest-continuous-increasing-subsequence/)
+
+数组题、序列、连续递增序列
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findLengthOfLCIS = function(nums) {
+  const n = nums.length
+  let l = 0, r = 1, max = 1
+  while(r < n) {
+    if(nums[r] <= nums[r - 1]) {
+      max = Math.max(max, r - l)
+      l = r
+    }
+    r++
+  }
+  max = Math.max(max, r - l)
+  return max
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var findLengthOfLCIS = function(nums) {
+  const n = nums.length
+  let l = 0, r = 0, max = 1
+  while(r < n) {
+    if(r === 0 || nums[r] > nums[r - 1] ) {
+      max = Math.max(max, r - l + 1)
+    } else {
+      l = r
+    }
+    r++
+  }
+  return max
+};
 ```
 
 ## ?🌟😻✔ 676. 实现一个魔法字典【medium】
@@ -20964,6 +21103,59 @@ var isRectangleOverlap = function(rec1, rec2) {
 };
 ```
 
+## ?🌟😻✔ 839. 相似字符串组【hard】
+
+[ref](https://leetcode.cn/problems/similar-string-groups/)
+
+图、广度优先搜索
+
+```js
+var numSimilarGroups = function(strs) {
+  const n = strs.length, strLen = strs[0].length, connectionArr = new Array(n).fill(0).map(_ => [])
+  for(let i=0; i<n; i++) {
+    for(let j=0; j<n; j++) {
+      if(i !== j) {
+        let diffCnt = 0, x, y
+        for(let k=0;k<strLen;k++) {
+          if(strs[i][k] !== strs[j][k]) {
+            diffCnt++
+            if(diffCnt > 2) break
+            if(x === undefined) x = k
+            else y = k
+          }
+        }
+        if(diffCnt === 0 || diffCnt === 2 && (strs[i][x] === strs[j][y] && strs[i][y] === strs[j][x])) {
+          connectionArr[i].push(j)
+        }
+      }
+    }
+  }
+  let cnt = 0
+  const used = new Array(n).fill(false)
+  for(let i=0;i<n;i++) {
+    if(used[i]) continue
+    cnt++
+    used[i] = true
+    let q = [i]
+    while(q.length) {
+      const tq = []
+      for(let j=0;j<q.length;j++) {
+        const curr = q[j]
+        const nexts = connectionArr[curr]
+        for(const next of nexts) {
+          if(!used[next]) {
+            used[next] = true
+            tq.push(next)
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return cnt
+};
+```
+
 ## 🌟😻✔ 841. 钥匙和房间【medium】
 
 [ref](https://leetcode.cn/problems/keys-and-rooms/)
@@ -21033,6 +21225,28 @@ var backspaceCompare = function(s, t) {
     else stack2.push(t[i])
   }
   return stack1.join('') === stack2.join('')
+};
+```
+
+## 🌟😻✔ 845. 数组中的最长山脉【medium】
+
+[ref](https://leetcode.cn/problems/longest-mountain-in-array/)
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var longestMountain = function(arr) {
+  let max = 0
+  const n = arr.length
+  for(let i=1;i<n - 1;i++) {
+    if(arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+      let l = i - 1, r = i + 1
+      while(l - 1 >= 0 && arr[l - 1] < arr[l]) l--
+      while(r + 1 < n && arr[r + 1] < arr[r]) r++
+      max = Math.max(max, r - l + 1)
+    }
+  }
+  return max
 };
 ```
 
@@ -21337,6 +21551,38 @@ class MaxHeap {
     }
   }
 }
+```
+
+## 🌟😻✔ 860. 柠檬水找零【easy】
+
+[ref](https://leetcode.cn/problems/lemonade-change/)
+
+贪心
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var lemonadeChange = function(bills) {
+  let cnt5 = 0, cnt10 = 0
+  for(const bill of bills) {
+    if(bill === 5) cnt5++
+    else if(bill === 10) {
+      if(cnt5 === 0) return false
+      cnt5--
+      cnt10++
+    } else {
+      if(cnt5 === 0) return false
+      if(cnt10) {
+        cnt10--
+        cnt5--
+      } else {
+        if(cnt5 < 3) return false
+        cnt5 -= 3
+      }
+    }
+  }
+  return true
+};
 ```
 
 ## ?🌟😻✔ 862 和至少为 K 的最短子数组【hard】
@@ -21888,6 +22134,64 @@ RecentCounter.prototype.ping = function (t) {
   }
   return this.q.length
 }
+```
+
+## ???🌟😻✔ 940. 不同的子序列 II【hard】
+
+[ref](https://leetcode.cn/problems/distinct-subsequences-ii/)
+
+子序列、动态规划
+
+```js
+// 时间复杂度：O(N*C^2)
+// 空间复杂度：O(C)
+var distinctSubseqII = function(s) {
+  const mod = 10 ** 9 + 7, n = s.length
+  let dp = new Array(26).fill(0), res = 0
+  for(let i=1;i<=n;i++) {
+    const c = s[i - 1].charCodeAt(0) - 'a'.charCodeAt(0)
+    const tdp = []
+    let cnt = 0
+    for(let j=0;j<26;j++) {
+      if(j === c) {
+        let sum = 1
+        for(let k=0;k<26;k++) sum = (sum + dp[k]) % mod
+        tdp[j] = sum
+      } else {
+        tdp[j] = dp[j]
+      }
+      cnt = (cnt + tdp[j]) % mod
+    }
+    dp = tdp
+    res = cnt
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N*C^2)
+// 空间复杂度：O(N*C)
+var distinctSubseqII = function(s) {
+  const mod = 10 ** 9 + 7, n = s.length
+  const dp = new Array(n + 1).fill(0).map(_ => new Array(26).fill(0))
+  for(let i=1;i<=n;i++) {
+    const c = s[i - 1].charCodeAt(0) - 'a'.charCodeAt(0)
+    for(let j=0;j<26;j++) {
+      if(j === c) {
+        let sum = 1
+        for(let k=0;k<26;k++) sum = (sum + dp[i-1][k]) % mod
+        dp[i][j] = sum
+      } else {
+        dp[i][j] = dp[i-1][j]
+      }
+    }
+  }
+  let ret = 0
+  for(let i=0;i<26;i++) ret = (ret + dp[n][i]) % mod
+  return ret
+};
+
 ```
 
 ## ?🌟😻✔ 945. 使数组唯一的最小增量【medium】
@@ -23479,15 +23783,53 @@ var canReach = function(arr, start) {
 
 ```
 
-## ✔ 1480. 一维数组的动态和【easy】
+## ✔ 1342. 将数字变成 0 的操作次数【easy】
 
-[ref](https://leetcode.cn/problems/running-sum-of-1d-array/)
+[ref](https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/)
 
-数组、累加
+数字题
 
 ```js
-var runningSum = function(nums) {
-  for(let i=1;i<nums.length;i++) nums[i] += nums[i - 1]
+var numberOfSteps = function(num) {
+  let cnt = 0
+  while(num) {
+    if(num % 2 === 1) {
+      num--
+    } else {
+      num /= 2
+    }
+    cnt++
+  }
+  return cnt
+};
+
+```
+
+## ✔ 1365. 有多少小于当前数字的数字【easy】
+
+[ref](https://leetcode.cn/problems/how-many-numbers-are-smaller-than-the-current-number/)
+
+哈希表、数组题
+
+```js
+var smallerNumbersThanCurrent = function(nums) {
+  const map = new Map()
+  let max = 0
+  for(let i=0;i<nums.length;i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + 1)
+    max = Math.max(max, nums[i])
+  }
+  let cnt = 0
+  for(let i=0;i<=max;i++) {
+    if(map.get(i) > 0) {
+      const tmpCnt = map.get(i)
+      map.set(i, cnt)
+      cnt += tmpCnt
+    }
+  }
+  for(let i=0;i<nums.length;i++) {
+    nums[i] = map.get(nums[i])
+  }
   return nums
 };
 ```
@@ -23633,6 +23975,24 @@ var maxScore = function(s) {
     max = Math.max(lCount + rp[i], max)
   }
   return max
+};
+```
+
+## ✔ 1431. 拥有最多糖果的孩子【easy】
+
+[ref](https://leetcode.cn/problems/kids-with-the-greatest-number-of-candies/)
+
+模拟
+
+```js
+var kidsWithCandies = function(candies, extraCandies) {
+  let max = 0
+  for(const num of candies) max = Math.max(max, num)
+  for(let i=0;i<candies.length;i++) {
+    if(candies[i] + extraCandies >= max) candies[i] = true
+    else candies[i] = false
+  }
+  return candies
 };
 ```
 
@@ -23917,6 +24277,19 @@ var finalPrices = function(prices) {
     q.push(i)
   }
   return prices
+};
+```
+
+## ✔ 1480. 一维数组的动态和【easy】
+
+[ref](https://leetcode.cn/problems/running-sum-of-1d-array/)
+
+数组、累加
+
+```js
+var runningSum = function(nums) {
+  for(let i=1;i<nums.length;i++) nums[i] += nums[i - 1]
+  return nums
 };
 ```
 
@@ -24220,6 +24593,60 @@ var reformatNumber = function(number) {
     }
   }
 
+  return res
+};
+```
+
+## 🌟😻✔ 1706. 球会落何处【medium】
+
+[ref](https://leetcode.cn/problems/where-will-the-ball-fall/)
+
+矩阵、模拟
+
+```js
+var findBall = function(grid) {
+  const m = grid.length, n = grid[0].length
+  const res = new Array(n).fill(-1)
+  for(let j=0;j<n;j++) {
+    let col = j
+    for(let i = 0;i<m;i++) {
+      if(
+        col === 0 && grid[i][col] === -1 || 
+        col === n - 1 && grid[i][col] === 1 || 
+        grid[i][col] === -1 && grid[i][col - 1] === 1 ||
+        grid[i][col] === 1 && grid[i][col + 1] === -1
+      ) {
+        col = -1
+        break
+      }
+      col += grid[i][col]
+    }
+    res[j] = col
+  }
+  return res
+};
+```
+
+```js
+var findBall = function(grid) {
+  const m = grid.length, n = grid[0].length
+  let base = new Array(n).fill(0).map((_, i) => [i, i]) // 原来, 现在
+  const res = new Array(n).fill(-1)
+  for(let i=0;i<m;i++) {
+    const next = []
+    for(let k=0;k<base.length;k++) {
+      const [ori, currJ] = base[k]
+      if(currJ === 0 && grid[i][currJ] === -1) continue
+      if(currJ === n - 1 && grid[i][currJ] === 1) continue
+      if(grid[i][currJ] === 1 && grid[i][currJ + 1] === -1) continue
+      if(grid[i][currJ] === -1 && grid[i][currJ - 1] === 1) continue
+      next.push([ori, grid[i][currJ] + currJ])
+    }
+    base = next
+  }
+  for(let i=0;i<base.length;i++) {
+    res[base[i][0]] = base[i][1]
+  }
   return res
 };
 ```
@@ -32687,6 +33114,38 @@ var lenLongestFibSubseq = function(arr) {
 };
 ```
 
+## ???🌟😻✔ 剑指 Offer II 094. 最少回文分割【hard】
+
+[ref](https://leetcode.cn/problems/omKAoA/)
+
+回文串、动态规划
+
+```js
+// 时间复杂度：O(N^2)
+// 空间复杂度：O(N^2)
+var minCut = function(s) {
+  const n = s.length
+  const fp = new Array(n).fill(0).map(_ => new Array(n).fill(true))
+  for(let i=n-2;i>=0;i--) {
+    for(let j=i + 1;j<n;j++) {
+      fp[i][j] = false
+      if(s[i] === s[j]) {
+        fp[i][j] = i + 1 <= j - 1 ? fp[i + 1][j - 1] : true
+      }
+    }
+  }
+  const dp = new Array(n + 1).fill(0).map((_, i) => i)
+  for(let j=1;j<=n;j++) {
+    for(let i=j;i>=1;i--) {
+      if(fp[i-1][j-1]) {
+        dp[j] = Math.min(dp[j], dp[i - 1] + 1) 
+      }
+    }
+  }
+  return dp[n] - 1
+};
+```
+
 ## ?🌟😻✔ 剑指 Offer II 095. 最长公共子序列【medium】
 
 [ref](https://leetcode.cn/problems/qJnOS7/)
@@ -33602,6 +34061,60 @@ var findCircleNum = function(isConnected) {
   }
   return cnt
 };
+```
+
+## ?🌟😻✔ 剑指 Offer II 117. 相似的字符串【hard】
+
+[ref](https://leetcode.cn/problems/H6lPxb/)
+
+图、广度优先搜索
+
+```js
+var numSimilarGroups = function(strs) {
+  const n = strs.length, strLen = strs[0].length, connectionArr = new Array(n).fill(0).map(_ => [])
+  for(let i=0; i<n; i++) {
+    for(let j=0; j<n; j++) {
+      if(i !== j) {
+        let diffCnt = 0, x, y
+        for(let k=0;k<strLen;k++) {
+          if(strs[i][k] !== strs[j][k]) {
+            diffCnt++
+            if(diffCnt > 2) break
+            if(x === undefined) x = k
+            else y = k
+          }
+        }
+        if(diffCnt === 0 || diffCnt === 2 && (strs[i][x] === strs[j][y] && strs[i][y] === strs[j][x])) {
+          connectionArr[i].push(j)
+        }
+      }
+    }
+  }
+  let cnt = 0
+  const used = new Array(n).fill(false)
+  for(let i=0;i<n;i++) {
+    if(used[i]) continue
+    cnt++
+    used[i] = true
+    let q = [i]
+    while(q.length) {
+      const tq = []
+      for(let j=0;j<q.length;j++) {
+        const curr = q[j]
+        const nexts = connectionArr[curr]
+        for(const next of nexts) {
+          if(!used[next]) {
+            used[next] = true
+            tq.push(next)
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return cnt
+};
+
 ```
 
 ## ?🌟😻✔ 剑指 Offer II 118. 多余的边【medium】
