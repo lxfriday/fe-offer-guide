@@ -35,9 +35,21 @@
 - 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
 - ???[🌟【hard】940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
+- ???[🌟【easy】459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
 # 刷题日记
 
-- 20221014(15)
+- 20221016(10)
+  - [🌟【medium】886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/) 图、广度优先搜索、深度优先搜索
+  - [🌟【easy】733. 图像渲染](https://leetcode.cn/problems/flood-fill/) 图、深度优先搜索
+  - [🌟【easy】1046. 最后一块石头的重量](https://leetcode.cn/problems/last-stone-weight/) 堆、大顶堆、优先队列
+  - [🌟【easy】680. 验证回文串 II](https://leetcode.cn/problems/valid-palindrome-ii/) 字符串、回文串、双指针
+  - [【easy】1672. 最富有客户的资产总量](https://leetcode.cn/problems/richest-customer-wealth/) 数组、矩阵
+  - ???[🌟【easy】459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
+  - [【easy】832. 翻转图像](https://leetcode.cn/problems/flipping-an-image/) 矩阵
+  - [【easy】434. 字符串中的单词数](https://leetcode.cn/problems/number-of-segments-in-a-string/) 字符串
+  - ?[🌟【meidum】1014. 最佳观光组合](https://leetcode.cn/problems/best-sightseeing-pair/) 数组题、规律、脑筋急转弯、贪心
+  - ?[🌟【meidum】397. 整数替换](https://leetcode.cn/problems/integer-replacement/) 递归、规律、模拟
+- 20221015(15)
   - [【medium】1441. 用栈操作构建数组](https://leetcode.cn/problems/build-an-array-with-stack-operations/) 模拟、栈
   - [【easy】1365. 有多少小于当前数字的数字](https://leetcode.cn/problems/how-many-numbers-are-smaller-than-the-current-number/) 哈希表、桶排序
   - [【easy】520. 检测大写字母](https://leetcode.cn/problems/detect-capital/) 字符串
@@ -1093,6 +1105,7 @@
 - 🌟【easy】[面试题 01.09. 字符串轮转](https://leetcode.cn/problems/string-rotation-lcci/) 字符串题、字符串旋转
 - ?🌟【medium】[468. 验证IP地址](https://leetcode.cn/problems/validate-ip-address/) 字符串题
 - 🌟【easy】[409. 最长回文串](https://leetcode.cn/problems/longest-palindrome/) 字符串、回文串
+- ???🌟【easy】[459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
 
 回文串相关
 
@@ -1105,6 +1118,7 @@
 - 🌟【easy】[266. 回文排列](https://leetcode.cn/problems/palindrome-permutation/) 字符串、回文
 - 🌟【medium】[267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
 - ???🌟【hard】[剑指 Offer II 094. 最少回文分割](https://leetcode.cn/problems/omKAoA/) 动态规划、回文串
+- 🌟【easy】[680. 验证回文串 II](https://leetcode.cn/problems/valid-palindrome-ii/) 字符串、回文串
 
 ## 数组题 
 
@@ -1157,6 +1171,7 @@
 - 🌟【easy】[414. 第三大的数](https://leetcode.cn/problems/third-maximum-number/) 数组题
 - ?🌟【easy】[495. 提莫攻击](https://leetcode.cn/problems/teemo-attacking/) 数组、区间问题
 - 🌟【medium】[845. 数组中的最长山脉](https://leetcode.cn/problems/longest-mountain-in-array/) 模拟、数组题#
+- ?🌟【meidum】[1014. 最佳观光组合](https://leetcode.cn/problems/best-sightseeing-pair/) 数组题、规律、脑筋急转弯
 
 ### 排列组合
 
@@ -1218,6 +1233,7 @@
 - ???🌟【medium】[927. 三等分](https://leetcode.cn/problems/three-equal-parts/) 模拟
 - ??🌟【medium】[593. 有效的正方形](https://leetcode.cn/problems/valid-square/) 模拟、哈希表
 - 🌟【easy】[258. 各位相加](https://leetcode.cn/problems/add-digits/) 模拟、数学问题、数论
+- ?🌟【meidum】[397. 整数替换](https://leetcode.cn/problems/integer-replacement/) 递归、规律、模拟
 
 ### 模拟运算
 
@@ -1432,6 +1448,7 @@
 - ? 🌟【medium】[面试题 17.14. 最小K个数](https://leetcode.cn/problems/smallest-k-lcci/) 堆、优先队列、快速选择、前k个问题
 - ? 🌟【medium】[973. 最接近原点的 K 个点](https://leetcode.cn/problems/k-closest-points-to-origin/) 优先队列、快速选择、分治法、堆、前K个问题
 - ?? 🌟【medium】[剑指 Offer II 061. 和最小的 k 个数对](https://leetcode.cn/problems/qn8gGX/) 优先队列
+- 🌟【easy】[1046. 最后一块石头的重量](https://leetcode.cn/problems/last-stone-weight/) 堆、大顶堆、优先队列
 
 ### 矩阵、深度优先、广度优先
 - [🌟【medium】1034. 边界着色](https://leetcode.cn/problems/coloring-a-border/) 矩阵、深度优先搜索、广度优先搜索
@@ -1473,6 +1490,7 @@
 - 🌟【hard】[剑指 Offer II 108. 单词演变](https://leetcode.cn/problems/om3reC/) 图、广度优先搜索
 - 🌟【medium】[433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/) 广度优先搜索、BFS、DFS
 - ?🌟【hard】[剑指 Offer II 117. 相似的字符串](https://leetcode.cn/problems/H6lPxb/) 图、广度优先搜索
+- 🌟【medium】[886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/) 图、广度优先搜索、深度优先搜索
 
 ### 并查集
 
@@ -1586,6 +1604,7 @@
 - 🌟【medium】[781. 森林中的兔子](https://leetcode.cn/problems/rabbits-in-forest/) 贪心
 - ? 🌟【medium】[991. 坏了的计算器](https://leetcode.cn/problems/broken-calculator/) 贪心
 - ??🌟【medium】[881. 救生艇](https://leetcode.cn/problems/boats-to-save-people/) 贪心
+- ?🌟【meidum】[1014. 最佳观光组合](https://leetcode.cn/problems/best-sightseeing-pair/) 数组题、规律、脑筋急转弯、贪心
 
 ## 回溯思想
 
@@ -14270,6 +14289,23 @@ var longestSubstring = function(s, k) {
 
 ```
 
+## ?🌟😻✔ 397. 整数替换【medium】
+
+[ref](https://leetcode.cn/problems/integer-replacement/)
+
+规律、模拟、位运算
+
+```js
+var integerReplacement = function(n) {
+  if(n === 1) return 0
+  if(n % 2 === 0) {
+    return 1 + integerReplacement(n / 2)
+  } else {
+    return 1 + Math.min(integerReplacement(n + 1), integerReplacement(n - 1))
+  }
+};
+```
+
 ## ??🌟😻✔ 399. 除法求值【medium】
 
 [ref](https://leetcode.cn/problems/evaluate-division/)
@@ -15081,6 +15117,24 @@ function myFlatten(head) {
 }
 ```
 
+## ✔ 434. 字符串中的单词数【easy】
+
+[ref](https://leetcode.cn/problems/number-of-segments-in-a-string/)
+
+字符串
+
+```js
+var countSegments = function(s) {
+  let cnt = 0
+  for(let i=0;i<s.length;i++) {
+    if(s[i] !== ' ') {
+      if(i === 0 || s[i-1] === ' ') cnt++
+    }
+  }
+  return cnt
+};
+```
+
 ## ?🌟😻✔ 435. 无重叠区间【medium】
 
 [ref](https://leetcode.cn/problems/non-overlapping-intervals/)
@@ -15622,7 +15676,44 @@ var findContentChildren = function(g, s) {
 };
 ```
 
-## ???🌟😻✔ 461 汉明距离【easy】
+## ???🌟😻✔ 459. 重复的子字符串【easy】
+
+[ref](https://leetcode.cn/problems/repeated-substring-pattern/)
+
+字符串、模拟
+
+```js
+var repeatedSubstringPattern = function(s) {
+  const str = s + s
+  return str.slice(1, str.length -1).includes(s)
+};
+```
+
+```js
+// 暴力，O(N^2)
+var repeatedSubstringPattern = function(s) {
+  const n = s.length
+  if(n < 2) return false
+  for(let i=0;i<n / 2;i++) {
+    if(canRepeat(s.slice(0, i + 1), s)) return true
+  }
+  return false
+};
+
+function canRepeat(str, s) {
+  const strLen = str.length
+  let i = 0, j = 0
+  while(j < s.length) {
+    if(str[i] === s[j]) {
+      i = (i + 1) % strLen
+      j++
+    } else return false
+  }
+  return i === 0
+}
+```
+
+## ???🌟😻✔ 460. LFU 缓存【hard】
 
 [ref](https://leetcode.cn/problems/lfu-cache/)
 
@@ -18410,6 +18501,44 @@ var checkValidString = function(s) {
 };
 ```
 
+## 🌟😻✔ 680. 验证回文串 II【easy】
+
+[ref](https://leetcode.cn/problems/valid-palindrome-ii/)
+
+回文串、字符串、双指针
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(1)
+var validPalindrome = function(s) {
+  let l = 0, r = s.length - 1
+  while(l < r) {
+    if(s[l] !== s[r]) {
+      let pl = l, pr = r, leftFailed = false, rightFailed = false
+      pl++
+      while(pl < pr) {
+        if(s[pl++] !== s[pr--]) {
+          leftFailed = true
+          break
+        }
+      }
+      pl = l, pr = r
+      pr--
+      while(pl < pr) {
+        if(s[pl++] !== s[pr--]) {
+          rightFailed = true
+        }
+      }
+      return !leftFailed || !rightFailed
+    } else {
+      l++
+      r--
+    }
+  }
+  return true
+};
+```
+
 ## ??🌟😻✔ 684. 冗余连接【medium】
 
 [ref](https://leetcode.cn/problems/redundant-connection/solution/)
@@ -19658,6 +19787,32 @@ var splitListToParts = function(head, k) {
     res[i++] = myHead.next
   }
   return res
+};
+```
+
+## 🌟😻✔ 733. 图像渲染【easy】
+
+[ref](https://leetcode.cn/problems/flood-fill/)
+
+图、深度优先搜索
+
+```js
+// 时间复杂度：O(MN)
+// 空间复杂度：O(MN)
+var floodFill = function(image, sr, sc, color) {
+  const target = image[sr][sc]
+  if(target === color) return image
+  function walk(i, j) {
+    const m = image.length, n = image[0].length
+    if(i < 0 || i >= m || j < 0 || j >= n || image[i][j] !== target) return
+    image[i][j] = color
+    walk(i - 1, j)
+    walk(i + 1, j)
+    walk(i, j - 1)
+    walk(i, j + 1)
+  }
+  walk(sr, sc)
+  return image
 };
 ```
 
@@ -21089,6 +21244,34 @@ var uniqueLetterString = function(s) {
 };
 ```
 
+## ✔ 832. 翻转图像【easy】
+
+[ref](https://leetcode.cn/problems/flipping-an-image/)
+
+矩阵
+
+```js
+var flipAndInvertImage = function(image) {
+  const m = image.length, n = image[0].length
+  for(let i=0;i<m;i++) {
+    let l = 0, r = n - 1
+    while(l < r) {
+      const t = image[i][l]
+      image[i][l] = image[i][r]
+      image[i][r] = t
+      l++
+      r--
+    }
+  }
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      image[i][j] = 1 - image[i][j]
+    }
+  }
+  return image
+};
+```
+
 ## ? 🌟😻✔ 836. 矩形重叠【easy】
 
 [ref](https://leetcode.cn/problems/rectangle-overlap/)
@@ -21889,6 +22072,52 @@ var numRescueBoats = function(people, limit) {
     r--
   }
   return cnt
+};
+
+```
+
+## 🌟😻✔ 886. 可能的二分法【medium】
+
+[ref](https://leetcode.cn/problems/possible-bipartition/)
+
+图、深度优先搜索、广度优先搜索
+
+```js
+var possibleBipartition = function(n, dislikes) {
+  const disLikeMap = new Map()
+  for(const pair of dislikes) {
+    const [a, b] = pair
+    if(!disLikeMap.has(a)) disLikeMap.set(a, new Set())
+    if(!disLikeMap.has(b)) disLikeMap.set(b, new Set())
+    disLikeMap.get(a).add(b)
+    disLikeMap.get(b).add(a)
+  }
+  const colors = new Array(n + 1).fill(0)
+  for(let i=1;i<=n;i++) {
+    if(colors[i] !== 0) continue
+    colors[i] = 1
+    let q = [[i, 1]]
+    while(q.length) {
+      const tq = []
+      for(let j=0;j<q.length;j++) {
+        const [curr, pos] = q[j]
+        const nexts = disLikeMap.get(curr)
+        if(nexts) {
+          const nextPos = -pos
+          for(const next of nexts) {
+            if(colors[next] !== 0) {
+              if(colors[next] !== nextPos) return false
+            } else {
+              colors[next] = nextPos
+              tq.push([next, nextPos])
+            }
+          }
+        }
+      }
+      q = tq
+    }
+  }
+  return true
 };
 
 ```
@@ -22871,6 +23100,93 @@ var shipWithinDays = function(weights, days) {
 };
 ```
 
+## ?🌟😻✔ 1014. 最佳观光组合【medium】
+
+[ref](https://leetcode.cn/problems/best-sightseeing-pair/)
+
+数组、智力题、脑筋急转弯、贪心
+
+```js
+var maxScoreSightseeingPair = function(values) {
+  const n = values.length
+  let res = Number.MIN_SAFE_INTEGER, maxIpair = values[0] + 0
+  for(let j=1;j<n;j++) {
+    res = Math.max(res, maxIpair + values[j] - j)
+    maxIpair = Math.max(maxIpair, values[j] + j)
+  }
+  return res
+};
+```
+
+```js
+var maxScoreSightseeingPair = function(values) {
+  const n = values.length
+  let max = Number.MIN_SAFE_INTEGER
+  const maxHeap = new MaxHeap()
+  for(let i=1;i<n;i++) {
+    maxHeap.insert({
+      i: i,
+      v: values[i] - i
+    })
+  }
+  for(let i=0;i<n-1;i++) {
+    while(maxHeap.peek().i <= i) {
+      maxHeap.pop()
+    }
+    max = Math.max(max, values[i] + i + maxHeap.peek().v)
+  }
+  return max
+};
+
+class MaxHeap {
+  constructor(){
+    this.heap = []
+  }
+  insert(obj){
+    this.heap.push(obj)
+    this.shiftUp(this.size() - 1)
+  }
+  pop(){
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  swap(i, j){
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  peek() {
+    return this.heap[0]
+  }
+  size(){
+    return this.heap.length
+  }
+  shiftUp(i){
+    const parentIdx = Math.floor((i - 1) / 2)
+    if(parentIdx >= 0 && this.heap[i].v > this.heap[parentIdx].v) {
+      this.swap(i, parentIdx)
+      this.shiftUp(parentIdx)
+    }
+  }
+  shiftDown(i){
+    const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2
+    let maxIdx = i
+    if(leftIdx < this.size() && this.heap[leftIdx].v > this.heap[maxIdx].v) {
+      maxIdx = leftIdx
+    }
+    if(rightIdx < this.size() && this.heap[rightIdx].v > this.heap[maxIdx].v) {
+      maxIdx = rightIdx
+    }
+    if(maxIdx !== i) {
+      this.swap(i, maxIdx)
+      this.shiftDown(maxIdx)
+    }
+  }
+}
+````
+
 ## ?🌟😻✔ 1020. 飞地的数量【medium】
 
 [ref](https://leetcode.cn/problems/number-of-enclaves/)
@@ -23022,7 +23338,69 @@ var maxUncrossedLines = function(nums1, nums2) {
   }
   return dp[m-1][n-1]
 };
+```
 
+## ✔ 1047. 删除字符串中的所有相邻重复项【easy】
+
+[ref](https://leetcode.cn/problems/last-stone-weight/)
+
+优先队列、堆、大顶堆
+
+```js
+var lastStoneWeight = function(stones) {
+  const maxHeap = new MaxHeap()
+  for(const stone of stones) maxHeap.insert(stone)
+  while(maxHeap.size() >= 2) {
+    const v = Math.abs(maxHeap.pop() - maxHeap.pop())
+    if(v > 0) maxHeap.insert(v)
+  }
+  return maxHeap.size() ?  maxHeap.pop() : 0
+};
+
+class MaxHeap {
+  constructor(){
+    this.heap = []
+  }
+  insert(v){
+    this.heap.push(v)
+    this.shiftUp(this.size() - 1)
+  }
+  pop(){
+    this.swap(0, this.size() - 1)
+    const ret = this.heap.pop()
+    this.shiftDown(0)
+    return ret
+  }
+  swap(i, j) {
+    const t = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = t
+  }
+  size(){
+    return this.heap.length
+  }
+  shiftUp(i){
+    const parentIdx = Math.floor((i - 1) / 2)
+    if(parentIdx >= 0 && this.heap[i] > this.heap[parentIdx]) {
+      this.swap(i, parentIdx)
+      this.shiftUp(parentIdx)
+    }
+  }
+  shiftDown(i){
+    const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2
+    let maxIdx = i
+    if(leftIdx < this.size() && this.heap[leftIdx] > this.heap[maxIdx]) {
+      maxIdx = leftIdx
+    }
+    if(rightIdx < this.size() && this.heap[rightIdx] > this.heap[maxIdx]) {
+      maxIdx = rightIdx
+    }
+    if(maxIdx !== i) {
+      this.swap(i, maxIdx)
+      this.shiftDown(maxIdx)
+    }
+  }
+}
 ```
 
 ## ✔ 1047. 删除字符串中的所有相邻重复项【easy】
@@ -24553,6 +24931,24 @@ OrderedStream.prototype.insert = function(idKey, value) {
     res.push(this.stream[this.i++])
   }
   return res
+};
+```
+
+## ✔ 1672. 最富有客户的资产总量【easy】
+
+[ref](https://leetcode.cn/problems/richest-customer-wealth/)
+
+矩阵、数组
+
+```js
+var maximumWealth = function(accounts) {
+  let max = 0
+  for(const accountArr of accounts) {
+    let sum = 0
+    for(const num of accountArr) sum += num
+    max = Math.max(max, sum)
+  }
+  return max
 };
 ```
 
