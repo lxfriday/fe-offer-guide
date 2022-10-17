@@ -29,15 +29,28 @@
 - ?? [🌟【medium】743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/) 最短路、最短路问题、Floyd 算法、Dijkstra 算法、深度优先搜索
 
 ## 后续回顾
+
 - ??[🌟【medium】470. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/) 概率、随机数
-- ??? 🌟【hard】[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
+- ??? [🌟【hard】115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
 - ??? [🌟【hard】857. 雇佣 K 名工人的最低成本](https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/) 优先队列、大顶堆、堆
 - 🌟【medium】[399. 除法求值](https://leetcode.cn/problems/evaluate-division/) Floyd 算法
 - ?? [🌟【medium】227. 基本计算器 II](https://leetcode.cn/problems/basic-calculator-ii/) 模拟
 - ???[🌟【hard】940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
 - ???[🌟【easy】459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
+
 # 刷题日记
 
+- 20221017(10)
+  - [🌟【medium】904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 滑动窗口
+  - [🌟【easy】1122. 数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) 计数排序
+  - [🌟【easy】1021. 删除最外层的括号](https://leetcode.cn/problems/remove-outermost-parentheses/) 模拟
+  - [🌟【easy】697. 数组的度](https://leetcode.cn/problems/degree-of-an-array/) 数组题、模拟
+  - [🌟【easy】441. 排列硬币](https://leetcode.cn/problems/arranging-coins/) 二分搜索
+  - [🌟【easy】1013. 将数组分成和相等的三个部分](https://leetcode.cn/problems/partition-array-into-three-parts-with-equal-sum/) 数组题，前缀和
+  - [🌟【easy】476. 数字的补数](https://leetcode.cn/problems/number-complement/) 二进制、位运算
+  - [🌟【easy】1160. 拼写单词](https://leetcode.cn/problems/find-words-that-can-be-formed-by-characters/) 哈希表
+  - ?[🌟【medium】969. 煎饼排序](https://leetcode.cn/problems/pancake-sorting/) 模拟、排序
+  - [🌟【medium】690. 员工的重要性](https://leetcode.cn/problems/employee-importance/) 图、广度优先搜索
 - 20221016(10)
   - [🌟【medium】886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/) 图、广度优先搜索、深度优先搜索
   - [🌟【easy】733. 图像渲染](https://leetcode.cn/problems/flood-fill/) 图、深度优先搜索
@@ -1030,6 +1043,7 @@
 - ?🌟【easy】[面试题 05.06. 整数转换](https://leetcode.cn/problems/convert-integer-lcci/) 二进制、位运算
 - ?🌟【easy】[面试题 05.07. 配对交换](https://leetcode.cn/problems/exchange-lcci/) 二进制、位运算
 - 🌟【easy】[面试题 17.01. 不用加号的加法](https://leetcode.cn/problems/add-without-plus-lcci/) 二进制、位运算
+- 🌟【easy】[476. 数字的补数](https://leetcode.cn/problems/number-complement/) 二进制、位运算
 
 ## 数字大小、数字、数学、数学规律
 
@@ -1491,6 +1505,7 @@
 - 🌟【medium】[433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/) 广度优先搜索、BFS、DFS
 - ?🌟【hard】[剑指 Offer II 117. 相似的字符串](https://leetcode.cn/problems/H6lPxb/) 图、广度优先搜索
 - 🌟【medium】[886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/) 图、广度优先搜索、深度优先搜索
+- 🌟【medium】[690. 员工的重要性](https://leetcode.cn/problems/employee-importance/) 图、广度优先搜索
 
 ### 并查集
 
@@ -1670,8 +1685,14 @@
 - ??🌟【medium】[222. 完全二叉树的节点个数](https://leetcode.cn/problems/count-complete-tree-nodes/) 二叉树、二分搜索
 - ??🌟【medium】[611. 有效三角形的个数](https://leetcode.cn/problems/valid-triangle-number/) 二分搜索、排序
 - ?? 🌟【medium】[792. 匹配子序列的单词数](https://leetcode.cn/problems/number-of-matching-subsequences/) 二分搜索、哈希表
+- 🌟【easy】[441. 排列硬币](https://leetcode.cn/problems/arranging-coins/) 二分搜索
 
 ## 排序算法的应用
+
+### 冒泡
+
+- ?[🌟【medium】969. 煎饼排序](https://leetcode.cn/problems/pancake-sorting/) 模拟、排序
+
 
 ### 归并
 
@@ -1702,6 +1723,7 @@
 - ? 🌟【medium】[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/) 堆排序、排序、桶排序
 - 🌟【easy】[1608. 特殊数组的特征值](https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/) 桶排序、计数排序、排序
 - ??? 🌟【medium】[剑指 Offer II 057. 值和下标之差都在给定的范围内](https://leetcode.cn/problems/7WqeDu/) 桶排序、滑动窗口
+- 🌟【easy】[1122. 数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) 计数排序
 
 ### 插入排序
 
@@ -15283,6 +15305,28 @@ function getCount(s, n) {
 }
 ```
 
+## 🌟😻✔ 441. 排列硬币【easy】
+
+[ref](https://leetcode.cn/problems/arranging-coins/)
+
+二分搜索
+
+```js
+var arrangeCoins = function(n) {
+  let l = 1, r = n
+  while(l < r) {
+    const mid = Math.ceil((l + r) / 2)
+    const sum = (1 + mid) * mid / 2
+    if(sum <= n) {
+      l = mid
+    } else {
+      r = mid - 1
+    }
+  }
+  return l
+};
+```
+
 ## 🌟😻✔ 442. 数组中重复的数据【medium】
 
 [ref](https://leetcode.cn/problems/find-all-duplicates-in-an-array/)
@@ -15990,6 +16034,24 @@ function binarySearch(heaters, target) {
   }
   return l
 }
+```
+
+## 🌟😻✔ 476. 数字的补数【easy】
+
+[ref](https://leetcode.cn/problems/number-complement/)
+
+二进制、位运算
+
+```js
+var findComplement = function(num) {
+  let ret = 0, i = 0
+  while(num > 0) {
+    ret |= (1 - (num & 1)) << i
+    num >>= 1
+    i++
+  }
+  return ret
+};
 ```
 
 ## ✔ 485. 最大连续 1 的个数【easy】
@@ -18714,6 +18776,41 @@ var longestUnivaluePath = function(root) {
 
 ```
 
+## 🌟😻✔ 690. 员工的重要性【medium】
+
+[ref](https://leetcode.cn/problems/employee-importance/)
+
+图、广度优先搜索
+
+```js
+var GetImportance = function(employees, id) {
+  const subMap = new Map(), valMap = new Map()
+  for(const {id, importance, subordinates} of employees) {
+    subMap.set(id, subordinates)
+    valMap.set(id, importance)
+  }
+  let sum = valMap.get(id)
+  let q = [id]
+  const used = new Set([id])
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const curr = q[i]
+      const nexts = subMap.get(curr)
+      for(const next of nexts) {
+        if(!used.has(next)) {
+          used.add(next)
+          sum += valMap.get(next)
+          tq.push(next)
+        }
+      }
+    }
+    q = tq
+  }
+  return sum
+};
+```
+
 ## ?🌟😻✔ 692. 前K个高频单词【medium】
 
 [ref](https://leetcode.cn/problems/top-k-frequent-words/)
@@ -18915,6 +19012,38 @@ var maxAreaOfIsland = function(grid) {
 
   return max
 };
+```
+
+## 🌟😻✔ 697. 数组的度【medium】
+
+[ref](https://leetcode.cn/problems/degree-of-an-array/)
+
+数组、模拟
+
+```js
+var findShortestSubArray = function(nums) {
+  const map = new Map(), n = nums.length
+  let maxDegree = 0
+  for(const num of nums) {
+    map.set(num, (map.get(num) || 0) + 1)
+    maxDegree = Math.max(maxDegree, map.get(num))
+  }
+  const m = new Map()
+  let l = 0, r = 0, min = Number.MAX_SAFE_INTEGER
+  while(r < n) {
+    m.set(nums[r], (m.get(nums[r]) || 0) + 1)
+    if(m.get(nums[r]) === maxDegree) {
+      while(nums[l] !== nums[r]) {
+        m.set(nums[l], m.get(nums[l]) - 1)
+        l++
+      }
+      min = Math.min(min, r - l + 1)
+    }
+    r++
+  }
+  return min  
+};
+
 ```
 
 ## ??🌟😻✔ 698 划分为k个相等的子集【medium】
@@ -23100,6 +23229,32 @@ var shipWithinDays = function(weights, days) {
 };
 ```
 
+## 🌟😻✔ 1013. 将数组分成和相等的三个部分【easy】
+
+[ref](https://leetcode.cn/problems/partition-array-into-three-parts-with-equal-sum/)
+
+前缀和、数组
+
+```js
+var canThreePartsEqualSum = function(arr) {
+  const n = arr.length
+  let sum = 0
+  for(const num of arr) sum += num
+  const target = sum / 3
+  if(target !== Math.floor(target)) return false
+  sum = 0
+  let iIdx = -1
+  for(let i=0;i<arr.length;i++) {
+    sum += arr[i]
+    if(sum === target && iIdx === -1) iIdx = i
+    if(sum === 2 * target) {
+      if(iIdx >= 0 && i > iIdx && i < n - 1) return true
+    }
+  }
+  return false
+};
+```
+
 ## ?🌟😻✔ 1014. 最佳观光组合【medium】
 
 [ref](https://leetcode.cn/problems/best-sightseeing-pair/)
@@ -23228,6 +23383,31 @@ var numEnclaves = function(grid) {
 };
 ```
 
+## 🌟😻✔ 1021. 删除最外层的括号【easy】
+
+[ref](https://leetcode.cn/problems/remove-outermost-parentheses/)
+
+模拟、括号
+
+```js
+var removeOuterParentheses = function(s) {
+  const n = s.length
+  let l = 0, r = 0, lCnt = 0, res = ''
+  while(r < n) {
+    if(s[r] === '(') lCnt++
+    else {
+      lCnt--
+      if(lCnt === 0) {
+        res += s.slice(l + 1, r)
+        l = r + 1
+      }
+    }
+    r++
+  }
+  return res
+};
+```
+
 ## ??🌟😻✔ 1024. 视频拼接【medium】
 
 [ref](https://leetcode.cn/problems/video-stitching/)
@@ -23340,7 +23520,7 @@ var maxUncrossedLines = function(nums1, nums2) {
 };
 ```
 
-## ✔ 1047. 删除字符串中的所有相邻重复项【easy】
+## ✔ 1046. 最后一块石头的重量【easy】
 
 [ref](https://leetcode.cn/problems/last-stone-weight/)
 
@@ -23749,6 +23929,35 @@ var longestCommonSubsequence = function(text1, text2) {
 };
 ```
 
+## 🌟😻✔ 1122. 数组的相对排序【easy】
+
+[ref](https://leetcode.cn/problems/relative-sort-array/)
+
+计数排序
+
+```js
+var relativeSortArray = function(arr1, arr2) {
+  const bucket = new Array(1001).fill(0)
+  for(const num of arr1) {
+    bucket[num]++
+  }
+  const res = []
+  for(const num of arr2) {
+    while(bucket[num] > 0) {
+      res.push(num)
+      bucket[num]--
+    }
+  }
+  for(let i=0;i<1001;i++) {
+    while(bucket[i] > 0) {
+      res.push(i)
+      bucket[i]--
+    }
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 1150. 检查一个数是否在数组中占绝大多数【easy】
 
 [ref](https://leetcode.cn/problems/check-if-a-number-is-majority-element-in-a-sorted-array/)
@@ -23792,6 +24001,35 @@ var isMajorityElement = function(nums, target) {
   return r - l + 1 > len / 2
 };
 
+```
+
+## 🌟😻✔ 1160. 拼写单词【easy】
+
+[ref](https://leetcode.cn/problems/find-words-that-can-be-formed-by-characters/)
+
+哈希表
+
+```js
+var countCharacters = function(words, chars) {
+  const charsMap = new Map()
+  for(const c of chars) {
+    charsMap.set(c, (charsMap.get(c) || 0) + 1)
+  }
+  let res = 0
+  for(const word of words) {
+    let shouldAdd = true
+    const map = new Map()
+    for(const c of word) {
+      if(!charsMap.has(c) || charsMap.get(c) === map.get(c)) {
+        shouldAdd = false
+        break
+      }
+      map.set(c, (map.get(c) || 0) + 1)
+    }
+    if(shouldAdd) res += word.length
+  }
+  return res
+};
 ```
 
 ## ??🌟😻✔ 1190. 反转每对括号间的子串【medium】
