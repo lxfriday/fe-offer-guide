@@ -40,6 +40,31 @@
 
 # 刷题日记
 
+- [🌟【hard】902. 最大为 N 的数字组合](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/) 动态规划、数位DP
+
+
+- 20221019(10)
+  - [🌟【easy】1700. 无法吃午餐的学生数量](https://leetcode.cn/problems/number-of-students-unable-to-eat-lunch/) 模拟
+  - [🌟【medium】1319. 连通网络的操作次数](https://leetcode.cn/problems/number-of-operations-to-make-network-connected/) 并查集
+  - [🌟【easy】993. 二叉树的堂兄弟节点](https://leetcode.cn/problems/cousins-in-binary-tree/) 二叉树
+  - [🌟【easy】938. 二叉搜索树的范围和](https://leetcode.cn/problems/range-sum-of-bst/) 二叉搜索树
+  - [🌟【easy】821. 字符的最短距离](https://leetcode.cn/problems/shortest-distance-to-a-character/) 多源广度优先、广度优先搜索
+  - [🌟【easy】637. 二叉树的层平均值](https://leetcode.cn/problems/average-of-levels-in-binary-tree/) 二叉树、广度优先搜索
+  - [🌟【easy】228. 汇总区间](https://leetcode.cn/problems/summary-ranges/) 数组题
+  - [🌟【easy】682. 棒球比赛](https://leetcode.cn/problems/baseball-game/) 栈
+  - [🌟【easy】645. 错误的集合](https://leetcode.cn/problems/set-mismatch/) 数组、计数
+  - [🌟【easy】500. 键盘行](https://leetcode.cn/problems/keyboard-row/) 哈希表
+- 20221018(10)
+  - [🌟【easy】917. 仅仅反转字母](https://leetcode.cn/problems/reverse-only-letters/) 双指针
+  - [【easy】561. 数组拆分](https://leetcode.cn/problems/array-partition/) 排序
+  - [🌟【easy】922. 按奇偶排序数组 II](https://leetcode.cn/problems/sort-array-by-parity-ii/) 数组、排序
+  - [🌟【easy】342. 4的幂](https://leetcode.cn/problems/power-of-four/) 二进制、位运算、模拟
+  - [🌟【easy】530. 二叉搜索树的最小绝对差](https://leetcode.cn/problems/minimum-absolute-difference-in-bst/) 二叉搜索树、中序遍历
+  - [🌟【easy】559. N 叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-n-ary-tree/) N叉树、BFS、DFS
+  - [🌟【easy】1207. 独一无二的出现次数](https://leetcode.cn/problems/unique-number-of-occurrences/) 哈希表
+  - [🌟【easy】1108. IP 地址无效化](https://leetcode.cn/problems/defanging-an-ip-address/) 字符串
+  - [🌟【medium】1006. 笨阶乘](https://leetcode.cn/problems/clumsy-factorial/) 模拟
+  - ?[🌟【medium】306. 累加数](https://leetcode.cn/problems/additive-number/) 回溯法
 - 20221017(10)
   - [🌟【medium】904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/) 滑动窗口
   - [🌟【easy】1122. 数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) 计数排序
@@ -1248,6 +1273,7 @@
 - ??🌟【medium】[593. 有效的正方形](https://leetcode.cn/problems/valid-square/) 模拟、哈希表
 - 🌟【easy】[258. 各位相加](https://leetcode.cn/problems/add-digits/) 模拟、数学问题、数论
 - ?🌟【meidum】[397. 整数替换](https://leetcode.cn/problems/integer-replacement/) 递归、规律、模拟
+- [🌟【medium】1006. 笨阶乘](https://leetcode.cn/problems/clumsy-factorial/) 模拟
 
 ### 模拟运算
 
@@ -1290,6 +1316,7 @@
 - ?? [🌟【medium】1190. 反转每对括号间的子串](https://leetcode.cn/problems/reverse-substrings-between-each-pair-of-parentheses/) 栈、括号问题
 - 🌟【easy】[844. 比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/) 字符串、双指针、栈
 - 🌟【easy】[1047. 删除字符串中的所有相邻重复项](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/) 栈
+- 🌟【easy】[682. 棒球比赛](https://leetcode.cn/problems/baseball-game/) 栈
 
 ### 单调栈
 
@@ -1448,6 +1475,7 @@
 - ? 🌟【medium】[669. 修剪二叉搜索树](https://leetcode.cn/problems/trim-a-binary-search-tree/) 二叉搜索树、深度优先搜索
 - 🌟【easy】[面试题 17.12. BiNode](https://leetcode.cn/problems/binode-lcci/) 二叉搜索树
 - 🌟【medium】[1305. 两棵二叉搜索树中的所有元素](https://leetcode.cn/problems/all-elements-in-two-binary-search-trees/) 二叉搜索树
+- 🌟【easy】[938. 二叉搜索树的范围和](https://leetcode.cn/problems/range-sum-of-bst/) 二叉搜索树
 
 ## 堆、小顶堆、大顶堆、优先队列
 
@@ -1513,6 +1541,8 @@
 - ??? 🌟【hard】[685. 冗余连接 II](https://leetcode.cn/problems/redundant-connection-ii/) 并查集、广度优先搜索、图、树、拓扑
 - ? 🌟【medium】[261. 以图判树](https://leetcode.cn/problems/graph-valid-tree/) 并查集、广度优先搜索
 - 🌟【medium】[990. 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/) 并查集
+- 🌟【medium】[1319. 连通网络的操作次数](https://leetcode.cn/problems/number-of-operations-to-make-network-connected/) 并查集
+
 ## 搜索、排序
 
 - 【easy】 [374 猜数字大小](https://leetcode.cn/problems/guess-number-higher-or-lower/)
@@ -1647,6 +1677,7 @@
 - 🌟【medium】[267. 回文排列 II](https://leetcode.cn/problems/palindrome-permutation-ii/) 字符串、回文、回溯法
 - ? 🌟【hard】[60. 排列序列](https://leetcode.cn/problems/permutation-sequence/) 回溯法、排列组合、规律题
 - ? 🌟【medium】[526. 优美的排列](https://leetcode.cn/problems/beautiful-arrangement/) 回溯法、排列组合
+- ?🌟【medium】[306. 累加数](https://leetcode.cn/problems/additive-number/) 回溯法
 
 ## 二分查找、二分搜索
 
@@ -10421,6 +10452,32 @@ var calculate = function(s) {
 };
 ```
 
+## 🌟😻✔ 228. 汇总区间【easy】
+
+[ref](https://leetcode.cn/problems/summary-ranges/)
+
+数组题
+
+```js
+var summaryRanges = function(nums) {
+  const res = [], n = nums.length
+  let i=0
+  while(i < n) {
+    let j = i
+    while(nums[j] + 1 === nums[j + 1]) {
+      j++
+    }
+    if(j === i) {
+      res.push(`${nums[i]}`)
+    } else {
+      res.push(`${nums[i]}->${nums[j]}`)
+    }
+    i = j + 1
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 229. 多数元素 II【medium】
 
 [ref](https://leetcode.cn/problems/majority-element-ii/)
@@ -12678,6 +12735,42 @@ NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
 };
 ```
 
+## ?🌟😻✔ 306. 累加数【medium】
+
+[ref](https://leetcode.cn/problems/additive-number/)
+
+回溯法
+
+```js
+var isAdditiveNumber = function(num) {
+  if(num.length < 3) return false
+  const n = num.length
+  let can = false
+  function dfs(idx, a, b, opeated) {
+    if(idx === n) {
+      if(opeated) can = true
+      return 
+    }
+    for(let i=idx; i<n; i++) {
+      const curr = Number(num.slice(idx, i + 1))
+      // 含前导0的非0数字，直接return
+      if(num[idx] === '0' && curr !== 0) return
+      // if(n - i - 1 > 0 && i - idx + 1 > n - i - 1) continue
+      if(a === -1) {
+        dfs(i + 1, curr, b, false)
+      } else if(b === -1) {
+        dfs(i + 1, a, curr, false)
+      } else if(a + b === curr) {
+        dfs(i + 1, b, curr, true)
+      }
+    }
+  }
+  dfs(0, -1, -1, false)
+  return can
+};
+
+```
+
 ## ??🌟😻✔ 309 最佳买卖股票时机含冷冻期【medium】
 
 [ref](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
@@ -13425,6 +13518,20 @@ NestedIterator.prototype.hasNext = function() {
 };
 NestedIterator.prototype.next = function() {
   return this.list.shift().getInteger()
+};
+```
+
+## 🌟😻✔ 342. 4的幂【easy】
+
+[ref](https://leetcode.cn/problems/power-of-four/)
+
+二进制、位运算、模拟
+
+```js
+var isPowerOfFour = function(n) {
+  if(n === 1) return true
+  if(n < 4) return false
+  return isPowerOfFour(n / 4)
 };
 ```
 
@@ -16367,6 +16474,36 @@ var findDiagonalOrder = function(mat) {
 
 ```
 
+## 🌟😻✔ 500. 键盘行【easy】
+
+[ref](https://leetcode.cn/problems/keyboard-row/)
+
+哈希表
+
+```js
+var findWords = function(words) {
+  const map = {}
+  for(const c of 'qwertyuiop') {
+    map[c] = 1
+  }
+  for(const c of 'asdfghjkl') {
+    map[c] = 2
+  }
+  for(const c of 'zxcvbnm') {
+    map[c] = 3
+  }
+  const res = []
+  for(const word of words) {
+    const s = new Set()
+    for(const c of word) {
+      s.add(map[c.toLowerCase()])
+    }
+    if(s.size === 1) res.push(word)
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 503. 下一个更大元素 II【medium】
 
 [ref](https://leetcode.cn/problems/next-greater-element-ii/)
@@ -16639,6 +16776,30 @@ var countArrangement = function(n) {
 // 1 2 3
 // 3 2 1
 // 2 1 3
+```
+
+## 🌟😻✔ 530. 二叉搜索树的最小绝对差【easy】
+
+[ref](https://leetcode.cn/problems/minimum-absolute-difference-in-bst/)
+
+二叉搜索树、中序遍历
+
+```js
+var getMinimumDifference = function(root) {
+  let res = Number.MAX_SAFE_INTEGER, prev
+
+  function dfs(node) {
+    node.left && dfs(node.left)
+    if(prev !== undefined) {
+      res = Math.min(res, node.val - prev)
+    }
+    prev = node.val
+    node.right && dfs(node.right)
+  }
+  dfs(root)
+
+  return res
+};
 ```
 
 ## ?🌟😻✔ 532. 数组中的 k-diff 数对【medium】
@@ -17022,6 +17183,32 @@ function reverse(s) {
 }
 ```
 
+## 🌟😻✔ 559. N 叉树的最大深度【easy】
+
+[ref](https://leetcode.cn/problems/maximum-depth-of-n-ary-tree/)
+
+N二叉树、BFS、DFS
+
+```js
+var maxDepth = function(root) {
+  if(!root) return 0
+  let res = 0
+  let q = [root]
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const node = q[i]
+      for(let j=0;j<node.children.length;j++) {
+        tq.push(node.children[j])
+      }
+    }
+    q = tq
+    res++
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 560 和为 K 的子数组【medium】
 
 [ref](https://leetcode.cn/problems/subarray-sum-equals-k/)
@@ -17045,6 +17232,24 @@ var subarraySum = function(nums, k) {
     map.set(sum, map.has(sum)? map.get(sum) + 1: 1)
   }
   return count
+};
+```
+
+## ✔ 561. 数组拆分【easy】
+
+[ref](https://leetcode.cn/problems/array-partition/)
+
+数组、排序
+
+```js
+var arrayPairSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  const n = nums.length
+  let ret = 0
+  for(let i=0;i<n-1;i+=2) {
+    ret += nums[i]
+  }
+  return ret
 };
 ```
 
@@ -17550,6 +17755,24 @@ MyCircularQueue.prototype.isEmpty = function() {
 MyCircularQueue.prototype.isFull = function() {
   return this.count === this.capacity
 };
+```
+
+## 🌟😻✔ 628. 三个数的最大乘积【easy】
+
+[ref](https://leetcode.cn/problems/maximum-product-of-three-numbers/)
+
+排序、规律
+
+```js
+var maximumProduct = function(nums) {
+  nums.sort((a, b) => a - b)
+  let a = nums[0], b = nums[1], c = nums[2]
+  let d = nums[nums.length - 3], e = nums[nums.length - 2], f = nums[nums.length - 1]
+  return Math.max(
+   d*e*f, 
+   a*b*f, 
+  )
+};
 
 ```
 
@@ -17681,6 +17904,32 @@ var judgeSquareSum = function(c) {
   }
   return false
 };
+```
+
+## 🌟😻✔ 637. 二叉树的层平均值【easy】
+
+[ref](https://leetcode.cn/problems/average-of-levels-in-binary-tree/)
+
+二叉树
+
+```js
+var averageOfLevels = function(root) {
+  const res = []
+  let q = [root]
+  while(q.length) {
+    const tq = []
+    let sum = 0
+    for(let i=0;i<q.length;i++) {
+      sum += q[i].val
+      q[i].left && tq.push(q[i].left)
+      q[i].right && tq.push(q[i].right)
+    }
+    res.push(sum / q.length)
+    q = tq
+  }
+  return res
+};
+
 ```
 
 ## ??🌟😻✔ 639. 解码方法 II【hard】
@@ -17852,8 +18101,26 @@ MyCircularDeque.prototype.isEmpty = function() {
 MyCircularDeque.prototype.isFull = function() {
   return this.count === this.capacity
 };
-
 ````
+
+## 🌟😻✔ 645. 错误的集合【easy】
+
+[ref](https://leetcode.cn/problems/set-mismatch/)
+
+数组、计数
+
+```js
+var findErrorNums = function(nums) {
+  const bucket = []
+  for(const num of nums) bucket[num] = (bucket[num] || 0) + 1
+  let a, b
+  for(let i=1;i<=nums.length;i++) {
+    if(bucket[i] === 2) a = i
+    if(bucket[i] === undefined) b = i
+  }
+  return [a, b]
+};
+```
 
 ## 🌟😻✔ 646. 最长数对链【medium】
 
@@ -18598,6 +18865,33 @@ var validPalindrome = function(s) {
     }
   }
   return true
+};
+```
+
+## 🌟😻✔ 682. 棒球比赛【easy】
+
+[ref](https://leetcode.cn/problems/baseball-game/)
+
+栈
+
+```js
+var calPoints = function(operations) {
+  const stack = []
+  for(let i=0;i<operations.length;i++) {
+    const curr = operations[i]
+    if(curr === '+') {
+      stack.push(stack[stack.length - 1] + stack[stack.length - 2])
+    } else if(curr === 'D') {
+      stack.push(stack[stack.length - 1] * 2)
+    } else if(curr === 'C') {
+      stack.pop()
+    } else {
+      stack.push(Number(curr))
+    }
+  }
+  let ret = 0
+  for(let num of stack) ret += num
+  return ret
 };
 ```
 
@@ -21260,6 +21554,60 @@ var numComponents = function(head, nums) {
 };
 ```
 
+## 🌟😻✔ 821. 字符的最短距离【easy】
+
+[ref](https://leetcode.cn/problems/shortest-distance-to-a-character/)
+
+广度优先搜索、多源广度优先、字符串
+
+```js
+var shortestToChar = function(s, c) {
+  const n = s.length, res = new Array(n).fill(Number.MAX_SAFE_INTEGER)
+  let prevIdx = Number.MIN_SAFE_INTEGER
+  for(let i=0;i<n;i++) {
+    if(s[i] === c) prevIdx = i
+    res[i] = i - prevIdx
+  }
+  prevIdx = Number.MAX_SAFE_INTEGER
+  for(let i=n-1;i>=0;i--) {
+    if(s[i] === c) prevIdx = i
+    res[i] = Math.min(prevIdx - i, res[i])
+  }
+  return res
+};
+```
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var shortestToChar = function(s, c) {
+  const n = s.length, res = new Array(n).fill(-1)
+  let q = []
+  for(let i=0;i<n;i++) {
+    if(s[i] === c) {
+      q.push([i, 0])
+      res[i] = 0
+    }
+  }
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const [curr, depth] = q[i]
+      if(curr - 1 >=0 && res[curr - 1] === -1) {
+        tq.push([curr - 1, depth + 1])
+        res[curr - 1] = depth + 1
+      }
+      if(curr + 1 < n && res[curr + 1] === -1) {
+        tq.push([curr + 1, depth + 1])
+        res[curr + 1] = depth + 1
+      }
+    }
+    q = tq
+  }
+  return res
+};
+```
+
 ## ???🌟😻✔ 827. 最大人工岛【hard】
 
 [ref](https://leetcode.cn/problems/making-a-large-island/)
@@ -22359,6 +22707,40 @@ var sumSubarrayMins = function(arr) {
 
 ```
 
+## 🌟😻✔ 917. 仅仅反转字母【easy】
+
+[ref](https://leetcode.cn/problems/reverse-only-letters/)
+
+双指针
+
+```js
+var reverseOnlyLetters = function(s) {
+  const sSplit = s.split('')
+  let l = 0, r = sSplit.length - 1
+  while(l < r) {
+    while(l < r && !isAlpha(s[l])) {
+      l++
+    }
+    while(l < r && !isAlpha(s[r])) {
+      r--
+    }
+    const t = sSplit[l]
+    sSplit[l] = sSplit[r]
+    sSplit[r] = t
+    l++, r--
+  }
+  return sSplit.join('')
+};
+
+function isAlpha(c) {
+  const cCode = c.charCodeAt(0)
+  return 'A'.charCodeAt(0) <= cCode &&
+  'Z'.charCodeAt(0) >= cCode ||
+  'a'.charCodeAt(0) <= cCode &&
+  'z'.charCodeAt(0) >= cCode
+}
+```
+
 ## 🌟😻✔ 921. 使括号有效的最少添加【medium】
 
 [ref](https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/)
@@ -22383,7 +22765,31 @@ var minAddToMakeValid = function(s) {
   }
   return stack.length
 };
+```
 
+## 🌟😻✔ 922. 按奇偶排序数组 II【easy】
+
+[ref](https://leetcode.cn/problems/sort-array-by-parity-ii/)
+
+数组、排序
+
+```js
+var sortArrayByParityII = function(nums) {
+  let j = 1
+  for(let k=0;k<nums.length;k+=2) {
+    while(nums[k] % 2 === 1) {
+      swap(nums, j, k)
+      j+=2
+    }
+  }
+  return nums
+};
+
+function swap(arr, i, j) {
+  const t = arr[i]
+  arr[i] = arr[j]
+  arr[j] = t
+}
 ```
 
 ## ???🌟😻✔ 927. 三等分【medium】
@@ -22492,6 +22898,25 @@ RecentCounter.prototype.ping = function (t) {
   }
   return this.q.length
 }
+```
+
+## 🌟😻✔ 938. 二叉搜索树的范围和【easy】
+
+[ref](https://leetcode.cn/problems/range-sum-of-bst/)
+
+二叉搜索树
+
+```js
+var rangeSumBST = function(root, low, high) {
+  if(!root) return 0
+  if(root.val < low) {
+    return rangeSumBST(root.right, low, high)
+  } else if(root.val > high) {
+    return rangeSumBST(root.left, low, high)
+  } else {
+    return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high)
+  }
+};
 ```
 
 ## ???🌟😻✔ 940. 不同的子序列 II【hard】
@@ -22980,6 +23405,35 @@ var brokenCalc = function(X, Y) {
 
 ```
 
+## 🌟😻✔ 993. 二叉树的堂兄弟节点【easy】
+
+[ref](https://leetcode.cn/problems/cousins-in-binary-tree/)
+
+二叉树
+
+```js
+var isCousins = function(root, x, y) {
+  let isSameFather = false, xh, yh
+  function dfs(node, height) {
+    if(node.val === x) {
+      xh = height
+    } else if(node.val === y) {
+      yh = height
+    }
+    node.left && dfs(node.left, height + 1)
+    node.right && dfs(node.right, height + 1)
+    if(
+      node.left && node.left.val === x && node.right && node.right.val == y || 
+      node.left && node.left.val === y && node.right && node.right.val == x
+    ) {
+      isSameFather = true
+    }
+  }
+  dfs(root, 1)
+  return !isSameFather && xh === yh
+};
+```
+
 ## ?🌟😻✔ 994. 腐烂的橘子【medium】
 
 [ref](https://leetcode.cn/problems/rotting-oranges/)
@@ -23182,6 +23636,40 @@ var largestSumAfterKNegations = function(nums, k) {
   }
   if(k <= 0 || k % 2 === 0) return sum
   return sum - 2 * absMin
+};
+```
+
+## 🌟😻✔ 1006. 笨阶乘【medium】
+
+[ref](https://leetcode.cn/problems/clumsy-factorial/)
+
+模拟
+
+```js
+var clumsy = function(n) {
+  let res = 0
+  if(n < 4) {
+    switch(n) {
+      case 3: return 6;
+      case 2: return 2;
+      case 1: return 1;
+    }
+  } else {
+    res += Math.floor((n * (n-1) / (n-2))) + (n-3)
+    n-=4
+    while(n >= 4) {
+      res += -Math.floor((n * (n-1) / (n-2))) + (n-3)
+      n -= 4
+    }
+    if(n === 3) {
+      res -= 6
+    } else if(n === 2) {
+      res -= 2
+    } else if(n === 1) {
+      res -= 1
+    }
+    return res
+  }
 };
 ```
 
@@ -23819,6 +24307,18 @@ var pathInZigZagTree = function(label) {
 };
 ```
 
+## ✔ 1108. IP 地址无效化【easy】
+
+[ref](https://leetcode.cn/problems/defanging-an-ip-address/)
+
+字符串
+
+```js
+var defangIPaddr = function(address) {
+  return address.split('.').join('[.]')
+};
+```
+
 ## ?🌟😻✔ 1109. 航班预订统计【medium】
 
 [ref](https://leetcode.cn/problems/corporate-flight-bookings/)
@@ -24080,6 +24580,27 @@ function reverse(str) {
   for(let i=str.length - 1;i>=0;i--) res += str[i]
   return res
 }
+```
+
+## 🌟😻✔ 1207. 独一无二的出现次数【easy】
+
+[ref](https://leetcode.cn/problems/unique-number-of-occurrences/)
+
+哈希表
+
+```js
+var uniqueOccurrences = function(arr) {
+  const bucket = new Map()
+  for(let i=0;i<arr.length;i++) {
+    bucket.set(arr[i], (bucket.get(arr[i]) || 0) + 1)
+  }
+  const times = new Set()
+  for(const cnt of bucket.values()) {
+    if(times.has(cnt)) return false
+    times.add(cnt)
+  }
+  return true
+};
 ```
 
 ## 🌟😻✔ 1208. 尽可能使字符串相等【medium】
@@ -24396,7 +24917,43 @@ var canReach = function(arr, start) {
 
   return jump(start - arr[start]) || jump(start + arr[start])
 };
+```
 
+## 🌟😻✔ 1319. 连通网络的操作次数【medium】
+
+[ref](https://leetcode.cn/problems/number-of-operations-to-make-network-connected/)
+
+并查集
+
+```js
+var makeConnected = function(n, connections) {
+  const parent = new Array(n).fill(0).map((_, i) => i)
+  let extraCnt = 0
+  for(let i=0;i<connections.length;i++) {
+    const [a, b] = connections[i]
+    if(find(parent, a) !== find(parent, b)) {
+      union(parent, a, b)
+    } else {
+      extraCnt++
+    }
+  }
+  let setsCnt = 0
+  for(let i=0;i<n;i++) {
+    if(parent[i] === i) setsCnt++
+  }
+  return extraCnt>= setsCnt - 1 ? setsCnt - 1 : -1
+};
+
+function union(parent, idx1, idx2) {
+  parent[find(parent, idx1)] = find(parent, idx2)
+}
+
+function find(parent, idx) {
+  if(parent[idx] !== idx) {
+    return find(parent, parent[idx])
+  }
+  return parent[idx]
+}
 ```
 
 ## ✔ 1342. 将数字变成 0 的操作次数【easy】
@@ -25228,6 +25785,25 @@ var reformatNumber = function(number) {
   }
 
   return res
+};
+```
+
+## 🌟😻✔ 1700. 无法吃午餐的学生数量【easy】
+
+[ref](https://leetcode.cn/problems/number-of-students-unable-to-eat-lunch/)
+
+模拟
+
+```js
+var countStudents = function(students, sandwiches) {
+  let arr = [0, 0]
+  for(const num of students) {
+    arr[num]++
+  }
+  while(sandwiches.length && arr[sandwiches[0]] > 0) {
+    arr[sandwiches.shift()]--
+  }
+  return sandwiches.length
 };
 ```
 
