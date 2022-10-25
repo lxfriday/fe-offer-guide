@@ -43,7 +43,13 @@
 
 # 刷题日记
 
-- 20221023(5)
+- 20221025(5)
+  - [🌟【medium】934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/) 深度优先搜索、广度优先搜索、多源广度优先
+  - [🌟【medium】1248. 统计「优美子数组」](https://leetcode.cn/problems/count-number-of-nice-subarrays/) 前缀和、数组题、哈希表、滑动窗口
+  - [🌟【medium】1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/) 矩阵、深度优先搜索、广度优先搜索
+  - ??[🌟【medium】365. 水壶问题](https://leetcode.cn/problems/water-and-jug-problem/) 广度优先搜索、数学
+  - ?[🌟【medium】767. 重构字符串](https://leetcode.cn/problems/reorganize-string/) 字符串、哈希表、脑筋急转弯
+- 20221024(5)
   - [🌟【medium】915. 分割数组](https://leetcode.cn/problems/partition-array-into-disjoint-intervals/) 数组题
   - ??[🌟【medium】686. 重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) 字符串、字符串匹配、KMP
   - ?[🌟【medium】331. 验证二叉树的前序序列化](https://leetcode.cn/problems/verify-preorder-serialization-of-a-binary-tree/) 二叉树、序列化、数组
@@ -1139,6 +1145,7 @@
 - 🌟【medium】[325. 和等于 k 的最长子数组长度](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/) 前缀、前缀和
 - ? 🌟【medium】[剑指 Offer II 011. 0 和 1 个数相同的子数组](https://leetcode.cn/problems/A1NYOS/) 前缀和
 - ?🌟【medium】[面试题 17.05.  字母与数字](https://leetcode.cn/problems/find-longest-subarray-lcci/) 前缀和
+- 🌟【medium】[1248. 统计「优美子数组」](https://leetcode.cn/problems/count-number-of-nice-subarrays/) 前缀和、哈希表、数学
 
 ## trie、字典树
 
@@ -1196,6 +1203,7 @@
 - ???🌟【easy】[459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
 - 🌟【easy】[925. 长按键入](https://leetcode.cn/problems/long-pressed-name/) 双指针、字符串
 - 🌟【easy】[1189. “气球” 的最大数量](https://leetcode.cn/problems/maximum-number-of-balloons/) 哈希表、字符串
+- ?🌟【medium】[767. 重构字符串](https://leetcode.cn/problems/reorganize-string/) 字符串、哈希表、脑筋急转弯
 
 ### KMP
 - ??🌟【medium】[686. 重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) 字符串、字符串匹配、KMP
@@ -1571,6 +1579,8 @@
 - ?🌟【medium】[1020. 飞地的数量](https://leetcode.cn/problems/number-of-enclaves/) 矩阵、广度优先搜索
 - 🌟【easy】[867. 转置矩阵](https://leetcode.cn/problems/transpose-matrix/) 矩阵
 - 🌟【easy】[1162. 地图分析](https://leetcode.cn/problems/as-far-from-land-as-possible/) 广度优先搜索、BFS、矩阵
+- 🌟【medium】[934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/) 深度优先搜索、广度优先搜索、多源广度优先
+- 🌟【medium】[1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/) 矩阵、深度优先搜索、广度优先搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -1595,6 +1605,7 @@
 - ?🌟【hard】[剑指 Offer II 117. 相似的字符串](https://leetcode.cn/problems/H6lPxb/) 图、广度优先搜索
 - 🌟【medium】[886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/) 图、广度优先搜索、深度优先搜索
 - 🌟【medium】[690. 员工的重要性](https://leetcode.cn/problems/employee-importance/) 图、广度优先搜索
+- ??🌟【medium】[365. 水壶问题](https://leetcode.cn/problems/water-and-jug-problem/) 广度优先搜索、数学
 
 ### 并查集
 
@@ -14094,6 +14105,60 @@ var countNumbersWithUniqueDigits = function(n) {
 };
 ```
 
+## ??🌟😻✔ 365. 水壶问题【medium】
+
+[ref](https://leetcode.cn/problems/water-and-jug-problem/)
+
+广度优先搜索
+
+```js
+var canMeasureWater = function(cap1, cap2, target) {
+  if(cap1 + cap2 < target) return false
+  const used = new Set()
+  let q = [[0, 0]]
+  used.add(hash(0, 0))
+  while(q.length) {
+    const [a, b] = q.shift()
+    if(a === target || b === target || a + b === target) return true
+    // 倒掉第1个杯子中的水
+    if(!used.has(hash(0, b))) {
+      q.push([0, b])
+      used.add(hash(0, b))
+    }
+    // 倒掉第2个杯子中的水
+    if(!used.has(hash(a, 0))) {
+      q.push([a, 0])
+      used.add(hash(a, 0))
+    }
+    // 倒满第1个杯子
+    if(!used.has(hash(cap1, b))) {
+      q.push([cap1, b])
+      used.add(hash(cap1, b))
+    }
+    // 倒满第2个杯子
+    if(!used.has(hash(a, cap2))) {
+      q.push([a, cap2])
+      used.add(hash(a, cap2))
+    }
+    // 把第2个杯子中的水倒到第1个中，多余的水留在2中
+    if(!used.has(hash(Math.min(cap1, a + b), Math.max(b - (cap1 - a), 0)))) {
+      q.push([Math.min(cap1, a + b), Math.max(b - (cap1 - a), 0)])
+      used.add(hash(Math.min(cap1, a + b), Math.max(b - (cap1 - a), 0)))
+    }
+    // 把第1个杯子中的水倒到第2个中，多余的水留在1中
+    if(!used.has(hash(Math.max(a - (cap2 - b), 0), Math.min(cap2, a + b)))) {
+      q.push([Math.max(a - (cap2 - b), 0), Math.min(cap2, a + b)])
+      used.add(hash(Math.max(a - (cap2 - b), 0), Math.min(cap2, a + b)))
+    }
+  }
+  return false
+};
+
+function hash(a, b) {
+  return `${a},${b}`
+}
+```
+
 ## ✔ 367. 有效的完全平方数【easy】
 
 [ref](https://leetcode.cn/problems/valid-perfect-square/)
@@ -21412,6 +21477,30 @@ var partitionLabels = function(s) {
 };
 ```
 
+## ?🌟😻✔ 767. 重构字符串【medium】
+
+[ref](https://leetcode.cn/problems/reorganize-string/)
+
+字符串、哈希表、脑筋急转弯
+
+```js
+var reorganizeString = function(s) {
+  const cntMap = new Map(), n = s.length
+  for(let i=0;i<s.length;i++) cntMap.set(s[i], (cntMap.get(s[i]) || 0) + 1)
+  const arr = Array.from(cntMap).sort((a, b) => b[1] - a[1])
+  if(arr[0][1] > (n + 1) / 2) return ''
+  const resArr = new Array(arr[0][1]).fill(arr[0][0]), len = resArr.length
+  let idx = 0
+  for(let i=1;i<arr.length;i++) {
+    for(let j=0;j<arr[i][1];j++) {
+      resArr[idx] += arr[i][0]
+      idx = (idx + 1) % len
+    }
+  }
+  return resArr.join('')
+};
+```
+
 ## ?? 🌟✔ 768. 最多能完成排序的块 II【hard】
 
 [ref](https://leetcode.cn/problems/max-chunks-to-make-sorted-ii/)
@@ -23805,6 +23894,59 @@ RecentCounter.prototype.ping = function (t) {
 }
 ```
 
+## 🌟😻✔ 934. 最短的桥【medium】
+
+[ref](https://leetcode.cn/problems/shortest-bridge/)
+
+矩阵、深度优先搜索、广度优先搜索、多源广度优先
+
+```js
+var shortestBridge = function(grid) {
+  const n = grid.length
+  let q = []
+  function walk(i, j) {
+    if(i < 0 || j < 0 || i >= n || j >= n || grid[i][j] !== 1) return
+    grid[i][j] = -1
+    q.push([i, j])
+    walk(i - 1, j)
+    walk(i + 1, j)
+    walk(i, j - 1)
+    walk(i, j + 1)
+  }
+  for(let i=0;i<n;i++) {
+    let shouldBreak = false
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 1) {
+        walk(i, j)
+        shouldBreak = true
+        break
+      }
+    }
+    if(shouldBreak) break
+  }
+  const directs = [[-1, 0], [1, 0], [0, 1], [0, -1]]
+  let cnt = 0
+  while(q.length) {
+    const tq = []
+    for(let i=0;i<q.length;i++) {
+      const [x, y] = q[i]
+      for(let j=0;j<4;j++) {
+        const xx = x + directs[j][0], yy = y + directs[j][1]
+        if(xx < 0 || yy < 0 || xx >= n || yy >= n || grid[xx][yy] === -1) continue
+        if(grid[xx][yy] === 0) {
+          grid[xx][yy] = -1
+          tq.push([xx, yy])
+        } else {
+          return cnt
+        }
+      }
+    }
+    q = tq
+    cnt++
+  }
+};
+```
+
 ## 🌟😻✔ 938. 二叉搜索树的范围和【easy】
 
 [ref](https://leetcode.cn/problems/range-sum-of-bst/)
@@ -25778,6 +25920,90 @@ var maximizeSweetness = function(sweetness, k) {
     }
     const res = cnt >= k + 1
     return res
+  }
+};
+```
+
+## 🌟😻✔ 1248. 统计「优美子数组」【medium】
+
+[ref](https://leetcode.cn/problems/count-number-of-nice-subarrays/)
+
+前缀和、数组题、哈希表、滑动窗口
+
+```js
+var numberOfSubarrays = function(nums, k) {
+  const n = nums.length, map = new Map([[0, 1]])
+  let sum = 0, res = 0
+  for(let i=0;i<n;i++) {
+    if(nums[i] & 1) nums[i] = 1
+    else nums[i] = 0
+    sum += nums[i]
+    if(map.has(sum - k)) {
+      res += map.get(sum - k)
+    }
+    map.set(sum, (map.get(sum) || 0) + 1)
+  }
+  return res
+};
+```
+
+```js
+var numberOfSubarrays = function(nums, k) {
+  const arr = [], n = nums.length
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] % 2 === 1) arr.push(i)
+  }
+  if(arr.length < k) return 0
+  arr.unshift(-1)
+  arr.push(n)
+  let res = 0, l = 1, r = k
+  while(r < arr.length - 1) {
+    res += (arr[l] - arr[l - 1]) * (arr[r + 1] - arr[r])
+    l++, r++
+  }
+  return res
+};
+```
+
+## 🌟😻✔ 1254. 统计封闭岛屿的数目【medium】
+
+[ref](https://leetcode.cn/problems/number-of-closed-islands/)
+
+矩阵、深度优先搜索、广度优先搜索
+
+```js
+var closedIsland = function(grid) {
+  const m = grid.length, n = grid[0].length
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if((i === 0 || i === m - 1 || j === 0 || j === n - 1) && grid[i][j] === 0) walkSideZero(i, j)
+    }
+  }
+  let res = 0
+  for(let i=0;i<m;i++) {
+    for(let j=0;j<n;j++) {
+      if(grid[i][j] === 0) {
+        res++
+        walk(i, j)
+      }
+    }
+  }
+  return res
+  function walkSideZero(i, j) {
+    if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] === 1) return
+    grid[i][j] = 1
+    walkSideZero(i - 1, j)
+    walkSideZero(i + 1, j)
+    walkSideZero(i, j - 1)
+    walkSideZero(i, j + 1)
+  }
+  function walk(i, j) {
+    if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] === 1) return
+    grid[i][j] = 1
+    walk(i - 1, j)
+    walk(i + 1, j)
+    walk(i, j - 1)
+    walk(i, j + 1)
   }
 };
 ```
