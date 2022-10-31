@@ -3516,6 +3516,8 @@ onload DONE
 
 ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/1190000004322487)
 
+被动事件
+
 | 事件                 | 触发条件                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `onreadystatechange` | 每当 `xhr.readyState` 改变时触发                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -3523,9 +3525,49 @@ ref [https://segmentfault.com/a/1190000004322487](https://segmentfault.com/a/119
 | `onprogress`         | `xhr.upload.onprogress` 在上传阶段(即 `xhr.send()`之后，`xhr.readystate=2` 之前)触发，每 50ms 触发一次；`xhr.onprogress` 在下载阶段（即 `xhr.readystate=3` 时）触发，每 50ms 触发一次。                                                                                                                                                                                                                                       |
 | `onload`             | 当请求成功完成时触发，此时 `xhr.readystate=4`                                                                                                                                                                                                                                                                                                                                                                                 |
 | `onloadend`          | 当请求结束（包括请求成功和请求失败）时触发                                                                                                                                                                                                                                                                                                                                                                                    |
+| `onloadstart`        | `xhr.open()`调用之后， `xhr.readystate=2` 之前触发                                                                                                                                                                                                                                                                                                                                                                                    |
 | `onabort`            | 当调用 `xhr.abort()` 后触发                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `ontimeout`          | `xhr.timeout` 不等于 0，由请求开始即 `onloadstart` 开始算起，当到达 `xhr.timeout` 所设置时间请求还未结束即 `onloadend`，则触发此事件。                                                                                                                                                                                                                                                                                        |
 | `onerror`            | 在请求过程中，若发生 `Network error` 则会触发此事件（若发生 `Network error` 时，上传还没有结束，则会先触发 `xhr.upload.onerror`，再触发`xhr.onerror`；若发生 `Network error` 时，上传已经结束，则只会触发 `xhr.onerror`）。注意，只有发生了网络层级别的异常才会触发此事件，对于应用层级别的异常，如响应返回的 `xhr.statusCode` 是 `4xx` 时，并不属于 `Network error`，所以不会触发 `onerror` 事件，而是会触发 `onload` 事件。 |
+
+上传事件
+
+都存在于 `xhr.upload.xxx` 中
+
+|事件|解释|
+|:-|:-|
+|`xhr.upload.onabort()`|取消上传时触发|
+|`xhr.upload.onerror()`|上传出错时触发|
+|`xhr.upload.onload()`|上传成功时触发|
+|`xhr.upload.onloadend()`|上传完成时触发，不管是否成功|
+|`xhr.upload.onloadstart()`|上传开始时触发|
+|`xhr.upload.onprogress()`|上传过程中触发|
+|`xhr.upload.ontimeout()`|上传超时时触发|
+
+### ✔ xhr 方法
+
+|方法|作用|
+|:-|:-|
+|`abort()`|取消xhr请求|
+|`getAllResponseHeaders()`|获取所有的 Headers 信息，返回的是一个字符串，用 `\r\n` 分割|
+|`getResponseHeader(headername)`|获取指定的http头信息`xhr.getResponseHeader('content-type')`，返回字符串，不存在则返回 `null`|
+|`open(method, url, async)`|配置xhr的请求方法、目标url和是否异步|
+|`overrideMimeType(mimeType)`| 指定具体的 MIME 类型去代替有服务器指定的 MIME 类型`req.overrideMimeType("text/plain")` |
+|`send(data)`| 发起 xhr 请求，参数可以是 字符串、formData、Blob、 URLSearchParams、 Document，没有设置的时候默认为 `null`|
+|`setRequestHeader(head1, val)`| 设置请求头|
+
+### ✔ 属性
+
+|属性|解释|
+|:-|:-|
+|`readyState`| 获取 xhr 目前所处的状态|
+|`responseType`| 指定预处理 `response` 的格式，默认为 `text`，其他的：`json`、`document`、`arraybuffer`、`blob`|
+|`response`| 获取请求到的内容，内部会依据 `responseType` 做对应的格式化处理|
+|`responseURL`| 请求的url地址|
+|`status`| HTTP 响应码|
+|`statusText`| HTTP 响应状态文本|
+|`timeout`| 设置超时时间 |
+|`withCredentials`| 是否携带 Cookies，涉及到跨域问题，设置为 true 之后对服务器返回的http头中 `Access-Control-Allow-Origin` 要明确指定域名，同域名下设置 `withCredentials` 属性无效 |
 
 ### ✔ 封装 XHR
 

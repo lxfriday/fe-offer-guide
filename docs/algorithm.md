@@ -38,11 +38,27 @@
 - ???[🌟【hard】940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
 - ???[🌟【easy】459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/) 模拟、字符串、KMP
 - ??[🌟【medium】877. 石子游戏](https://leetcode.cn/problems/stone-game/) 数组题
-- [🌟【hard】902. 最大为 N 的数字组合](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/) 动态规划、数位DP
-- [🌟【hard】1235. 规划兼职工作](https://leetcode.cn/problems/maximum-profit-in-job-scheduling/) 二分搜索、动态规划
+- ???[🌟【hard】902. 最大为 N 的数字组合](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/) 动态规划、数位DP
+- ???[🌟【hard】1235. 规划兼职工作](https://leetcode.cn/problems/maximum-profit-in-job-scheduling/) 二分搜索、动态规划
+- ???[🌟【hard】862. 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/) 数组、前缀、双端队列
 
 # 刷题日记
 
+- 20221031(1)
+  - [🌟【medium】481. 神奇字符串](https://leetcode.cn/problems/magical-string/) 规律、模拟、字符串
+- 20221030(1)
+  - [🌟【medium】784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/) 回溯法
+- 20221029(1)
+  - [【easy】1773. 统计匹配检索规则的物品数量](https://leetcode.cn/problems/count-items-matching-a-rule/) 模拟
+- 20221028(1)
+  - ? [🌟【medium】907. 子数组的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums/) 单调栈
+- 20221027(1)
+  - [🌟【easy】1822. 数组元素积的符号](https://leetcode.cn/problems/sign-of-the-product-of-an-array/) 数组题
+- 20221026(4)
+  - ???[🌟【hard】862. 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/) 数组、前缀、双端队列
+  - ?[🌟【medium】396. 旋转函数](https://leetcode.cn/problems/rotate-function/) 数组、旋转数组、规律题
+  - [🌟【medium】529. 扫雷游戏](https://leetcode.cn/problems/minesweeper/) 矩阵、深度优先搜索
+  - ??[🌟【medium】456. 132 模式](https://leetcode.cn/problems/132-pattern/) 数组、单调栈
 - 20221025(5)
   - [🌟【medium】934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/) 深度优先搜索、广度优先搜索、多源广度优先
   - [🌟【medium】1248. 统计「优美子数组」](https://leetcode.cn/problems/count-number-of-nice-subarrays/) 前缀和、数组题、哈希表、滑动窗口
@@ -1273,6 +1289,7 @@
 - ?🌟【easy】[495. 提莫攻击](https://leetcode.cn/problems/teemo-attacking/) 数组、区间问题
 - 🌟【medium】[845. 数组中的最长山脉](https://leetcode.cn/problems/longest-mountain-in-array/) 模拟、数组题#
 - ?🌟【meidum】[1014. 最佳观光组合](https://leetcode.cn/problems/best-sightseeing-pair/) 数组题、规律、脑筋急转弯
+- ?🌟【medium】[396. 旋转函数](https://leetcode.cn/problems/rotate-function/) 数组、旋转数组
 
 ### 排列组合
 
@@ -1395,6 +1412,7 @@
 - ? 🌟【medium】[316. 去除重复字母](https://leetcode.cn/problems/remove-duplicate-letters/) 单调栈
 - ??🌟【medium】[面试题 16.16. 部分排序](https://leetcode.cn/problems/sub-sort-lcci/) 单调栈
 - ?🌟【medium】[901. 股票价格跨度](https://leetcode.cn/problems/online-stock-span/) 单调栈
+- ??🌟【medium】[456. 132 模式](https://leetcode.cn/problems/132-pattern/) 数组、单调栈
 
 ## 队列
 
@@ -1581,6 +1599,7 @@
 - 🌟【easy】[1162. 地图分析](https://leetcode.cn/problems/as-far-from-land-as-possible/) 广度优先搜索、BFS、矩阵
 - 🌟【medium】[934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/) 深度优先搜索、广度优先搜索、多源广度优先
 - 🌟【medium】[1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/) 矩阵、深度优先搜索、广度优先搜索
+- 🌟【medium】[529. 扫雷游戏](https://leetcode.cn/problems/minesweeper/) 矩阵、深度优先搜索
 
 ### 图、深度优先、广度优先
 - 【medium】 [133 克隆图](https://leetcode.cn/problems/clone-graph/)
@@ -14702,6 +14721,29 @@ var longestSubstring = function(s, k) {
 
 ```
 
+## ?🌟😻✔ 396. 旋转函数【medium】
+
+[ref](https://leetcode.cn/problems/rotate-function/)
+
+数组、旋转数组、规律题
+
+```js
+var maxRotateFunction = function(nums) {
+  const n = nums.length
+  let res = 0,cal = 0,  sum = 0
+  for(let i=0;i<nums.length;i++) {
+    sum += nums[i]
+    cal += i * nums[i]
+  }
+  res = cal
+  for(let i=1;i<n;i++) {
+    cal = cal + sum - nums[n - i] - (n - 1) * nums[n - i]
+    res = Math.max(res, cal)
+  }
+  return res
+};
+```
+
 ## ?🌟😻✔ 397. 整数替换【medium】
 
 [ref](https://leetcode.cn/problems/integer-replacement/)
@@ -16111,6 +16153,34 @@ var findContentChildren = function(g, s) {
 };
 ```
 
+## ??🌟😻✔ 456. 132 模式【medium】
+
+[ref](https://leetcode.cn/problems/132-pattern/)
+
+数组、单调栈
+
+```js
+var find132pattern = function(nums) {
+  const n = nums.length;
+  const candidate_k = [nums[n - 1]];
+  let max_k = -Number.MAX_SAFE_INTEGER;
+
+  for (let i = n - 2; i >= 0; --i) {
+    if (nums[i] < max_k) {
+      return true;
+    }
+    while (candidate_k.length && nums[i] > candidate_k[candidate_k.length - 1]) {
+      max_k = candidate_k[candidate_k.length - 1];
+      candidate_k.pop();
+    }
+    if (nums[i] > max_k) {
+      candidate_k.push(nums[i]);
+    }
+  }
+  return false;
+};
+```
+
 ## ???🌟😻✔ 459. 重复的子字符串【easy】
 
 [ref](https://leetcode.cn/problems/repeated-substring-pattern/)
@@ -16442,6 +16512,37 @@ var findComplement = function(num) {
     i++
   }
   return ret
+};
+```
+
+## ?🌟😻✔ 481. 神奇字符串【medium】
+
+[ref](https://leetcode.cn/problems/magical-string/)
+
+规律、模拟
+
+```js
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+var magicalString = function(n) {
+  if(n <= 3) return 1
+  const map = {1:2, 2:1}, arr = [1, 2, 2]
+  let idx = 2
+  while(arr.length < n) {
+    if(arr[idx] === 1) {
+      arr.push(map[arr[arr.length -1]])
+    } else {
+      const t = map[arr[arr.length -1]]
+      arr.push(t)
+      arr.push(t)
+    }
+    idx++
+  }
+  let cnt = 0
+  for(let i=0;i<n;i++) {
+    if(arr[i] === 1) cnt++
+  }
+  return cnt
 };
 ```
 
@@ -17140,6 +17241,49 @@ var countArrangement = function(n) {
 // 1 2 3
 // 3 2 1
 // 2 1 3
+```
+
+## 🌟😻✔ 529. 扫雷游戏【medium】
+
+[ref](https://leetcode.cn/problems/minesweeper/)
+
+矩阵、深度优先搜索
+
+```js
+var updateBoard = function(board, click) {
+  const m = board.length, n = board[0].length
+  if(board[click[0]][click[1]] === 'M') {
+    board[click[0]][click[1]] = 'X'
+    return board
+  }
+  function dfs(i, j) {
+    if(i < 0 || j < 0 || i >=m || j >= n || board[i][j] !== 'E') return
+    let cnt = 0
+    if(i - 1 >= 0 && board[i-1][j] === 'M') cnt++
+    if(i + 1 < m && board[i+1][j] === 'M') cnt++ 
+    if(j - 1 >=0 && board[i][j-1] === 'M') cnt++ 
+    if(j + 1 < n && board[i][j + 1] === 'M') cnt++ 
+    if(i - 1 >= 0 && j - 1>=0 && board[i - 1][j - 1] === 'M') cnt++ 
+    if(i - 1 >= 0 && j + 1 < n && board[i - 1][j + 1] === 'M') cnt++ 
+    if(i + 1 < m && j - 1 >= 0 && board[i + 1][j - 1] === 'M') cnt++ 
+    if(i + 1 < m && j + 1 < n && board[i + 1][j + 1] === 'M') cnt++ 
+
+    if(cnt === 0) board[i][j] = 'B'
+    else board[i][j] = String(cnt)
+    if(cnt === 0) {
+      dfs(i - 1, j)
+      dfs(i + 1, j)
+      dfs(i, j - 1)
+      dfs(i, j + 1)
+      dfs(i - 1, j - 1)
+      dfs(i - 1, j + 1)
+      dfs(i + 1, j - 1)
+      dfs(i + 1, j + 1)
+    }
+  }
+  dfs(click[0], click[1])
+  return board
+};
 ```
 
 ## 🌟😻✔ 530. 二叉搜索树的最小绝对差【easy】
@@ -23622,6 +23766,24 @@ function swap(arr, i, j) {
 - ?[🌟【medium】2104. 子数组范围和](https://leetcode.cn/problems/sum-of-subarray-ranges/) 数组、单调栈
 
 ```js
+var sumSubarrayMins = function(arr) {
+  arr.unshift(0)
+  arr.push(0)
+  const mod = 10 ** 9 + 7, n = arr.length, stack = []
+  let res = 0
+  for(let i=0;i<n;i++) {
+    while(arr[i] < arr[stack[stack.length - 1]]) {
+      const idx = stack.pop()
+      const l = idx - stack[stack.length - 1], r = i - idx
+      res = (res + arr[idx] * l * r) % mod
+    }
+    stack.push(i)
+  }
+  return res
+};
+```
+
+```js
 // 时间复杂度：O(N)
 // 空间复杂度：O(N)
 var sumSubarrayMins = function(arr) {
@@ -27384,6 +27546,28 @@ var mergeAlternately = function(word1, word2) {
 };
 ```
 
+## ✔ 1773. 统计匹配检索规则的物品数量【easy】
+
+[ref](https://leetcode.cn/problems/count-items-matching-a-rule/)
+
+简单模拟
+
+```js
+var countMatches = function(items, ruleKey, ruleValue) {
+  let cnt = 0
+  for(const item of items) {
+    if(
+      ruleKey === 'type' && ruleValue === item[0] || 
+      ruleKey === 'color' && ruleValue === item[1] || 
+      ruleKey === 'name' && ruleValue === item[2]
+    ) {
+      cnt ++
+    }
+  }
+  return cnt
+};
+```
+
 ## 🌟😻✔ 1784. 检查二进制字符串字段【easy】
 
 [ref](https://leetcode.cn/problems/check-if-binary-string-has-at-most-one-segment-of-ones/)
@@ -27451,6 +27635,27 @@ var maxAscendingSum = function(nums) {
     r++
   }
   return max
+};
+```
+
+## ✔ 1822. 数组元素积的符号【easy】
+
+[ref](https://leetcode.cn/problems/sign-of-the-product-of-an-array/)
+
+数组
+
+```js
+var arraySign = function(nums) {
+  let s = 1
+  for(const num of nums) {
+    if(num === 0) return 0
+    else if(s * num > 0) {
+      s = 1
+    } else {
+      s = -1
+    }
+  }
+  return s
 };
 ```
 
