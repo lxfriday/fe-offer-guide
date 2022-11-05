@@ -16,65 +16,58 @@ async function getData() {
   // })
   // const res2 = await fetch('https://api.x.com/api/getUserInfo', {
   //   method: 'get',
-      // body: formData,
-    // body: urlSearchParams,
-    // body: '我是普通字符串',
+  // body: formData,
+  // body: urlSearchParams,
+  // body: '我是普通字符串',
   // })
   // console.log('response', response)
   // console.log('content-type', response.headers.get('content-type'))
   // console.log('last-modified', response.headers.get('last-modified'))
 
-  const response = await fetch('https://qiniu1.lxfriday.xyz/1651146206621_d22070f3-6899-4135-9b34-ecc173b1b04e.png')
+  const response = await fetch(
+    'https://qiniu1.lxfriday.xyz/1651146206621_d22070f3-6899-4135-9b34-ecc173b1b04e.png',
+  )
 
   // const response = await fetch('./api/getUserInfos')
-
 }
 
 async function getData2() {
-
-
   const abortController = new AbortController()
-
   const abortSignal = abortController.signal
-  abortController.abort()
-
   abortSignal.onabort = function () {
     console.log('取消了请求')
   }
 
-
   fetch('./api/getUserInfo', {
-    signal: abortSignal
+    signal: abortSignal,
   }).catch(e => {
     console.log('err', e)
   })
+  abortController.abort()
 }
 
 // async function getData3() {
 //   const myRequest = new Request('./api/getUserInfo', {
 //     method: 'GET',
-//     credentials: 'omit', 
+//     credentials: 'omit',
 //     headers: {
 //       'content-type': 'application/json',
 //       a: 1
 //     },
 //   })
 //   const res = await fetch(myRequest)
-//   console.log('res3', res) 
+//   console.log('res3', res)
 //   const data = await res.json()
 //   console.log('data3', data)
 // }
 // getData3()
 
-
 // fetch('./api/getUserInfo', {
-//   method: 'GET', // HEAD POST PUT DELETE OPTIONS 
+//   method: 'GET', // HEAD POST PUT DELETE OPTIONS
 //   header: {}
 // }).catch(e => {
 //   console.log(e)
 // })
-
-
 
 // method?: string;
 // headers?: HeadersInit;
@@ -103,17 +96,19 @@ async function getData2() {
 // getData5()
 
 function download() {
-  fetch('https://qiniu1.lxfriday.xyz/today64511.3gp').then(async function (res) {
-    const filesize = +res.headers.get('content-length');
-    let LoadedLength = 0;
-    const reader = res.body.getReader();
+  fetch('https://qiniu1.lxfriday.xyz/today64511.3gp').then(async function (
+    res,
+  ) {
+    const filesize = +res.headers.get('content-length')
+    let LoadedLength = 0
+    const reader = res.body.getReader()
     while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+      const { done, value } = await reader.read()
+      if (done) break
       // 已下载的字节
-      LoadedLength += value.length;
+      LoadedLength += value.length
       // 下载进度
-      const progress = Math.floor((LoadedLength / filesize) * 100);
+      const progress = Math.floor((LoadedLength / filesize) * 100)
       console.log(`下载进度 ${progress} %`)
     }
   })

@@ -44,6 +44,14 @@
 
 # 刷题日记
 
+- 20221104(1)
+  - [🌟【medium】754. 到达终点数字](https://leetcode.cn/problems/reach-a-number/) 数学规律、模拟
+- 20221103(1)
+  - [【easy】1668. 最大重复子字符串](https://leetcode.cn/problems/maximum-repeating-substring/) 字符串、字符串匹配
+- 20221102(1)
+  - [🌟【medium】1620. 网络信号最好的坐标](https://leetcode.cn/problems/coordinate-with-maximum-network-quality/) 枚举
+- 20221101(1)
+  - [【easy】1662. 检查两个字符串数组是否相等](https://leetcode.cn/problems/check-if-two-string-arrays-are-equivalent/) 字符串
 - 20221031(1)
   - [🌟【medium】481. 神奇字符串](https://leetcode.cn/problems/magical-string/) 规律、模拟、字符串
 - 20221030(1)
@@ -1352,7 +1360,8 @@
 - ??🌟【medium】[593. 有效的正方形](https://leetcode.cn/problems/valid-square/) 模拟、哈希表
 - 🌟【easy】[258. 各位相加](https://leetcode.cn/problems/add-digits/) 模拟、数学问题、数论
 - ?🌟【meidum】[397. 整数替换](https://leetcode.cn/problems/integer-replacement/) 递归、规律、模拟
-- [🌟【medium】1006. 笨阶乘](https://leetcode.cn/problems/clumsy-factorial/) 模拟
+- 🌟【medium】[1006. 笨阶乘](https://leetcode.cn/problems/clumsy-factorial/) 模拟
+- 🌟【medium】[754. 到达终点数字](https://leetcode.cn/problems/reach-a-number/) 数学规律、模拟
 
 ### 模拟运算
 
@@ -21592,6 +21601,24 @@ var openLock = function(deadends, target) {
 };
 ```
 
+## ?🌟😻✔ 754. 到达终点数字【medium】
+
+[ref](https://leetcode.cn/problems/reach-a-number/)
+
+规律、模拟
+
+```js
+var reachNumber = function(target) {
+  target = Math.abs(target)
+  let sum = 0, k = 0
+  while(sum < target || ((sum - target) % 2 !== 0)) {
+    k++
+    sum += k
+  }
+  return k
+};
+```
+
 ## ?🌟😻✔ 763 划分字母区间【medium】
 
 [ref](https://leetcode.cn/problems/partition-labels/)
@@ -27270,6 +27297,39 @@ var trimMean = function(arr) {
 };
 ```
 
+## 🌟😻✔ 1620. 网络信号最好的坐标【medium】
+
+[ref](https://leetcode.cn/problems/coordinate-with-maximum-network-quality/)
+
+枚举
+
+```js
+var bestCoordinate = function(towers, radius) {
+  let max = 0, res = [0, 0]
+  for(let i=0;i<=50;i++) {
+    for(let j=0;j<=50;j++) {
+      let e = 0
+      for(const tower of towers) {
+        e += getE([i, j], [tower[0], tower[1]], tower[2], radius)
+      }
+      if(e > max) {
+        max = e
+        res = [i, j]
+      }
+    }
+  }
+  return res
+};
+
+function getE(dot1, dot2, originalE, radius) {
+  const dis = Math.sqrt((dot1[0] - dot2[0]) ** 2 +  (dot1[1] - dot2[1]) ** 2)
+  if(dis <= radius) {
+    return Math.floor(originalE / (1 + dis))
+  }
+  return 0
+}
+```
+
 ## ✔ 1624. 两个相同字符之间的最长子字符串【easy】
 
 [ref](https://leetcode.cn/problems/largest-substring-between-two-equal-characters/)
@@ -27388,6 +27448,36 @@ OrderedStream.prototype.insert = function(idKey, value) {
     res.push(this.stream[this.i++])
   }
   return res
+};
+```
+
+## ✔ 1662. 检查两个字符串数组是否相等【easy】
+
+[ref](https://leetcode.cn/problems/check-if-two-string-arrays-are-equivalent/)
+
+字符串
+
+```js
+var arrayStringsAreEqual = function(word1, word2) {
+  return word1.join('') === word2.join('')
+};
+```
+
+## ✔ 1668. 最大重复子字符串【easy】
+
+[ref](https://leetcode.cn/problems/maximum-repeating-substring/)
+
+字符串、字符串匹配
+
+```js
+var maxRepeating = function(sequence, word) {
+  if(!sequence.includes(word)) return 0
+  let k = 1, s = word
+  while(sequence.includes(s + word)) {
+    s += word
+    k++
+  }
+  return k
 };
 ```
 
