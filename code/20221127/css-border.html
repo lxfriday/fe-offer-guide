@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        padding-top: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .trangle-wrapper {
+        width: 500px;
+        height: 300px;
+      }
+      .trangle {
+        width: 0;
+        height: 0;
+        border-left: 100px solid red;
+        border-top: 100px solid green;
+        border-right: 100px solid cyan;
+        border-bottom: 100px solid yellow;
+      }
+
+      .input-wrapper {
+        margin-top: 30px;
+        width: 500px;
+      }
+      input {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="trangle-wrapper">
+        <div class="trangle"></div>
+      </div>
+      <table class="input-wrapper">
+        <tr>
+          <td><span>border-left</span></td>
+          <td>
+            <input
+              type="number"
+              name="borderLeft"
+              value="100"
+              step="5"
+              tabindex="1"
+            />
+          </td>
+          <td>
+            <button
+              click-type="transparent"
+              click-color="transparent"
+              click-target="borderLeft"
+            >
+              transparent
+            </button>
+          </td>
+          <td>
+            <button
+              click-type="reset"
+              click-color="red"
+              click-target="borderLeft"
+              disabled
+            >
+              red
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><span>border-top</span></td>
+          <td>
+            <input
+              type="number"
+              name="borderTop"
+              value="100"
+              step="5"
+              tabindex="2"
+            />
+          </td>
+          <td>
+            <button
+              click-type="transparent"
+              click-color="transparent"
+              click-target="borderTop"
+            >
+              transparent
+            </button>
+          </td>
+          <td>
+            <button
+              click-type="reset"
+              click-color="green"
+              click-target="borderTop"
+              disabled
+            >
+              green
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><span>border-right</span></td>
+          <td>
+            <input
+              type="number"
+              name="borderRight"
+              value="100"
+              step="5"
+              tabindex="3"
+            />
+          </td>
+          <td>
+            <button
+              click-type="transparent"
+              click-color="transparent"
+              click-target="borderRight"
+            >
+              transparent
+            </button>
+          </td>
+          <td>
+            <button
+              click-type="reset"
+              click-color="cyan"
+              click-target="borderRight"
+              disabled
+            >
+              cyan
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><span>border-bottom</span></td>
+          <td>
+            <input
+              type="number"
+              name="borderBottom"
+              value="100"
+              step="5"
+              tabindex="4"
+            />
+          </td>
+          <td>
+            <button
+              click-type="transparent"
+              click-color="transparent"
+              click-target="borderBottom"
+            >
+              transparent
+            </button>
+          </td>
+          <td>
+            <button
+              click-type="reset"
+              click-color="yellow"
+              click-target="borderBottom"
+              disabled
+            >
+              yellow
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><span>border-radius</span></td>
+          <td>
+            <input
+              type="number"
+              name="borderRadius"
+              value="0"
+              step="2"
+              tabindex="5"
+            />
+          </td>
+          <td>
+            <button
+              click-type="radius-reset"
+              click-target="borderRadius"
+              disabled
+            >
+              reset
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><span>width/height</span></td>
+          <td>
+            <input
+              type="number"
+              name="widthHeight"
+              value="0"
+              step="2"
+              tabindex="6"
+            />
+          </td>
+          <td>
+            <button
+              click-type="widthHeight-reset"
+              click-target="widthHeight"
+              disabled
+            >
+              reset
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      const trangle = document.querySelector('.trangle')
+      document
+        .querySelector('.input-wrapper')
+        .addEventListener('input', function (e) {
+          if (e.target.getAttribute('name') === 'widthHeight') {
+            trangle.style['width'] = e.target.value + 'px'
+            trangle.style['height'] = e.target.value + 'px'
+            e.target.parentNode.nextElementSibling.firstElementChild.removeAttribute(
+              'disabled',
+            )
+          } else if (e.target.getAttribute('name') === 'borderRadius') {
+            trangle.style[e.target.getAttribute('name')] = e.target.value + 'px'
+            e.target.parentNode.nextElementSibling.firstElementChild.removeAttribute(
+              'disabled',
+            )
+          } else {
+            trangle.style[e.target.getAttribute('name') + 'Width'] =
+              e.target.value + 'px'
+          }
+        })
+      document
+        .querySelector('.input-wrapper')
+        .addEventListener('click', function (e) {
+          if (e.target.getAttribute('click-target')) {
+            if (e.target.getAttribute('click-type') === 'widthHeight-reset') {
+              trangle.style['width'] = 0
+              trangle.style['height'] = 0
+              e.target.parentNode.previousElementSibling.firstElementChild.value = 0
+            } else if (e.target.getAttribute('click-type') === 'radius-reset') {
+              trangle.style['borderRadius'] = 0
+              e.target.parentNode.previousElementSibling.firstElementChild.value = 0
+            } else {
+              trangle.style[e.target.getAttribute('click-target') + 'Color'] =
+                e.target.getAttribute('click-color')
+
+              // 重置按钮状态
+              e.target.setAttribute('disabled', 'true')
+              if (e.target.getAttribute('click-type') === 'transparent') {
+                e.target.parentNode.nextElementSibling.firstElementChild.removeAttribute(
+                  'disabled',
+                )
+              } else {
+                e.target.parentNode.previousElementSibling.firstElementChild.removeAttribute(
+                  'disabled',
+                )
+              }
+            }
+          }
+        })
+    </script>
+  </body>
+</html>

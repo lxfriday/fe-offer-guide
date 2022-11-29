@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no"
+    />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 10rem;
+        height: 10rem;
+        border: 1px solid #000;
+      }
+      .box-bottom {
+        width: 10rem;
+        height: 10rem;
+        border-bottom: 1px solid #000;
+      }
+      .box-top {
+        width: 10rem;
+        height: 10rem;
+        border-top: 1px solid #000;
+      }
+      .box-radius {
+        width: 10rem;
+        height: 10rem;
+        border: 1px solid #000;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">你好呀</div>
+    <br />
+    <div class="box-top"></div>
+    <br />
+    <div class="box-bottom"></div>
+    <br />
+    <div class="box-radius"></div>
+    <script>
+      const viewport = document.querySelector('meta[name=viewport]')
+      const dpr = window.devicePixelRatio || 1
+      const scale = 1 / dpr
+      viewport.setAttribute(
+        'content',
+        `width=device-width, minimum-scale=${scale}, maximum-scale=${scale}, user-scalable=no`,
+      )
+
+      // 这个时候要全部使用 rem 布局，如果是 px，则 100px 会被缩小 dpr 倍
+      // 原本 10rem -> 100px，设置了下面的根字体大小之后， 10rem -> 10 * 10 * dpr
+      document.documentElement.style.fontSize = `${10 * dpr}px`
+    </script>
+  </body>
+</html>

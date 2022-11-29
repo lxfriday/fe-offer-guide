@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1px resolution</title>
+    <style>
+      .wrapper {
+        position: relative;
+        margin: 0 auto;
+        background-color: bisque;
+        width: 50px;
+        height: 50px;
+      }
+      .border-1px::after {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: 100% 0;
+        border: 1px solid #000;
+      }
+      .wrapper-normal {
+        margin: 50px auto;
+        background-color: bisque;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #000;
+      }
+
+      @media (-webkit-min-device-pixel-ratio: 2) {
+        .border-1px:after {
+          width: 200%;
+          height: 200%;
+          transform: scale(0.5);
+        }
+      }
+      @media (-webkit-min-device-pixel-ratio: 2.5) {
+        .border-1px:after {
+          width: 250%;
+          height: 250%;
+          transform: scale(0.4);
+        }
+      }
+      @media (-webkit-min-device-pixel-ratio: 2.75) {
+        .border-1px:after {
+          width: 275%;
+          height: 275%;
+          transform: scale(1 / 2.75);
+        }
+      }
+      @media (-webkit-min-device-pixel-ratio: 3) {
+        .border-1px:after {
+          width: 300%;
+          height: 300%;
+          transform: scale(1 / 3);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper border-1px"></div>
+    <div class="wrapper-normal"></div>
+    <script>
+      // alert(window.devicePixelRatio)
+    </script>
+  </body>
+</html>

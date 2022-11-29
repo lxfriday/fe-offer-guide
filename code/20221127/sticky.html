@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        flex: 0 0 50px;
+        background-color: lime;
+      }
+      footer {
+        flex: 0 0 80px;
+        background-color: cyan;
+      }
+      main {
+        flex: 1;
+      }
+      .content {
+        height: 100%;
+      }
+      #addHeight {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>nav</nav>
+    <main>
+      <div class="content">content</div>
+    </main>
+    <footer>footer</footer>
+    <button id="addHeight">add height</button>
+    <script>
+      document.querySelector('#addHeight').addEventListener('click', () => {
+        const contentEle = document.querySelector('.content')
+        contentEle.style.height = contentEle.clientHeight + 500 + 'px'
+      })
+    </script>
+  </body>
+</html>

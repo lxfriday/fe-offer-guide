@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <button id="add">Add</button>
+    <script>
+      let count = 0
+      function addList() {
+        const wrapper = document.querySelector('.wrapper')
+        const list = []
+        for (let i = 0; i < 20; i++) {
+          const box = document.createElement('div')
+          box.classList.add('box')
+          box.innerText = count++
+          list.push(box)
+        }
+        wrapper.append(...list)
+      }
+      addList()
+      document.querySelector('#add').addEventListener('click', addList)
+    </script>
+
+    <style>
+      .wrapper {
+        margin: 0 auto;
+        max-width: 1200px;
+        display: grid;
+        /* grid-template-columns: repeat(auto-fill, 200px); */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 5px;
+        grid-auto-rows: 60px;
+      }
+      .box {
+        color: #fff;
+        background-color: #143250;
+      }
+      .box:nth-child(9n + 1) {
+        grid-row: span 1 / span 1;
+      }
+      .box:nth-child(9n + 2) {
+        grid-row: auto / span 2;
+      }
+      .box:nth-child(9n + 3) {
+        grid-row: auto / span 3;
+      }
+      .box:nth-child(9n + 4) {
+        grid-row: auto / span 4;
+      }
+      .box:nth-child(9n + 5) {
+        grid-row: auto / span 5;
+      }
+      .box:nth-child(9n + 6) {
+        grid-row: auto / span 6;
+      }
+      .box:nth-child(9n + 7) {
+        grid-row: auto / span 7;
+      }
+      .box:nth-child(9n + 8) {
+        grid-row: auto / span 8;
+      }
+      .box:nth-child(9n + 9) {
+        grid-row: auto / span 9;
+      }
+      button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .app {
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 200px 1fr;
+        grid-template-areas:
+          'header header'
+          'nav main'
+          'nav footer';
+      }
+      header {
+        background-color: green;
+        grid-area: header;
+      }
+      nav {
+        background-color: pink;
+        grid-area: nav;
+      }
+      main {
+        background-color: cyan;
+        grid-area: main;
+      }
+      footer {
+        background-color: chocolate;
+        grid-area: footer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>header</header>
+      <div class="contentWrapper">
+        <nav>nav</nav>
+        <div class="content">
+          <main>main</main>
+          <footer>footer</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

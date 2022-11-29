@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .wrapper {
+        height: 500px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        font-size: 10px;
+        border: 1px solid #999;
+      }
+      div[class*=box] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box a">1(grid-row-start: 3;)</div>
+      <div class="box a">2</div>
+      <div class="box3 a">3</div>
+      <div class="box4 a">4(grid-column-start: 2;)</div>
+      <div class="box5 a">5</div>
+      <div class="box6 a">6</div>
+    </div>
+  </body>
+</html>

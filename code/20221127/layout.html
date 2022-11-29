@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .wrapper {
+        height: 90vh;
+        display: grid;
+        grid-template-columns: minmax(0, 200px) minmax(500px, 1fr) minmax(0, 200px);
+        grid-template-rows: 1fr;
+      }
+      .one {
+        background-color: orange;
+      }
+      .two {
+        background-color: pink;
+      }
+      .three {
+        background-color: cyan;
+      }
+      header {
+        height: 50px;
+        background-color: brown;
+      }
+      footer {
+        height: 200px;
+        background-color: cornflowerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <header>header</header>
+    <div class="wrapper">
+      <div class="one">1</div>
+      <div class="two">2</div>
+      <div class="three">3</div>
+    </div>
+    <footer>footer</footer>
+  </body>
+</html>
