@@ -41,9 +41,52 @@
 - ???[🌟【hard】902. 最大为 N 的数字组合](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/) 动态规划、数位DP
 - ???[🌟【hard】1235. 规划兼职工作](https://leetcode.cn/problems/maximum-profit-in-job-scheduling/) 二分搜索、动态规划
 - ???[🌟【hard】862. 和至少为 K 的最短子数组](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k/) 数组、前缀、双端队列
+- ???[🌟【hard】1106. 解析布尔表达式](https://leetcode.cn/problems/parsing-a-boolean-expression/) 栈
+- ??[🌟【medium】795. 区间子数组个数](https://leetcode.cn/problems/number-of-subarrays-with-bounded-maximum/) 模拟、数组
+- ??[🌟【hard】895. 最大频率栈](https://leetcode.cn/problems/maximum-frequency-stack/) 设计题、栈
 
 # 刷题日记
 
+- 20221201(1)
+  - [【easy】1779. 找到最近的有相同 X 或 Y 坐标的点](https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/) 普通模拟题
+- 20221130(1)
+  - ??[🌟【hard】895. 最大频率栈](https://leetcode.cn/problems/maximum-frequency-stack/) 设计题、栈
+- 20221129(1)
+  - [【easy】1758. 生成交替二进制字符串的最少操作数](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/) 动态规划
+- 20221128(1)
+  - ?[🌟【medium】813. 最大平均值和的分组](https://leetcode.cn/problems/largest-sum-of-averages/) 动态规划、背包问题
+- 20221127(1)
+  - [【easy】1752. 检查数组是否经排序和轮转得到](https://leetcode.cn/problems/check-if-array-is-sorted-and-rotated/) 数组题
+- 20221125(1)
+  - ?[🌟【medium】809. 情感丰富的文字](https://leetcode.cn/problems/expressive-words/) 字符串题
+- 20221124(1)
+  - ??[🌟【medium】795. 区间子数组个数](https://leetcode.cn/problems/number-of-subarrays-with-bounded-maximum/) 模拟、数组
+- 20221123(1)
+  - [【easy】1742. 盒子中小球的最大数量](https://leetcode.cn/problems/maximum-number-of-balls-in-a-box/) 哈希表
+- 20221122(1)
+  - ??[🌟【hard】878. 第 N 个神奇数字](https://leetcode.cn/problems/nth-magical-number/) 最大公约数、最小公倍数、二分查找
+- 20221120(1)
+  - [🌟【medium】799. 香槟塔](https://leetcode.cn/problems/champagne-tower/) 动态规划
+- 20221119(1)
+  - [【easy】1732. 找到最高海拔](https://leetcode.cn/problems/find-the-highest-altitude/) 数组题
+- 20221118(1)
+  - ??[🌟【hard】891. 子序列宽度之和](https://leetcode.cn/problems/sum-of-subsequence-widths/) 排列组合、组合数
+- 20221116(1)
+  - [🌟【medium】775. 全局倒置与局部倒置](https://leetcode.cn/problems/global-and-local-inversions/) 逆序对、归并排序
+- 20221115(1)
+  - [【easy】1710. 卡车上的最大单元数](https://leetcode.cn/problems/maximum-units-on-a-truck/) 数组、排序
+- 20221112(1)
+  - ?[🌟【medium】790. 多米诺和托米诺平铺](https://leetcode.cn/problems/domino-and-tromino-tiling/) 动态规划
+- 20221111(1)
+  - [【easy】1704. 判断字符串的两半是否相似](https://leetcode.cn/problems/determine-if-string-halves-are-alike/) 字符串
+- 20221109(1)
+  - [🌟【medium】764. 最大加号标志](https://leetcode.cn/problems/largest-plus-sign/) 矩阵
+- 20221107(1)
+  - [🌟【medium】816. 模糊坐标](https://leetcode.cn/problems/ambiguous-coordinates/) 枚举、模拟
+- 20221106(1)
+  - [【easy】1678. 设计 Goal 解析器](https://leetcode.cn/problems/goal-parser-interpretation/) 字符串
+- 20221105(1)
+  - ???[🌟【hard】1106. 解析布尔表达式](https://leetcode.cn/problems/parsing-a-boolean-expression/) 栈
 - 20221104(1)
   - [🌟【medium】754. 到达终点数字](https://leetcode.cn/problems/reach-a-number/) 数学规律、模拟
 - 20221103(1)
@@ -1298,6 +1341,7 @@
 - 🌟【medium】[845. 数组中的最长山脉](https://leetcode.cn/problems/longest-mountain-in-array/) 模拟、数组题#
 - ?🌟【meidum】[1014. 最佳观光组合](https://leetcode.cn/problems/best-sightseeing-pair/) 数组题、规律、脑筋急转弯
 - ?🌟【medium】[396. 旋转函数](https://leetcode.cn/problems/rotate-function/) 数组、旋转数组
+- ??[🌟【medium】795. 区间子数组个数](https://leetcode.cn/problems/number-of-subarrays-with-bounded-maximum/) 模拟、数组
 
 ### 排列组合
 
@@ -1314,6 +1358,7 @@
 - ? [🌟【easy】401. 二进制手表](https://leetcode.cn/problems/binary-watch/) 回溯法、枚举
 - ? [🌟【medium】254. 因子的组合](https://leetcode.cn/problems/factor-combinations/) 回溯法、排列组合
 - ? 🌟【hard】[60. 排列序列](https://leetcode.cn/problems/permutation-sequence/) 回溯法、排列组合、规律题
+- ?? 🌟【hard】[891. 子序列宽度之和](https://leetcode.cn/problems/sum-of-subsequence-widths/) 排列组合、组合数
 
 ## 模拟、规律
 
@@ -1362,6 +1407,8 @@
 - ?🌟【meidum】[397. 整数替换](https://leetcode.cn/problems/integer-replacement/) 递归、规律、模拟
 - 🌟【medium】[1006. 笨阶乘](https://leetcode.cn/problems/clumsy-factorial/) 模拟
 - 🌟【medium】[754. 到达终点数字](https://leetcode.cn/problems/reach-a-number/) 数学规律、模拟
+- 🌟【medium】[816. 模糊坐标](https://leetcode.cn/problems/ambiguous-coordinates/) 枚举、模拟
+- ??[🌟【medium】795. 区间子数组个数](https://leetcode.cn/problems/number-of-subarrays-with-bounded-maximum/) 模拟、数组
 
 ### 模拟运算
 
@@ -1405,6 +1452,7 @@
 - 🌟【easy】[844. 比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/) 字符串、双指针、栈
 - 🌟【easy】[1047. 删除字符串中的所有相邻重复项](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/) 栈
 - 🌟【easy】[682. 棒球比赛](https://leetcode.cn/problems/baseball-game/) 栈
+- ??🌟【hard】[895. 最大频率栈](https://leetcode.cn/problems/maximum-frequency-stack/) 设计题、栈
 
 ### 单调栈
 
@@ -1715,6 +1763,9 @@
 - ?? 🌟【medium】[673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/) 动态规划、递增子序列
 - ??? 🌟【hard】[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/) 动态规划
 - ???🌟【hard】[940. 不同的子序列 II](https://leetcode.cn/problems/distinct-subsequences-ii/) 子序列、动态规划
+- 🌟【medium】[790. 多米诺和托米诺平铺](https://leetcode.cn/problems/domino-and-tromino-tiling/) 动态规划
+- 🌟【medium】[799. 香槟塔](https://leetcode.cn/problems/champagne-tower/) 动态规划
+- 【easy】[1758. 生成交替二进制字符串的最少操作数](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/) 动态规划
 
 ### 动态规划 - 背包问题
 
@@ -1732,6 +1783,7 @@
 - 🌟【medium】[面试题 08.11. 硬币](https://leetcode.cn/problems/coin-lcci/) 动态规划、背包问题、完全背包
 - ??🌟【medium】[面试题 17.13. 恢复空格](https://leetcode.cn/problems/re-space-lcci/) 动态规划、背包问题、完全背包
 - ???🌟【medium】[1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/) 动态规划、01背包、背包问题
+- ?[🌟【medium】813. 最大平均值和的分组](https://leetcode.cn/problems/largest-sum-of-averages/) 动态规划、背包问题
 
 ## 贪心思想
 
@@ -1819,6 +1871,7 @@
 - 🌟【easy】[441. 排列硬币](https://leetcode.cn/problems/arranging-coins/) 二分搜索
 - 🌟【easy】[744. 寻找比目标字母大的最小字母](https://leetcode.cn/problems/find-smallest-letter-greater-than-target/) 二分搜索
 - 🌟【medium】[1894. 找到需要补充粉笔的学生编号](https://leetcode.cn/problems/find-the-student-that-will-replace-the-chalk/) 二分搜索
+- ??[🌟【hard】878. 第 N 个神奇数字](https://leetcode.cn/problems/nth-magical-number/) 最大公约数、最小公倍数、二分查找
 
 ## 排序算法的应用
 
@@ -1834,6 +1887,7 @@
 - 🌟【medium】[48 排序链表](https://leetcode.cn/problems/sort-list/)
 - 🌟【hard】[315 计算右侧小于当前元素的个数](https://leetcode.cn/problems/count-of-smaller-numbers-after-self/)
 - 🌟【hard】[剑指 Offer 51 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)
+- 🌟【medium】[775. 全局倒置与局部倒置](https://leetcode.cn/problems/global-and-local-inversions/) 逆序对、归并排序
 
 ### 堆排序
 
@@ -21648,6 +21702,58 @@ var partitionLabels = function(s) {
 };
 ```
 
+## 🌟😻✔ 764. 最大加号标志【medium】
+
+[ref](https://leetcode.cn/problems/largest-plus-sign/)
+
+矩阵
+
+```js
+var orderOfLargestPlusSign = function(n, mines) {
+  const dp = new Array(n).fill(0).map(_ => new Array(n).fill(0).map(__ => new Array(4).fill(1)))
+  for(const [i, j] of mines) {
+    dp[i][j] = [0, 0, 0, 0]
+  }
+  for(let i=1;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(dp[i][j][0] > 0) {
+        dp[i][j][0] = dp[i - 1][j][0] + 1
+      }
+    }
+  }
+  for(let i=n-2;i>=0;i--) {
+    for(let j=0;j<n;j++) {
+      if(dp[i][j][0] > 0) {
+        dp[i][j][1] = dp[i + 1][j][1] + 1
+      }
+    }
+  }
+  for(let i=0;i<n;i++) {
+    for(let j=1;j<n;j++) {
+      if(dp[i][j][0] > 0) {
+        dp[i][j][2] = dp[i][j-1][2] + 1
+      }
+    }
+  }
+  for(let i=0;i<n;i++) {
+    for(let j=n-2;j>=0;j--) {
+      if(dp[i][j][0] > 0) {
+        dp[i][j][3] = dp[i][j+1][3] + 1
+      }
+    }
+  }
+  let k = 0
+  for(let i=0;i<n;i++) {
+    for(let j=0;j<n;j++) {
+      if(dp[i][j][0] > 0) {
+        k = Math.max(k, Math.min(...dp[i][j]))
+      }
+    }
+  }
+  return k
+};
+```
+
 ## ?🌟😻✔ 767. 重构字符串【medium】
 
 [ref](https://leetcode.cn/problems/reorganize-string/)
@@ -21779,6 +21885,48 @@ var numJewelsInStones = function(jewels, stones) {
     if(jewelsSet.has(c)) cnt++
   }
   return cnt
+};
+```
+
+## 🌟😻✔ 775. 全局倒置与局部倒置【medium】
+
+[ref](https://leetcode.cn/problems/global-and-local-inversions/)
+
+归并排序、逆序对
+
+```js
+var isIdealPermutation = function(nums) {
+  const n = nums.length
+  let partCnt = 0, totalCnt = 0
+  for(let i=0; i<n - 1; i++) {
+    if(nums[i] > nums[i + 1]) partCnt++
+  }
+  function mergeSort(l, r) {
+    if(l === r) return [nums[l]]
+    const mid = Math.floor((l + r) / 2)
+    return merge(mergeSort(l, mid), mergeSort(mid + 1, r))
+  }
+  function merge(arr1, arr2) {
+    let i1=0, i2=0
+    const ret = []
+    while(i1 < arr1.length && i2 < arr2.length) {
+      if(arr1[i1] > arr2[i2]) {
+        totalCnt += arr2.length - i2
+        ret.push(arr1[i1++])
+      } else {
+        ret.push(arr2[i2++])
+      }
+    }
+    while(i1 < arr1.length) {
+      ret.push(arr1[i1++])
+    }
+    while(i2 < arr2.length) {
+      ret.push(arr2[i2++])
+    }
+    return ret
+  }
+  mergeSort(0, n - 1)
+  return partCnt === totalCnt
 };
 ```
 
@@ -22140,6 +22288,27 @@ var rotatedDigits = function(n) {
 };
 ```
 
+## ?🌟😻✔ 790. 多米诺和托米诺平铺【medium】
+
+[ref](https://leetcode.cn/problems/domino-and-tromino-tiling/)
+
+动态规划
+
+```js
+var numTilings = function(n) {
+  const mod = 10 ** 9 + 7
+  const dp = new Array(n + 1).fill(0).map(_ => new Array(3).fill(0)) // 0 两个填满 1上面填 2下面填
+  dp[0][0] = 1
+  dp[1][0] = 1
+  for(let i=2;i<=n;i++) {
+    dp[i][0] = (dp[i - 1][0] + dp[i - 2][0] + dp[i - 1][1] + dp[i - 1][2]) % mod
+    dp[i][1] = (dp[i-1][2] + dp[i-2][0]) % mod
+    dp[i][2] = (dp[i-1][1] + dp[i-2][0]) % mod
+  }
+  return dp[n][0]
+};
+```
+
 ## ??🌟😻✔ 792. 匹配子序列的单词数【medium】
 
 [ref](https://leetcode.cn/problems/number-of-matching-subsequences/)
@@ -22248,6 +22417,33 @@ function getZeroCount(n) {
 }
 ```
 
+## ??🌟😻✔ 795. 区间子数组个数【medium】
+
+[ref](https://leetcode.cn/problems/number-of-subarrays-with-bounded-maximum/)
+
+数组题、模拟
+
+```js
+// 每个 nums[i] 作为子数组右端点时，所能贡献的子数组个数
+var numSubarrayBoundedMax = function(nums, left, right) {
+  return numMaxCnt(nums, right) - numMaxCnt(nums, left - 1)
+};
+function numMaxCnt(nums, max) {
+  let res = 0, cnt = 0
+
+  for(const num of nums) {
+    if(num <= max) {
+      cnt++
+      res += cnt
+    } else {
+      cnt = 0
+    }
+  }
+
+  return res
+}
+```
+
 ## 🌟✔ 796. 旋转字符串【easy】
 
 [ref](https://leetcode.cn/problems/rotate-string/submissions/)
@@ -22307,6 +22503,51 @@ var allPathsSourceTarget = function(graph) {
 };
 ```
 
+## 🌟😻✔ 799. 香槟塔【medium】
+
+[ref](https://leetcode.cn/problems/champagne-tower/)
+
+动态规划
+
+```js
+var champagneTower = function(total, m, n) {
+  let dp = [total]
+  for(let i=1;i<=m;i++) {
+    const tdp = []
+    for(let j=0;j<=i;j++) {
+      if(j === 0) {
+        tdp.push(Math.max(dp[0] - 1, 0)  / 2)
+      } else if(j === i) {
+        tdp.push(Math.max(dp[i-1] - 1, 0) / 2)
+      } else {
+        tdp.push((Math.max(dp[j-1] - 1, 0)  + Math.max(dp[j] - 1, 0)) / 2)
+      }
+    }
+    dp = tdp
+  }
+  return dp[n] >= 1? 1: dp[n]
+};
+```
+
+```js
+var champagneTower = function(total, m, n) {
+  const dp = new Array(m + 1).fill(0).map(_ => new Array(m + 1).fill(0))
+  dp[0][0] = total
+  for(let i=1;i<=m;i++) {
+    for(let j=0;j<=i;j++) {
+      if(j === 0) {
+        dp[i][j] = Math.max(dp[i-1][0] - 1, 0)  / 2
+      } else if(j === i) {
+        dp[i][j] = Math.max(dp[i-1][i-1] - 1, 0)  / 2
+      } else {
+        dp[i][j] = (Math.max(dp[i-1][j-1] - 1, 0)  + Math.max(dp[i-1][j] - 1, 0)) / 2
+      }
+    }
+  }
+  return dp[m][n] >= 1? 1: dp[m][n]
+};
+```
+
 ## ???🌟😻✔ 801. 使序列递增的最小交换次数【hard】
 
 [ref](https://leetcode.cn/problems/minimum-swaps-to-make-sequences-increasing/)
@@ -22361,6 +22602,38 @@ var maxIncreaseKeepingSkyline = function(grid) {
 };
 ```
 
+## ?🌟😻✔ 809. 情感丰富的文字【medium】
+
+[ref](https://leetcode.cn/problems/expressive-words/)
+
+字符串题
+
+```js
+var expressiveWords = function(s, words) {
+  let cnt = 0
+  for(const str of words) {
+    if(canStretch(s, str)) cnt++
+  }
+  return cnt
+};
+function canStretch(target, source) {
+  let i = 0, j = 0
+  while(i < target.length && j < source.length) {
+    if(target[i] !== source[j]) return false
+    let ii = i, jj = j;
+    while(ii < target.length && target[ii] === target[i]) ii++
+    while(jj < source.length && source[jj] === source[j]) jj++
+    if((jj - j) > (ii - i) || (ii - i) !== (jj - j) && (ii - i) === 2) {
+      return false
+    } else {
+      i = ii
+      j = jj
+    }
+  }
+  return i === target.length && j === source.length
+}
+```
+
 ## 🌟😻✔ 811. 子域名访问计数【medium】
 
 [ref](https://leetcode.cn/problems/subdomain-visit-count/)
@@ -22386,6 +22659,31 @@ var subdomainVisits = function(cpdomains) {
     res.push(`${cnt} ${domain}`)
   }
   return res
+};
+```
+
+## 🌟😻✔ 813. 最大平均值和的分组【medium】
+
+[ref](https://leetcode.cn/problems/largest-sum-of-averages/)
+
+动态规划、背包问题
+
+```js
+var largestSumOfAverages = function (nums, K) {
+  const n = nums.length, dp = new Array(n + 1).fill(0).map(_ => new Array(K + 1).fill(0))
+  const sum = new Array(n + 1).fill(0)
+  for (let i = 1; i <= n; i++) {
+    sum[i] = sum[i - 1] + nums[i - 1]
+    dp[i][1] = sum[i] / i
+  }
+  for(let i=1;i<=n;i++) {
+    for(let k=2;k<=K;k++) {
+      for(let j=0;j<i;j++) {
+        dp[i][k] = Math.max(dp[i][k], dp[j][k-1] + (sum[i] - sum[j]) / (i - j))
+      }
+    }
+  }
+  return dp[n][K]
 };
 ```
 
@@ -22484,6 +22782,45 @@ var numBusesToDestination = function(routes, source, target) {
   return -1
 };
 
+```
+
+## 🌟😻✔ 816. 模糊坐标【medium】
+
+[ref](https://leetcode.cn/problems/ambiguous-coordinates/)
+
+枚举、模拟、规律
+
+```js
+// 时间复杂度：O(N^3)
+// 空间复杂度：O(N)
+var ambiguousCoordinates = function(s) {
+  s = s.slice(1, s.length - 1)
+  const res = []
+  function walk(i, j) {
+    if(i === j) return [s.slice(i, i + 1)]
+    if(s[i] === '0') {
+      if(s[j] === '0') return []
+      return [s[i] + '.' + s.slice(i + 1, j + 1)]
+    } else {
+      const ret = [s.slice(i, j + 1)]
+      if(s[j] === '0') return ret
+      for(let k=i;k<j;k++) {
+        ret.push(s.slice(i, k + 1) + '.' + s.slice(k + 1, j + 1))
+      }
+      return ret
+    }
+  }
+  for(let i=0;i<s.length - 1;i++) {
+    const lRes = walk(0, i)
+    const rRes = walk(i + 1, s.length - 1)
+    for(const l of lRes) {
+      for(const r of rRes) {
+        res.push(`(${l}, ${r})`)
+      }
+    }
+  }
+  return res
+};
 ```
 
 ## 🌟😻✔ 817. 链表组件【medium】
@@ -23535,6 +23872,44 @@ var stoneGame = function(piles) {
 };
 ```
 
+## ??🌟😻✔ 878. 第 N 个神奇数字【hard】
+
+[ref](https://leetcode.cn/problems/nth-magical-number/)
+
+二分搜索
+
+```js
+// 时间复杂度：O(logN)
+// 空间复杂度：O(1)
+var nthMagicalNumber = function(n, a, b) {
+  let l = 1, r = a * b * n
+  const c = lcm(a, b), mod = 10 ** 9 +7
+  function check(target) {
+    return (Math.floor(target / a) + Math.floor(target / b) - Math.floor(target / c)) >= n
+  }
+  while(l < r) {
+    const mid = Math.floor((l + r) / 2)
+    if(check(mid)) {
+      r = mid
+    } else {
+      l = mid + 1
+    }
+  }
+  return l % mod
+};
+
+// 最小公倍数 Least Common Multiple
+function lcm(a, b) {
+  return a * b / gcd(a, b)
+}
+
+// 最大公约数 Greatest Common Divisor(GCD)
+// 辗转相除法
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
+}
+```
+
 ## ??🌟😻✔ 879 盈利计划【hard】
 
 [ref](https://leetcode.cn/problems/profitable-schemes/)
@@ -23642,6 +24017,60 @@ var possibleBipartition = function(n, dislikes) {
   }
   return true
 };
+```
+
+## ?? 🌟😻✔ 891. 子序列宽度之和【hard】
+
+[ref](https://leetcode.cn/problems/sum-of-subsequence-widths/)
+
+排列组合、子序列、组合数
+
+```js
+var sumSubseqWidths = function(nums) {
+  nums.sort((a, b) => a - b)
+  const mod = 10 ** 9 + 7, n = nums.length, P = new Array(n).fill(1)
+  let res = 0
+  for(let i=1;i<n;i++) {
+    P[i] = (P[i - 1] * 2) % mod
+  }
+  for(let i=0;i<n;i++) {
+    res = (res + nums[i] * P[i]) % mod
+    res = (res - nums[i] * P[n - i - 1]) % mod
+  }
+  return res
+};
+```
+
+## ??🌟😻✔ 895. 最大频率栈【hard】
+
+[ref](https://leetcode.cn/problems/maximum-frequency-stack/)
+
+设计题、栈
+
+```js
+var FreqStack = function() {
+  this.cntMap = new Map()
+  this.cntNumsMap = new Map()
+  this.max = 0
+};
+FreqStack.prototype.push = function(val) {
+  let prevCnt = this.cntMap.get(val) || 0
+  this.cntMap.set(val, prevCnt + 1)
+  if(prevCnt + 1 > this.max) {
+    this.max++
+  }
+  if(!this.cntNumsMap.has(prevCnt + 1)) {
+    this.cntNumsMap.set(prevCnt + 1, [])
+  }
+  this.cntNumsMap.get(prevCnt + 1).push(val)
+};
+FreqStack.prototype.pop = function() {
+  const target = this.cntNumsMap.get(this.max).pop()
+  if(!this.cntNumsMap.get(this.max).length) this.max--
+  this.cntMap.set(target, this.cntMap.get(target) - 1)
+  return target
+};
+
 ```
 
 ## 🌟😻✔ 896. 单调数列【easy】
@@ -25591,6 +26020,52 @@ var pathInZigZagTree = function(label) {
 };
 ```
 
+## ???🌟😻✔ 1106. 解析布尔表达式【hard】
+
+[ref](https://leetcode.cn/problems/parsing-a-boolean-expression/)
+
+栈
+
+```js
+var parseBoolExpr = function(expression) {
+  const stack = [];
+  const n = expression.length;
+  for (let i = 0; i < n; i++) {
+    const c = expression[i];
+    if (c === ',') {
+        continue;
+    } else if (c !== ')') {
+        stack.push(c);
+    } else {
+      let t = 0, f = 0;
+      while (stack[stack.length - 1] !== '(') {
+        const val = stack.pop();
+        if (val === 't') {
+          t++;
+        } else {
+          f++;
+        }
+      }
+      stack.pop();
+      const op = stack.pop();
+      switch (op) {
+        case '!':
+          stack.push(f === 1 ? 't' : 'f');
+          break;
+        case '&':
+          stack.push(f === 0 ? 't' : 'f');
+          break;
+        case '|':
+          stack.push(t > 0 ? 't' : 'f');
+          break;
+        default:
+      }
+    }
+  }
+  return stack.pop() === 't';
+};
+```
+
 ## ✔ 1108. IP 地址无效化【easy】
 
 [ref](https://leetcode.cn/problems/defanging-an-ip-address/)
@@ -27499,6 +27974,33 @@ var maximumWealth = function(accounts) {
 };
 ```
 
+## ✔ 1672. 最富有客户的资产总量【easy】
+
+[ref](https://leetcode.cn/problems/goal-parser-interpretation/)
+
+字符串
+
+```js
+var interpret = function(command) {
+  const n = command.length
+  let res = '', i=0
+  while(i < n) {
+    if(command[i] === 'G') res += 'G'
+    else if(command[i] === '(') {
+      if(command[i + 1] === ')') {
+        res += 'o'
+        i++
+      } else {
+        res += 'al'
+        i += 3
+      }
+    }
+    i++
+  }
+  return res
+};
+```
+
 ## 🌟😻✔ 1694. 重新格式化电话号码【easy】
 
 [ref](https://leetcode.cn/problems/reformat-phone-number/)
@@ -27559,6 +28061,28 @@ var countStudents = function(students, sandwiches) {
 };
 ```
 
+## ✔ 1704. 判断字符串的两半是否相似【easy】
+
+[ref](https://leetcode.cn/problems/determine-if-string-halves-are-alike/)
+
+字符串
+
+```js
+var halvesAreAlike = function(s) {
+  let cnt = 0, leftCnt = 0
+  for(let i=0;i<s.length;i++) {
+    if(isBase(s[i])) cnt++
+    if(s.length / 2 - 1 === i) {
+      leftCnt = cnt
+    }
+  }
+  return cnt === 2 * leftCnt
+};
+function isBase(c) {
+  return 'aeiou'.indexOf(c.toLowerCase()) !== -1
+}
+```
+
 ## 🌟😻✔ 1706. 球会落何处【medium】
 
 [ref](https://leetcode.cn/problems/where-will-the-ball-fall/)
@@ -27613,6 +28137,107 @@ var findBall = function(grid) {
 };
 ```
 
+## ✔ 1710. 卡车上的最大单元数【easy】
+
+[ref](https://leetcode.cn/problems/maximum-units-on-a-truck/)
+
+```js
+var maximumUnits = function(boxTypes, truckSize) {
+  boxTypes.sort((a, b) => b[1] - a[1])
+  let res = 0
+  for(const [cnt, size] of boxTypes) {
+    res += Math.min(cnt, truckSize) * size
+    truckSize -= Math.min(cnt, truckSize)
+    if(truckSize === 0) return res
+  }
+  return res
+};
+```
+
+## ✔ 1732. 找到最高海拔【easy】
+
+[ref](https://leetcode.cn/problems/find-the-highest-altitude/)
+
+数组题
+
+```js
+var largestAltitude = function(gain) {
+  let prev = 0, max = 0
+  for(let i=0;i<gain.length;i++) {
+    prev = prev + gain[i]
+    max = Math.max(max, prev)
+  }
+  return max
+};
+```
+
+## ✔ 1742. 盒子中小球的最大数量【easy】
+
+[ref](https://leetcode.cn/problems/maximum-number-of-balls-in-a-box/)
+
+哈希表
+
+```js
+var countBalls = function(lowLimit, highLimit) {
+  const map = new Map()
+  let max = 0
+  for(let i=lowLimit;i<=highLimit;i++) {
+    const s = sum(i)
+    map.set(s, (map.get(s) || 0) + 1)
+    max = Math.max(map.get(s), max)
+  }
+  return max
+};
+
+function sum(num) {
+  let s = 0
+  while(num > 0) {
+    s += num % 10
+    num = Math.floor(num / 10)
+  }
+  return s
+}
+```
+
+## ✔ 1752. 检查数组是否经排序和轮转得到【easy】
+
+[ref](https://leetcode.cn/problems/check-if-array-is-sorted-and-rotated/)
+
+数组题
+
+```js
+var check = function(nums) {
+  let cnt = 0
+  for(let i=1;i<nums.length;i++) {
+    if(nums[i] < nums[i - 1]) {
+      cnt++
+      if(cnt > 1 || nums[0] < nums[nums.length - 1]) return false
+    }
+  }
+  return true
+};
+```
+
+## ✔ 1758. 生成交替二进制字符串的最少操作数【easy】
+
+[ref](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/)
+
+动态规划
+
+```js
+var minOperations = function (s) {
+  const n = s.length
+  let a = s[0] === '0' ? 0 : 1
+  let b = s[0] === '1' ? 0 : 1
+  for (let i = 1; i < n; i++) {
+    const pa = a, pb = b
+    a = pb + (s[i] === '0' ? 0 : 1)
+    b = pa + (s[i] === '1' ? 0 : 1)
+  }
+  return Math.min(a, b)
+};
+```
+
 ## ✔ 1768. 交替合并字符串【easy】
 
 [ref](https://leetcode.cn/problems/merge-strings-alternately/)
@@ -27655,6 +28280,29 @@ var countMatches = function(items, ruleKey, ruleValue) {
     }
   }
   return cnt
+};
+```
+
+## ✔ 1779. 找到最近的有相同 X 或 Y 坐标的点【easy】
+
+[ref](https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/)
+
+简单模拟题
+
+```js
+var nearestValidPoint = function(x, y, points) {
+  let minDis = Number.MAX_SAFE_INTEGER, idx = -1
+  for(let i = 0;i < points.length; i++) {
+    const [xx, yy] = points[i]
+    if(xx === x || yy === y) {
+      const dis = Math.abs(xx - x) + Math.abs(yy - y)
+      if(dis < minDis) {
+        minDis = dis
+        idx = i
+      }
+    }
+  }
+  return idx
 };
 ```
 

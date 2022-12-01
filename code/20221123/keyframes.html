@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .box1 {
+      width: 100px;
+      height: 100px;
+      background-color: cyan;
+      animation: box-animation 3s infinite alternate-reverse;
+    }
+    @keyframes box-animation {
+      0% {
+        width: 100px;
+      }
+      50% {
+        width: 300px;
+      }
+      100% {
+        width: 1000px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box1"></div>
+</body>
+</html>

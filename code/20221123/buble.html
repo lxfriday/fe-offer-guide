@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .box1 {
+        width: 300px;
+        height: 300px;
+        background-color: black;
+      }
+      .box2 {
+        width: 200px;
+        height: 200px;
+        background-color: cyan;
+      }
+      .box3 {
+        width: 100px;
+        height: 100px;
+        background-color: white;
+      }
+    </style>
+
+    <body>
+      <ul>
+        <li key="1" name="lx">11</li>
+        <li key="2">22</li>
+        <li key="3">33</li>
+        <li key="4">44</li>
+      </ul>
+      <script>
+        document.querySelector('ul').addEventListener('click', function (e) {
+          console.log('target', e.target) // li
+          console.log('key', {key: e.target.attributes.name})
+          console.log('key', e.target.attributes.key.value)
+          e.target.parentNode.removeChild(e.target)
+        })
+      </script>
+    </body>
+  </body>
+</html>

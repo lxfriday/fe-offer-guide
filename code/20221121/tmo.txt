@@ -1,0 +1,11 @@
+content-security-policy
+	default-src 'self' api2.firefoxchina.cn account.firefoxchina.cn;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' http://a.alimama.cn g.click.taobao.com suggestion.baidu.com www.baidu.com hm.baidu.com nssug.baidu.com www.google-analytics.com *.googlesyndication.com static.huohu123.com ;
+  img-src * data:;
+  child-src 'self' *.firefoxchina.cn *.17huohu.com;
+  frame-src 'self' *.firefoxchina.cn *.17huohu.com www.taobao.com entry.baidu.com;
+  frame-ancestors 'self' *.firefoxchina.cn tongji.baidu.com about:;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self' data: ;
+  connect-src hm.baidu.com *.firefoxchina.cn ;
+  report-uri /_/csp-reports

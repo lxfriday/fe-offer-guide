@@ -245,7 +245,7 @@ console.log("objStrReplaced", objStrReplaced);
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1652079538317_a330c9f4-0762-4446-b7a4-75b74a209c84.png)
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/json-bigint-test-tggvmm?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/json-bigint-test-tggvmm?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="JSON-Bigint-test"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -4476,7 +4476,7 @@ imgs.forEach(el => {
             console.log(entry);
           }
         }
-      })
+      }, options)
       const imgs = document.querySelectorAll('img[data-origin]')
       imgs.forEach(img => imgObserver.observe(img))
     </script>
@@ -5969,31 +5969,7 @@ box3.addEventListener('click', function (e) {
 // box2
 ```
 
-**在同一个目标元素（捕捉和冒泡切换的末端）上注册了冒泡和捕捉两种事件时，先注册的事件先执行**
-
-```javascript
-box1.addEventListener('click', function (e) {
-  console.log('box1')
-})
-box2.addEventListener('click', function (e) {
-  console.log('box2')
-})
-box3.addEventListener(
-  'click',
-  function (e) {
-    console.log('box3 capture')
-  },
-  true
-)
-box3.addEventListener('click', function (e) {
-  console.log('box3 bubble')
-})
-// 点击 `.box3` 所在的区域时
-// box3 capture
-// box3 bubble
-// box2
-// box1
-```
+**在同一个目标元素（捕捉和冒泡切换的末端）上注册了冒泡和捕捉两种事件时，先捕捉后冒泡（应用W3c冒泡捕捉顺序规则：先捕捉后冒泡）**
 
 ```javascript
 box1.addEventListener('click', function (e) {
@@ -6012,12 +5988,14 @@ box3.addEventListener(
   },
   true
 )
+
 // 点击 `.box3` 所在的区域时
-// box3 bubble
 // box3 capture
+// box3 bubble
 // box2
 // box1
 ```
+
 
 ### ✔ attachEvent
 
@@ -9341,7 +9319,7 @@ CodePen 全屏查看
 
 想要改变三角形的大小形状只需要修改边框宽度就可以实现：
 
-<iframe height="800" style="width: 100%;" scrolling="no" title="border 实现三角形动态体验" src="https://codepen.io/lxfriday/embed/popvdod?default-tab=html%2Cresult&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="800" style="width: 100%;" scrolling="no" title="border 实现三角形动态体验" src="https://codesandbox.io/embed/relaxed-jackson-i6wmft?fontsize=14&hidenavigation=1&theme=dark&editable=true" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/lxfriday/pen/popvdod">
   Untitled</a> by 云影sky (<a href="https://codepen.io/lxfriday">@lxfriday</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -9906,7 +9884,7 @@ if (testElem.offsetHeight == 1) {
 }
 ```
 
-### ✔ 伪类 + transform
+### ✔ 伪元素 + transform
 
 ref 
 - [移动端 1px 解决方案(完整版)](https://blog.csdn.net/qq_45846359/article/details/108761345)
@@ -9924,9 +9902,11 @@ ref
   box-sizing: border-box;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   border: 1px solid #000;
   border-radius: 4px;
-  transform-origin: top left;
+  transform-origin: 100% 0;
 }
 @media (-webkit-min-device-pixel-ratio: 2) {
   .border-1px:after {
@@ -9969,6 +9949,13 @@ ref
   transform-origin: left top;
 }
 ```
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/nameless-sun-ymxoom?autoresize=1&fontsize=12&hidenavigation=1&theme=dark&editable=true"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="relaxed-joliot-f795it"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>在 Code Sandbox 中全屏查看
+</button>
 
 ### ✔ viewport + rem
 
@@ -10036,6 +10023,13 @@ ref
 </html>
 ```
 优点是非常方便，缺点在于老项目迁移难度大。部分机型可能没有 `devicePixelRatio` 属性，不支持这个方式。
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/eloquent-surf-yqq4c6?fontsize=14&hidenavigation=1&theme=dark&editable=true"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="relaxed-joliot-f795it"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>在 Code Sandbox 中全屏查看
+</button>
 
 ### ✔ border-image
 
@@ -11069,6 +11063,18 @@ ref
 - [https://zhuanlan.zhihu.com/p/37095662](https://zhuanlan.zhihu.com/p/37095662)
 - [https://juejin.im/post/5dadc6045188255a270a0f85](https://juejin.im/post/5dadc6045188255a270a0f85)
 
+## React Diff
+
+- [为什么 React 的 Diff 算法不采用 Vue 的双端对比算法？](https://juejin.cn/post/7116141318853623839)
+
+总个来说，React Diff 算法分以下几个步骤：
+
+- 第一轮，从左向右新老节点进行比对查找能复用的旧节点，如果有新老节点比对不成功的，则停止这一轮的比对，并记录了停止的位置。
+- 如果第一轮比对，能把所有的新节点都比对完毕，则删除旧节点还没进行比对的节点。
+- 如果第一轮的比对，没能将所有的新节点都比对完毕，则继续从第一轮比对停止的位置继续开始循环新节点，拿每一个新节点去老节点里面进行查找，有匹配成功的则复用，没匹配成功的则在协调位置的时候打上 Placement 的标记。
+- 在所有新节点比对完毕之后，检查还有没有没进行复用的旧节点，如果有，则全部删除。
+
+
 ## setState 原理
 
 ref
@@ -11488,7 +11494,7 @@ extraReducers: {
 
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651996895206_82c93c14-7b54-4681-9c1f-a243be6c3de1.png)
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/keen-murdock-gtvv20?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/keen-murdock-gtvv20?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="keen-murdock-gtvv20"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -11604,7 +11610,7 @@ export default connect(state => {
 从前后两次点击的差别就可以看出，`createSelector` 具备 memorize 能力，如果最后一个函数的参数都没有发生变更，则不会执行最后的计算，其会直接返回上次计算出的值。
 
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/festive-gould-mrqyee?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/festive-gould-mrqyee?autoresize=1&fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="festive-gould-mrqyee"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -11775,7 +11781,7 @@ export default function App1() {
 }
 ```
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/modern-dust-ezkzij?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/modern-dust-ezkzij?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="modern-dust-ezkzij"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -11966,7 +11972,7 @@ export default function App() {
 }
 ```
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/smoosh-bush-j1px09?autoresize=1&fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/smoosh-bush-j1px09?autoresize=1&fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="smoosh-bush-j1px09"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -12231,7 +12237,7 @@ export default function App() {
   );
 }
 ```
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/relaxed-joliot-f795it?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/relaxed-joliot-f795it?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="relaxed-joliot-f795it"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -12359,7 +12365,7 @@ export default function App() {
 
 ```
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/recursing-gould-v4odiu?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/recursing-gould-v4odiu?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="recursing-gould-v4odiu"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -12399,7 +12405,7 @@ export default function App() {
 }
 ```
 
-<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/unruffled-wozniak-gpxnkh?fontsize=10&hidenavigation=1&theme=dark"
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/unruffled-wozniak-gpxnkh?fontsize=10&hidenavigation=1&theme=dark&editable=true"
      style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
      title="unruffled-wozniak-gpxnkh"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -13413,6 +13419,16 @@ Date: Wed, 21 Oct 2015 07:28:00 GMT
 Age: <delta-seconds>
 ```
 
+#### ✔ http 缓存-刷新
+
+|类型|强缓存(`cache-control`)|协商缓存(`etag`)|最终结果|
+|:-|:-|:-|:-|
+|`f5`|生效|生效|在有效期内则使用本地缓存否则去缓存服务器验证etag是否依然有效|
+|`ctrl+r`|生效|生效|同`f5`|
+|`ctrl+f5`|失效|失效|重新请求资源并缓存资源|
+|`ctrl+shift+r`|失效|失效|同`ctrl+f5`|
+|`地址栏点击刷新按钮`|生效|生效|同`f5`|
+
 ### ✔ HSTS
 
 HTTP Strict Transport Security（通常简称为 HSTS）是一个安全功能，它告诉浏览器只能通过 HTTPS 访问当前资源，而不是 HTTP。
@@ -14069,6 +14085,8 @@ HTTP 303 See Other 重定向状态码，通常作为 PUT 或 POST 操作的返�
 表示可以使用本地缓存的内容，详见【HTTP 缓存】部分。
 
 #### ✔ 307 Temporary Redirect
+
+也叫 307 Internal Redirect，在 HSTS 中有307这个状态码应用。
 
 307 Temporary Redirect（临时重定向）是表示重定向的响应状态码，说明请求的资源暂时地被移动到 `Location` 首部所指向的 `URL` 上。
 
@@ -14975,6 +14993,7 @@ ref
 
 - [https://zhuanlan.zhihu.com/p/80551769](https://zhuanlan.zhihu.com/p/80551769)
 - [https://zhuanlan.zhihu.com/p/34453198](https://zhuanlan.zhihu.com/p/34453198)
+- [从URL输入到页面展现到底发生什么？](https://segmentfault.com/a/1190000017184701)
 
 主要的过程分为以下几步：
 
@@ -16183,27 +16202,111 @@ MPromise.all([p1, p2, p3]).then(
 100 =>  100
 [100, 200, 300] =>  [ 100, 200, 300 ]
 ```
-### ? 手撕 Set
-
-Set 各个方法的时间复杂度
+### ✔ 手撕 Promise.all
 
 ```js
-const arr = new Array(1000000).fill(1).map((_, i) => i)
-const set = new Set(arr)
-set.has(1000000000) // 并不是 O(1)
-
+Promise.all = function (promises) {
+  console.log('this is my promise.all')
+  const n = promises.length,
+    ret = []
+  return new Promise(function (resolve, reject) {
+    for (let i = 0; i < n; i++) {
+      const promise = promises[i]
+      promise
+        .then(res => {
+          ret[i] = res
+          if (ret.length === n) {
+            resolve(ret)
+          }
+        })
+        .catch(e => {
+          reject(e)
+        })
+    }
+  })
+}
 ```
 
-### ? 手撕 Map
-
-Map 各个方法的时间复杂度
+测试代码
 
 ```js
-const Obj = {}
-new Array(1000000).fill(1).map((_, i) => {
-  Obj[i] = i
+const p1 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(1000)
+  }, 1000)
 })
-Obj[10000000] // O(1)
+const p2 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(2000)
+  }, 2000)
+})
+const p3 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(3000)
+  }, 3000)
+})
+const p4 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    reject('error')
+  }, 500)
+})
+
+Promise.all([p1, p2, p3, p4])
+  .then(res => {
+    console.log(res)
+  })
+  .catch(e => {
+    console.log('promise.all error', e)
+  })
+```
+
+### ✔ 手撕 Promise.race
+
+```js
+Promise.race = function (promises) {
+  console.log('this is my promise.race')
+  return new Promise(function (resolve, reject) {
+    for(const promise of promises) {
+      Promise.resolve(promise).then(res => {
+        resolve(res)
+      }).catch(e => {
+        reject(e)
+      })
+    }
+  })
+}
+```
+
+```js
+
+const p1 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(1000)
+  }, 1000)
+})
+const p2 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(2000)
+  }, 2000)
+})
+const p3 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    resolve(3000)
+  }, 3000)
+})
+const p4 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    reject('error')
+  }, 500)
+})
+
+Promise.race([p1, p2, p3])
+  .then(res => {
+    console.log(res)
+  })
+  .catch(e => {
+    console.log('promise.race error', e)
+  })
 ```
 
 ### ✔ 手撕 map 函数

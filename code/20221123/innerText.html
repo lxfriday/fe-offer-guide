@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <<<<<  被转义
+    >>>>>  被转义
+    &&&&&  被转义
+    hello >ok?
+    <!-- are u ok? -->
+    <span> i am normal </span>
+    <span style="opacity: 0"> i am hidden</span>
+    <style>
+      .xxx {
+        /* style */
+        display: none;
+      }
+    </style>
+    <script>
+      // script
+      const aa = 111
+    </script>
+  </div>
+  <script>
+    console.log('innerHTML', document.querySelector('.wrapper').innerText)
+  </script>
+</body>
+</html>

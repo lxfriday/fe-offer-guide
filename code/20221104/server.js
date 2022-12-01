@@ -1,27 +1,31 @@
 const http = require('http')
 const Mock = require('mockjs')
+const url = require('url')
 
 const app = http.createServer((req, res) => {
-  // res.writeHead(200, {
-  //   'access-control-allow-origin': 'https://x.com',
-  //   'access-control-allow-methods': 'GET,POST',
-  //   'access-control-allow-credentials': true,
-  //   'access-control-allow-headers': 'content-type,a,requestId,abc',
-  //   'Content-Type': 'text/plain; charset=utf-8',
-  // })
-  res.end(
-    JSON.stringify({
-      success: true,
-      data: {
-        id: Mock.mock('@guid'),
-        name: Mock.mock('@cname'),
-        age: Mock.mock({
-          'number|1-100': 100,
-        }).number,
-      },
-      errMsg: '',
-    }),
-  )
+  const urlInfo = url.parse(req.url)
+  const query = {}
+  urlInfo.query &&
+    urlInfo.query.split('&').forEach(str => {
+      const [k, v] = str.split('=')
+      query[k] = v
+    })
+
+  console.log('query', query)
+
+  const data = {
+    uid: query.uid,
+    a: 1,
+    b: 2,
+    c: 3,
+  }
+  res.writeHead(200, {
+    'content-type': 'text/javascript',
+    'access-control-allow-origin': 'https://a.com',
+    'access-control-allow-headers': 'content-type',
+    'access-control-allow-credentials': true,
+  })
+  res.end(`${query.cb}(${JSON.stringify(data)})`)
 })
 
 const port = 4567

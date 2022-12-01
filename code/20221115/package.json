@@ -1,0 +1,16 @@
+{
+  "name": "20221115",
+  "version": "1.0.0",
+  "description": "",
+  "main": "httpServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3"
+  }
+}
