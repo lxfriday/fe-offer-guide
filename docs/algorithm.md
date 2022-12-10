@@ -47,6 +47,12 @@
 
 # 刷题日记
 
+- 20221205(1)
+  - [【easy】1805. 字符串中不同整数的数目](https://leetcode.cn/problems/number-of-different-integers-in-a-string/) 字符串
+- 20221205(1)
+  - [【medium】1774. 最接近目标价格的甜点成本](https://leetcode.cn/problems/closest-dessert-cost/) 回溯法
+- 20221202(1)
+  - ?[【medium】1769. 移动所有球到每个盒子所需的最小操作数](https://leetcode.cn/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/) 规律、模拟
 - 20221201(1)
   - [【easy】1779. 找到最近的有相同 X 或 Y 坐标的点](https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/) 普通模拟题
 - 20221130(1)
@@ -28261,6 +28267,49 @@ var mergeAlternately = function(word1, word2) {
 };
 ```
 
+## ??🌟😻✔ 1769. 移动所有球到每个盒子所需的最小操作数【medium】
+
+[ref](https://leetcode.cn/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/)
+
+规律、模拟
+
+```js
+// 双单侧统计
+var minOperations = function(boxes) {
+  const res = []
+  let cnt = 0, prev = 0
+  for(let i=0;i<boxes.length;i++) {
+    res[i] = prev + cnt
+    prev += cnt
+    if(boxes[i] === '1') cnt++
+  }
+  prev = 0, cnt = 0
+  for(let i=boxes.length-1; i >= 0; i--) {
+    res[i] += prev + cnt
+    prev += cnt
+    if(boxes[i] === '1') cnt++
+  }
+  return res
+};
+```
+
+```js
+// O(N^2) 两层循环
+var minOperations = function(boxes) {
+  const res = []
+  for(let i=0;i<boxes.length;i++) {
+    let sum = 0
+    for(let j=0;j<boxes.length;j++) {
+      if(i !== j && boxes[j] === '1') {
+        sum += Math.abs(j - i)
+      }
+    }
+    res[i] = sum
+  }
+  return res
+};
+```
+
 ## ✔ 1773. 统计匹配检索规则的物品数量【easy】
 
 [ref](https://leetcode.cn/problems/count-items-matching-a-rule/)
@@ -28280,6 +28329,36 @@ var countMatches = function(items, ruleKey, ruleValue) {
     }
   }
   return cnt
+};
+```
+
+## 🌟😻✔ 1774. 最接近目标价格的甜点成本【medium】
+
+[ref](https://leetcode.cn/problems/closest-dessert-cost/)
+
+回溯法
+
+```js
+var closestCost = function(baseCosts, toppingCosts, target) {
+  const m = baseCosts.length, n = toppingCosts.length
+  let res = Number.MAX_SAFE_INTEGER
+  for(const base of baseCosts) {
+    walk(base, 0)
+  }
+  function walk(sum, idx) {
+    if(Math.abs(sum - target) <= Math.abs(res - target)) {
+      if(Math.abs(sum - target) === Math.abs(res - target)) {
+        res = Math.min(res, sum)
+      } else {
+        res = sum
+      }
+    }
+    if(sum >= target || idx >= n) return
+    walk(sum, idx + 1)
+    walk(sum + toppingCosts[idx], idx + 1)
+    walk(sum + 2 * toppingCosts[idx], idx + 1)
+  }
+  return res
 };
 ```
 
@@ -28373,6 +28452,29 @@ var maxAscendingSum = function(nums) {
     r++
   }
   return max
+};
+```
+
+## ✔ 1805. 字符串中不同整数的数目【easy】
+
+[ref](https://leetcode.cn/problems/number-of-different-integers-in-a-string/)
+
+字符串
+
+```js
+var numDifferentIntegers = function(word) {
+  const set = new Set()
+  for(let i=0;i<word.length;i++) {
+    let str = ''
+    while(i < word.length && word[i] <= '9' && word[i] >= '0') {
+      if(str === '0') str = ''
+      str += word[i++]
+    }
+    if(str.length) {
+      set.add(str)
+    }
+  }
+  return set.size
 };
 ```
 

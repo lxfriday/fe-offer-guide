@@ -11048,13 +11048,22 @@ CodePen 查看演示
 
 ## React Context
 
-## React 事件机制
+## ✔ React 事件机制
 
 ref
 
 - [https://juejin.im/post/5c7df2e7f265da2d8a55d49d](https://juejin.im/post/5c7df2e7f265da2d8a55d49d)
 
-## React 事件绑定 this
+主要点：
+
+- 采用驼峰命名，不同于浏览器的全小写
+- React 内部采用自己设计的合成事件机制，抹平了平台差异
+- React 采用事件代理，把所有事件代理到 `document` 上，原生事件会先于合成事件执行，因为要等到冒泡到 `document` 对象之后再执行React指定的事件函数
+
+## ✔ React 事件绑定 this
+
+- `constructor` 中绑定
+- 箭头函数定义时绑定
 
 ## React Fiber
 
@@ -11063,30 +11072,47 @@ ref
 - [https://zhuanlan.zhihu.com/p/37095662](https://zhuanlan.zhihu.com/p/37095662)
 - [https://juejin.im/post/5dadc6045188255a270a0f85](https://juejin.im/post/5dadc6045188255a270a0f85)
 
-## React Diff
+## ✔ React Diff
 
 - [为什么 React 的 Diff 算法不采用 Vue 的双端对比算法？](https://juejin.cn/post/7116141318853623839)
+- [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
 
-总个来说，React Diff 算法分以下几个步骤：
+Diff 通常就是指的某个节点的子节点中有一堆使用同一个组件创建的Element，这些Element需要设置 key 属性来做区分。
 
-- 第一轮，从左向右新老节点进行比对查找能复用的旧节点，如果有新老节点比对不成功的，则停止这一轮的比对，并记录了停止的位置。
-- 如果第一轮比对，能把所有的新节点都比对完毕，则删除旧节点还没进行比对的节点。
-- 如果第一轮的比对，没能将所有的新节点都比对完毕，则继续从第一轮比对停止的位置继续开始循环新节点，拿每一个新节点去老节点里面进行查找，有匹配成功的则复用，没匹配成功的则在协调位置的时候打上 Placement 的标记。
-- 在所有新节点比对完毕之后，检查还有没有没进行复用的旧节点，如果有，则全部删除。
+Diff 算法会依据子节点现有的keys列表和即将生成的子节点keys列表做比对，概述的讲就是把这两个列表在比对的时候标记出旧列表中哪些是要删除的(Delete)，哪些是要移动的(Move)，以及新列表中哪些是要新增(Add)的，
+再依据标记把两个列表做合并，把要删除的节点全部删除，剩下的要新增的和要移动的放到各自对应的位置上。
 
-
-## setState 原理
+## ✔ setState 什么时候异步什么时候同步
 
 ref
 
 - [https://juejin.im/post/5b45c57c51882519790c7441](https://juejin.im/post/5b45c57c51882519790c7441)
 - [测试 code](https://codesandbox.io/s/modest-volhard-0l3ov?fontsize=14&hidenavigation=1&theme=dark)
 
-## HOC
+异步：在React合成事件中或者生命周期函数中
+
+同步：自己使用监听器绑定的函数（原生事件）或者计时器中
+
+setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
+
+
+## ✔ HOC
+
+ref
+
+- [React高阶组件(HOC)的入门📖及实践](https://juejin.cn/post/6844904050236850184)
 
 ## HOOKS 原理
 
-## 虚拟 DOM
+- [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
+- [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
+
+
+## ✔ 虚拟 DOM
+
+ref
+
+- [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
 
 ## React Router 原理
 
