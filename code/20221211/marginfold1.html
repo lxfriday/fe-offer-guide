@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <style>
+      .wrapper {
+        background-color: bisque;
+      }
+      .normalbox {
+        height: 20px;
+        background-color: cyan;
+        margin-top: 20px;
+      }
+      .box {
+        height: 20px;
+        background-color: cyan;
+        margin: 10px 0;
+        display: flow-root;
+        border: 1px solid #000;
+      }
+    </style>
+    <p>正常的</p>
+    <div class="wrapper">
+      <div class="normalbox">12345</div>
+      <div class="normalbox">12345</div>
+    </div>
+    <p>不正常的</p>
+    <div class="wrapper">
+      <div class="box">12345</div>
+      <div style="display: flow-root"></div>
+      <div class="box">12345</div>
+      <div style="overflow: auto"></div>
+      <div class="box">12345</div>
+      <div class="box">12345</div>
+      <div class="box">12345</div>
+    </div>
+  </body>
+</html>

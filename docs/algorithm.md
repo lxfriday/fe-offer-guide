@@ -47,6 +47,10 @@
 
 # 刷题日记
 
+- 20221213(1)
+  - [【easy】1832. 判断句子是否为全字母句](https://leetcode.cn/problems/check-if-the-sentence-is-pangram/) 字符串题、哈希表
+- 20221211(1)
+  - [【easy】1827. 最少操作使数组递增](https://leetcode.cn/problems/minimum-operations-to-make-the-array-increasing/) 数组
 - 20221205(1)
   - [【easy】1805. 字符串中不同整数的数目](https://leetcode.cn/problems/number-of-different-integers-in-a-string/) 字符串
 - 20221205(1)
@@ -28496,6 +28500,43 @@ var arraySign = function(nums) {
     }
   }
   return s
+};
+```
+
+## ✔ 1827. 最少操作使数组递增【easy】
+
+[ref](https://leetcode.cn/problems/minimum-operations-to-make-the-array-increasing/)
+
+数组题
+
+```js
+var minOperations = function(nums) {
+  let cnt = 0, prev = Number.MIN_SAFE_INTEGER
+  for(const num of nums) {
+    if(num <= prev) {
+      cnt += prev - num + 1
+      prev = prev + 1
+    } else {
+      prev = num
+    }
+  }
+  return cnt
+};
+```
+
+## ✔ 1832. 判断句子是否为全字母句【easy】
+
+[ref](https://leetcode.cn/problems/check-if-the-sentence-is-pangram/)
+
+字符串题、哈希表
+
+```js
+var checkIfPangram = function(sentence) {
+  let set = new Set()
+  for(const c of sentence) {
+    set.add(c)
+  }
+  return set.size === 26
 };
 ```
 

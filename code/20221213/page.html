@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      axios({
+        method: 'GET',
+        url: '/getUserInfo',
+        data: { from: 'client', info: 'this is body' },
+      }).then(res => {
+        console.log('res.data', res.data)
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .wrapper {
+        position: relative;
+      }
+      .absolute {
+        position: absolute;
+        background-color: bisque;
+      }
+      .float {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: cyan;
+        display: flow-root;
+      }
+    </style>
+    <div class="wrapper">
+      <div class="absolute">
+        <div class="float">1</div>
+        <div class="box">2</div>
+      </div>
+    </div>
+  </body>
+</html>
