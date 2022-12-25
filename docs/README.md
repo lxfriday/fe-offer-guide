@@ -2910,17 +2910,19 @@ ref
 
 - [JS 事件循环 event loop，前端烧脑一刻](https://juejin.im/post/5d81bc016fb9a06b084d2acc)
 - [详解 JavaScript 中的 Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
+- [Difference between microtask and macrotask within an event loop context](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context/30910084#30910084)
+- [https://html.spec.whatwg.org/multipage/webappapis.html#event-loops](https://html.spec.whatwg.org/multipage/webappapis.html#event-loops)
 
 事件循环涉及到两种类型的任务，**宏任务（macroTask）**和**微任务（microTask）**。
 
-宏任务包括：
+微任务包括：
 
 - `process.nextTick`
 - `promise.then`（`new Promise(cb)` 中的 cb 是同步执行的，非微任务，`async`、`await` 是 promise 的语法糖）
 
 优先级是 `process.nextTick` > `promise.then`。
 
-微任务包括：
+宏任务包括：
 
 - `setImmediate`
 - `setTimeout`
@@ -6222,7 +6224,67 @@ Content-Security-Policy: child-src 'self' http://example.com;
 
 # NodeJS
 
-## commonJS 和 ESM 差异
+## ✔ commonJS 和 ESM 差异
+
+ref
+
+- [ES6 模块与 CommonJS 模块的差异](https://es6.ruanyifeng.com/#docs/module-loader#ES6-%E6%A8%A1%E5%9D%97%E4%B8%8E-CommonJS-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%B7%AE%E5%BC%82)
+
+---
+
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
+- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+- CommonJS 模块的require()是同步加载模块，ES6 模块的import命令是异步加载，有一个独立的模块依赖的解析阶段
+- CommonJS 加载的是一个对象（即module.exports属性），该对象只有在脚本运行完才会生成。而 ES6 模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成。
+
+
+看例子
+
+```js
+// CommonJS
+// cjs.js
+let cnt = 0
+setTimeout(() => {
+  cnt++
+  console.log('changed')
+}, 1000)
+module.exports = cnt
+
+// cjs2.js
+const cnt = require('./cjs')
+console.log(cnt)
+setTimeout(() => {
+  console.log(cnt)
+}, 3000);
+// 打印结果是
+// 0
+// changed
+// 0
+```
+
+```js
+// ESM
+// esm.js
+export let cnt = 0
+setTimeout(() => {
+  cnt++
+  console.log('esm changed')
+}, 1000)
+
+// esm2.js
+import { cnt } from './esm.js'
+
+console.log('esm cnt', cnt)
+
+setTimeout(() => {
+  console.log('esm cnt', cnt)
+}, 2000)
+
+// 打印结果是
+// esm cnt 0
+// esm changed
+// esm cnt 1
+```
 
 ## Express
 
@@ -12569,8 +12631,6 @@ ref
 - [深入 Webpack-编写 Loader](https://juejin.im/post/5a4f3791f265da3e3f4c7ee6)
 - [markdown-loader](https://github.com/peerigon/markdown-loader)
 
-编写插件会用到 [loader-utils](https://github.com/webpack/loader-utils) 来处理传入的参数等。
-
 自己本地写的 Loader 测试的时候可以通过 npm link 从 node_modules 加载，最方便的是配置 `resolveLoader` 属性来扩展 loader 加载的目录。
 
 Loader 需要返回数据，返回数据有两种形式：
@@ -12592,33 +12652,26 @@ this.callback(
     abstractSyntaxTree?: AST
 );
 ```
-
-![](https://qiniu1.lxfriday.xyz/feoffer/cc177795-bae0-6cd1-432a-287c5beae476.png)
-![](https://qiniu1.lxfriday.xyz/feoffer/f7f45982-58b7-8697-1f54-37f157d35219.png)
-
-编写一个简单的 loader 来转换 markdown，插件命名为 `md-loader`。
+编写一个简单的 loader 来导入json，插件命名为 `my-loader`。
 
 ```javascript
-const loaderUitls = require('loader-utils')
-const marked = require('marked')
-
 module.exports = function (source) {
-  const options = loaderUitls.getOptions(this)
-  marked.setOptions(options)
+  const options = this.getOptions();
+  console.log("-------------------------");
+  console.log("my loader", {
+    source,
+    options,
+  });
+  console.log("-------------------------");
+  let value = typeof source === "string" ? JSON.parse(source) : source;
 
-  console.log('------------------')
-  console.log('options')
-  console.log(options)
-  console.log('source')
-  console.log(source)
-  console.log('marked(source)')
-  console.log(marked(source))
-  console.log('------------------')
-  return marked(source)
+  value = JSON.stringify(value)
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 
-  // 或者使用 this.callback
-  // this.callback(null, marked(source))
-}
+  return `module.exports = ${value}`;
+};
+
 ```
 
 webpack.config.js
@@ -12630,13 +12683,14 @@ webpack.config.js
     rules: [
       ...
       {
-        test: /\.md$/i,
+        test: /\.myjsoner$/i,
         use: [
-          'html-loader',
           {
-            loader: 'md-loader',
+            loader: 'my-loader.js',
             options: {
-              name: 'md-loader',
+              a: 1,
+              b: 2,
+              c: 3,
             },
           },
         ],
@@ -12648,10 +12702,6 @@ webpack.config.js
   },
 }
 ```
-
-运行之后，打印如下
-
-![](https://qiniu1.lxfriday.xyz/feoffer/2902fc92-6fff-476c-93fe-bdfddd24686a.png)
 
 ### ✔ css-loader 原理分析
 
@@ -16228,6 +16278,205 @@ MPromise.all([p1, p2, p3]).then(
 100 =>  100
 [100, 200, 300] =>  [ 100, 200, 300 ]
 ```
+
+---
+
+版本2
+
+```js
+class MyPromise {
+  static PENGDING = 'PENGDING'
+  static FULFILLED = 'FULFILLED'
+  static REJECTED = 'REJECTED'
+  static resolve(data) {
+    return new MyPromise((res, rej) => res(data))
+  }
+  static reject(data) {
+    return new MyPromise((res, rej) => rej(data))
+  }
+  constructor(func) {
+    const that = this
+    this.resolveData = null
+    this.onFulfilledCallbacks = []
+    this.rejectData = null
+    this.onRejectedCallbacks = []
+    this.status = MyPromise.PENGDING
+    function resolve(data) {
+      if (that.status === MyPromise.PENGDING) {
+        if (data instanceof MyPromise) {
+          data.then(
+            d => {
+              resolve(d)
+            },
+            e => {
+              reject(e)
+            },
+          )
+        } else {
+          that.status = MyPromise.FULFILLED
+          that.resolveData = data
+          for (const cb of that.onFulfilledCallbacks) {
+            cb && cb(data)
+          }
+        }
+      }
+    }
+    function reject(data) {
+      if (that.status === MyPromise.PENGDING) {
+        if (data instanceof MyPromise) {
+          data.then(
+            d => {
+              reject(d)
+            },
+            e => {
+              reject(e)
+            },
+          )
+        } else {
+          that.status = MyPromise.REJECTED
+          that.rejectData = data
+          for (const cb of that.onRejectedCallbacks) {
+            cb && cb(data)
+          }
+        }
+      }
+    }
+    try {
+      func && func(resolve, reject)
+    } catch (e) {
+      reject(e)
+    }
+  }
+
+  then(onFulfilledCallback, onRejectedCallback) {
+    return new MyPromise((res, rej) => {
+      if (this.status === MyPromise.FULFILLED) {
+        try {
+          if (onFulfilledCallback) res(onFulfilledCallback(this.resolveData))
+          else res(this.resolveData)
+        } catch (e) {
+          rej(e)
+        }
+      } else if (this.status === MyPromise.REJECTED) {
+        try {
+          if (onRejectedCallback) res(onRejectedCallback(this.rejectData))
+          else rej(e)
+        } catch (e) {
+          rej(e)
+        }
+      } else {
+        this.onFulfilledCallbacks.push(data => {
+          try {
+            if (onFulfilledCallback) res(onFulfilledCallback(data))
+            else res(data)
+          } catch (e) {
+            rej(e)
+          }
+        })
+        this.onRejectedCallbacks.push(data => {
+          try {
+            if (onRejectedCallback) res(onRejectedCallback(data))
+            else rej(data)
+          } catch (e) {
+            rej(e)
+          }
+        })
+      }
+    })
+  }
+
+  catch(onRejectedCallback) {
+    return new MyPromise((res, rej) => {
+      if (this.status === MyPromise.FULFILLED) {
+        res()
+      } else if (this.status === MyPromise.REJECTED) {
+        try {
+          if (onRejectedCallback) res(onRejectedCallback(this.rejectData))
+          else rej(this.rejectData)
+        } catch (e) {
+          rej(e)
+        }
+      } else {
+        this.onFulfilledCallbacks.push(() => {
+          res()
+        })
+        this.onRejectedCallbacks.push(data => {
+          try {
+            if (onRejectedCallback) res(onRejectedCallback(data))
+            else rej(data)
+          } catch (e) {
+            rej(e)
+          }
+        })
+      }
+    })
+  }
+
+  finally(finallyCallback) {
+    if (this.status === MyPromise.FULFILLED) {
+      finallyCallback()
+    } else if (this.status === MyPromise.REJECTED) {
+      finallyCallback()
+    } else {
+      this.onFulfilledCallbacks.push(data => {
+        finallyCallback()
+      })
+      this.onRejectedCallbacks.push(data => {
+        finallyCallback()
+      })
+    }
+  }
+
+  /**
+   *
+   * @param {Array<MyPromise>} promises
+   * @returns
+   */
+  static all(promises) {
+    return new MyPromise((res, rej) => {
+      let cnt = 0
+      const ret = []
+      for (let i = 0; i < promises.length; i++) {
+        if (promises[i] instanceof MyPromise) {
+          promises[i].then(
+            data => {
+              ret[i] = data
+              cnt++
+              if (cnt === promises.length) res(ret)
+            },
+            e => {
+              rej(e)
+            },
+          )
+        } else {
+          ret[i] = promises[i]
+        }
+      }
+    })
+  }
+  /**
+   *
+   * @param {Array<MyPromise>} promises
+   * @returns
+   */
+  static race(promises) {
+    return new MyPromise((res, rej) => {
+      for (let i = 0; i < promises.length; i++) {
+        if (promises[i] instanceof MyPromise) {
+          promises[i]
+            .then(data => {
+              res(data)
+            })
+            .catch(e => {
+              rej(e)
+            })
+        }
+      }
+    })
+  }
+}
+```
+
 ### ✔ 手撕 Promise.all
 
 ```js
@@ -16744,6 +16993,18 @@ function flattenDepthRecu(arr, depth) {
 
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 1));
 // console.log(flattenDepth([1, [2, [3, [4]], 5]], 2));
+
+function flatten(arr, depth) {
+  let ret = []
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i]) && depth > 0) {
+      ret = ret.concat(flatten(arr[i], depth - 1))
+    } else {
+      ret.push(arr[i])
+    }
+  }
+  return ret
+}
 ```
 
 ## 手撕 DOM 操作
@@ -17312,3 +17573,20 @@ wear()
 // 穿上第二件衣服
 // 穿上第三件衣服
 ```
+
+# 操作系统
+
+## 进程和线程的区别
+
+ref
+
+- [面试常问——进程和线程的区别](https://blog.csdn.net/weixin_48271092/article/details/123649795)
+---
+
+- 根本区别：进程是操作系统进行资源分配的最小单元，线程是操作系统进行运算调度的最小单元。
+- 从属关系不同：进程中包含了线程，线程属于进程。
+- 开销不同：进程的创建、销毁和切换的开销都远大于线程。
+- 拥有资源不同：每个进程有自己的内存和资源，一个进程中的线程会共享这些内存和资源。
+- 控制和影响能力不同：子进程无法影响父进程，而子线程可以影响父线程，如果主线程发生异常会影响其所在进程和子线程。
+- CPU利用率不同：进程的CPU利用率较低，因为上下文切换开销较大，而线程的CPU的利用率较高，上下文的切换速度快。
+- 操纵者不同：进程的操纵者一般是操作系统，线程的操纵者一般是编程人员。 

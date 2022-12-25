@@ -47,6 +47,12 @@
 
 # 刷题日记
 
+- 20221224(1)
+  - [【medium】1754. 构造字典序最大的合并字符串](https://leetcode.cn/problems/largest-merge-of-two-strings/) 字符串、贪心
+- 20221217(1)
+  - [【medium】1764. 通过连接另一个数组的子数组得到一个数组](https://leetcode.cn/problems/form-array-by-concatenating-subarrays-of-another-array/) 数组题
+- 20221216(1)
+  - [【medium】1785. 构成特定和需要添加的最少元素](https://leetcode.cn/problems/minimum-elements-to-add-to-form-a-given-sum/) 数组题
 - 20221213(1)
   - [【easy】1832. 判断句子是否为全字母句](https://leetcode.cn/problems/check-if-the-sentence-is-pangram/) 字符串题、哈希表
 - 20221211(1)
@@ -28228,6 +28234,29 @@ var check = function(nums) {
 };
 ```
 
+## 🌟😻✔ 1754. 构造字典序最大的合并字符串【medium】
+
+- [ref](https://leetcode.cn/problems/largest-merge-of-two-strings/)
+
+字符串、贪心
+
+```js
+var largestMerge = function(w1, w2) {
+  let res = ''
+  let len1 = w1.length, len2 = w2.length, i = 0, j = 0
+  while(i < len1 && j < len2) {
+    if(w1.slice(i) > w2.slice(j)) {
+      res += w1[i++]
+    } else {
+      res += w2[j++]
+    }
+  }
+  if(i === len1) return res + w2.slice(j)
+  return res + w1.slice(i)
+};
+
+```
+
 ## ✔ 1758. 生成交替二进制字符串的最少操作数【easy】
 
 [ref](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/)
@@ -28246,6 +28275,37 @@ var minOperations = function (s) {
   }
   return Math.min(a, b)
 };
+```
+
+## 🌟😻✔ 1764. 通过连接另一个数组的子数组得到一个数组【medium】
+
+[ref](https://leetcode.cn/problems/form-array-by-concatenating-subarrays-of-another-array/)
+
+数组题、KMP
+
+```js
+var canChoose = function(groups, nums) {
+  let j = 0
+  for(let i=0;i<nums.length;i++) {
+    if(nums[i] === groups[j][0] && check(nums, groups[j], i, 0)) {
+      i += groups[j].length - 1
+      j++
+      if(j === groups.length) return true
+    }
+  }
+  return false
+};
+
+function check(arr1, arr2, i, k) {
+  while(k < arr2.length) {
+    if(arr1[i] === arr2[k]) {
+      i++,k++
+    } else {
+      return false
+    }
+  }
+  return true
+}
 ```
 
 ## ✔ 1768. 交替合并字符串【easy】
@@ -28410,6 +28470,21 @@ var checkOnesSegment = function(s) {
     i++
   }
   return true
+};
+```
+
+## ✔ 1785. 构成特定和需要添加的最少元素【medium】
+
+[ref](https://leetcode.cn/problems/minimum-elements-to-add-to-form-a-given-sum/)
+
+```js
+var minElements = function(nums, limit, goal) {
+  let sum = 0
+  for(const num of nums) sum += num
+  const dis = Math.abs(goal - sum)
+  const min = Math.floor(dis / limit)
+  if(min * limit === dis) return min
+  return min + 1
 };
 ```
 
