@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function jsonp({ url, params }) {
+        return new Promise((res, rej) => {
+          const cbName = `jsonpFunc_${Date.now()}_${Math.floor(
+            Math.random() * 100000,
+          )}`
+          console.log('cbname',cbName)
+          params = params || {}
+          params.cb = cbName
+          const query = new URLSearchParams(params).toString()
+          const targetUrl = url +'?' + query
+          const script = document.createElement('script')
+          script.src = targetUrl
+          window[cbName] = function (data) {
+            res(data)
+            document.body.removeChild(script)
+            window[cbName] = undefined
+          }
+          document.body.appendChild(script)
+        })
+      }
+
+      jsonp({
+        url: 'http://localhost:3333',
+        params: { name: 'lxfriday' },
+      }).then(data => {
+        console.log('data here', data)
+      })
+    </script>
+  </body>
+</html>

@@ -386,6 +386,30 @@ LexicalEnvironment = {
 
 **JavaScript 引擎使用词法作用域，这意味着变量的作用域在编译时确定。JavaScript 引擎使用词法环境在程序执行期间存储变量。**
 
+### ✔ 面试题：let、var的区别
+
+
+下面是一个经典题目
+```js
+const arr = []
+for(var i=0;i<10;i++) {
+  arr.push(() => console.log(i))
+}
+for(const func of arr) func()
+// 输出10个10
+```
+
+```js
+const arr = []
+for(let i=0;i<10;i++) {
+  arr.push(() => console.log(i))
+}
+for(const func of arr) func()
+// 输出0到9
+```
+
+for 循环中每一层循环都会创建一个新的作用域，用let声明的变量传入到 for 循环体的作用域后，不会发生改变，不受外界的影响。
+
 ## ✔ 变量提升
 
 ref
@@ -7531,7 +7555,7 @@ ref
 1. 属性选择器(`[name=lxfriday]`)
 1. 元素选择器(`h1`)
 
-- `!important` > 内联样式 style > id 选择器 > 伪类选择器 > 属性选择器 = class 选择器 > 元素(类型)选择器；
+- `!important` > 内联样式 style > id 选择器 > 伪类选择器 = 属性选择器 = class 选择器 > 元素(类型)选择器；
 - 相同的选择器，后面声明的比前面声明的优先级高，相同属性后者覆盖前者；
 
 关系选择器 > 通配符选择器
@@ -15062,7 +15086,6 @@ ref [MDN Performance](https://developer.mozilla.org/zh-CN/docs/Web/API/Performan
 ![](https://qiniu1.lxfriday.xyz/blog/17a5f396-1dc6-cc17-7ad3-b19c4bc9f259.png)
 
 
-
 ## ✔ 输入 URL 到页面显示发生哪些事情
 
 ref
@@ -15211,20 +15234,22 @@ ref
 - [https://csspod.com/frontend-performance-best-practices/](https://csspod.com/frontend-performance-best-practices/)
 
 1. [升级到 HTTP2](#✔-升级协议版本到-HTTP2)
+1. 使用 CDN
 1. [http 缓存](#✔-HTTP-缓存)
 1. [dns-prefetch（dns 预热）](#✔-DNS-prefetch)
-1. preload（预加载单个资源）
-1. 使用 CDN
+1. [preload（预加载单个资源）](#✔-preload)
+1. 开启 gzip、deflat、brotli 压缩
 1. [减少回流重绘](#✔-回流重绘)
 1. [async、defer 并行加载脚本](#✔-async、defer-优化脚本加载和执行)
 1. js 代码拆分（code-spliting）
 1. tree shaking
 1. 图片等静态资源压缩
-1. 开启 gzip、deflat、brotli 压缩
 1. 使用 service worker
 1. [图片懒加载](#✔-IntersectionObserver-实现懒加载)
 1. [节流防抖](#节流防抖)
 1. 虚拟列表
+1. 框架：memo 减少不必要的渲染
+1. 首屏加载：在渲染之前添加 loading 提示，减少白屏时间
 
 ### ✔ 节流防抖
 
@@ -15576,32 +15601,31 @@ window.addEventListener('load', function (event) {
 1. 前端 `script` 接收导 `show` 函数的调用，执行 `show()` 函数；
 
 ```javascript
-// index.html
-function jsonp({ url, params, cb }) {
-  return new Promise((resolve, reject) => {
-    let script = document.createElement('script')
-    // 把要执行的函数名传递到服务端，服务端回传一个对该函数的调用（同时附带需要处理的参数）
-    window[cb] = function (data) {
-      resolve(data)
+function jsonp({ url, params }) {
+  return new Promise((res, rej) => {
+    const cbName = `jsonpFunc_${Date.now()}_${Math.floor(
+      Math.random() * 100000,
+    )}`
+    params = params || {}
+    params.cb = cbName
+    const query = new URLSearchParams(params).toString()
+    const targetUrl = url +'?' + query
+    const script = document.createElement('script')
+    script.src = targetUrl
+    window[cbName] = function (data) {
+      res(data)
       document.body.removeChild(script)
+      window[cbName] = undefined
     }
-    params = { ...params, cb }
-    let arrs = []
-    // 拼接成 name=lxfriday&cb=show
-    for (let key in params) {
-      arrs.push(`${key}=${params[key]}`)
-    }
-    script.src = `${url}?${arrs.join('&')}`
     document.body.appendChild(script)
   })
 }
+
 jsonp({
-  url: 'http://localhost:3333/api',
+  url: 'http://localhost:3333',
   params: { name: 'lxfriday' },
-  cb: 'show',
 }).then(data => {
-  // 打印 lxfriday
-  console.log(data)
+  console.log('data here', data)
 })
 ```
 
@@ -16904,6 +16928,84 @@ const target = {
 target.h = target
 
 console.log(deepCloneWithWhile(target))
+```
+
+---
+
+简易版，不考虑 函数、Symbol、正则
+
+```js
+function clone(target, map) {
+  if (map.has(target)) return map.get(target)
+  let ret
+
+  if (isObjectType(target)) {
+    if (isNoCopy(target)) {
+      ret = new target.constructor(target)
+    }
+    if (isRegExp(target)) {
+      ret = new target.constructor(target.source, target.flags)
+    } else if (isArray(target)) {
+      ret = []
+      map.set(target, ret)
+      for (let i = 0; i < target.length; i++) {
+        ret.push(clone(target[i], map))
+      }
+    } else if (isObject(target)) {
+      ret = {}
+      map.set(target, ret)
+      for (let key in target) {
+        ret[key] = clone(target[key], map)
+      }
+    } else if (isSet(target)) {
+      ret = new Set()
+      map.set(target, ret)
+      for (let val of target) {
+        ret.add(clone(val, map))
+      }
+    } else if (isMap(target)) {
+      ret = new Map()
+      map.set(target, ret)
+      for (let [key, val] of target.entries()) {
+        ret.set(clone(key, map), clone(val, map))
+      }
+    }
+  } else {
+    return target
+  }
+
+  return ret
+}
+
+let noCopyFlags = [
+  '[object Number]',
+  '[object String]',
+  '[object Boolean]',
+  '[object Date]',
+]
+
+function isNoCopy(target) {
+  return noCopyFlags.includes(Object.prototype.toString.call(target))
+}
+function isRegExp(target) {
+  return target instanceof RegExp
+}
+function isSet(target) {
+  return Object.prototype.toString.call(target) === '[object Set]'
+}
+function isMap(target) {
+  return Object.prototype.toString.call(target) === '[object Map]'
+}
+function isArray(target) {
+  return Object.prototype.toString.call(target) === '[object Array]'
+}
+function isObject(target) {
+  return Object.prototype.toString.call(target) === '[object Object]'
+}
+function isObjectType(target) {
+  const type = typeof target
+  return target !== null && type === 'object'
+}
 ```
 
 ### ✔ flatten 递归把数组扁平化
