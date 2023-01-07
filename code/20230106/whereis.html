@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        font-family: sans-serif;
+        font-size: 150%;
+      }
+
+      :is(section.is-styling a, aside.is-styling a, footer.is-styling a， :sss) {
+        color: red;
+      }
+
+      :where(section.where-styling, aside.where-styling, footer.where-styling)
+        a {
+        color: orange;
+      }
+      a {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <h2>:is()-styled links</h2>
+      <section class="is-styling">
+        <p>
+          Here is my main content. This
+          <a href="https://mozilla.org">contains a link</a>.
+        </p>
+      </section>
+      <aside class="is-styling">
+        <p>
+          Here is my aside content. This
+          <a href="https://developer.mozilla.org">also contains a link</a>.
+        </p>
+      </aside>
+      <footer class="is-styling">
+        <p>
+          This is my footer, also containing
+          <a href="https://github.com/mdn">a link</a>.
+        </p>
+      </footer>
+    </article>
+    <article>
+      <h2>:where()-styled links</h2>
+      <section class="where-styling">
+        <p>
+          Here is my main content. This
+          <a href="https://mozilla.org">contains a link</a>.
+        </p>
+      </section>
+      <aside class="where-styling">
+        <p>
+          Here is my aside content. This
+          <a href="https://developer.mozilla.org">also contains a link</a>.
+        </p>
+      </aside>
+      <footer class="where-styling">
+        <p>
+          This is my footer, also containing
+          <a href="https://github.com/mdn">a link</a>.
+        </p>
+      </footer>
+      <footer class="wher222e-styling">
+        <p>
+          This is my footer, also containing
+          <a href="https://github.com/mdn">a link</a>.
+        </p>
+      </footer>
+    </article>
+  </body>
+</html>

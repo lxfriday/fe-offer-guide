@@ -913,7 +913,7 @@ const child2 = new Child('daisy', 20)
 ```javascript
 function createObj(o) {
   function F() {}
-  F.prototype = 0
+  F.prototype = o
   return new F()
 }
 
@@ -6392,16 +6392,28 @@ ref
 
 html5 中新增了一些语义化的标签，方便做 seo，这些新增标签自带固定样式。
 
-- `<template>` 通过 JavaScript 在运行时实例化内容的容器
-- `<section>` 定义文档中的一个章节
-- `<nav>` 定义只包含导航链接的章节
-- `<article>` 定义可以独立于内容其余部分的完整独立内容块
-- `<aside>` 定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理
-- `<header>` 定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录
-- `<footer>` 定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址
-- `<main>` 定义文档中主要或重要的内容
-- `<figure>` 代表一个和文档有关的图例
-- `<figcaption>` 代表一个图例的说明
+- [`<section>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section) 定义文档中的一个章节
+- [`<nav>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/nav) 定义只包含导航链接的章节
+- [`<aside>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside) 定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理
+- [`<header>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header) 定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录
+- [`<footer>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer) 定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址
+- [`<main>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/main) 定义文档中主要或重要的内容
+- [`<article>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article) 定义可以独立于内容其余部分的完整独立内容块
+- [`<template>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/template) 通过 JavaScript 在运行时实例化内容的容器
+- [`<figure>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure) 代表一个和文档有关的图例
+- [`<figcaption>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figcaption) 代表一个图例的说明
+- [`<video>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video) 代表一段视频及其视频文件和字幕，并提供了播放视频的用户界面
+- [`<audio>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio) 代表一段声音 ，或音频流
+- `<source>` 为 `<video>` 或 `<audio>` 这类媒体元素指定媒体源
+- `<svg>` 定义一个嵌入式矢量图
+- `<progress>` 代表进度条
+- [`<details>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/details) 代表一个用户可以(点击)获取额外信息或控件的小部件
+- [`<summary>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/summary) 代表 `<details>` 元素的综述或标题
+
+---
+
+- `<menuitem>` 代表一个用户可以点击的菜单项
+- `<menu>` 代表菜单
 - `<data>` 关联一个内容的机器可读的等价形式
 - `<time>` 代表日期和时间值；机器可读的等价形式通过 datetime 属性指定
 - `<mark>` 代表一段需要被高亮的引用 文字
@@ -6411,30 +6423,21 @@ html5 中新增了一些语义化的标签，方便做 seo，这些新增标签�
 - `<bdi>` 代表需要脱离父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本
 - `<wbr>` 代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符
 - `<embed>` 代表一个嵌入 的外部资源，如应用程序或交互内容
-- `<video>` 代表一段视频及其视频文件和字幕，并提供了播放视频的用户界面
-- `<audio>` 代表一段声音 ，或音频流
-- `<source>` 为 `<video>` 或 `<audio>` 这类媒体元素指定媒体源
 - `<track>` 为 `<video>` 或 `<audio>` 这类媒体元素指定文本轨道（字幕）
 - `<canvas>` 代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等
-- `<svg>` 定义一个嵌入式矢量图
 - `<math>` 定义一段数学公式
 - `<datalist>` 代表提供给其他控件的一组预定义选项
 - `<keygen>` 代表一个密钥对生成器 控件
 - `<output>` 代表计算值
-- `<progress>` 代表进度条
 - `<meter>` 代表滑动条
-- `<details>` 代表一个用户可以(点击)获取额外信息或控件的小部件
-- `<summary>` 代表 `<details>` 元素的综述或标题
-- `<menuitem>` 代表一个用户可以点击的菜单项
-- `<menu>` 代表菜单
 
 ### ✔ html5 新增 api
 
 - Websocket
-- WebRTC
 - web Workers
 - serviceWorker
-- xlocalStorage
+- WebRTC
+- localStorage
 - IndexedDB
 - Camera
 - Canvas
@@ -6444,6 +6447,65 @@ html5 中新增了一些语义化的标签，方便做 seo，这些新增标签�
 - History
 - contentEditable 属性
 - requestAnimationFrame
+
+## ✔ input 标签(input 标签的 type 有哪些类型)
+
+- text
+- password
+- date
+- number
+- button
+- submit
+- reset
+- checkbox
+- radio
+- color
+- file
+- hidden
+- range
+- search
+- time
+
+<style>
+  .html-inputwrapper {
+    height: 600px;
+  }
+  .html-inputwrapper div {
+
+    border:1px solid #ccc;
+    margin-top: 10px;
+  }
+</style>
+<div class="html-inputwrapper">
+  <div><input type="text" /> text</div>
+  <div><input type="password" /> password</div>
+  <div><input type="date" /> date</div>
+  <div><input type="number" /> number</div>
+  <div><input type="button" value="111" /> button</div>
+  <div><input type="submit" value="submit" /> submit</div>
+  <div><input type="reset" value="reset" /> reset</div>
+  <div>
+    <label for="checkboxxxx">check</label>
+    <input id="checkboxxxx" type="checkbox" name="checkbox" checked />
+    checkbox
+  </div>
+  <div><input type="color" value="color" /> color</div>
+  <div>
+    <input id="radio1" type="radio" name="radio-select" value="radio1" />
+    <label for="radio1">radio1</label>
+    <input id="radio2" type="radio" name="radio-select" value="radio2" />
+    <label for="radio2">radio2</label>
+    <input id="radio3" type="radio" name="radio-select" value="radio3"/>
+    <label for="radio3">radio3</label>
+  </div>
+  <div><input type="file"/> file</div>
+  <div><input type="hidden" value="10086"/> hidden</div>
+  <div><input type="range" min="10" max="100" step="10"/> range</div>
+  <div><input type="search" value="100"/> search </div>
+  <div><input type="time" value="20:21"/> time </div>
+</div>
+
+---
 
 ## ✔ script 标签
 
@@ -11105,6 +11167,39 @@ p {
 </div>
 ```
 
+## ✔ antd 中使用到的 `:where` 它是干什么的
+
+ref
+
+- [`:where`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:where)
+- [`:is`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:is)
+
+`:where()` CSS 伪类函数接受选择器列表作为它的参数，将会选择所有能被该选择器列表中任何一条规则选中的元素。
+
+`:is()` 函数将选择器列表作为参数，并选择该列表中任意一个选择器可以选择的元素。
+
+这两者在 MDN 的第一行简介的意思是差不多的，都是用来匹配对应的选择器的。`:where()` 和 `:is()` 的不同之处在于，**`:where()` 的优先级总是为 0**，但是 `:is()` 的优先级是由它的选择器列表中优先级最高的选择器决定的。
+
+`:where()` 和 `:is()` 都是可容错的，也就是说，在它们的括号中添加的选择器是无效的时候，会被直接忽略掉这一条，而不会影响其它的选择器。而在写比较常规的CSS规则的时候，如果有一条选择器无效的时候，整块CSS都将会失效。看下面的例子：
+
+```css
+:is(:valid, :unsupported) {
+  /* … */
+}
+```
+
+即使在不支持 `:unsupported` 的浏览器中，仍将正确解析 `:valid`，而：
+
+```css
+:valid,
+:unsupported {
+  /* … */
+}
+```
+在不支持 `:unsupported` 浏览器中即使它们支持 `:valid`，仍将忽略。
+
+**综述：`:where()` 和 `:is()` 是可容错的，而`:where()` 中的选择器优先级会被指定为0，`:is()` 可以安全地写CSS**
+
 
 # React
 
@@ -11188,11 +11283,59 @@ ref
 
 - [React高阶组件(HOC)的入门📖及实践](https://juejin.cn/post/6844904050236850184)
 
-## HOOKS 原理
+## React HOOKS
 
 - [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
 - [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
 
+### 有哪些HOOKS
+
+- useState 组件内状态管理
+- useCallback 性能优化，避免重复创建函数
+- useMemo 性能优化，避免不必要的运算
+- useEffect 类似生命周期，cdm、cwum 的综合体
+- useLayoutEffect 类似生命周期函数 cwm
+- useContext 获取上下文
+- useReducer 类redux的reducer函数
+- useRef 用于记录 Ref
+- useId 生成可以传递给可访问性属性的唯一 ID
+- [useTransition](https://beta.reactjs.org/reference/react/useTransition#usetransition) 处理低优先级的任务，避免页面出现卡顿，如果一个组件渲染比较耗时，那么更改状态渲染这个组件的时候可能就会出现卡顿，useTransition 返回的数组中第二个参数是一个函数，这个函数的参数也是一个函数，在这个参数函数中可以执行低优先级的任务，碰到低优先级任务执行的时候又要执行其它任务，则会打断当前的任务，避免低优先级任务导致的页面卡顿
+- [useDebugValue](https://beta.reactjs.org/reference/react/useDebugValue) 类似 console.log，用于自定义HOOKS中调试使用，可以结合 ReactDevTools 直接在 Components 面板调试自定义HOOKS
+- [useDeferredValue](https://beta.reactjs.org/reference/react/useDeferredValue) 用来延迟更新UI，类似于 debounce 防抖
+- [useImperativeHandle](https://beta.reactjs.org/reference/react/useImperativeHandle) 配合 forwardRef 用来暴露一些属性和方法给父组件中传递的ref
+- [useInsertionEffect](https://beta.reactjs.org/reference/react/useInsertionEffect) is aimed at CSS-in-JS library authors. Unless you are working on a CSS-in-JS library and need a place to inject the styles, you probably want useEffect or useLayoutEffect instead.
+
+## ✔ ref
+
+- forward 用来透传父组件的ref到子组件中
+- useImperativeHandle 配合 forwardRef 用来暴露一些属性和方法给父组件中传递的ref
+
+```jsx
+export default function App10() {
+  const fancyRef = useRef();
+  useEffect(() => {
+    console.log('fancyRef', fancyRef)
+    fancyRef.current.focus();
+  }, []);
+
+  return (
+    <div>
+      App10
+      <FancyInput ref={fancyRef} />
+    </div>
+  );
+}
+
+const FancyInput = React.forwardRef((props, ref) => {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputRef.current.focus();
+    },
+  }), );
+  return <input ref={inputRef} type="password" defaultValue="10086" />;
+});
+```
 
 ## ✔ 虚拟 DOM
 
@@ -11201,6 +11344,41 @@ ref
 - [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
 
 ## React Router 原理
+
+## ✔ 服务端渲染和客户端渲染对比
+
+ref
+
+- [客户端渲染和服务端渲染的区别](https://juejin.cn/post/7087416028434530318)
+
+特点
+
+客户端渲染：
+
+- 可以较快的给用户呈现出一些信息
+- 给爬虫爬取页面信息增加难度
+- 可能需要多次向服务器请求数据
+- 不利于 SEO 优化
+
+服务端渲染：
+
+- 利于SEO
+- 数据量过大会导致页面白屏比较长的时间
+- 容易被爬虫爬取
+
+区别：
+
+- 本质上：服务端渲染在服务端生成 DOM 结构，客户端渲染需要在客户端生成DOM结构
+- SEO：服务端渲染有利于爬虫爬取信息，客户端渲染不利于SEO
+- 开发效率：服务端渲染前后端逻辑分离不好，客户端渲染让前后端分工明确，开发效率较高
+- 对于单页应用，请求的资源数量较多，首屏比较慢
+
+如何选择两种渲染方式：
+
+- 如果主要功能是页面展示，没有复杂的交互，并且要良好的SEO，则使用服务端渲染
+- 如果是后台页面，不需要SEO的场景，页面内交互比较强，则使用客户端渲染
+
+React SSR 框架 [Next](https://nextjs.org/)
 
 ## Redux 相关
 
@@ -12387,6 +12565,15 @@ const store = createStore(
 ![](https://qiniu1.lxfriday.xyz/feoffer/1651887772385_116a5b31-7a65-4d1a-8d21-cca36a45e86b.png)
 
 ### Redux Saga
+### ✔ 关于 reducer 为什么是纯函数
+
+纯函数的定义：
+
+- 没有副作用
+- 相同的输入会产生相同的输出
+- 不对参数做更改
+
+关键原因在于，redux 比对state更新是浅比对，只比较顶层的变量值或者变量指向的地址，所以对 state 对象修改属性的操作并不会导致刷新，至于相同的输入会导致相同的输出，这个取决于如何设计的reducer函数，reducer函数中是不建议写副作用功能的，在这里只做直接的、确定的事情。
 
 ## ✔ immer
 
@@ -12553,8 +12740,6 @@ const TodoList = () => {
   );
   //etc
 ```
-
-## immutable
 
 # Webpack
 
