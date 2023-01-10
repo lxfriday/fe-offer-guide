@@ -47,10 +47,19 @@
 
 # 刷题日记
 
-- 20230105()
+- 20230108()
+  - ??[【medium】HJ24 合唱队](https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 数组题、动态规划
+  - ??[【medium】HJ16 购物单](https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 背包问题、01背包
+  - ?[【medium】1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/) 矩阵、深度优先搜索
+  - ?[【medium】494. 目标和](https://leetcode.cn/problems/target-sum/) 背包问题、01背包
+  - ???[【hard】895. 最大频率栈](https://leetcode.cn/problems/maximum-frequency-stack/) 栈、设计题
+  - ?[【hard】899. 有序队列](https://leetcode.cn/problems/orderly-queue/) 数组题
+  - ???[【hard】732. 我的日程安排表 III](https://leetcode.cn/problems/my-calendar-iii/) 差分数组
+  - ??[【easy]HJ6 质数因子](https://www.nowcoder.com/practice/196534628ca6490ebce2e336b47b3607?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu)
+  - ??[【medium】HJ41 称砝码](https://www.nowcoder.com/practice/f9a4c19050fc477e9e27eb75f3bfd49c?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=41&gioEnter=menu)
   - [【easy】HJ5 进制转换](https://www.nowcoder.com/practice/8f3df50d2b9043208c5eed283d1d4da6?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=5&gioEnter=menu) 进制转换
-- [【easy】NC68 跳台阶](https://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=117&tqId=37764&rp=1&ru=/exam/oj&qru=/exam/oj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=undefined&judgeStatus=undefined&tags=&title=68) 动态规划
-- [【easy】NC61 两数之和](https://www.nowcoder.com/practice/20ef0972485e41019e39543e8e895b7f?tpId=196&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=61&gioEnter=menu) 哈希表
+  - [【easy】NC68 跳台阶](https://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=117&tqId=37764&rp=1&ru=/exam/oj&qru=/exam/oj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=undefined&judgeStatus=undefined&tags=&title=68) 动态规划
+  - [【easy】NC61 两数之和](https://www.nowcoder.com/practice/20ef0972485e41019e39543e8e895b7f?tpId=196&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=61&gioEnter=menu) 哈希表
 
 - 20221224(1)
   - [【medium】1754. 构造字典序最大的合并字符串](https://leetcode.cn/problems/largest-merge-of-two-strings/) 字符串、贪心
@@ -1444,6 +1453,7 @@
 - 🌟【easy】[1450. 在既定时间做作业的学生人数](https://leetcode.cn/problems/number-of-students-doing-homework-at-a-given-time/) 区间、区间权重累加、差分、二分搜索
 - 🌟【medium】[253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii/) 二分搜索、排序、单调栈、上下车问题、重叠区间问题
 - 🌟【medium】[1094. 拼车](https://leetcode.cn/problems/car-pooling/) 上下车问题、差分
+- ???🌟[【hard】732. 我的日程安排表 III](https://leetcode.cn/problems/my-calendar-iii/) 差分
 
 ### 扫描线
 
@@ -1787,7 +1797,7 @@
 - 🌟【medium】[790. 多米诺和托米诺平铺](https://leetcode.cn/problems/domino-and-tromino-tiling/) 动态规划
 - 🌟【medium】[799. 香槟塔](https://leetcode.cn/problems/champagne-tower/) 动态规划
 - 【easy】[1758. 生成交替二进制字符串的最少操作数](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/) 动态规划
-
+- ??[【medium】HJ24 合唱队](https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 数组题、动态规划
 ### 动态规划 - 背包问题
 
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -1805,7 +1815,7 @@
 - ??🌟【medium】[面试题 17.13. 恢复空格](https://leetcode.cn/problems/re-space-lcci/) 动态规划、背包问题、完全背包
 - ???🌟【medium】[1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/) 动态规划、01背包、背包问题
 - ?[🌟【medium】813. 最大平均值和的分组](https://leetcode.cn/problems/largest-sum-of-averages/) 动态规划、背包问题
-
+- ??[【medium】HJ16 购物单](https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 背包问题、01背包
 ## 贪心思想
 
 特征是：期盼通过每个阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。

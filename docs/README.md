@@ -11288,7 +11288,24 @@ ref
 - [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
 - [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
 
-### 有哪些HOOKS
+### ✔ HOOKS 相比 Component 有什么优缺点
+
+优点：
+
+
+- 代码可读性变强
+- 不用再考虑 this
+- useEffect 直接聚合了 `componentDidMount`、`componentDidUpdate`、`componentWillUnmount`
+
+缺点：
+
+- 不支持完整的 Component 生命周期(`getSnapShotBeforeUpdate`、`componentDidCatch`)
+- 写复杂业务的时候，没有 Component 直观和方便
+
+使用useEffect时候里面不能写太多依赖项，将各个不同的功能划分为多个useEffect模块，将各项功能拆开写，这是遵循了软件设计的“单一职责模式”。如果遇到状态不同步的情况，使用手动传递参数的形式。如果业务复杂，就使用Component代替hooks，hooks的出现并不是取代了class组件，而是在函数组件的基础上可以实现一部分的类似class组件功能。
+
+
+### ✔ 有哪些HOOKS
 
 - useState 组件内状态管理
 - useCallback 性能优化，避免重复创建函数
@@ -11342,6 +11359,13 @@ const FancyInput = React.forwardRef((props, ref) => {
 ref
 
 - [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
+
+## React 面试题
+
+### ✔ Element 和 Component 的区别是什么
+
+- React 中的组件分为函数式组件和类组件，组件的返回值是 Element
+- Element 决定了在屏幕上能看到什么
 
 ## React Router 原理
 

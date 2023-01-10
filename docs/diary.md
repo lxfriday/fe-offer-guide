@@ -12,6 +12,8 @@
 - HOOKS 相比 component 组件有什么优缺点，什么时候使用 HOOKS 什么时候使用component
 - react 中 element 和 component 的区别，分别是做什么的
 - react18 中为什么用 createRoot 替代 render，有什么优点
+- 用过哪些UI库，前端框架相比没有框架有了什么改进的地方
+- Suspense
 - react 中怎么做性能优化
 - saga 大概的原理
 - redux 大概的原理
@@ -35,6 +37,9 @@
 
 - 你的职业规划是怎样的
 - 你怎么认识初级工程师和高级工程师的，他们有什么区别，高级工程师应该具备什么特点
+- react 虚拟DOM、fiber
+
+- 双指针和滑动窗口的区别
 ## 20230103-20230104
 
 - JS 闭包、内存泄漏
