@@ -1,0 +1,16 @@
+{
+  "name": "20230119",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compose.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^4.2.0",
+    "redx": "^1.0.1"
+  }
+}

@@ -309,6 +309,28 @@ typeof f // function
 
 `typeof null === 'object'` 的原因：在 JavaScript 最初的实现中，JavaScript 中的值是由**一个表示类型的标签和实际数据值表示的**。对象的类型标签是 **0**。由于 `null` 代表的是**空指针**（大多数平台下值为 `0x00`），因此，`null` 的类型标签是 `0`，`typeof null` 也因此返回 `object`。
 
+## ✔ ES6 新增特性
+
+- `let、cosnt` `class` `extends`
+- 变量解构赋值 `cosnt [a, b] = [1, 2]`
+- 字符串
+  - 字符串添加迭代器，可以用 forof 遍历
+  - 模板字符串，模板字符串中使用 `$`
+- 函数
+  - 箭头函数
+  - rest 参数 `func(a, ...args)`
+  - 严格模式
+- 运算符
+  - `2 ** 3`
+- Symbol
+- Set、Map、WeakSet（只放弱引用对象，不能遍历、不能清空）、WeakMap（只接收对象作为键名，没有遍历方法、不能清空）
+- Proxy、Reflect
+- Promise
+- 迭代器、forof
+- async、await：它就是 Generator 函数的语法糖。
+- 模块：`import` `export` ，es6模块自动启用严格模式
+
+
 ## ✔ ES7、8、9、10 新特性
 
 ![ES-7-8-9-10.png](https://qiniu1.lxfriday.xyz/feoffer%2FES-7-8-9-10.png)
@@ -388,6 +410,11 @@ LexicalEnvironment = {
 
 ### ✔ 面试题：let、var的区别
 
+- var 是函数作用域，let 是块级作用域
+- 在块级作用域中用声明var声明的变量，在这个块级作用域之外也可以访问到，而let则不行
+- 在全局作用域中用var声明的变量会成为 window 的一个属性，而let声明的变量则不会
+- var 具备变量提升，而 let 存在暂时性死区
+  - var 在变量声明之前就可以赋值和访问，而let 在声明之前不能赋值和访问
 
 下面是一个经典题目
 ```js
@@ -3464,7 +3491,62 @@ SVG 动画不在这一节做深入探讨，参考 MDN。
   </rect>
 </svg>
 
-## 函数式编程
+## ✔ 什么是函数柯里化，优缺点
+
+柯里化(Currying)是把接收多个参数的函数变换成接收一个单一参数的函数，并且返回接收余下的参数且返回结果的新函数的技术。
+
+> 在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
+
+柯里化会涉及到 **闭包**，柯里化的优点是可以缓存变量，减少重复的工作。
+
+
+例如下面的转换：
+
+```typescript
+//before
+function add0(a: number, b: number, c: number) {
+  return a + b + c
+}
+// currying
+function add1(a: number) {
+  return (b: number) => {
+    return (c: number) => {
+      return a + b + c
+    }
+  }
+}
+const ad = add1(1)(2)
+console.log(ad(3))
+console.log(ad(4))
+console.log(ad(5))
+```
+
+对函数直接做柯里化
+
+```js
+function curry1(func) {
+  const len = func.length
+
+  return function innerFunc(...args) {
+    if (args.length >= len) {
+      return func.call(this, ...args)
+    }
+    return innerFunc.bind(this, ...args)
+  }
+}
+function myAdd(a, b, c, d, e) {
+  return a + b + c + d + e
+}
+const add = curry1(myAdd)
+
+console.log(add(1)(2)(3)(4)(5))
+console.log(add(1, 2)(3)(4)(5))
+console.log(add(1, 2, 3)(4, 5))
+console.log(add(1, 2, 3, 4)(5))
+console.log(add(1, 2, 3, 4, 5))
+```
+
+另外柯里化也应用在 redux compose 函数的实现中，[实现 compose 函数](#✔-手撕-compose-函数)
 
 # 浏览器特有 API
 
@@ -7690,6 +7772,27 @@ CSS关键字 `unset` 可以分为两种情况，如果这个属性本来有从�
 
 简言之 **表示样式表中定义的元素属性的默认值。若用户定义样式表中显式设置，则按此设置；否则，按照浏览器定义样式表中的样式设置；否则，等价于 `unset`**。
 
+下面这个例子很好的揭示了 `revert` 和 `unset` 的区别
+
+```html
+<body>
+  <b class="color unset">设置了unset，我的font-weight会被完全清除</b>
+  <br />
+  <b class="color revert">
+    设置了revert,我的
+    font-weight将会被还原到浏览器默认样式的font-weight: bold;
+  </b>
+  <style>
+    .unset {
+      font-weight: unset;
+    }
+    .revert {
+      font-weight: revert;
+    }
+  </style>
+</body>
+```
+
 ---
 
 可以使用 `all` 简写属性一次控制所有属性的继承，该属性将其值应用于所有属性，例如:
@@ -11203,6 +11306,60 @@ ref
 
 # React
 
+## React 是不是 MVVM 框架
+
+ref
+
+- [MVC和MVVM的区别](https://blog.csdn.net/wu_xianqiang/article/details/105083404)
+
+> React 官网的一句话：A JavaScript library for building user interfaces
+
+MVVM(Model-View-ViewModel) ，React 不是 MVVM 框架。MVVM 的作用是将结构布局（UI）和业务分开，通过 ViewModel 在结构布局和业务逻辑之间通信。VM 用来让数据和视图互相转换，既将数据显示在视图，将视图触发事件反应给数据。
+
+MVVM即Model-View-ViewModel的简写。即模型-视图-视图模型。模型（Model）指的是后端传递的数据。视图(View)指的是所看到的页面。视图模型(ViewModel)是mvvm模式的核心，它是连接view和model的桥梁。它有两个方向：一是将模型（Model）转化成视图(View)，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将视图(View)转化成模型(Model)，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。这两个方向都实现的，我们称之为数据的双向绑定。
+
+通过上面的描述就知道，React 框架本身是单纯的V层框架，用来视图层的，需要结合 Redux 这类数据管理工具实现 VM 层。而第一个 M 是服务端数据层。
+
+- M：Model，数据访问层
+- V：视图层，布局、外观
+- ViewModel 公共属性和命令
+
+MVVM 的优势：
+- 低耦合，将布局和业务分开
+- 可重用性高
+- 分离式开发，便于维护（逻辑、样式分离）
+---
+
+## ✔ 如何理解 React？为什么会出现 React
+
+- React 是一个用于构建用户界面的 javascript
+- 原生 JS 操作 DOM 的方式比较繁琐并且存在兼容性问题，所以需要框架来抹平平台差异，让开发者更专注逻辑编写
+- 随着项目复杂度的提升，需要比较好的组织项目结构，开始探讨前端组件化的问题，通过组件化让项目结构变得清晰，提高重用性
+- 接着大家发现 MVX 的数据绑定依然需要我们手动监听 model 的变化，然后去做各种 DOM 操作，数据到视图层的映射依然繁琐
+- 于是大家就开始推崇 MVVM 的数据绑定，于是就出现了例如 Angular，React 和 Vue 这样的前端框架
+
+## ✔ React 和 Vue 的异同
+
+相同点：
+
+- 都使虚拟 DOM
+- 提供组件化的开发模式
+- 建注意力集中在保持核心库，其他功能如路由、数据管理交给相关的库
+
+不同点：
+
+- 视图更新：
+  - React 中某个组件的状态发生变更之后，会以该组件为根，重新渲染整个组件树，为了避免不必要的渲染需要用 `PureComponent` `shouldComponentUpdate` `memo` 来处理
+  - Vue 中组件的依赖是在渲染过程中自动追踪的，所以 Vue 能精确知晓哪个组件确实需要被重渲染。Vue的特点可以让开发者不再考虑此类优化，从而更好地专注于应用本身
+- HTML&CSS
+  - React 中一切都是JS，连CSS也可以用JS写
+  - Vue 的整体思想是拥抱经典的 Web 技术，并在其上进行扩展。使用 html，css 和 js 来构建模板。
+- 规模
+  - Vue 的路由状态管理由官方维护，react的路由和状态管理由社区管理，其创建了更为分散的生态系统
+  - React 的生态相比 Vue 更加繁荣
+- 原生渲染
+  - 两者都有使用虚拟 DOm，所有都可以构建原生的安卓和IOS app，例如 react-native 和 weex
+
 ## ✔ React 生命周期
 
 ![](https://qiniu1.lxfriday.xyz/blog/3ce7e947-da2b-4977-fc51-3d2290ebcb8e.png)
@@ -11239,43 +11396,12 @@ ref
 
 - 采用驼峰命名，不同于浏览器的全小写
 - React 内部采用自己设计的合成事件机制，抹平了平台差异
-- React 采用事件代理，把所有事件代理到 `document` 上，原生事件会先于合成事件执行，因为要等到冒泡到 `document` 对象之后再执行React指定的事件函数
+- React 采用事件代理，把所有事件代理到 `document` 上，**原生事件会先于合成事件执行**，因为要等到冒泡到 `document` 对象之后再执行React指定的事件函数
 
 ## ✔ React 事件绑定 this
 
 - `constructor` 中绑定
 - 箭头函数定义时绑定
-
-## React Fiber
-
-ref
-
-- [https://zhuanlan.zhihu.com/p/37095662](https://zhuanlan.zhihu.com/p/37095662)
-- [https://juejin.im/post/5dadc6045188255a270a0f85](https://juejin.im/post/5dadc6045188255a270a0f85)
-
-## ✔ React Diff
-
-- [为什么 React 的 Diff 算法不采用 Vue 的双端对比算法？](https://juejin.cn/post/7116141318853623839)
-- [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
-
-Diff 通常就是指的某个节点的子节点中有一堆使用同一个组件创建的Element，这些Element需要设置 key 属性来做区分。
-
-Diff 算法会依据子节点现有的keys列表和即将生成的子节点keys列表做比对，概述的讲就是把这两个列表在比对的时候标记出旧列表中哪些是要删除的(Delete)，哪些是要移动的(Move)，以及新列表中哪些是要新增(Add)的，
-再依据标记把两个列表做合并，把要删除的节点全部删除，剩下的要新增的和要移动的放到各自对应的位置上。
-
-## ✔ setState 什么时候异步什么时候同步
-
-ref
-
-- [https://juejin.im/post/5b45c57c51882519790c7441](https://juejin.im/post/5b45c57c51882519790c7441)
-- [测试 code](https://codesandbox.io/s/modest-volhard-0l3ov?fontsize=14&hidenavigation=1&theme=dark)
-
-异步：在React合成事件中或者生命周期函数中
-
-同步：自己使用监听器绑定的函数（原生事件）或者计时器中
-
-setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
-
 
 ## ✔ HOC
 
@@ -11283,10 +11409,119 @@ ref
 
 - [React高阶组件(HOC)的入门📖及实践](https://juejin.cn/post/6844904050236850184)
 
-## React HOOKS
+
+高阶组件（ higher-order component ，HOC ）是 React 中**复用组件逻辑**的一种进阶技巧。高阶函数是把函数作为参数传入到函数中并返回一个新的函数。这里我们把函数替换为组件，就是高阶组件了。
+
+HOS 常见的有两种实现方式，一种是 **Props Proxy**，它能够对 `WrappedComponent` 的 `props` 进行操作，提取 `WrappedComponent` state 以及使用其他元素来包裹 `WrappedComponent`。
+
+```jsx
+function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    // 实现 HOC 不同的命名
+    static displayName = `HOC(${WrappedComponent.displayName})`;
+    getWrappedInstance() {
+      return this.wrappedInstance;
+    }
+    // 实现 ref 的访问
+    setWrappedInstance(ref) {
+      this.wrappedInstance = ref;
+    }
+    render() {
+      return <WrappedComponent {
+        ...this.props,
+        ref: this.setWrappedInstance.bind(this),
+      } />
+    }
+  }
+}
+
+@ppHOC
+class Example extends React.Component {
+  static displayName = 'Example';
+  handleClick() { ... }
+}
+
+class App extends React.Component {
+  handleClick() {
+    this.refs.example.getWrappedInstance().handleClick();
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick.bind(this)}>按钮</button>
+        <Example ref="example" />
+      </div>  
+    );
+  }
+}
+```
+
+另一种是 Inheritance Inversion，HOC 类继承了 `WrappedComponent`，意味着可以访问到 `WrappedComponent` 的 state、props、生命周期和 render 等方法。
+
+通过完全操作 `WrappedComponent` 的 `render` 方法返回的元素树，可以真正实现渲染劫持。这种方案依然是继承的思想，对于 `WrappedComponent` 也有较强的侵入性，因此并不常见。
+
+```js
+function HOC(Comp) {
+  return class extends Comp {
+    render() {
+      console.log('HOC render')
+      return super.render();
+    }
+    componentDidMount() {
+      console.log('HOC cdm')
+      super.componentDidMount();
+    }
+  };
+}
+```
+
+## ✔ React HOOKS
 
 - [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
 - [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
+
+### ✔ 自己写一个 HOOKS
+
+实现一个带有过期功能的 localStorage
+
+```jsx
+function Comp1(props) {
+  const [uid, setUid] = useStorage('uid', 'init value')
+  return <div>
+    Comp1
+    <div>
+      uid: {uid}
+      <div>
+        <button onClick={() => setUid(Math.random(), 10000)}>set uid</button>
+      </div>
+    </div>
+  </div>;
+}
+function useStorage(key, init = '', expire = 3000) {
+  const [data, setData] = React.useState('')
+  const setStorage = React.useCallback((d) => {
+    localStorage.setItem(key, JSON.stringify({
+      value: String(d),
+      expire: Date.now() + expire
+    }))
+    setData(d)
+  }, [])
+  React.useEffect(() => {
+    let d = localStorage.getItem(key) || JSON.stringify({})
+    try {
+      const parsedData = JSON.parse(d)
+      if(parsedData.expire && parsedData.expire > Date.now()) {
+        setData(parsedData.value)
+      } else {
+        setStorage(init)
+      }
+    } catch(e) {
+      setStorage(init)
+    }
+  }, [])
+  return [data, setStorage]
+}
+```
 
 ### ✔ HOOKS 相比 Component 有什么优缺点
 
@@ -11304,6 +11539,11 @@ ref
 
 使用useEffect时候里面不能写太多依赖项，将各个不同的功能划分为多个useEffect模块，将各项功能拆开写，这是遵循了软件设计的“单一职责模式”。如果遇到状态不同步的情况，使用手动传递参数的形式。如果业务复杂，就使用Component代替hooks，hooks的出现并不是取代了class组件，而是在函数组件的基础上可以实现一部分的类似class组件功能。
 
+HOOKS 的出现解决了什么问题：
+
+- HOOKS 最初的出现是为了解决 **函数式组件没有状态的问题**
+- 不用再考虑this的问题
+- 存在复杂逻辑的情况下 class 组件的 cdm 可能会有比较多的逻辑，看起来比较复杂，而用 useEffect 可以把逻辑拆分，代码看起来会比较清晰
 
 ### ✔ 有哪些HOOKS
 
@@ -11354,11 +11594,220 @@ const FancyInput = React.forwardRef((props, ref) => {
 });
 ```
 
+## ✔ React.Suspense、React.lazy
+
+`React.Suspense` 配合 `React.lazy` 来实现组件的懒加载。
+
+```jsx
+import React, { Suspense, lazy } from "react";
+
+const Comp1 = lazy(() => import("./Comp1"));
+const Comp2 = lazy(() => import("./Comp2"));
+
+export default function App14() {
+  return (
+    <div>
+      <Suspense fallback={"loading"}>
+        <Comp2></Comp2>
+        <Comp1></Comp1>
+      </Suspense>
+    </div>
+  );
+}
+```
+
 ## ✔ 虚拟 DOM
 
 ref
 
 - [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
+
+
+虚拟 DOM 是对 DOM 的抽象，本质上是 JS 对象。
+
+在前端性能优化中，有一个很重要的一项就是尽可能少的操作 DOM，不仅仅是 DOM 操作相对较慢，更是因为频繁的 DOM 操作会造成浏览器的回流或者重绘，这些都会对我们的性能造成影响。因此我们需要一个抽象，在patch过程中，尽量一次将差异更新到 DOM 中。
+
+其次，现代前端框架的一个基本要求就是无须手动操作DOM，这样可以大大提高开发效率。
+
+最后，虚拟DOM可以更好地实现跨平台，用于编写原生应用。
+
+```js
+React.createElement("div", { a: 1, ref: "ss", key: 'key-001' }, "云影");
+// 生成的结构
+{
+  "type": "div",
+  "key": "key-001",
+  "ref": "ss",
+  "props": {
+    "a": 1,
+    "children": "云影"
+  },
+  "_owner": null,
+  "_store": {}
+}
+```
+
+## ✔ React Diff
+
+- [为什么 React 的 Diff 算法不采用 Vue 的双端对比算法？](https://juejin.cn/post/7116141318853623839)
+- [「React深入」一文吃透虚拟DOM和diff算法](https://juejin.cn/post/7116326409961734152)
+
+---
+
+React Diff 基于下面三个策略做了Diff优化
+
+- **Tree Diff**：跨层级移动节点的操作很少，可以忽略不计
+- **Component Diff**：拥有相同类的两个组件会生成相似的树形结构，拥有不同类的两个组件会生成不同的树形结构
+- **Element Diff**：对于同一层级的一组子节点，可以通过唯一id进行区分
+
+**Tree Diff**
+
+在 Tree Diff 的时候，React 只会对两棵树的同一层级的节点作比较，即同一个父节点下的所有子节点，当发现节点已经不存在，则该节点及其子节点会被完全删除，这样只需要对树进行一次遍历，就能完成整个 DOM 树的比较。
+
+**如果出现了跨层级的移动，React会删除该节点以及其所有的子节点，然后在新的节点下创建节点。**React只会简单的考虑同层级节点的位置变换，而对于不同层级的节点，只有创建和删除操作。当根节点发现子节点中 A 消失了，就会直接销毁A，当D发现多了一个子节点A，则会创建新的A作为其子节点。此时 React Diff 的执行情况是：create A -> create B -> create C -> delete A。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1673625436145_7774ab79-b986-4f71-9d25-ae2059765fbb.png)
+
+**Component Diff**
+
+React 是基于组件构建的应用，因此在进行diff时，React会遵循以下策略：
+
+- 如果是同一类型的组件，则按照源策略继续比较 DOM Tree
+- 如果是不同类型的组件，react 会按照替换整个组件下的所有子节点
+
+对于同一类型的组件，其虚拟 DOM 可能并没有发生变化，因此用 `shouldComponentUpdate` 来判断磁组件是否需要 diff
+
+下雨中，当 component D 改变为 component G 时，即使这两个 component 结构很相似，一旦 React 判断D和G是不同类型的组件，则不会对二者进行比较，而是直接删除D，重新创建G及其子节点。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1673625729669_94476f55-a281-4fcb-a92d-10f636179015.png)
+
+**Element Diff**
+
+当节点处于同一层级的时候，React Diff提供了三种节点操作，移动、删除、插入。
+
+当节点没有 key 的时候，在对比新老虚拟DOM的时候，会出现频繁的创建、删除操作，不能很好的做到节点复用，影响diff效率。
+
+因此需要对同一层级的子元素进行比较的时候，需要添加 key做唯一标识。
+
+![](https://qiniu1.lxfriday.xyz/feoffer/1673625841478_68ab31e3-5286-4701-acc2-77713b863c57.png)
+
+有了 key 之后，React Diff 在同层级比较的时候，会有下面的操作：
+
+- 首先会初始化 `lastIndex` 和 `nextIndex`，两者都是 0
+- 遍历新的虚拟DOM集合，找到新的集合中的每个节点在老集合中的位置 `oldIndex`
+  - 如果 `oldIndex >= lastIndex`，则该节点保持不动，并更新 `lastIndex=Math.max(lastIndex,oldIndex)`，然后更新该节点的位置为 `nextIndex`, `nextIndex`往后移1位(`nextIndex++`)
+  - 如果 `oldIndex<lastIndex`，则移动该节点至 `nextIndex` 的位置，同时更新 `lastIndex=Math.max(lastIndex, oldIndex), nextIndex++`
+  - 如果老集合中没有找到节点，说明节点是新增的，则会创建新节点插入到 `nextIndex` 位置
+- 当完成心机和中所有节点的 diff 时，最后还需要对老集合进行遍历，判断是否存在新集合中没有但老集合中仍存在的节点，把这样的节点全部删除，到此diff就完成了。
+
+`lastIndex` 对应的是老集合中最远走到的下标，只会往后走(`Math.max`)，所以碰到新虚拟DOM中的节点的 `oldIndex` 在 `lastIndex` 前面，则要把这个节点往后移，反之，`oldIndex` 在 `lastIndex` 后面，则直接略过，换句话说 **React** 同层级的Diff算法是**顾前不顾后**的。
+
+---
+
+React 目前存在的不足之处，下面这个例子中React会把 a、b、c 移动到他们相对应的位置，而d不移动，总共需要三步，而实际上最优思路是把d移动到最后这一步就足够了。
+
+```
+old: [a b c d]
+new: [d a b c]
+```
+
+## ✔ React Fiber
+
+ref
+
+- [https://zhuanlan.zhihu.com/p/37095662](https://zhuanlan.zhihu.com/p/37095662)
+- [https://juejin.im/post/5dadc6045188255a270a0f85](https://juejin.im/post/5dadc6045188255a270a0f85)
+
+fiber 解决的问题： 
+
+JS引擎和页面渲染引擎两个线程是互斥的，当其中一个线程执行时，另一个线程只能挂起等待。如果JS线程长时间占用主线程会导致页面卡顿。
+
+当 React在渲染组件时，从开始到渲染完成整个过程是一气呵成的，无法中断，如果组件较大，那么JS线程会一直执行，然后等到整棵VDOM树计算完成后，才会交给渲染的线程。
+
+基于上面的问题，facebook 提出了 fiber 架构：
+
+- fiber 把渲染更新过程拆分为多个子任务，其中优先级高的先执行，并且每次只做其中的一小部分，完成一部分任务之后，将控制权交回给浏览器，让浏览器有时间进行页面的渲染
+- 等浏览器忙完之后有剩余时间，再继续之前 React 未完成的任务，是一种合作式调度
+
+上述思想的实现依赖于 `window.requestIdleCallback()`， 该方法在浏览器的每一帧的空闲时间调用排队的函数。 React 团队 polyfill 了这个 API，使其对比原生的浏览器兼容性更好且拓展了特性
+
+React 把更新分为两个阶段：
+
+- reconciliation 阶段，这个阶段的更新是可以被打断的，主要涉及的声明周期是：
+  - `componentWillMount`
+  - `componentWillReceiveProps`
+  - `shouldComponentUpdate`
+  - `componentWillUpdate`
+- commit 阶段，这个阶段的更新是不能被打断的
+  - `componentDidUpdate`
+  - `componentDidMount`
+  - `componentWillUnmount`
+
+
+## ✔ setState 什么时候异步什么时候同步
+
+ref
+
+- [https://juejin.im/post/5b45c57c51882519790c7441](https://juejin.im/post/5b45c57c51882519790c7441)
+- [测试 code](https://codesandbox.io/s/modest-volhard-0l3ov?fontsize=14&hidenavigation=1&theme=dark)
+
+异步：在React合成事件中或者生命周期函数中
+
+同步：自己使用监听器绑定的函数（原生事件）或者计时器中
+
+setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
+
+## ✔ React 状态复用的方式
+
+- HOC
+- HOOKS
+- render props
+
+render props：把 prop 是一个函数并且要告诉组件要渲染什么内容的技术，叫做render Props模式。
+
+看下面的例子
+
+```jsx
+class MoveCom extends React.Component {
+  // 提供位置数据
+  state = {
+    x: 0,
+    y: 0,
+  };
+  // 获取鼠标的当前坐标
+  moveHandler = (e) => {
+    this.setState({
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+  // 监听鼠标的行为
+  componentDidMount() {
+    // DOM已经渲染完成了；可以进行DOM操作
+    window.addEventListener("mousemove", this.moveHandler);
+  }
+  render() {
+    // 将组件中的数据暴露出去this.props.render(数据)
+    return this.props.render(this.state);
+  }
+}
+
+export default class Father extends React.Component{
+  render() { 
+    return (
+      <div>
+        <h2> render Props的简单使用</h2>
+        { /* 接受子组件向上抛出来的数据*/}
+        <MoveCom render={sonGiveData => {
+          return (
+            <p>当前鼠标的坐标横坐标： {sonGiveData.x }  纵坐标: {sonGiveData.y }</p>
+          )
+        }}></MoveCom>
+      </div>
+    )
+  }
+}
+```
 
 ## React 面试题
 
@@ -11367,7 +11816,60 @@ ref
 - React 中的组件分为函数式组件和类组件，组件的返回值是 Element
 - Element 决定了在屏幕上能看到什么
 
+### ✔ React 18 发布，有什么改进？
+
+ref
+
+- [React 18 正式发布，该版本有哪些大的改进？](https://www.zhihu.com/question/538785413?utm_id=0)
+
+---
+
+- 使用 `createRoot` 代替之前的 `render`
+- `Concurrenct` 模式
+  - React 18 之前，渲染是单一的、不间断的、同步的事物，一旦渲染开始就不能被打断，如果组件内的层级比较深，比较耗时，会导致卡顿
+  - React 18 是并发渲染模式，React 把任务拆分为西校的子任务，子任务有不同的优先级，高优先级的先执行，执行完成之后JS线程交出控制权，等浏览器的空闲时间再执行低优先级的任务
+- `strict mode` 会给组件树预先执行一次挂载和卸载
+- 自动批处理，React 将多个状态更新合并到一次中提交，以提高性能
+  - 批处理在 React 18 之前只有在事件处理程序期间才会开启，以前不会在 promise、setTimeout、原生事件 开启批处理，也就是说以前每次setState 就会更新一次状态
+  - 从React 18的 `createRoot` 开始，所有更新都将批处理，无论来自何处（**setTimeout、原生事件中都会被批处理**），可以使用 `ReactDOM.flushSync(() => { setState(...) })` 让这个状态设置不走批处理，紧接着 `console.log` 就可以拿到最新值
+- Transition： 用来标记不需要紧急资源来更新的用户界面更新
+  - `React.stateTransition(() => {//低优先级的任务})`
+  - `const [isPending, startTransition] = useTransition()`
+
 ## React Router 原理
+
+### 什么时候用HashRouter、什么时候用BrowserRouter
+
+ref
+
+- [react router中HashRouter和BrowserRouter的区别和使用场景](https://blog.csdn.net/weixin_44246717/article/details/115585326)
+
+---
+
+HashRouter
+
+- 基于hash模式：页面跳转原理是使用了`location.hash`、`location.replace`；
+- 在域名后，先拼接`/#`，再拼接路径；也就是利用锚点，实现路由的跳转；如：`http://www.abc.com/#/xx`
+
+BrowserRouter
+
+- 页面跳转原理是使用了HTML5为浏览器全局的history对象新增了两个API，包括 `history.pushState`、`history.replaceState`；
+- 更加优雅： 直接拼接路径；如：http://www.abc.com/xx
+- **需要后端做处理**，否则会404，因为带有路径
+
+怎么选择：
+
+- hash模式不需要后端做处理
+- hash模式是基于url hash实现，可以用于直接部署到cdn上面，不需要后端做任何配置
+
+```js
+// history.pushState
+const state = { 'page_id': 1, 'user_id': 5 }
+const title = ''
+const url = 'hello-world.html'
+
+history.pushState(state, title, url)
+```
 
 ## ✔ 服务端渲染和客户端渲染对比
 
@@ -13172,6 +13674,17 @@ plugins: [
 - hash：是工程级别的，每次 build 都会生成一个新的 hash；
 - chunkhash：根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值，缺点是 JS 中引入了 CSS 时，CSS 和 JS 的 chunkhash 一致；
 - contenthash：针对文件内容级别的，只有你自己模块的内容变了，那么 contenthash 值才改变，即使 JS 中引入了 CSS，这两个文件的 contenthash 都是不一样的，
+
+## ✔ webpack 构建流程是什么样的
+
+- 读取配置
+- 确定入口
+- 读取模块
+- 编译模块
+- 完成模块编译
+- 开始输出资源
+- 资源输出完成
+- 结束
 
 ## Webpack、Rollup、Parcel、Grunt、Gulp 对比
 
@@ -17318,6 +17831,118 @@ function flatten(arr, depth) {
 }
 ```
 
+### ✔ 手写一个解析 url 的函数
+
+```typescript
+function parseUrl(url: string) {
+  const urlObj = new URL(url)
+  const ret = {
+    protocol: urlObj.protocol,
+    host: urlObj.host,
+    pathname: urlObj.pathname,
+    hash: urlObj.hash,
+    port: urlObj.port,
+    query: <{[key: string]: string}>{}
+  }
+
+  const urlSplit = url.split('?')
+  if (urlSplit.length > 1) {
+    const search = urlSplit[1]
+    const usp = new URLSearchParams(search)
+    const query = <{[key: string]: string}>{}
+    for(const [k, v] of usp.entries()) {
+      query[k] = v
+    }
+    ret.query = query
+  }
+  return ret
+}
+
+console.log(
+  parseUrl('https://juejin.cn/post/6844904032826294286#heading-42?a=1&b=2'),
+)
+
+```
+
+### ✔ JS 实现并发控制
+
+```typescript
+function paraRequests(reqs: Promise<number>[], limit: number) {
+  return new Promise<number[]>((resolve, reject) => {
+    const ret: number[] = [],
+      len = reqs.length
+    let i = 0,
+      cnt = 0
+    for (let k = 0; k < limit; k++) {
+      run()
+    }
+    function run() {
+      if (i >= len) return
+      let idx = i++
+      reqs[idx].then(d => {
+        ret[idx] = d
+        cnt++
+        console.log('d', d)
+        if (cnt === len) resolve(ret)
+        run()
+      })
+    }
+  })
+}
+
+const tasks: Promise<number>[] = []
+for (let w = 0; w < 20; w++) {
+  tasks.push(
+    new Promise<number>((resolve, reject) => {
+      const num = Math.floor(Math.random() * 100) * 10
+      setTimeout(() => {
+        resolve((w + 1) * 100)
+      }, (w + 1) * 100)
+    }),
+  )
+}
+
+console.time('log')
+paraRequests(tasks.reverse(), 10).then(data => {
+  console.log('data', data)
+  console.timeEnd('log')
+})
+
+```
+
+### ✔ 手撕 `Array.prototype.reduce`
+
+```typescript
+function reduce<T>(arr: Array<T>, cb: (prev: T, next: T, currentIdx: number, array: Array<T>) => T, initValue?: T) {
+  let val: T,
+    idx = 0
+  if (initValue) {
+    val = initValue
+  } else {
+    val = arr[idx++]
+  }
+  while (idx < arr.length) {
+    val = cb(val, arr[idx], idx, arr)
+    idx++
+  }
+  return val
+}
+
+const data = [1, 2, 3, 4, 5, 6]
+const d = reduce(
+  data,
+  (prev, next) => {
+    return Math.max(prev, next)
+  },
+)
+
+console.log('res', d)
+
+```
+
+### ✔ 手撕 compose 函数
+
+
 ## 手撕 DOM 操作
 
 ### ✔ 实现一个输入框防抖并带有 autocomplete 能力
@@ -17679,6 +18304,177 @@ const single = {
     return this.ins
   },
 }
+
+// ------
+class Parent {
+  static ins: Parent
+  static getInstance() {
+    if(!this.ins) {
+      this.ins = new Parent()
+    }
+    return this.ins
+  }
+}
+
+Parent.getInstance()
+```
+
+## ✔ 工厂模式
+
+
+ref [简单工厂模式、工厂方法模式和抽象工厂模式有何区别？](https://www.zhihu.com/question/27125796/answer/35397105)
+
+工厂模式解决的问题是 **客户端在调用时不想判断来实例化哪一个类** 或者 **实例化的过程过于复杂**。工厂模式有三种三种更细化的模式：
+
+- 简单工厂模式
+  - 简单工厂模式相当于是一个工厂中有各种产品，创建在一个类中，客户无需知道具体产品的名称，只需要知道产品类所对应的参数即可。但是工厂的职责过重，而且当类型过多时不利于系统的扩展维护。
+- 工厂方法模式
+  - 工厂方法模式相当于在简单工厂模式的基础上增加一个抽象工厂，在简单工厂模式下如果增加一个产品，要修改工厂类，不符合开闭原则。在工厂方法下，只需要增加具体工厂和具体产品即可。
+- 抽象工厂模式
+  - 类似于一个集团旗下生产的各种产品的工厂，这些产品是一个产品族。是在工厂方法下的扩展。比如一个产品的界面，可以通过直接改变具体工厂的实例来改变产品的界面风格
+
+---
+
+- 简单工厂：唯一工厂类
+- 工厂方法：多个工厂类
+- 抽象工厂：多个工厂类，多个产品抽象类，产品子类分组，同一个工厂实现类创建同组中的不同产品，减少了工厂子类的数量。
+
+简单工厂模式
+
+```js
+function createImage(name) {
+  if (name.match(/.jpe?g$/)) {
+    return new ImageJpeg(name)
+  } else if (name.match(/.gif$/)) {
+    return new ImageGif(name)
+  } else if (name.match(/.png$/)) {
+    return new ImagePng(name)
+  } else {
+    throw new Error('Unsupported Format')
+  }
+}
+```
+
+工厂方法模式
+```js
+interface IPay {
+  pay(id: string, cost: number): void
+}
+
+interface IPayFactory {
+  create(): IPay
+}
+
+class AliPay implements IPay {
+  pay(id: string, cost: number): void {}
+}
+class WechatPay implements IPay {
+  pay(id: string, cost: number): void {}
+}
+class UnionPay implements IPay {
+  pay(id: string, cost: number): void {}
+}
+
+class AliPayFactory implements IPayFactory {
+  create(): IPay {
+    return new AliPay()
+  }
+}
+class WechatFactory implements IPayFactory {
+  create(): IPay {
+    return new WechatPay()
+  }
+}
+class UnionPayFactory implements IPayFactory {
+  create(): IPay {
+    return new UnionPay()
+  }
+}
+const alipay = new AliPayFactory().create()
+alipay.pay('20230112001', 1000)
+```
+
+## ✔ 装饰器模式
+
+ES7 中出现的装饰器即为装饰器模式
+
+```js
+function addSkill(target) {
+  target.prototype.age = 1000
+  target.prototype.sayNameAge = function () {
+    console.log(`sayNameAge ${this.name} ${this.age}`)
+  }
+}
+@addSkill
+class Person{
+  constructor() {
+    this.name = name;
+  }
+  sayName(){
+    console.log('name ' + this.name)
+  }
+}
+```
+
+```typescript
+class Greeter {
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+
+  @enumerable(false)
+  greet() {
+    return 'Hello, ' + this.greeting
+  }
+}
+
+function enumerable(value: boolean) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor,
+  ) {
+    descriptor.enumerable = value
+  }
+}
+const g = new Greeter('ok')
+```
+
+## ✔ 适配器模式
+
+通过适配器模式可以让当前 class 不改变的情况下正常使用另一个 class。换句话说，在原本不兼容的双方之间，添加一个适配器层，从而让这双方又能够正常使用。
+
+适配器设计模式可以让彼此不兼容的功能在一块工作，有助于避免大规模的修改代码，并且易于扩展和兼容,但是如果过多的使用适配器，就会使得代码复杂程度增加
+
+```js
+// 仿 jQuery 实现
+window.jQuery = function (...args) {
+  return ajax(...args)
+}
+window.jQuery.ajax = ajax
+function ajax(cfg) {
+  return new Promise(res => {
+    if (typeof cfg === 'string') cfg = { url: cfg }
+    cfg.method = cfg.method || 'GET'
+    const xhr = new XMLHttpRequest()
+    xhr.open(cfg.method, cfg.url)
+    xhr.responseType = 'json'
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(xhr.response)
+        } else {
+          rej(xhr.response)
+        }
+      }
+    }
+    xhr.timeout = cfg.timeout || 2000
+    xhr.ontimeout = cfg.ontimeout
+    xhr.send(cfg.data)
+  })
+}
+
 ```
 
 ## ✔ 发布-订阅模式
@@ -17814,76 +18610,41 @@ console.log(proxyMulti(2, 3, 4))
 console.log(proxyMulti(2, 3, 5))
 ```
 
-## ✔ 装饰者模式
+## ✔ 迭代器模式
 
-动态地给函数赋能。在改造前是这样的：
+提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。
 
-```javascript
-let wear = function () {
-  console.log('穿上第一件衣服')
-}
-
-const _wear1 = wear
-
-wear = function () {
-  _wear1()
-  console.log('穿上第二件衣服')
-}
-
-const _wear2 = wear
-
-wear = function () {
-  _wear2()
-  console.log('穿上第三件衣服')
-}
-
-wear()
-
-// 穿上第一件衣服
-// 穿上第二件衣服
-// 穿上第三件衣服
-```
-
-经过改造之后：
-
-```javascript
-// 前置代码
-Function.prototype.before = function (fn) {
-  const self = this
-  return function () {
-    fn.apply(self, arguments)
-    return self.apply(self, arguments)
+```js
+class Iter {
+  constructor(ins) {
+    this.list = ins.list
+    this.idx = 0
+  }
+  hasNext() {
+    if (this.idx >= this.list.length) return false
+    return true
+  }
+  next() {
+    if (this.idx < this.list.length) return this.list[this.idx++]
+    return null
   }
 }
 
-// 后置代码
-Function.prototype.after = function (fn) {
-  const self = this
-  return function () {
-    self.apply(self, arguments)
-    return fn.apply(self, arguments)
+class Animal {
+  constructor() {
+    this.list = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+  }
+  getIterator() {
+    return new Iter(this)
   }
 }
 
-const wear1 = function () {
-  console.log('穿上第一件衣服')
+const iter = new Animal().getIterator()
+while(iter.hasNext()) {
+  console.log(iter.next())
 }
-
-const wear2 = function () {
-  console.log('穿上第二件衣服')
-}
-
-const wear3 = function () {
-  console.log('穿上第三件衣服')
-}
-
-const wear = wear1.after(wear2).after(wear3)
-wear()
-
-// 穿上第一件衣服
-// 穿上第二件衣服
-// 穿上第三件衣服
 ```
+
 
 # 操作系统
 
@@ -17901,3 +18662,4 @@ ref
 - 控制和影响能力不同：子进程无法影响父进程，而子线程可以影响父线程，如果主线程发生异常会影响其所在进程和子线程。
 - CPU利用率不同：进程的CPU利用率较低，因为上下文切换开销较大，而线程的CPU的利用率较高，上下文的切换速度快。
 - 操纵者不同：进程的操纵者一般是操作系统，线程的操纵者一般是编程人员。 
+

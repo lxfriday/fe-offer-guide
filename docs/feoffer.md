@@ -1,0 +1,237 @@
+# feoofer 必会项目
+
+- 前端安全
+  - 讲一讲 XSS
+  - 讲一讲 CSRF
+  - XSS、CSRF 的区别
+  - XSRF 是什么
+  - 如何防范
+    - 防XSS
+    - 防CSRF
+  - CSP、HSTS、x-frame-options
+- 协议
+  - HTTP 协议变迁、http1.0 2.0 3.0 各有什么特性
+  - HTTPS 握手、三次握手四次挥手
+  - 为什么要三次握手、四次挥手
+  - HTTP2 对前端带来了什么影响
+  - SYN 洪水攻击了解吗，是怎么解决的
+  - TCP、UDP 各自有什么特点
+  - HTTP、TCP、IP 各自工作在那一层
+  - HTTP1.1
+    - 什么是长链接
+  - HTTP2
+    - 什么是多路复用
+    - 什么是头部压缩
+  - 讲一讲 HTTP 状态码
+  - HTTP 请求方法有哪些
+  - 对称加密算法有哪些
+  - 非对称加密算法有哪些
+  - 了解 websocket 吗
+    - 怎么建立ws连接的
+  - 了解 CDN 吗
+    - 什么是回源
+    - CDN 解决了什么问题
+- 设计模式
+  - 常见的设计模式有哪些
+    - 单例、工厂、策略、代理、迭代器、装饰器、适配器、发布订阅、观察者
+- 性能优化
+  - 框架优化
+  - 通用优化
+    - 懒加载
+      - 普通JS实现
+      - Intersection 实现
+  - 移动端解决兼容性的手段有哪些
+- React
+  - 常见的性能优化手段
+  - 如何理解前端组件化
+  - 如何理解 MVVM、和MVC的区别是什么
+    - React 是MVVVM 框架吗
+  - React、Vue 这类框架出现的背景是什么
+  - React 和 vue 有什么差别
+  - React 18有哪些新特性
+  - fiber、react diff、虚拟dom
+  - HOOKS
+    - 有哪些HOOKS
+    - 好用的 HOOKS
+    - 怎么写HOOKS、你写过自己的HOOKS没有
+    - 函数式组件相比 component组件的优缺点，怎么做选择
+  - 什么是合成事件、合成事件有哪些
+  - ref是做什么的，有哪些处理ref的方式、如何跨层级传递ref
+  - setState
+    - setState 多个不同的值有什么效果
+    - setState 之后立马console.log 会获得什么值
+  - 状态复用方式有哪些
+  - HOC 是什么，怎么写，有哪些常见的HOC
+  - Suspense的作用、React.lazy 
+  - 常见的 React UI 库
+  - 什么是不可变数据
+  - redux 基本原理
+    - 什么是纯函数
+  - 什么是immer，怎么写、有什么用
+  - 讲一讲服务端渲染和客户端渲染
+    - 服务端渲染框架有哪些
+    - 什么时候选择server render 什么时候选择 client render
+  - ? react-router 基本原理
+- webpack
+  - loader 有哪些、作用是什么、怎么写
+  - plugin 有哪些、作用是什么、怎么写
+  - splitchunks 了不了解
+  - 有哪些加速手段
+  - 有哪些提升性能、优化的插件
+  - hash、chunkhash、contenthash 的区别
+  - ? **前端构建工具的区别、优缺点**
+  - webpack 的构建流程是怎么样的
+  - webpack mode dev 和 prod 两种模式有什么区别
+  - compiler 和 compilation 的区别是什么
+- HTML
+  - h5 的 doctype 怎么写
+  - h5 新增的标签
+  - h5 新增的api
+  - input 的type 有哪些类型
+  - script 标签的 async、defer和不加这两者有什么区别
+  - link prefetch、preload 的区别
+  - meta 怎么使用
+    - viewport 有哪些属性可以配置
+    - 和SEO相关的配置怎么配
+  - table、tr、th、td 怎么写
+- JS
+  - 有哪些基本的数据类型
+  - typeof 的结果有哪些
+  - ES6新特性有哪些
+  - ES7、8有哪些新特性
+  - ? **怎么理解JS作用域**
+  - 什么是变量提升
+  - 什么是执行上下文：全局执行上下文、函数执行上下文
+  - 什么是严格模式、严格模式下和普通模式有什么区别
+  - let、var 的区别
+  - 讲一讲原型链
+  - JS 中this有哪几种情况
+  - 什么是闭包、闭包的优缺点
+  - 什么是继承、JS 中实现继承有哪几种方式、extends能不能继承普通函数
+  - 什么是箭头函数、箭头函数有哪些特点
+  - 什么是JS协程
+  - 什么是 async、await
+  - 什么是weakmap、weakmap和map的区别是什么
+  - 浮点数运算不准确问题
+  - Promse 有什么用
+    - Promise.all、Promise.race、Promise.resolve、Promise.reject
+  - JS 事件循环
+    - 微任务、宏任务有哪些、怎么调度
+  - 讲一讲 JS 中的GC
+  - 如何避免内存泄漏
+  - valueOf 和 toString 的区别、什么时候会优先使用
+  - 正则表达式
+    - str.match、str.replace 怎么使用
+    - regexp.test 返回什么
+  - setTimeout、setInterval 第二个参数的意思
+  - 前端实现动画的方式有哪几种
+    - transition 动画怎么实现
+    - animation 动画怎么实现
+    - requestAnimation 动画怎么实现
+    - svg
+    - canvas
+  - **JS Object 原型方法有哪些**
+  - **JS Array 原型方法有哪些**
+  - Proxy 是做什么的，怎么用
+- CSS
+  - 讲一讲 CSS 的三大特性
+  - 讲一讲CSS盒模型
+  - 讲一讲CSS高度坍塌和外边距折叠
+  - CSS 选择器的优先级是怎么样的
+  - 媒体查询怎么写
+  - 讲一讲 CSS 自定义变量
+  - less、sass 是什么，为什么要用 他们
+  - CSS calc 怎么使用
+  - background 有哪些属性
+  - transition 有哪些属性
+  - animation 有哪些属性
+  - position 有哪些属性，设置的时候需要注意什么
+  - 什么是回流重绘
+    - 什么操作会触发回流、重绘
+    - 怎么减少回流重绘
+  - CSS 怎么清除 浮动
+  - 讲一讲 flex 布局
+    - flex 的三个属性分别是什么，做什么的
+    - justifyContent、alignItems 有哪些属性
+  - 怎么用CSS添加省略号，需要注意什么
+  - 讲一讲 grid 布局
+    - 常用的 grid 布局属性有哪些，分别是做什么的
+  - 如何用 CSS 画一个三角形
+  - 实现瀑布流布局有哪些方式
+    - JS 实现
+    - flex 实现
+    - grid 实现
+  - 实现圣杯布局
+  - 实现粘连布局
+  - CSS 实现垂直居中的方式有哪些，如果子盒子不确定宽高呢
+  - 讲一讲 BFC
+  - 移动端 1px 方案通常怎么实现
+  - antd 中的 `:where` 是做什么用户的
+- TS
+  - 为什么要用ts
+  - ts 相比js 的优缺点
+  - const、readonly 的区别
+  - 基本数据类型
+  - interface、type 的区别
+  - 泛型是做什么的
+  - 什么是接口
+    - 接口可以定义哪些类型
+    - 接口能不能继承
+    - 接口和type怎么转化
+  - 类
+    - getter、setter怎么写
+    - 构造函数简易写法
+  - 类型推断
+  - interface 和抽象类的区别
+  - 方法修饰符有哪些
+- 浏览器
+  - 讲一讲 XHR
+    - XHR 和fetch 的对比，各自的优缺点
+  - cookie
+  - localstorage、sessionstorage 的特点
+  - localstorage、sessionstorage、cookie、session的区别
+  - 什么是跨域、有哪些常见的跨域方式、优缺点
+  - 说一说 history
+    - history 有哪些方法
+    - history.pushState、history.popState 有什么作用
+  - 说一说location
+  - DOM
+    - 有哪些常见的操作 DOM 的方法
+    - Element 和 Node 的区别
+    - document.querySelector 和 document.getElementByxx 的去呗
+    - innerText、textContent、nodeValue 的区别
+  - 讲一讲事件冒泡和事件捕捉
+    - 添加事件监听的方法，包含IE
+  - **讲一讲前端缓存**
+  - 讲一讲 iframe
+- NodeJS
+  - 讲一讲 commonJS 和ESM 的区别
+  - 讲讲 import 和 require 导入的区别
+  - 讲一讲 Express 和 Eggjs 的区别
+  - 讲一讲 RestFul及其优缺点
+- 通用问题
+  - 输入 URL 到页面显示出来发生了什么
+- 手撕代码环节
+  - **手写节流防抖**
+  - 手写 LRU
+  - 手写 EventEmitter
+  - 写一个 深拷贝
+  - 手写 call、apply、bind
+  - 手写flatten
+  - 手写 new
+  - 手写 Promise
+    - Promise.all
+    - Promise.race
+  - 手写 Object.create
+  - 手写 Object.assign
+  - 手写 instanceOf
+  - 手写并发函数【字节】
+  - 手写一个带有防抖并且autocomplete的输入框
+- ? **错误监控**
+  - sourcemap
+    - 有哪些类型
+    - 怎么使用 部署
+- 算法
+  - 排序有哪些
+  - 基本的数据结构、解法
+- 简历项目简介
