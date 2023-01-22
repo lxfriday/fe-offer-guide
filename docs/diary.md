@@ -3,7 +3,10 @@
 
 ## 20230119
 
-- setTimeout 的第三个参数
+- react18新特性 [ref](https://www.infoq.cn/article/pi8g04Fpma4KmMD9hDwp)
+- 强化：输入url到页面显示出来的
+- eggjs 温习
+- koajs、expressjs、原生node js 如何起一个服务器
 - 内存泄漏的排查手段
   - performance
   - memory
@@ -11,26 +14,29 @@
 - bigint 计算
 - soucemap
 - 项目巩固
-- Array 和 new Array 的区别
 - createPortal
 - 简历star法则
 - hooks 实现原理
 - **源码分析：redux、axios**
 - 树的非递归先序遍历
 - **行内元素、块级元素有哪些**
-- JS 判断数组
 - webpack treeshaking
-- symbol
-- proxy 的使用
 - 写个css，当文本没有超过容器宽度时居中显示，超过宽度则换行，并左对齐（display:tabel-cell或者width:fit-content，但是忘了）
 - jsbridge原理
-- http123 http https 
-- ssr、csr的区别
-- promise、asyncawait、generator的区别
 - audio、video标签使用
+- [!] proxy 的使用
+- [x] symbol
+- [?] http123 http https 
+- [x] ssr、csr的区别
+- [x] 闭包函数中打印值（函数的变量查找方式 => 定义时就确定，不是执行的时候）
+- [x] setTimeout 的第三个参数
+- [x] JS 判断数组
+- [x] promise、asyncawait、generator的区别
+  - 实现一个 generator 自动执行器
 - [x] 函数柯里化
   - [x] 手写实现reduce函数
-- 洋葱模型、compose函数怎么实现
+- 洋葱模型
+- [x] compose函数怎么实现 `const compose = (...funcs) => funcs.reduce((a, b) => (...args) => a(b(...args)))`
 - [x] 手写并发函数
 
 ## 20230111

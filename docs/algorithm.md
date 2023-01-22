@@ -47,7 +47,9 @@
 
 # 刷题日记
 
-- 20230108()
+- 20230121
+  - ???[【hard】1444. 切披萨的方案数](https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza/) 动态规划、前缀数组
+- 20230108
   - ??[【medium】HJ24 合唱队](https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 数组题、动态规划
   - ??[【medium】HJ16 购物单](https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 背包问题、01背包
   - ?[【medium】1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/) 矩阵、深度优先搜索
@@ -1798,6 +1800,8 @@
 - 🌟【medium】[799. 香槟塔](https://leetcode.cn/problems/champagne-tower/) 动态规划
 - 【easy】[1758. 生成交替二进制字符串的最少操作数](https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/) 动态规划
 - ??[【medium】HJ24 合唱队](https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4?tpId=37&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26pageSize%3D50%26search%3D68%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AF%2587%26topicId%3D117&difficulty=&judgeStatus=&tags=&title=&gioEnter=menu) 数组题、动态规划
+- ???[【hard】1444. 切披萨的方案数](https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza/) 动态规划、前缀数组
+
 ### 动态规划 - 背包问题
 
 - 🌟【hard】[879 盈利计划](https://leetcode.cn/problems/profitable-schemes/) 多维费用背包
@@ -27264,6 +27268,42 @@ var kidsWithCandies = function(candies, extraCandies) {
     else candies[i] = false
   }
   return candies
+};
+```
+
+## ??🌟😻✔ 1444. 切披萨的方案数【hard】
+
+[ref](https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza/)
+
+动态规划、前缀数组
+
+```js
+function ways(pizza, k) {
+  const mod = 10 ** 9 + 7, m = pizza.length, n = pizza[0].length
+  const dp = new Array(m).fill(0).map(_ => new Array(n).fill(0).map(__ => new Array(k).fill(0)))
+  const apples = new Array(m).fill(0).map(_ => new Array(n).fill(0))
+
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      apples[i][j] = (i + 1 < m ? apples[i + 1][j] : 0) + (j + 1 < n ? apples[i][j + 1] : 0) - ((i + 1 < m && j + 1 < n) ? apples[i + 1][j + 1] : 0) + (pizza[i][j] === 'A' ? 1 : 0)
+      // 不切的时候，只需要看 apples[i][j] 这块区域内有没有苹果，有苹果就是1
+      dp[i][j][0] = apples[i][j] > 0 ? 1 : 0
+      // 切1次~k-1次的情况
+      for (let w = 1; w < k; w++) {
+        for (let r = i + 1; r < m; r++) {
+          if (apples[i][j] - apples[r][j] > 0) {
+            dp[i][j][w] = (dp[i][j][w] + dp[r][j][w - 1]) % mod
+          }
+        }
+        for (let c = j + 1; c < n; c++) {
+          if (apples[i][j] - apples[i][c] > 0) {
+            dp[i][j][w] = (dp[i][j][w] + dp[i][c][w - 1]) % mod
+          }
+        }
+      }
+    }
+  }
+  return dp[0][0][k - 1]
 };
 ```
 

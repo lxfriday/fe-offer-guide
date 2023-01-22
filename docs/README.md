@@ -410,32 +410,63 @@ LexicalEnvironment = {
 
 ### ✔ 面试题：let、var的区别
 
+作用域类型、变量提升、windows属性
+
 - var 是函数作用域，let 是块级作用域
 - 在块级作用域中用声明var声明的变量，在这个块级作用域之外也可以访问到，而let则不行
 - 在全局作用域中用var声明的变量会成为 window 的一个属性，而let声明的变量则不会
 - var 具备变量提升，而 let 存在暂时性死区
   - var 在变量声明之前就可以赋值和访问，而let 在声明之前不能赋值和访问
 
+### ✔ 面试题：for循环中的延迟打印问题
+
 下面是一个经典题目
 ```js
-const arr = []
-for(var i=0;i<10;i++) {
-  arr.push(() => console.log(i))
+const arr = ['a', 'b', 'c', 'd']
+
+for (var i = 0; i < arr.length; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 0)
 }
-for(const func of arr) func()
-// 输出10个10
+// 4
+// 4
+// 4
+// 4
 ```
+
+
+- **方法1**：`var` 改成 `let`，`for` 循环中每一层循环都会创建一个新的作用域，用`let`声明的变量传入到 `for` 循环体的作用域后，不会发生改变，不受外界的影响。
 
 ```js
-const arr = []
-for(let i=0;i<10;i++) {
-  arr.push(() => console.log(i))
+for (let i = 0; i < arr.length; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 0)
 }
-for(const func of arr) func()
-// 输出0到9
+```
+- **方法2**：iife
+
+```js
+for (var i = 0; i < arr.length; i++) {
+  ;((k) => {
+    setTimeout(() => {
+      console.log(k)
+    }, 0)
+  })(i)
+}
 ```
 
-for 循环中每一层循环都会创建一个新的作用域，用let声明的变量传入到 for 循环体的作用域后，不会发生改变，不受外界的影响。
+- **方法3**：setTimeout 添加额外的参数
+
+```js
+for (var i = 0; i < arr.length; i++) {
+  setTimeout((k) => {
+    console.log(k)
+  }, 0, i)
+}
+```
+
 
 ## ✔ 变量提升
 
@@ -837,6 +868,34 @@ printThis.call([2])
 闭包缺点：
 
 - 常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露；
+
+### ✔ 面试题：打印闭包中变量的值
+
+```js
+let c = 100
+
+const func = () => {
+  let c = 1000
+  return () => {
+    console.log(c)
+  }
+}
+func()() // 1000
+```
+
+---
+
+```js
+let c = 100
+const func2 = () => {
+  console.log(c)
+}
+const func = () => {
+  let c = 1000
+  func2()
+}
+func() // 100
+```
 
 ## ✔ 多种继承及其优缺点
 
@@ -1256,6 +1315,137 @@ map.has: 0.051ms
 map.get ->  6684360
 map.get: 0.104ms
 ```
+
+## ✔ Symbol
+
+Symbol 是一种基本数据类型。Symbol() 函数会返回 Symbol 类型的值，该类型具有静态属性和静态方法。
+
+每个从 `Symbol()` 返回的 symbol 值都是唯一的。一个 symbol 值能作为对象属性的标识符；
+
+**全局共享的 Symbol**
+
+要创建跨文件可用的 symbol，甚至跨域（每个都有它自己的全局作用域），使用 `Symbol.for()` 方法和 `Symbol.keyFor()` 方法从全局的 symbol 注册表设置和取得 symbol。
+
+`Object.getOwnPropertySymbols()` 方法让你在查找一个给定对象的符号属性时返回一个 symbol 类型的数组。
+
+### ✔ Symbol.toPrimitive
+
+见 [Symbol.toPrimitive](#✔-symboltoprimitive-1)
+
+### ✔ Symbol.toStringTag
+
+`Symbol.toStringTag` 用于创建对象的默认字符串描述。
+
+简言之，给对象添加了 `Symbol.toStringTag` 属性之后，可以指定 `Object.prototype.toString.call(obj)` 返回的值是什么。
+
+```js
+const obj = [1, 2, 3]
+obj[Symbol.toStringTag] = 'Hello'
+
+console.log(obj.toString()) // 1,2,3
+console.log(Object.prototype.toString.call(obj)) // [object Hello]
+```
+
+### ✔ Symbol.iterator
+
+定义目标对象的迭代器协议。
+
+```js
+const obj = {
+  data: ['a', 'b', 'c', 'd', 'e'],
+  *[Symbol.iterator]() {
+    for (let i = 0; i < this.data.length; i++) {
+      yield this.data[i]
+    }
+  },
+}
+
+for(const d of obj) {
+  console.log(d)
+}
+// a
+// b
+// c
+// d
+// e
+```
+
+或者写成下面这种形式
+
+```js
+const obj = {
+  data: ['a', 'b', 'c', 'd', 'e'],
+  [Symbol.iterator]() {
+    const data = this.data
+    let i = 0
+    return {
+      next() {
+        return {
+          done: i >= data.length,
+          value: data[i++],
+        }
+      },
+    }
+  },
+}
+```
+
+### ✔ Symbol.asyncIterator
+
+`Symbol.asyncIterator` 指定了一个对象的默认**异步迭代器**。如果一个对象设置了这个属性，它就是异步可迭代对象，可用于for await...of循环。
+
+```js
+const obj = {
+  data: ['a', 'b', 'c', 'd', 'e'],
+  async *[Symbol.asyncIterator]() {
+    for (let i = 0; i < this.data.length; i++) {
+      yield this.data[i]
+    }
+  },
+}
+;(async () => {
+  for await (const d of obj) {
+    console.log(d)
+  }
+})()
+// a
+// b
+// c
+// d
+// e
+```
+
+### ✔ Symbol.for
+
+`Symbol.for(key)` 方法会根据给定的键 key，来从运行时的 symbol 注册表中找到对应的 symbol，如果找到了，则返回它，否则，新建一个与该键关联的 symbol，并放入全局 symbol 注册表中。
+
+- `key` 一个字符串，作为 symbol 注册表中与某 symbol 关联的键（同时也会作为该 symbol 的描述）。
+
+和 `Symbol()` 不同的是，用 `Symbol.for()` 方法创建的的 symbol 会被放入一个全局 symbol 注册表中。`Symbol.for()` 并不是每次都会创建一个新的 symbol，它会首先检查给定的 key 是否已经在注册表中了。假如是，则会直接返回上次存储的那个。否则，它会再新建一个。
+
+
+```js
+Symbol.for("bar") === Symbol.for("bar"); // true，证明了上面说的
+```
+
+### ✔ Symbol.keyFor
+
+`Symbol.keyFor(sym)` 方法用来获取全局 symbol 注册表中与某个 symbol 关联的键。
+
+如果全局注册表中查找到该 symbol，则返回该 symbol 的 key 值，返回值为字符串类型。否则返回 `undefined`
+
+```js
+// 创建一个全局 Symbol
+var globalSym = Symbol.for("foo");
+Symbol.keyFor(globalSym); // "foo"
+
+var localSym = Symbol();
+Symbol.keyFor(localSym); // undefined，
+
+// 以下 Symbol 不是保存在全局 Symbol 注册表中
+Symbol.keyFor(Symbol.iterator) // undefined
+```
+
 
 ## ✔ Proxy
 
@@ -3082,6 +3272,45 @@ setTimeout
 
 实际延迟时间可能远大于 `delay`。
 
+**注意**，`setTimeout` 的参数非常特殊：
+
+```js
+var timeoutID = scope.setTimeout(function[, delay, arg1, arg2, ...]);
+```
+
+可以在 `setTimeout` 的延迟时间这个参数之后传递额外的参数，这些参数将作为回调函数的参数。
+
+可以用来解决下面的这个问题：
+
+```js
+const arr = ['a', 'b', 'c', 'd']
+
+for (var i = 0; i < arr.length; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 0)
+}
+// 4
+// 4
+// 4
+// 4
+
+// 使用额外的参数之后
+const arr = ['a', 'b', 'c', 'd']
+
+for (var i = 0; i < arr.length; i++) {
+  setTimeout((k) => {
+    console.log(k)
+  }, 0, i)
+}
+// 0
+// 1
+// 2
+// 3
+```
+
+
+
 ## ✔ encodeURIComponent、decodeURIComponent 和 encodeURI、decodeURI
 
 `encodeURI` 和 `encodeURIComponent` 的差别在于编码范围有些不同，后者的会对更多的字符进行编码。
@@ -3547,6 +3776,41 @@ console.log(add(1, 2, 3, 4, 5))
 ```
 
 另外柯里化也应用在 redux compose 函数的实现中，[实现 compose 函数](#✔-手撕-compose-函数)
+
+## ✔ JS 判断类型总汇
+### ✔ JS 判断数组有哪些方法
+
+- **Object.prototype.toString.call** 完全ok
+  - `Object.prototype.toString.call([]) === '[object Array]'`
+- **instanceof** 完全ok
+  - `[] instanceof Array`
+- **Array.isArray** 完全ok
+  - `Array.isArray([])`
+- **arr.constructor** `constructor` 如果被更改则会出问题
+  - **[].constructor === Array**
+- **isPrototypeOf** 用于测试一个对象是否存在于另一个对象的原型链上
+  - `Array.prototype.isPrototypeOf([])`
+
+要注意 `Object.prototype.toString.call(Array.prototype) === '[object Array]'`
+
+#### ✔ 关于 `Object.prototype.toString`
+
+`toString` 在 `Array` `Function` `Number` 的原型中都被重写了。
+
+`Object.toString()` 也是可以调用的，这里 `Object.toString === Function.prototype.toString` 实际调用的是 `Function` 原型上被重写的 `toString`。
+
+当你创建一个自定义对象时，你可以重写 `toString()` 以调用自定义方法，以便将自定义对象转换为一个字符串。或者，你可以增加一个` @@toPrimitive` 方法，该方法允许对转换过程有更多的控制，并且对于任意的类型转换，且总是优先于 `valueOf` 或 `toString`。
+
+`Object.prototype.toString()` 返回 `[object Type]`，这里的 Type 是对象的类型。如果对象有 `Symbol.toStringTag` 属性，其值是一个字符串，则它的值将被用作 Type。
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674218843731_0e214651-530b-4933-9199-6f13504a8b9a.png)
+
+```js
+const obj = {
+  [Symbol.toStringTag]: 'Hello'
+}
+console.log(Object.prototype.toString.call(obj)) // [object Hello]
+```
 
 # 浏览器特有 API
 
@@ -11871,7 +12135,7 @@ const url = 'hello-world.html'
 history.pushState(state, title, url)
 ```
 
-## ✔ 服务端渲染和客户端渲染对比
+## ✔ 服务端渲染和客户端渲染对比(ssr vs csr)
 
 ref
 
@@ -17942,6 +18206,140 @@ console.log('res', d)
 
 ### ✔ 手撕 compose 函数
 
+```js
+const { compose: reduxCompose } = require('redux')
+
+const compose = (...funcs) => funcs.reduce((a, b) => (...args) => a(b(...args)))
+
+// compose(a, b, c, d, e)(1)
+reduxCompose(a, b, c, d)('initial args')('from third ')
+
+function a(next) {
+  return (innerParams) => {
+    console.log('before a')
+    const res = typeof next === 'function' && next('data from a')
+    console.log('after a', res, innerParams)
+    return 'ret from a'
+  }
+}
+function b(next) {
+  return (innerParams) => {
+    console.log('before b')
+    const res = typeof next === 'function' && next('data from b')
+    console.log('after b', res, innerParams)
+    return 'ret from b'
+  }
+}
+function c(next) {
+  return (innerParams) => {
+    console.log('before c')
+    const res = typeof next === 'function' && next('data from c')
+    console.log('after c', res, innerParams)
+    return 'ret from c'
+  }
+}
+function d(next) {
+  return (innerParams) => {
+    console.log('before d')
+    const res = typeof next === 'function' && next()
+    console.log('after d', next, innerParams)
+    return 'ret from d'
+  }
+}
+```
+
+### ✔ 手撕 koa-compose 函数
+
+```js
+function koaCompose(...asyncFuncs) {
+  return function (context, next) {
+    return dispatch(0)
+    function dispatch(idx) {
+      let fn
+      if (idx < asyncFuncs.length) {
+        fn = asyncFuncs[idx]
+      } else if (idx === asyncFuncs.length && typeof next === 'function') {
+        fn = next
+      } else {
+        return Promise.resolve()
+      }
+      return Promise.resolve(fn(context, dispatch.bind(null, idx + 1)))
+    }
+  }
+}
+
+let middlewares = []
+middlewares.push(async (ctx, next) => {
+  console.log('a before')
+  await next()
+  console.log('a after')
+})
+middlewares.push(async (ctx, next) => {
+  console.log('b before')
+  await next()
+  console.log('b after')
+})
+middlewares.push(async (ctx, next) => {
+  console.log('c before')
+  await next()
+  console.log('c after')
+})
+
+;(async () => {
+  const ret = await koaCompose(...middlewares)({ name: 'lxfriday' })
+})()
+
+```
+
+### ✔ 手撕 generator 自动执行函数
+
+```js
+function genRunner(genFunc) {
+  return new Promise((resolve, reject) => {
+    const r = genFunc()
+    runTask()
+    function runTask(init) {
+      const { value: p, done } = r.next(init)
+      Promise.resolve(p)
+        .then(data => {
+          if (!done) runTask(data)
+          else resolve(data)
+        })
+        .catch(e => {
+          reject(e)
+        })
+    }
+  })
+}
+
+const ps = new Array(5).fill(0).map(
+  (_, i) => () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve((i + 1) * 100)
+      }, (i + 1) * 100)
+    }),
+)
+
+
+function* calc(tasks) {
+  let sum = yield 1
+  for(const task of tasks) {
+    const d = yield task()
+    console.log(d)
+    sum += d
+  }
+  return sum
+}
+
+genRunner(calc.bind(null, ps.reverse()))
+  .then(d => {
+    console.log('resultData', d)
+  })
+  .catch(e => {
+    console.log('err', e)
+  })
+```
 
 ## 手撕 DOM 操作
 
