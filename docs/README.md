@@ -5,8 +5,6 @@
 ---
 
 # 新问题未归类
-## ? forin、forof、for、while效率问题以及差别
-## ? 迭代器协议
 
 # JavaScript
 
@@ -7246,6 +7244,107 @@ Content-Security-Policy: script-src 'self'; object-src 'none'; style-src cdn.exa
 <meta name="description" content="这里是网站的内容描述"/>
 ```
 
+## ✔ audio 标签
+
+audio 标签是浏览器的音频组件，用来播放音频。具体使用可以参照 [使用 audio 标签写一个播放器](https://github.com/lxfriday/audioplayer-react/blob/main/src/pages/components/PlayerBar.tsx#L178)。
+
+audio 标签的常规使用：
+
+```jsx
+<audio
+  style={{ display: "none" }}
+  controls
+  src={src}
+></audio>
+```
+
+因为音频标签主要用来播放音乐，实际上在开发的时候并不需要把audio标签展示出来，`display:none` 的时候照样可以播放音乐，你只需要用 `player.xx` 方法来实现audio的各种行为即可。
+
+---
+
+标签属性：
+
+```typescript
+src?: string | undefined;
+controls?: boolean | undefined;
+crossOrigin?: "anonymous" | "use-credentials" | "" | undefined;
+autoPlay?: boolean | undefined;
+loop?: boolean | undefined;
+muted?: boolean | undefined;
+preload?: string | undefined;
+```
+
+- `src` 音频源
+- `controls` 是否提供浏览器内置的控制组件，暂停、进度、音量...
+- `crossOrigin` 展示音频资源是否可以通过 CORS 加载
+  - `anonymous` 在发送跨域请求时不携带验证信息
+  - `use-credentials` 在发送跨域请求时携带验证信息，需要走CORS跨域的验证逻辑，如果 `access-control-allow-credentials` 没有设置或者 `access-control-allow-origin` 没有明确指定是当前页面的域名，则会报错
+- `autoPlay` 是否自动播放，这个属性不好使，在浏览器上如果用户没有进行任何操作的时候，自动播放会报错
+- `loop` 是否单曲循环
+- `muted` 是否静音
+- `preload` 让开发者自行思考来示意浏览器使用何种加载方式以达到最好的用户体验
+  - `none`  示意用户可能不会播放该音频，或者服务器希望节省带宽；换句话说，该音频不会被缓存
+  - `metadata` 示意即使用户可能不会播放该音频，但获取元数据 (例如音频长度) 还是有必要的
+  - `auto` 示意用户可能会播放音频；换句话说，如果有必要，整个音频都将被加载，即使用户不期望使用
+  - `""`空字符串，等效于 `auto` 属性。不同浏览器会有自己的默认值，规范建议的默认值为 `metadata`。
+  - **注意**：`autoplay` 属性的优先级高于 `preload`。如果 `autoplay` 被指定，浏览器将显式地开始下载媒体以供播放
+
+---
+
+组件**属性、方法**和**事件**：
+
+```js
+const player = document.querySelector('audio')
+
+player.onxx = () => {}
+player.xx = yy
+```
+
+组件属性、方法
+
+```js
+// 可设置可读取
+player.src = src // {string} 音频地址
+player.currentTime = 100 // {number} 当前进度 秒
+player.autoplay = false // {boolean} 是否自动播放
+player.controls = true // {boolean} 是否显示控制组件
+player.loop = false // {boolean} 是否单曲循环
+player.muted = false // {boolean} 是否静音
+player.preload = 'auto' // {enum} 加载方式  "none" | "metadata" | "auto" | ""
+player.volume = 1 // {number} 音量 浮点数 0~1
+
+// 仅读取 readonly
+console.log('duration', player.duration) // {number} 资源总时长
+console.log('paused', player.paused) // {boolean} 是否暂停
+console.log('readyState', player.readyState) // {number} 音频的就绪状态 https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/readyState
+
+// 控制方法
+player.play() // 播放
+player.play().catch(e => {
+  // 播放调用出错的时候可以在这里捕捉
+  console.log('play catch')
+}) // 播放
+player.pause() // 暂停
+```
+
+组件事件
+
+```js
+player.onloadedmetadata = () => {log('onloadedmetadata')} // 元数据加载完成
+player.onloadeddata = () => {log('onloadeddata')} // 媒体的第一帧加载完成
+player.onseeking = () => {log('onseeking')} // 切换进度开始
+player.ontimeupdate = () => {log('ontimeupdate')} // currentTime 播放进度发生变化时触发，高频调用
+player.onseeked = () => {log('onseeked')} // 切换进度完成
+player.onplay = () => {log('onplay')} // 开始播放
+player.onpause = () => {log('onpause')} // 播放暂停
+player.onended = () => {log('onended')} // 播放结束触发
+player.onratechange = () => {log('onratechange')} // 播放速度发生变化
+player.onvolumechange = () => {log('onvolumechange')} // 音量变化
+player.onwaiting = () => {log('onwaiting')} // 因为暂时性缺少数据，播放暂停 
+```
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674657470084_7076621b-8d76-4393-9ac1-19ef4ce71f2e.png)
+
 # CSS
 
 ## ✔ 选择器
@@ -11744,6 +11843,9 @@ function HOC(Comp) {
 - [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
 - [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
 
+### React HOOKS 原理
+
+
 ### ✔ 自己写一个 HOOKS
 
 实现一个带有过期功能的 localStorage
@@ -15986,7 +16088,7 @@ console.log('ws listenning 3344')
 
 # CDN
 
-# 性能优化
+# 性能
 
 ## ? 性能指标
 ### ? FP （First Paint） 首次绘制
@@ -16548,6 +16650,128 @@ window.addEventListener('load', function (event) {
   console.log('All resources finished loading!')
 })
 ```
+
+## `forin`、`forof`、`for`、`while`、`arr.map`、`arr.forEach` 效率问题以及差别
+
+这几种便利方式各有各的特点
+
+`for...in`
+
+`for...in` 遍历对象的可枚举属性，包括**原型链**上的**可枚举属性**
+
+```typescript
+const prototype = { pos: 'in prototype', c: 3 }
+Object.defineProperty(prototype, 'd', {
+  value: 4,
+  enumerable: false,
+})
+const obj = Object.create(prototype, {
+  a: {
+    value: 1,
+    enumerable: true,
+  },
+  b: {
+    value: 2,
+    enumerable: false,
+  },
+})
+for(const key in obj) {
+  console.log(`${key} => ${obj[key]}`)
+}
+
+// a => 1
+// pos => in prototype
+// c => 3
+```
+
+`for...of` 依据迭代器协议对目标进行遍历。
+
+forof可以迭代的目标：
+
+- 字符串
+- 数组
+- `arguments`
+- Map、Set
+- generator 函数 `[...genFunc()]`
+- `document.querySelectorAll('div')`
+- `document.getElementsByTagName('div')`
+- 部署了 `Symbol.iterator` 属性的对象
+
+要注意的是，`{}` 本身没有部署迭代器协议，如果要使用 `forof` ，可以手动部署迭代器协议。
+
+```typescript
+const obj1 = {
+  data: [1, 2, 3],
+  *[Symbol.iterator]() {
+    for (const d of this.data) {
+      yield d
+    }
+  },
+}
+
+for (const v of obj1) {
+  console.log(v)
+}
+// 1
+// 2
+// 3
+```
+
+`for`：朴素循环，通常依据下标移动遍历
+
+`while`：朴素循环，依据条件进行循环
+
+`arr.map`、`arr.forEach` 这两者在每次循环的时候都会创建一个函数并执行，`arr.map` 会返回一个新数组。
+
+---
+
+**性能比较**
+
+```typescript
+const data = []
+for(let i=0;i<80000000;i++) {
+  data.push(Math.random())
+}
+
+console.time('for')
+for (let i = 0; i < data.length; i++) {}
+console.timeEnd('for')
+
+console.time('while')
+let j = 0
+while (j < data.length) {
+  j++
+}
+console.timeEnd('while')
+
+
+console.time('forin')
+for (const key in data) {}
+console.timeEnd('forin')
+
+console.time('forof')
+for (const value of data) {}
+console.timeEnd('forof')
+
+console.time('arr.map')
+data.map(() => {})
+console.timeEnd('arr.map')
+
+console.time('arr.forEach')
+data.forEach(() => {})
+console.timeEnd('arr.forEach')
+```
+
+```
+for: 28.458ms
+while: 28.873ms
+forin: 53.240s
+forof: 4.564s
+arr.map: 1.983s
+arr.forEach: 1.067s
+```
+
+大体上：`for` 和 `while` 两种朴素循环的效率最高，而 `for...in` 的效率最低
 
 # 浏览器及安全
 
