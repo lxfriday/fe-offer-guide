@@ -2,6 +2,8 @@
 
 ## 20230119
 
+- 项目巩固
+- 简历 star 法则
 - react18 新特性 [ref](https://www.infoq.cn/article/pi8g04Fpma4KmMD9hDwp)
 - 强化：输入 url 到页面显示出来的
 - eggjs 温习
@@ -11,19 +13,20 @@
   - memory
   - [ref](https://juejin.cn/post/6844904165672484871#heading-16)
 - bigint 计算
-- soucemap
-- 项目巩固
-- createPortal
-- 简历 star 法则
-- hooks 实现原理
-- useImperativehandle
+- react router 原理、面试题
 - **源码分析：redux、axios**
-- 树的非递归先序遍历
-- **行内元素、块级元素有哪些**
+- cjs、AMD、CMD、ESM区别
 - webpack treeshaking
-- 写个 css，当文本没有超过容器宽度时居中显示，超过宽度则换行，并左对齐（display:tabel-cell 或者 width:fit-content，但是忘了）
-- jsbridge 原理
-- audio、video 标签使用
+- soucemap
+- [x] 事件循环有哪些
+- [x] createPortal
+- [x] **行内元素、块级元素有哪些**
+- [x] 树的非递归先序遍历
+- [x] useImperativehandle
+- [x] 写个 css，当文本没有超过容器宽度时居中显示，超过宽度则换行，并左对齐（display:tabel-cell 或者 width:fit-content，但是忘了）
+- [x] jsbridge 原理
+- [x] hooks 实现原理
+- [x] audio、video 标签使用
 - [!] proxy 的使用
 - [x] symbol
 - [?] http123 http https

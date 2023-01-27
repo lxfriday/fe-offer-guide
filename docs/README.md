@@ -1218,6 +1218,21 @@ setTimeout
 
 ## Object
 
+### ✔ Object.is
+
+- ref [MDN Object.is](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+
+判断两个参数是否相等，与 `==` 、`===` 的行为都不一致。
+
+- `==` 会进行类型转换
+- `===` 不会进行类型转换，但是：
+  - `NaN === NaN` 返回 `false`
+  - `+0 === -0` 返回 `true`
+- `Object.is(x, y)` 最严格且最准确
+  - `Object.is(NaN, NaN)` 返回 `true`
+  - `Object.is(-0, +0)` 返回 `false`
+
+
 ### ✔ Object.defineProperty
 
 - ref [MDN Object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
@@ -3252,6 +3267,56 @@ promise2
 setTimeout
 ```
 
+关于 Promise，有一点需要注意
+
+```js
+Promise.resolve().then(() => {
+  console.log('1')
+}).then(() => {
+  console.log('2')
+})
+Promise.resolve().then(() => {
+  console.log('5')
+}).then(() => {
+  console.log('6')
+})
+```
+
+打印结果
+```
+1
+5
+2
+6
+```
+
+```js
+Promise.resolve().then(() => {
+  console.log('1')
+  Promise.resolve().then(() => {
+    console.log('7')
+  }).then(() => {
+    console.log('8')
+  })
+}).then(() => {
+  console.log('2')
+})
+Promise.resolve().then(() => {
+  console.log('5')
+}).then(() => {
+  console.log('6')
+})
+```
+执行结果
+```
+1
+5
+7
+2
+6
+8
+```
+
 ## 正则表达式
 
 ## ✔ setTimeout、setInterval
@@ -3809,6 +3874,13 @@ const obj = {
 }
 console.log(Object.prototype.toString.call(obj)) // [object Hello]
 ```
+
+## ✔ JS Bridge 原理
+
+ref
+
+- [深入浅出JSBridge：从原理到使用](https://zhuanlan.zhihu.com/p/438763800)
+
 
 # 浏览器特有 API
 
@@ -5647,6 +5719,15 @@ myNode.replaceChildren();
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 
+### ✔ Element.remove
+
+`Element.remove()` 方法，把对象从它所属的 DOM 树中删除。
+
+```js
+var el = document.getElementById('div-02');
+el.remove();
+```
+
 ### ✔ Node.appendChild
 
 - [Node.appendChild()](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)
@@ -6725,6 +6806,66 @@ ref
 - [MDN 文档类型声明](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
 
 在 HTML 中，文档类型声明是必要的。所有的文档的头部，你都将会看到 `<!DOCTYPE html>` 的身影。这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“怪异模式(兼容模式)”的渲染模式。`<!DOCTYPE html>` **确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式**。
+
+## ✔ html 标签
+
+### ✔ html 块级元素有哪些
+
+ref [块级元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Block-level_elements)
+
+块级元素占据其父元素（容器）的整个水平空间，垂直空间等于其内容高度，因此创建了一个“块”
+
+- [div](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/fieldset)
+- p
+- h1~h6
+- [ul](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul)
+- [ol](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol)
+- header
+- nav
+- main
+- [section](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section)
+- [article](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article)
+- [aside](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside)
+- [footer](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer)
+- [table](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/table)
+- [form](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/form)
+- [blockquote](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/blockquote)
+- [fieldset](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/fieldset)
+- [figcaption](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figcaption)
+- [figure](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure)
+- [hgroup](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/hgroup)
+- [hr](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/hr)
+- [pre](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/pre)
+
+### ✔ html 行内元素有哪些
+
+ref [行内元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Inline_elements)
+
+一个行内元素只占据它对应标签的边框所包含的空间
+
+- span
+- img
+- a
+- input
+- select
+- textarea
+- button
+- label
+- code
+- b
+- i
+- big
+- small
+- em
+- strong
+- br
+- sub
+- sup
+
+
+### 块级标签和行内标签的区别
+
+一般情况下，行内元素只能包含数据和其他行内元素。 而块级元素可以包含行内元素和其他块级元素。这种结构上的包含继承区别可以使块级元素创建比行内元素更”大型“的结构。
 
 ## ✔ html5 相比以前有什么变化
 
@@ -11442,6 +11583,34 @@ ref
 }
 ```
 
+## ✔ CSS实现：当文本没有超过容器宽度时居中显示，超过宽度则换行，并左对齐
+
+```css
+<style>
+  body {
+    font-size: 12px;
+  }
+  .box {
+    text-align: center;
+    width: 200px;
+    background-color: bisque;
+  }
+  .content {
+    background-color: cyan;
+    text-align: left;
+    display: inline-block;
+  }
+</style>
+<div class="box">
+  <p class="content">地下城与勇士士地下城与勇士士地下城与勇士士地下城与勇士</p>
+</div>
+<div class="box">
+  <p class="content">地下城与勇士</p>
+</div>
+```
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674766141192_18d11b15-30c6-48ee-84c5-cb17f1c4db80.png)
+
 ## ✔ 块级格式化上下文（BFC）
 
 ref [MDN BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
@@ -11843,7 +12012,264 @@ function HOC(Comp) {
 - [React Hooks 的原理，有的简单有的不简单](https://juejin.cn/post/7075701341997236261)
 - [react-hooks如何使用？](https://juejin.cn/post/6864438643727433741)
 
-### React HOOKS 原理
+### ✔ React HOOKS 原理
+
+ref
+
+- [一文吃透react-hooks原理](https://zhuanlan.zhihu.com/p/376914196)
+
+React 以链表的形式连接组件内部的HOOKS状态。下面有一段核心代码
+
+```js
+export function renderWithHooks(
+  current,
+  workInProgress,
+  Component,
+  props,
+  secondArg,
+  nextRenderExpirationTime,
+) {
+  renderExpirationTime = nextRenderExpirationTime;
+  currentlyRenderingFiber = workInProgress;
+
+  workInProgress.memoizedState = null;
+  workInProgress.updateQueue = null;
+  workInProgress.expirationTime = NoWork;
+
+  // 组件执行前
+  ReactCurrentDispatcher.current =
+      current === null || current.memoizedState === null
+        ? HooksDispatcherOnMount
+        : HooksDispatcherOnUpdate;
+  // 函数式组件执行
+  let children = Component(props, secondArg);
+  // ...
+  // 组件执行后，ContextOnlyDispatcher 对在组件外执行HOOKS的情况警告
+  ReactCurrentDispatcher.current = ContextOnlyDispatcher;
+
+  renderExpirationTime = NoWork;
+  currentlyRenderingFiber = null;
+
+  currentHook = null
+  workInProgressHook = null;
+
+  didScheduleRenderPhaseUpdate = false;
+
+  return children;
+}
+```
+
+- `workInProgress.memoizedState` 以链表的形式存放hooks信息
+- `workInProgress.expirationTime` React 用不同的 `expirationTime`，来确定更新的优先级
+
+`renderWithHooks` 函数主要作用:
+
+首先先置空即将调和渲染的 `workInProgress` 树的 `memoizedState` 和 `updateQueue`，为什么这么做，因为在接下来的函数组件执行过程中，要把新的hooks信息挂载到这两个属性上，然后在组件commit阶段，将`workInProgress`树替换成`current`树，替换真实的DOM元素节点。并在current树保存hooks信息。
+
+接下来，调用`Component(props, secondArg);`执行函数组件，函数组件在这里真正的被执行了，然后，我们写的hooks被依次执行，把hooks信息依次保存到`workInProgress`树上。 
+
+接下来，将`ContextOnlyDispatcher`赋值给`ReactCurrentDispatcher.current`，由于js是单线程的，也就是说我们没有在函数组件中，调用的hooks，都是`ContextOnlyDispatcher`对象上hooks。从下面的代码就可以知道，在函数组件外调用HOOKS会直接报错。
+
+```js
+const ContextOnlyDispatcher = {
+    useState:throwInvalidHookError
+}
+function throwInvalidHookError() {
+  invariant(
+    false,
+    'Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for' +
+      ' one of the following reasons:\n' +
+      '1. You might have mismatching versions of React and the renderer (such as React DOM)\n' +
+      '2. You might be breaking the Rules of Hooks\n' +
+      '3. You might have more than one copy of React in the same app\n' +
+      'See https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.',
+  );
+}
+```
+
+函数组件执行的时候，每一次 HOOKS 函数执行，就会调用 `mountWorkInProgressHook`。
+
+```js
+function mountWorkInProgressHook() {
+  const hook: Hook = {
+    // useState中 保存 state 信息
+    // useEffect 中保存着 回调函数 和 deps
+    // useMemo 中保存的是 缓存的值 和 deps
+    // useRef 中保存的是 ref 对象
+    memoizedState: null,  
+    baseState: null,
+    baseQueue: null,
+    queue: null,
+    next: null,
+  };
+  if (workInProgressHook === null) { // 例子中的第一个`hooks`-> useState(0) 走的就是这样。
+    currentlyRenderingFiber.memoizedState = workInProgressHook = hook;
+  } else {
+    // 链表指针后移
+    workInProgressHook = workInProgressHook.next = hook;
+  }
+  return workInProgressHook;
+}
+```
+
+- `memoizedState`
+  - `useState` 中 保存 state 信息
+  - `useEffect` 中 保存着回调和 deps
+  - `useMemo` 中保存的是缓存的值和 deps
+  - `useRef` 中保存的是 ref 对象
+- `baseState`： `useState` 和 `useReducer` 一次更新中 ，产生的最新 state 值
+- `next` 指向下一个 hooks 的指针
+
+下面这段HOOKS执行之后，打印出来的执行结果。
+
+```js
+// ...
+const [text, setText] = useState('0')
+const ref = useRef(null)
+const [num, setNum] = useState(0)
+useEffect(() => {
+  setText(t => {
+    return t + 1
+  })
+}, [])
+```
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674759387190_d248a589-e617-4aa7-8972-822316cf5e83.png)
+
+--- 
+
+首次初始化(mount)阶段
+
+初始化 `useState` 的时候：
+
+```js
+function mountState(initialState) {
+  var hook = mountWorkInProgressHook();
+
+  if (typeof initialState === 'function') {
+    // $FlowFixMe: Flow doesn't like mixed types
+    initialState = initialState();
+  }
+
+  hook.memoizedState = hook.baseState = initialState;
+  var queue = {
+    pending: null,
+    interleaved: null,
+    lanes: NoLanes,
+    dispatch: null,
+    lastRenderedReducer: basicStateReducer,
+    lastRenderedState: initialState
+  };
+  hook.queue = queue;
+  var dispatch = queue.dispatch = dispatchSetState.bind(null, currentlyRenderingFiber$1, queue);
+  return [hook.memoizedState, dispatch];
+}
+```
+
+初始化 `useEffect` 的时候：
+
+```js
+function mountEffect(
+  create,
+  deps,
+) {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  hook.memoizedState = pushEffect(
+    HookHasEffect | hookEffectTag, 
+    create, // useEffect 第一次参数，就是副作用函数
+    undefined,
+    nextDeps, // useEffect 第二次参数，deps
+  );
+}
+```
+
+初始化 `useMemo` 的时候：
+
+```js
+function mountMemo(nextCreate,deps){
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+```
+
+初始化 `useRef` 的时候：
+
+```js
+function mountRef(initialValue) {
+  const hook = mountWorkInProgressHook();
+  const ref = {current: initialValue};
+  hook.memoizedState = ref;
+  return ref;
+}
+```
+
+---
+
+更新阶段
+
+`updateState` 比较复杂就不列出了
+
+```js
+// effect
+function updateEffect(create, deps): void {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  let destroy = undefined;
+  if (currentHook !== null) {
+    const prevEffect = currentHook.memoizedState;
+    destroy = prevEffect.destroy;
+    if (nextDeps !== null) {
+      const prevDeps = prevEffect.deps;
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        pushEffect(hookEffectTag, create, destroy, nextDeps);
+        return;
+      }
+    }
+  }
+  currentlyRenderingFiber.effectTag |= fiberEffectTag
+  hook.memoizedState = pushEffect(
+    HookHasEffect | hookEffectTag,
+    create,
+    destroy,
+    nextDeps,
+  );
+}
+```
+
+```js
+// memo
+function updateMemo(
+  nextCreate,
+  deps,
+) {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps; // 新的 deps 值
+  const prevState = hook.memoizedState; 
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps = prevState[1]; // 之前保存的 deps 值
+      if (areHookInputsEqual(nextDeps, prevDeps)) { //判断两次 deps 值
+        return prevState[0];
+      }
+    }
+  }
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+```
+
+```js
+// ref
+function updateRef(initialValue){
+  const hook = updateWorkInProgressHook()
+  return hook.memoizedState
+}
+```
 
 
 ### ✔ 自己写一个 HOOKS
@@ -11911,13 +12337,13 @@ HOOKS 的出现解决了什么问题：
 - 不用再考虑this的问题
 - 存在复杂逻辑的情况下 class 组件的 cdm 可能会有比较多的逻辑，看起来比较复杂，而用 useEffect 可以把逻辑拆分，代码看起来会比较清晰
 
-### ✔ 有哪些HOOKS
+### ✔ 有哪些内置HOOKS
 
 - useState 组件内状态管理
 - useCallback 性能优化，避免重复创建函数
 - useMemo 性能优化，避免不必要的运算
-- useEffect 类似生命周期，cdm、cwum 的综合体
-- useLayoutEffect 类似生命周期函数 cwm
+- useEffect **类似**生命周期，cdm、cwum 的综合体，**异步执行**，这里仅仅是类似
+- useLayoutEffect 实际对应的是 cdm([useEffect、useLayoutEffect 的区别](#useeffect-和-uselayouteffect-的区别))，**同步执行**，适合操作 DOM
 - useContext 获取上下文
 - useReducer 类redux的reducer函数
 - useRef 用于记录 Ref
@@ -11927,6 +12353,92 @@ HOOKS 的出现解决了什么问题：
 - [useDeferredValue](https://beta.reactjs.org/reference/react/useDeferredValue) 用来延迟更新UI，类似于 debounce 防抖
 - [useImperativeHandle](https://beta.reactjs.org/reference/react/useImperativeHandle) 配合 forwardRef 用来暴露一些属性和方法给父组件中传递的ref
 - [useInsertionEffect](https://beta.reactjs.org/reference/react/useInsertionEffect) is aimed at CSS-in-JS library authors. Unless you are working on a CSS-in-JS library and need a place to inject the styles, you probably want useEffect or useLayoutEffect instead.
+
+### ✔ useEffect 和 useLayoutEffect 的区别
+
+- ref [useLayoutEffect和useEffect的区别](https://zhuanlan.zhihu.com/p/348701319)
+- ref [react杂谈之componentDidMount](https://zhuanlan.zhihu.com/p/388636591)
+
+先说差别
+
+- `useEffect` 是**异步**执行的，而 `useLayoutEffect` 是**同步**执行的
+- `useEefect` 的执行实际是浏览器完成渲染之后，而 `useLayoutEffect` 的执行时机是浏览器把内容真正渲染到界面之前，和 `componentDidMount` 等价
+- `useLayoutEffect` 执行的时候组件已经挂载了，但没有渲染，而且其是在渲染之前执行，所以如果在这里耗时比较久，会导致体验下降
+
+`useLayoutEffect`
+
+> useLayoutEffect can hurt performance. Prefer useEffect when possible.
+
+useLayoutEffect is a version of useEffect that **fires before the browser repaints the screen**.
+
+The code inside useLayoutEffect and all state updates scheduled from it **block the browser from repainting the screen**. When used excessively, this can make your app very slow. When possible, prefer useEffect.
+
+`useLEffect`
+
+Even if your Effect was caused by an interaction (like a click), the browser may **repaint the screen before processing the state updates inside your Effect**. Usually, that’s what you want. However, if you must **block the browser from repainting the screen**, you need to **replace useEffect with useLayoutEffect**.
+
+
+大多数场景下可以直接使用 `useEffect`，但是如果你的代码引起了页面闪烁，也就是引起了组件突然改变位置、颜色及其他效果等的情况下，就推荐使用 `useLayoutEffect` 来处理。那么总结起来就是如果有直接操作 DOM 样式或者引起 DOM 样式更新的场景更推荐使用 `useLayoutEffect`。
+
+通常你会看到这样的一个现象，如果在 `useEffect` 有更新state，那么页面中的展示的state值可能会闪。这是因为 `useEffect` 回调函数执行的时候，组件已经渲染完成了，更新状态之后，新状态会导致展示的内容发生变更，从而看起来像是闪屏一样。
+
+### ✔ 为什么HOOKS不能放到判断语句中
+
+下面这个写法是错误的
+
+```jsx
+export default function App() {
+  const [num, setNum] = useState(0)
+  // 不能放到条件语句中
+  if(num > 5) {
+    const [num2, setNum2] = useState(num)
+  }
+  return ...
+}
+```
+
+ESLint 会给出下面的提示
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674754511387_5ccf8949-6b4e-490a-a5c1-b4df9fec57dd.png)
+
+
+这涉及到React内部存储HOOKS值的实现。
+
+- React 内部使用**链表** 存储组件中的所有HOOKS
+- Mount 阶段，会把所有的 HOOKS 以链表的形式记录下值和顺序
+- Update 阶段，再次执行HOOKS函数的时候，通过 `hooks.next` 移动指针来找到当前应该对应的是哪个 hooks，然后拿到对应的值和deps
+
+从上面的实现过程就可以知道，如果中间某个 hook 函数突然不行了，就会导致HOOKS混乱，这是无意义的。所以要避免使用条件语句执行HOOKS函数。
+
+
+### ✔ 为什么HOOKS不能放到普通函数中执行
+
+### 关于 `setXX` 和 `this.setState`
+
+`usuState` 的 `setXXX` 设置相同值的时候不会触发 rerender。而 `this.setState` 设置相同值依然会触发 rerender。
+
+```js
+// hooks
+const [num, setNum] = useState(0)
+
+setNum(0)
+```
+```jsx
+// component
+class App extends Component {
+  state = {
+    num: 0
+  }
+  render() {
+    return <button onClick={() => this.setState({num: 0})}></button>
+  }
+  componentDidMount() {
+    console.log('cdm')
+  }
+}
+
+```
+
 
 ## ✔ ref
 
@@ -12174,6 +12686,75 @@ export default class Father extends React.Component{
   }
 }
 ```
+
+## ✔ `createPortal`
+
+ref [createPortal](https://beta.reactjs.org/reference/react-dom/createPortal)
+
+`createPortal` 是 react-dom 包中导出的一个函数，用来在指定 element 上挂载组件。用法：
+
+```js
+createPortal(children, domNode)
+```
+
+`createPortal` 所产生的行为比较特殊，它可以让对应的组件直接挂载在指定的 element 上。官网原话：
+
+> A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events still bubble up from children to parents according to the React tree.
+
+
+```jsx
+import React from 'react'
+import { createPortal } from 'react-dom'
+
+export default function Portal() {
+  return (
+    <div>
+      Portal
+      {createPortal(
+        <div>this is a portal</div>,
+        document.querySelector('body') as Element,
+      )}
+    </div>
+  )
+}
+```
+
+上面这个例子渲染执行之后的效果
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674776727411_e509db5f-473b-48fd-82d0-a18f290a1d9c.png)
+
+`createPortal` 的作用之一是可以用来实现全局提示的 Modal。
+
+```tsx
+import { createPortal } from 'react-dom'
+import './Portal.css'
+
+export default function Portal() {
+  return (
+    <div>
+      <Modal>
+        <div>hello this is in modal</div>
+      </Modal>
+      Portal
+    </div>
+  )
+}
+
+type ModalProps = {
+  children: JSX.Element
+}
+
+function Modal(props: ModalProps) {
+  return createPortal(
+    <div className="modal-wrapper">
+      <div className="modal-content-wrapper">{props.children}</div>
+    </div>,
+    document.body,
+  )
+}
+```
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674777269774_e7814cd0-ddd0-4b3d-a8fe-919683e963d3.png)
 
 ## React 面试题
 
@@ -14057,6 +14638,9 @@ plugins: [
 ref
 
 - [Parcel Vs Webpack](https://segmentfault.com/a/1190000012612891)
+
+## ✔ tree shaking
+
 
 # 协议（HTTP+TCP+UDP）
 
@@ -16344,6 +16928,16 @@ ref
 ref
 
 - [https://juejin.im/post/5d88d68ae51d4561c541a796](https://juejin.im/post/5d88d68ae51d4561c541a796)
+
+
+应用场景
+
+- 防抖 debounce
+  - 搜索框：频繁输入只在停止输入之后才发起搜索请求
+  - 滚动优化：连续滚动的时候不执行，等滚动结束才执行对应的回调
+  - window 触发 resize 事件的时候，不断的调整窗口可以用 debounce 只在停止resize之后才触发对应的回调
+- 节流 throttle
+  - 鼠标连点：鼠标高频点击的时候，固定时间执行一次回调
 
 #### ✔ 防抖(debounce)
 
