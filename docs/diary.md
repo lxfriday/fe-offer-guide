@@ -5,19 +5,15 @@
 - 项目巩固
 - 简历 star 法则
 - react18 新特性 [ref](https://www.infoq.cn/article/pi8g04Fpma4KmMD9hDwp)
-- 强化：输入 url 到页面显示出来的
 - eggjs 温习
 - koajs、expressjs、原生 node js 如何起一个服务器
-- 内存泄漏的排查手段
-  - performance
-  - memory
-  - [ref](https://juejin.cn/post/6844904165672484871#heading-16)
-- bigint 计算
 - react router 原理、面试题
 - **源码分析：redux、axios**
-- cjs、AMD、CMD、ESM区别
-- webpack treeshaking
-- soucemap
+- [x] 强化：输入 url 到页面显示出来
+- [x] bigint 计算
+- [x] cjs、AMD、CMD、ESM区别
+- [x] soucemap
+- [x] webpack treeshaking
 - [x] 事件循环有哪些
 - [x] createPortal
 - [x] **行内元素、块级元素有哪些**

@@ -1,27 +1,36 @@
 /*! For license information please see index.js.LICENSE.txt */
 ;(() => {
   'use strict'
-  var r = {
-      './src/a.js': (r, e, o) => {
-        function t(r) {
-          console.log('sayName', r)
+  var e,
+    r,
+    o = {
+      './src/a.js': (e, r, o) => {
+        function s(e) {
+          console.log('sayName', e)
         }
-        o.d(e, { sayName: () => t })
+        o.d(r, { sayName: () => s })
+      },
+      './src/b.js': (e, r, o) => {
+        o.d(r, { default: () => s })
+        const s = { b1: 'b1', b2: 'b2' }
       },
     },
-    e = {}
-  function o(t) {
-    var a = e[t]
-    if (void 0 !== a) return a.exports
-    var s = (e[t] = { exports: {} })
-    return r[t](s, s.exports, o), s.exports
+    s = {}
+  function t(e) {
+    var r = s[e]
+    if (void 0 !== r) return r.exports
+    var a = (s[e] = { exports: {} })
+    return o[e](a, a.exports, t), a.exports
   }
-  ;(o.d = (r, e) => {
-    for (var t in e)
-      o.o(e, t) &&
-        !o.o(r, t) &&
-        Object.defineProperty(r, t, { enumerable: !0, get: e[t] })
+  ;(t.d = (e, r) => {
+    for (var o in r)
+      t.o(r, o) &&
+        !t.o(e, o) &&
+        Object.defineProperty(e, o, { enumerable: !0, get: r[o] })
   }),
-    (o.o = (r, e) => Object.prototype.hasOwnProperty.call(r, e)),
-    (0, o('./src/a.js').sayName)('lxfriday')
+    (t.o = (e, r) => Object.prototype.hasOwnProperty.call(e, r)),
+    (e = t('./src/a.js')),
+    (r = t('./src/b.js')),
+    (0, e.sayName)('lxfriday'),
+    console.log(r.default.b1)
 })()

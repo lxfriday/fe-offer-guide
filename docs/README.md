@@ -12785,6 +12785,12 @@ ref
 
 ## React Router 原理
 
+
+ref [React-router 底层实现原理是什么？](https://www.zhihu.com/question/354758756/answer/889763334)
+
+顶层Router订阅history，history变化时，Router调用setState将location向下传递，并设置到RouterContext。Route组件匹配context中的location决定是否显示。Switch选择最先匹配到的显示，利用props children。Link组件阻止a标签默认事件，并调用history.push。NavLink通过匹配context中的location决定是否为active状态。Redirect组件匹配context里的location决定是否调用history.push(to)，Switch组件会匹配location和from决定是否发起Redirect。
+
+
 ### 什么时候用HashRouter、什么时候用BrowserRouter
 
 ref
@@ -14640,6 +14646,310 @@ ref
 - [Parcel Vs Webpack](https://segmentfault.com/a/1190000012612891)
 
 ## ✔ tree shaking
+
+ref [Webpack 原理系列九：Tree-Shaking 实现原理](https://zhuanlan.zhihu.com/p/403901557)
+
+Tree-Shaking 是一种基于 **ES Module** 规范的 Dead Code Elimination 技术，它会在运行过程中静态分析模块之间的导入导出，确定 ESM 模块中哪些导出值**未在其它模块使用，并将其删除**，以此实现打包产物的优化。
+
+
+**在 Webpack 中启动 Tree Shaking**
+
+- 使用 ESM 规范编写模块代码
+- 配置 `optimization.usedExports` 为 `true`，启动标记功能（对使用过的导出进行标记，方便minimizer删除未使用的导出）
+- 启动代码优化功能，可以通过如下方式实现：
+  - 配置 optimization.minimize = true
+  - 提供 optimization.minimizer 数组
+  - 配置 `devtool`  为 `false`
+
+```js
+module.exports = () => {
+  return {
+    mode: 'development',
+    devtool: false,
+    entry: {
+      index: path.join(srcPath, 'index.js'),
+    },
+    output: {
+      path: distPath,
+    },
+    optimization: {
+      usedExports: true,
+      minimize: true,
+      minimizer: [new TerserWebpackPlugin()],
+    },
+    plugins: [new CleanWebpackPlugin()],
+  }
+}
+```
+
+**Tree Shaking 实现的基础**：在 CJS、AMD、CMD这些旧版本的模块方案中，导入导出是动态的，不执行到某一行无法知道是否需要导入和导出。而ESM规定所有的导入导出语句必须放在模块顶层，在ESM模块中导入导出是非常明确的。
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674825676452_ae095d96-df8b-49db-aba9-a4419b7eb0a4.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674825694027_10960b3a-dcb4-423a-a859-e42ef9160d78.png)
+
+**Tree Shaking 原理**
+
+- **标记**出模块导出值中哪些没有被使用过
+  - Make 阶段（收集导出），收集模块导出变量并记录到模块依赖关系图 ModuleGraph 变量中
+  - Seal 阶段（标记导出有没有被使用），遍历 ModuleGraph 标记模块导出变量有没有被使用，**optimization.usedExports = true** 启用标记功能
+  - （删除）生成产物时，若变量没有被其它模块使用则删除对应的导出语句
+- **删除** 使用 terser 删除掉没被用到的导出语句
+
+Tree shaking 可以删除**没有被使用的导出**和**没用使用的变量**。
+
+Tree Shaking 最佳实践：
+
+1. 避免无意义的赋值
+
+```js
+import { sayName, sayAge } from './a'
+sayName('lxfriday')
+// 无意义的赋值，会导致无法删除 sayAge
+const sa = sayAge
+```
+
+2. 禁止 Babel 转译模块导入导出语句
+
+Babel 可以将 `import/export` 风格的 ESM 语句等价转译为 CommonJS 风格的模块化语句，但该功能却导致 Webpack 无法对转译后的模块导入导出内容做静态分析，示例：
+
+```js
+// ...
+{
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    modules: 'commonjs', // 设置为 false 即可正常 tree shaking
+                  },
+                ],
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  }
+}
+```
+
+3. 优化导出值的粒度
+
+Tree Shaking 逻辑作用在 ESM 的 `export` 语句上，因此对于下面这种导出场景：
+
+```js
+export default {
+  bar: 'bar',
+  foo: 'foo'
+}
+```
+即使实际上只用到 `default` 导出值的其中一个属性，整个 `default` 对象依然会被完整保留。所以实际开发中，应该尽量保持导出值颗粒度和原子性，上例代码的优化版本：
+
+```js
+const bar = 'bar'
+const foo = 'foo'
+
+export {
+  bar,
+  foo
+}
+```
+
+4. 使用支持 Tree Shaking 的包
+
+尽量使用支持 Tree Shaking 的 npm 包
+
+---
+
+
+关于 package.json 中的 `sideEffects` 属性，参考 [Webpack 中的 sideEffects 到底该怎么用？](https://zhuanlan.zhihu.com/p/40052192)
+
+如果`sideEffects`配置为`false`，该模块内代码都没有副作用，只要没有被导入使用，均会被删除，webpack也无需分析。
+
+webpack 能将标记为 side-effects-free 的包由 `import {a} from xx` 转换为 `import {a} from 'xx/a'`，从而自动修剪掉不必要的 `import`。
+
+如果我们引入的 包/模块 被标记为 `sideEffects: false` 了，那么不管它是否真的有副作用，只要它没有被引用到，整个 模块/包 都会被完整的移除。以 mobx-react-devtool 为例，我们通常这样去用：
+
+```jsx
+import DevTools from 'mobx-react-devtools';
+
+class MyApp extends React.Component {
+  render() {
+    return (
+      <div>
+        ...
+        { process.env.NODE_ENV === 'production' ? null : <DevTools /> }
+      </div>
+    );
+  }
+}
+```
+
+这是一个很常见的按需导入场景，然而在没有 `sideEffects: false` 配置时，即便 `NODE_ENV` 设为 `production` ，打包后的代码里依然会包含 mobx-react-devtools 包，虽然我们没使用过其导出成员，但是 mobx-react-devtools 还是会被 `import`，因为里面“可能”会有副作用。但当我们加上 sideEffects false 之后，tree shaking 就能安全的把它从 bundle 里完整的移除掉了。
+
+通常我们发布到 npm 上的包很难保证其是否包含副作用（可能是代码的锅可能是 transformer 的锅），但是我们基本能确保这个包是否会对包以外的对象产生影响，比如是否修改了 window 上的属性，是否复写了原生对象方法等。如果我们能保证这一点，其实我们就能知道整个包是否能设置 `sideEffects: false` 了，至于是不是真的有副作用则并不重要。
+
+所以其实 webpack 里的 `sideEffects: false` 的意思并不是我这个模块真的没有副作用，而**只是为了在摇树时告诉 webpack：我这个包在设计的时候就是期望没有副作用的**，即使他打完包后是有副作用的，webpack 同学你摇树时放心的当成无副作用包摇就好啦！
+
+也就是说，只要你的包不是用来做 polyfill 或 shim 之类的事情，就尽管放心的给他加上 `sideEffects: false` 吧！
+
+## ✔ source-map
+
+ref
+
+- [阮一峰：JavaScript Source Map 详解](https://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
+
+**source map 的作用是什么？**
+
+线上的代码基本都是压缩合并过后的代码，不具备可读性，报错时无法追踪错误所在的真实文件、行数。source map 是在编译源代码时生成的映射文件，其可以反应出编译后的代码在编译前是什么样子。
+
+```js
+// a.js
+export function sayName(name) {
+  dfsafdsf
+  console.log('sayName' + name)
+}
+
+export function sayAge(age) {
+  console.log('sayAge' + age)
+}
+//index.js
+import { sayName } from './a'
+
+console.log('111')
+
+sayName('lxfriday')
+```
+
+代码在编译之后：
+
+```js
+(()=>{"use strict";var s;console.log("111"),s="lxfriday",dfsafdsf,console.log("sayName"+s)})();
+//# sourceMappingURL=index.js.map
+```
+
+下面有一个 source map 源映射文件，格式化之后是下面这个样子：
+
+```json
+{
+  "version": 3,
+  "file": "index.js",
+  "mappings": "mBAAO,IAAiBA,ECExBC,QAAQC,IAAI,ODFYF,ECIhB,WDHNG,SACAF,QAAQC,IAAI,UAAYF,E",
+  "sources": [
+    "webpack://source-map/./src/a.js",
+    "webpack://source-map/./src/index.js"
+  ],
+  "sourcesContent": [
+    "export function sayName(name) {\r\n  dfsafdsf\r\n  console.log('sayName' + name)\r\n}\r\n\r\nexport function sayAge(age) {\r\n  console.log('sayAge' + age)\r\n}",
+    "import { sayName } from './a'\r\n\r\nconsole.log('111')\r\n\r\nsayName('lxfriday')\r\n"
+  ],
+  "names": [
+    "name",
+    "console",
+    "log",
+    "dfsafdsf"
+  ],
+  "sourceRoot": ""
+}
+```
+
+其各个属性的意义：
+
+- `version` source map 的版本，目前为3
+- `file` 转换后的文件名
+- `sourceRoot` 转换前的文件所在目录，如果与转换前的文件在同一目录，该项为空
+- `sources` 转换前的文件。该项是一个数组，表示可能存在多个文件合并
+- `names`转换前的所有变量名和属性名
+- `mappings` 记录位置信息的字符串，下文详细介绍
+- `sourcesContent` 转换前文件的原始内容
+
+---
+
+webpack 中的 source map，在 `devtool` 属性对 source map 进行配置。常见的几种source map生成方案：
+
+- `source-map` 外部，可以查看**错误代码准确信息**和**源代码的错误位置**
+- `inline-source-map` 内联，只生成一个内联base64编码的 source map
+- `hidden-source-map` 外部。可以查看错误代码准确信息，但不能追踪源代码错误，只能提示到构建后代码的错误位置。
+- `eval-source-map` 内联。每一个文件都生成对应的 source map，都在 eval 中，可以查看错误代码准确信息 和 源代码的错误位置。
+- `nosources-source-map` 外部。可以查看错误代码错误原因，但不能查看错误代码准确信息，并且没有任何源代码信息。
+- `cheap-source-map` 外部。可以查看错误代码准确信息和源代码的错误位置，只能把错误精确到**整行**，忽略列。
+- `cheap-module-source-map` 外部。可以查看错误代码准确信息和源代码的错误位置，module 会加入 loader 的 Source Map。
+
+内联source map生成速度更快，通常在dev模式下使用，prod模式下一般要拆分到单独的文件。
+
+上面几种source map 的对比：
+
+`source-map`
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843372518_c8565785-f3ba-45d7-84fb-438ef46c5daa.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674849934119_d92414ec-5411-42a7-b409-37ca2d293668.png)
+
+`inline-source-map` 
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843303131_683e63e2-3429-46db-9f6d-a878528853bd.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674849949622_6b298828-47a8-4937-9b40-cb8145608f00.png)
+
+`hidden-source-map`
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843346692_f7d85f87-3292-44df-88e0-ed569cadc1a2.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674850118056_6b4de831-32f6-4fa5-bdda-14692ede003e.png)
+
+`eval-source-map`
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843404695_e70d8025-ca9a-47ba-8f04-ed830d72f209.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674850155127_1bcbf5a6-0c00-4a69-8487-add4c4ac42c3.png)
+
+`nosources-source-map` 能提示错误，但是无法找到源代码
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843460718_c8923722-a6b4-4aa9-9b89-83d20e244697.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674850206325_15fd67c7-0b93-457d-a0be-9373d0ac25f5.png)
+
+`cheap-source-map`
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843486418_201d257e-d707-49f1-a420-937777112e65.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674850247743_61159fe0-fab1-4c59-93db-ce8ba76c3846.png)
+
+`cheap-module-source-map`
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1674843503664_3a3d197c-4a90-436e-93ab-1ee492aba80b.png)
+![](http://qiniu1.lxfriday.xyz/feoffer/1674850224431_728013f4-c2e3-4384-97af-9fa9abb53b7e.png)
+
+
+---
+
+source map 选择
+
+- 开发环境
+  - 速度快：eval > inline > cheap，`eval-cheap-souce-map`、`eval-souce-map`
+  - 调试友好：`source-map`、`cheap-module-source-map`、`cheap-source-map`
+- 线上环境
+  - 上报错误推荐 `nosources-source-map` 隐藏源代码 只提示错误信息
+  - 常规推荐 `hidden-source-map` 隐藏source map路径
+
+---
+
+各个前缀的含义：
+
+- `eval`  每个模块都使用 `eval()` 执行，并且都有 `//# sourceURL`。此选项会非常快地构建
+- `cheap` 只映射到源代码的某一行，不精确到列，可以提升 sourcemap 生成速度
+- `inline` 使用 dataUrl 存储 source map信息
+- `hidden` 不添加 source map 文件路径
+- `nosources` 不生成 sourceContent（源代码） 内容，可以减小 sourcemap 文件的大小
+- `module` sourcemap 生成时会关联每一步 loader 生成的 sourcemap，配合 sourcemap-loader 可以映射回最初的源码
+
+---
+
+推荐前端错误监控工具：
+
+- [fundebug](https://www.fundebug.com/)
+- [sentry](https://sentry.io/)
 
 
 # 协议（HTTP+TCP+UDP）

@@ -1,0 +1,11 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "module": "./index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "sideEffects": ["./c.js"]
+}

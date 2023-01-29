@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    .wrapper {
+      height: 600px;
+      width: 100%;
+      background-color: cyan;
+      overflow: auto;
+    }
+    .box {
+      position: relative;;
+      display: inline-block;
+      width: 50px;
+      height: 2000px;
+      background-color: bisque;
+      left: 20px;
+    }
+    .sticky {
+      position: sticky;
+      top: 20px;
+      background-color: red;
+    }
+    .gap {
+      height: 200px;
+    }
+  </style>
+  <div class="wrapper">
+    <div class="box">
+      <div class="gap">gap</div>
+      <div class="sticky">sticky</div>
+      <div class="gap">gap</div>
+      <div class="sticky">sticky2</div>
+      <div class="gap">gap</div>
+      <div class="sticky">sticky3</div>
+      <div class="gap">gap</div>
+      <div class="sticky">sticky4</div>
+      <div class="gap">gap</div>
+      <div class="sticky">sticky5</div>
+    </div>
+  </div>
+</body>
+</html>

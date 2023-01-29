@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("111"),dfsafdsf,console.log("sayNamelxfriday")})();
