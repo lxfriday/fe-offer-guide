@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import Nav from './Components/Nav'
+import Pagea from './Pages/Pagea'
+import Pageb from './Pages/Pageb'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      <Route path="/" element={<Nav />}>
+        <Route path="/" element={<Navigate to="/pagea" replace />} />
+        <Route path="/pagea" element={<Pagea />} />
+        <Route path="/pageb" element={<Pageb />} />
+      </Route>
+    </Routes>
+  )
 }
 
-export default App;
+export default App

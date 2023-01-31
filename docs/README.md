@@ -12629,11 +12629,17 @@ ref
 - [https://juejin.im/post/5b45c57c51882519790c7441](https://juejin.im/post/5b45c57c51882519790c7441)
 - [测试 code](https://codesandbox.io/s/modest-volhard-0l3ov?fontsize=14&hidenavigation=1&theme=dark)
 
+**React 18 之前：**
+
 异步：在React合成事件中或者生命周期函数中
 
 同步：自己使用监听器绑定的函数（原生事件）或者计时器中
 
 setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
+
+React 18 之后：
+
+开启了批处理之后（使用 `ReactDOM.createRoot(rootEle).render(<APP />)`），所有的 setState 都是异步的（包括自己定义的原生事件、定时器）
 
 ## ✔ React 状态复用的方式
 
@@ -12785,11 +12791,53 @@ ref
 
 ## React Router 原理
 
-
 ref [React-router 底层实现原理是什么？](https://www.zhihu.com/question/354758756/answer/889763334)
 
-顶层Router订阅history，history变化时，Router调用setState将location向下传递，并设置到RouterContext。Route组件匹配context中的location决定是否显示。Switch选择最先匹配到的显示，利用props children。Link组件阻止a标签默认事件，并调用history.push。NavLink通过匹配context中的location决定是否为active状态。Redirect组件匹配context里的location决定是否调用history.push(to)，Switch组件会匹配location和from决定是否发起Redirect。
+- 顶层Router订阅history，history变化时，Router调用setState将location向下传递，并设置到RouterContext。
+- Route组件匹配context中的location决定是否显示。
+- Switch选择最先匹配到的显示，利用props children。
+- Link组件阻止a标签默认事件，并调用history.push。
+- NavLink通过匹配context中的location决定是否为active状态。
+- Redirect组件匹配context里的location决定是否调用history.push(to)，Switch组件会匹配location和from决定是否发起Redirect。
 
+顶层的 BrowserRouter 实现
+
+```tsx
+export function BrowserRouter({
+  basename,
+  children,
+  window,
+}: BrowserRouterProps) {
+  let historyRef = React.useRef<BrowserHistory>();
+  if (historyRef.current == null) {
+    historyRef.current = createBrowserHistory({ window, v5Compat: true });
+  }
+
+  let history = historyRef.current;
+  let [state, setState] = React.useState({
+    action: history.action,
+    location: history.location,
+  });
+
+  React.useLayoutEffect(() => history.listen(setState), [history]);
+
+  return (
+    <Router
+      basename={basename}
+      children={children}
+      location={state.location}
+      navigationType={state.action}
+      navigator={history}
+    />
+  );
+}
+```
+
+`HashRouter`、`BrowserRouter` 的实现依赖于：
+
+- `history.pushState`
+- `history.replaceState`
+- `window.addEventListener('popstate', handlePop)`
 
 ### 什么时候用HashRouter、什么时候用BrowserRouter
 
@@ -12801,12 +12849,10 @@ ref
 
 HashRouter
 
-- 基于hash模式：页面跳转原理是使用了`location.hash`、`location.replace`；
 - 在域名后，先拼接`/#`，再拼接路径；也就是利用锚点，实现路由的跳转；如：`http://www.abc.com/#/xx`
 
 BrowserRouter
 
-- 页面跳转原理是使用了HTML5为浏览器全局的history对象新增了两个API，包括 `history.pushState`、`history.replaceState`；
 - 更加优雅： 直接拼接路径；如：http://www.abc.com/xx
 - **需要后端做处理**，否则会404，因为带有路径
 
