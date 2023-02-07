@@ -11835,6 +11835,10 @@ ref
 
 **综述：`:where()` 和 `:is()` 是可容错的，而`:where()` 中的选择器优先级会被指定为0，`:is()` 可以安全地写CSS**
 
+## ✔ CSS cursor类型
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1675460788839_8f186ae7-0b89-47ba-abba-9e988d49c5c2.png)
+
 
 # React
 
@@ -14268,8 +14272,6 @@ const TodoList = () => {
 
 # Webpack
 
-## 手写实现 Webpack
-
 ## ✔ Loader
 
 ref
@@ -14306,6 +14308,29 @@ module: {
     },
   ]
 }
+```
+
+**rules 数组是从后往前匹配**
+
+```js
+// ...
+// 先执行 loaderB 再执行 loaderA
+{
+  test: /\.xs$/,
+  use: [
+    {
+      loader: require.resolve('./loader/loaderA.js'),
+    },
+  ],
+},
+{
+  test: /\.xs$/,
+  use: [
+    {
+      loader: require.resolve('./loader/loaderB.js'),
+    },
+  ],
+},
 ```
 
 2、内联
@@ -19842,6 +19867,342 @@ function extractTime(timeStr) {
 CodePen 全屏查看
 </button>
 
+
+### ✔ 如何实现定点缩放和容器拖拽
+
+![](http://qiniu1.lxfriday.xyz/feoffer/1675741740222_1bd5285b-fdb4-4cf0-ab57-09a5fb3e13a2.gif)
+
+<button onclick="codepenFullscreen(this)" class="codepen-fullscreen" data-target='<iframe src="https://codesandbox.io/embed/recursing-fast-zup4ct?fontsize=10&hidenavigation=1&theme=dark&editable=true"
+     style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;"
+     title="JSON-Bigint-test"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>'>
+在 Code Sandbox 中查看
+</button>
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/bignumber.js@9.1.0/bignumber.min.js"></script>
+    <script>
+      function add(a, b) {
+        return new BigNumber(a).plus(b).toNumber()
+      }
+      function minus(a, b) {
+        return new BigNumber(a).minus(b).toNumber()
+      }
+      function multiple(a, b) {
+        return new BigNumber(a).multipliedBy(b).toNumber()
+      }
+      function divide(a, b) {
+        return new BigNumber(a).dividedBy(b).toNumber()
+      }
+    </script>
+    <style>
+      body {
+        position: relative;
+        overflow: hidden;
+      }
+      .wrapper {
+        left: calc(50% - 250px);
+        top: 100px;
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background-color: #ccc;
+      }
+      .lineVer,
+      .boxVer {
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        background-color: red;
+      }
+      .lineHor,
+      .boxHor {
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        background-color: red;
+      }
+      .box {
+        position: absolute;
+        /* left: calc(50% - 50px); */
+        /* top: calc(50% - 50px); */
+        /* width: 100px; */
+        /* height: 100px; */
+        background-color: bisque;
+        /* transform: matrix(6, 0, 0, 6, -350, -400);  */
+        /* transform: matrix(5, 0, 0, 5, -280, -320); */
+        /* transform: matrix(4, 0, 0, 4, -210, -240); */
+        /* transform: matrix(3, 0, 0, 3, -140, -160); */
+        /* transform: matrix(2, 0, 0, 2, -70, -80); */
+        transform-origin: 0 0;
+        cursor: pointer;
+        transition: transform 0.1s;
+      }
+      .dot,
+      .boxDot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 2px;
+        height: 2px;
+        /* 70,80 */
+        /* transform: translate(20px, 30px); */
+        background-color: #000;
+      }
+      .boxDot {
+        background-color: cyan;
+      }
+      .noti {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noti">
+      <div>ctrl+滚轮放大缩小</div>
+      <div>按下拖拽位置</div>
+      <div id="scale">缩放倍数</div>
+      <div id="translate">traslate</div>
+    </div>
+    <div class="wrapper">
+      <div class="lineVer"></div>
+      <div class="lineHor"></div>
+      <div class="box">
+        <div class="boxVer"></div>
+        <div class="boxHor"></div>
+        <div class="boxDot"></div>
+      </div>
+      <div class="dot"></div>
+    </div>
+    <script>
+      function updateNoti() {
+        scaleNotiEle.innerText = `放大倍数 ${Math.round(scale * 100)}%`
+        translateNotiEle.innerText = `translate ${JSON.stringify(
+          prevTranslate,
+        )}`
+      }
+
+      let scale = 1
+      const boxW = 100,
+        boxH = 100,
+        scaleGap = 0.1
+      let prevTranslate = { x: 0, y: 0 }
+      const boxEle = document.querySelector('.box')
+      const dotEle = document.querySelector('.dot')
+      const boxDotEle = document.querySelector('.boxDot')
+      const scaleNotiEle = document.querySelector('#scale')
+      const translateNotiEle = document.querySelector('#translate')
+      boxEle.style.left = `calc(50% - ${boxW / 2}px)`
+      boxEle.style.top = `calc(50% - ${boxH / 2}px)`
+      boxEle.style.width = `${boxW}px`
+      boxEle.style.height = `${boxH}px`
+      let timeoutWaitBase = 1000
+      setTimeout(() => {
+        dotEle.style.transform = `translate(20px, 30px)`
+        boxDotEle.style.transform = `translate(20px, 30px)`
+        boxEle.style.transform = `matrix(4, 0, 0, 4, -210, -240)`
+        prevTranslate = { x: -210, y: -240 }
+        scale = 4
+        updateNoti()
+      }, timeoutWaitBase)
+      setTimeout(() => {
+        dotEle.style.transform = `translate(20px, -30px)`
+        boxDotEle.style.transform = `translate(20px, 15px)`
+        boxEle.style.transform = `matrix(5, 0, 0, 5, -280, -305)`
+        prevTranslate = { x: -280, y: -305 }
+        scale = 5
+        updateNoti()
+      }, timeoutWaitBase * 2)
+      setTimeout(() => {
+        dotEle.style.transform = `translate(-300px, 50px)`
+        boxDotEle.style.transform = `translate(-44px, 31px)`
+        boxEle.style.transform = `matrix(6, 0, 0, 6, -285, -385)`
+        prevTranslate = { x: -285, y: -385 }
+        scale = 6
+        updateNoti()
+      }, timeoutWaitBase * 3)
+      setTimeout(() => {
+        boxEle.style.transform = `matrix(7, 0, 0, 7, -180, -480)`
+        dotEle.style.transform = `translate(-20px, 30px)`
+        boxDotEle.style.transform = `translate(-20px, 30px)`
+        prevTranslate = { x: -180, y: -480 }
+        scale = 7
+        updateNoti()
+      }, timeoutWaitBase * 4)
+      boxEle.addEventListener(
+        'wheel',
+        (e) => {
+          if (!e.ctrlKey) return
+          e.preventDefault()
+
+          const cursorPos = {
+            x: e.clientX,
+            y: e.clientY,
+          }
+          const boxEleRect = boxEle.getBoundingClientRect()
+          // origin 在屏幕中位置
+          const originPos = {
+            x: boxEleRect.left,
+            y: boxEleRect.top,
+          }
+          // 缩放前的相对位置
+          const cursorRelativeBasePosBefore = {
+            x: Math.round((cursorPos.x - originPos.x) / scale),
+            y: Math.round((cursorPos.y - originPos.y) / scale),
+          }
+          // 带放大比例的位置
+          const cursorRelativePosBefore = {
+            x: cursorPos.x - originPos.x,
+            y: cursorPos.y - originPos.y,
+          }
+          // -----------------------
+          console.log(
+            '缩放前原始相对位置',
+            cursorRelativeBasePosBefore,
+            `当前缩放倍数 ${scale - 1}`,
+          )
+          // -----------------------
+          console.log('prevTranslate: ', prevTranslate)
+          if (e.deltaY < 0) {
+            scale = add(scale, scaleGap)
+            // 缩放后的相对位置
+            const cursorRelativePosAfter = {
+              x: cursorRelativeBasePosBefore.x * scale,
+              y: cursorRelativeBasePosBefore.y * scale,
+            }
+            // -----------------------
+            console.log(
+              '放大后相对位置（带放大倍数）',
+              cursorRelativePosAfter,
+              `缩放倍数 ${scale - 1}`,
+              ` = ${cursorRelativePosAfter.x} / ${cursorRelativeBasePosBefore.x} => ${scale} - 1`,
+            )
+            const deltaX = cursorRelativePosAfter.x - cursorRelativePosBefore.x
+            const deltaY = cursorRelativePosAfter.y - cursorRelativePosBefore.y
+            console.log('偏移量（带放大倍数）', {
+              deltaX,
+              deltaY,
+            })
+            prevTranslate = {
+              x: Math.round(prevTranslate.x - deltaX),
+              y: Math.round(prevTranslate.y - deltaY),
+            }
+            // -----------------------
+          } else {
+            scale = minus(scale, scaleGap)
+            // 缩放后的相对位置
+            const cursorRelativePosAfter = {
+              x: cursorRelativeBasePosBefore.x * scale,
+              y: cursorRelativeBasePosBefore.y * scale,
+            }
+            // -----------------------
+            console.log(
+              '缩小后相对位置（带放大倍数）',
+              cursorRelativePosAfter,
+              `缩放倍数 ${scale - 1}`,
+              ` = ${cursorRelativePosAfter.x} / ${cursorRelativeBasePosBefore.x} => ${scale} - 1`,
+            )
+            const deltaX = cursorRelativePosBefore.x - cursorRelativePosAfter.x
+            const deltaY = cursorRelativePosBefore.y - cursorRelativePosAfter.y
+            console.log('偏移量（带放大倍数）', {
+              deltaX,
+              deltaY,
+            })
+
+            prevTranslate = {
+              x: Math.round(prevTranslate.x + deltaX),
+              y: Math.round(prevTranslate.y + deltaY),
+            }
+            // -----------------------
+          }
+          boxEle.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${prevTranslate.x}, ${prevTranslate.y})`
+          updateNoti()
+        },
+        { passive: false },
+      )
+
+      let isDragging = false
+      let draggingSrcPos = { ...prevTranslate }
+      let cursorSrcPos = { x: 0, y: 0 }
+      boxEle.addEventListener('mousedown', function (e) {
+        isDragging = true
+        boxEle.style.cursor = 'grab'
+        console.log('mousedown', e)
+        draggingSrcPos = { ...prevTranslate }
+        cursorSrcPos = {
+          x: e.clientX,
+          y: e.clientY,
+        }
+        console.log(
+          '鼠标初始位置：',
+          cursorSrcPos,
+          'draggingSrcPos',
+          draggingSrcPos,
+        )
+      })
+      boxEle.addEventListener('mousemove', function (e) {
+        boxEle.style.transition = 'none'
+        console.log('mousemove')
+        if (isDragging) {
+          const cursorCurrentPos = {
+            x: e.clientX,
+            y: e.clientY,
+          }
+          // 负值往左，正值往右
+          prevTranslate = {
+            x: draggingSrcPos.x + cursorCurrentPos.x - cursorSrcPos.x,
+            y: draggingSrcPos.y + cursorCurrentPos.y - cursorSrcPos.y,
+          }
+          console.log(
+            JSON.stringify({
+              cursorCurrentPos,
+              draggingSrcPos,
+              cursorCurrentPos,
+              cursorSrcPos,
+              prevTranslate,
+              '鼠标移动了：': {
+                x: cursorCurrentPos.x - cursorSrcPos.x,
+                y: cursorCurrentPos.y - cursorSrcPos.y,
+              },
+            }),
+          )
+          boxEle.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${prevTranslate.x}, ${prevTranslate.y})`
+          updateNoti()
+        }
+      })
+      window.addEventListener('mouseup', function (e) {
+        isDragging = false
+        boxEle.style.cursor = 'default'
+        console.log('mouseup')
+      })
+      window.addEventListener(
+        'wheel',
+        function (e) {
+          e.preventDefault()
+        },
+        { passive: false },
+      )
+    </script>
+  </body>
+</html>
+```
+
+
 # 设计模式
 
 ref
@@ -20235,3 +20596,12 @@ ref
 - CPU利用率不同：进程的CPU利用率较低，因为上下文切换开销较大，而线程的CPU的利用率较高，上下文的切换速度快。
 - 操纵者不同：进程的操纵者一般是操作系统，线程的操纵者一般是编程人员。 
 
+# 综合面试相关
+
+## 职业规划
+
+- 把公司的业务做好，提升处理业务的能力
+- 多了解其他框架，比对优缺点，提升编码全面性，vue、nodejs、eggjs
+- 学一些后端的知识点，学一门后端语言，争取能为公司更好的服务
+
+每句不离为公司做贡献

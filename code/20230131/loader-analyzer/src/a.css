@@ -1,0 +1,9 @@
+.wrapper {
+  width: 100px;
+  height: 200px;
+  background: url('./pic.png');
+}
+.box {
+  height: 100vh;
+  color: red;
+}
