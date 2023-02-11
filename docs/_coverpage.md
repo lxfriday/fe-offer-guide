@@ -6,3 +6,4 @@
 [数据结构与算法](/algorithm)
 [小技巧](/secret-skills)
 [typescript](/typescript)
+[收藏](/star)
